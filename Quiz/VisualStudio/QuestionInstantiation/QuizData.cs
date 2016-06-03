@@ -8,6 +8,7 @@ namespace QuestionInstantiation
 {
     class QuizData
     {
+        private readonly string _dataFileName;
         private readonly XmlQuizData _xmlQuizData;
         private readonly Dictionary<string, XmlElementType> _elementTypeDictionary = new Dictionary<string, XmlElementType>();
         private readonly Dictionary<string, XmlAttributeType> _attributeTypeDictionary = new Dictionary<string, XmlAttributeType>();
@@ -17,8 +18,9 @@ namespace QuestionInstantiation
         private readonly Dictionary<string, XmlRelationNNType> _relationNNTypeDictionary = new Dictionary<string, XmlRelationNNType>();
         private readonly Dictionary<string, XmlElement> _elementDictionary = new Dictionary<string, XmlElement>();
 
-        internal QuizData(XmlQuizData xmlQuizData)
+        internal QuizData(string dataFileName, XmlQuizData xmlQuizData)
         {
+            _dataFileName = dataFileName;
             _xmlQuizData = xmlQuizData;
             foreach (XmlElementType elementType in _xmlQuizData.typeDefinitions.elementTypeList) _elementTypeDictionary.Add(elementType.id, elementType);
             foreach (XmlAttributeType attributeType in _xmlQuizData.typeDefinitions.attributeTypeList) _attributeTypeDictionary.Add(attributeType.id, attributeType);
@@ -32,6 +34,11 @@ namespace QuestionInstantiation
         internal XmlQuizData XmlQuizData
         {
             get { return _xmlQuizData; }
+        }
+
+        internal string DataFileName
+        {
+            get { return _dataFileName; }
         }
 
         internal XmlElementType getElementType(string id)

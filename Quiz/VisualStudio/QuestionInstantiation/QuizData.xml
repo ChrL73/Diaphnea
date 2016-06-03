@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
+  
+  <typeDefinitions>
+    <elementTypeList>
+      <elementType id="et_France" />
+      <elementType id="et_Region" />
+      <elementType id="et_Departement" />
+      <elementType id="et_Ville" />
+      <elementType id="et_FleuveRiviere" />
+      <elementType id="et_DestinationFleuve" />
+      <elementType id="et_Pays" />
+    </elementTypeList>
+    <attributeTypeList>
+      <attributeType id="at_Nom1" canBeQuestion="true" />
+      <attributeType id="at_Nom2" canBeQuestion="true" />
+      <attributeType id="at_Nom3" canBeQuestion="true" />
+      <attributeType id="at_Nom4" canBeQuestion="true" />
+      <attributeType id="at_NomConfluence" canBeQuestion="true" />
+      <attributeType id="at_Numero" canBeQuestion="true" />
+      <attributeType id="at_DateCreation" canBeQuestion="false" />
+      <attributeType id="at_DateNom" canBeQuestion="false" />
+    </attributeTypeList>
+    <numericalAttributeTypeList>
+      <numericalAttributeType id="nt_Latitude" unit=" °" ambiguityThreshold="0.4" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longitude" unit=" °" ambiguityThreshold="0.6" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longueur" unit=" km" ambiguityThreshold="120" displayPrecision="0"/>
+      <numericalAttributeType id="nt_Population" unit=" h" ambiguityThreshold="25000" displayPrecision="0"/>
+    </numericalAttributeTypeList>
+    <relation11TypeList>
+      <relation11Type id="r11_Departement_ChefLieu" startType="et_Departement" endType="et_Ville" />
+      <relation11Type id="r11_Riviere_VilleConfluent" startType="et_FleuveRiviere" endType="et_Ville" />
+      <relation11Type id="r11_Fleuve_VilleEmbouchure" startType="et_FleuveRiviere" endType="et_Ville" />
+    </relation11TypeList>
+    <relation1NTypeList>
+      <relation1NType id="r1N_Departement_ChefsLieuxArrondissement" startType="et_Departement" endType="et_Ville" />
+      <relation1NType id="r1N_Departement_Villes" startType="et_Departement" endType="et_Ville"/>
+      <relation1NType id="r1N_Region_Departements" startType="et_Region" endType="et_Departement" />
+      <relation1NType id="r1N_Riviere_Villes" startType="et_FleuveRiviere" endType="et_Ville" />
+      <relation1NType id="r1N_Riviere_Affluents" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
+      <relation1NType id="r1N_Riviere_Bras" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
+      <relation1NType id="r1N_Destination_Fleuves" startType="et_DestinationFleuve" endType="et_FleuveRiviere" />
+    </relation1NTypeList>
+    <relationNNTypeList>
+      <relationNNType id="rNN_Riviere_Departements" startType="et_FleuveRiviere" endType="et_Departement" />
+      <relationNNType id="rNN_Departement_DepartementsLimitrophes" startType="et_Departement" endType="et_Departement" checkSymetry="yesError" />
+      <relationNNType id="rNN_Region_RegionsLimitrophes" startType="et_Region" endType="et_Region" checkSymetry="yesError" />
+      <relationNNType id="rNN_Pays_DepartementsLimitrophes" startType="et_Pays" endType="et_Departement" />
+      <relationNNType id="rNN_Mer_DepartementsLimitrophes" startType="et_DestinationFleuve" endType="et_Departement" />
+    </relationNNTypeList>
+  </typeDefinitions>
+
+  <levelList>
+    <level value="0" name="Très facile" choiceCount="3" questionCount="10" distribParameter="0.5" />
+    <level value="1" name="Facile" choiceCount="4" questionCount="10" distribParameter="0.35" />
+    <level value="2" name="Moyen" choiceCount="5" questionCount="15" distribParameter="0.2" />
+    <level value="3" name="Difficile" choiceCount="6" questionCount="15" distribParameter="0.1" />
+    <level value="4" name="Très difficile" choiceCount="7" questionCount="20" distribParameter="0" />
+  </levelList>
+
+  <elementList>
+    <element id="el_France" name="" type="et_France" minLevel="0" mapLevel="1">
+      <attributeList/>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <!--Départements-->
+    <element id="el_AinDepartement" name="Ain" sortKey="01" type="et_Departement" minLevel="0" mapLevel="9">
+      <attributeList>
+        <attribute type="at_Nom1" value="L'Ain"/>
+        <attribute type="at_Nom2" value="de l'Ain"/>
+        <attribute type="at_Numero" value="1"/>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_BourgEnBresse"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Gex"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Belley"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nantua"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_BourgEnBresse"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Belley"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nantua"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_RhoneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>-->
+      </relationList>
+    </element>
+    <element id="el_AisneDepartement" name="Aisne" sortKey="02" type="et_Departement" minLevel="0" mapLevel="9">
+      <attributeList>
+        <attribute type="at_Nom1" value="L'Aisne"/>
+        <attribute type="at_Nom2" value="de l'Aisne"/>
+        <attribute type="at_Numero" value="2"/>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Laon"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintQuentin"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Soissons"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauThierry"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vervins"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Laon"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintQuentin"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Soissons"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauThierry"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Vervins"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nord"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SommeDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OiseDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineEtMarne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ardennes"/>-->
+      </relationList>
+    </element>
+    <element id="el_AllierDepartement" name="Allier" sortKey="03" type="et_Departement" minLevel="0" mapLevel="9">
+      <attributeList>
+        <attribute type="at_Nom1" value="L'Allier"/>
+        <attribute type="at_Nom2" value="de l'Allier"/>
+        <attribute type="at_Numero" value="3"/>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Moulins"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montlucon"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vichy"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Moulins"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montlucon"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Vichy"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>-->
+      </relationList>
+    </element>
+    <!--Villes 01-->
+    <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" mapLevel="7">
+      <attributeList>
+        <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
+        <attribute type="at_Nom2" value="de Bourg-en-Bresse"/>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="40200"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 02-->
+    <element id="el_Laon" name="Laon" type="et_Ville" minLevel="0" mapLevel="7">
+      <attributeList>
+        <attribute type="at_Nom1" value="Laon"/>
+        <attribute type="at_Nom2" value="de Laon"/>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="26175"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 03-->
+    <element id="el_Moulins" name="Moulins" type="et_Ville" minLevel="0" mapLevel="7">
+      <attributeList>
+        <attribute type="at_Nom1" value="Moulins"/>
+        <attribute type="at_Nom2" value="de Moulins"/>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="19760"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+  </elementList>
+
+  <questionCategories>
+    <attributeQuestionCategoryList>
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="sortKey" commentMode="questionAttribute" weight="100" minLevel="0"
+                                 question="Quel est le département dont le numéro est % ?"/>
+      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="sortKey" commentMode="name" weight="100" minLevel="0"
+                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0" elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Quel est le numéro associé au département % ?"/>
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateCreation"
+                                 answerProximityCriterion="attributeValue" distribParameterCorrection="0.1" commentMode="name" weight="30" minLevel="2"
+                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0"  elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="En quelle année a été créé le département % ?"/>
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateNom"
+                                 answerProximityCriterion="attributeValue" distribParameterCorrection="0.1" commentMode="name" weight="3" minLevel="2"
+                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0"  elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Depuis quelle année le département % porte-t-il son nom actuel ?"/>-->
+    </attributeQuestionCategoryList>
+  </questionCategories>
+  
+</quizData>

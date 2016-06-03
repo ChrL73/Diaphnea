@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="quizData" type="XmlQuizData" />
+  <xsd:complexType name="XmlQuizData">
+    <xsd:sequence>
+      <xsd:element name="typeDefinitions" type="XmlTypeDefinition" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="questionCategories" type="XmlQuestionCategories" maxOccurs="1" minOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlTypeDefinition">
+    <xsd:sequence>
+      <xsd:element name="elementTypeList" type="XmlElementTypeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="attributeTypeList" type="XmlAttributeTypeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="numericalAttributeTypeList" type="XmlNumericalAttributeTypeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relation11TypeList" type="XmlRelation11TypeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relation1NTypeList" type="XmlRelation1NTypeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationNNTypeList" type="XmlRelationNNTypeList" maxOccurs="1" minOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlElementTypeList">
+    <xsd:sequence>
+      <xsd:element name="elementType" type="XmlElementType" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlElementType">
+    <xsd:sequence />
+    <xsd:attribute name="id" type="XmlElementTypeId" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlElementTypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="et_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlAttributeTypeList">
+    <xsd:sequence>
+      <xsd:element name="attributeType" type="XmlAttributeType" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttributeType">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="XmlAttributeTypeId" use="required" />
+    <xsd:attribute name="canBeQuestion" type="xsd:boolean" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlAttributeTypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="at_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlNumericalAttributeTypeList">
+    <xsd:sequence>
+      <xsd:element name="numericalAttributeType" type="XmlNumericalAttributeType" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlNumericalAttributeType">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="XmlNumericalAttributeTypeId" use="required" />
+    <xsd:attribute name="unit" type="xsd:string" use="required" />
+    <xsd:attribute name="ambiguityThreshold" type="XmlPositiveDouble" use="required" />
+    <xsd:attribute name="displayPrecision" type="XmlPrecision" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlNumericalAttributeTypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="nt_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPositiveDouble">
+    <xsd:restriction base="xsd:double">
+      <xsd:minExclusive value="0" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPrecision">
+    <xsd:restriction base="xsd:nonNegativeInteger">
+      <xsd:maxInclusive value="9" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlRelation11TypeList">
+    <xsd:sequence>
+      <xsd:element name="relation11Type" type="XmlRelation11Type" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlRelation11Type">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="XmlRelation11TypeId" use="required" />
+    <xsd:attribute name="startType" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="endType" type="XmlElementTypeIdRef" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlRelation11TypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="r11_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlElementTypeIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="et_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlRelation1NTypeList">
+    <xsd:sequence>
+      <xsd:element name="relation1NType" type="XmlRelation1NType" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlRelation1NType">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="Relation1NTypeId" use="required" />
+    <xsd:attribute name="startType" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="endType" type="XmlElementTypeIdRef" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="Relation1NTypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="r1N_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlRelationNNTypeList">
+    <xsd:sequence>
+      <xsd:element name="relationNNType" type="XmlRelationNNType" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlRelationNNType">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="XmlRelationNNTypeId" use="required" />
+    <xsd:attribute name="startType" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="endType" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="checkSymetry" type="XmlCheckSymetryEnum" use="optional" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlRelationNNTypeId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="rNN_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlCheckSymetryEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="no" />
+      <xsd:enumeration value="yesWarning" />
+      <xsd:enumeration value="yesError" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlLevelList">
+    <xsd:sequence>
+      <xsd:element name="level" type="XmlLevel" maxOccurs="unbounded" minOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLevel">
+    <xsd:attribute name="value" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="choiceCount" type="xsd:positiveInteger" use="required" />
+    <xsd:attribute name="questionCount" type="xsd:positiveInteger" use="required" />
+    <xsd:attribute name="distribParameter" type="XmlDistribParameter" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlDistribParameter">
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="1" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlElementList">
+    <xsd:sequence>
+      <xsd:element name="element" type="XmlElement" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlElement">
+    <xsd:sequence>
+      <xsd:element name="attributeList" type="XmlAttributeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="numericalAttributeList" type="XmlNumericalAttributeList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationList" type="XmlRelationList" maxOccurs="1" minOccurs="1" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="type" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="mapLevel" type="xsd:unsignedByte" use="required" />
+    <xsd:attribute name="sortKey" type="xsd:string" use="optional" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttributeList">
+    <xsd:sequence>
+      <xsd:element name="attribute" type="XmlAttribute" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlNumericalAttributeList">
+    <xsd:sequence>
+      <xsd:element name="numericalAttribute" type="XmlNumericalAttribute" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlRelationList">
+    <xsd:sequence>
+      <xsd:element name="relation" type="XmlRelation" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttribute">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="type" type="XmlAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="value" type="xsd:string" use="required" />
+    <xsd:attribute name="comment" type="xsd:string" use="optional" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlNumericalAttribute">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="type" type="XmlNumericalAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="value" type="xsd:double" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlElementId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="el_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlRelation">
+    <xsd:sequence />
+    <xsd:attribute name="type" type="XmlRelationIdRef" use="required" />
+    <xsd:attribute name="linkedElement" type="XmlElementIdRef" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlAttributeTypeIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="at_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlNumericalAttributeTypeIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="nt_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlRelationIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="r.._(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlElementIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="el_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlQuestionCategories">
+    <xsd:sequence>
+      <xsd:element name="attributeQuestionCategoryList" type="XmlAttributeQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <!--<xsd:element name="attributeOrderQuestionCategoryList" type="AttributeOrderQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relation1QuestionCategoryList" type="Relation1QuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationNQuestionCategoryList" type="RelationNQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationLimitQuestionCategoryList" type="RelationLimitQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationOrderQuestionCategoryList" type="RelationOrderQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="relationExistenceQuestionCategoryList" type="RelationExistenceQuestionCategoryList" maxOccurs="1" minOccurs="1" />-->
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttributeQuestionCategoryList">
+    <xsd:sequence>
+      <xsd:element name="attributeQuestionCategory" type="XmlAttributeQuestionCategory" minOccurs="0"
+				maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttributeQuestionCategory">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="elementType" type="XmlElementTypeIdRef" use="required" />
+    <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="answerProximityCriterion" type="XmlAnswerProximityCriterionEnum" use="required" />
+    <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
+    <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
+    <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="question" type="XmlString1P" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlAnswerProximityCriterionEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="attributeValue" />
+      <xsd:enumeration value="sortKey" />
+      <xsd:enumeration value="elementLocation" />
+      <xsd:enumeration value="none" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlCommentModeEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="questionAttribute" />
+      <xsd:enumeration value="name" />
+      <xsd:enumeration value="none" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlString1P">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[^%^#]*%[^%^#]*" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

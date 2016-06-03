@@ -16,8 +16,19 @@ namespace QuestionInstantiation
 
         static void Main(string[] args)
         {
-            if (loadData(args) != 0) return;
-            if (instantiateQuestions() != 0) return;
+            MessageLogger.FileLogLevel = LogLevelEnum.MESSAGE;
+            MessageLogger.ConsoleLogLevel = LogLevelEnum.MESSAGE;
+
+            int result = 0;
+
+            if (result == 0) result = loadData(args);
+            if (result == 0) result = instantiateQuestions();
+
+            if (result == 0) Console.WriteLine("Question instantitation terminated successfully");
+            else Console.WriteLine("Question instantitation terminated with errors");
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         static int loadData(string[] args)
@@ -65,7 +76,7 @@ namespace QuestionInstantiation
 
             reader.Close();
 
-            _quizData =  new QuizData(quizData);
+            _quizData =  new QuizData(args[0], quizData);
 
             return 0;
         }

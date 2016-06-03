@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace QuestionInstantiation
 {
-    class ElementType
+    enum RelationWayEnum
     {
+        DIRECT = 0,
+        INVERSE = 1
     }
 }

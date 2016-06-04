@@ -3,6 +3,7 @@
   <xsd:element name="quizData" type="XmlQuizData" />
   <xsd:complexType name="XmlQuizData">
     <xsd:sequence>
+      <xsd:element name="configuration" type="XmlConfiguration" maxOccurs="1" minOccurs="1" />
       <xsd:element name="typeDefinitions" type="XmlTypeDefinition" maxOccurs="1" minOccurs="1" />
       <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
@@ -275,6 +276,20 @@
   <xsd:simpleType name="XmlString1P">
     <xsd:restriction base="xsd:string">
       <xsd:pattern value="[^%^#]*%[^%^#]*" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlConfiguration">
+    <xsd:sequence/>
+    <xsd:attribute name="logFileName" type="xsd:string" use="required" />
+    <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
+    <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlLogLevelEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="noLog" />
+      <xsd:enumeration value="error" />
+      <xsd:enumeration value="warning" />
+      <xsd:enumeration value="message" />
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

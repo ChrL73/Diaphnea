@@ -40,7 +40,7 @@ namespace QuestionInstantiation
 		      
 		        if (error)
 		        {
-			        MessageLogger.addMessage(LogLevelEnum.FATAL_ERROR,
+			        MessageLogger.addMessage(XmlLogLevelEnum.error,
                         String.Format("Error in {0}: Attribute {1} is defined several times for element {2}",
                         quizData.DataFileName, xmlAttributeType.id, _xmlElement.id));
 			        return -1;
@@ -67,7 +67,7 @@ namespace QuestionInstantiation
                 
                 if (error)
                 {
-                    MessageLogger.addMessage(LogLevelEnum.FATAL_ERROR,
+                    MessageLogger.addMessage(XmlLogLevelEnum.error,
                         String.Format("Error in {0}: Numerical attribute {1} is defined several times for element {2}",
                         quizData.DataFileName, xmlNumericalAttributeType.id, _xmlElement.id));
                     return -1;

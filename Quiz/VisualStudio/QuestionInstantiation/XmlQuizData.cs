@@ -23,6 +23,8 @@ using System.Xml.Serialization;
 [System.Xml.Serialization.XmlRootAttribute("quizData", Namespace="", IsNullable=false)]
 public partial class XmlQuizData {
     
+    private XmlConfiguration configurationField;
+    
     private XmlTypeDefinition typeDefinitionsField;
     
     private XmlLevel[] levelListField;
@@ -30,6 +32,16 @@ public partial class XmlQuizData {
     private XmlElement[] elementListField;
     
     private XmlQuestionCategories questionCategoriesField;
+    
+    /// <remarks/>
+    public XmlConfiguration configuration {
+        get {
+            return this.configurationField;
+        }
+        set {
+            this.configurationField = value;
+        }
+    }
     
     /// <remarks/>
     public XmlTypeDefinition typeDefinitions {
@@ -79,83 +91,44 @@ public partial class XmlQuizData {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlTypeDefinition {
+public partial class XmlConfiguration {
     
-    private XmlElementType[] elementTypeListField;
+    private string logFileNameField;
     
-    private XmlAttributeType[] attributeTypeListField;
+    private XmlLogLevelEnum fileLogLevelField;
     
-    private XmlNumericalAttributeType[] numericalAttributeTypeListField;
-    
-    private XmlRelation11Type[] relation11TypeListField;
-    
-    private XmlRelation1NType[] relation1NTypeListField;
-    
-    private XmlRelationNNType[] relationNNTypeListField;
+    private XmlLogLevelEnum consoleLogLevelField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("elementType", IsNullable=false)]
-    public XmlElementType[] elementTypeList {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string logFileName {
         get {
-            return this.elementTypeListField;
+            return this.logFileNameField;
         }
         set {
-            this.elementTypeListField = value;
+            this.logFileNameField = value;
         }
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("attributeType", IsNullable=false)]
-    public XmlAttributeType[] attributeTypeList {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLogLevelEnum fileLogLevel {
         get {
-            return this.attributeTypeListField;
+            return this.fileLogLevelField;
         }
         set {
-            this.attributeTypeListField = value;
+            this.fileLogLevelField = value;
         }
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("numericalAttributeType", IsNullable=false)]
-    public XmlNumericalAttributeType[] numericalAttributeTypeList {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLogLevelEnum consoleLogLevel {
         get {
-            return this.numericalAttributeTypeListField;
+            return this.consoleLogLevelField;
         }
         set {
-            this.numericalAttributeTypeListField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("relation11Type", IsNullable=false)]
-    public XmlRelation11Type[] relation11TypeList {
-        get {
-            return this.relation11TypeListField;
-        }
-        set {
-            this.relation11TypeListField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("relation1NType", IsNullable=false)]
-    public XmlRelation1NType[] relation1NTypeList {
-        get {
-            return this.relation1NTypeListField;
-        }
-        set {
-            this.relation1NTypeListField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("relationNNType", IsNullable=false)]
-    public XmlRelationNNType[] relationNNTypeList {
-        get {
-            return this.relationNNTypeListField;
-        }
-        set {
-            this.relationNNTypeListField = value;
+            this.consoleLogLevelField = value;
         }
     }
 }
@@ -163,22 +136,19 @@ public partial class XmlTypeDefinition {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
 [System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlElementType {
-    
-    private string idField;
+public enum XmlLogLevelEnum {
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-    public string id {
-        get {
-            return this.idField;
-        }
-        set {
-            this.idField = value;
-        }
-    }
+    noLog,
+    
+    /// <remarks/>
+    error,
+    
+    /// <remarks/>
+    warning,
+    
+    /// <remarks/>
+    message,
 }
 
 /// <remarks/>
@@ -958,6 +928,113 @@ public partial class XmlAttributeType {
         }
         set {
             this.canBeQuestionField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlElementType {
+    
+    private string idField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlTypeDefinition {
+    
+    private XmlElementType[] elementTypeListField;
+    
+    private XmlAttributeType[] attributeTypeListField;
+    
+    private XmlNumericalAttributeType[] numericalAttributeTypeListField;
+    
+    private XmlRelation11Type[] relation11TypeListField;
+    
+    private XmlRelation1NType[] relation1NTypeListField;
+    
+    private XmlRelationNNType[] relationNNTypeListField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("elementType", IsNullable=false)]
+    public XmlElementType[] elementTypeList {
+        get {
+            return this.elementTypeListField;
+        }
+        set {
+            this.elementTypeListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("attributeType", IsNullable=false)]
+    public XmlAttributeType[] attributeTypeList {
+        get {
+            return this.attributeTypeListField;
+        }
+        set {
+            this.attributeTypeListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("numericalAttributeType", IsNullable=false)]
+    public XmlNumericalAttributeType[] numericalAttributeTypeList {
+        get {
+            return this.numericalAttributeTypeListField;
+        }
+        set {
+            this.numericalAttributeTypeListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("relation11Type", IsNullable=false)]
+    public XmlRelation11Type[] relation11TypeList {
+        get {
+            return this.relation11TypeListField;
+        }
+        set {
+            this.relation11TypeListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("relation1NType", IsNullable=false)]
+    public XmlRelation1NType[] relation1NTypeList {
+        get {
+            return this.relation1NTypeListField;
+        }
+        set {
+            this.relation1NTypeListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("relationNNType", IsNullable=false)]
+    public XmlRelationNNType[] relationNNTypeList {
+        get {
+            return this.relationNNTypeListField;
+        }
+        set {
+            this.relationNNTypeListField = value;
         }
     }
 }

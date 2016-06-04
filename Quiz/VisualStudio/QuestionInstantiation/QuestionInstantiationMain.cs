@@ -16,9 +16,6 @@ namespace QuestionInstantiation
 
         static void Main(string[] args)
         {
-            MessageLogger.FileLogLevel = LogLevelEnum.MESSAGE;
-            MessageLogger.ConsoleLogLevel = LogLevelEnum.MESSAGE;
-
             int result = 0;
 
             if (result == 0) result = loadData(args);
@@ -77,6 +74,10 @@ namespace QuestionInstantiation
             reader.Close();
 
             _quizData =  new QuizData(args[0], quizData);
+
+            MessageLogger.LogFileName = quizData.configuration.logFileName;
+            MessageLogger.FileLogLevel = quizData.configuration.fileLogLevel;
+            MessageLogger.ConsoleLogLevel = quizData.configuration.consoleLogLevel;
 
             return 0;
         }

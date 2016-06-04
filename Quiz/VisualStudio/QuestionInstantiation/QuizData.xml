@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
+
+  <configuration logFileName="log.txt" fileLogLevel="message" consoleLogLevel="message"/>
   
   <typeDefinitions>
     <elementTypeList>
@@ -140,6 +142,7 @@
     <!--Villes 01-->
     <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" mapLevel="7">
       <attributeList>
+        <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
         <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
         <attribute type="at_Nom2" value="de Bourg-en-Bresse"/>
       </attributeList>

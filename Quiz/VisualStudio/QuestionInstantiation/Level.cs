@@ -63,7 +63,7 @@ namespace QuestionInstantiation
 
                     foreach (Element element in elementList)
 			        {			
-                        MessageLogger.addMessage(LogLevelEnum.WARNING,String.Format(
+                        MessageLogger.addMessage(XmlLogLevelEnum.warning, String.Format(
                             "Level \"{0}\": Element {1} has the same value ({2}) for attribute {3} as another element of same type ({4}). Since the attribute type {3} can be used as a question, the element {1} is ignored to avoid ambiguous questions",
                             _xmlLevel.name, element.XmlElement.id, valueStr, attrTypeStr, eltTypeStr));
 

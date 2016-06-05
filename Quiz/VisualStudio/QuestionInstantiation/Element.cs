@@ -8,11 +8,13 @@ namespace QuestionInstantiation
 {
     class Element
     {
-        private XmlElement _xmlElement;
-        private XmlElementType _type;
-        private Dictionary<XmlAttributeType, AttributeValue> _attributeDictionary = new Dictionary<XmlAttributeType,AttributeValue>();
-        private List<string> _attributeKeyList = new List<string>();
-        private Dictionary<XmlNumericalAttributeType, NumericalAttributeValue> _numericalAttributeDictionary = new Dictionary<XmlNumericalAttributeType, NumericalAttributeValue>();
+        private readonly XmlElement _xmlElement;
+        private readonly XmlElementType _type;
+        private readonly Dictionary<XmlAttributeType, AttributeValue> _attributeDictionary = new Dictionary<XmlAttributeType, AttributeValue>();
+        private readonly List<string> _attributeKeyList = new List<string>();
+        private readonly Dictionary<XmlNumericalAttributeType, NumericalAttributeValue> _numericalAttributeDictionary = new Dictionary<XmlNumericalAttributeType, NumericalAttributeValue>();
+        private readonly Dictionary<RelationType, Element> _relation1Dictionary = new Dictionary<RelationType, Element>();
+        private readonly Dictionary<RelationType, List<Element>> _relationNDictionary = new Dictionary<RelationType, List<Element>>();
 
         internal Element(XmlElement xmlElement, XmlElementType type)
         {
@@ -25,6 +27,11 @@ namespace QuestionInstantiation
             get { return _xmlElement; }
         }
 
+        internal XmlElementType Type
+        {
+            get { return _type; }
+        }
+
         internal List<string> AttributeKeyList
         {
             get { return _attributeKeyList; }
@@ -34,13 +41,12 @@ namespace QuestionInstantiation
         {
             foreach (XmlAttribute xmlAttribute in _xmlElement.attributeList)
 	        {
-		        XmlAttributeType xmlAttributeType = quizData.getAttributeType(xmlAttribute.type);
+		        XmlAttributeType xmlAttributeType = quizData.getXmlAttributeType(xmlAttribute.type);
                 AttributeValue attributeValue = new AttributeValue(xmlAttribute.value, xmlAttribute.comment, xmlAttributeType);
-                bool error = _attributeDictionary.ContainsKey(xmlAttributeType);
-		      
-		        if (error)
+                
+		        if (_attributeDictionary.ContainsKey(xmlAttributeType))
 		        {
-			        MessageLogger.addMessage(XmlLogLevelEnum.error,
+			        MessageLogger.addMessage(XmlLogLevelEnum.ERROR,
                         String.Format("Error in {0}: Attribute {1} is defined several times for element {2}",
                         quizData.DataFileName, xmlAttributeType.id, _xmlElement.id));
 			        return -1;
@@ -61,13 +67,12 @@ namespace QuestionInstantiation
         {
             foreach (XmlNumericalAttribute xmlNumericalAttribute in _xmlElement.numericalAttributeList)
 	        {
-                XmlNumericalAttributeType xmlNumericalAttributeType = quizData.getNumericalAttributeType(xmlNumericalAttribute.type);
+                XmlNumericalAttributeType xmlNumericalAttributeType = quizData.getXmlNumericalAttributeType(xmlNumericalAttribute.type);
                 NumericalAttributeValue numericalAttributeValue = new NumericalAttributeValue(xmlNumericalAttribute.value, xmlNumericalAttributeType);
-                bool error = _numericalAttributeDictionary.ContainsKey(xmlNumericalAttributeType);
                 
-                if (error)
+                if (_numericalAttributeDictionary.ContainsKey(xmlNumericalAttributeType))
                 {
-                    MessageLogger.addMessage(XmlLogLevelEnum.error,
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR,
                         String.Format("Error in {0}: Numerical attribute {1} is defined several times for element {2}",
                         quizData.DataFileName, xmlNumericalAttributeType.id, _xmlElement.id));
                     return -1;
@@ -87,46 +92,66 @@ namespace QuestionInstantiation
                 if (elementDictionary.ContainsKey(xmlRelation.linkedElement))
 		        {
                     Element linkedElement = elementDictionary[xmlRelation.linkedElement];
+                    RelationType relationType = quizData.getRelationType(xmlRelation.type);
 
-			        /*const wchar_t *typeId = XmlFunctions::get_element_relation_type (elementIndex, i);
-			        const RelationType *relationType = relationTypeMap[typeId];
-
-			        if (_type != relationType->getStartType() || linkedElement->_type != relationType->getEndType())
+			        if (_type != relationType.StartType || linkedElement._type != relationType.EndType)
 			        {
-				        const wchar_t *cMessage1 = XmlFunctions::get_errorMessages_typeMismatch1();
-				        const wchar_t *cMessage2 = XmlFunctions::get_errorMessages_typeMismatch2();
-				        std::wstring message1 (cMessage1);
-				        std::wstring message2 (cMessage2);
-				        message1.replace (message1.find ('%'), 1, _id);
-				        message1.replace (message1.find ('#'), 1, linkedElement->_id);
-				        if (_type != relationType->getStartType()) message2.replace (message2.find ('%'), 1, _id);
-				        else message2.replace (message2.find ('%'), 1,linkedElement->_id);
-				        message2.replace (message2.find ('#'), 1, relationType->getId());
-				        message1.append (message2);
-				        ErrorMessage::setMessage (message1);
-				        MessageLogger::instance()->addMessage (FATAL_ERROR, message1.c_str());
-				        return false;
+                        if (_type != relationType.StartType)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, 
+                                String.Format("Error in {0}: Error in relation between element {1} and element {2}: The type of element {1} is {3}, instead of {4} expected by relation {5}",
+                                quizData.DataFileName, _xmlElement.id, linkedElement.XmlElement.id, _type.id, relationType.StartType.id, xmlRelation.type));
+                        }
+                        else
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR,
+                                String.Format("Error in {0}: Error in relation between element {1} and element {2}: The type of element {2} is {3}, instead of {4} expected by relation {5}",
+                                quizData.DataFileName, _xmlElement.id, linkedElement.XmlElement.id, linkedElement._type.id, relationType.EndType.id, xmlRelation.type));
+                        }
+
+                        return -1;
 			        }
 
-			        if (relationType->getNature() == RELATION_11)
+			        if (relationType.Nature == RelationNatureEnum.RELATION_11)
 			        {
-				        if (!addRelation1 (linkedElement, relationType)) return false;
-				        if (!linkedElement->addRelation1 (this, relationType->getReciprocalType())) return false;
+                        if (addRelation1(quizData, linkedElement, relationType) != 0) return -1;
+                        if (linkedElement.addRelation1(quizData, this, relationType.ReciprocalType) != 0) return -1;
 			        }
-			        else if (relationType->getNature() == RELATION_1N)
+			        else if (relationType.Nature == RelationNatureEnum.RELATION_1N)
 			        {
-				        if (!addRelationN (linkedElement, relationType)) return false;
-				        if (!linkedElement->addRelation1 (this, relationType->getReciprocalType())) return false;
+                        if (addRelationN(linkedElement, relationType) != 0) return -1;
+				        if (linkedElement.addRelation1 (quizData, this, relationType.ReciprocalType) != 0) return -1;
 			        }
 			        else
 			        {
-				        if (!addRelationN (linkedElement, relationType)) return false;
-				        if (!linkedElement->addRelationN (this, relationType->getReciprocalType())) return false;
-			        }*/	
+				        if (addRelationN (linkedElement, relationType) != 0) return -1;
+				        if (linkedElement.addRelationN (this, relationType.ReciprocalType) != 0) return -1;
+			        }
 		        }
 	        }
 
             return 0;
         }
+
+        private int addRelation1(QuizData quizData, Element element, RelationType relationType)
+        {
+            if (_relation1Dictionary.ContainsKey(relationType))
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Element {1} is linked to several elements ({2} and {3}) by relation {4}",
+                    quizData.DataFileName, _xmlElement.id, _relation1Dictionary[relationType]._xmlElement.id, element._xmlElement.id, relationType.Id));
+                return -1;
+            }
+
+            _relation1Dictionary.Add(relationType, element);
+            return 0;
+        }
+
+        private int addRelationN(Element element, RelationType relationType)
+        {
+            if (!_relationNDictionary.ContainsKey(relationType)) _relationNDictionary.Add(relationType, new List<Element>());
+            _relationNDictionary[relationType].Add(element);
+            return 0;
+        }
+
     }
 }

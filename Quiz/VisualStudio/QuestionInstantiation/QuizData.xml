@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
 
-  <configuration logFileName="log.txt" fileLogLevel="message" consoleLogLevel="message"/>
+  <configuration logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE"/>
   
   <typeDefinitions>
     <elementTypeList>
@@ -45,8 +45,8 @@
     </relation1NTypeList>
     <relationNNTypeList>
       <relationNNType id="rNN_Riviere_Departements" startType="et_FleuveRiviere" endType="et_Departement" />
-      <relationNNType id="rNN_Departement_DepartementsLimitrophes" startType="et_Departement" endType="et_Departement" checkSymetry="yesError" />
-      <relationNNType id="rNN_Region_RegionsLimitrophes" startType="et_Region" endType="et_Region" checkSymetry="yesError" />
+      <relationNNType id="rNN_Departement_DepartementsLimitrophes" startType="et_Departement" endType="et_Departement" checkSymetry="YES_ERROR" />
+      <relationNNType id="rNN_Region_RegionsLimitrophes" startType="et_Region" endType="et_Region" checkSymetry="YES_ERROR" />
       <relationNNType id="rNN_Pays_DepartementsLimitrophes" startType="et_Pays" endType="et_Departement" />
       <relationNNType id="rNN_Mer_DepartementsLimitrophes" startType="et_DestinationFleuve" endType="et_Departement" />
     </relationNNTypeList>
@@ -76,8 +76,8 @@
       <numericalAttributeList/>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_BourgEnBresse"/>
-        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Gex"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Belley"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Gex"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Belley"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nantua"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_BourgEnBresse"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
@@ -143,11 +143,20 @@
     <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" mapLevel="7">
       <attributeList>
         <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
-        <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
         <attribute type="at_Nom2" value="de Bourg-en-Bresse"/>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="40200"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Gex" name="Gex" type="et_Ville" minLevel="1" mapLevel="10">
+      <attributeList>
+        <attribute type="at_Nom1" value="Gex"/>
+        <attribute type="at_Nom2" value="de Gex"/>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="9700"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -178,7 +187,7 @@
   <questionCategories>
     <attributeQuestionCategoryList>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="sortKey" commentMode="questionAttribute" weight="100" minLevel="0"
+                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0"
                                  question="Quel est le département dont le numéro est % ?"/>
       <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="sortKey" commentMode="name" weight="100" minLevel="0"

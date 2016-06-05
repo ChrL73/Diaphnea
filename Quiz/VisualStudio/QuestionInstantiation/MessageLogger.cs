@@ -12,8 +12,8 @@ namespace QuestionInstantiation
         static MessageLogger()
         {
             LogFileName = "log.txt";
-            ConsoleLogLevel = XmlLogLevelEnum.message;
-            FileLogLevel = XmlLogLevelEnum.message;
+            ConsoleLogLevel = XmlLogLevelEnum.MESSAGE;
+            FileLogLevel = XmlLogLevelEnum.MESSAGE;
 
             if (File.Exists(LogFileName)) File.Delete(LogFileName);
         }
@@ -30,12 +30,12 @@ namespace QuestionInstantiation
 
         private static void addFileMessage(XmlLogLevelEnum logLevel, string message)
         {
-            if (logLevel == XmlLogLevelEnum.warning || logLevel > FileLogLevel) return;
+            if (logLevel == XmlLogLevelEnum.NO_LOG || logLevel > FileLogLevel) return;
 
             using (StreamWriter file = new StreamWriter(LogFileName, true))
             {
-                if (logLevel == XmlLogLevelEnum.error) file.Write("Error: ");
-                else if (logLevel == XmlLogLevelEnum.warning) file.Write("Warning: ");
+                if (logLevel == XmlLogLevelEnum.ERROR) file.Write("Error: ");
+                else if (logLevel == XmlLogLevelEnum.WARNING) file.Write("Warning: ");
                 else file.Write("Message: ");
 
                 file.WriteLine(message);
@@ -44,10 +44,10 @@ namespace QuestionInstantiation
 
         private static void addConsoleMessage(XmlLogLevelEnum logLevel, string message)
         {
-            if (logLevel == XmlLogLevelEnum.noLog || logLevel > ConsoleLogLevel) return;
+            if (logLevel == XmlLogLevelEnum.NO_LOG || logLevel > ConsoleLogLevel) return;
 
-            if (logLevel == XmlLogLevelEnum.error) Console.Write("Error: ");
-            else if (logLevel == XmlLogLevelEnum.warning) Console.Write("Warning: ");
+            if (logLevel == XmlLogLevelEnum.ERROR) Console.Write("Error: ");
+            else if (logLevel == XmlLogLevelEnum.WARNING) Console.Write("Warning: ");
             else Console.Write("Message: ");
 
             Console.WriteLine(message);

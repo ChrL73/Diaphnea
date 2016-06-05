@@ -139,16 +139,16 @@ public partial class XmlConfiguration {
 public enum XmlLogLevelEnum {
     
     /// <remarks/>
-    noLog,
+    NO_LOG,
     
     /// <remarks/>
-    error,
+    ERROR,
     
     /// <remarks/>
-    warning,
+    WARNING,
     
     /// <remarks/>
-    message,
+    MESSAGE,
 }
 
 /// <remarks/>
@@ -295,16 +295,16 @@ public partial class XmlAttributeQuestionCategory {
 public enum XmlAnswerProximityCriterionEnum {
     
     /// <remarks/>
-    attributeValue,
+    ATTRIBUTE_VALUE,
     
     /// <remarks/>
-    sortKey,
+    SORT_KEY,
     
     /// <remarks/>
-    elementLocation,
+    ELEMENT_LOCATION,
     
     /// <remarks/>
-    none,
+    NONE,
 }
 
 /// <remarks/>
@@ -313,13 +313,13 @@ public enum XmlAnswerProximityCriterionEnum {
 public enum XmlCommentModeEnum {
     
     /// <remarks/>
-    questionAttribute,
+    QUESTION_ATTRIBUTE,
     
     /// <remarks/>
-    name,
+    NAME,
     
     /// <remarks/>
-    none,
+    NONE,
 }
 
 /// <remarks/>
@@ -735,13 +735,13 @@ public partial class XmlRelationNNType {
 public enum XmlCheckSymetryEnum {
     
     /// <remarks/>
-    no,
+    NO,
     
     /// <remarks/>
-    yesWarning,
+    YES_WARNING,
     
     /// <remarks/>
-    yesError,
+    YES_ERROR,
 }
 
 /// <remarks/>

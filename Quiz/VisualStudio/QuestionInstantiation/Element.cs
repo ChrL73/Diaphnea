@@ -153,5 +153,16 @@ namespace QuestionInstantiation
             return 0;
         }
 
+        internal int getLinkedNElementCount(RelationType relationType)
+        {
+            if (_relationNDictionary.ContainsKey(relationType)) return _relationNDictionary[relationType].Count;
+            return 0;
+        }
+
+        internal Element getLinkedNElement(RelationType relationType, int i)
+        {
+            return _relationNDictionary[relationType][i];
+        }
+
     }
 }

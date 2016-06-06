@@ -170,7 +170,6 @@
     <xsd:attribute name="name" type="xsd:string" use="required" />
     <xsd:attribute name="type" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
-    <xsd:attribute name="mapLevel" type="xsd:unsignedByte" use="required" />
     <xsd:attribute name="sortKey" type="xsd:string" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeList">

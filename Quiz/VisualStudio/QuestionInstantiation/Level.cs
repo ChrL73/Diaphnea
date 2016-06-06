@@ -20,6 +20,7 @@ namespace QuestionInstantiation
             _value = Int32.Parse(_xmlLevel.value);
 
             if (addElements(quizData) != 0) return -1;
+            if (checkSymetricalRelations(quizData) != 0) return -1;
 
             return 0;
         }
@@ -86,6 +87,59 @@ namespace QuestionInstantiation
 			        return -1;
 		        }
 	        }
+
+            return 0;
+        }
+
+        int checkSymetricalRelations(QuizData quizData)
+        {
+            foreach (RelationType relationType in quizData.RelationTypeDictionary.Values)
+            {
+                if (relationType.Nature == RelationNatureEnum.RELATION_NN && relationType.CheckSymetry != XmlCheckSymetryEnum.NO)
+                {
+                    Dictionary<Element, Dictionary<Element, int>> elementPairDictionary = new Dictionary<Element, Dictionary<Element, int>>();
+
+                    foreach (Element element in _elementDictionary.Values)
+                    {
+                        int i, n = element.getLinkedNElementCount(relationType);
+                        for (i = 0; i < n; ++i)
+                        {
+                            Element linkedElement = element.getLinkedNElement(relationType, i);
+
+                            if (elementPairDictionary.ContainsKey(linkedElement) && elementPairDictionary[linkedElement].ContainsKey(element))
+                            {
+                                elementPairDictionary[linkedElement].Remove(element);
+                            }
+                            else
+                            {
+                                if (!elementPairDictionary.ContainsKey(element)) elementPairDictionary.Add(element, new Dictionary<Element, int>());
+                                elementPairDictionary[element].Add(linkedElement, 0);
+                            }
+                        }
+                    }
+
+                    foreach (KeyValuePair<Element, Dictionary<Element, int>> pair1 in elementPairDictionary)
+                    {
+                        Element element1 = pair1.Key;
+                        foreach (KeyValuePair<Element, int> pair2 in pair1.Value)
+                        {
+                            Element element2 = pair2.Key;
+                            string message = String.Format("Level \"{0}\": Relation {1}: Symetry check failed for elements {2} and {3}",
+                                _xmlLevel.name, relationType.Id, element1.XmlElement.id, element2.XmlElement.id);
+
+                            if (relationType.CheckSymetry == XmlCheckSymetryEnum.YES_ERROR)
+                            {
+                                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, message);
+                                return -1;
+                            }
+                            else
+                            {
+                                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, message);
+                            }
+                        }
+                    }
+                }
+            }
 
             return 0;
         }

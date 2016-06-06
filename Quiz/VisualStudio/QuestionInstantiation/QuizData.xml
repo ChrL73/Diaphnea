@@ -61,13 +61,13 @@
   </levelList>
 
   <elementList>
-    <element id="el_France" name="" type="et_France" minLevel="0" mapLevel="1">
+    <element id="el_France" name="" type="et_France" minLevel="0" >
       <attributeList/>
       <numericalAttributeList/>
       <relationList/>
     </element>
     <!--Départements-->
-    <element id="el_AinDepartement" name="Ain" sortKey="01" type="et_Departement" minLevel="0" mapLevel="9">
+    <element id="el_AinDepartement" name="Ain" sortKey="01" type="et_Departement" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="L'Ain"/>
         <attribute type="at_Nom2" value="de l'Ain"/>
@@ -82,16 +82,16 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_BourgEnBresse"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Belley"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Nantua"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nantua"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_RhoneDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>-->
       </relationList>
     </element>
-    <element id="el_AisneDepartement" name="Aisne" sortKey="02" type="et_Departement" minLevel="0" mapLevel="9">
+    <element id="el_AisneDepartement" name="Aisne" sortKey="02" type="et_Departement" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="L'Aisne"/>
         <attribute type="at_Nom2" value="de l'Aisne"/>
@@ -117,7 +117,7 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ardennes"/>-->
       </relationList>
     </element>
-    <element id="el_AllierDepartement" name="Allier" sortKey="03" type="et_Departement" minLevel="0" mapLevel="9">
+    <element id="el_AllierDepartement" name="Allier" sortKey="03" type="et_Departement" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="L'Allier"/>
         <attribute type="at_Nom2" value="de l'Allier"/>
@@ -139,8 +139,29 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>-->
       </relationList>
     </element>
+    <element id="el_Jura" name="Jura" sortKey="39" type="et_Departement" minLevel="0" >
+      <attributeList>
+        <attribute type="at_Nom1" value="Le Jura"/>
+        <attribute type="at_Nom2" value="du Jura"/>
+        <attribute type="at_Numero" value="39"/>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_LonsLeSaunier"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dole"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintClaude"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_LonsLeSaunier"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Dole"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintClaude"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DoubsDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSaone"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+      </relationList>
+    </element>
     <!--Villes 01-->
-    <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" mapLevel="7">
+    <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
         <attribute type="at_Nom2" value="de Bourg-en-Bresse"/>
@@ -150,7 +171,7 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Gex" name="Gex" type="et_Ville" minLevel="1" mapLevel="10">
+    <element id="el_Gex" name="Gex" type="et_Ville" minLevel="1" >
       <attributeList>
         <attribute type="at_Nom1" value="Gex"/>
         <attribute type="at_Nom2" value="de Gex"/>
@@ -161,7 +182,7 @@
       <relationList/>
     </element>
     <!--Villes 02-->
-    <element id="el_Laon" name="Laon" type="et_Ville" minLevel="0" mapLevel="7">
+    <element id="el_Laon" name="Laon" type="et_Ville" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="Laon"/>
         <attribute type="at_Nom2" value="de Laon"/>
@@ -172,7 +193,7 @@
       <relationList/>
     </element>
     <!--Villes 03-->
-    <element id="el_Moulins" name="Moulins" type="et_Ville" minLevel="0" mapLevel="7">
+    <element id="el_Moulins" name="Moulins" type="et_Ville" minLevel="0" >
       <attributeList>
         <attribute type="at_Nom1" value="Moulins"/>
         <attribute type="at_Nom2" value="de Moulins"/>

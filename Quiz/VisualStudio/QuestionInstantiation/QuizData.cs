@@ -147,5 +147,10 @@ namespace QuestionInstantiation
             if (_relationTypeDictionary.TryGetValue(id, out relationType)) return relationType;
             return null;
         }
+
+        internal Dictionary<string, RelationType> RelationTypeDictionary
+        {
+            get { return _relationTypeDictionary; }
+        }
     }
 }

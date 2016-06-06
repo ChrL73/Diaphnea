@@ -132,9 +132,9 @@
   </xsd:simpleType>
   <xsd:simpleType name="XmlCheckSymetryEnum">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="no" />
-      <xsd:enumeration value="yesWarning" />
-      <xsd:enumeration value="yesError" />
+      <xsd:enumeration value="NO" />
+      <xsd:enumeration value="YES_WARNING" />
+      <xsd:enumeration value="YES_ERROR" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="XmlLevelList">
@@ -260,17 +260,17 @@
   </xsd:complexType>
   <xsd:simpleType name="XmlAnswerProximityCriterionEnum">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="attributeValue" />
-      <xsd:enumeration value="sortKey" />
-      <xsd:enumeration value="elementLocation" />
-      <xsd:enumeration value="none" />
+      <xsd:enumeration value="ATTRIBUTE_VALUE" />
+      <xsd:enumeration value="SORT_KEY" />
+      <xsd:enumeration value="ELEMENT_LOCATION" />
+      <xsd:enumeration value="NONE" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlCommentModeEnum">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="questionAttribute" />
-      <xsd:enumeration value="name" />
-      <xsd:enumeration value="none" />
+      <xsd:enumeration value="QUESTION_ATTRIBUTE" />
+      <xsd:enumeration value="NAME" />
+      <xsd:enumeration value="NONE" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlString1P">
@@ -286,10 +286,10 @@
   </xsd:complexType>
   <xsd:simpleType name="XmlLogLevelEnum">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="noLog" />
-      <xsd:enumeration value="error" />
-      <xsd:enumeration value="warning" />
-      <xsd:enumeration value="message" />
+      <xsd:enumeration value="NO_LOG" />
+      <xsd:enumeration value="ERROR" />
+      <xsd:enumeration value="WARNING" />
+      <xsd:enumeration value="MESSAGE" />
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

@@ -8,5 +8,16 @@ namespace QuestionInstantiation
 {
     class Category
     {
+        private readonly Int32 _weightIndex;
+
+        protected Category(int weightIndex)
+        {
+            _weightIndex = weightIndex;
+        }
+
+        internal Int32 WeightIndex
+        {
+            get { return _weightIndex; }
+        }
     }
 }

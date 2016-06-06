@@ -274,7 +274,7 @@
   </xsd:simpleType>
   <xsd:simpleType name="XmlString1P">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="[^%^#]*%[^%^#]*" />
+      <xsd:pattern value="[^{^}]*\{0\}[^{^}]*" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="XmlConfiguration">

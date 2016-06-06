@@ -209,7 +209,7 @@
     <attributeQuestionCategoryList>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0"
-                                 question="Quel est le département dont le numéro est % ?"/>
+                                 question="Quel est le département dont le numéro est {0} ?"/>
       <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="sortKey" commentMode="name" weight="100" minLevel="0"
                                  elementDrawDepth1="2" wrongChoiceDrawDepth1="0" elementDrawDepth2="10" wrongChoiceDrawDepth2="0"

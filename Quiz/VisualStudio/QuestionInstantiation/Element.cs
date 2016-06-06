@@ -37,6 +37,24 @@ namespace QuestionInstantiation
             get { return _attributeKeyList; }
         }
 
+        internal AttributeValue getAttributeValue(XmlAttributeType type)
+        {
+            AttributeValue value;
+            if (_attributeDictionary.TryGetValue(type, out value)) return value;
+            return null;
+        }
+
+        internal int getLinkedNElementCount(RelationType relationType)
+        {
+            if (_relationNDictionary.ContainsKey(relationType)) return _relationNDictionary[relationType].Count;
+            return 0;
+        }
+
+        internal Element getLinkedNElement(RelationType relationType, int i)
+        {
+            return _relationNDictionary[relationType][i];
+        }
+
         internal int addAttributes(QuizData quizData)
         {
             foreach (XmlAttribute xmlAttribute in _xmlElement.attributeList)
@@ -152,17 +170,5 @@ namespace QuestionInstantiation
             _relationNDictionary[relationType].Add(element);
             return 0;
         }
-
-        internal int getLinkedNElementCount(RelationType relationType)
-        {
-            if (_relationNDictionary.ContainsKey(relationType)) return _relationNDictionary[relationType].Count;
-            return 0;
-        }
-
-        internal Element getLinkedNElement(RelationType relationType, int i)
-        {
-            return _relationNDictionary[relationType][i];
-        }
-
     }
 }

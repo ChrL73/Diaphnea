@@ -31,6 +31,12 @@ namespace QuestionInstantiation
             foreach (XmlRelationNNType relationNNType in _xmlQuizData.typeDefinitions.relationNNTypeList) _relationNNTypeDictionary.Add(relationNNType.id, relationNNType);
             foreach (XmlElement element in _xmlQuizData.elementList) _elementDictionary.Add(element.id, element);
 
+            BuildRelationTypes();
+            verifyGeographicalNumericalAttributes();
+        }
+
+        private void BuildRelationTypes()
+        {
             foreach (XmlRelation11Type xmlRelation11Type in _xmlQuizData.typeDefinitions.relation11TypeList)
             {
                 RelationType directType = new RelationType(xmlRelation11Type.id,  RelationNatureEnum.RELATION_11, getXmlElementType(xmlRelation11Type.startType),
@@ -79,6 +85,45 @@ namespace QuestionInstantiation
                 directType.ReciprocalType = inverseType;
                 inverseType.ReciprocalType = directType;
                 _relationTypeDictionary.Add(xmlRelationNNType.id, directType);
+            }
+        }
+
+        private void verifyGeographicalNumericalAttributes()
+        {
+            XmlNumericalAttributeType latitudeAttributeType = null;
+            XmlNumericalAttributeType longitudeAttributeType = null;
+            foreach (XmlNumericalAttributeType xmlNumericalAttributeType in _xmlQuizData.typeDefinitions.numericalAttributeTypeList)
+            {
+                if (xmlNumericalAttributeType.id == "nt_Latitude") latitudeAttributeType = xmlNumericalAttributeType;
+                else if (xmlNumericalAttributeType.id == "nt_Longitude") longitudeAttributeType = xmlNumericalAttributeType;
+            }
+
+            if (latitudeAttributeType == null)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                    "File {0} contains no numerical attribute type called \"nt_Latitude\". Value \"elementLocation\" of parameter \"answerProximityCriterion\" will not be taken into account",
+                    _dataFileName));
+            }
+            
+            if (longitudeAttributeType == null)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                    "File {0} contains no numerical attribute type called \"nt_Longitude\". Value \"elementLocation\" of parameter \"answerProximityCriterion\" will not be taken into account",
+                    _dataFileName));
+            }
+            
+            if (latitudeAttributeType != null && latitudeAttributeType.unit != " °")
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                    "File {0}: Unit of numerical attribute type \"nt_Latitude\" is \"{1}\" instead of \" °\" expected. If latitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" will not be build as expected",
+                    _dataFileName, latitudeAttributeType.unit));
+            }
+
+            if (longitudeAttributeType != null && longitudeAttributeType.unit != " °")
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                    "File {0}: Unit of numerical attribute type \"nt_Longitude\" is \"{1}\" instead of \" °\" expected. If longitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" will not be build as expected",
+                    _dataFileName, longitudeAttributeType.unit));
             }
         }
 

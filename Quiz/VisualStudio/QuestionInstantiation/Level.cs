@@ -10,6 +10,8 @@ namespace QuestionInstantiation
     {
         private XmlLevel _xmlLevel;
         private Int32 _value;
+        private Int32 _weightSum = 0;
+        private Int32 _choiceCount;
         private readonly Dictionary<string, Element> _elementDictionary = new Dictionary<string, Element>();
         private readonly Dictionary<XmlElementType, List<Element>> _elementByTypeDictionary = new Dictionary<XmlElementType, List<Element>>();
         private readonly List<Category> _categoryList = new List<Category>();
@@ -18,9 +20,11 @@ namespace QuestionInstantiation
         {
             _xmlLevel = xmlLevel;
             _value = Int32.Parse(_xmlLevel.value);
+            _choiceCount = Int32.Parse(_xmlLevel.choiceCount);
 
             if (addElements(quizData) != 0) return -1;
             if (checkSymetricalRelations(quizData) != 0) return -1;
+            if (addQuestions(quizData) != 0) return -1;
 
             return 0;
         }
@@ -140,6 +144,136 @@ namespace QuestionInstantiation
                     }
                 }
             }
+
+            return 0;
+        }
+
+        int addQuestions(QuizData quizData)
+        {
+            if (addAttributeQuestions(quizData) != 0) return -1;
+
+            /*if (!addAttributeQuestions()) return false;
+	        if (!addAttributeOrderQuestions()) return false;
+	        if (!addRelation1Questions()) return false;
+	        if (!addRelationNQuestions()) return false;
+	        if (!addRelationLimitQuestions()) return false;
+	        if (!addRelationOrderQuestions()) return false;
+	        if (!addRelationExistenceQuestions()) return false;
+
+	        const wchar_t *cMessage;
+	        std::wstring message;
+	        wchar_t countStr[16];
+
+	        std::map<const ElementType *, std::vector<const Element *> >::iterator it = _elementByTypeMap.begin();
+	        for (; it!=_elementByTypeMap.end(); ++it)
+	        {
+		        const std::wstring typeName = (*it).first->getId();
+		        unsigned int elementCount = (*it).second.size();
+		        cMessage = XmlFunctions::get_informationMessages_elementCountInfo();
+		        message = cMessage;
+		        swprintf (countStr, 16, L"%d", elementCount);
+		        message.replace (message.find ('%'), 1, typeName);
+		        message.replace (message.find ('#'), 1, countStr);
+		        MessageLogger::instance()->addMessage (MESSAGE, message.c_str());
+	        }
+
+	        cMessage = XmlFunctions::get_informationMessages_totalQuestionCountInfo();
+	        message = cMessage;
+	        swprintf (countStr, 16, L"%d", _totalQuestionCount);
+	        message.replace (message.find ('%'), 1, _name);
+	        message.replace (message.find ('#'), 1, countStr);
+	        MessageLogger::instance()->addMessage (MESSAGE, message.c_str());
+
+	        cMessage = XmlFunctions::get_informationMessages_categoryCountInfo();
+	        message = cMessage;
+	        swprintf (countStr, 16, L"%d", _categoryVector.size());
+	        message.replace (message.find ('%'), 1, _name);
+	        message.replace (message.find ('#'), 1, countStr);
+	        MessageLogger::instance()->addMessage (MESSAGE, message.c_str());*/
+
+            return 0;
+        }
+
+        int addAttributeQuestions(QuizData quizData)
+        {
+            foreach(XmlAttributeQuestionCategory xmlAttributeQuestionCategory in quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
+	        {
+		        Int32 minLevel = Int32.Parse(xmlAttributeQuestionCategory.minLevel);
+                if (_value >= minLevel)
+		        {
+                    XmlElementType elementType = quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
+
+                    string questionTemplate = xmlAttributeQuestionCategory.question;
+
+			        if (_elementByTypeDictionary.ContainsKey(elementType))
+			        {
+                        XmlAttributeType questionAttributeType = quizData.getXmlAttributeType(xmlAttributeQuestionCategory.questionAttribute);
+                        if (!questionAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
+                                quizData.DataFileName, xmlAttributeQuestionCategory.question, questionAttributeType.id));
+                            return -1;
+                        }
+
+				        XmlAttributeType answerAttributeType = quizData.getXmlAttributeType(xmlAttributeQuestionCategory.answerAttribute);
+				        Int32 weight = Int32.Parse(xmlAttributeQuestionCategory.weight);
+                        _weightSum += weight;
+
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlAttributeQuestionCategory.answerProximityCriterion, xmlAttributeQuestionCategory.distribParameterCorrection);
+
+				        foreach (Element element in _elementByTypeDictionary[elementType])
+				        {
+                            AttributeValue questionAttributeValue = element.getAttributeValue(questionAttributeType);
+                            AttributeValue answerAttributeValue = element.getAttributeValue(answerAttributeType);
+					
+					        if (answerAttributeValue != null) 
+					        {
+						        PossibleAnswer answer = new PossibleAnswer(answerAttributeValue, element);
+						        category.addAnswer(answer);
+
+						        if (questionAttributeValue != null)
+						        {
+                                    string questionText = String.Format(questionTemplate, questionAttributeValue.Value);
+                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, answer, null);
+							        category.addQuestion(question);
+						        }
+					        }
+				        }
+
+				        if (category.QuestionCount == 0)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
+                                _xmlLevel.name, questionTemplate));
+					        _weightSum -= weight;
+				        }
+                        else if (category.DistinctAnswerCount < _choiceCount)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\", category \"{1}\": Not enough possible answers ({2} possibles answers, {3} required). The category is ignored",
+                                _xmlLevel.name, questionTemplate, category.DistinctAnswerCount, _choiceCount));
+					        _weightSum -= weight;
+				        }
+				        else
+				        {
+                            /*const wchar_t *commentMode = XmlFunctions::get_attributeQuestionCategory_commentMode (i);
+                            if (commentMode[0] == 'q') category->setComments (questionAttributeType);
+                            else if (commentMode[1] == 'a') category->setComments (0);*/
+                            if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE) category.setComments(questionAttributeType);
+                            else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME) category.setComments(null);
+
+                            /*questionCountInfoMessage1 (category->getQuestionCount(), category->getDistinctAnswerCount(), questionTemplate);
+					        _categoryVector.push_back (category);
+					        _totalQuestionCount += category->getQuestionCount();*/
+                        }
+			        }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _xmlLevel.name, questionTemplate, elementType.id));
+                    }
+		        }
+	        }
 
             return 0;
         }

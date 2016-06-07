@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -274,6 +275,13 @@ namespace QuestionInstantiation
                     }
 		        }
 	        }
+
+            return 0;
+        }
+
+        internal int fillDataBase(IMongoDatabase database)
+        {
+
 
             return 0;
         }

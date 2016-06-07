@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace QuestionInstantiation
 
             if (result == 0) result = loadData(args);
             if (result == 0) result = instantiateQuestions();
+            if (result == 0) result = fillDatabase();
 
             if (result == 0) Console.WriteLine("Question instantitation terminated successfully");
             else Console.WriteLine("Question instantitation terminated with errors");
@@ -89,6 +91,19 @@ namespace QuestionInstantiation
                 Level level = new Level();
                 if (level.initialize(_quizData, xmlLevel) != 0) return -1;
                 _levelList.Add(level);
+            }
+
+            return 0;
+        }
+
+        static int fillDatabase()
+        {
+            MongoClient mongoClient = new MongoClient();
+            IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.configuration.databaseName);
+
+            foreach (Level level in _levelList)
+            {
+                if (level.fillDataBase(database) != 0) return -1;
             }
 
             return 0;

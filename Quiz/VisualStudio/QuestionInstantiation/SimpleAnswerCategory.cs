@@ -50,34 +50,24 @@ namespace QuestionInstantiation
 
         internal void setComments(XmlAttributeType attributeType)
         {
-            /*std::map < std::wstring, std::vector <const PossibleAnswer*> >::iterator it = _answerMap.begin();
-            for (; it != _answerMap.end(); ++it)*/
             foreach (List<PossibleAnswer> answerList in _answerDictionary.Values)
             {
-                string comment = "";
-                /*std::vector <const PossibleAnswer*> answerVector = (*it).second;
-                int i, n = answerVector.size();
-                for (i = 0; i < n; ++i)*/
+                List<string> list = new List<string>();
                 foreach (PossibleAnswer answer in answerList)
                 {
-                    /*const PossibleAnswer* answer = answerVector[i];
-                    if (attributeType == 0)
+                    if (attributeType == null)
                     {
-                        comment += answer->getElement()->getName();
-                        if (i != n - 1) comment += L", ";
+                        list.Add(answer.Element.XmlElement.name);
                     }
                     else
                     {
-                        const AttributeValue* attributeValue = answer->getElement()->getAttributeValue(attributeType);
-                        if (attributeValue != 0)
-                        {
-                            comment += attributeValue->getValue();
-                            if (i != n - 1) comment += L", ";
-                        }
-                    }*/
+                        AttributeValue attributeValue = answer.Element.getAttributeValue(attributeType);
+                        if (attributeValue != null) list.Add(attributeValue.Value);
+                    }
                 }
 
-                //for (i = 0; i < n; ++i) answerVector[i]->setComment(comment);
+                string comment = String.Join(", ", list);
+                foreach (PossibleAnswer answer in answerList) answer.Comment = comment;
             }
         }
     }

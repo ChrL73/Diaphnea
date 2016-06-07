@@ -12,6 +12,7 @@ namespace QuestionInstantiation
         private Int32 _value;
         private Int32 _weightSum = 0;
         private Int32 _choiceCount;
+        private Int32 _totalQuestionCount = 0;
         private readonly Dictionary<string, Element> _elementDictionary = new Dictionary<string, Element>();
         private readonly Dictionary<XmlElementType, List<Element>> _elementByTypeDictionary = new Dictionary<XmlElementType, List<Element>>();
         private readonly List<Category> _categoryList = new List<Category>();
@@ -255,15 +256,14 @@ namespace QuestionInstantiation
 				        }
 				        else
 				        {
-                            /*const wchar_t *commentMode = XmlFunctions::get_attributeQuestionCategory_commentMode (i);
-                            if (commentMode[0] == 'q') category->setComments (questionAttributeType);
-                            else if (commentMode[1] == 'a') category->setComments (0);*/
                             if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE) category.setComments(questionAttributeType);
                             else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME) category.setComments(null);
 
-                            /*questionCountInfoMessage1 (category->getQuestionCount(), category->getDistinctAnswerCount(), questionTemplate);
-					        _categoryVector.push_back (category);
-					        _totalQuestionCount += category->getQuestionCount();*/
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} possible answer(s)",
+                                _xmlLevel.name, questionTemplate, category.QuestionCount, category.DistinctAnswerCount));
+
+                            _categoryList.Add(category);
+                            _totalQuestionCount += category.QuestionCount;
                         }
 			        }
 			        else

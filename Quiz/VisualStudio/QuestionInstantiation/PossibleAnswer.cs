@@ -24,7 +24,7 @@ namespace QuestionInstantiation
             get { return _attributeValue; }
         }
 
-        internal Element element
+        internal Element Element
         {
             get { return _element; }
         }

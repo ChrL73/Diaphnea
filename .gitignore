@@ -6,3 +6,5 @@
 /Quiz/VisualStudio/.vs
 /Experiments/VisualStudio/packages
 /Experiments/VisualStudio/.vs
+/Shared/*
+!/Shared/readme.txt

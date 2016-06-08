@@ -1,0 +1,1 @@
+mongoexport --db testDb --collection test --out ../../../Shared/test.json

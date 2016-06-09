@@ -1,0 +1,12 @@
+{
+   "name": "MongoDbTest",
+   "version": "0.1.0",
+   "dependencies":
+   {
+      "mongoose": "~4.4.20",
+      "async": "~2.0.0-rc.6"
+   },
+   "author": "Christophe <christoph92@yahoo.fr",
+   "description": "MongoDb test",
+   "license": "GPL-3.0"
+}

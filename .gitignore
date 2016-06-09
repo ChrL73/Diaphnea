@@ -9,3 +9,4 @@
 /Shared/*
 !/Shared/readme.txt
 .directory
+*node_modules

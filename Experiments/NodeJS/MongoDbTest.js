@@ -18,12 +18,21 @@ launchTest();
 
 function launchTest()
 {
-   console.log("launchTest, n=" + n1); 
-   var i;
+   console.log("launchTest, n=" + n1);
+   
+   var x = 0.5, r = 3.99;
+   var i, j;
    for (i = 0; i < n1; ++i)
    {
+      var s = "";
+      for (j = 0; j < 8; ++j)
+      {
+         x = r * x * (1 - x);
+         s += String.fromCharCode(26 * x + 97);
+      }
+      
       iArray.push(i);
-      testArray1.push(getString(i + 1));
+      testArray1.push(s + i.toString());
    }
    
    //console.log(testArray1);
@@ -147,6 +156,8 @@ function testPerf(id)
             if (n1 < 30000)
             {
                n1 *= 2;
+               testArray1 = [];
+               iArray = [];
                setTimeout(launchTest(), 1);
             }
             else     
@@ -157,19 +168,4 @@ function testPerf(id)
          
       }
    });
-}
-
-function getString(i)
-{
-   var s = "";
-   var value = i;
-   var j;
-   for (j = 0; j < 10; ++j)
-   {
-      value = Math.exp(value) % 700;  
-      s = s + String.fromCharCode((value % 26) + 97);
-   }
-   
-   s = s + i.toString(); 
-   return s;
 }

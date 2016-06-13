@@ -7,6 +7,6 @@
       "async": "~2.0.0-rc.6"
    },
    "author": "Christophe <christoph92@yahoo.fr",
-   "description": "MongoDb test",
+   "description": "MongoDB tests",
    "license": "AGPL-3.0"
 }

@@ -3,9 +3,11 @@ var aSync = require("async");
 
 var db = mongoose.connect("mongodb://localhost/testDb");
 
-var n1 = 100;
+var n1 = 10;
 
-var questionSchema, categorySchema, testSchema;
+var questionSchema = mongoose.Schema({ index: Number, text: String });
+var categorySchema = mongoose.Schema({ index: Number, name: String, questions: [questionSchema] });
+var testSchema;
 var TestModel;
 
 clearArray();
@@ -14,8 +16,6 @@ function clearArray()
 {
    console.log("n=" + n1 + " clearArray");
    
-   questionSchema = mongoose.Schema({ index: Number, text: String, });
-   categorySchema = mongoose.Schema({ index: Number, name: String, question: [questionSchema] });
    levelSchema = mongoose.Schema({ name: String, categories: [categorySchema] }, { collection: "levels" + n1.toString() });
    LevelModel = mongoose.model("Level" + n1.toString(), levelSchema);
    
@@ -40,9 +40,17 @@ function fillArray(err)
          level.name = "Level" + i.toString();
 
          var j;
-         for (j = 0; j < 2; ++j)
+         for (j = 0; j < 6; ++j)
          {
-            var category = { index: j, name: "Category" + j.toString() };
+            var category = { index: j, name: "Category" + j.toString(), questions: [] };
+            
+            var k;
+            for (k = 0; k < (j + 1) * n1; ++k)
+            {
+               var question = { index: k, text: "Question" + k.toString() };
+               category.questions.push(question);
+            }
+            
             level.categories.push(category);
          }
 
@@ -56,7 +64,15 @@ function fillArray(err)
          }
          else
          {
-            console.log("End");
+            if (n1 < 1500)
+            {
+               n1 *= 2;
+               clearArray();
+            }
+            else
+            {
+               console.log("End");
+            }
          }
       });
    }

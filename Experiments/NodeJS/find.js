@@ -3,7 +3,7 @@ printjson(dbs);
 
 db = connect("testDb");
 
-var documents = db.questionLists10.find();
+var documents = db.levels10.find();
 
 var i = 0;
 documents.forEach(function(document)

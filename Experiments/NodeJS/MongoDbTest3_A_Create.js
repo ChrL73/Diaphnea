@@ -4,6 +4,7 @@ var aSync = require("async");
 var db = mongoose.connect("mongodb://localhost/testDb");
 
 var n1 = 10;
+var ijArray;
 
 var questionSchema = mongoose.Schema({ index: Number, text: String });
 var questionListSchema;
@@ -48,7 +49,7 @@ function fillQuestionLists(err)
    }
    else
    {
-      var ijArray = getIndex2Array(3, 6);
+      ijArray = getIndex2Array(3, 6);
       
       aSync.forEachOf(ijArray, function(ij, l, callback)
       {
@@ -65,20 +66,67 @@ function fillQuestionLists(err)
          
          questionList.save(function(err, questionListDoc)
          {
-            ijArray[l].questionlistId = questionListDoc._id;
-            callback(false);
+            if (err)
+            {
+               console.log(err);
+            }
+            else
+            {
+               ijArray[l].questionlistId = questionListDoc._id;
+               callback(false);
+            }
          });
-      },
-      function(err)
-      {
-         console.log(ijArray);
-      });
+      }, fillLevels);
    }
 }
 
 function fillLevels(err)
 {
-   
+   if (err)
+   {
+      console.log(err);
+   }
+   else
+   {
+      var level;
+      
+      aSync.forEachOf(ijArray, function(ij, l, callback)
+      {
+         var i = ij.i, j = ij.j;
+         
+         if (j == 0)
+         {
+            level = new LevelModel();
+            level.name = "Level" + i.toString();
+         }
+         
+         var category = { index: j, name: "Category" + j.toString(), questionList: ij.questionlistId };
+         level.categories.push(category);
+         
+         level.save(function(err)
+         {
+            if (err)
+            {
+               console.log(err);
+            }
+            else
+            {
+               callback(false);
+            }
+         });
+      },
+      function(err)
+      {
+         if (err)
+         {
+            console.log(err);
+         }
+         else
+         {
+            console.log("End");
+         }
+      });
+   }
 }
 
 /*function fillArray(err)
@@ -135,14 +183,14 @@ function fillLevels(err)
          }
       });
    }
-}*/
+}
 
 function getIndexArray(n)
 {
    var i, array = [];
    for (i = 0; i < n; ++i) array.push(i);
    return array;
-}
+}*/
 
 function getIndex2Array(n, m)
 {

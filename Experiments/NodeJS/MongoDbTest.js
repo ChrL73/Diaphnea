@@ -163,6 +163,7 @@ function testPerf(id)
             else     
             {
                console.log("End of test");
+               process.exit();
             }
          }
          

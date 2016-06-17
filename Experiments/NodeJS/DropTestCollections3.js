@@ -10,14 +10,15 @@ db.levels320.drop();
 db.levels640.drop();
 db.levels1280.drop();
 db.levels2560.drop();
+db.levels5120.drop();
 
 db.questionLists10.drop();
 db.questionLists20.drop();
 db.questionLists30.drop();
 db.questionLists40.drop();
-db.questionLists.drop();
-db.questionLists.drop();
+db.questionLists80.drop();
+db.questionLists160.drop();
 db.questionLists320.drop();
 db.questionLists640.drop();
 db.questionLists1280.drop();
-db.questionLists2560.drop();
+db.questionLists5120.drop();

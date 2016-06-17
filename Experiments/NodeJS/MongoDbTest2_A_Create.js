@@ -75,6 +75,7 @@ function addDocuments(err)
             else
             {
                console.log("End");
+               process.exit();
             }
          }
       });

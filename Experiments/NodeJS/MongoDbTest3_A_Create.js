@@ -3,7 +3,7 @@ var aSync = require("async");
 
 var db = mongoose.connect("mongodb://localhost/testDb");
 
-var n1 = 10;
+var n1 = 100;
 var ijArray;
 
 var questionSchema = mongoose.Schema({ index: Number, text: String });
@@ -58,7 +58,7 @@ function fillQuestionLists(err)
          questionList.questions = [];
          
          var k;
-         for (k = 0; k < (j + 1) * n1; ++k)
+         for (k = 0; k < N(i, j); ++k)
          {       
             var question = { index: k, text: "Question" + k.toString() };
             questionList.questions.push(question);
@@ -90,7 +90,7 @@ function fillLevels(err)
    {
       var level;
       
-      aSync.forEachOf(ijArray, function(ij, l, callback)
+      aSync.each(ijArray, function(ij, callback)
       {
          var i = ij.i, j = ij.j;
          
@@ -123,7 +123,7 @@ function fillLevels(err)
          }
          else
          {
-            if (n1 < 1500)
+            if (n1 < 30000)
             {
                n1 *= 2;
                clearQuestionsLists();
@@ -131,6 +131,7 @@ function fillLevels(err)
             else
             {
                console.log("End");
+               process.exit();
             }
          }
       });
@@ -142,4 +143,10 @@ function getIndex2Array(n, m)
    var i, j, array = [];
    for (i = 0; i < n; ++i) for (j = 0; j < m; ++j) array.push({ i: i, j: j });
    return array;
+}
+
+function N(i, j)
+{
+   if (j == 0) return n1;
+   return 10;
 }

@@ -129,6 +129,7 @@ function testPerf(field)
             else     
             {
                console.log("End of test");
+               process.exit();
             }
          }
          

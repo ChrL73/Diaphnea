@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuestionInstantiation
 {
-    class Category
+    abstract class Category
     {
         private readonly Int32 _weightIndex;
 
@@ -19,5 +20,7 @@ namespace QuestionInstantiation
         {
             get { return _weightIndex; }
         }
+
+        abstract internal BsonDocument getBsonDocument();
     }
 }

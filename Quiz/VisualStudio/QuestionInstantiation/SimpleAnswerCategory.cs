@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,6 +70,16 @@ namespace QuestionInstantiation
                 string comment = String.Join(", ", list);
                 foreach (PossibleAnswer answer in answerList) answer.Comment = comment;
             }
+        }
+
+        internal override BsonDocument getBsonDocument()
+        {
+            BsonDocument categoryDocument = new BsonDocument()
+            {
+                { "just_a_test", _questionList.Count }
+            };
+
+            return categoryDocument;
         }
     }
 }

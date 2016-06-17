@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,6 +101,12 @@ namespace QuestionInstantiation
         {
             MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.configuration.databaseName);
+
+            BsonDocument filter = new BsonDocument();
+            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
+            DeleteResult result1 = levelCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("questionLists");
+            DeleteResult result2 = questionListsCollection.DeleteMany(filter);
 
             foreach (Level level in _levelList)
             {

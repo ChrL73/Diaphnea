@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -281,7 +282,26 @@ namespace QuestionInstantiation
 
         internal int fillDataBase(IMongoDatabase database)
         {
+            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
 
+            BsonDocument levelDocument = new BsonDocument()
+            {
+                { "name", _xmlLevel.name }
+            };
+
+            BsonArray categoriesArray = new BsonArray();
+            foreach (Category category in _categoryList)
+            {
+                categoriesArray.Add(category.getBsonDocument());
+            }
+
+            BsonDocument categoriesDocument = new BsonDocument()
+            {
+                { "categories", categoriesArray }
+            };
+
+            levelDocument.Add(categoriesDocument);
+            levelCollection.InsertOne(levelDocument);
 
             return 0;
         }

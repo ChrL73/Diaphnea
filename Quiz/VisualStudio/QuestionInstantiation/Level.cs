@@ -300,7 +300,7 @@ namespace QuestionInstantiation
                 { "categories", categoriesArray }
             };
 
-            levelDocument.Add(categoriesDocument);
+            levelDocument.AddRange(categoriesDocument);
             levelCollection.InsertOne(levelDocument);
 
             return 0;

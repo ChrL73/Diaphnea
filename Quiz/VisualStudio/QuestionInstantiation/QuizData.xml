@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
 
-  <configuration logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"/>
+  <parameters logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
+    <languageList>
+      <language id="la_francais" name="français" status="TRANSLATION_COMPLETED"/>
+      <language id="la_english" name="english" status="TRANSLATION_IN_PROGRESS"/>
+    </languageList>
+    <questionnaireName>
+      <name language="la_francais" text="France"/>
+      <name language="la_english" text="France"/>
+    </questionnaireName>
+    <levelList>
+      <level value="0" choiceCount="3" questionCount="10" distribParameter="0.5">
+        <name language="la_francais" text="Très facile"/>
+        <name language="la_english" text="Very easy"/>
+      </level>
+      <level value="1" choiceCount="4" questionCount="10" distribParameter="0.35">
+        <name language="la_francais" text="Facile"/>
+        <name language="la_francais" text="Easy"/>
+      </level>
+      <level value="2" choiceCount="5" questionCount="15" distribParameter="0.2">
+        <name language="la_francais" text="Moyen"/>
+        <name language="la_francais" text="Medium"/>     
+      </level>
+      <level value="3" choiceCount="6" questionCount="15" distribParameter="0.1">
+        <name language="la_francais" text="Difficile"/>
+        <name language="la_francais" text="Hard"/>
+      </level>
+      <level value="4" choiceCount="7" questionCount="20" distribParameter="0">
+        <name language="la_francais" text="Très difficile"/>
+        <name language="la_francais" text="Very hard"/>
+      </level>
+    </levelList>
+  </parameters>
   
   <typeDefinitions>
     <elementTypeList>
@@ -52,26 +83,32 @@
     </relationNNTypeList>
   </typeDefinitions>
 
-  <levelList>
-    <level value="0" name="Très facile" choiceCount="3" questionCount="10" distribParameter="0.5" />
-    <level value="1" name="Facile" choiceCount="4" questionCount="10" distribParameter="0.35" />
-    <level value="2" name="Moyen" choiceCount="5" questionCount="15" distribParameter="0.2" />
-    <level value="3" name="Difficile" choiceCount="6" questionCount="15" distribParameter="0.1" />
-    <level value="4" name="Très difficile" choiceCount="7" questionCount="20" distribParameter="0" />
-  </levelList>
-
   <elementList>
-    <element id="el_France" name="" type="et_France" minLevel="0" >
+    <element id="el_France" type="et_France" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="France"/>
+        <name language="la_english" text="France"/>
+      </elementName>
       <attributeList/>
       <numericalAttributeList/>
       <relationList/>
     </element>
     <!--Départements-->
-    <element id="el_AinDepartement" name="Ain" sortKey="01" type="et_Departement" minLevel="0" >
+    <element id="el_AinDepartement" sortKey="01" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Ain"/>
+        <name language="la_english" text="Ain"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="L'Ain"/>
-        <attribute type="at_Nom2" value="de l'Ain"/>
-        <attribute type="at_Numero" value="1"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Ain"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de l'Ain"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="1"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList/>
       <relationList>
@@ -91,11 +128,21 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>-->
       </relationList>
     </element>
-    <element id="el_AisneDepartement" name="Aisne" sortKey="02" type="et_Departement" minLevel="0" >
+    <element id="el_AisneDepartement" sortKey="02" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Aisne"/>
+        <name language="la_english" text="Aisne"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="L'Aisne"/>
-        <attribute type="at_Nom2" value="de l'Aisne"/>
-        <attribute type="at_Numero" value="2"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Aisne"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de l'Aisne"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="2"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList/>
       <relationList>
@@ -117,11 +164,21 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ardennes"/>-->
       </relationList>
     </element>
-    <element id="el_AllierDepartement" name="Allier" sortKey="03" type="et_Departement" minLevel="0" >
+    <element id="el_AllierDepartement" sortKey="03" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Allier"/>
+        <name language="la_english" text="Allier"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="L'Allier"/>
-        <attribute type="at_Nom2" value="de l'Allier"/>
-        <attribute type="at_Numero" value="3"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Allier"/>
+        </attribute>  
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de l'Allier"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="3"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList/>
       <relationList>
@@ -139,11 +196,21 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>-->
       </relationList>
     </element>
-    <element id="el_Jura" name="Jura" sortKey="39" type="et_Departement" minLevel="0" >
+    <element id="el_Jura" sortKey="39" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Jura"/>
+        <name language="la_english" text="Jura"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="Le Jura"/>
-        <attribute type="at_Nom2" value="du Jura"/>
-        <attribute type="at_Numero" value="39"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Le Jura"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="du Jura"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="39"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList/>
       <relationList>
@@ -161,20 +228,36 @@
       </relationList>
     </element>
     <!--Villes 01-->
-    <element id="el_BourgEnBresse" name="Bourg-en-Bresse" type="et_Ville" minLevel="0" >
+    <element id="el_BourgEnBresse" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Bourg-en-Bresse"/>
+        <name language="la_english" text="Bourg-en-Bresse"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="Bourg-en-Bresse"/>
-        <attribute type="at_Nom2" value="de Bourg-en-Bresse"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Bourg-en-Bresse"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de Bourg-en-Bresse"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="40200"/>
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Gex" name="Gex" type="et_Ville" minLevel="1" >
+    <element id="el_Gex" type="et_Ville" minLevel="1" >
+      <elementName>
+        <name language="la_francais" text="Gex"/>
+        <name language="la_english" text="Gex"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="Gex"/>
-        <attribute type="at_Nom2" value="de Gex"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Gex"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de Gex"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="9700"/>
@@ -182,10 +265,18 @@
       <relationList/>
     </element>
     <!--Villes 02-->
-    <element id="el_Laon" name="Laon" type="et_Ville" minLevel="0" >
+    <element id="el_Laon" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Laon"/>
+        <name language="la_english" text="Laon"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="Laon"/>
-        <attribute type="at_Nom2" value="de Laon"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Laon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de Laon"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="26175"/>
@@ -193,10 +284,18 @@
       <relationList/>
     </element>
     <!--Villes 03-->
-    <element id="el_Moulins" name="Moulins" type="et_Ville" minLevel="0" >
+    <element id="el_Moulins" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Moulins"/>
+        <name language="la_english" text="Moulins"/>
+      </elementName>
       <attributeList>
-        <attribute type="at_Nom1" value="Moulins"/>
-        <attribute type="at_Nom2" value="de Moulins"/>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Moulins"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="la_francais" value="de Moulins"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="19760"/>
@@ -208,8 +307,11 @@
   <questionCategories>
     <attributeQuestionCategoryList>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0"
-                                 question="Quel est le département dont le numéro est {0} ?"/>
+                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
+        <questionText language="la_francais" text="Quel est le département dont le numéro est {0} ?"/>
+        <questionText language="la_english" text="What is the département whose number is {0} ?"/>
+      </attributeQuestionCategory>
+      
       <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="sortKey" commentMode="name" weight="100" minLevel="0"
                                  elementDrawDepth1="2" wrongChoiceDrawDepth1="0" elementDrawDepth2="10" wrongChoiceDrawDepth2="0"

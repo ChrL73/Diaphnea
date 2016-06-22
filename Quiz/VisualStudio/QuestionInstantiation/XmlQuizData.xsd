@@ -3,9 +3,8 @@
   <xsd:element name="quizData" type="XmlQuizData" />
   <xsd:complexType name="XmlQuizData">
     <xsd:sequence>
-      <xsd:element name="configuration" type="XmlConfiguration" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="parameters" type="XmlParameters" maxOccurs="1" minOccurs="1" />
       <xsd:element name="typeDefinitions" type="XmlTypeDefinition" maxOccurs="1" minOccurs="1" />
-      <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="questionCategories" type="XmlQuestionCategories" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
@@ -137,14 +136,37 @@
       <xsd:enumeration value="YES_ERROR" />
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:complexType name="XmlLanguageList">
+    <xsd:sequence>
+      <xsd:element name="language" type="XmlLanguage" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLanguage">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="id" type="XmlLanguageId" use="required" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="status" type="XmlLanguageStatusEnum" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlLanguageId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="la_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlLanguageIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="la_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlLevelList">
     <xsd:sequence>
       <xsd:element name="level" type="XmlLevel" maxOccurs="unbounded" minOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlLevel">
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlName" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
     <xsd:attribute name="value" type="xsd:nonNegativeInteger" use="required" />
-    <xsd:attribute name="name" type="xsd:string" use="required" />
     <xsd:attribute name="choiceCount" type="xsd:positiveInteger" use="required" />
     <xsd:attribute name="questionCount" type="xsd:positiveInteger" use="required" />
     <xsd:attribute name="distribParameter" type="XmlDistribParameter" use="required" />
@@ -162,12 +184,12 @@
   </xsd:complexType>
   <xsd:complexType name="XmlElement">
     <xsd:sequence>
+      <xsd:element name="elementName" type="XmlElementName"/>
       <xsd:element name="attributeList" type="XmlAttributeList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="numericalAttributeList" type="XmlNumericalAttributeList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="relationList" type="XmlRelationList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
-    <xsd:attribute name="name" type="xsd:string" use="required" />
     <xsd:attribute name="type" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="sortKey" type="xsd:string" use="optional" />
@@ -188,8 +210,14 @@
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlAttribute">
-    <xsd:sequence></xsd:sequence>
+    <xsd:sequence>
+      <xsd:element name="value" type="XmlAttributeValue" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
     <xsd:attribute name="type" type="XmlAttributeTypeIdRef" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlAttributeValue">
+    <xsd:sequence></xsd:sequence>
+    <xsd:attribute name="language" type="XmlLanguageIdRef" use="required"/>
     <xsd:attribute name="value" type="xsd:string" use="required" />
     <xsd:attribute name="comment" type="xsd:string" use="optional" />
   </xsd:complexType>
@@ -246,7 +274,9 @@
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeQuestionCategory">
-    <xsd:sequence></xsd:sequence>
+    <xsd:sequence>
+      <xsd:element name="questionText" type="XmlQuestionText" maxOccurs="unbounded" minOccurs="0" />
+    </xsd:sequence>
     <xsd:attribute name="elementType" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
@@ -255,7 +285,11 @@
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
-    <xsd:attribute name="question" type="XmlString1P" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlQuestionText">
+    <xsd:sequence/>
+    <xsd:attribute name="language" type="XmlLanguageIdRef" use="required" />
+    <xsd:attribute name="text" type="XmlString1P" use="required" />
   </xsd:complexType>
   <xsd:simpleType name="XmlAnswerProximityCriterionEnum">
     <xsd:restriction base="xsd:string">
@@ -277,8 +311,12 @@
       <xsd:pattern value="[^{^}]*\{0\}[^{^}]*" />
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:complexType name="XmlConfiguration">
-    <xsd:sequence/>
+  <xsd:complexType name="XmlParameters">
+    <xsd:sequence>
+      <xsd:element name="languageList" type="XmlLanguageList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="questionnaireName" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
+    </xsd:sequence>
     <xsd:attribute name="logFileName" type="xsd:string" use="required" />
     <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
@@ -290,6 +328,23 @@
       <xsd:enumeration value="ERROR" />
       <xsd:enumeration value="WARNING" />
       <xsd:enumeration value="MESSAGE" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="XmlElementName">
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlName" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlName">
+    <xsd:sequence/>
+    <xsd:attribute name="language" type="XmlLanguageIdRef" use="required"/>
+    <xsd:attribute name="text" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlLanguageStatusEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="TRANSLATION_COMPLETED"/>
+      <xsd:enumeration value="TRANSLATION_IN_PROGRESS"/>
+      <xsd:enumeration value="IGNORE"/>
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

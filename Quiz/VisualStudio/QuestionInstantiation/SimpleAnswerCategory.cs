@@ -10,7 +10,7 @@ namespace QuestionInstantiation
 {
     class SimpleAnswerCategory : Category
     {
-        private readonly List<PossibleAnswer> _answerList = new List<PossibleAnswer>();
+        //private readonly List<PossibleAnswer> _answerList = new List<PossibleAnswer>();
         private readonly Dictionary<string, List<PossibleAnswer>> _answerDictionary = new Dictionary<string, List<PossibleAnswer>>();
         private readonly List<SimpleAnswerQuestion> _questionList = new List<SimpleAnswerQuestion>();
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
@@ -32,14 +32,14 @@ namespace QuestionInstantiation
             get { return _answerDictionary.Count; }
         }
 
-        internal int TotalAnswerCount
+        /*internal int TotalAnswerCount
         {
             get { return _answerList.Count; }
-        }
+        }*/
 
         internal void addAnswer(PossibleAnswer answer)
         {
-            _answerList.Add(answer);
+            //_answerList.Add(answer);
 
             // TODO: The following code is not correct: the answer should not be added in the following case: 2 answer texts are not identical in a language, but identical in another language
             string answerTextId = answer.AttributeValue.Value.TextId;
@@ -89,7 +89,7 @@ namespace QuestionInstantiation
         {
             IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
 
-            BsonDocument questionListDocument = new BsonDocument();
+            BsonDocument questionListDocument = getQuestionListDocument();
             questionListsCollection.InsertOne(questionListDocument);
 
             BsonDocument categoryDocument = new BsonDocument()
@@ -98,7 +98,75 @@ namespace QuestionInstantiation
                 { "distrib_parameter_correction", _distribParameterCorrection }
             };
 
+            categoryDocument.AddRange(getAnswerListDocument());
+
             return categoryDocument;
+        }
+
+        internal BsonDocument getQuestionListDocument()
+        {
+            BsonDocument questionListDocument = new BsonDocument();
+
+            BsonArray questionsArray = new BsonArray();
+            foreach (SimpleAnswerQuestion question in _questionList)
+            {
+                questionsArray.Add(question.getBsonDocument());
+            }
+
+            BsonDocument questionsDocument = new BsonDocument()
+            {
+                { "questions", questionsArray }
+            };
+
+            questionListDocument.AddRange(questionsDocument);
+
+            return questionListDocument;
+        }
+        
+        internal BsonDocument getAnswerListDocument()
+        {
+            BsonDocument answerListDocument = new BsonDocument();
+
+            BsonArray answersArray = new BsonArray();
+            foreach (List<PossibleAnswer> list in _answerDictionary.Values)
+            {
+                string proximityCriterionValue = "";
+                if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+                {
+                    proximityCriterionValue = list[0].Element.XmlElement.sortKey;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+
+                BsonDocument answerDocument = new BsonDocument()
+                {
+                    { "answer_text", list[0].AttributeValue.Value.getBsonDocument() },
+                    { "proximity_criterion_value", proximityCriterionValue }
+                };
+                answersArray.Add(answerDocument);
+            }
+
+            string proximityCriterionType = "none";
+            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            {
+                proximityCriterionType = "string";
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            BsonDocument answersDocument = new BsonDocument()
+            {
+                { "proximity_criterion_type", proximityCriterionType},
+                { "answers", answersArray }
+            };
+
+            answerListDocument.AddRange(answersDocument);
+
+            return answerListDocument;
         }
     }
 }

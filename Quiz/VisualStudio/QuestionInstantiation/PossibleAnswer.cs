@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,17 @@ namespace QuestionInstantiation
         internal Element Element
         {
             get { return _element; }
+        }
+
+        internal BsonDocument getBsonDocument()
+        {
+            BsonDocument answerDocument = new BsonDocument()
+            {
+                { "answer_text", _attributeValue.Value.getBsonDocument() },
+                { "answer_comment", _attributeValue.Comment.getBsonDocument() }
+            };
+
+            return answerDocument;
         }
     }
 }

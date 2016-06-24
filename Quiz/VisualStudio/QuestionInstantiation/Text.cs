@@ -41,7 +41,7 @@ namespace QuestionInstantiation
 
             foreach (KeyValuePair<string, string> pair in _textDictionary)
             {
-                textDocument.Add(new BsonDocument() { { pair.Key, pair.Value } });
+                textDocument.AddRange(new BsonDocument() { { pair.Key, pair.Value == null ? "" : pair.Value} });
             }
 
             return textDocument;

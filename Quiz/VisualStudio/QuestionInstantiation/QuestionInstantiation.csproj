@@ -68,6 +68,7 @@
     <Compile Include="RelationWayEnum.cs" />
     <Compile Include="SimpleAnswerCategory.cs" />
     <Compile Include="SimpleAnswerQuestion.cs" />
+    <Compile Include="Text.cs" />
     <Compile Include="XmlQuizData.cs" />
   </ItemGroup>
   <ItemGroup>

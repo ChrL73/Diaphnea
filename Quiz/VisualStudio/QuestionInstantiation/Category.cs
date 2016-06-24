@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,6 @@ namespace QuestionInstantiation
             get { return _weightIndex; }
         }
 
-        abstract internal BsonDocument getBsonDocument();
+        abstract internal BsonDocument getBsonDocument(IMongoDatabase database);
     }
 }

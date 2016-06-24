@@ -78,16 +78,16 @@ namespace QuestionInstantiation
 
             _quizData =  new QuizData(args[0], quizData);
 
-            MessageLogger.LogFileName = quizData.configuration.logFileName;
-            MessageLogger.FileLogLevel = quizData.configuration.fileLogLevel;
-            MessageLogger.ConsoleLogLevel = quizData.configuration.consoleLogLevel;
+            MessageLogger.LogFileName = quizData.parameters.logFileName;
+            MessageLogger.FileLogLevel = quizData.parameters.fileLogLevel;
+            MessageLogger.ConsoleLogLevel = quizData.parameters.consoleLogLevel;
 
             return 0;
         }
 
         static int instantiateQuestions()
         {
-            foreach(XmlLevel xmlLevel in _quizData.XmlQuizData.levelList)
+            foreach(XmlLevel xmlLevel in _quizData.XmlQuizData.parameters.levelList)
             {
                 Level level = new Level();
                 if (level.initialize(_quizData, xmlLevel) != 0) return -1;
@@ -100,13 +100,13 @@ namespace QuestionInstantiation
         static int fillDatabase()
         {
             MongoClient mongoClient = new MongoClient();
-            IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.configuration.databaseName);
+            IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
 
             BsonDocument filter = new BsonDocument();
             IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
-            DeleteResult result1 = levelCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("questionLists");
-            DeleteResult result2 = questionListsCollection.DeleteMany(filter);
+            levelCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
+            questionListsCollection.DeleteMany(filter);
 
             foreach (Level level in _levelList)
             {

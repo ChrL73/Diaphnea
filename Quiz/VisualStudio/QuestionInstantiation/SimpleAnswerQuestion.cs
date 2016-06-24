@@ -8,11 +8,11 @@ namespace QuestionInstantiation
 {
     class SimpleAnswerQuestion
     {
-        private readonly string _questionText;
+        private readonly Text _questionText;
         private readonly Element _element;
         private readonly PossibleAnswer _answer;
 
-        internal SimpleAnswerQuestion(string questionText, PossibleAnswer answer, Element element)
+        internal SimpleAnswerQuestion(Text questionText, PossibleAnswer answer, Element element)
         {
             _questionText = questionText;
             _element = element;

@@ -11,6 +11,8 @@ namespace QuestionInstantiation
     class Level
     {
         private XmlLevel _xmlLevel;
+        private Text _name = new Text();
+        private string _nameInLog;
         private Int32 _value;
         private Int32 _weightSum = 0;
         private Int32 _choiceCount;
@@ -22,6 +24,11 @@ namespace QuestionInstantiation
         internal int initialize(QuizData quizData, XmlLevel xmlLevel)
         {
             _xmlLevel = xmlLevel;
+
+            _nameInLog = _xmlLevel.name[0].text;
+            foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language, xmlName.text);
+            quizData.verifyText(_name, String.Format("Level {0}", _nameInLog));
+
             _value = Int32.Parse(_xmlLevel.value);
             _choiceCount = Int32.Parse(_xmlLevel.choiceCount);
 
@@ -44,6 +51,7 @@ namespace QuestionInstantiation
                     XmlElementType xmlElementType = quizData.getXmlElementType(xmlElement.type);
                     Element element = new Element(xmlElement, xmlElementType);
 
+                    if (element.setName(quizData) != 0) return -1;
                     if (element.addAttributes(quizData) != 0) return -1;
                     if (element.addNumericalAttributes(quizData) != 0) return -1;
 
@@ -73,7 +81,7 @@ namespace QuestionInstantiation
 			        {			
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                             "Level \"{0}\": Element {1} has the same value ({2}) for attribute {3} as another element of same type ({4}). Since the attribute type {3} can be used as a question, the element {1} is ignored to avoid ambiguous questions",
-                            _xmlLevel.name, element.XmlElement.id, valueStr, attrTypeStr, eltTypeStr));
+                            _nameInLog, element.XmlElement.id, valueStr, attrTypeStr, eltTypeStr));
 
                         _elementDictionary.Remove(element.XmlElement.id);
 			        }
@@ -132,7 +140,7 @@ namespace QuestionInstantiation
                         {
                             Element element2 = pair2.Key;
                             string message = String.Format("Level \"{0}\": Relation {1}: Symetry check failed for elements {2} and {3}",
-                                _xmlLevel.name, relationType.Id, element1.XmlElement.id, element2.XmlElement.id);
+                                _nameInLog, relationType.Id, element1.XmlElement.id, element2.XmlElement.id);
 
                             if (relationType.CheckSymetry == XmlCheckSymetryEnum.YES_ERROR)
                             {
@@ -206,7 +214,7 @@ namespace QuestionInstantiation
 		        {
                     XmlElementType elementType = quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
 
-                    string questionTemplate = xmlAttributeQuestionCategory.question;
+                    string questionNameInLog =  xmlAttributeQuestionCategory.questionText[0].text;
 
 			        if (_elementByTypeDictionary.ContainsKey(elementType))
 			        {
@@ -214,7 +222,7 @@ namespace QuestionInstantiation
                         if (!questionAttributeType.canBeQuestion)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
-                                quizData.DataFileName, xmlAttributeQuestionCategory.question, questionAttributeType.id));
+                                quizData.DataFileName, questionNameInLog, questionAttributeType.id));
                             return -1;
                         }
 
@@ -222,7 +230,9 @@ namespace QuestionInstantiation
 				        Int32 weight = Int32.Parse(xmlAttributeQuestionCategory.weight);
                         _weightSum += weight;
 
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlAttributeQuestionCategory.answerProximityCriterion, xmlAttributeQuestionCategory.distribParameterCorrection);
+                        double distribParameterCorrection = 0.0;
+                        if (xmlAttributeQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeQuestionCategory.distribParameterCorrection;
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlAttributeQuestionCategory.answerProximityCriterion, distribParameterCorrection);
 
 				        foreach (Element element in _elementByTypeDictionary[elementType])
 				        {
@@ -236,7 +246,15 @@ namespace QuestionInstantiation
 
 						        if (questionAttributeValue != null)
 						        {
-                                    string questionText = String.Format(questionTemplate, questionAttributeValue.Value);
+                                    Text questionText = new Text();
+                                    foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
+                                    {
+                                        string languageId = xmlQuestionText.language;
+                                        string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                        questionText.setText(languageId, questionString);
+                                    }
+                                    if (quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
                                     SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, answer, null);
 							        category.addQuestion(question);
 						        }
@@ -246,23 +264,29 @@ namespace QuestionInstantiation
 				        if (category.QuestionCount == 0)
 				        {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
-                                _xmlLevel.name, questionTemplate));
+                                _nameInLog, questionNameInLog));
 					        _weightSum -= weight;
 				        }
                         else if (category.DistinctAnswerCount < _choiceCount)
 				        {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                                 "Level \"{0}\", category \"{1}\": Not enough possible answers ({2} possibles answers, {3} required). The category is ignored",
-                                _xmlLevel.name, questionTemplate, category.DistinctAnswerCount, _choiceCount));
+                                _nameInLog, questionNameInLog, category.DistinctAnswerCount, _choiceCount));
 					        _weightSum -= weight;
 				        }
 				        else
 				        {
-                            if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE) category.setComments(questionAttributeType);
-                            else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME) category.setComments(null);
+                            if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
+                            {
+                                if (category.setComments(questionAttributeType, quizData) != 0) return -1;
+                            }
+                            else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
+                            {
+                                if (category.setComments(null, quizData) != 0) return -1;
+                            }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} possible answer(s)",
-                                _xmlLevel.name, questionTemplate, category.QuestionCount, category.DistinctAnswerCount));
+                                _nameInLog, questionNameInLog, category.QuestionCount, category.DistinctAnswerCount));
 
                             _categoryList.Add(category);
                             _totalQuestionCount += category.QuestionCount;
@@ -272,7 +296,7 @@ namespace QuestionInstantiation
 			        {
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                                 "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
-                                _xmlLevel.name, questionTemplate, elementType.id));
+                                _nameInLog, questionNameInLog, elementType.id));
                     }
 		        }
 	        }
@@ -286,13 +310,13 @@ namespace QuestionInstantiation
 
             BsonDocument levelDocument = new BsonDocument()
             {
-                { "name", _xmlLevel.name }
+                { "name", _name.getBsonDocument() }
             };
 
             BsonArray categoriesArray = new BsonArray();
             foreach (Category category in _categoryList)
             {
-                categoriesArray.Add(category.getBsonDocument());
+                categoriesArray.Add(category.getBsonDocument(database));
             }
 
             BsonDocument categoriesDocument = new BsonDocument()

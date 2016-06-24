@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Express 14 for Windows Desktop
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbTest", "MongoDbTest\MongoDbTest.csproj", "{34684B79-535E-4996-BB7F-EA95F92BC9B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IComparerTest", "IComparerTest\IComparerTest.csproj", "{F5C5602A-9A8F-4849-853E-8F49F00299A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{34684B79-535E-4996-BB7F-EA95F92BC9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34684B79-535E-4996-BB7F-EA95F92BC9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34684B79-535E-4996-BB7F-EA95F92BC9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C5602A-9A8F-4849-853E-8F49F00299A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C5602A-9A8F-4849-853E-8F49F00299A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C5602A-9A8F-4849-853E-8F49F00299A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C5602A-9A8F-4849-853E-8F49F00299A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

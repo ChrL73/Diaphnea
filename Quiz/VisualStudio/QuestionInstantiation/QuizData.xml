@@ -17,19 +17,19 @@
       </level>
       <level value="1" choiceCount="4" questionCount="10" distribParameter="0.35">
         <name language="la_francais" text="Facile"/>
-        <name language="la_francais" text="Easy"/>
+        <name language="la_english" text="Easy"/>
       </level>
       <level value="2" choiceCount="5" questionCount="15" distribParameter="0.2">
         <name language="la_francais" text="Moyen"/>
-        <name language="la_francais" text="Medium"/>     
+        <name language="la_english" text="Medium"/>     
       </level>
       <level value="3" choiceCount="6" questionCount="15" distribParameter="0.1">
         <name language="la_francais" text="Difficile"/>
-        <name language="la_francais" text="Hard"/>
+        <name language="la_english" text="Hard"/>
       </level>
       <level value="4" choiceCount="7" questionCount="20" distribParameter="0">
         <name language="la_francais" text="Très difficile"/>
-        <name language="la_francais" text="Very hard"/>
+        <name language="la_english" text="Very hard"/>
       </level>
     </levelList>
   </parameters>
@@ -108,6 +108,7 @@
         </attribute>
         <attribute type="at_Numero">
           <value language="la_francais" value="1"/>
+          <value language="la_english" value="1"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -142,6 +143,7 @@
         </attribute>
         <attribute type="at_Numero">
           <value language="la_francais" value="2"/>
+          <value language="la_english" value="2"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -178,6 +180,7 @@
         </attribute>
         <attribute type="at_Numero">
           <value language="la_francais" value="3"/>
+          <value language="la_english" value="3"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -210,6 +213,7 @@
         </attribute>
         <attribute type="at_Numero">
           <value language="la_francais" value="39"/>
+          <value language="la_english" value="39"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>

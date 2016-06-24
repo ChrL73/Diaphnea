@@ -10,6 +10,7 @@ namespace QuestionInstantiation
     {
         private readonly string _dataFileName;
         private readonly XmlQuizData _xmlQuizData;
+        private readonly Dictionary<string, XmlLanguage> _languageDictionary = new Dictionary<string, XmlLanguage>();
         private readonly Dictionary<string, XmlElementType> _elementTypeDictionary = new Dictionary<string, XmlElementType>();
         private readonly Dictionary<string, XmlAttributeType> _attributeTypeDictionary = new Dictionary<string, XmlAttributeType>();
         private readonly Dictionary<string, XmlNumericalAttributeType> _numericalAttributeTypeDictionary = new Dictionary<string, XmlNumericalAttributeType>();
@@ -23,6 +24,7 @@ namespace QuestionInstantiation
         {
             _dataFileName = dataFileName;
             _xmlQuizData = xmlQuizData;
+            foreach (XmlLanguage language in _xmlQuizData.parameters.languageList) _languageDictionary.Add(language.id, language);
             foreach (XmlElementType elementType in _xmlQuizData.typeDefinitions.elementTypeList) _elementTypeDictionary.Add(elementType.id, elementType);
             foreach (XmlAttributeType attributeType in _xmlQuizData.typeDefinitions.attributeTypeList) _attributeTypeDictionary.Add(attributeType.id, attributeType);
             foreach (XmlNumericalAttributeType numericalAttributeType in _xmlQuizData.typeDefinitions.numericalAttributeTypeList) _numericalAttributeTypeDictionary.Add(numericalAttributeType.id, numericalAttributeType);
@@ -135,6 +137,34 @@ namespace QuestionInstantiation
         internal string DataFileName
         {
             get { return _dataFileName; }
+        }
+
+        internal XmlLanguage getXmlLanguage(string id)
+        {
+            XmlLanguage language;
+            if (_languageDictionary.TryGetValue(id, out language)) return language;
+            return null;
+        }
+
+        internal int verifyText(Text text, string description)
+        {
+            foreach (XmlLanguage language in _xmlQuizData.parameters.languageList)
+            {
+                if (text.getText(language.id) == null)
+                {
+                    if (language.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Language {0}, translation missing for: {1})", language.id, description));
+                        return -1;
+                    }
+                    else if (language.status == XmlLanguageStatusEnum.TRANSLATION_IN_PROGRESS)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Language {0}, translation missing for: {1}", language.id, description));
+                    }
+                }
+            }
+
+            return 0;
         }
 
         internal XmlElementType getXmlElementType(string id)

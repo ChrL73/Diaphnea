@@ -10,6 +10,7 @@ namespace QuestionInstantiation
     {
         private readonly XmlElement _xmlElement;
         private readonly XmlElementType _type;
+        private readonly Text _name = new Text();
         private readonly Dictionary<XmlAttributeType, AttributeValue> _attributeDictionary = new Dictionary<XmlAttributeType, AttributeValue>();
         private readonly List<string> _attributeKeyList = new List<string>();
         private readonly Dictionary<XmlNumericalAttributeType, NumericalAttributeValue> _numericalAttributeDictionary = new Dictionary<XmlNumericalAttributeType, NumericalAttributeValue>();
@@ -21,6 +22,15 @@ namespace QuestionInstantiation
             _xmlElement = xmlElement;
             _type = type;
         }
+
+        internal int setName(QuizData quizData)
+        {
+            foreach (XmlName elementName in _xmlElement.elementName) _name.setText(elementName.language, elementName.text);
+            if (quizData.verifyText(_name, String.Format("name of element {0}", _xmlElement.id)) != 0) return -1;
+            return 0;
+        }
+
+        internal Text Name { get { return _name; } }
 
         internal XmlElement XmlElement
         {
@@ -58,9 +68,20 @@ namespace QuestionInstantiation
         internal int addAttributes(QuizData quizData)
         {
             foreach (XmlAttribute xmlAttribute in _xmlElement.attributeList)
-	        {
-		        XmlAttributeType xmlAttributeType = quizData.getXmlAttributeType(xmlAttribute.type);
-                AttributeValue attributeValue = new AttributeValue(xmlAttribute.value, xmlAttribute.comment, xmlAttributeType);
+            {
+                XmlAttributeType xmlAttributeType = quizData.getXmlAttributeType(xmlAttribute.type);
+
+                Text valueText = new Text();
+                Text commentText = new Text();
+                foreach(XmlAttributeValue xmlAttributeValue in xmlAttribute.value)
+                {
+                    valueText.setText(xmlAttributeValue.language, xmlAttributeValue.value);
+                    commentText.setText(xmlAttributeValue.language, xmlAttributeValue.comment);
+                }
+
+                if (quizData.verifyText(valueText, String.Format("element {0}, attribute type {1}", XmlElement.id, xmlAttributeType.id)) != 0) return -1;
+
+                AttributeValue attributeValue = new AttributeValue(valueText, commentText, xmlAttributeType);
                 
 		        if (_attributeDictionary.ContainsKey(xmlAttributeType))
 		        {
@@ -74,7 +95,8 @@ namespace QuestionInstantiation
 
 		        if (xmlAttributeType.canBeQuestion)
 		        {
-                    _attributeKeyList.Add(String.Format("{0}+{1}+{2}", _type.id, xmlAttributeType.id, attributeValue.Value));
+                    // TODO: The following code is not correct
+                    _attributeKeyList.Add(String.Format("{0}+{1}+{2}", _type.id, xmlAttributeType.id, attributeValue.Value.TextId));
 		        }
 	        }
 

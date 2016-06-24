@@ -8,23 +8,23 @@ namespace QuestionInstantiation
 {
     class AttributeValue
     {
-        private readonly string _value;
-        private readonly string _comment;
+        private readonly Text _value;
+        private readonly Text _comment;
         private readonly XmlAttributeType _attributeType;
 
-        internal AttributeValue(string value, string comment, XmlAttributeType attributeType)
+        internal AttributeValue(Text value, Text comment, XmlAttributeType attributeType)
         {
             _value = value;
             _comment = comment;
             _attributeType = attributeType;
         }
 
-        internal string Value
+        internal Text Value
         {
             get { return _value; }
         }
 
-        internal string Comment
+        internal Text Comment
         {
             get { return _comment; }
         }

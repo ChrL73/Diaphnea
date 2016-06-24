@@ -17,7 +17,7 @@ namespace QuestionInstantiation
             _element = element;
         }
 
-        internal string Comment { get; set; }
+        internal Text Comment { get; set; }
 
         internal AttributeValue AttributeValue
         {

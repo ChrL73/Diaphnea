@@ -23,23 +23,21 @@ using System.Xml.Serialization;
 [System.Xml.Serialization.XmlRootAttribute("quizData", Namespace="", IsNullable=false)]
 public partial class XmlQuizData {
     
-    private XmlConfiguration configurationField;
+    private XmlParameters parametersField;
     
     private XmlTypeDefinition typeDefinitionsField;
-    
-    private XmlLevel[] levelListField;
     
     private XmlElement[] elementListField;
     
     private XmlQuestionCategories questionCategoriesField;
     
     /// <remarks/>
-    public XmlConfiguration configuration {
+    public XmlParameters parameters {
         get {
-            return this.configurationField;
+            return this.parametersField;
         }
         set {
-            this.configurationField = value;
+            this.parametersField = value;
         }
     }
     
@@ -50,17 +48,6 @@ public partial class XmlQuizData {
         }
         set {
             this.typeDefinitionsField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("level", IsNullable=false)]
-    public XmlLevel[] levelList {
-        get {
-            return this.levelListField;
-        }
-        set {
-            this.levelListField = value;
         }
     }
     
@@ -91,7 +78,13 @@ public partial class XmlQuizData {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlConfiguration {
+public partial class XmlParameters {
+    
+    private XmlLanguage[] languageListField;
+    
+    private XmlName[] questionnaireNameField;
+    
+    private XmlLevel[] levelListField;
     
     private string logFileNameField;
     
@@ -100,6 +93,39 @@ public partial class XmlConfiguration {
     private XmlLogLevelEnum consoleLogLevelField;
     
     private string databaseNameField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("language", IsNullable=false)]
+    public XmlLanguage[] languageList {
+        get {
+            return this.languageListField;
+        }
+        set {
+            this.languageListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] questionnaireName {
+        get {
+            return this.questionnaireNameField;
+        }
+        set {
+            this.questionnaireNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("level", IsNullable=false)]
+    public XmlLevel[] levelList {
+        get {
+            return this.levelListField;
+        }
+        set {
+            this.levelListField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -149,19 +175,110 @@ public partial class XmlConfiguration {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
-public enum XmlLogLevelEnum {
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlLanguage {
+    
+    private string idField;
+    
+    private string nameField;
+    
+    private XmlLanguageStatusEnum statusField;
+    
+    private bool statusFieldSpecified;
     
     /// <remarks/>
-    NO_LOG,
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
+        }
+    }
     
     /// <remarks/>
-    ERROR,
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
     
     /// <remarks/>
-    WARNING,
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageStatusEnum status {
+        get {
+            return this.statusField;
+        }
+        set {
+            this.statusField = value;
+        }
+    }
     
     /// <remarks/>
-    MESSAGE,
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool statusSpecified {
+        get {
+            return this.statusFieldSpecified;
+        }
+        set {
+            this.statusFieldSpecified = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLanguageStatusEnum {
+    
+    /// <remarks/>
+    TRANSLATION_COMPLETED,
+    
+    /// <remarks/>
+    TRANSLATION_IN_PROGRESS,
+    
+    /// <remarks/>
+    IGNORE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlQuestionText {
+    
+    private string languageField;
+    
+    private string textField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string language {
+        get {
+            return this.languageField;
+        }
+        set {
+            this.languageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string text {
+        get {
+            return this.textField;
+        }
+        set {
+            this.textField = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -170,6 +287,8 @@ public enum XmlLogLevelEnum {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlAttributeQuestionCategory {
+    
+    private XmlQuestionText[] questionTextField;
     
     private string elementTypeField;
     
@@ -189,7 +308,16 @@ public partial class XmlAttributeQuestionCategory {
     
     private string minLevelField;
     
-    private string questionField;
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("questionText")]
+    public XmlQuestionText[] questionText {
+        get {
+            return this.questionTextField;
+        }
+        set {
+            this.questionTextField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
@@ -287,17 +415,6 @@ public partial class XmlAttributeQuestionCategory {
         }
         set {
             this.minLevelField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string question {
-        get {
-            return this.questionField;
-        }
-        set {
-            this.questionField = value;
         }
     }
 }
@@ -429,9 +546,9 @@ public partial class XmlNumericalAttribute {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlAttribute {
+public partial class XmlAttributeValue {
     
-    private string typeField;
+    private string languageField;
     
     private string valueField;
     
@@ -439,12 +556,12 @@ public partial class XmlAttribute {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-    public string type {
+    public string language {
         get {
-            return this.typeField;
+            return this.languageField;
         }
         set {
-            this.typeField = value;
+            this.languageField = value;
         }
     }
     
@@ -476,7 +593,43 @@ public partial class XmlAttribute {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlAttribute {
+    
+    private XmlAttributeValue[] valueField;
+    
+    private string typeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("value")]
+    public XmlAttributeValue[] value {
+        get {
+            return this.valueField;
+        }
+        set {
+            this.valueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string type {
+        get {
+            return this.typeField;
+        }
+        set {
+            this.typeField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlElement {
+    
+    private XmlName[] elementNameField;
     
     private XmlAttribute[] attributeListField;
     
@@ -486,13 +639,22 @@ public partial class XmlElement {
     
     private string idField;
     
-    private string nameField;
-    
     private string typeField;
     
     private string minLevelField;
     
     private string sortKeyField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] elementName {
+        get {
+            return this.elementNameField;
+        }
+        set {
+            this.elementNameField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("attribute", IsNullable=false)]
@@ -539,17 +701,6 @@ public partial class XmlElement {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
-        get {
-            return this.nameField;
-        }
-        set {
-            this.nameField = value;
-        }
-    }
-    
-    /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
     public string type {
         get {
@@ -588,70 +739,31 @@ public partial class XmlElement {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlLevel {
+public partial class XmlName {
     
-    private string valueField;
+    private string languageField;
     
-    private string nameField;
-    
-    private string choiceCountField;
-    
-    private string questionCountField;
-    
-    private double distribParameterField;
+    private string textField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string value {
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string language {
         get {
-            return this.valueField;
+            return this.languageField;
         }
         set {
-            this.valueField = value;
+            this.languageField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    public string text {
         get {
-            return this.nameField;
+            return this.textField;
         }
         set {
-            this.nameField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="positiveInteger")]
-    public string choiceCount {
-        get {
-            return this.choiceCountField;
-        }
-        set {
-            this.choiceCountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="positiveInteger")]
-    public string questionCount {
-        get {
-            return this.questionCountField;
-        }
-        set {
-            this.questionCountField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public double distribParameter {
-        get {
-            return this.distribParameterField;
-        }
-        set {
-            this.distribParameterField = value;
+            this.textField = value;
         }
     }
 }
@@ -1037,4 +1149,95 @@ public partial class XmlTypeDefinition {
             this.relationNNTypeListField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlLevel {
+    
+    private XmlName[] nameField;
+    
+    private string valueField;
+    
+    private string choiceCountField;
+    
+    private string questionCountField;
+    
+    private double distribParameterField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("name")]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string value {
+        get {
+            return this.valueField;
+        }
+        set {
+            this.valueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="positiveInteger")]
+    public string choiceCount {
+        get {
+            return this.choiceCountField;
+        }
+        set {
+            this.choiceCountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="positiveInteger")]
+    public string questionCount {
+        get {
+            return this.questionCountField;
+        }
+        set {
+            this.questionCountField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double distribParameter {
+        get {
+            return this.distribParameterField;
+        }
+        set {
+            this.distribParameterField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLogLevelEnum {
+    
+    /// <remarks/>
+    NO_LOG,
+    
+    /// <remarks/>
+    ERROR,
+    
+    /// <remarks/>
+    WARNING,
+    
+    /// <remarks/>
+    MESSAGE,
 }

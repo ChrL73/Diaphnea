@@ -12,7 +12,7 @@ namespace QuestionInstantiation
         private readonly XmlElementType _type;
         private readonly Text _name = new Text();
         private readonly Dictionary<XmlAttributeType, AttributeValue> _attributeDictionary = new Dictionary<XmlAttributeType, AttributeValue>();
-        private readonly List<string> _attributeKeyList = new List<string>();
+        private readonly List<Text> _attributeKeyList = new List<Text>();
         private readonly Dictionary<XmlNumericalAttributeType, NumericalAttributeValue> _numericalAttributeDictionary = new Dictionary<XmlNumericalAttributeType, NumericalAttributeValue>();
         private readonly Dictionary<RelationType, Element> _relation1Dictionary = new Dictionary<RelationType, Element>();
         private readonly Dictionary<RelationType, List<Element>> _relationNDictionary = new Dictionary<RelationType, List<Element>>();
@@ -42,7 +42,7 @@ namespace QuestionInstantiation
             get { return _type; }
         }
 
-        internal List<string> AttributeKeyList
+        internal List<Text> AttributeKeyList
         {
             get { return _attributeKeyList; }
         }
@@ -95,8 +95,12 @@ namespace QuestionInstantiation
 
 		        if (xmlAttributeType.canBeQuestion)
 		        {
-                    // TODO: The following code is not correct
-                    _attributeKeyList.Add(String.Format("{0}+{1}+{2}", _type.id, xmlAttributeType.id, attributeValue.Value.TextId));
+                    Text attributeKey = new Text();
+                    foreach (string language in attributeValue.Value.LanguageList)
+                    {
+                        attributeKey.setText(language, String.Format("{0}+{1}+{2}", _type.id, xmlAttributeType.id, attributeValue.Value.getText(language)));
+                    }
+                    _attributeKeyList.Add(attributeKey);
 		        }
 	        }
 

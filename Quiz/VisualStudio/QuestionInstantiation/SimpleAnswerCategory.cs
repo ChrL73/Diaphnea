@@ -11,7 +11,7 @@ namespace QuestionInstantiation
     class SimpleAnswerCategory : Category
     {
         //private readonly List<PossibleAnswer> _answerList = new List<PossibleAnswer>();
-        private readonly Dictionary<string, List<PossibleAnswer>> _answerDictionary = new Dictionary<string, List<PossibleAnswer>>();
+        private readonly SortedDictionary<Text, List<PossibleAnswer>> _answerDictionary = new SortedDictionary<Text, List<PossibleAnswer>>(new TextComparer());
         private readonly List<SimpleAnswerQuestion> _questionList = new List<SimpleAnswerQuestion>();
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
@@ -41,10 +41,9 @@ namespace QuestionInstantiation
         {
             //_answerList.Add(answer);
 
-            // TODO: The following code is not correct: the answer should not be added in the following case: 2 answer texts are not identical in a language, but identical in another language
-            string answerTextId = answer.AttributeValue.Value.TextId;
-            if (!_answerDictionary.ContainsKey(answerTextId)) _answerDictionary.Add(answerTextId, new List<PossibleAnswer>());
-            _answerDictionary[answerTextId].Add(answer);
+            Text answerText = answer.AttributeValue.Value;
+            if (!_answerDictionary.ContainsKey(answerText)) _answerDictionary.Add(answerText, new List<PossibleAnswer>());
+            _answerDictionary[answerText].Add(answer);
         }
 
         internal void addQuestion(SimpleAnswerQuestion question)
@@ -130,10 +129,10 @@ namespace QuestionInstantiation
             BsonArray answersArray = new BsonArray();
             foreach (List<PossibleAnswer> list in _answerDictionary.Values)
             {
-                string proximityCriterionValue = "";
+                BsonArray proximityCriterionArray = new BsonArray();
                 if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
                 {
-                    proximityCriterionValue = list[0].Element.XmlElement.sortKey;
+                    foreach (PossibleAnswer possibleAnswer in list) proximityCriterionArray.Add(possibleAnswer.Element.XmlElement.sortKey);
                 }
                 else
                 {
@@ -143,7 +142,7 @@ namespace QuestionInstantiation
                 BsonDocument answerDocument = new BsonDocument()
                 {
                     { "answer_text", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "proximity_criterion_value", proximityCriterionValue }
+                    { "proximity_criterion_values", proximityCriterionArray }
                 };
                 answersArray.Add(answerDocument);
             }

@@ -102,10 +102,11 @@
       <attributeList>
         <attribute type="at_Nom1">
           <value language="la_francais" value="L'Ain"/>
+          <value language="la_english" value="Ain"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="la_francais" value="de l'Ain"/>
-        </attribute>
+        </attribute>-->
         <attribute type="at_Numero">
           <value language="la_francais" value="1"/>
           <value language="la_english" value="1"/>
@@ -137,10 +138,11 @@
       <attributeList>
         <attribute type="at_Nom1">
           <value language="la_francais" value="L'Aisne"/>
+          <value language="la_english" value="Aisne"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="la_francais" value="de l'Aisne"/>
-        </attribute>
+        </attribute>-->
         <attribute type="at_Numero">
           <value language="la_francais" value="2"/>
           <value language="la_english" value="2"/>
@@ -174,10 +176,11 @@
       <attributeList>
         <attribute type="at_Nom1">
           <value language="la_francais" value="L'Allier"/>
-        </attribute>  
-        <attribute type="at_Nom2">
-          <value language="la_francais" value="de l'Allier"/>
+          <value language="la_english" value="Allier"/>
         </attribute>
+        <!--<attribute type="at_Nom2">
+          <value language="la_francais" value="de l'Allier"/>
+        </attribute>-->
         <attribute type="at_Numero">
           <value language="la_francais" value="3"/>
           <value language="la_english" value="3"/>
@@ -207,10 +210,11 @@
       <attributeList>
         <attribute type="at_Nom1">
           <value language="la_francais" value="Le Jura"/>
+          <value language="la_english" value="Jura"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="la_francais" value="du Jura"/>
-        </attribute>
+        </attribute>-->
         <attribute type="at_Numero">
           <value language="la_francais" value="39"/>
           <value language="la_english" value="39"/>
@@ -238,12 +242,12 @@
         <name language="la_english" text="Bourg-en-Bresse"/>
       </elementName>
       <attributeList>
-        <attribute type="at_Nom1">
+        <!--<attribute type="at_Nom1">
           <value language="la_francais" value="Bourg-en-Bresse"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="la_francais" value="de Bourg-en-Bresse"/>
-        </attribute>
+        </attribute>-->
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="40200"/>
@@ -256,12 +260,12 @@
         <name language="la_english" text="Gex"/>
       </elementName>
       <attributeList>
-        <attribute type="at_Nom1">
+        <!--<attribute type="at_Nom1">
           <value language="la_francais" value="Gex"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="la_francais" value="de Gex"/>
-        </attribute>
+        </attribute>-->
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="9700"/>
@@ -275,12 +279,12 @@
         <name language="la_english" text="Laon"/>
       </elementName>
       <attributeList>
-        <attribute type="at_Nom1">
+        <!--<attribute type="at_Nom1">
           <value language="la_francais" value="Laon"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="la_francais" value="de Laon"/>
-        </attribute>
+        </attribute>-->
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="26175"/>
@@ -294,12 +298,12 @@
         <name language="la_english" text="Moulins"/>
       </elementName>
       <attributeList>
-        <attribute type="at_Nom1">
+        <!--<attribute type="at_Nom1">
           <value language="la_francais" value="Moulins"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="la_francais" value="de Moulins"/>
-        </attribute>
+        </attribute>-->
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="19760"/>

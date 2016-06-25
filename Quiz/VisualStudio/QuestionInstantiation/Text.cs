@@ -23,7 +23,7 @@ namespace QuestionInstantiation
                 list.Add(pair.Value);
             }
             
-            _textId = String.Join("#", list);
+            _textId = String.Join("|", list);
         }
 
         internal string getText(string languageId)
@@ -34,6 +34,8 @@ namespace QuestionInstantiation
         }
 
         internal string TextId { get { return _textId; } }
+
+        internal IEnumerable<string> LanguageList { get { return _textDictionary.Keys; } }
 
         internal BsonDocument getBsonDocument()
         {

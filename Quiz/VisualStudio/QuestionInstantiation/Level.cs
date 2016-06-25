@@ -41,7 +41,7 @@ namespace QuestionInstantiation
 
         private int addElements(QuizData quizData)
         {
-            Dictionary<string, List<Element>> elementByAttributeKeyDictionary = new Dictionary<string, List<Element>>();
+            SortedDictionary<Text, List<Element>> elementByAttributeKeyDictionary = new SortedDictionary<Text, List<Element>>(new TextComparer());
 
             foreach (XmlElement xmlElement in quizData.XmlQuizData.elementList)
 	        {
@@ -57,7 +57,7 @@ namespace QuestionInstantiation
 
                     _elementDictionary.Add(xmlElement.id, element);
 
-			        foreach (string attributeKey in element.AttributeKeyList)
+			        foreach (Text attributeKey in element.AttributeKeyList)
 			        {
                         if (!elementByAttributeKeyDictionary.ContainsKey(attributeKey)) elementByAttributeKeyDictionary.Add(attributeKey, new List<Element>());
                         elementByAttributeKeyDictionary[attributeKey].Add(element);
@@ -65,23 +65,29 @@ namespace QuestionInstantiation
 		        }
 	        }
 
-	        foreach (KeyValuePair<string, List<Element>> pair in elementByAttributeKeyDictionary)
+	        foreach (KeyValuePair<Text, List<Element>> pair in elementByAttributeKeyDictionary)
 	        {
                 List<Element> elementList = pair.Value;
 
                 if (elementList.Count > 1)
 		        {
-                    string key = pair.Key;
-                    string eltTypeStr = key.Substring(0, key.IndexOf('+'));
-                    string attrTypeStr = key.Substring(key.IndexOf('+') + 1);
-                    string valueStr = attrTypeStr.Substring(attrTypeStr.IndexOf('+') + 1);
-                    attrTypeStr = attrTypeStr.Substring(0, attrTypeStr.IndexOf('+')); 
+                    Text key = pair.Key;
+                    string eltTypeStr = null, attrTypeStr = null;
+                    List<string> valueStrList = new List<string>();
+                    foreach (string language in key.LanguageList)
+                    {
+                        string text = key.getText(language);   
+                        eltTypeStr = text.Substring(0, text.IndexOf('+'));
+                        attrTypeStr = text.Substring(text.IndexOf('+') + 1);
+                        valueStrList.Add(attrTypeStr.Substring(attrTypeStr.IndexOf('+') + 1));
+                        attrTypeStr = attrTypeStr.Substring(0, attrTypeStr.IndexOf('+'));
+                    }
 
                     foreach (Element element in elementList)
 			        {			
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                            "Level \"{0}\": Element {1} has the same value ({2}) for attribute {3} as another element of same type ({4}). Since the attribute type {3} can be used as a question, the element {1} is ignored to avoid ambiguous questions",
-                            _nameInLog, element.XmlElement.id, valueStr, attrTypeStr, eltTypeStr));
+                            "Level \"{0}\": Element {1} has the same value in at least one language ({2}) for attribute {3} as another element of same type ({4}). Since the attribute type {3} can be used as a question, the element {1} is ignored to avoid ambiguous questions",
+                            _nameInLog, element.XmlElement.id, String.Join("|", valueStrList), attrTypeStr, eltTypeStr));
 
                         _elementDictionary.Remove(element.XmlElement.id);
 			        }

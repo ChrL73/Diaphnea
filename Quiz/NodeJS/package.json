@@ -1,0 +1,13 @@
+{
+   "name": "diaphnea.quiz",
+   "version": "0.1.0",
+   "dependencies":
+   {
+      "express": "~4.14.0",
+      "ejs": "~2.4.2",
+      "mongoose": "~4.4.20"
+   },
+   "author": "Christophe <christoph92@yahoo.fr>",
+   "description": "Geography quiz",
+   "license": "AGPL-3.0"
+}

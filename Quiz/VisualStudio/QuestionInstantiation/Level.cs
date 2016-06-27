@@ -11,6 +11,7 @@ namespace QuestionInstantiation
     class Level
     {
         private XmlLevel _xmlLevel;
+        private QuizData _quizData;
         private Text _name = new Text();
         private string _nameInLog;
         private Int32 _value;
@@ -24,6 +25,7 @@ namespace QuestionInstantiation
         internal int initialize(QuizData quizData, XmlLevel xmlLevel)
         {
             _xmlLevel = xmlLevel;
+            _quizData = quizData;
 
             _nameInLog = _xmlLevel.name[0].text;
             foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language, xmlName.text);
@@ -32,28 +34,28 @@ namespace QuestionInstantiation
             _value = Int32.Parse(_xmlLevel.value);
             _choiceCount = Int32.Parse(_xmlLevel.choiceCount);
 
-            if (addElements(quizData) != 0) return -1;
-            if (checkSymetricalRelations(quizData) != 0) return -1;
-            if (addQuestions(quizData) != 0) return -1;
+            if (addElements() != 0) return -1;
+            if (checkSymetricalRelations() != 0) return -1;
+            if (addQuestions() != 0) return -1;
 
             return 0;
         }
 
-        private int addElements(QuizData quizData)
+        private int addElements()
         {
             SortedDictionary<Text, List<Element>> elementByAttributeKeyDictionary = new SortedDictionary<Text, List<Element>>(new TextComparer());
 
-            foreach (XmlElement xmlElement in quizData.XmlQuizData.elementList)
+            foreach (XmlElement xmlElement in _quizData.XmlQuizData.elementList)
             {
                 Int32 minLevel = Int32.Parse(xmlElement.minLevel);
                 if (_value >= minLevel)
                 {
-                    XmlElementType xmlElementType = quizData.getXmlElementType(xmlElement.type);
+                    XmlElementType xmlElementType = _quizData.getXmlElementType(xmlElement.type);
                     Element element = new Element(xmlElement, xmlElementType);
 
-                    if (element.setName(quizData) != 0) return -1;
-                    if (element.addAttributes(quizData) != 0) return -1;
-                    if (element.addNumericalAttributes(quizData) != 0) return -1;
+                    if (element.setName(_quizData) != 0) return -1;
+                    if (element.addAttributes(_quizData) != 0) return -1;
+                    if (element.addNumericalAttributes(_quizData) != 0) return -1;
 
                     _elementDictionary.Add(xmlElement.id, element);
 
@@ -98,7 +100,7 @@ namespace QuestionInstantiation
             {
                 Element element = pair.Value;
 
-                if (element.addRelations(quizData, _elementDictionary) == 0)
+                if (element.addRelations(_quizData, _elementDictionary) == 0)
                 {
                     if (!_elementByTypeDictionary.ContainsKey(element.Type)) _elementByTypeDictionary.Add(element.Type, new List<Element>());
                     _elementByTypeDictionary[element.Type].Add(element);
@@ -112,9 +114,9 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int checkSymetricalRelations(QuizData quizData)
+        int checkSymetricalRelations()
         {
-            foreach (RelationType relationType in quizData.RelationTypeDictionary.Values)
+            foreach (RelationType relationType in _quizData.RelationTypeDictionary.Values)
             {
                 if (relationType.Nature == RelationNatureEnum.RELATION_NN && relationType.CheckSymetry != XmlCheckSymetryEnum.NO)
                 {
@@ -165,9 +167,9 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int addQuestions(QuizData quizData)
+        int addQuestions()
         {
-            if (addAttributeQuestions(quizData) != 0) return -1;
+            if (addAttributeQuestions() != 0) return -1;
 
             /*if (!addAttributeQuestions()) return false;
             if (!addAttributeOrderQuestions()) return false;
@@ -211,28 +213,28 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int addAttributeQuestions(QuizData quizData)
+        int addAttributeQuestions()
         {
-            foreach(XmlAttributeQuestionCategory xmlAttributeQuestionCategory in quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
+            foreach(XmlAttributeQuestionCategory xmlAttributeQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
             {
                 Int32 minLevel = Int32.Parse(xmlAttributeQuestionCategory.minLevel);
                 if (_value >= minLevel)
                 {
-                    XmlElementType elementType = quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
+                    XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
 
                     string questionNameInLog =  xmlAttributeQuestionCategory.questionText[0].text;
 
                     if (_elementByTypeDictionary.ContainsKey(elementType))
                     {
-                        XmlAttributeType questionAttributeType = quizData.getXmlAttributeType(xmlAttributeQuestionCategory.questionAttribute);
+                        XmlAttributeType questionAttributeType = _quizData.getXmlAttributeType(xmlAttributeQuestionCategory.questionAttribute);
                         if (!questionAttributeType.canBeQuestion)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
-                                quizData.DataFileName, questionNameInLog, questionAttributeType.id));
+                                _quizData.DataFileName, questionNameInLog, questionAttributeType.id));
                             return -1;
                         }
 
-                        XmlAttributeType answerAttributeType = quizData.getXmlAttributeType(xmlAttributeQuestionCategory.answerAttribute);
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlAttributeQuestionCategory.answerAttribute);
                         Int32 weight = Int32.Parse(xmlAttributeQuestionCategory.weight);
                         _weightSum += weight;
 
@@ -259,7 +261,7 @@ namespace QuestionInstantiation
                                         string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
                                         questionText.setText(languageId, questionString);
                                     }
-                                    if (quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+                                    if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
                                     SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, answer, null);
                                     category.addQuestion(question);
@@ -284,11 +286,11 @@ namespace QuestionInstantiation
                         {
                             if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (category.setComments(questionAttributeType, quizData) != 0) return -1;
+                                if (category.setComments(questionAttributeType, _quizData) != 0) return -1;
                             }
                             else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                if (category.setComments(null, quizData) != 0) return -1;
+                                if (category.setComments(null, _quizData) != 0) return -1;
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} possible answer(s)",
@@ -316,13 +318,14 @@ namespace QuestionInstantiation
 
             BsonDocument levelDocument = new BsonDocument()
             {
+                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
                 { "name", _name.getBsonDocument() }
             };
 
             BsonArray categoriesArray = new BsonArray();
             foreach (Category category in _categoryList)
             {
-                categoriesArray.Add(category.getBsonDocument(database));
+                categoriesArray.Add(category.getBsonDocument(database, _quizData.XmlQuizData.parameters.questionnaireId));
             }
 
             BsonDocument categoriesDocument = new BsonDocument()

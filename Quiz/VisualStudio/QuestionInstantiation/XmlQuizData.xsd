@@ -317,11 +317,17 @@
       <xsd:element name="questionnaireName" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
+    <xsd:attribute name="questionnaireId" type="XmlQuestionnaireId" use="required"/>
     <xsd:attribute name="logFileName" type="xsd:string" use="required" />
     <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="databaseName" type="xsd:string" use="required" />
   </xsd:complexType>
+  <xsd:simpleType name="XmlQuestionnaireId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:simpleType name="XmlLogLevelEnum">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="NO_LOG" />

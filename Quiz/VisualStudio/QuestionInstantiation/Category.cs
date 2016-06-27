@@ -22,6 +22,6 @@ namespace QuestionInstantiation
             get { return _weightIndex; }
         }
 
-        abstract internal BsonDocument getBsonDocument(IMongoDatabase database);
+        abstract internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId);
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
 
-  <parameters logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
+  <parameters questionnaireId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
       <language id="la_francais" name="français" status="TRANSLATION_COMPLETED"/>
       <language id="la_english" name="english" status="TRANSLATION_IN_PROGRESS"/>

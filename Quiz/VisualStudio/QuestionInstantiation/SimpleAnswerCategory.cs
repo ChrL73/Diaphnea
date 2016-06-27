@@ -84,11 +84,11 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        internal override BsonDocument getBsonDocument(IMongoDatabase database)
+        internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
         {
             IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
 
-            BsonDocument questionListDocument = getQuestionListDocument();
+            BsonDocument questionListDocument = getQuestionListDocument(questionnaireId);
             questionListsCollection.InsertOne(questionListDocument);
 
             BsonDocument categoryDocument = new BsonDocument()
@@ -102,7 +102,7 @@ namespace QuestionInstantiation
             return categoryDocument;
         }
 
-        internal BsonDocument getQuestionListDocument()
+        internal BsonDocument getQuestionListDocument(string questionnaireId)
         {
             BsonDocument questionListDocument = new BsonDocument();
 
@@ -114,6 +114,7 @@ namespace QuestionInstantiation
 
             BsonDocument questionsDocument = new BsonDocument()
             {
+                { "questionnaire", questionnaireId },
                 { "questions", questionsArray }
             };
 

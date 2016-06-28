@@ -41,6 +41,8 @@ namespace QuestionInstantiation
             return 0;
         }
 
+        internal Int32 QuestionCount { get { return _totalQuestionCount; } }
+
         private int addElements()
         {
             SortedDictionary<Text, List<Element>> elementByAttributeKeyDictionary = new SortedDictionary<Text, List<Element>>(new TextComparer());

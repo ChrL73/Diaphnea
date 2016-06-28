@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
+
+  <parameters questionnaireId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
+    <languageList>
+      <language id="la_francais" name="français" status="TRANSLATION_COMPLETED"/>
+    </languageList>
+    <questionnaireName>
+      <name language="la_francais" text="Gabon"/>
+    </questionnaireName>
+    <levelList>
+      <level value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
+        <name language="la_francais" text="Facile"/>
+      </level>
+      <level value="1" choiceCount="5" questionCount="15" distribParameter="0.2">
+        <name language="la_francais" text="Moyen"/>
+      </level>
+      <level value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
+        <name language="la_francais" text="Difficile"/>
+      </level>
+    </levelList>
+  </parameters>
+
+  <typeDefinitions>
+    <elementTypeList>
+      <elementType id="et_Province" />
+      <elementType id="et_Ville" />
+      <elementType id="et_FleuveRiviere" />
+    </elementTypeList>
+    <attributeTypeList>
+      <attributeType id="at_Nom1" canBeQuestion="true" />
+      <attributeType id="at_Numero" canBeQuestion="true" />
+    </attributeTypeList>
+    <numericalAttributeTypeList>
+      <numericalAttributeType id="nt_Latitude" unit=" °" ambiguityThreshold="0.4" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longitude" unit=" °" ambiguityThreshold="0.6" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longueur" unit=" km" ambiguityThreshold="120" displayPrecision="0"/>
+      <numericalAttributeType id="nt_Population" unit=" h" ambiguityThreshold="25000" displayPrecision="0"/>
+    </numericalAttributeTypeList>
+    <relation11TypeList>
+      <relation11Type id="r11_Province_ChefLieu" startType="et_Province" endType="et_Ville" />
+    </relation11TypeList>
+    <relation1NTypeList>
+      <relation1NType id="r1N_Province_Villes" startType="et_Province" endType="et_Ville"/>
+      <relation1NType id="r1N_Riviere_Villes" startType="et_FleuveRiviere" endType="et_Ville" />
+      <relation1NType id="r1N_Riviere_Affluents" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
+    </relation1NTypeList>
+    <relationNNTypeList>
+      <relationNNType id="rNN_Riviere_Provinces" startType="et_FleuveRiviere" endType="et_Province" />
+      <relationNNType id="rNN_Province_ProvincesLimitrophes" startType="et_Province" endType="et_Province" checkSymetry="YES_ERROR" />
+    </relationNNTypeList>
+  </typeDefinitions>
+
+  <elementList>
+    <!--Provinces-->
+    <element id="el_Estuaire" sortKey="1" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Estuaire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Estuaire"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="1"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Libreville"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
+      </relationList>
+    </element>
+    <element id="el_HautOgooue" sortKey="2" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Haut-Ogooué"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Le Haut-Ogooué"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="2"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Franceville"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
+      </relationList>
+    </element>
+    <element id="el_MoyenOgooue" sortKey="3" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Moyen-Ogooué"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Le Moyen-Ogooué"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="3"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Lambarene"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
+      </relationList>
+    </element>
+    <element id="el_Ngounie" sortKey="4" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Ngounié"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="La Ngounié"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="4"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Mouila"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Nyanga"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
+      </relationList>
+    </element>
+    <element id="el_Nyanga" sortKey="5" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Nyanga"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="La Nyanga"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="5"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Tchibanga"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
+      </relationList>
+    </element>
+    <element id="el_OgooueIvindo" sortKey="6" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Ogooué-Ivindo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Ogooué-Ivindo"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="6"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Makokou"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
+      </relationList>
+    </element>
+    <element id="el_OgooueLolo" sortKey="7" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Ogooué-Lolo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Ogooué-Lolo"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="7"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Koulamoutou"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
+      </relationList>
+    </element>
+    <element id="el_OgooueMaritime" sortKey="8" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Ogooué-Maritime"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="L'Ogooué-Maritime"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="8"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_PortGentil"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Nyanga"/>
+      </relationList>
+    </element>
+    <element id="el_WoleuNtem" sortKey="9" type="et_Province" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Woleu-Ntem"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Le Woleu-Ntem"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="la_francais" value="9"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Province_ChefLieu" linkedElement="el_Oyem"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
+        <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
+      </relationList>
+    </element>
+    <!--Ville-->
+    <element id="el_Libreville" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Libreville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Libreville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Franceville" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Franceville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Franceville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Lambarene" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Lambaréné"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Lambaréné"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Mouila" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Mouila"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Mouila"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Tchibanga" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Tchibanga"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Tchibanga"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Makokou" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Makokou"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Makokou"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Koulamoutou" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Koulamoutou"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Koulamoutou"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_PortGentil" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Port-Gentil"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Port-Gentil"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+    <element id="el_Oyem" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="la_francais" text="Oyem"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="la_francais" value="Oyem"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList/>
+    </element>
+  </elementList>
+
+  <questionCategories>
+    <attributeQuestionCategoryList>
+      <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
+        <questionText language="la_francais" text="Quel est la province dont le numéro est {0} ?"/>
+      </attributeQuestionCategory>
+    </attributeQuestionCategoryList>
+  </questionCategories>
+  
+</quizData>

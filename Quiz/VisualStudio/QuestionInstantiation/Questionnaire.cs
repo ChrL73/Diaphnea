@@ -95,16 +95,47 @@ namespace QuestionInstantiation
             MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
 
-            // TODO: Verify that filter correctly works whith several questionnaires
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("questionnaire", _quizData.XmlQuizData.parameters.questionnaireId);
             IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
             levelCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
             questionListsCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> questionnaireCollection = database.GetCollection<BsonDocument>("questionnaires");
+            questionnaireCollection.DeleteMany(filter);
+
+            Int32 totalQuestionCount = 0;
+            foreach (Level level in _levelList) totalQuestionCount += level.QuestionCount;
+            if (totalQuestionCount == 0) return 0;
+            
+            BsonDocument questionnaireDocument = new BsonDocument()
+            {
+                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId }
+            };
+
+            BsonArray languagesArray = new BsonArray();
+            foreach (XmlLanguage language in _quizData.XmlQuizData.parameters.languageList)
+            {
+                BsonDocument languageDocument = new BsonDocument()
+                {
+                    { "id", language.id },
+                    { "name", language.name }
+                };
+                languagesArray.Add(languageDocument);
+            }
+            BsonDocument languagesDocument = new BsonDocument()
+            {
+                { "languages", languagesArray }
+            };
+            questionnaireDocument.AddRange(languagesDocument);
+
+            questionnaireCollection.InsertOne(questionnaireDocument);
 
             foreach (Level level in _levelList)
             {
-                if (level.fillDataBase(database) != 0) return -1;
+                if (level.QuestionCount > 0)
+                {
+                    if (level.fillDataBase(database) != 0) return -1;
+                }
             }
 
             return 0;

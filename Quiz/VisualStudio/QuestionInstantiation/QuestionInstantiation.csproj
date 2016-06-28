@@ -79,9 +79,10 @@
     <None Include="XmlQuizData.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="QuizData.xml">
+    <Content Include="QuizData_France.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="QuizData_Gabon.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

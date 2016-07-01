@@ -166,11 +166,17 @@
     <xsd:sequence>
       <xsd:element name="name" type="XmlName" minOccurs="1" maxOccurs="unbounded"/>
     </xsd:sequence>
+    <xsd:attribute name="levelId" type="XmlLevelId" use="required" />
     <xsd:attribute name="value" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="choiceCount" type="xsd:positiveInteger" use="required" />
     <xsd:attribute name="questionCount" type="xsd:positiveInteger" use="required" />
     <xsd:attribute name="distribParameter" type="XmlDistribParameter" use="required" />
   </xsd:complexType>
+  <xsd:simpleType name="XmlLevelId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="lv_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:simpleType name="XmlDistribParameter">
     <xsd:restriction base="xsd:double">
       <xsd:minInclusive value="0" />

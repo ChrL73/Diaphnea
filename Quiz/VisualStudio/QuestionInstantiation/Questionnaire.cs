@@ -14,6 +14,7 @@ namespace QuestionInstantiation
     class Questionnaire
     {
         private QuizData _quizData;
+        Text _name = new Text();
         private List<Level> _levelList = new List<Level>();
 
         internal void instantiate(string path)
@@ -80,6 +81,9 @@ namespace QuestionInstantiation
 
         int instantiateQuestions()
         {
+            foreach (XmlName xmlName in _quizData.XmlQuizData.parameters.questionnaireName) _name.setText(xmlName.language, xmlName.text);
+            if (_quizData.verifyText(_name, String.Format("name of questionnaire {0}", _quizData.XmlQuizData.parameters.questionnaireId)) != 0) return -1;
+
             foreach (XmlLevel xmlLevel in _quizData.XmlQuizData.parameters.levelList)
             {
                 Level level = new Level();
@@ -109,7 +113,8 @@ namespace QuestionInstantiation
             
             BsonDocument questionnaireDocument = new BsonDocument()
             {
-                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId }
+                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
+                { "name", _name.getBsonDocument() }
             };
 
             BsonArray languagesArray = new BsonArray();

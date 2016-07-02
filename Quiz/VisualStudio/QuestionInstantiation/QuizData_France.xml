@@ -3,31 +3,31 @@
 
   <parameters questionnaireId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
-      <language id="la_francais" name="français" status="TRANSLATION_COMPLETED"/>
-      <language id="la_english" name="english" status="TRANSLATION_IN_PROGRESS"/>
+      <language id="la_francais" name="Français" status="TRANSLATION_COMPLETED"/>
+      <language id="la_english" name="English" status="TRANSLATION_IN_PROGRESS"/>
     </languageList>
     <questionnaireName>
       <name language="la_francais" text="France"/>
       <name language="la_english" text="France"/>
     </questionnaireName>
     <levelList>
-      <level value="0" choiceCount="3" questionCount="10" distribParameter="0.5">
+      <level levelId="lv_TresFacile" value="0" choiceCount="3" questionCount="10" distribParameter="0.5">
         <name language="la_francais" text="Très facile"/>
         <name language="la_english" text="Very easy"/>
       </level>
-      <level value="1" choiceCount="4" questionCount="10" distribParameter="0.35">
+      <level levelId="lv_Facile" value="1" choiceCount="4" questionCount="10" distribParameter="0.35">
         <name language="la_francais" text="Facile"/>
         <name language="la_english" text="Easy"/>
       </level>
-      <level value="2" choiceCount="5" questionCount="15" distribParameter="0.2">
+      <level levelId="lv_Moyen" value="2" choiceCount="5" questionCount="15" distribParameter="0.2">
         <name language="la_francais" text="Moyen"/>
         <name language="la_english" text="Medium"/>     
       </level>
-      <level value="3" choiceCount="6" questionCount="15" distribParameter="0.1">
+      <level levelId="lv_Difficile" value="3" choiceCount="6" questionCount="15" distribParameter="0.1">
         <name language="la_francais" text="Difficile"/>
         <name language="la_english" text="Hard"/>
       </level>
-      <level value="4" choiceCount="7" questionCount="20" distribParameter="0">
+      <level levelId="lv_TresDifficile" value="4" choiceCount="7" questionCount="20" distribParameter="0">
         <name language="la_francais" text="Très difficile"/>
         <name language="la_english" text="Very hard"/>
       </level>

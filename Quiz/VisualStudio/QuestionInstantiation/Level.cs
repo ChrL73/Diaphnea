@@ -321,6 +321,7 @@ namespace QuestionInstantiation
             BsonDocument levelDocument = new BsonDocument()
             {
                 { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
+                { "levelId", _xmlLevel.levelId },
                 { "name", _name.getBsonDocument() }
             };
 

@@ -3,19 +3,19 @@
 
   <parameters questionnaireId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
-      <language id="la_francais" name="français" status="TRANSLATION_COMPLETED"/>
+      <language id="la_francais" name="Français" status="TRANSLATION_COMPLETED"/>
     </languageList>
     <questionnaireName>
       <name language="la_francais" text="Gabon"/>
     </questionnaireName>
     <levelList>
-      <level value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
+      <level levelId="lv_Facile" value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
         <name language="la_francais" text="Facile"/>
       </level>
-      <level value="1" choiceCount="5" questionCount="15" distribParameter="0.2">
+      <level levelId="lv_Moyen" value="1" choiceCount="5" questionCount="15" distribParameter="0.2">
         <name language="la_francais" text="Moyen"/>
       </level>
-      <level value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
+      <level levelId="lv_Difficile" value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
         <name language="la_francais" text="Difficile"/>
       </level>
     </levelList>

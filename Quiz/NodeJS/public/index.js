@@ -2,10 +2,10 @@ $(function()
 {
    var socket = io.connect();
    
-   console.log("test...");
+   console.log('test...');
    
-   $("#questionnaireSelect").change(function()
+   $('#questionnaireSelect').change(function()
    {
-      console.log($(this).val());
+      socket.emit('questionnaireChoice', $(this).val()); 
    })
 })

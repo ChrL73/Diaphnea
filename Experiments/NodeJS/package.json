@@ -8,5 +8,10 @@
    },
    "author": "Christophe <christoph92@yahoo.fr>",
    "description": "MongoDB tests",
-   "license": "AGPL-3.0"
+   "license": "AGPL-3.0",
+   "repository":
+   {
+      "type": "git",
+      "url": "https://github.com/ChrL73/Diaphnea.git"
+   }
 }

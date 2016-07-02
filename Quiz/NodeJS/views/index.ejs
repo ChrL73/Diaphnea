@@ -7,6 +7,16 @@
    </head>
 
    <body>
-      <p>Test</p>
+      <p>
+         <select id="questionnaireSelect">
+            <option id="q1">Questionnaire 1</option>
+            <option id="q2">Questionnaire 2</option>
+         </select>
+      </p>
+      <p><%= test %></p>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="index.js"></script>
    </body>
 </html>

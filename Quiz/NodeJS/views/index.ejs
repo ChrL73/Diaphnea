@@ -9,11 +9,36 @@
    <body>
       <p>
          <select id="questionnaireSelect">
-            <option id="q1">Questionnaire 1</option>
-            <option id="q2">Questionnaire 2</option>
+            <% data.questionnaireList.forEach(function(questionnaire) { 
+               if (questionnaire.id == data.questionnaireId) { %>
+               <option selected value="<%= questionnaire.id %>">
+               <%  } else { %>
+               <option value="<%= questionnaire.id %>"> <% } %>
+                  <%= questionnaire.name %>
+               </option>
+            <% }); %>
+         </select>
+         <select id="languageSelect">
+            <% data.languageList.forEach(function(language) { 
+               if (language.id == data.languageId) { %>
+               <option selected value="<%= language.id %>">
+               <%  } else { %>
+               <option value="<%= language.id %>"> <% } %>
+                  <%= language.name %>
+               </option>
+            <% }); %>
+         </select>
+         <select id="levelSelect">
+            <% data.levelList.forEach(function(level) { 
+               if (level.id == data.levelId) { %>
+               <option selected value="<%= level.id %>">
+               <%  } else { %>
+               <option value="<%= level.id %>"> <% } %>
+                  <%= level.name %>
+               </option>
+            <% }); %>
          </select>
       </p>
-      <p><%= test %></p>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>

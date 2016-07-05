@@ -3,122 +3,92 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var morgan = require('morgan');
-var mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
-//var sharedsession = require("express-socket.io-session");
-//var cookieParser = require('cookie-parser');
+
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/diaphnea');
+var quizData = require('./quiz_data');
+var userData = require('./user_data');
+
+var config = require('./config');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
 
-//app.use(cookieParser('ke7Hèq*fG5ùZ'));
-app.use(session(
+if (!config.cookieSecret) throw new Error("No 'cookieSecret' value in config.js");
+app.use(cookieParser(config.cookieSecret));
+
+if (!config.sessionSecret) throw new Error("No 'sessionSecret' value in config.js");
+var sessionMiddleware = session(
 {
-  secret: 'ke7Hèq*fG5ùZ',
-  resave: true,
+  secret: config.sessionSecret,
+  resave: false,
   saveUninitialized: true
-}));
-//io.use(sharedsession(session, { autoSave: true , resave: true,})); 
+});
+io.use(function(socket, next)
+{
+   sessionMiddleware(socket.request, socket.request.res, next);
+});
+app.use(sessionMiddleware);
 
-var db = mongoose.connect("mongodb://localhost/diaphnea");
+/*userData.tryAddUser('Bob', 'blop', function(err, id)
+{
+   console.log('err: ' + err);
+   console.log('id: ' + id);
+});*/
+//userData.displayAllUsers();
+/*userData.findUserId('Bob', 'blop', function(err, userId)
+{
+   console.log('err: ' + err);
+   console.log('userId: ' + userId);
 
-var languageSchema = mongoose.Schema({ id: String, name: String });
-var questionnaireSchema = mongoose.Schema({ questionnaire: String, name: mongoose.Schema.Types.Mixed, languages: [languageSchema] });
-var QuestionnaireModel = mongoose.model("Questionnaire", questionnaireSchema);
+   userData.getUser(userId, function(err, user)
+   {
+      console.log('err: ' + err);
+      console.log('user: ' + user);
+      
+      userData.removeUser(userId, function(err, count)
+      {
+         console.log('err: ' + err);
+         console.log('count: ' + count);
+         
+         userData.displayAllUsers();
+      });
+   });
+});*/
 
-var levelSchema = mongoose.Schema({ questionnaire: String, levelId: String, name: mongoose.Schema.Types.Mixed, categories: mongoose.Schema.Types.Mixed });
-var LevelModel = mongoose.model("Level", levelSchema);
 
 app.get('/', function(req, res)
 {
-   var sessionQuestionnaireId = req.session.questionnaireId;
-   var sessionLanguageId = req.session.languageId;
-   var sessionLevelId = req.session.levelId;
-   /*var cookieQuestionnaireId = req.cookies.questionnaireId;
-   var cookieLanguageId = req.cookies.languageId;
-   var cookieLevelId = req.cookies.levelId;*/
-   
-   var questionnaire, language, level;
-   var data = { questionnaireList: [], languageList: [], levelList: [] };
-   
-   console.log("sessionQuestionnaireId: " + sessionQuestionnaireId);
-   console.log("sessionLanguageId: " + sessionLanguageId);
-   console.log("sessionLevelId: " + sessionLevelId);
-   /*console.log("cookieQuestionnaireId: " + cookieQuestionnaireId);
-   console.log("cookieLanguageId: " + cookieLanguageId);
-   console.log("cookieLevelId: " + cookieLevelId);*/
-   
-   QuestionnaireModel.find().sort("questionnaire").exec(processQuestionnaires);
-   
-   function processQuestionnaires(err, questionnaires)
+   var upData =
    {
-      var defaultQuestionnaire;
-      questionnaires.forEach(function(iQuestionnaire)
-      {
-         if (!defaultQuestionnaire) defaultQuestionnaire = iQuestionnaire; 
-         if (iQuestionnaire.questionnaire === sessionQuestionnaireId) questionnaire = iQuestionnaire;
-         //if (iQuestionnaire.questionnaire === cookieQuestionnaireId) questionnaire = iQuestionnaire;
-      });
-      
-      if (!questionnaire) questionnaire = defaultQuestionnaire;
-      req.session.questionnaireId = questionnaire.questionnaire;
-      //res.cookie('questionnaireId', questionnaire.questionnaire);
-      
-      var defaultLanguage;
-      questionnaire.languages.forEach(function(iLanguage)
-      {
-         if (!defaultLanguage) defaultLanguage = iLanguage;
-         if (iLanguage.id === sessionLanguageId) language = iLanguage;
-         //if (iLanguage.id === cookieLanguageId) language = iLanguage;
-         data.languageList.push(iLanguage.name);
-      });
-      
-      if (!language) language = defaultLanguage;
-      req.session.languageId = language.id;
-      //res.cookie('languageId', language.id);
-      
-      questionnaires.forEach(function(iQuestionnaire)
-      {
-         data.questionnaireList.push(iQuestionnaire.name[language.id]);
-      });
-      
-      LevelModel.find({ questionnaire: questionnaire.questionnaire }, processLevels);
-   }
+      questionnaireId: req.cookies.questionnaireId,
+      languageId: req.cookies.languageId,
+      levelId: req.cookies.levelId,
+   };
    
-   function processLevels(err, levels)
-   {
-      var defaultLevel;
-      
-      levels.forEach(function(iLevel)
-      {
-         if (!defaultLevel) defaultLevel = iLevel;
-         if (iLevel.levelId === sessionLevelId) level = iLevel;
-         //if (iLevel.levelId === cookieLevelId) level = iLevel;
-         data.levelList.push(iLevel.name[language.id]);
-      });
-      
-      if (!level) level = defaultLevel;
-      req.session.levelId = level.levelId;
-      //res.cookie('levelId', level.levelId);
-      
-      renderView();
-   }
+   quizData.getLevelChoiceDownData(upData, renderView);
    
-   function renderView()
+   function renderView(downData)
    {
-      res.render('index.ejs', { test: questionnaire.questionnaire, data: data });
+      res.render('index.ejs', { data: downData });
    }
 });
 
 io.on('connection', function(socket)
 {
-   socket.on('questionnaireChoice', function(questionnaireName)
+   socket.on('levelChoice', function(upData)
    {
-      console.log(questionnaireName);
-      //console.log(socket.handshake);
-      //console.log(socket.handshake.headers.cookie);
+      quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
    });
+   
+   function emitUpdateSelects(downData)
+   {
+      socket.emit('updateSelects', downData);
+   }
 });
 
-console.log('Quiz server listening on port 3000...');
-server.listen(3000);
+if (!config.port) throw new Error("No 'port' value in config.js");
+console.log('Quiz server listening on port ' + config.port + '...');
+server.listen(config.port);

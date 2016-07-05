@@ -15,12 +15,12 @@ var sessionMiddleware = session(
   secret: 'ke7Hèq*fG5ùZ',
   resave: false,
   saveUninitialized: true
-})
+});
 
 io.use(function(socket, next)
 {
    sessionMiddleware(socket.request, socket.request.res, next);
-})
+});
 
 app.use(sessionMiddleware);
 

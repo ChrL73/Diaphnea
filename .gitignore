@@ -10,3 +10,4 @@
 !/Shared/readme.txt
 .directory
 *node_modules
+*npm-debug.log

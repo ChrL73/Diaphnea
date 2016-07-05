@@ -3,21 +3,61 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var morgan = require('morgan');
-var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/diaphnea');
+var quizData = require('./quiz_data');
+var userData = require('./user_data');
+
+var config = require('./config');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
-app.use(cookieParser('ke7Hèq*fG5ùZ'));
 
-var db = mongoose.connect("mongodb://localhost/diaphnea");
+if (!config.cookieSecret) throw new Error("No 'cookieSecret' value in config.js");
+app.use(cookieParser(config.cookieSecret));
 
-var languageSchema = mongoose.Schema({ id: String, name: String });
-var questionnaireSchema = mongoose.Schema({ questionnaire: String, name: mongoose.Schema.Types.Mixed, languages: [languageSchema] });
-var QuestionnaireModel = mongoose.model("Questionnaire", questionnaireSchema);
+if (!config.sessionSecret) throw new Error("No 'sessionSecret' value in config.js");
+var sessionMiddleware = session(
+{
+  secret: config.sessionSecret,
+  resave: false,
+  saveUninitialized: true
+});
+io.use(function(socket, next)
+{
+   sessionMiddleware(socket.request, socket.request.res, next);
+});
+app.use(sessionMiddleware);
 
-var levelSchema = mongoose.Schema({ questionnaire: String, levelId: String, name: mongoose.Schema.Types.Mixed, categories: mongoose.Schema.Types.Mixed });
-var LevelModel = mongoose.model("Level", levelSchema);
+/*userData.tryAddUser('Bob', 'blop', function(err, id)
+{
+   console.log('err: ' + err);
+   console.log('id: ' + id);
+});*/
+//userData.displayAllUsers();
+/*userData.findUserId('Bob', 'blop', function(err, userId)
+{
+   console.log('err: ' + err);
+   console.log('userId: ' + userId);
+
+   userData.getUser(userId, function(err, user)
+   {
+      console.log('err: ' + err);
+      console.log('user: ' + user);
+      
+      userData.removeUser(userId, function(err, count)
+      {
+         console.log('err: ' + err);
+         console.log('count: ' + count);
+         
+         userData.displayAllUsers();
+      });
+   });
+});*/
+
 
 app.get('/', function(req, res)
 {
@@ -28,7 +68,7 @@ app.get('/', function(req, res)
       levelId: req.cookies.levelId,
    };
    
-   getLevelChoiceDownData(upData, renderView);
+   quizData.getLevelChoiceDownData(upData, renderView);
    
    function renderView(downData)
    {
@@ -40,7 +80,7 @@ io.on('connection', function(socket)
 {
    socket.on('levelChoice', function(upData)
    {
-      getLevelChoiceDownData(upData, emitUpdateSelects);
+      quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
    });
    
    function emitUpdateSelects(downData)
@@ -49,64 +89,6 @@ io.on('connection', function(socket)
    }
 });
 
-function getLevelChoiceDownData(upData, callback)
-{
-   var questionnaire, language, level;
-   var downData = { questionnaireList: [], languageList: [], levelList: [] };
-   
-   QuestionnaireModel.find().sort("questionnaire").exec(processQuestionnaires);
-   
-   function processQuestionnaires(err, questionnaires)
-   {
-      var defaultQuestionnaire;
-      questionnaires.forEach(function(iQuestionnaire)
-      {
-         if (!defaultQuestionnaire) defaultQuestionnaire = iQuestionnaire; 
-         if (iQuestionnaire.questionnaire === upData.questionnaireId) questionnaire = iQuestionnaire;
-      });
-      
-      if (!questionnaire) questionnaire = defaultQuestionnaire;
-      
-      var defaultLanguage;
-      questionnaire.languages.forEach(function(iLanguage)
-      {
-         if (!defaultLanguage) defaultLanguage = iLanguage;
-         if (iLanguage.id === upData.languageId) language = iLanguage;
-         downData.languageList.push({ id: iLanguage.id, name: iLanguage.name });
-      });
-      
-      if (!language) language = defaultLanguage;
-      
-      questionnaires.forEach(function(iQuestionnaire)
-      {
-         var questionnaireName = iQuestionnaire.name[language.id];
-         if (!questionnaireName) questionnaireName = iQuestionnaire.name[iQuestionnaire.languages[0].id];
-         downData.questionnaireList.push({id: iQuestionnaire.questionnaire, name: questionnaireName });
-      });
-      
-      LevelModel.find({ questionnaire: questionnaire.questionnaire }, processLevels);
-   }
-   
-   function processLevels(err, levels)
-   {
-      var defaultLevel;
-      
-      levels.forEach(function(iLevel)
-      {
-         if (!defaultLevel) defaultLevel = iLevel;
-         if (iLevel.levelId === upData.levelId) level = iLevel;
-         downData.levelList.push({ id: iLevel.levelId, name: iLevel.name[language.id] });
-      });
-      
-      if (!level) level = defaultLevel;
-      
-      downData.questionnaireId = questionnaire.questionnaire;
-      downData.languageId = language.id;
-      downData.levelId = level.levelId;
-      
-      callback(downData);
-   }
-}
-
-console.log('Quiz server listening on port 3000...');
-server.listen(3000);
+if (!config.port) throw new Error("No 'port' value in config.js");
+console.log('Quiz server listening on port ' + config.port + '...');
+server.listen(config.port);

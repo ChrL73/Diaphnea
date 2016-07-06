@@ -20,7 +20,7 @@ function tryAddUser(name, pass, callback)
       }
       if (user)
       {
-         callback("User name '" + name + "' already exists", null);
+         callback(null, null);
          return;
       }
       

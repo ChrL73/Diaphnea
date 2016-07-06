@@ -12,6 +12,7 @@ var quizData = require('./quiz_data');
 var userData = require('./user_data');
 
 var config = require('./config');
+var translate = require('./translate');
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -58,22 +59,58 @@ app.use(sessionMiddleware);
    });
 });*/
 
-
-app.get('/', function(req, res)
+app.all('/', function(req, res)
 {
-   var upData =
+   var user;
+   if (req.session.userId) user = userData.getUser(req.session.userId);
+   
+   var upData;
+   if (user)
    {
-      questionnaireId: req.cookies.questionnaireId,
-      languageId: req.cookies.languageId,
-      levelId: req.cookies.levelId,
-   };
+      upData =
+      {
+         questionnaireId: user.preferences.questionnaireId,
+         languageId: user.preferences.languageId,
+         levelId: user.preferences.levelId
+      };
+   }
+   else
+   {
+      upData =
+      {
+         questionnaireId: req.cookies.questionnaireId,
+         languageId: req.cookies.languageId,
+         levelId: req.cookies.levelId
+      };
+   }
    
    quizData.getLevelChoiceDownData(upData, renderView);
    
    function renderView(downData)
    {
+      downData.siteLanguageList = translate().languages;
+      
+      if (user)
+      {
+         downData.userName = user.name;
+         downData.siteLanguageId = user.preferences.siteLanguageId;
+      }
+      else
+      {   
+         downData.siteLanguageId = req.cookies.siteLanguageId;
+      }
+      
+      if (!downData.siteLanguageId) downData.siteLanguageId = translate().languages[0].id;
+      console.log(downData.siteLanguageId);
+      downData.texts = translate(downData.siteLanguageId).texts;
+      
       res.render('index.ejs', { data: downData });
    }
+});
+
+app.use(function(req, res)
+{
+   res.redirect('/');
 });
 
 io.on('connection', function(socket)

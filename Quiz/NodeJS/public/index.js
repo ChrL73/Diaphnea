@@ -2,6 +2,12 @@ $(function()
 {
    var socket = io.connect();
    
+   $('#siteLanguageSelect').change(function()
+   {
+      document.cookie = 'siteLanguageId=' + $(this).val();
+      location.reload();
+   });
+   
    $('#questionnaireSelect').change(emitLevelChoice);
    $('#languageSelect').change(emitLevelChoice);
    $('#levelSelect').change(emitLevelChoice);

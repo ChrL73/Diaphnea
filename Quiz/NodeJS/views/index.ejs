@@ -7,7 +7,30 @@
    </head>
 
    <body>
+      <div>
+         <% if (data.user) { %>
+            
+         <%} else {%>
+            <form id="signInForm" action="/" method="post">
+               <label for="nameInput"><%=data.texts.name%>: </label><input type="text" id="nameInput" name="name"/>
+               <label for="passInput"><%=data.texts.password%>: </label><input type="password" id="passInput" name="pass"/>
+               <input type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
+               <input type="submit" value="<%=data.texts.signUp%>" name="signUp"/>
+            </form>
+         <% } %>
+         <select id="siteLanguageSelect">
+            <% data.siteLanguageList.forEach(function(language) { 
+               if (language.id == data.siteLanguageId) { %>
+               <option selected value="<%= language.id %>">
+               <%  } else { %>
+               <option value="<%= language.id %>"> <% } %>
+                  <%= language.name %>
+               </option>
+            <% }); %>
+         </select>
+      </div>
       <p>
+         <label for="questionnaireSelect"><%=data.texts.questionnaire%>: </label> 
          <select id="questionnaireSelect">
             <% data.questionnaireList.forEach(function(questionnaire) { 
                if (questionnaire.id == data.questionnaireId) { %>
@@ -18,6 +41,9 @@
                </option>
             <% }); %>
          </select>
+      </p>
+      <p>
+         <label for="languageSelect"><%=data.texts.language%>: </label> 
          <select id="languageSelect">
             <% data.languageList.forEach(function(language) { 
                if (language.id == data.languageId) { %>
@@ -28,6 +54,9 @@
                </option>
             <% }); %>
          </select>
+      </p>
+      <p>
+         <label for="levelSelect"><%=data.texts.level%>: </label> 
          <select id="levelSelect">
             <% data.levelList.forEach(function(level) { 
                if (level.id == data.levelId) { %>

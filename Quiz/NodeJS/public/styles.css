@@ -1,6 +1,11 @@
-p
+*
 {
    font-family: sans-serif;
+}
+
+#signInForm
+{
+   display: inline-block;
 }
 
 #waitImg

@@ -73,9 +73,9 @@ namespace QuestionInstantiation
                 foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
                 {
                     List<string> list = new List<string>();
-                    foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id));
+                    foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id.ToString()));
                     string comment = String.Join(", ", list);
-                    commentText.setText(xmlLanguage.id, comment);
+                    commentText.setText(xmlLanguage.id.ToString(), comment);
                 }
 
                 foreach (PossibleAnswer answer in answerList) answer.Comment = commentText;

@@ -192,7 +192,7 @@ public partial class XmlParameters {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlLanguage {
     
-    private string idField;
+    private XmlLanguageId idField;
     
     private string nameField;
     
@@ -201,8 +201,8 @@ public partial class XmlLanguage {
     private bool statusFieldSpecified;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-    public string id {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageId id {
         get {
             return this.idField;
         }
@@ -248,6 +248,18 @@ public partial class XmlLanguage {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
+public enum XmlLanguageId {
+    
+    /// <remarks/>
+    fr,
+    
+    /// <remarks/>
+    en,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
 public enum XmlLanguageStatusEnum {
     
     /// <remarks/>
@@ -267,13 +279,13 @@ public enum XmlLanguageStatusEnum {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlQuestionText {
     
-    private string languageField;
+    private XmlLanguageIdRef languageField;
     
     private string textField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-    public string language {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageIdRef language {
         get {
             return this.languageField;
         }
@@ -292,6 +304,18 @@ public partial class XmlQuestionText {
             this.textField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLanguageIdRef {
+    
+    /// <remarks/>
+    fr,
+    
+    /// <remarks/>
+    en,
 }
 
 /// <remarks/>
@@ -561,15 +585,15 @@ public partial class XmlNumericalAttribute {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlAttributeValue {
     
-    private string languageField;
+    private XmlLanguageIdRef languageField;
     
     private string valueField;
     
     private string commentField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-    public string language {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageIdRef language {
         get {
             return this.languageField;
         }
@@ -754,13 +778,13 @@ public partial class XmlElement {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlName {
     
-    private string languageField;
+    private XmlLanguageIdRef languageField;
     
     private string textField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-    public string language {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageIdRef language {
         get {
             return this.languageField;
         }

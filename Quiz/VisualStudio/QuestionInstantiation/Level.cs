@@ -28,7 +28,7 @@ namespace QuestionInstantiation
             _quizData = quizData;
 
             _nameInLog = _xmlLevel.name[0].text;
-            foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language, xmlName.text);
+            foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language.ToString(), xmlName.text);
             quizData.verifyText(_name, String.Format("Level {0}", _nameInLog));
 
             _value = Int32.Parse(_xmlLevel.value);
@@ -259,7 +259,7 @@ namespace QuestionInstantiation
                                     Text questionText = new Text();
                                     foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
                                     {
-                                        string languageId = xmlQuestionText.language;
+                                        string languageId = xmlQuestionText.language.ToString();
                                         string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
                                         questionText.setText(languageId, questionString);
                                     }

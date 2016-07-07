@@ -24,7 +24,7 @@ namespace QuestionInstantiation
         {
             _dataFileName = dataFileName;
             _xmlQuizData = xmlQuizData;
-            foreach (XmlLanguage language in _xmlQuizData.parameters.languageList) _languageDictionary.Add(language.id, language);
+            foreach (XmlLanguage language in _xmlQuizData.parameters.languageList) _languageDictionary.Add(language.id.ToString(), language);
             foreach (XmlElementType elementType in _xmlQuizData.typeDefinitions.elementTypeList) _elementTypeDictionary.Add(elementType.id, elementType);
             foreach (XmlAttributeType attributeType in _xmlQuizData.typeDefinitions.attributeTypeList) _attributeTypeDictionary.Add(attributeType.id, attributeType);
             foreach (XmlNumericalAttributeType numericalAttributeType in _xmlQuizData.typeDefinitions.numericalAttributeTypeList) _numericalAttributeTypeDictionary.Add(numericalAttributeType.id, numericalAttributeType);
@@ -150,7 +150,7 @@ namespace QuestionInstantiation
         {
             foreach (XmlLanguage language in _xmlQuizData.parameters.languageList)
             {
-                if (text.getText(language.id) == null)
+                if (text.getText(language.id.ToString()) == null)
                 {
                     if (language.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED)
                     {

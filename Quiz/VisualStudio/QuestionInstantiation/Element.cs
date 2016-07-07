@@ -25,7 +25,7 @@ namespace QuestionInstantiation
 
         internal int setName(QuizData quizData)
         {
-            foreach (XmlName elementName in _xmlElement.elementName) _name.setText(elementName.language, elementName.text);
+            foreach (XmlName elementName in _xmlElement.elementName) _name.setText(elementName.language.ToString(), elementName.text);
             if (quizData.verifyText(_name, String.Format("name of element {0}", _xmlElement.id)) != 0) return -1;
             return 0;
         }
@@ -75,8 +75,8 @@ namespace QuestionInstantiation
                 Text commentText = new Text();
                 foreach(XmlAttributeValue xmlAttributeValue in xmlAttribute.value)
                 {
-                    valueText.setText(xmlAttributeValue.language, xmlAttributeValue.value);
-                    commentText.setText(xmlAttributeValue.language, xmlAttributeValue.comment);
+                    valueText.setText(xmlAttributeValue.language.ToString(), xmlAttributeValue.value);
+                    commentText.setText(xmlAttributeValue.language.ToString(), xmlAttributeValue.comment);
                 }
 
                 if (quizData.verifyText(valueText, String.Format("element {0}, attribute type {1}", XmlElement.id, xmlAttributeType.id)) != 0) return -1;

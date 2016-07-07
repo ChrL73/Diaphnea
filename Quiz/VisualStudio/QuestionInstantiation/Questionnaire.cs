@@ -81,7 +81,7 @@ namespace QuestionInstantiation
 
         int instantiateQuestions()
         {
-            foreach (XmlName xmlName in _quizData.XmlQuizData.parameters.questionnaireName) _name.setText(xmlName.language, xmlName.text);
+            foreach (XmlName xmlName in _quizData.XmlQuizData.parameters.questionnaireName) _name.setText(xmlName.language.ToString(), xmlName.text);
             if (_quizData.verifyText(_name, String.Format("name of questionnaire {0}", _quizData.XmlQuizData.parameters.questionnaireId)) != 0) return -1;
 
             foreach (XmlLevel xmlLevel in _quizData.XmlQuizData.parameters.levelList)
@@ -122,7 +122,7 @@ namespace QuestionInstantiation
             {
                 BsonDocument languageDocument = new BsonDocument()
                 {
-                    { "id", language.id },
+                    { "id", language.id.ToString() },
                     { "name", language.name }
                 };
                 languagesArray.Add(languageDocument);

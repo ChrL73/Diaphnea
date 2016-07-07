@@ -3,20 +3,20 @@
 
   <parameters questionnaireId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
-      <language id="la_francais" name="Français" status="TRANSLATION_COMPLETED"/>
+      <language id="fr" name="Français" status="TRANSLATION_COMPLETED"/>
     </languageList>
     <questionnaireName>
-      <name language="la_francais" text="Gabon"/>
+      <name language="fr" text="Gabon"/>
     </questionnaireName>
     <levelList>
       <level levelId="lv_Facile" value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
-        <name language="la_francais" text="Facile"/>
+        <name language="fr" text="Facile"/>
       </level>
       <level levelId="lv_Moyen" value="1" choiceCount="5" questionCount="15" distribParameter="0.2">
-        <name language="la_francais" text="Moyen"/>
+        <name language="fr" text="Moyen"/>
       </level>
       <level levelId="lv_Difficile" value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
-        <name language="la_francais" text="Difficile"/>
+        <name language="fr" text="Difficile"/>
       </level>
     </levelList>
   </parameters>
@@ -55,14 +55,14 @@
     <!--Provinces-->
     <element id="el_Estuaire" sortKey="1" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Estuaire"/>
+        <name language="fr" text="Estuaire"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="L'Estuaire"/>
+          <value language="fr" value="L'Estuaire"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="1"/>
+          <value language="fr" value="1"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -75,14 +75,14 @@
     </element>
     <element id="el_HautOgooue" sortKey="2" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Haut-Ogooué"/>
+        <name language="fr" text="Haut-Ogooué"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Le Haut-Ogooué"/>
+          <value language="fr" value="Le Haut-Ogooué"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="2"/>
+          <value language="fr" value="2"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -94,14 +94,14 @@
     </element>
     <element id="el_MoyenOgooue" sortKey="3" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Moyen-Ogooué"/>
+        <name language="fr" text="Moyen-Ogooué"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Le Moyen-Ogooué"/>
+          <value language="fr" value="Le Moyen-Ogooué"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="3"/>
+          <value language="fr" value="3"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -116,14 +116,14 @@
     </element>
     <element id="el_Ngounie" sortKey="4" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Ngounié"/>
+        <name language="fr" text="Ngounié"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="La Ngounié"/>
+          <value language="fr" value="La Ngounié"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="4"/>
+          <value language="fr" value="4"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -137,14 +137,14 @@
     </element>
     <element id="el_Nyanga" sortKey="5" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Nyanga"/>
+        <name language="fr" text="Nyanga"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="La Nyanga"/>
+          <value language="fr" value="La Nyanga"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="5"/>
+          <value language="fr" value="5"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -156,14 +156,14 @@
     </element>
     <element id="el_OgooueIvindo" sortKey="6" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Ogooué-Ivindo"/>
+        <name language="fr" text="Ogooué-Ivindo"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="L'Ogooué-Ivindo"/>
+          <value language="fr" value="L'Ogooué-Ivindo"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="6"/>
+          <value language="fr" value="6"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -177,14 +177,14 @@
     </element>
     <element id="el_OgooueLolo" sortKey="7" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Ogooué-Lolo"/>
+        <name language="fr" text="Ogooué-Lolo"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="L'Ogooué-Lolo"/>
+          <value language="fr" value="L'Ogooué-Lolo"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="7"/>
+          <value language="fr" value="7"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -197,14 +197,14 @@
     </element>
     <element id="el_OgooueMaritime" sortKey="8" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Ogooué-Maritime"/>
+        <name language="fr" text="Ogooué-Maritime"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="L'Ogooué-Maritime"/>
+          <value language="fr" value="L'Ogooué-Maritime"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="8"/>
+          <value language="fr" value="8"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -218,14 +218,14 @@
     </element>
     <element id="el_WoleuNtem" sortKey="9" type="et_Province" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Woleu-Ntem"/>
+        <name language="fr" text="Woleu-Ntem"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Le Woleu-Ntem"/>
+          <value language="fr" value="Le Woleu-Ntem"/>
         </attribute>
         <attribute type="at_Numero">
-          <value language="la_francais" value="9"/>
+          <value language="fr" value="9"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -239,11 +239,11 @@
     <!--Ville-->
     <element id="el_Libreville" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Libreville"/>
+        <name language="fr" text="Libreville"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Libreville"/>
+          <value language="fr" value="Libreville"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -251,11 +251,11 @@
     </element>
     <element id="el_Franceville" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Franceville"/>
+        <name language="fr" text="Franceville"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Franceville"/>
+          <value language="fr" value="Franceville"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -263,11 +263,11 @@
     </element>
     <element id="el_Lambarene" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Lambaréné"/>
+        <name language="fr" text="Lambaréné"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Lambaréné"/>
+          <value language="fr" value="Lambaréné"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -275,11 +275,11 @@
     </element>
     <element id="el_Mouila" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Mouila"/>
+        <name language="fr" text="Mouila"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Mouila"/>
+          <value language="fr" value="Mouila"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -287,11 +287,11 @@
     </element>
     <element id="el_Tchibanga" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Tchibanga"/>
+        <name language="fr" text="Tchibanga"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Tchibanga"/>
+          <value language="fr" value="Tchibanga"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -299,11 +299,11 @@
     </element>
     <element id="el_Makokou" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Makokou"/>
+        <name language="fr" text="Makokou"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Makokou"/>
+          <value language="fr" value="Makokou"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -311,11 +311,11 @@
     </element>
     <element id="el_Koulamoutou" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Koulamoutou"/>
+        <name language="fr" text="Koulamoutou"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Koulamoutou"/>
+          <value language="fr" value="Koulamoutou"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -323,11 +323,11 @@
     </element>
     <element id="el_PortGentil" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Port-Gentil"/>
+        <name language="fr" text="Port-Gentil"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Port-Gentil"/>
+          <value language="fr" value="Port-Gentil"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -335,11 +335,11 @@
     </element>
     <element id="el_Oyem" type="et_Ville" minLevel="0" >
       <elementName>
-        <name language="la_francais" text="Oyem"/>
+        <name language="fr" text="Oyem"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="la_francais" value="Oyem"/>
+          <value language="fr" value="Oyem"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -351,7 +351,7 @@
     <attributeQuestionCategoryList>
       <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
-        <questionText language="la_francais" text="Quel est la province dont le numéro est {0} ?"/>
+        <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
       </attributeQuestionCategory>
     </attributeQuestionCategoryList>
   </questionCategories>

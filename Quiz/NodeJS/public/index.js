@@ -5,7 +5,7 @@ $(function()
    $('#siteLanguageSelect').change(function()
    {
       document.cookie = 'siteLanguageId=' + $(this).val();
-      location.reload();
+      location.replace('/');
    });
    
    $('#questionnaireSelect').change(emitLevelChoice);
@@ -33,6 +33,15 @@ $(function()
          $('#questionnaireSelect').append('<option value="' + questionnaire.id + '">' + questionnaire.name + '</option>');
       });
       $('#questionnaireSelect').val(data.questionnaireId);
+      
+      if (data.showLanguageSelect)
+      {
+         $('.languageSelection').css('display', 'inline');
+      }
+      else
+      {
+         $('.languageSelection').css('display', 'none');
+      }
       
       $('#languageSelect').find('option').remove();
       data.languageList.forEach(function(language)

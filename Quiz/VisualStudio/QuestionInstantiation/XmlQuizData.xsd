@@ -149,12 +149,14 @@
   </xsd:complexType>
   <xsd:simpleType name="XmlLanguageId">
     <xsd:restriction base="xsd:ID">
-      <xsd:pattern value="la_(.)+" />
+      <xsd:enumeration value="fr" />
+      <xsd:enumeration value="en" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlLanguageIdRef">
     <xsd:restriction base="xsd:IDREF">
-      <xsd:pattern value="la_(.)+" />
+      <xsd:enumeration value="fr" />
+      <xsd:enumeration value="en" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="XmlLevelList">

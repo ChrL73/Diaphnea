@@ -4,13 +4,18 @@
       <meta charset="utf-8" />
       <link rel="stylesheet" href="styles.css"/>
       <title>Quiz</title>
+      <% if (!data.showLanguageSelect) {%>
+         <style>
+            .languageSelection { display: none; }
+         </style>
+      <% } %>
    </head>
 
    <body>
       <div>
          <% if (data.user) { %>
             
-         <%} else {%>
+         <% } else { %>
             <form id="signInForm" action="/" method="post">
                <label for="nameInput"><%=data.texts.name%>: </label><input type="text" id="nameInput" name="name"/>
                <label for="passInput"><%=data.texts.password%>: </label><input type="password" id="passInput" name="pass"/>
@@ -18,16 +23,7 @@
                <input type="submit" value="<%=data.texts.signUp%>" name="signUp"/>
             </form>
          <% } %>
-         <select id="siteLanguageSelect">
-            <% data.siteLanguageList.forEach(function(language) { 
-               if (language.id == data.siteLanguageId) { %>
-               <option selected value="<%= language.id %>">
-               <%  } else { %>
-               <option value="<%= language.id %>"> <% } %>
-                  <%= language.name %>
-               </option>
-            <% }); %>
-         </select>
+         <%- include('language_select.ejs', data) %>
       </div>
       <p>
          <label for="questionnaireSelect"><%=data.texts.questionnaire%>: </label> 
@@ -41,10 +37,10 @@
                </option>
             <% }); %>
          </select>
-      </p>
+      </p>     
       <p>
-         <label for="languageSelect"><%=data.texts.language%>: </label> 
-         <select id="languageSelect">
+         <label class="languageSelection" for="languageSelect"><%=data.texts.language%>: </label> 
+         <select class="languageSelection" id="languageSelect">
             <% data.languageList.forEach(function(language) { 
                if (language.id == data.languageId) { %>
                <option selected value="<%= language.id %>">
@@ -54,7 +50,7 @@
                </option>
             <% }); %>
          </select>
-      </p>
+      </p>   
       <p>
          <label for="levelSelect"><%=data.texts.level%>: </label> 
          <select id="levelSelect">

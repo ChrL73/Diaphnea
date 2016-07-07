@@ -10,7 +10,8 @@
       "morgan": "~1.7.0",
       "cookie-parser": "~1.4.3",
       "body-parser": "~1.15.2",
-      "express-session": "~1.13.0"
+      "express-session": "~1.13.0",
+      "serve-favicon": "~2.3.0"
    },
    "author": "Christophe <christoph92@yahoo.fr>",
    "description": "Geography quiz",

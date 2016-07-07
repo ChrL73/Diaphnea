@@ -3,8 +3,10 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var morgan = require('morgan');
+var bodyparser = require("body-parser");
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var favicon = require('serve-favicon');
 
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/diaphnea');
@@ -13,9 +15,13 @@ var userData = require('./user_data');
 
 var config = require('./config');
 var translate = require('./translate');
+var languages = translate().languages;
+var defaultLanguageId = languages[0].id;
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(favicon('public/favicon.ico'));
 
 if (!config.cookieSecret) throw new Error("No 'cookieSecret' value in config.js");
 app.use(cookieParser(config.cookieSecret));
@@ -61,52 +67,68 @@ app.use(sessionMiddleware);
 
 app.all('/', function(req, res)
 {
-   var user;
-   if (req.session.userId) user = userData.getUser(req.session.userId);
+   var context = getContext(req.session, req.cookies);
    
-   var upData;
-   if (user)
+   if (req.body.signUp)
    {
-      upData =
-      {
-         questionnaireId: user.preferences.questionnaireId,
-         languageId: user.preferences.languageId,
-         levelId: user.preferences.levelId
-      };
-   }
-   else
-   {
-      upData =
-      {
-         questionnaireId: req.cookies.questionnaireId,
-         languageId: req.cookies.languageId,
-         levelId: req.cookies.levelId
-      };
+      signUp(req, res, context);
+      return;
    }
    
-   quizData.getLevelChoiceDownData(upData, renderView);
+   quizData.getLevelChoiceDownData(context, renderView);
    
    function renderView(downData)
    {
-      downData.siteLanguageList = translate().languages;
+      if (context.user) downData.userName = context.user.name;
       
-      if (user)
-      {
-         downData.userName = user.name;
-         downData.siteLanguageId = user.preferences.siteLanguageId;
-      }
-      else
-      {   
-         downData.siteLanguageId = req.cookies.siteLanguageId;
-      }
-      
-      if (!downData.siteLanguageId) downData.siteLanguageId = translate().languages[0].id;
-      console.log(downData.siteLanguageId);
-      downData.texts = translate(downData.siteLanguageId).texts;
+      downData.siteLanguageList = languages;
+      downData.siteLanguageId = context.siteLanguageId;
+      downData.texts = translate(context.siteLanguageId).texts;
       
       res.render('index.ejs', { data: downData });
    }
 });
+
+function getContext(session, cookies)
+{
+   var context = {};
+   
+   if (session.userId) context.user = userData.getUser(session.userId);
+   if (context.user)
+   {
+      context.siteLanguageId = user.pageParameters.siteLanguageId,
+      context.questionnaireId = user.pageParameters.questionnaireId,
+      context.languageId = user.pageParameters.languageId,
+      context.levelId = user.pageParameters.levelId     
+   }
+   
+   if (!context.siteLanguageId) context.siteLanguageId = session.siteLanguageId;
+   if (!context.siteLanguageId) context.siteLanguageId = cookies.siteLanguageId;
+   if (!context.siteLanguageId) context.siteLanguageId = defaultLanguageId;
+   
+   if (!context.questionnaireId) context.questionnaireId = session.questionnaireId;
+   if (!context.questionnaireId) context.questionnaireId = cookies.questionnaireId;
+   
+   if (!context.languageId) context.languageId = session.languageId;
+   if (!context.languageId) context.languageId = cookies.languageId;
+   
+   if (!context.levelId) context.levelId = session.levelId;
+   if (!context.levelId) context.levelId = cookies.levelId;
+   
+   return context;
+}
+
+function signUp(req, res, context)
+{
+   var data =
+   {
+      siteLanguageList: languages,
+      siteLanguageId: context.siteLanguageId,
+      texts: translate(context.siteLanguageId).texts
+   };
+   
+   res.render('sign_up.ejs', { data: data });
+}
 
 app.use(function(req, res)
 {
@@ -117,6 +139,10 @@ io.on('connection', function(socket)
 {
    socket.on('levelChoice', function(upData)
    {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      var context = getContext(socket.request.session, cookies);
+      upData.siteLanguageId = context.siteLanguageId;
+      
       quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
    });
    
@@ -125,6 +151,20 @@ io.on('connection', function(socket)
       socket.emit('updateSelects', downData);
    }
 });
+
+function extractCookies(cookieString)
+{
+   var cookieObject = {};
+   var cookieArray = cookieString.split(';');
+   
+   cookieArray.forEach(function(cookie)
+   {
+      cookieParts = cookie.split('=');
+      cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
+   });
+   
+   return cookieObject;
+}
 
 if (!config.port) throw new Error("No 'port' value in config.js");
 console.log('Quiz server listening on port ' + config.port + '...');

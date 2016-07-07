@@ -1,3 +1,6 @@
+var translate = require('./translate');
+var languages = translate().languages;
+
 var mongoose = require('mongoose');
 
 var languageSchema = mongoose.Schema({ id: String, name: String });
@@ -10,7 +13,7 @@ var LevelModel = mongoose.model('Level', levelSchema);
 function getLevelChoiceDownData(upData, callback)
 {
    var questionnaire, language, level;
-   var downData = { questionnaireList: [], languageList: [], levelList: [] };
+   var downData = { questionnaireList: [], languageList: [], levelList: [], showLanguageSelect: false };
    
    QuestionnaireModel.find().sort('questionnaire').exec(processQuestionnaires);
    
@@ -25,14 +28,44 @@ function getLevelChoiceDownData(upData, callback)
       
       if (!questionnaire) questionnaire = defaultQuestionnaire;
       
-      var defaultLanguage;
+      var defaultLanguage, siteLanguage;
       questionnaire.languages.forEach(function(iLanguage)
       {
          if (!defaultLanguage) defaultLanguage = iLanguage;
+         if (iLanguage.id === upData.siteLanguageId ) siteLanguage = iLanguage;
          if (iLanguage.id === upData.languageId) language = iLanguage;
          downData.languageList.push({ id: iLanguage.id, name: iLanguage.name });
       });
       
+      // If the 'questionnaire language list' and the 'site language list' contain exactly the same languages,
+      // the user does not choose the questionnaire language: The same language is used for the site and for the questionnaire.
+      // Otherwise, the user can choose a different languuage for the questionnaire than for the questionnaire
+      if (languages.length == downData.languageList.length)
+      {
+         var array1 = [];
+         languages.forEach(function(language) { array1.push(language.id); } )
+         array1.sort();
+         
+         var array2 = [];
+         downData.languageList.forEach(function(language) { array2.push(language.id); } )
+         array2.sort();
+         
+         var i, n = languages.length;
+         for (i = 0; i < n; ++i)
+         {
+            if (array1[i] != array2[i])
+            {
+               downData.showLanguageSelect = true;
+               break;
+            }
+         }
+      }
+      else
+      {
+         downData.showLanguageSelect = true;
+      }
+      
+      if (siteLanguage && !downData.showLanguageSelect) language = siteLanguage;
       if (!language) language = defaultLanguage;
       
       questionnaires.forEach(function(iQuestionnaire)

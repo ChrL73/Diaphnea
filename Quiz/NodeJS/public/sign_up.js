@@ -23,8 +23,8 @@ $(function()
    {
       var ok = true;
       
-      var val = $('#nameInput').val();
-      if (val.length < 2 || val.length > 16)
+      var name = $('#nameInput').val();
+      if (name.length < 2 || name.length > 16)
       {
          $(nameMessage).show();
          ok = false;
@@ -34,12 +34,12 @@ $(function()
          $(nameMessage).hide();
       }
       
-      val = $('#passInput1').val();
-      if (val.length >= 8)
+      var pass1 = $('#passInput1').val();
+      if (pass1.length >= 8)
       {
          $(pass1aMessage).hide();
          
-         if (/^[A-Za-z0-9_,?;.:!$*+-=&]+$/.test(val))
+         if (/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(pass1))
          {
             $(pass1bMessage).hide();
          }
@@ -52,10 +52,20 @@ $(function()
       else
       {
          $(pass1aMessage).show();
+         $(pass1bMessage).hide();
          ok = false;
       }
       
-      
+      var pass2 = $('#passInput2').val();
+      if (pass1 === pass2)
+      {
+         $(pass2Message).hide();
+      }
+      else
+      {
+         $(pass2Message).show();
+         ok = false;
+      }
       
       return ok;
    }

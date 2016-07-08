@@ -122,6 +122,7 @@ function signUp(req, res, context)
 {
    var data =
    {
+      userName: req.body.name,
       siteLanguageList: languages,
       siteLanguageId: context.siteLanguageId,
       texts: translate(context.siteLanguageId).texts

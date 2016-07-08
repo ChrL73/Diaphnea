@@ -4,23 +4,24 @@ $(function()
    
    $('#siteLanguageSelect').change(function()
    {
-      document.cookie = 'siteLanguageId=' + $(this).val();
+      document.cookie = 'siteLanguageId=' + $(this).val() + getCookieExpires(180);
       location.replace('/');
    });
    
    $('#questionnaireSelect').change(emitLevelChoice);
    $('#languageSelect').change(emitLevelChoice);
    $('#levelSelect').change(emitLevelChoice);
-      
+   
    function emitLevelChoice()
    {
       var questionnaireId = $('#questionnaireSelect').val();
       var languageId = $('#languageSelect').val();
       var levelId = $('#levelSelect').val();
       
-      document.cookie = 'questionnaireId=' + questionnaireId;
-      document.cookie = 'languageId=' + languageId;
-      document.cookie = 'levelId=' + levelId;
+      var expires = getCookieExpires(180);
+      document.cookie = 'questionnaireId=' + questionnaireId + expires;
+      document.cookie = 'languageId=' + languageId + expires;
+      document.cookie = 'levelId=' + levelId + expires;
       
       socket.emit('levelChoice', { questionnaireId: questionnaireId, languageId: languageId, levelId: levelId }); 
    }

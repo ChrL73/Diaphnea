@@ -7,6 +7,37 @@
    </head>
 
    <body>
+      <div>
+         <%- include('language_select.ejs', data) %>
+      </div>
+      <div>
+         <form action="/" method="post">
+            <p>
+               <label for="nameInput"><%=data.texts.name%>: </label>
+               <input type="text" id="nameInput" name="name" value="<%=data.userName%>"/>
+               <span class="errorMessage" id="nameMessage"><%=data.texts.nameMustBeBetween2And16Chars%></span>
+            </p>
+            <p>
+               <label for="passInput1"><%=data.texts.password%>: </label>
+               <!--<input type="password" id="passInput1" name="pass1"/>-->
+               <input type="text" id="passInput1" name="pass1"/>
+               <span class="errorMessage" id="pass1aMessage"><%=data.texts.passwordMustContainAtLeast8Chars%></span>
+               <span class="errorMessage" id="pass1bMessage"><%=data.texts.passwordMustContainOnlyLettersNumbersAndAtLeast1SpecialChar%></span>
+            </p>
+            <p>
+               <label for="passInput2"><%=data.texts.confirmPassword%>: </label>
+               <input type="password" id="passInput2" name="pass2"/>
+               <span class="errorMessage" id="pass2Message"></span>
+            </p>
+            <p>
+               <input type="submit" value="<%=data.texts.signUp%>" name="signIn"/>
+            </p>
+         </form>
+      </div>
       
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="utils.js"></script>
+      <script src="sign_up.js"></script>
    </body>
 </html>

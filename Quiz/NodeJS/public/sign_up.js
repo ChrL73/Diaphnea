@@ -1,8 +1,8 @@
 $(function()
 {
    $('.errorMessage').hide();
-   
-   var socket = io.connect();
+   if (reload) checkForm();
+   console.log('reload: ' + reload);
    
    $('#siteLanguageSelect').change(function()
    {
@@ -12,13 +12,12 @@ $(function()
    
    $('form').submit(function(e)
    {
-      if (!checkForm())
+      /*if (!checkForm())
       {
          e.preventDefault();
-      }
+      }*/
    });
-   
-   
+    
    function checkForm()
    {
       var ok = true;

@@ -69,10 +69,14 @@ app.all('/', function(req, res)
 {
    var context = getContext(req.session, req.cookies);
    
-   if (req.body.signUp)
+   if (req.body.enterSignUp)
    {
-      signUp(req, res, context);
+      enterSignUp(req, res, context, 'false');
       return;
+   }
+   else if (req.body.submitSignUp)
+   {
+      if (!submitSignUp(req, res, context)) return;
    }
    
    quizData.getLevelChoiceDownData(context, renderView);
@@ -118,17 +122,32 @@ function getContext(session, cookies)
    return context;
 }
 
-function signUp(req, res, context)
+function enterSignUp(req, res, context, reload)
 {
    var data =
    {
-      userName: req.body.name,
+      name: req.body.name,
+      pass1: reload ? req.body.pass1 : '',
+      pass2: reload ? req.body.pass2 : '',
       siteLanguageList: languages,
       siteLanguageId: context.siteLanguageId,
-      texts: translate(context.siteLanguageId).texts
+      texts: translate(context.siteLanguageId).texts,
+      reload: reload
    };
    
    res.render('sign_up.ejs', { data: data });
+}
+
+function submitSignUp(req, res, context)
+{
+   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
+      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
+   {
+      enterSignUp(req, res, context, 'true');
+      return false;
+   }
+   
+   return true;
 }
 
 app.use(function(req, res)
@@ -151,21 +170,21 @@ io.on('connection', function(socket)
    {
       socket.emit('updateSelects', downData);
    }
-});
 
-function extractCookies(cookieString)
-{
-   var cookieObject = {};
-   var cookieArray = cookieString.split(';');
-   
-   cookieArray.forEach(function(cookie)
+   function extractCookies(cookieString)
    {
-      cookieParts = cookie.split('=');
-      cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
-   });
-   
-   return cookieObject;
-}
+      var cookieObject = {};
+      var cookieArray = cookieString.split(';');
+
+      cookieArray.forEach(function(cookie)
+      {
+         cookieParts = cookie.split('=');
+         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
+      });
+
+      return cookieObject;
+   }
+});
 
 if (!config.port) throw new Error("No 'port' value in config.js");
 console.log('Quiz server listening on port ' + config.port + '...');

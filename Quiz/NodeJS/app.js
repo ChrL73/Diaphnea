@@ -39,46 +39,26 @@ io.use(function(socket, next)
 });
 app.use(sessionMiddleware);
 
-/*userData.tryAddUser('Bob', 'blop', function(err, id)
-{
-   console.log('err: ' + err);
-   console.log('id: ' + id);
-});*/
-//userData.displayAllUsers();
-/*userData.findUserId('Bob', 'blop', function(err, userId)
-{
-   console.log('err: ' + err);
-   console.log('userId: ' + userId);
-
-   userData.getUser(userId, function(err, user)
-   {
-      console.log('err: ' + err);
-      console.log('user: ' + user);
-      
-      userData.removeUser(userId, function(err, count)
-      {
-         console.log('err: ' + err);
-         console.log('count: ' + count);
-         
-         userData.displayAllUsers();
-      });
-   });
-});*/
-
 app.all('/', function(req, res)
 {
    var context = getContext(req.session, req.cookies);
    
    if (req.body.enterSignUp)
    {
-      enterSignUp(req, res, context, 'false');
-      return;
+      enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
    }
    else if (req.body.submitSignUp)
    {
-      if (!submitSignUp(req, res, context)) return;
+      submitSignUp(req, res, context)
    }
-   
+   else
+   {
+      index(req, res, context);
+   }
+});
+        
+function index(req, res, context)
+{
    quizData.getLevelChoiceDownData(context, renderView);
    
    function renderView(downData)
@@ -91,7 +71,51 @@ app.all('/', function(req, res)
       
       res.render('index.ejs', { data: downData });
    }
-});
+}
+
+function enterSignUp(req, res, context, flags)
+{
+   var data =
+   {
+      name: req.body.name,
+      pass1: flags.reload ? req.body.pass1 : '',
+      pass2: flags.reload ? req.body.pass2 : '',
+      siteLanguageList: languages,
+      siteLanguageId: context.siteLanguageId,
+      texts: translate(context.siteLanguageId).texts,
+      flags: flags
+   };
+   
+   if (flags.error == 'true') res.status(500);
+   res.render('sign_up.ejs', { data: data });
+}
+
+function submitSignUp(req, res, context)
+{
+   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
+      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
+   {
+      enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'false' });
+      return;
+   }
+   
+   userData.tryAddUser(req.body.name, req.body.pass1, function(err, id)
+   {
+      if (err)
+      {
+         console.log('err: ' + err);
+         enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'true' });
+      }
+      else if (!id)
+      {
+         enterSignUp(req, res, context, { reload: 'true', userExists: 'true', error: 'false' });
+      }
+      else
+      {
+         index(req, res, context);
+      }
+   });
+}
 
 function getContext(session, cookies)
 {
@@ -120,34 +144,6 @@ function getContext(session, cookies)
    if (!context.levelId) context.levelId = cookies.levelId;
    
    return context;
-}
-
-function enterSignUp(req, res, context, reload)
-{
-   var data =
-   {
-      name: req.body.name,
-      pass1: reload ? req.body.pass1 : '',
-      pass2: reload ? req.body.pass2 : '',
-      siteLanguageList: languages,
-      siteLanguageId: context.siteLanguageId,
-      texts: translate(context.siteLanguageId).texts,
-      reload: reload
-   };
-   
-   res.render('sign_up.ejs', { data: data });
-}
-
-function submitSignUp(req, res, context)
-{
-   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
-      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
-   {
-      enterSignUp(req, res, context, 'true');
-      return false;
-   }
-   
-   return true;
 }
 
 app.use(function(req, res)

@@ -15,7 +15,8 @@
             <p>
                <label for="nameInput"><%=data.texts.name%>: </label>
                <input type="text" id="nameInput" name="name" value="<%=data.name%>"/>
-               <span class="errorMessage" id="nameMessage"><%=data.texts.nameMustBeBetween2And16Chars%></span>
+               <span class="errorMessage" id="nameMessage1"><%=data.texts.nameMustBeBetween2And16Chars%></span>
+               <span class="errorMessage" id="nameMessage2"><%=data.texts.theNameIsAlreadyUsed%></span>
             </p>
             <p>
                <label for="passInput1"><%=data.texts.password%>: </label>
@@ -31,10 +32,15 @@
             <p>
                <input type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
             </p>
+            <p>
+               <span class="errorMessage" id="serverErrorMessage"><%=data.texts.failToCreateUserAccount%>(<%=data.texts.internalServerError%>)</span>
+            </p>
          </form>
       </div>
       
-      <script>var reload = <%=data.reload%>;</script>
+      <script>var reload = <%=data.flags.reload%>;</script>
+      <script>var userExists = <%=data.flags.userExists%>;</script>
+      <script>var error = <%=data.flags.error%>;</script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="utils.js"></script>
       <script src="sign_up.js"></script>

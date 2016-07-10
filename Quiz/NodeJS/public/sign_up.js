@@ -2,7 +2,9 @@ $(function()
 {
    $('.errorMessage').hide();
    if (reload) checkForm();
-   console.log('reload: ' + reload);
+   
+   if (userExists) $('#nameMessage2').show();
+   if (error) $('#serverErrorMessage').show();
    
    $('#siteLanguageSelect').change(function()
    {
@@ -12,10 +14,10 @@ $(function()
    
    $('form').submit(function(e)
    {
-      /*if (!checkForm())
+      if (!checkForm())
       {
          e.preventDefault();
-      }*/
+      }
    });
     
    function checkForm()
@@ -25,44 +27,44 @@ $(function()
       var name = $('#nameInput').val();
       if (name.length < 2 || name.length > 16)
       {
-         $(nameMessage).show();
+         $('#nameMessage1').show();
          ok = false;
       }
       else
       {
-         $(nameMessage).hide();
+         $('#nameMessage1').hide();
       }
       
       var pass1 = $('#passInput1').val();
       if (pass1.length >= 8)
       {
-         $(pass1aMessage).hide();
+         $('#pass1aMessage').hide();
          
          if (/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(pass1))
          {
-            $(pass1bMessage).hide();
+            $('#pass1bMessage').hide();
          }
          else
          {
-            $(pass1bMessage).show();
+            $('#pass1bMessage').show();
             ok = false;
          }
       }
       else
       {
-         $(pass1aMessage).show();
-         $(pass1bMessage).hide();
+         $('#pass1aMessage').show();
+         $('#pass1bMessage').hide();
          ok = false;
       }
       
       var pass2 = $('#passInput2').val();
       if (pass1 === pass2)
       {
-         $(pass2Message).hide();
+         $('#pass2Message').hide();
       }
       else
       {
-         $(pass2Message).show();
+         $('{pass2Message').show();
          ok = false;
       }
       

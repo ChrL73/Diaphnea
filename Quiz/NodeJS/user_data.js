@@ -4,8 +4,6 @@ var crypto = require('crypto');
 var userSchema = mongoose.Schema({ name: String, sha1pass: String });
 var UserModel = mongoose.model('User', userSchema);
 
-var hash = crypto.createHash('sha1');
-
 function tryAddUser(name, pass, callback)
 {
    UserModel.findOne({ name: name }, findEnd);
@@ -24,6 +22,7 @@ function tryAddUser(name, pass, callback)
          return;
       }
       
+      var hash = crypto.createHash('sha1');
       hash.update(pass);
       var sha1 = hash.digest('hex');
       
@@ -47,6 +46,7 @@ function tryAddUser(name, pass, callback)
 
 function findUserId(name, pass, callback)
 {
+   var hash = crypto.createHash('sha1');
    hash.update(pass);
    var sha1 = hash.digest('hex');
    UserModel.findOne({ name: name, sha1pass: sha1 }, { _id: 1 }, function(err, user)

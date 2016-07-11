@@ -15,5 +15,7 @@ module.exports =
    'twoPasswordsAreNotIdentical': 'Les deux mots de passe ne sont pas identiques',
    'theNameIsAlreadyUsed': 'Ce nom est déjà utilisé',
    'internalServerError': 'Erreur interne au serveur',
-   'failToCreateUserAccount': 'Echec de la création du compte utilisateur'
+   'failToCreateUserAccount': 'Erreur lors de la création du compte utilisateur',
+   'unknownUserOrWrongPassword': 'Utilisateur inconnu ou mot de passe incorrect',
+   'connectionFailure': 'Echec de la connexion'
 };

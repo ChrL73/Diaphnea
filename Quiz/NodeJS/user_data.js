@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
-var userSchema = mongoose.Schema({ name: String, sha1pass: String });
+var userSchema = mongoose.Schema(
+{
+   name: String,
+   sha1pass: String,
+   parameters: { siteLanguageId: String, questionnaireId: String, languageId: String, levelId: String }
+});
 var UserModel = mongoose.model('User', userSchema);
 
 function tryAddUser(name, pass, callback)
@@ -61,6 +66,18 @@ function getUser(id, callback)
    UserModel.findOne({ _id: id }, callback);
 }
 
+function updateParameters(user, parameters, callback)
+{
+   if (!user.parameters) user.parameters = {};
+   
+   if (parameters.siteLanguageId) user.parameters.siteLanguageId = parameters.siteLanguageId;
+   if (parameters.questionnaireId) user.parameters.questionnaireId = parameters.questionnaireId;
+   if (parameters.languageId) user.parameters.languageId = parameters.languageId;
+   if (parameters.levelId) user.parameters.levelId = parameters.levelId;
+   
+   user.save(callback);
+}
+
 function removeUser(id, callback)
 {
    UserModel.remove({ _id: id }, callback);
@@ -80,6 +97,7 @@ function displayAllUsers()
 module.exports.tryAddUser = tryAddUser;
 module.exports.findUserId = findUserId;
 module.exports.getUser = getUser;
+module.exports.updateParameters = updateParameters;
 module.exports.removeUser = removeUser;
 
 module.exports.displayAllUsers = displayAllUsers;

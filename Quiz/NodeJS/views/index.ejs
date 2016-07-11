@@ -4,25 +4,31 @@
       <meta charset="utf-8" />
       <link rel="stylesheet" href="styles.css"/>
       <title>Quiz</title>
-      <% if (!data.showLanguageSelect) {%>
-         <style>
+      <style>
+         .errorMessage { display: none; }
+         <% if (!data.showLanguageSelect) {%>
             .languageSelection { display: none; }
-         </style>
-      <% } %>
+         <% } %>
+      </style>   
    </head>
 
    <body>
       <div>
-         <% if (data.user) { %>
-            
+         <% if (data.userName) { %>
+            <span><%=data.userName%></span>
+            <form class="signForm" action="/" method="post">
+               <input type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
+            </form>
          <% } else { %>
-            <form id="signInForm" action="/" method="post">
+            <form class="signForm" action="/" method="post">
                <label for="nameInput"><%=data.texts.name%>: </label><input type="text" id="nameInput" name="name"/>
                <label for="passInput"><%=data.texts.password%>: </label><input type="password" id="passInput" name="pass"/>
                <input type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
                <input type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
             </form>
          <% } %>
+         <span class="errorMessage" id="cnxMessage1"><%=data.texts.unknownUserOrWrongPassword%></span>
+         <span class="errorMessage" id="cnxMessage2"><%=data.texts.connectionFailure%> (<%=data.texts.internalServerError%>)</span>
          <%- include('language_select.ejs', data) %>
       </div>
       <p>
@@ -65,6 +71,15 @@
          </select>
       </p>
       
+      <script>
+         var unknwon = <%=data.flags.unknwon%>;
+         var error = <%=data.flags.error%>;
+         <% if (data.userName) { %>
+            var userLogged = true;
+         <% } else { %>
+            var userLogged = false;
+         <% } %>
+      </script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="utils.js"></script>

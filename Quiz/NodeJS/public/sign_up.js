@@ -1,6 +1,5 @@
 $(function()
 {
-   $('.errorMessage').hide();
    if (reload) checkForm();
    
    if (userExists) $('#nameMessage2').show();
@@ -22,6 +21,7 @@ $(function()
     
    function checkForm()
    {
+      $('.errorMessage').hide();   
       var ok = true;
       
       var name = $('#nameInput').val();
@@ -30,21 +30,11 @@ $(function()
          $('#nameMessage1').show();
          ok = false;
       }
-      else
-      {
-         $('#nameMessage1').hide();
-      }
       
       var pass1 = $('#passInput1').val();
       if (pass1.length >= 8)
       {
-         $('#pass1aMessage').hide();
-         
-         if (/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(pass1))
-         {
-            $('#pass1bMessage').hide();
-         }
-         else
+         if (!(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(pass1)))
          {
             $('#pass1bMessage').show();
             ok = false;
@@ -53,18 +43,13 @@ $(function()
       else
       {
          $('#pass1aMessage').show();
-         $('#pass1bMessage').hide();
          ok = false;
       }
       
       var pass2 = $('#passInput2').val();
-      if (pass1 === pass2)
+      if (pass1 !== pass2)
       {
-         $('#pass2Message').hide();
-      }
-      else
-      {
-         $('{pass2Message').show();
+         $('#pass2Message').show();
          ok = false;
       }
       

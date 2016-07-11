@@ -2,10 +2,14 @@ $(function()
 {
    var socket = io.connect();
    
+   if (unknwon) $('#cnxMessage1').show();
+   if (error) $('#cnxMessage2').show();
+   
    $('#siteLanguageSelect').change(function()
    {
-      document.cookie = 'siteLanguageId=' + $(this).val() + getCookieExpires(180);
-      location.replace('/');
+      var languageId = $(this).val();
+      if (!userLogged) document.cookie = 'siteLanguageId=' + languageId + getCookieExpires(180);
+      location.replace('/' + languageId);
    });
    
    $('#questionnaireSelect').change(emitLevelChoice);
@@ -18,10 +22,13 @@ $(function()
       var languageId = $('#languageSelect').val();
       var levelId = $('#levelSelect').val();
       
-      var expires = getCookieExpires(180);
-      document.cookie = 'questionnaireId=' + questionnaireId + expires;
-      document.cookie = 'languageId=' + languageId + expires;
-      document.cookie = 'levelId=' + levelId + expires;
+      if (!userLogged)
+      {
+         var expires = getCookieExpires(180);
+         document.cookie = 'questionnaireId=' + questionnaireId + expires;
+         document.cookie = 'languageId=' + languageId + expires;
+         document.cookie = 'levelId=' + levelId + expires;
+      }
       
       socket.emit('levelChoice', { questionnaireId: questionnaireId, languageId: languageId, levelId: levelId }); 
    }

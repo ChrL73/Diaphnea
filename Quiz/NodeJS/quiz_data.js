@@ -39,7 +39,7 @@ function getLevelChoiceDownData(upData, callback)
       
       // If the 'questionnaire language list' and the 'site language list' contain exactly the same languages,
       // the user does not choose the questionnaire language: The same language is used for the site and for the questionnaire.
-      // Otherwise, the user can choose a different languuage for the questionnaire than for the site
+      // Otherwise, the user can choose a different language for the questionnaire than for the site
       if (languages.length == downData.languageList.length)
       {
          var array1 = [];

@@ -124,6 +124,7 @@ function index(req, res, context, flags)
       downData.texts = translate(context.siteLanguageId).texts;
       downData.flags = flags;
       
+      if (flags.error == 'true') res.status(500);
       res.render('index.ejs', { data: downData });
    }
 }

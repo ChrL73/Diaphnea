@@ -43,26 +43,7 @@ app.all('/', function(req, res)
 {
    updateContext(req.session, req.cookies, function(context)
    {
-      if (req.body.enterSignUp)
-      {
-         enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
-      }
-      else if (req.body.submitSignUp)
-      {
-         submitSignUp(req, res, context);
-      }
-      else if (req.body.signIn)
-      {
-         signIn(req, res, context);
-      }
-      else if (req.body.signOut)
-      {
-         signOut(req, res, context);
-      }
-      else
-      {
-         index(req, res, context, { unknwon: 'false', error: 'false' });
-      }
+      routeSwitch(req, res, context);
    });
 });
 
@@ -80,11 +61,13 @@ app.use(function(req, res)
          
          if (siteLanguageId)
          {
+            context.siteLanguageId = siteLanguageId;
+            routeSwitch(req, res, context);
+            
             var parameters = { siteLanguageId: siteLanguageId };
             userData.updateParameters(context.user, parameters, function(err)
             {
                // Todo: handle error
-               res.redirect('/');
             });
          }
          else
@@ -98,6 +81,30 @@ app.use(function(req, res)
       }
    });
 });
+
+function routeSwitch(req, res, context)
+{
+   if (req.body.enterSignUp)
+   {
+      enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
+   }
+   else if (req.body.submitSignUp)
+   {
+      submitSignUp(req, res, context);
+   }
+   else if (req.body.signIn)
+   {
+      signIn(req, res, context);
+   }
+   else if (req.body.signOut)
+   {
+      signOut(req, res, context);
+   }
+   else
+   {
+      index(req, res, context, { unknwon: 'false', error: 'false' });
+   }
+}
         
 function index(req, res, context, flags)
 {
@@ -105,7 +112,12 @@ function index(req, res, context, flags)
    
    function renderView(downData)
    {
-      if (context.user) downData.userName = context.user.name;
+      if (context.user)
+      {
+         downData.userName = context.user.name;
+         var parameters = { questionnaireId: downData.questionnaireId, languageId: downData.languageId, levelId: downData.levelId };
+         userData.updateParameters(context.user, parameters, function(err) { /* Todo: handle error */ });
+      }
       
       downData.siteLanguageList = languages;
       downData.siteLanguageId = context.siteLanguageId;

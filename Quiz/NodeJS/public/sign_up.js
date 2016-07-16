@@ -11,11 +11,20 @@ $(function()
       location.reload();
    });
    
+   var cancel = false;
+   $('#cancelSignUp').click(function(e)
+   {
+      cancel = true;
+   });
+   
    $('form').submit(function(e)
    {
-      if (!checkForm())
+      if (!cancel)
       {
-         e.preventDefault();
+         if (!checkForm())
+         {
+            e.preventDefault();
+         }
       }
    });
     

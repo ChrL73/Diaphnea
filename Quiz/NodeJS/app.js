@@ -50,7 +50,7 @@ app.all('/', function(req, res)
 {
    updateContext(req.session, req.cookies, function(context)
    {
-      if (req.body.siteLanguageSelect)
+      if (context.user && req.body.siteLanguageSelect)
       {
          var siteLanguageId;
          languages.forEach(function(language)
@@ -70,7 +70,7 @@ app.all('/', function(req, res)
       }
 
       var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
-                       req.body.signIn || req.body.signOut || req.body.start;
+                       req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
 
       if (req.body.enterSignUp || (!pageInBody && req.session.currentPage == pages.signUp))
       {
@@ -131,7 +131,14 @@ function index(req, res, context, flags)
 function game(req, res, context)
 {
    req.session.currentPage = pages.game;
-   var data = { texts: translate(context.siteLanguageId).texts };
+   var data =
+   {
+      texts: translate(context.siteLanguageId).texts,
+      siteLanguageList: languages,
+      siteLanguageId: context.siteLanguageId
+   };
+   
+   if (context.user) data.userName = context.user.name;
    
    res.render('game.ejs', { data: data });
 }

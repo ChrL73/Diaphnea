@@ -7,9 +7,21 @@
    </head>
 
    <body>
-      <button id="stop"><%=data.texts.stop%></button>
+      <%- include('language_select.ejs', data) %>
       
+      <form id="stopForm" action="/" method="post">
+         <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
+      </form>
+      
+      <script>
+         <% if (data.userName) { %>
+            var userLogged = true;
+         <% } else { %>
+            var userLogged = false;
+         <% } %>
+      </script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="utils.js"></script>
       <script src="game.js"></script>
    </body>
 </html>

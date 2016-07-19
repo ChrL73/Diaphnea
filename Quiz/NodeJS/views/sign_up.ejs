@@ -31,7 +31,8 @@
                <span class="errorMessage" id="pass2Message"><%=data.texts.twoPasswordsAreNotIdentical%></span>
             </p>
             <p>
-               <input type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
+               <input id="submitSignUp" type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
+               <input id="cancelSignUp" type="submit" value="<%=data.texts.cancel%>" name="cancelSignUp"/>
             </p>
             <p>
                <span class="errorMessage" id="serverErrorMessage"><%=data.texts.failToCreateUserAccount%> (<%=data.texts.internalServerError%>)</span>

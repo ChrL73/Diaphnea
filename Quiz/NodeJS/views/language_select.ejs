@@ -1,10 +1,12 @@
-<select id="siteLanguageSelect">
-   <% data.siteLanguageList.forEach(function(language) { 
-      if (language.id == data.siteLanguageId) { %>
-      <option selected value="<%= language.id %>">
-      <%  } else { %>
-      <option value="<%= language.id %>"> <% } %>
-         <%= language.name %>
-      </option>
-   <% }); %>
-</select>
+<form class="inlineBlockForm" id="siteLanguageForm" action="/" method="post">
+   <select id="siteLanguageSelect" name="siteLanguageSelect" form="siteLanguageForm">
+      <% data.siteLanguageList.forEach(function(language) { 
+         if (language.id == data.siteLanguageId) { %>
+         <option selected value="<%= language.id %>">
+         <%  } else { %>
+         <option value="<%= language.id %>"> <% } %>
+            <%= language.name %>
+         </option>
+      <% }); %>
+   </select>
+</form>

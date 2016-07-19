@@ -16,11 +16,11 @@
       <div>
          <% if (data.userName) { %>
             <span><%=data.userName%></span>
-            <form class="signForm" action="/" method="post">
+            <form class="inlineBlockForm" action="/" method="post">
                <input type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
             </form>
          <% } else { %>
-            <form class="signForm" action="/" method="post">
+            <form class="inlineBlockForm" action="/" method="post">
                <label for="nameInput"><%=data.texts.name%>: </label><input type="text" id="nameInput" name="name"/>
                <label for="passInput"><%=data.texts.password%>: </label><input type="password" id="passInput" name="pass"/>
                <input type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
@@ -70,6 +70,11 @@
             <% }); %>
          </select>
       </p>
+      <div>
+         <form action="/" method="post">
+            <input type="submit" value="<%=data.texts.start%>" name="start"/>
+         </form>
+      </div>
       
       <script>
          var unknwon = <%=data.flags.unknwon%>;

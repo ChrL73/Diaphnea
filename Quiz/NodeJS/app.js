@@ -39,75 +39,74 @@ io.use(function(socket, next)
 });
 app.use(sessionMiddleware);
 
+var pages =
+{
+   index: 0,
+   signUp: 1,
+   game: 2,
+};
+
 app.all('/', function(req, res)
 {
    updateContext(req.session, req.cookies, function(context)
    {
-      routeSwitch(req, res, context);
-   });
-});
-
-app.use(function(req, res)
-{
-   updateContext(req.session, req.cookies, function(context)
-   {
-      if (context.user)
+      if (context.user && req.body.siteLanguageSelect)
       {
          var siteLanguageId;
          languages.forEach(function(language)
          {
-            if (req.url == '/' + language.id) siteLanguageId = language.id;
+            if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
          });
-         
+
          if (siteLanguageId)
          {
             context.siteLanguageId = siteLanguageId;
-            routeSwitch(req, res, context);
-            
             var parameters = { siteLanguageId: siteLanguageId };
             userData.updateParameters(context.user, parameters, function(err)
             {
                // Todo: handle error
             });
          }
-         else
-         {
-            res.redirect('/');
-         }
+      }
+
+      var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
+                       req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
+
+      if (req.body.enterSignUp || (!pageInBody && req.session.currentPage == pages.signUp))
+      {
+         enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
+      }
+      else if (req.body.submitSignUp)
+      {
+         submitSignUp(req, res, context);
+      }
+      else if (req.body.signIn)
+      {
+         signIn(req, res, context);
+      }
+      else if (req.body.signOut)
+      {
+         signOut(req, res, context);
+      }
+      else if (req.body.start || (!pageInBody && req.session.currentPage == pages.game))
+      {
+         game(req, res, context);
       }
       else
       {
-         res.redirect('/');
+         index(req, res, context, { unknwon: 'false', error: 'false' });
       }
    });
 });
 
-function routeSwitch(req, res, context)
+app.use(function(req, res)
 {
-   if (req.body.enterSignUp)
-   {
-      enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
-   }
-   else if (req.body.submitSignUp)
-   {
-      submitSignUp(req, res, context);
-   }
-   else if (req.body.signIn)
-   {
-      signIn(req, res, context);
-   }
-   else if (req.body.signOut)
-   {
-      signOut(req, res, context);
-   }
-   else
-   {
-      index(req, res, context, { unknwon: 'false', error: 'false' });
-   }
-}
+   res.redirect('/');
+});
         
 function index(req, res, context, flags)
 {
+   req.session.currentPage = pages.index;
    quizData.getLevelChoiceDownData(context, renderView);
    
    function renderView(downData)
@@ -129,8 +128,24 @@ function index(req, res, context, flags)
    }
 }
 
+function game(req, res, context)
+{
+   req.session.currentPage = pages.game;
+   var data =
+   {
+      texts: translate(context.siteLanguageId).texts,
+      siteLanguageList: languages,
+      siteLanguageId: context.siteLanguageId
+   };
+   
+   if (context.user) data.userName = context.user.name;
+   
+   res.render('game.ejs', { data: data });
+}
+
 function enterSignUp(req, res, context, flags)
 {
+   req.session.currentPage = pages.signUp;
    var data =
    {
       name: req.body.name,

@@ -7,10 +7,10 @@
    </head>
 
    <body>
-      <%- include('language_select.ejs', data) %>
-      
       <form id="stopForm" action="/" method="post">
-         <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
+         <p>
+            <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
+         </p>
       </form>
       
       <script>

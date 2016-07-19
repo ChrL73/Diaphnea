@@ -7,6 +7,7 @@ var bodyparser = require("body-parser");
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var favicon = require('serve-favicon');
+var childProcess = require('child_process');
 
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/diaphnea');
@@ -131,16 +132,46 @@ function index(req, res, context, flags)
 function game(req, res, context)
 {
    req.session.currentPage = pages.game;
-   var data =
+   
+   if (!context.questionnaireId || !context.languageId || !context.languageId)
    {
-      texts: translate(context.siteLanguageId).texts,
-      siteLanguageList: languages,
-      siteLanguageId: context.siteLanguageId
-   };
+      quizData.getLevelChoiceDownData(context, continuation);
+   }
+   else
+   {
+      continuation();
+   }
    
-   if (context.user) data.userName = context.user.name;
-   
-   res.render('game.ejs', { data: data });
+   function continuation(downData)
+   {
+      var qData = {};
+      if (downData)
+      {
+         qData.questionnaireId = downData.questionnaireId;
+         qData.languageId = downData.languageId;
+         qData.levelId = downData.levelId;
+      }
+      else
+      {
+         qData.questionnaireId = context.questionnaireId;
+         qData.languageId = context.languageId;
+         qData.levelId = context.levelId;
+      }
+      
+      var questionProducer = childProcess.spawn('node', ['produceQuestions.js']);
+      questionProducer.stdin.write(JSON.stringify(qData));
+      questionProducer.stdout.on('data', function(jsonData)
+      {
+         var obj = JSON.parse(jsonData);
+         console.log(obj);
+         questionProducer.kill();
+      });
+      questionProducer.stderr.on('data', function(data) { console.log(data.toString()); });
+
+      var data = { texts: translate(context.siteLanguageId).texts };
+
+      res.render('game.ejs', { data: data });
+   }
 }
 
 function enterSignUp(req, res, context, flags)

@@ -323,7 +323,8 @@ namespace QuestionInstantiation
                 { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
                 { "levelId", _xmlLevel.levelId },
                 { "index", _xmlLevel.value },
-                { "name", _name.getBsonDocument() }
+                { "name", _name.getBsonDocument() },
+                { "weightSum", _weightSum }
             };
 
             BsonArray categoriesArray = new BsonArray();

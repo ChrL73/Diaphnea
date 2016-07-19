@@ -96,6 +96,15 @@ namespace QuestionInstantiation
 
         int fillDatabase()
         {
+            if (_quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED).Count() == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Qestionnaire \"{0}\": No language with completed translation: Database not filled",
+                    _quizData.XmlQuizData.parameters.questionnaireId));
+                return -1;
+            }
+
+            Text.setCompletedTranslationDictionary(_quizData);
+
             MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
 

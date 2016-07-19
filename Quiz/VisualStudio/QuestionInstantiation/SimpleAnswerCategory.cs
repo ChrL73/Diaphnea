@@ -93,6 +93,7 @@ namespace QuestionInstantiation
 
             BsonDocument categoryDocument = new BsonDocument()
             {
+                { "type", "SimpleAnswer" },
                 { "question_list", questionListDocument.GetValue("_id") },
                 { "distrib_parameter_correction", _distribParameterCorrection }
             };
@@ -122,7 +123,7 @@ namespace QuestionInstantiation
 
             return questionListDocument;
         }
-        
+
         internal BsonDocument getAnswerListDocument()
         {
             BsonDocument answerListDocument = new BsonDocument();

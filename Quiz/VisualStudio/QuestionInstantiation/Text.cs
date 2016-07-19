@@ -37,13 +37,23 @@ namespace QuestionInstantiation
 
         internal IEnumerable<string> LanguageList { get { return _textDictionary.Keys; } }
 
+        private static Dictionary<string, int> _completedTranslationDictionary;
+        internal static void setCompletedTranslationDictionary(QuizData quizData)
+        {
+            _completedTranslationDictionary = new Dictionary<string, int>();
+            foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList)
+            {
+                if (xmlLanguage.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED) _completedTranslationDictionary.Add(xmlLanguage.id.ToString(), 0);
+            }
+        }
+
         internal BsonDocument getBsonDocument()
         {
             BsonDocument textDocument = new BsonDocument();
 
             foreach (KeyValuePair<string, string> pair in _textDictionary)
             {
-                textDocument.AddRange(new BsonDocument() { { pair.Key, pair.Value == null ? "" : pair.Value} });
+                if (_completedTranslationDictionary.ContainsKey(pair.Key)) textDocument.AddRange(new BsonDocument() { { pair.Key, pair.Value == null ? "" : pair.Value } });
             }
 
             return textDocument;

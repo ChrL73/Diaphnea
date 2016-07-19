@@ -154,7 +154,7 @@ namespace QuestionInstantiation
                 {
                     if (language.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED)
                     {
-                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Language {0}, translation missing for: {1})", language.id, description));
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Language {0}, translation missing for: {1}", language.id, description));
                         return -1;
                     }
                     else if (language.status == XmlLanguageStatusEnum.TRANSLATION_IN_PROGRESS)

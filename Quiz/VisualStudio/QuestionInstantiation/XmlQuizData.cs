@@ -462,7 +462,7 @@ public partial class XmlAttributeQuestionCategory {
 public enum XmlAnswerProximityCriterionEnum {
     
     /// <remarks/>
-    ATTRIBUTE_VALUE,
+    ATTRIBUTE_VALUE_AS_NUMBER,
     
     /// <remarks/>
     SORT_KEY,

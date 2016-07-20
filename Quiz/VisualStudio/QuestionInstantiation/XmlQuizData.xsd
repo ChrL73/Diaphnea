@@ -301,7 +301,7 @@
   </xsd:complexType>
   <xsd:simpleType name="XmlAnswerProximityCriterionEnum">
     <xsd:restriction base="xsd:string">
-      <xsd:enumeration value="ATTRIBUTE_VALUE" />
+      <xsd:enumeration value="ATTRIBUTE_VALUE_AS_NUMBER" />
       <xsd:enumeration value="SORT_KEY" />
       <xsd:enumeration value="ELEMENT_LOCATION" />
       <xsd:enumeration value="NONE" />

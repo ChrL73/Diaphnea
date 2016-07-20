@@ -16,7 +16,8 @@ namespace QuestionInstantiation
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
 
-        internal SimpleAnswerCategory(Int32 weightIndex, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection) : base(weightIndex)
+        internal SimpleAnswerCategory(Int32 weightIndex, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection, string questionNameInLog)
+            : base(weightIndex, questionNameInLog)
         {
             _proximityCriterion = proximityCriterion;
             _distribParameterCorrection = distribParameterCorrection;
@@ -136,6 +137,23 @@ namespace QuestionInstantiation
                 {
                     foreach (PossibleAnswer possibleAnswer in list) proximityCriterionArray.Add(possibleAnswer.Element.XmlElement.sortKey);
                 }
+                else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+                {
+                    foreach (PossibleAnswer possibleAnswer in list)
+                    {
+                        string s = possibleAnswer.AttributeValue.Value.getAsNumber();
+                        if (s == null)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), answer {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
+                                QuestionNameInLog, possibleAnswer.Element.XmlElement.id));
+                            proximityCriterionArray.Add("0");
+                        }
+                        else
+                        {
+                            proximityCriterionArray.Add(s);
+                        }
+                    }
+                }
                 else
                 {
                     throw new NotImplementedException();
@@ -144,6 +162,7 @@ namespace QuestionInstantiation
                 BsonDocument answerDocument = new BsonDocument()
                 {
                     { "answer_text", list[0].AttributeValue.Value.getBsonDocument() },
+                    { "answer_comment", list[0].Comment.getBsonDocument() },
                     { "proximity_criterion_values", proximityCriterionArray }
                 };
                 answersArray.Add(answerDocument);
@@ -153,6 +172,10 @@ namespace QuestionInstantiation
             if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
             {
                 proximityCriterionType = "string";
+            }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            {
+                proximityCriterionType = "number";
             }
             else
             {

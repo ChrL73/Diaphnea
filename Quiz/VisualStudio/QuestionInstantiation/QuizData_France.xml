@@ -104,9 +104,10 @@
           <value language="fr" value="L'Ain"/>
           <value language="en" value="Ain"/>
         </attribute>
-        <!--<attribute type="at_Nom2">
+        <attribute type="at_Nom2">
           <value language="fr" value="de l'Ain"/>
-        </attribute>-->
+          <value language="en" value="Ain"/>
+        </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="1"/>
           <value language="en" value="1"/>
@@ -117,9 +118,9 @@
         <relation type="r11_Departement_ChefLieu" linkedElement="el_BourgEnBresse"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Gex"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Belley"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nantua"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nantua"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_BourgEnBresse"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Belley"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Nantua"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
@@ -140,9 +141,10 @@
           <value language="fr" value="L'Aisne"/>
           <value language="en" value="Aisne"/>
         </attribute>
-        <!--<attribute type="at_Nom2">
+        <attribute type="at_Nom2">
           <value language="fr" value="de l'Aisne"/>
-        </attribute>-->
+          <value language="en" value="Aisne"/>
+        </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="2"/>
           <value language="en" value="2"/>
@@ -154,9 +156,9 @@
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintQuentin"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Soissons"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauThierry"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vervins"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vervins"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Laon"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintQuentin"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_SaintQuentin"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Soissons"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_ChateauThierry"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Vervins"/>
@@ -178,9 +180,10 @@
           <value language="fr" value="L'Allier"/>
           <value language="en" value="Allier"/>
         </attribute>
-        <!--<attribute type="at_Nom2">
+        <attribute type="at_Nom2">
           <value language="fr" value="de l'Allier"/>
-        </attribute>-->
+          <value language="en" value="Allier"/>
+        </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="3"/>
           <value language="en" value="3"/>
@@ -190,9 +193,9 @@
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Moulins"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montlucon"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vichy"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vichy"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Moulins"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Montlucon"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Montlucon"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Vichy"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
@@ -200,6 +203,259 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_AlpesHauteProvence" sortKey="04" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Alpes-de-Haute-Provence"/>
+        <name language="en" text="Alpes-de-Haute-Provence"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Les Alpes-de-Haute-Provence"/>
+          <value language="en" value="Alpes-de-Haute-Provence"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="des Alpes-de-Haute-Provence"/>
+          <value language="en" value="Alpes-de-Haute-Provence"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="4"/>
+          <value language="en" value="4"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1970" comment="Le département s'appelait Basses-Alpes avant 1970"/>
+          <value language="en" value="1970" comment="The département was called Basses-Alpes before 1970"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_DigneLesBains"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Forcalquier"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Barcelonnette"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Castellane"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_DigneLesBains"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Forcalquier"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Barcelonnette"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Castellane"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesMaritimes"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautesAlpes"/>
+      </relationList>
+    </element>
+    <element id="el_HautesAlpes" sortKey="05" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Hautes-Alpes"/>
+        <name language="en" text="Hautes-Alpes"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Les Hautes-Alpes"/>
+          <value language="en" value="Hautes-Alpes"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="des Hautes-Alpes"/>
+          <value language="en" value="Hautes-Alpes"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="5"/>
+          <value language="en" value="5"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Gap"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Briancon"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Gap"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Briancon"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
+      </relationList>
+    </element>
+    <element id="el_AlpesMaritimes" sortKey="06" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Alpes-Maritimes"/>
+        <name language="en" text="Alpes-Maritimes"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Les Alpes-Maritimes"/>
+          <value language="en" value="Alpes-Maritimes"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="des Alpes-Maritimes"/>  
+          <value language="en" value="Alpes-Maritimes"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="6"/>
+          <value language="en" value="6"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1793" comment="Le département est créé en 1793 lors de l'occupation par la France du Comté de Nice, dans des limites différentes de celles du département actuel. En 1814, les Etats de Savoie reprennent le Comté de Nice. Le département dans ses frontières actuelles est créé en 1860, lorsque le Comté de Nice est à nouveau rattaché à la France."/>
+          <value language="en" value="1793" comment="The département was created in 1793 during the occupation of France by the County of Nice, in different limits from those of the current département. In 1814 the Savoy States reclaim the County of Nice. The department in its current borders is created in 1860, when the County of Nice was again annexed to France."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Nice"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Grasse"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nice"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Grasse"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Antibes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Cannes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_CagnesSurMer"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
+      </relationList>
+    </element>
+    <element id="el_CharenteMaritime" sortKey="17" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Charente-Maritime"/>
+        <name language="en" text="Charente-Maritime"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Charente-Maritime"/>
+          <value language="en" value="Charente-Maritime"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Charente-Maritime"/>
+          <value language="en" value="Charente-Maritime"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="17"/>
+          <value language="en" value="17"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1941" comment="Le département s'appelait Charente-Inférieure avant 1941"/>
+          <value language="en" value="1941" comment="The département was called Charente-Inférieure before 1941"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Rochelle"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Saintes"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Rochefort"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintJeanAngely"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Jonzac"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Rochelle"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Saintes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Rochefort"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJeanAngely"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Jonzac"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Gironde"/>-->
+      </relationList>
+    </element>
+    <element id="el_CorseDuSud" sortKey="20A" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Corse-du-Sud"/>
+        <name language="en" text="Corse-du-Sud"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Corse-du-Sud"/>
+          <value language="en" value="Corse-du-Sud"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Corse-du-Sud"/>  
+          <value language="en" value="Corse-du-Sud"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="2A"/>
+          <value language="en" value="2A"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1976" comment="Le département est créé en 1976 lors du découpage en deux du département de la Corse."/>
+          <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Ajaccio"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sartene"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Ajaccio"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Sartene"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteCorse"/>
+      </relationList>
+    </element>
+    <element id="el_HauteCorse" sortKey="20B" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Haute-Corse"/>
+        <name language="en" text="Haute-Corse"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Haute-Corse"/>
+          <value language="en" value="Haute-Corse"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Haute-Corse"/>  
+          <value language="en" value="Haute-Corse"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="2B"/>
+          <value language="en" value="2B"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1976" comment="Le département est créé en 1976 lors du découpage en deux du département de la Corse."/>
+          <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Bastia"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Corte"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Calvi"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bastia"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Corte"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Calvi"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorseDuSud"/>
+      </relationList>
+    </element>
+    <element id="el_CotesArmor" sortKey="22" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Côtes-d'Armor"/>
+        <name language="en" text="Côtes-d'Armor"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Les Côtes-d'Armor"/>
+          <value language="en" value="Côtes-d'Armor"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="des Côtes-d'Armor"/>
+          <value language="en" value="Côtes-d'Armor"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="22"/>
+          <value language="en" value="22"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1990" comment="Le département s'appelait Côtes-du-Nord avant 1990"/>
+          <value language="en" value="1990" comment="The département was called Côtes-du-Nord before 1990"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_SaintBrieuc"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Lannion"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dinan"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Guingamp"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintBrieuc"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Lannion"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Dinan"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Guingamp"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Finistere"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>-->
       </relationList>
     </element>
     <element id="el_Jura" sortKey="39" type="et_Departement" minLevel="0" >
@@ -212,9 +468,10 @@
           <value language="fr" value="Le Jura"/>
           <value language="en" value="Jura"/>
         </attribute>
-        <!--<attribute type="at_Nom2">
+        <attribute type="at_Nom2">
           <value language="fr" value="du Jura"/>
-        </attribute>-->
+          <value language="en" value="Jura"/>
+        </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="39"/>
           <value language="en" value="39"/>
@@ -233,6 +490,363 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+      </relationList>
+    </element>
+    <element id="el_LoireDepartement" sortKey="42" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Loire"/>
+        <name language="en" text="Loire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Loire"/>
+          <value language="en" value="Loire"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Loire"/>  
+          <value language="en" value="Loire"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="42"/>
+          <value language="en" value="42"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1793" comment="Le département est créé en 1793 lors du découpage en deux du département du Rhône-et-Loire."/>
+          <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_SaintEtienne"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Roanne"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montbrison"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintEtienne"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Roanne"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montbrison"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintChamond"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AllierDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ArdecheDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_RhoneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
+      </relationList>
+    </element>
+    <element id="el_LoireAtlantique" sortKey="44" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Loire-Atlantique"/>
+        <name language="en" text="Loire-Atlantique"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Loire-Atlantique"/>
+          <value language="en" value="Loire-Atlantique"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Loire-Atlantique"/>
+          <value language="en" value="Loire-Atlantique"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="44"/>
+          <value language="en" value="44"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1957" comment="Le département s'appelait Loire-Inférieure avant 1957"/>
+          <value language="en" value="1957" comment="The département was called Loire-Inférieure before 1957"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nantes"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintNazaire"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaubriant"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ancenis"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nantes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintNazaire"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Chateaubriant"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Ancenis"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintHerblain"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Reze"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MaineEtLoire"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
+      </relationList>
+    </element>
+    <element id="el_MaineEtLoire" sortKey="49" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Maine-et-Loire"/>
+        <name language="en" text="Maine-et-Loire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Le Maine-et-Loire"/>
+          <value language="en" value="Maine-et-Loire"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="du Maine-et-Loire"/>
+          <value language="en" value="Maine-et-Loire"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="49"/>
+          <value language="en" value="49"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1791" comment="Le département s'appelait Mayenne-et-Loire avant 1791"/>
+          <value language="en" value="1791" comment="The département was called Mayenne-et-Loire before 1791"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Angers"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Cholet"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Saumur"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Segre"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Angers"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Cholet"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Saumur"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Segre"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MayenneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SartheDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IndreEtLoire"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VienneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>-->
+      </relationList>
+    </element>
+    <element id="el_MeurtheEtMoselle" sortKey="54" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Meurthe-et-Moselle"/>
+        <name language="en" text="Meurthe-et-Moselle"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Meurthe-et-Moselle"/>
+          <value language="en" value="Meurthe-et-Moselle"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Meurthe-et-Moselle"/>  
+          <value language="en" value="Meurthe-et-Moselle"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="54"/>
+          <value language="en" value="54"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1871" comment="Le département est créé suite à l'armistice franco-allemande de 1871, à partir des territoires des anciens départements de la Meurthe et de la Moselle non annexés par l'Allemagne."/>
+          <value language="en" value="1871" comment="The départements was created after the Franco-German armistice of 1871. It is composed of the parts of the former Meurthe and Moselle départements which were not annexed by Germany."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nancy"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Luneville"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Toul"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Briey"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nancy"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Luneville"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Toul"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Briey"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_VandoeuvreLesNancy"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeuseDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vosges"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BasRhin"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MoselleDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_MoselleDepartement" sortKey="57" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Moselle"/>
+        <name language="en" text="Moselle"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Moselle"/>
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Moselle"/>  
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="57"/>
+          <value language="en" value="57"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1919" comment="Le département est créé suite à l'armistice franco-allemande de 1918, à partir des territoires des anciens départements de la Meurthe et de la Moselle rendus par l'Allemagne."/>
+          <value language="en" value="1919" comment="The département was created following the Franco-German armistice of 1918. It is composed of parts of the former Meurthe and Moselle départements gived back by Germany."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Metz"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Thionville"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Forbach"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sarreguemines"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sarrebourg"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_BoulayMoselle"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauSalins"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Metz"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Thionville"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Forbach"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Sarreguemines"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Sarrebourg"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_BoulayMoselle"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauSalins"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BasRhin"/>-->
+      </relationList>
+    </element>
+    <element id="el_PyreneesAtlantiques" sortKey="64" type="et_Departement" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Pyrénées-Atlantiques"/>
+        <name language="en" text="Pyrénées-Atlantiques"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Les Pyrénées-Atlantiques"/>
+          <value language="en" value="Pyrénées-Atlantiques"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="des Pyrénées-Atlantiques"/>
+          <value language="en" value="Pyrénées-Atlantiques"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="64"/>
+          <value language="en" value="64"/>
+        </attribute>
+        <attribute type="at_DateNom">
+          <value language="fr" value="1969" comment="Le département s'appelait Basses-Pyrénées avant 1969"/>
+          <value language="en" value="1969" comment="The département was called Basses-Pyrénées before 1969"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Pau"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bayonne"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_OloronSainteMarie"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Pau"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bayonne"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_OloronSainteMarie"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Anglet"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Landes"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GersDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautesPyrenees"/>-->
+      </relationList>
+    </element>
+    <element id="el_RhoneDepartement" sortKey="69" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Rhône"/>
+        <name language="en" text="Rhône"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="Le Rhône"/>
+          <value language="en" value="Rhône"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="du Rhône"/>  
+          <value language="en" value="Rhône"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="69"/>
+          <value language="en" value="69"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1793" comment="Le département est créé en 1793 lors du découpage en deux du département du Rhône-et-Loire."/>
+          <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Lyon"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_VillefrancheSurSaone"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Lyon"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_VillefrancheSurSaone"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Villeurbanne"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Venissieux"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintPriest"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
+      </relationList>
+    </element>
+    <element id="el_Savoie" sortKey="73" type="et_Departement"  minLevel="0" >
+      <elementName>
+        <name language="fr" text="Savoie"/>
+        <name language="en" text="Savoie"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Savoie"/>
+          <value language="en" value="Savoie"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Savoie"/>  
+          <value language="en" value="Savoie"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="73"/>
+          <value language="en" value="73"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1860" comment="Le département est créé en 1860 lors du rattachement de la Savoie à la France."/>
+          <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Chambery"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Albertville"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintJeanDeMaurienne"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Chambery"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Albertville"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJeanDeMaurienne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautesAlpes"/>-->
+      </relationList>
+    </element>
+    <element id="el_HauteSavoie" sortKey="74" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Haute-Savoie"/>
+        <name language="en" text="Haute-Savoie"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Haute-Savoie"/>
+          <value language="en" value="Haute-Savoie"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Haute-Savoie"/>  
+          <value language="en" value="Haute-Savoie"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="74"/>
+          <value language="en" value="74"/>
+        </attribute>
+        <attribute type="at_DateCreation">
+          <value language="fr" value="1860" comment="Le département est créé en 1860 lors du rattachement de la Savoie à la France."/>
+          <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Annecy"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ThononLesBains"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bonneville"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintJulienEnGenevois"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Annecy"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_ThononLesBains"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bonneville"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJulienEnGenevois"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>-->
       </relationList>
     </element>
     <!--Villes 01-->
@@ -310,6 +924,63 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 04-->
+    <element id="el_DigneLesBains" type="et_Ville" minLevel="0">
+      <elementName>
+        <name language="fr" text="Digne-les-Bains"/>
+        <name language="en" text="Digne-les-Bains"/>
+      </elementName>
+      <attributeList>
+        <!--<attribute type="at_Nom1">
+          <value language="fr" value="Digne-les-Bains"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Digne-les-Bains"/>
+        </attribute>-->
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="17270"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 05-->
+    <element id="el_Gap" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Gap"/>
+        <name language="en" text="Gap"/>
+      </elementName>
+      <attributeList>
+        <!--<attribute type="at_Nom1">
+          <value language="fr" value="Gap"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Gap"/>
+        </attribute>-->
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="38585"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 06-->
+    <element id="el_Nice" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Nice"/>
+        <name language="en" text="Nice"/>
+      </elementName>
+      <attributeList>
+        <!--<attribute type="at_Nom1">
+          <value language="fr" value="Nice"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Nice"/>
+        </attribute>-->
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="344875"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
   </elementList>
 
   <questionCategories>
@@ -317,21 +988,24 @@
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
-        <questionText language="en" text="What is the département whose number is {0} ?"/>
+        <questionText language="en" text="What is the département whose number is {0}?"/>
       </attributeQuestionCategory>
-      
-      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
-                                 answerProximityCriterion="sortKey" commentMode="name" weight="100" minLevel="0"
-                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0" elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="Quel est le numéro associé au département % ?"/>
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le numéro associé au département {0} ?"/>
+        <questionText language="en" text="What is the number associated with the {0} département?"/>
+      </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateCreation"
-                                 answerProximityCriterion="attributeValue" distribParameterCorrection="0.1" commentMode="name" weight="30" minLevel="2"
-                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0"  elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="En quelle année a été créé le département % ?"/>
+                                 answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="30" minLevel="2">
+        <questionText language="fr" text="En quelle année a été créé le département {0} ?"/>
+        <questionText language="en" text="In what year was created the {0} département?"/>
+      </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateNom"
-                                 answerProximityCriterion="attributeValue" distribParameterCorrection="0.1" commentMode="name" weight="3" minLevel="2"
-                                 elementDrawDepth1="2" wrongChoiceDrawDepth1="0"  elementDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="Depuis quelle année le département % porte-t-il son nom actuel ?"/>-->
+                                 answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="3" minLevel="2">
+        <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
+        <questionText language="en" text="Since what year the {0} département bears its current name?"/>
+      </attributeQuestionCategory>
+        
     </attributeQuestionCategoryList>
   </questionCategories>
   

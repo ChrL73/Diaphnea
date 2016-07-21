@@ -162,9 +162,8 @@ function game(req, res, context)
       questionProducer.stdin.write(JSON.stringify(qData));
       questionProducer.stdout.on('data', function(jsonData)
       {
-         var obj = JSON.parse(jsonData);
-         console.log(obj);
-         questionProducer.kill();
+         var data = JSON.parse(jsonData);
+         console.log(data);
       });
       questionProducer.stderr.on('data', function(data) { console.log(data.toString()); });
 

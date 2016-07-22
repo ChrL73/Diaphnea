@@ -19,45 +19,44 @@ var Level = mongoose.model('Level', levelSchema);
 
 var produceSimpleAnswerQuestion = require('./produce_simple_answer_question');
 
-process.stdin.on('data', function(jsonParameters)
+var levelId = process.argv[2];
+var languageId = process.argv[3];
+
+Level.findOne({ _id: levelId }, function(err, level)
 {
-   var parameters = JSON.parse(jsonParameters);
-   
-   Level.findOne({ _id: parameters.levelId }, function(err, level)
+   // Todo: handle error
+   // Todo: category 'suitability'
+
+   var data = {};
+   var questionIndex = 0;
+   loop_part1();
+
+   function loop_part1()
    {
-      // Todo: handle error
-      // Todo: category 'suitability'
-      
-      var data = {};
-      var questionIndex = 0;
-      loop_part1();
-      
-      function loop_part1()
+      var draw = randomIntGenerator.getRandomInt(level.weight_sum);
+      var i;
+      for (i = 0; i < level.category_count; ++i)
       {
-         var draw = randomIntGenerator.getRandomInt(level.weight_sum);
-         var i;
-         for (i = 0; i < level.category_count; ++i)
-         {
-            if (draw < level.categories[i].weight_index) break;
-         }
-         
-         var category = level.categories[i];
-         if (category.type == 'SimpleAnswer') produceSimpleAnswerQuestion(category, parameters.languageId, loop_part2);
-         else throw new Error("Unknown category type '" + category.type + "'");
+         if (draw < level.categories[i].weight_index) break;
       }
-      
-      function loop_part2(question)
-      {
-         data['question' + questionIndex] = question;
-         
-         ++questionIndex;
-         if (questionIndex < level.question_count) loop_part1();
-         else end();
-      }
-      
-      function end()
-      {
-         process.stdout.write(JSON.stringify(data), function() { process.exit(); });  
-      }
-   });
+
+      var category = level.categories[i];
+      if (category.type == 'SimpleAnswer') produceSimpleAnswerQuestion(category, languageId, loop_part2);
+      else throw new Error("Unknown category type '" + category.type + "'");
+   }
+
+   function loop_part2(question)
+   {
+      data['question' + questionIndex] = question;
+
+      ++questionIndex;
+      if (questionIndex < level.question_count) loop_part1();
+      else end();
+   }
+
+   function end()
+   {
+      console.log(JSON.stringify(data));
+      process.exit();
+   }
 });

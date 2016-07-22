@@ -7,8 +7,42 @@ var languageSchema = mongoose.Schema({ id: String, name: String });
 var questionnaireSchema = mongoose.Schema({ questionnaire: String, name: mongoose.Schema.Types.Mixed, languages: [languageSchema] });
 var QuestionnaireModel = mongoose.model('Questionnaire', questionnaireSchema);
 
-var levelSchema = mongoose.Schema({ questionnaire: String, levelId: String, name: mongoose.Schema.Types.Mixed, categories: mongoose.Schema.Types.Mixed });
+var levelSchema = 
+{
+   questionnaire: String,
+   level_id: String,
+   index: Number,
+   name: mongoose.Schema.Types.Mixed,
+   question_count: Number,
+   choice_count: Number,
+   weight_sum: Number,
+   category_count: Number,
+   categories: [mongoose.Schema.Types.Mixed]
+};
 var LevelModel = mongoose.model('Level', levelSchema);
+
+var levelMap;
+function getLevelMap(callback)
+{
+   if (!levelMap)
+   {
+      LevelModel.find({}, { questionnaire: 1, level_id: 1 }, function(err, levels)
+      {
+         // Todo: handle error
+         levelMap = {};
+         levels.forEach(function(level)
+         {
+            if (!levelMap[level.questionnaire]) levelMap[level.questionnaire] = {};
+            levelMap[level.questionnaire][level.level_id] = level._id;
+         });
+         callback(levelMap);
+      })
+   }
+   else
+   {
+      callback(levelMap);
+   }
+}
 
 function getLevelChoiceDownData(upData, callback)
 {
@@ -85,18 +119,19 @@ function getLevelChoiceDownData(upData, callback)
       levels.forEach(function(iLevel)
       {
          if (!defaultLevel) defaultLevel = iLevel;
-         if (iLevel.levelId === upData.levelId) level = iLevel;
-         downData.levelList.push({ id: iLevel.levelId, name: iLevel.name[language.id] });
+         if (iLevel.level_id === upData.levelId) level = iLevel;
+         downData.levelList.push({ id: iLevel.level_id, name: iLevel.name[language.id] });
       });
       
       if (!level) level = defaultLevel;
       
       downData.questionnaireId = questionnaire.questionnaire;
       downData.languageId = language.id;
-      downData.levelId = level.levelId;
+      downData.levelId = level.level_id;
       
       callback(downData);
    }
 }
 
+module.exports.getLevelMap = getLevelMap;
 module.exports.getLevelChoiceDownData = getLevelChoiceDownData;

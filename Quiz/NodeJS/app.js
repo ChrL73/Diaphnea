@@ -47,6 +47,8 @@ var pages =
    game: 2,
 };
 
+quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
+
 app.all('/', function(req, res)
 {
    updateContext(req.session, req.cookies, function(context)
@@ -133,45 +135,36 @@ function game(req, res, context)
 {
    req.session.currentPage = pages.game;
    
-   if (!context.questionnaireId || !context.languageId || !context.languageId)
+   quizData.getLevelChoiceDownData(context, function(downData)
    {
-      quizData.getLevelChoiceDownData(context, continuation);
-   }
-   else
-   {
-      continuation();
-   }
-   
-   function continuation(downData)
-   {
-      var qData = {};
-      if (downData)
-      {
-         qData.questionnaireId = downData.questionnaireId;
-         qData.languageId = downData.languageId;
-         qData.levelId = downData.levelId;
-      }
-      else
-      {
-         qData.questionnaireId = context.questionnaireId;
-         qData.languageId = context.languageId;
-         qData.levelId = context.levelId;
-      }
+      var parameters = { languageId: downData.languageId };
+      var questionnaireId = downData.questionnaireId;
+      var levelId = downData.levelId;
       
-      var questionProducer = childProcess.spawn('node', ['produceQuestions.js']);
-      questionProducer.stdin.write(JSON.stringify(qData));
-      questionProducer.stdout.on('data', function(jsonData)
+      quizData.getLevelMap(function(levelMap)
       {
-         var obj = JSON.parse(jsonData);
-         console.log(obj);
-         questionProducer.kill();
+         parameters.levelId = levelMap[questionnaireId][levelId];
+         
+         var questionProducer = childProcess.spawn('node', ['produce_questions.js']);
+         questionProducer.stdin.write(JSON.stringify(parameters));
+         
+         questionProducer.stderr.on('data', function(data)
+         {
+            // Todo: handle error
+            console.log(data.toString());
+         });
+         
+         questionProducer.stdout.on('data', function(jsonData)
+         {
+            var data = JSON.parse(jsonData);
+            console.log(data);
+            
+            data.texts = translate(context.siteLanguageId).texts;
+
+            res.render('game.ejs', { data: data });
+         });  
       });
-      questionProducer.stderr.on('data', function(data) { console.log(data.toString()); });
-
-      var data = { texts: translate(context.siteLanguageId).texts };
-
-      res.render('game.ejs', { data: data });
-   }
+   });
 }
 
 function enterSignUp(req, res, context, flags)

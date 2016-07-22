@@ -113,6 +113,8 @@ namespace QuestionInstantiation
             levelCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
             questionListsCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
+            choiceListsCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> questionnaireCollection = database.GetCollection<BsonDocument>("questionnaires");
             questionnaireCollection.DeleteMany(filter);
 

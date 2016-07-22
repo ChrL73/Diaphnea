@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace QuestionInstantiation
 {
-    class PossibleAnswer
+    class Choice
     {
         private readonly AttributeValue _attributeValue;
         private readonly Element _element;
 
-        internal PossibleAnswer(AttributeValue attributeValue, Element element)
+        internal Choice(AttributeValue attributeValue, Element element)
         {
             _attributeValue = attributeValue;
             _element = element;
@@ -32,13 +32,13 @@ namespace QuestionInstantiation
 
         internal BsonDocument getBsonDocument()
         {
-            BsonDocument answerDocument = new BsonDocument()
+            BsonDocument choiceDocument = new BsonDocument()
             {
-                { "answer_text", _attributeValue.Value.getBsonDocument() },
-                { "answer_comment", _attributeValue.Comment.getBsonDocument() }
+                { "answer", _attributeValue.Value.getBsonDocument() },
+                { "comment", _attributeValue.Comment.getBsonDocument() }
             };
 
-            return answerDocument;
+            return choiceDocument;
         }
     }
 }

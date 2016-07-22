@@ -17,6 +17,7 @@ namespace QuestionInstantiation
         private Int32 _value;
         private Int32 _weightSum = 0;
         private Int32 _choiceCount;
+        private Int32 _questionCount;
         private Int32 _totalQuestionCount = 0;
         private readonly Dictionary<string, Element> _elementDictionary = new Dictionary<string, Element>();
         private readonly Dictionary<XmlElementType, List<Element>> _elementByTypeDictionary = new Dictionary<XmlElementType, List<Element>>();
@@ -33,6 +34,7 @@ namespace QuestionInstantiation
 
             _value = Int32.Parse(_xmlLevel.value);
             _choiceCount = Int32.Parse(_xmlLevel.choiceCount);
+            _questionCount = Int32.Parse(_xmlLevel.questionCount);
 
             if (addElements() != 0) return -1;
             if (checkSymetricalRelations() != 0) return -1;
@@ -251,8 +253,8 @@ namespace QuestionInstantiation
 
                             if (answerAttributeValue != null) 
                             {
-                                PossibleAnswer answer = new PossibleAnswer(answerAttributeValue, element);
-                                category.addAnswer(answer);
+                                Choice choice = new Choice(answerAttributeValue, element);
+                                category.addChoice(choice);
 
                                 if (questionAttributeValue != null)
                                 {
@@ -265,7 +267,7 @@ namespace QuestionInstantiation
                                     }
                                     if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, answer, null);
+                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null);
                                     category.addQuestion(question);
                                 }
                             }
@@ -277,11 +279,11 @@ namespace QuestionInstantiation
                                 _nameInLog, questionNameInLog));
                             _weightSum -= weight;
                         }
-                        else if (category.DistinctAnswerCount < _choiceCount)
+                        else if (category.ChoiceCount < _choiceCount)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                                "Level \"{0}\", category \"{1}\": Not enough possible answers ({2} possibles answers, {3} required). The category is ignored",
-                                _nameInLog, questionNameInLog, category.DistinctAnswerCount, _choiceCount));
+                                "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
+                                _nameInLog, questionNameInLog, category.ChoiceCount, _choiceCount));
                             _weightSum -= weight;
                         }
                         else
@@ -295,8 +297,8 @@ namespace QuestionInstantiation
                                 if (category.setComments(null, _quizData) != 0) return -1;
                             }
 
-                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} possible answer(s)",
-                                _nameInLog, questionNameInLog, category.QuestionCount, category.DistinctAnswerCount));
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
+                                _nameInLog, questionNameInLog, category.QuestionCount, category.ChoiceCount));
 
                             _categoryList.Add(category);
                             _totalQuestionCount += category.QuestionCount;
@@ -321,10 +323,13 @@ namespace QuestionInstantiation
             BsonDocument levelDocument = new BsonDocument()
             {
                 { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
-                { "levelId", _xmlLevel.levelId },
-                { "index", _xmlLevel.value },
+                { "level_id", _xmlLevel.levelId },
+                { "index", _value },
                 { "name", _name.getBsonDocument() },
-                { "weightSum", _weightSum }
+                { "question_count", _questionCount },
+                { "choice_count", _choiceCount },
+                { "weight_sum", _weightSum },
+                { "category_count", _categoryList.Count }
             };
 
             BsonArray categoriesArray = new BsonArray();

@@ -59,7 +59,7 @@
     <Compile Include="Level.cs" />
     <Compile Include="MessageLogger.cs" />
     <Compile Include="NumericalAttributeValue.cs" />
-    <Compile Include="PossibleAnswer.cs" />
+    <Compile Include="Choice.cs" />
     <Compile Include="Questionnaire.cs" />
     <Compile Include="QuizData.cs" />
     <Compile Include="QuestionInstantiationMain.cs" />

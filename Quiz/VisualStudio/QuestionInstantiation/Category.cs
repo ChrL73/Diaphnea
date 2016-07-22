@@ -19,7 +19,7 @@ namespace QuestionInstantiation
             _questionNameInLog = questionNameInLog;
         }
 
-        internal Int32 WeightIndex
+        protected Int32 WeightIndex
         {
             get { return _weightIndex; }
         }

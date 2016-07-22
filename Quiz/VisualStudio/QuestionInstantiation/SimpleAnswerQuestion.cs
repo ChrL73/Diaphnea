@@ -11,22 +11,23 @@ namespace QuestionInstantiation
     {
         private readonly Text _questionText;
         private readonly Element _element;
-        private readonly PossibleAnswer _answer;
+        private readonly Choice _choice;
 
-        internal SimpleAnswerQuestion(Text questionText, PossibleAnswer answer, Element element)
+        internal SimpleAnswerQuestion(Text questionText, Choice choice, Element element)
         {
             _questionText = questionText;
             _element = element;
-            _answer = answer;
+            _choice = choice;
         }
 
         internal BsonDocument getBsonDocument()
         {
             BsonDocument questionDocument = new BsonDocument()
             {
-                { "question_text", _questionText.getBsonDocument() },
-                { "answer", _answer.getBsonDocument() }
+                { "question", _questionText.getBsonDocument() }
             };
+
+            questionDocument.AddRange(_choice.getBsonDocument());
 
             return questionDocument;
         }

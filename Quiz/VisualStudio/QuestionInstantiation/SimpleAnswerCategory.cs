@@ -10,8 +10,8 @@ namespace QuestionInstantiation
 {
     class SimpleAnswerCategory : Category
     {
-        //private readonly List<PossibleAnswer> _answerList = new List<PossibleAnswer>();
-        private readonly SortedDictionary<Text, List<PossibleAnswer>> _answerDictionary = new SortedDictionary<Text, List<PossibleAnswer>>(new TextComparer());
+        //private readonly List<Choice> _choiceList = new List<Choice>();
+        private readonly SortedDictionary<Text, List<Choice>> _choiceDictionary = new SortedDictionary<Text, List<Choice>>(new TextComparer());
         private readonly List<SimpleAnswerQuestion> _questionList = new List<SimpleAnswerQuestion>();
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
@@ -28,23 +28,23 @@ namespace QuestionInstantiation
             get { return _questionList.Count; }
         }
 
-        internal int DistinctAnswerCount
+        internal int ChoiceCount
         {
-            get { return _answerDictionary.Count; }
+            get { return _choiceDictionary.Count; }
         }
 
-        /*internal int TotalAnswerCount
+        /*internal int TotalChoiceCount
         {
-            get { return _answerList.Count; }
+            get { return _choiceList.Count; }
         }*/
 
-        internal void addAnswer(PossibleAnswer answer)
+        internal void addChoice(Choice choice)
         {
-            //_answerList.Add(answer);
+            //_choiceList.Add(choice);
 
-            Text answerText = answer.AttributeValue.Value;
-            if (!_answerDictionary.ContainsKey(answerText)) _answerDictionary.Add(answerText, new List<PossibleAnswer>());
-            _answerDictionary[answerText].Add(answer);
+            Text choiceText = choice.AttributeValue.Value;
+            if (!_choiceDictionary.ContainsKey(choiceText)) _choiceDictionary.Add(choiceText, new List<Choice>());
+            _choiceDictionary[choiceText].Add(choice);
         }
 
         internal void addQuestion(SimpleAnswerQuestion question)
@@ -54,18 +54,18 @@ namespace QuestionInstantiation
 
         internal int setComments(XmlAttributeType attributeType, QuizData quizData)
         {
-            foreach (List<PossibleAnswer> answerList in _answerDictionary.Values)
+            foreach (List<Choice> choiceList in _choiceDictionary.Values)
             {
                 List<Text> textList = new List<Text>();
-                foreach (PossibleAnswer answer in answerList)
+                foreach (Choice choice in choiceList)
                 {
                     if (attributeType == null)
                     {
-                        textList.Add(answer.Element.Name);
+                        textList.Add(choice.Element.Name);
                     }
                     else
                     {
-                        AttributeValue attributeValue = answer.Element.getAttributeValue(attributeType);
+                        AttributeValue attributeValue = choice.Element.getAttributeValue(attributeType);
                         if (attributeValue != null) textList.Add(attributeValue.Value);
                     }
                 }
@@ -79,7 +79,7 @@ namespace QuestionInstantiation
                     commentText.setText(xmlLanguage.id.ToString(), comment);
                 }
 
-                foreach (PossibleAnswer answer in answerList) answer.Comment = commentText;
+                foreach (Choice choice in choiceList) choice.Comment = commentText;
             }
 
             return 0;
@@ -88,18 +88,36 @@ namespace QuestionInstantiation
         internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
         {
             IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
-
             BsonDocument questionListDocument = getQuestionListDocument(questionnaireId);
             questionListsCollection.InsertOne(questionListDocument);
+
+            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
+            BsonDocument choiceListDocument = getChoiceListDocument(questionnaireId);
+            choiceListsCollection.InsertOne(choiceListDocument);
+
+            string proximityCriterionType = "none";
+            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            {
+                proximityCriterionType = "string";
+            }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            {
+                proximityCriterionType = "number";
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
 
             BsonDocument categoryDocument = new BsonDocument()
             {
                 { "type", "SimpleAnswer" },
                 { "question_list", questionListDocument.GetValue("_id") },
-                { "distrib_parameter_correction", _distribParameterCorrection }
+                { "choice_list", choiceListDocument.GetValue("_id") },
+                { "weight_index", WeightIndex },
+                { "distrib_parameter_correction", _distribParameterCorrection },
+                { "proximity_criterion_type", proximityCriterionType }
             };
-
-            categoryDocument.AddRange(getAnswerListDocument());
 
             return categoryDocument;
         }
@@ -117,6 +135,7 @@ namespace QuestionInstantiation
             BsonDocument questionsDocument = new BsonDocument()
             {
                 { "questionnaire", questionnaireId },
+                { "count", _questionList.Count },
                 { "questions", questionsArray }
             };
 
@@ -125,27 +144,26 @@ namespace QuestionInstantiation
             return questionListDocument;
         }
 
-        internal BsonDocument getAnswerListDocument()
+        internal BsonDocument getChoiceListDocument(string questionnaireId)
         {
-            BsonDocument answerListDocument = new BsonDocument();
-
-            BsonArray answersArray = new BsonArray();
-            foreach (List<PossibleAnswer> list in _answerDictionary.Values)
+            BsonArray choicesArray = new BsonArray();
+            foreach (List<Choice> list in _choiceDictionary.Values)
             {
                 BsonArray proximityCriterionArray = new BsonArray();
                 if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
                 {
-                    foreach (PossibleAnswer possibleAnswer in list) proximityCriterionArray.Add(possibleAnswer.Element.XmlElement.sortKey);
+                    foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
                 }
                 else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
                 {
-                    foreach (PossibleAnswer possibleAnswer in list)
+                    foreach (Choice choice in list)
                     {
-                        string s = possibleAnswer.AttributeValue.Value.getAsNumber();
+                        string s = choice.AttributeValue.Value.getAsNumber();
                         if (s == null)
                         {
-                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), answer {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
-                                QuestionNameInLog, possibleAnswer.Element.XmlElement.id));
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
+                                QuestionNameInLog, choice.Element.XmlElement.id));
                             proximityCriterionArray.Add("0");
                         }
                         else
@@ -159,38 +177,26 @@ namespace QuestionInstantiation
                     throw new NotImplementedException();
                 }
 
-                BsonDocument answerDocument = new BsonDocument()
+                BsonDocument choiceDocument = new BsonDocument()
                 {
-                    { "answer_text", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "answer_comment", list[0].Comment.getBsonDocument() },
+                    { "choice", list[0].AttributeValue.Value.getBsonDocument() },
+                    { "comment", list[0].Comment.getBsonDocument() },
                     { "proximity_criterion_values", proximityCriterionArray }
                 };
-                answersArray.Add(answerDocument);
+                choicesArray.Add(choiceDocument);
             }
 
-            string proximityCriterionType = "none";
-            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            BsonDocument choicesDocument = new BsonDocument()
             {
-                proximityCriterionType = "string";
-            }
-            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
-            {
-                proximityCriterionType = "number";
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            BsonDocument answersDocument = new BsonDocument()
-            {
-                { "proximity_criterion_type", proximityCriterionType},
-                { "answers", answersArray }
+                { "questionnaire", questionnaireId },
+                { "count", _choiceDictionary.Count },
+                { "choices", choicesArray }
             };
 
-            answerListDocument.AddRange(answersDocument);
+            BsonDocument choiceListDocument = new BsonDocument();
+            choiceListDocument.AddRange(choicesDocument);
 
-            return answerListDocument;
+            return choiceListDocument;
         }
     }
 }

@@ -13,11 +13,36 @@ var levelSchema =
    level_id: String,
    index: Number,
    name: mongoose.Schema.Types.Mixed,
+   question_count: Number,
+   choice_count: Number,
    weight_sum: Number,
    category_count: Number,
    categories: [mongoose.Schema.Types.Mixed]
 };
 var LevelModel = mongoose.model('Level', levelSchema);
+
+var levelMap;
+function getLevelMap(callback)
+{
+   if (!levelMap)
+   {
+      LevelModel.find({}, { questionnaire: 1, level_id: 1 }, function(err, levels)
+      {
+         // Todo: handle error
+         levelMap = {};
+         levels.forEach(function(level)
+         {
+            if (!levelMap[level.questionnaire]) levelMap[level.questionnaire] = {};
+            levelMap[level.questionnaire][level.level_id] = level._id;
+         });
+         callback(levelMap);
+      })
+   }
+   else
+   {
+      callback(levelMap);
+   }
+}
 
 function getLevelChoiceDownData(upData, callback)
 {
@@ -108,4 +133,5 @@ function getLevelChoiceDownData(upData, callback)
    }
 }
 
+module.exports.getLevelMap = getLevelMap;
 module.exports.getLevelChoiceDownData = getLevelChoiceDownData;

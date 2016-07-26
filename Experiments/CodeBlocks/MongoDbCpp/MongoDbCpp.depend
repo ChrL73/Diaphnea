@@ -1,0 +1,1488 @@
+# depslib dependency file v1.0
+1469540945 source:/home/christophe/Diaphnea/Experiments/CodeBlocks/MongoDbCpp/main.cpp
+	"mongo/client/dbclient.h"
+	"mongo/bson/bson.h"
+	<iostream>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/dbclient.h
+	"mongo/config.h"
+	"mongo/client/redef_macros.h"
+	"mongo/client/autolib.h"
+	"mongo/client/dbclient_rs.h"
+	"mongo/client/dbclientcursor.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/gridfs.h"
+	"mongo/client/init.h"
+	"mongo/client/options.h"
+	"mongo/client/sasl_client_authenticate.h"
+	"mongo/geo/interface.h"
+	"mongo/version.h"
+	"mongo/client/undef_macros.h"
+
+1469526634 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/config.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/redef_macros.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/autolib.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/dbclient_rs.h
+	<boost/shared_ptr.hpp>
+	<utility>
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+	"mongo/util/net/hostandport.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/dbclientinterface.h
+	<boost/thread/locks.hpp>
+	<boost/thread/mutex.hpp>
+	"mongo/config.h"
+	"mongo/base/string_data.h"
+	"mongo/client/bulk_operation_builder.h"
+	"mongo/client/exceptions.h"
+	"mongo/client/export_macros.h"
+	"mongo/client/index_spec.h"
+	"mongo/client/write_concern.h"
+	"mongo/client/write_options.h"
+	"mongo/db/jsobj.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/stdx/functional.h"
+	"mongo/util/mongoutils/str.h"
+	"mongo/util/net/message.h"
+	"mongo/util/net/message_port.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/string_data.h
+	<algorithm>
+	<cstring>
+	<iosfwd>
+	<limits>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/base/string_data-inl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/export_macros.h
+	"mongo/platform/compiler.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/compiler.h
+	"mongo/platform/compiler_msvc.h"
+	"mongo/platform/compiler_gcc.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/compiler_msvc.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/compiler_gcc.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/string_data-inl.h
+	<stdexcept>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/bulk_operation_builder.h
+	<vector>
+	"mongo/bson/bsonobj.h"
+	"mongo/client/bulk_update_builder.h"
+	"mongo/client/write_result.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsonobj.h
+	<boost/noncopyable.hpp>
+	<set>
+	<list>
+	<string>
+	<vector>
+	<utility>
+	"mongo/bson/bsonelement.h"
+	"mongo/base/data_view.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/util/shared_buffer.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsonelement.h
+	<string.h>
+	<string>
+	<vector>
+	"mongo/base/data_cursor.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/timestamp.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/cstdint.h"
+	"mongo/platform/float_utils.h"
+	"mongo/platform/strnlen.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/data_cursor.h
+	<cstddef>
+	<cstring>
+	"mongo/base/data_view.h"
+	"mongo/platform/endian.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/data_view.h
+	"mongo/config.h"
+	<cstring>
+	"mongo/platform/endian.h"
+	<type_traits>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/endian.h
+	"mongo/config.h"
+	<climits>
+	<cstring>
+	<boost/static_assert.hpp>
+	<boost/mpl/if.hpp>
+	<boost/type_traits/is_signed.hpp>
+	"mongo/platform/cstdint.h"
+	<cstdlib>
+	<sys/byteorder.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/cstdint.h
+	<cstdint>
+	<stdint.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsontypes.h
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/assert_util.h
+	<typeinfo>
+	<string>
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/compiler.h"
+	"mongo/logger/log_severity.h"
+	"mongo/logger/logger.h"
+	"mongo/logger/logstream_builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/status.h
+	<iosfwd>
+	<string>
+	"mongo/base/error_codes.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/base/status-inl.h"
+
+1469526634 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/error_codes.h
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_word.h
+	"mongo/config.h"
+	"mongo/platform/atomic_word_cxx11.h"
+	"mongo/platform/atomic_word_intrinsics.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_word_cxx11.h
+	<atomic>
+	<type_traits>
+	<boost/static_assert.hpp>
+	"mongo/base/disallow_copying.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/disallow_copying.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_word_intrinsics.h
+	<boost/static_assert.hpp>
+	"mongo/base/disallow_copying.h"
+	"mongo/platform/atomic_intrinsics.h"
+	"mongo/platform/compiler.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_intrinsics.h
+	"mongo/config.h"
+	"mongo/platform/atomic_intrinsics_win32.h"
+	"mongo/platform/atomic_intrinsics_gcc_atomic.h"
+	"mongo/platform/atomic_intrinsics_gcc_sync.h"
+	"mongo/platform/atomic_intrinsics_gcc_intel.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_intrinsics_win32.h
+	<boost/utility.hpp>
+	"mongo/platform/windows_basic.h"
+	<intrin.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/windows_basic.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<wspiapi.h>
+	<windows.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_intrinsics_gcc_atomic.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_intrinsics_gcc_sync.h
+	<boost/utility.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/atomic_intrinsics_gcc_intel.h
+	<boost/utility.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/status-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_severity.h
+	<iosfwd>
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/logger/log_severity-inl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_severity-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/logger.h
+	"mongo/client/export_macros.h"
+	"mongo/logger/message_log_domain.h"
+	"mongo/logger/log_manager.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/message_log_domain.h
+	<boost/scoped_ptr.hpp>
+	<memory>
+	<string>
+	<vector>
+	"mongo/logger/log_domain.h"
+	"mongo/logger/message_event.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_domain.h
+	<boost/scoped_ptr.hpp>
+	<memory>
+	<string>
+	<vector>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/appender.h"
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/appender.h
+	"mongo/base/status.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/message_event.h
+	"mongo/base/string_data.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/cstdint.h"
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_component.h
+	<iosfwd>
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/time_support.h
+	<iosfwd>
+	<ctime>
+	<string>
+	<boost/date_time/posix_time/posix_time_types.hpp>
+	<boost/thread/xtime.hpp>
+	<boost/version.hpp>
+	"mongo/base/status_with.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/status_with.h
+	"mongo/base/status.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_manager.h
+	<string>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/component_message_log_domain.h"
+	"mongo/platform/unordered_map.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/component_message_log_domain.h
+	"mongo/logger/log_component_settings.h"
+	"mongo/logger/message_log_domain.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/log_component_settings.h
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/unordered_map.h
+	<new>
+	<unordered_map>
+	<unordered_map>
+	<tr1/unordered_map>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/logstream_builder.h
+	<boost/scoped_ptr.hpp>
+	<sstream>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/logger/labeled_level.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+	"mongo/logger/message_log_domain.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/logger/labeled_level.h
+	<string>
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/oid.h
+	<string>
+	"mongo/base/data_view.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/export_macros.h"
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/util/builder.h
+	<cfloat>
+	<sstream>
+	<stdio.h>
+	<string>
+	<boost/static_assert.hpp>
+	"mongo/base/data_view.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/inline_decls.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/inline_decls.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/timestamp.h
+	"mongo/platform/cstdint.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/float_utils.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/strnlen.h
+	<cstddef>
+	<cstring>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/shared_buffer.h
+	<boost/intrusive_ptr.hpp>
+	"mongo/platform/atomic_word.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/bulk_update_builder.h
+	"mongo/bson/bsonobj.h"
+	"mongo/client/bulk_upsert_builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/bulk_upsert_builder.h
+	"mongo/bson/bsonobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/write_result.h
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/util/net/operation.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/net/operation.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/exceptions.h
+	<exception>
+	<string>
+	"mongo/db/jsobj.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/db/jsobj.h
+	"mongo/bson/util/builder.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonmisc.h"
+	"mongo/bson/bsonobjbuilder.h"
+	"mongo/bson/bsonobjiterator.h"
+	"mongo/bson/bson-inl.h"
+	"mongo/bson/ordering.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/bson_db.h"
+	"mongo/bson/timestamp.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsonmisc.h
+	<memory>
+	"mongo/bson/bsonelement.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsonobjbuilder.h
+	<boost/static_assert.hpp>
+	<map>
+	<cmath>
+	<limits>
+	"mongo/base/data_cursor.h"
+	"mongo/base/parse_number.h"
+	"mongo/bson/bson_field.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonmisc.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/timestamp.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/parse_number.h
+	"mongo/base/status.h"
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bson_field.h
+	<string>
+	"mongo/bson/bsonobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bsonobjiterator.h
+	<boost/preprocessor/cat.hpp>
+	"mongo/bson/bsonobj.h"
+	"mongo/base/disallow_copying.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bson-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/ordering.h
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonobjiterator.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bson_db.h
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/index_spec.h
+	<string>
+	<vector>
+	<utility>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/write_concern.h
+	<bitset>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/write_options.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/stdx/functional.h
+	<functional>
+	<boost/bind.hpp>
+	<boost/function.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/mongoutils/str.h
+	<string>
+	<sstream>
+	"mongo/bson/util/builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/net/message.h
+	<vector>
+	"mongo/platform/atomic_word.h"
+	"mongo/platform/cstdint.h"
+	"mongo/base/data_view.h"
+	"mongo/base/encoded_value_storage.h"
+	"mongo/util/mongoutils/str.h"
+	"mongo/util/net/hostandport.h"
+	"mongo/util/net/operation.h"
+	"mongo/util/net/sock.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/base/encoded_value_storage.h
+	<cstring>
+	"mongo/base/data_view.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/net/hostandport.h
+	<iosfwd>
+	<string>
+	"mongo/bson/util/builder.h"
+	"mongo/platform/hash_namespace.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/platform/hash_namespace.h
+	<new>
+	<functional>
+	<functional>
+	<tr1/functional>
+	<tr1/functional>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/net/sock.h
+	"mongo/config.h"
+	<stdio.h>
+	<sys/socket.h>
+	<sys/types.h>
+	<sys/un.h>
+	<errno.h>
+	<sys/uio.h>
+	<boost/scoped_ptr.hpp>
+	<string>
+	<utility>
+	<vector>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/compiler.h"
+	"mongo/platform/cstdint.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/util/net/message_port.h
+	"mongo/config.h"
+	<boost/shared_ptr.hpp>
+	<boost/utility.hpp>
+	<vector>
+	"mongo/util/net/message.h"
+	"mongo/util/net/sock.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/dbclientcursor.h
+	<stack>
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/db/json.h"
+	"mongo/util/net/message.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/db/json.h
+	<string>
+	"mongo/bson/bsonobj.h"
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/gridfs.h
+	"boost/scoped_array.hpp"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/init.h
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+	"mongo/client/options.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/options.h
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/logger/log_domain.h"
+	"mongo/logger/message_log_domain.h"
+	"mongo/stdx/functional.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/sasl_client_authenticate.h
+	"mongo/base/status.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/interface.h
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/coordinates.h"
+	"mongo/geo/coordinates2d.h"
+	"mongo/geo/coordinates2dgeographic.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geometrycollection.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/namespaces.h"
+	"mongo/geo/parser.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/queryutils.h"
+	"mongo/geo/parser-impl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/boundingbox.h
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/constants.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/constants.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/coordinates.h
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/coordinates2d.h
+	<utility>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/coordinates.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/coordinates2dgeographic.h
+	<utility>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/coordinates.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/geometry.h
+	<algorithm>
+	<limits>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/geoobj.h
+	<string>
+	<vector>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/geometrycollection.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/parser.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/parser.h
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/linestring.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/point.h
+	<algorithm>
+	<boost/scoped_ptr.hpp>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/multilinestring.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/multipoint.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/multipolygon.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/polygon.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/namespaces.h
+	"mongo/geo/coordinates2d.h"
+	"mongo/geo/coordinates2dgeographic.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/coordinates.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geometrycollection.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/parser.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/queryutils.h
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/geo/parser-impl.h
+	"mongo/base/string_data.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/parser.h"
+	"mongo/util/assert_util.h"
+
+1469532294 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/version.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/client/undef_macros.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bson.h
+	"mongo/config.h"
+	"mongo/client/redef_macros.h"
+	"mongo/client/autolib.h"
+	"mongo/bson/bson_validate.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonobjbuilder.h"
+	"mongo/bson/bsonobjiterator.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/bson-inl.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/undef_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx_driver/include/mongo/bson/bson_validate.h
+	"mongo/base/status.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/cstdint.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/dbclient.h
+	"mongo/config.h"
+	"mongo/client/redef_macros.h"
+	"mongo/client/autolib.h"
+	"mongo/client/dbclient_rs.h"
+	"mongo/client/dbclientcursor.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/gridfs.h"
+	"mongo/client/init.h"
+	"mongo/client/options.h"
+	"mongo/client/sasl_client_authenticate.h"
+	"mongo/geo/interface.h"
+	"mongo/version.h"
+	"mongo/client/undef_macros.h"
+
+1469526634 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/config.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/redef_macros.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/autolib.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/dbclient_rs.h
+	<boost/shared_ptr.hpp>
+	<utility>
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+	"mongo/util/net/hostandport.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/dbclientinterface.h
+	<boost/thread/locks.hpp>
+	<boost/thread/mutex.hpp>
+	"mongo/config.h"
+	"mongo/base/string_data.h"
+	"mongo/client/bulk_operation_builder.h"
+	"mongo/client/exceptions.h"
+	"mongo/client/export_macros.h"
+	"mongo/client/index_spec.h"
+	"mongo/client/write_concern.h"
+	"mongo/client/write_options.h"
+	"mongo/db/jsobj.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/stdx/functional.h"
+	"mongo/util/mongoutils/str.h"
+	"mongo/util/net/message.h"
+	"mongo/util/net/message_port.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/string_data.h
+	<algorithm>
+	<cstring>
+	<iosfwd>
+	<limits>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/base/string_data-inl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/export_macros.h
+	"mongo/platform/compiler.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/compiler.h
+	"mongo/platform/compiler_msvc.h"
+	"mongo/platform/compiler_gcc.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/compiler_msvc.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/compiler_gcc.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/string_data-inl.h
+	<stdexcept>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/bulk_operation_builder.h
+	<vector>
+	"mongo/bson/bsonobj.h"
+	"mongo/client/bulk_update_builder.h"
+	"mongo/client/write_result.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsonobj.h
+	<boost/noncopyable.hpp>
+	<set>
+	<list>
+	<string>
+	<vector>
+	<utility>
+	"mongo/bson/bsonelement.h"
+	"mongo/base/data_view.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/util/shared_buffer.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsonelement.h
+	<string.h>
+	<string>
+	<vector>
+	"mongo/base/data_cursor.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/timestamp.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/cstdint.h"
+	"mongo/platform/float_utils.h"
+	"mongo/platform/strnlen.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/data_cursor.h
+	<cstddef>
+	<cstring>
+	"mongo/base/data_view.h"
+	"mongo/platform/endian.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/data_view.h
+	"mongo/config.h"
+	<cstring>
+	"mongo/platform/endian.h"
+	<type_traits>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/endian.h
+	"mongo/config.h"
+	<climits>
+	<cstring>
+	<boost/static_assert.hpp>
+	<boost/mpl/if.hpp>
+	<boost/type_traits/is_signed.hpp>
+	"mongo/platform/cstdint.h"
+	<cstdlib>
+	<sys/byteorder.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/cstdint.h
+	<cstdint>
+	<stdint.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsontypes.h
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/assert_util.h
+	<typeinfo>
+	<string>
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/compiler.h"
+	"mongo/logger/log_severity.h"
+	"mongo/logger/logger.h"
+	"mongo/logger/logstream_builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/status.h
+	<iosfwd>
+	<string>
+	"mongo/base/error_codes.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/atomic_word.h"
+	"mongo/base/status-inl.h"
+
+1469526634 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/error_codes.h
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_word.h
+	"mongo/config.h"
+	"mongo/platform/atomic_word_cxx11.h"
+	"mongo/platform/atomic_word_intrinsics.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_word_cxx11.h
+	<atomic>
+	<type_traits>
+	<boost/static_assert.hpp>
+	"mongo/base/disallow_copying.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/disallow_copying.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_word_intrinsics.h
+	<boost/static_assert.hpp>
+	"mongo/base/disallow_copying.h"
+	"mongo/platform/atomic_intrinsics.h"
+	"mongo/platform/compiler.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_intrinsics.h
+	"mongo/config.h"
+	"mongo/platform/atomic_intrinsics_win32.h"
+	"mongo/platform/atomic_intrinsics_gcc_atomic.h"
+	"mongo/platform/atomic_intrinsics_gcc_sync.h"
+	"mongo/platform/atomic_intrinsics_gcc_intel.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_intrinsics_win32.h
+	<boost/utility.hpp>
+	"mongo/platform/windows_basic.h"
+	<intrin.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/windows_basic.h
+	<winsock2.h>
+	<ws2tcpip.h>
+	<wspiapi.h>
+	<windows.h>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_intrinsics_gcc_atomic.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_intrinsics_gcc_sync.h
+	<boost/utility.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/atomic_intrinsics_gcc_intel.h
+	<boost/utility.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/status-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_severity.h
+	<iosfwd>
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/logger/log_severity-inl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_severity-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/logger.h
+	"mongo/client/export_macros.h"
+	"mongo/logger/message_log_domain.h"
+	"mongo/logger/log_manager.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/message_log_domain.h
+	<boost/scoped_ptr.hpp>
+	<memory>
+	<string>
+	<vector>
+	"mongo/logger/log_domain.h"
+	"mongo/logger/message_event.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_domain.h
+	<boost/scoped_ptr.hpp>
+	<memory>
+	<string>
+	<vector>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/appender.h"
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/appender.h
+	"mongo/base/status.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/message_event.h
+	"mongo/base/string_data.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/cstdint.h"
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_component.h
+	<iosfwd>
+	<string>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/time_support.h
+	<iosfwd>
+	<ctime>
+	<string>
+	<boost/date_time/posix_time/posix_time_types.hpp>
+	<boost/thread/xtime.hpp>
+	<boost/version.hpp>
+	"mongo/base/status_with.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/status_with.h
+	"mongo/base/status.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_manager.h
+	<string>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/component_message_log_domain.h"
+	"mongo/platform/unordered_map.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/component_message_log_domain.h
+	"mongo/logger/log_component_settings.h"
+	"mongo/logger/message_log_domain.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/log_component_settings.h
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/unordered_map.h
+	<new>
+	<unordered_map>
+	<unordered_map>
+	<tr1/unordered_map>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/logstream_builder.h
+	<boost/scoped_ptr.hpp>
+	<sstream>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/logger/labeled_level.h"
+	"mongo/logger/log_component.h"
+	"mongo/logger/log_severity.h"
+	"mongo/logger/message_log_domain.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/logger/labeled_level.h
+	<string>
+	"mongo/logger/log_severity.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/oid.h
+	<string>
+	"mongo/base/data_view.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/export_macros.h"
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/util/builder.h
+	<cfloat>
+	<sstream>
+	<stdio.h>
+	<string>
+	<boost/static_assert.hpp>
+	"mongo/base/data_view.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/inline_decls.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/inline_decls.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/timestamp.h
+	"mongo/platform/cstdint.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/float_utils.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/strnlen.h
+	<cstddef>
+	<cstring>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/shared_buffer.h
+	<boost/intrusive_ptr.hpp>
+	"mongo/platform/atomic_word.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/bulk_update_builder.h
+	"mongo/bson/bsonobj.h"
+	"mongo/client/bulk_upsert_builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/bulk_upsert_builder.h
+	"mongo/bson/bsonobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/write_result.h
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/util/net/operation.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/net/operation.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/exceptions.h
+	<exception>
+	<string>
+	"mongo/db/jsobj.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/db/jsobj.h
+	"mongo/bson/util/builder.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonmisc.h"
+	"mongo/bson/bsonobjbuilder.h"
+	"mongo/bson/bsonobjiterator.h"
+	"mongo/bson/bson-inl.h"
+	"mongo/bson/ordering.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/bson_db.h"
+	"mongo/bson/timestamp.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsonmisc.h
+	<memory>
+	"mongo/bson/bsonelement.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsonobjbuilder.h
+	<boost/static_assert.hpp>
+	<map>
+	<cmath>
+	<limits>
+	"mongo/base/data_cursor.h"
+	"mongo/base/parse_number.h"
+	"mongo/bson/bson_field.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonmisc.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/timestamp.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/parse_number.h
+	"mongo/base/status.h"
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bson_field.h
+	<string>
+	"mongo/bson/bsonobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bsonobjiterator.h
+	<boost/preprocessor/cat.hpp>
+	"mongo/bson/bsonobj.h"
+	"mongo/base/disallow_copying.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bson-inl.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/ordering.h
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonobjiterator.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bson_db.h
+	"mongo/util/time_support.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/index_spec.h
+	<string>
+	<vector>
+	<utility>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/write_concern.h
+	<bitset>
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/write_options.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/stdx/functional.h
+	<functional>
+	<boost/bind.hpp>
+	<boost/function.hpp>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/mongoutils/str.h
+	<string>
+	<sstream>
+	"mongo/bson/util/builder.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/net/message.h
+	<vector>
+	"mongo/platform/atomic_word.h"
+	"mongo/platform/cstdint.h"
+	"mongo/base/data_view.h"
+	"mongo/base/encoded_value_storage.h"
+	"mongo/util/mongoutils/str.h"
+	"mongo/util/net/hostandport.h"
+	"mongo/util/net/operation.h"
+	"mongo/util/net/sock.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/base/encoded_value_storage.h
+	<cstring>
+	"mongo/base/data_view.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/net/hostandport.h
+	<iosfwd>
+	<string>
+	"mongo/bson/util/builder.h"
+	"mongo/platform/hash_namespace.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/platform/hash_namespace.h
+	<new>
+	<functional>
+	<functional>
+	<tr1/functional>
+	<tr1/functional>
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/net/sock.h
+	"mongo/config.h"
+	<stdio.h>
+	<sys/socket.h>
+	<sys/types.h>
+	<sys/un.h>
+	<errno.h>
+	<sys/uio.h>
+	<boost/scoped_ptr.hpp>
+	<string>
+	<utility>
+	<vector>
+	"mongo/base/disallow_copying.h"
+	"mongo/logger/log_severity.h"
+	"mongo/platform/compiler.h"
+	"mongo/platform/cstdint.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/util/net/message_port.h
+	"mongo/config.h"
+	<boost/shared_ptr.hpp>
+	<boost/utility.hpp>
+	<vector>
+	"mongo/util/net/message.h"
+	"mongo/util/net/sock.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/dbclientcursor.h
+	<stack>
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/db/json.h"
+	"mongo/util/net/message.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/db/json.h
+	<string>
+	"mongo/bson/bsonobj.h"
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/gridfs.h
+	"boost/scoped_array.hpp"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/init.h
+	"mongo/base/status.h"
+	"mongo/client/export_macros.h"
+	"mongo/client/options.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/options.h
+	<string>
+	"mongo/client/export_macros.h"
+	"mongo/logger/log_domain.h"
+	"mongo/logger/message_log_domain.h"
+	"mongo/stdx/functional.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/sasl_client_authenticate.h
+	"mongo/base/status.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/client/dbclientinterface.h"
+	"mongo/client/export_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/interface.h
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/coordinates.h"
+	"mongo/geo/coordinates2d.h"
+	"mongo/geo/coordinates2dgeographic.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geometrycollection.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/namespaces.h"
+	"mongo/geo/parser.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/queryutils.h"
+	"mongo/geo/parser-impl.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/boundingbox.h
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/constants.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/constants.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/coordinates.h
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/coordinates2d.h
+	<utility>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/coordinates.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/coordinates2dgeographic.h
+	<utility>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/coordinates.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/geometry.h
+	<algorithm>
+	<limits>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/geoobj.h
+	<string>
+	<vector>
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/geometrycollection.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/parser.h"
+	"mongo/util/assert_util.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/parser.h
+	"mongo/base/string_data.h"
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/linestring.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/point.h
+	<algorithm>
+	<boost/scoped_ptr.hpp>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/multilinestring.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/multipoint.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/multipolygon.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/polygon.h
+	<boost/scoped_ptr.hpp>
+	<vector>
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/namespaces.h
+	"mongo/geo/coordinates2d.h"
+	"mongo/geo/coordinates2dgeographic.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/coordinates.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/geometrycollection.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/parser.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/queryutils.h
+	"mongo/client/export_macros.h"
+	"mongo/db/jsobj.h"
+	"mongo/geo/boundingbox.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geoobj.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/geo/parser-impl.h
+	"mongo/base/string_data.h"
+	"mongo/geo/constants.h"
+	"mongo/geo/geometry.h"
+	"mongo/geo/linestring.h"
+	"mongo/geo/multilinestring.h"
+	"mongo/geo/multipoint.h"
+	"mongo/geo/multipolygon.h"
+	"mongo/geo/geoobj.h"
+	"mongo/geo/point.h"
+	"mongo/geo/polygon.h"
+	"mongo/geo/parser.h"
+	"mongo/util/assert_util.h"
+
+1469532294 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/version.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/undef_macros.h
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bson.h
+	"mongo/config.h"
+	"mongo/client/redef_macros.h"
+	"mongo/client/autolib.h"
+	"mongo/bson/bson_validate.h"
+	"mongo/bson/bsonelement.h"
+	"mongo/bson/bsonobj.h"
+	"mongo/bson/bsonobjbuilder.h"
+	"mongo/bson/bsonobjiterator.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/bson/bson-inl.h"
+	"mongo/bson/oid.h"
+	"mongo/bson/util/builder.h"
+	"mongo/client/undef_macros.h"
+
+1469525720 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/bson/bson_validate.h
+	"mongo/base/status.h"
+	"mongo/base/string_data.h"
+	"mongo/bson/bsontypes.h"
+	"mongo/client/export_macros.h"
+	"mongo/platform/cstdint.h"
+

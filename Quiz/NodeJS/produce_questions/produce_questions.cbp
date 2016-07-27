@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="produce_questions" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/produce_questions" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="579201b9db404c2f80124100 fr" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="../../../mongo-cxx-driver/include" />
+				</Compiler>
+				<Linker>
+					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
+					<Add library="boost_system" />
+					<Add library="boost_regex" />
+					<Add library="boost_thread" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/produce_questions" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add directory="../../../mongo-cxx-driver/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
+					<Add library="boost_system" />
+					<Add library="boost_regex" />
+					<Add library="boost_thread" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Level.cpp" />
+		<Unit filename="Level.h" />
+		<Unit filename="QuestionProducer.cpp" />
+		<Unit filename="QuestionProducer.h" />
+		<Unit filename="QuizData.cpp" />
+		<Unit filename="QuizData.h" />
+		<Unit filename="RandomNumberGenerator.cpp" />
+		<Unit filename="RandomNumberGenerator.h" />
+		<Unit filename="SimpleAnswerCategory.cpp" />
+		<Unit filename="SimpleAnswerCategory.h" />
+		<Unit filename="SimpleAnswerQuestion.cpp" />
+		<Unit filename="SimpleAnswerQuestion.h" />
+		<Unit filename="produce_questions.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

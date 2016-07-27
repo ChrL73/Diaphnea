@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1469602562 source:/home/christophe/Diaphnea/Experiments/CodeBlocks/RandomDevice/main.cpp
+	<iostream>
+	<random>
+	<ctime>
+	<chrono>
+

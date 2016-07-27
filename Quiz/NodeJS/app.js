@@ -137,32 +137,28 @@ function game(req, res, context)
    
    quizData.getLevelChoiceDownData(context, function(downData)
    {
-      var parameters = { languageId: downData.languageId };
-      var questionnaireId = downData.questionnaireId;
-      var levelId = downData.levelId;
-      
       quizData.getLevelMap(function(levelMap)
       {
-         parameters.levelId = levelMap[questionnaireId][levelId];
+         var parameters = { languageId: downData.languageId };
+         parameters.levelId = levelMap[downData.questionnaireId][downData.levelId];
          
-         var questionProducer = childProcess.spawn('node', ['produce_questions.js']);
-         questionProducer.stdin.write(JSON.stringify(parameters));
-         
-         questionProducer.stderr.on('data', function(data)
+         childProcess.exec('node produce_questions.js ' + parameters.levelId + ' ' + parameters.languageId, function(err, stdout, stderr)
          {
-            // Todo: handle error
-            console.log(data.toString());
-         });
-         
-         questionProducer.stdout.on('data', function(jsonData)
-         {
-            var data = JSON.parse(jsonData);
-            console.log(data);
-            
-            data.texts = translate(context.siteLanguageId).texts;
+            if (err)
+            {
+               // Todo: handle error
+               console.log(stderr);
+            }
+            else
+            {
+               var data = JSON.parse(stdout);
+               console.log(data);
 
-            res.render('game.ejs', { data: data });
-         });  
+               data.texts = translate(context.siteLanguageId).texts;
+
+               res.render('game.ejs', { data: data });
+            }
+         });
       });
    });
 }

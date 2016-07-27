@@ -198,9 +198,9 @@
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_Montlucon"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Vichy"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>-->
       </relationList>
@@ -310,6 +310,42 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_CagnesSurMer"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
+      </relationList>
+    </element>
+    <element id="el_ArdecheDepartement" sortKey="07" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Ardèche"/>
+        <name language="en" text="Ardèche"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Ardèche"/>
+          <value language="en" value="Ardèche"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ardèche"/>
+          <value language="en" value="Ardèche"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="7"/>
+          <value language="en" value="7"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Privas"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_TournonSurRhone"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Largentiere"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Privas"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_TournonSurRhone"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Largentiere"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>-->
       </relationList>
     </element>
     <element id="el_CharenteMaritime" sortKey="17" type="et_Departement" minLevel="0" >
@@ -523,12 +559,12 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintEtienne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Roanne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Montbrison"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintChamond"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintChamond"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AllierDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ArdecheDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_RhoneDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
       </relationList>
@@ -981,8 +1017,27 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 07-->
+    <element id="el_Privas" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Privas"/>
+        <name language="en" text="Privas"/>
+      </elementName>
+      <attributeList>
+        <!--<attribute type="at_Nom1">
+          <value language="fr" value="Privas"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Privas"/>
+        </attribute>-->
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="8550"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
   </elementList>
-
+  
   <questionCategories>
     <attributeQuestionCategoryList>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"

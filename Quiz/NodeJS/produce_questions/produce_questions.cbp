@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="579201b9db404c2f80124100 fr" />
+				<Option parameters="5799ec3fdb404c1898ac4881 fr" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -47,8 +47,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Category.cpp" />
+		<Unit filename="Category.h" />
+		<Unit filename="CompleteQuestion.cpp" />
+		<Unit filename="CompleteQuestion.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
+		<Unit filename="ProximityCriterionTypeEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />
 		<Unit filename="QuestionProducer.h" />
 		<Unit filename="QuizData.cpp" />

@@ -329,6 +329,7 @@ namespace QuestionInstantiation
                 { "question_count", _questionCount },
                 { "choice_count", _choiceCount },
                 { "weight_sum", _weightSum },
+                { "distrib_parameter", _xmlLevel.distribParameter },
                 { "category_count", _categoryList.Count }
             };
 

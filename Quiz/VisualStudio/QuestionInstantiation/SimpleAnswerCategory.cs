@@ -112,7 +112,9 @@ namespace QuestionInstantiation
             BsonDocument categoryDocument = new BsonDocument()
             {
                 { "type", "SimpleAnswer" },
+                { "question_count", _questionList.Count },
                 { "question_list", questionListDocument.GetValue("_id") },
+                { "choice_count", _choiceDictionary.Count },
                 { "choice_list", choiceListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },
                 { "distrib_parameter_correction", _distribParameterCorrection },

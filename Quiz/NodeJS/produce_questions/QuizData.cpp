@@ -2,6 +2,7 @@
 #include "Level.h"
 #include "SimpleAnswerCategory.h"
 #include "SimpleAnswerQuestion.h"
+#include "Choice.h"
 
 namespace produce_questions
 {
@@ -156,6 +157,7 @@ namespace produce_questions
         }
         else
         {
+            // For test/debug purpose...
             std::cout << "Question already seen..." << std::endl;
         }
 
@@ -164,4 +166,52 @@ namespace produce_questions
         return (*it).second;
     }
 
+    Choice *QuizData::getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType)
+    {
+        std::pair<std::string, int> key(choiceListId, index);
+        std::map<std::pair<std::string, int>, Choice *>::iterator it = _choiceMap.find(key);
+
+        if (it == _choiceMap.end())
+        {
+            char projectionStr[64];
+            sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
+            mongo::BSONObj projection = mongo::fromjson(projectionStr);
+            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+
+            if (cursor->more())
+            {
+                mongo::BSONObj dbList = cursor->next();
+                mongo::BSONObj dbChoice = dbList.getField("choices").Array()[0].Obj();
+
+                const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
+                const char *comment = dbChoice.getField("comment").Obj().getStringField(_languageId);
+
+                std::vector<double> doubleCriterionVector;
+                std::vector<std::string> stringCriterionVector;
+
+                if (criterionType == produce_questions::STRING)
+                {
+
+                }
+                else if (criterionType == produce_questions::NUMBER)
+                {
+
+                }
+
+                Choice *choice = new Choice(choiceText, comment, doubleCriterionVector, stringCriterionVector);
+                it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, choice)).first;
+            }
+            else
+            {
+                it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, 0)).first;
+            }
+        }
+        else
+        {
+            // For test/debug purpose...
+            std::cout << "Choice already seen..." << std::endl;
+        }
+
+        return (*it).second;
+    }
 }

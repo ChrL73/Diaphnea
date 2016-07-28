@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 namespace produce_questions
 {
     class RandomNumberGenerator
@@ -16,7 +18,7 @@ namespace produce_questions
     public:
         static int verify(void);
         static unsigned int getRandomInt(int valueCount);
-
+        static unsigned int getRandomInt(int valueCount, const std::set<unsigned int>& excludedValues);
     };
 }
 

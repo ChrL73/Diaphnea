@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ProximityCriterionTypeEnum.h"
 #include "mongo/client/dbclient.h"
 
 #include <map>
@@ -9,6 +10,7 @@ namespace produce_questions
 {
     class Level;
     class SimpleAnswerQuestion;
+    class Choice;
 
     class QuizData
     {
@@ -26,6 +28,7 @@ namespace produce_questions
         std::string _languageId;
         std::map<std::string, Level *> _levelMap;
         std::map<std::pair<std::string, int>, SimpleAnswerQuestion *> _simpleAnswerQuestionMap;
+        std::map<std::pair<std::string, int>, Choice *> _choiceMap;
 
     public:
         static QuizData *instance(void);
@@ -35,5 +38,6 @@ namespace produce_questions
 
         Level *getLevel(const std::string& id);
         SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index);
+        Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
     };
 }

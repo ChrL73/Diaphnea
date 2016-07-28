@@ -49,11 +49,14 @@
 		</Compiler>
 		<Unit filename="Category.cpp" />
 		<Unit filename="Category.h" />
+		<Unit filename="Choice.cpp" />
+		<Unit filename="Choice.h" />
 		<Unit filename="CompleteQuestion.cpp" />
 		<Unit filename="CompleteQuestion.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
 		<Unit filename="ProximityCriterionTypeEnum.h" />
+		<Unit filename="QuestionMultiplicityEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />
 		<Unit filename="QuestionProducer.h" />
 		<Unit filename="QuizData.cpp" />
@@ -64,6 +67,8 @@
 		<Unit filename="SimpleAnswerCategory.h" />
 		<Unit filename="SimpleAnswerQuestion.cpp" />
 		<Unit filename="SimpleAnswerQuestion.h" />
+		<Unit filename="TextAndComment.cpp" />
+		<Unit filename="TextAndComment.h" />
 		<Unit filename="produce_questions.cpp" />
 		<Extensions>
 			<code_completion />

@@ -57,4 +57,21 @@ namespace produce_questions
     {
         return getRandomInt() % valueCount;
     }
+
+    unsigned int RandomNumberGenerator::getRandomInt(int valueCount, const std::set<unsigned int>& excludedValues)
+    {
+        valueCount -= excludedValues.size();
+        if (valueCount <= 0) return 0;
+
+        unsigned int draw = getRandomInt(valueCount);
+
+        std::set<unsigned int>::const_iterator it = excludedValues.begin();
+        for (; it != excludedValues.end(); ++it)
+        {
+            if (draw < *it) break;
+            ++draw;
+        }
+
+        return draw;
+    }
 }

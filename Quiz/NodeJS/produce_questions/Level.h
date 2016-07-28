@@ -14,7 +14,7 @@ namespace produce_questions
         const int _categoryCount;
         const int _weightSum;
         const double _distribParameter;
-        std::vector<Category *> _categoryVector;
+        const std::vector<Category *> _categoryVector;
 
     public:
         Level(int questionCount, int choiceCount, int categoryCount, int weightSum, double distribParameter, const std::vector<Category *> categoryVector) :

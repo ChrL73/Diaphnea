@@ -27,7 +27,7 @@ namespace produce_questions
         for (i = 0; i < 32; ++i)
         {
             _shift[i] = n;
-            n = (n << 1) | (n >> (32 - 1));
+            n = (n << 1) | (n >> 31);
         }
 
         _initialized = true;
@@ -35,6 +35,7 @@ namespace produce_questions
 
     int RandomNumberGenerator::verify(void)
     {
+        if (sizeof(unsigned int) != 4) return -1;
         if (!_initialized) initialize();
         if (std::random_device::min() != 0 || std::random_device::max() != 0xFFFFFFFF) return -1;
         return 0;

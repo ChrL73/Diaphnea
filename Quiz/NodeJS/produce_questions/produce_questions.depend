@@ -8,20 +8,20 @@
 1469739345 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuestionProducer.h
 	<string>
 
-1469739832 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.cpp
+1469827150 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.cpp
 	"QuizData.h"
 	"Level.h"
 	"SimpleAnswerCategory.h"
 	"SimpleAnswerQuestion.h"
 	"Choice.h"
 
-1469739368 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.h
+1469827140 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.h
 	"ProximityCriterionTypeEnum.h"
 	"mongo/client/dbclient.h"
 	<map>
 	<string>
 
-1469741339 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/RandomNumberGenerator.cpp
+1469820308 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/RandomNumberGenerator.cpp
 	"RandomNumberGenerator.h"
 	<ctime>
 	<cstdlib>
@@ -30,7 +30,7 @@
 1469741137 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/RandomNumberGenerator.h
 	<set>
 
-1469727639 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuestionProducer.cpp
+1469821969 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuestionProducer.cpp
 	"QuestionProducer.h"
 	"QuizData.h"
 	"Level.h"
@@ -43,11 +43,12 @@
 1469728594 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Level.h
 	<vector>
 
-1469727639 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerCategory.cpp
+1469827171 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerCategory.cpp
 	"SimpleAnswerCategory.h"
 	"RandomNumberGenerator.h"
 	"SimpleAnswerQuestion.h"
 	"QuizData.h"
+	"CompleteQuestion.h"
 
 1469739321 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerCategory.h
 	"Category.h"
@@ -57,8 +58,10 @@
 1469651841 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.cpp
 	"SimpleAnswerQuestion.h"
 
-1469739832 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.h
+1469827181 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.h
+	"ProximityCriterionTypeEnum.h"
 	<string>
+	<vector>
 
 1469560559 /home/christophe/Diaphnea/mongo-cxx-driver/include/mongo/client/dbclient.h
 	"mongo/config.h"
@@ -791,7 +794,7 @@
 
 1469727639 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/ProximityCriterionTypeEnum.h
 
-1469740935 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/CompleteQuestion.cpp
+1469741450 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/CompleteQuestion.cpp
 	"CompleteQuestion.h"
 	"TextAndComment.h"
 	"RandomNumberGenerator.h"
@@ -802,11 +805,11 @@
 	<vector>
 	<set>
 
-1469739832 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.cpp
+1469822839 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.cpp
 	"Choice.h"
 	"RandomNumberGenerator.h"
 
-1469739832 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.h
+1469822719 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.h
 	"ProximityCriterionTypeEnum.h"
 	<string>
 	<vector>

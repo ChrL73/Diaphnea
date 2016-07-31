@@ -23,7 +23,7 @@ namespace produce_questions
 
         quizData->setLanguageId(_languageId);
 
-        Level *level = quizData->getLevel(_levelId);
+        const Level *level = quizData->getLevel(_levelId);
         if (level == 0)
         {
             // Todo: handle error

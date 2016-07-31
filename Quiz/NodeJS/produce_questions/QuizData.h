@@ -26,9 +26,9 @@ namespace produce_questions
         mongo::DBClientConnection _connection;
 
         std::string _languageId;
-        std::map<std::string, Level *> _levelMap;
-        std::map<std::pair<std::string, int>, SimpleAnswerQuestion *> _simpleAnswerQuestionMap;
-        std::map<std::pair<std::string, int>, Choice *> _choiceMap;
+        std::map<std::string, const Level *> _levelMap;
+        std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *> _simpleAnswerQuestionMap;
+        std::map<std::pair<std::string, int>, const Choice *> _choiceMap;
 
     public:
         static QuizData *instance(void);
@@ -36,8 +36,8 @@ namespace produce_questions
 
         void setLanguageId(const std::string& languageId) { _languageId = languageId; }
 
-        Level *getLevel(const std::string& id);
-        SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index);
-        Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
+        const Level *getLevel(const std::string& id);
+        const SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType);
+        const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
     };
 }

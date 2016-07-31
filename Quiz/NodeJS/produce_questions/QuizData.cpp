@@ -56,10 +56,10 @@ namespace produce_questions
     {
         _deleteOk = true;
 
-        std::map<std::string, Level *>::iterator levelIt = _levelMap.begin();
+        std::map<std::string, const Level *>::iterator levelIt = _levelMap.begin();
         for (; levelIt != _levelMap.end(); ++levelIt) delete (*levelIt).second;
 
-        std::map<std::pair<std::string, int>, SimpleAnswerQuestion *>::iterator simpleAnswerQuestionIt = _simpleAnswerQuestionMap.begin();
+        std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *>::iterator simpleAnswerQuestionIt = _simpleAnswerQuestionMap.begin();
         for (; simpleAnswerQuestionIt != _simpleAnswerQuestionMap.end(); ++simpleAnswerQuestionIt) delete (*simpleAnswerQuestionIt).second;
 
         mongo::Status status = mongo::client::shutdown();
@@ -70,9 +70,9 @@ namespace produce_questions
         }
     }
 
-    Level *QuizData::getLevel(const std::string& id)
+    const Level *QuizData::getLevel(const std::string& id)
     {
-        std::map<std::string, Level *>::iterator it = _levelMap.find(id);
+        std::map<std::string, const Level *>::iterator it = _levelMap.find(id);
         if (it == _levelMap.end())
         {
             auto cursor = _connection.query("diaphnea.levels", MONGO_QUERY( "_id" << mongo::OID(id)), 1);
@@ -126,10 +126,10 @@ namespace produce_questions
         return (*it).second;
     }
 
-    SimpleAnswerQuestion *QuizData::getSimpleAnswerQuestion(const std::string& questionListId, int index)
+    const SimpleAnswerQuestion *QuizData::getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType)
     {
         std::pair<std::string, int> key(questionListId, index);
-        std::map<std::pair<std::string, int>, SimpleAnswerQuestion *>::iterator it = _simpleAnswerQuestionMap.find(key);
+        std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *>::iterator it = _simpleAnswerQuestionMap.find(key);
 
         if (it == _simpleAnswerQuestionMap.end())
         {
@@ -147,7 +147,7 @@ namespace produce_questions
                 const char *answer = dbQuestion.getField("answer").Obj().getStringField(_languageId);
                 const char *comment = dbQuestion.getField("comment").Obj().getStringField(_languageId);
 
-                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment);
+                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, proximityCriterionType);
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, question)).first;
             }
             else
@@ -166,10 +166,10 @@ namespace produce_questions
         return (*it).second;
     }
 
-    Choice *QuizData::getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType)
+    const Choice *QuizData::getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType)
     {
         std::pair<std::string, int> key(choiceListId, index);
-        std::map<std::pair<std::string, int>, Choice *>::iterator it = _choiceMap.find(key);
+        std::map<std::pair<std::string, int>, const Choice *>::iterator it = _choiceMap.find(key);
 
         if (it == _choiceMap.end())
         {

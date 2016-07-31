@@ -3,21 +3,10 @@
 
 namespace produce_questions
 {
-    double Choice::getDoubleCriterionValue(void) const
+    Choice::Choice(const std::string& choiceText, const std::string& comment, const std::vector<double>& doubleCriterionVector, const std::vector<std::string>& stringCriterionVector) :
+            _choiceText(choiceText), _comment(comment),
+            _doubleCriterionValue(doubleCriterionVector.empty() ? 0 : doubleCriterionVector[RandomNumberGenerator::getRandomInt(doubleCriterionVector.size())]),
+            _stringCriterionValue(stringCriterionVector.empty() ? _emptyString : stringCriterionVector[RandomNumberGenerator::getRandomInt(stringCriterionVector.size())])
     {
-        int n = _doubleCriterionVector.size();
-        if (n == 0) return 0.0;
-
-        int draw = RandomNumberGenerator::getRandomInt(n);
-        return _doubleCriterionVector[draw];
-    }
-
-    const std::string& Choice::getStringCriterionValue(void) const
-    {
-        int n = _stringCriterionVector.size();
-        if (n == 0) return _emptyString;
-
-        int draw = RandomNumberGenerator::getRandomInt(n);
-        return _stringCriterionVector[draw];
     }
 }

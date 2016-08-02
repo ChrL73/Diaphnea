@@ -47,24 +47,23 @@ namespace QuestionInstantiation
             }
         }
 
-        internal string getAsNumber()
+        internal Double? getAsDouble()
         {
             if (_textDictionary.Count() == 0) return null;
 
-            bool ok = true;
             Double? d = null;
             foreach (string s in _textDictionary.Values)
             {
                 Double res;
                 if (!Double.TryParse(s, out res))
                 {
-                    ok = false;
+                    return null;
                 }
                 else
                 {
                     if (d != null)
                     {
-                        if (d != res) ok = false;
+                        if (d != res) return null;
                     }
                     else
                     {
@@ -73,32 +72,7 @@ namespace QuestionInstantiation
                 }
             }
 
-            if (ok) return _textDictionary.Values.First();
-
-            ok = true;
-            Int32? i = null;
-            foreach (string s in _textDictionary.Values)
-            {
-                Int32 res;
-                if (!Int32.TryParse(s, out res))
-                {
-                    ok = false;
-                }
-                else
-                {
-                    if (i != null)
-                    {
-                        if (i != res) ok = false;
-                    }
-                    else
-                    {
-                        i = res;
-                    }
-                }
-            }
-
-            if (ok) return _textDictionary.Values.First();
-            return null;
+           return d;
         }
 
         internal BsonDocument getBsonDocument()

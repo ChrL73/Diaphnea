@@ -160,17 +160,17 @@ namespace QuestionInstantiation
                 {
                     foreach (Choice choice in list)
                     {
-                        string s = choice.AttributeValue.Value.getAsNumber();
-                        if (s == null)
+                        Double? d = choice.AttributeValue.Value.getAsDouble();
+                        if (d == null)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                                 "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
                                 QuestionNameInLog, choice.Element.XmlElement.id));
-                            proximityCriterionArray.Add("0");
+                            proximityCriterionArray.Add(0);
                         }
                         else
                         {
-                            proximityCriterionArray.Add(s);
+                            proximityCriterionArray.Add(d);
                         }
                     }
                 }

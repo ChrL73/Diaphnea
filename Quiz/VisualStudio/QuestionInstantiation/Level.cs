@@ -267,7 +267,7 @@ namespace QuestionInstantiation
                                     }
                                     if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null);
+                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
                                     category.addQuestion(question);
                                 }
                             }

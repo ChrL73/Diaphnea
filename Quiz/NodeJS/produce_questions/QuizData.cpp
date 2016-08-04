@@ -126,7 +126,7 @@ namespace produce_questions
         return (*it).second;
     }
 
-    const SimpleAnswerQuestion *QuizData::getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType)
+    const SimpleAnswerQuestion *QuizData::getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector)
     {
         std::pair<std::string, int> key(questionListId, index);
         std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *>::iterator it = _simpleAnswerQuestionMap.find(key);
@@ -147,7 +147,19 @@ namespace produce_questions
                 const char *answer = dbQuestion.getField("answer").Obj().getStringField(_languageId);
                 const char *comment = dbQuestion.getField("comment").Obj().getStringField(_languageId);
 
-                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, proximityCriterionType);
+                double doubleCriterionValue = 0.0;
+                std::string stringCriterionValue;
+
+                if (proximityCriterionType == produce_questions::STRING)
+                {
+                    stringCriterionValue = dbQuestion.getStringField("proximity_criterion_value");
+                }
+                else if (proximityCriterionType == produce_questions::NUMBER)
+                {
+                    doubleCriterionValue = dbQuestion.getField("proximity_criterion_value").Number();
+                }
+
+                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, proximityCriterionType, doubleCriterionValue, stringCriterionValue, choiceVector);
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, question)).first;
             }
             else
@@ -155,13 +167,6 @@ namespace produce_questions
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, 0)).first;
             }
         }
-        else
-        {
-            // For test/debug purpose...
-            std::cout << "Question already seen..." << std::endl;
-        }
-
-        std::cout << (*it).second->getQuestion() << std::endl;
 
         return (*it).second;
     }
@@ -186,16 +191,21 @@ namespace produce_questions
                 const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
                 const char *comment = dbChoice.getField("comment").Obj().getStringField(_languageId);
 
-                std::vector<double> doubleCriterionVector;
                 std::vector<std::string> stringCriterionVector;
+                std::vector<double> doubleCriterionVector;
+                std::vector<mongo::BSONElement> criterionVector = dbChoice.getField("proximity_criterion_values").Array();
+                int i, n = criterionVector.size();
 
-                if (criterionType == produce_questions::STRING)
+                for (i = 0; i < n; ++i)
                 {
-
-                }
-                else if (criterionType == produce_questions::NUMBER)
-                {
-
+                    if (criterionType == produce_questions::STRING)
+                    {
+                        stringCriterionVector.push_back(criterionVector[i].String());
+                    }
+                    else if (criterionType == produce_questions::NUMBER)
+                    {
+                        doubleCriterionVector.push_back(criterionVector[i].Number());
+                    }
                 }
 
                 Choice *choice = new Choice(choiceText, comment, doubleCriterionVector, stringCriterionVector);
@@ -205,11 +215,6 @@ namespace produce_questions
             {
                 it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, 0)).first;
             }
-        }
-        else
-        {
-            // For test/debug purpose...
-            std::cout << "Choice already seen..." << std::endl;
         }
 
         return (*it).second;

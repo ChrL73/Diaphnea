@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "RandomNumberGenerator.h"
 #include "Category.h"
+#include "CompleteQuestion.h"
 
 namespace produce_questions
 {
@@ -29,6 +30,8 @@ namespace produce_questions
             // Todo: handle error
             return -1;
         }
+
+        std::string json = "[";
 
         int i, questionCount = level->getQuestionCount();
         for (i = 0; i < questionCount; ++i)
@@ -59,14 +62,21 @@ namespace produce_questions
                 if (category != level->getCategories(j)) level->getCategories(j)->increaseSuitability();
             }
 
-            const CompleteQuestion *question = category->getNewQuestion(level->getChoiceCount(), level->getDistribParameter());
+            CompleteQuestion *question = category->getNewQuestion(level->getChoiceCount(), level->getDistribParameter());
+
+            json += question->getJson();
+            if (i != questionCount - 1) json += ",";
         }
+
+        json += "]";
 
         if (QuizData::destroyInstance() != 0)
         {
             // Todo: handle error
             return -1;
         }
+
+        std::cout << json;
 
         return 0;
     }

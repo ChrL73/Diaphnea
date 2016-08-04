@@ -21,7 +21,7 @@
         void increaseSuitability(void) { if (_suitabilityCounter > 0) --_suitabilityCounter; }
         bool isSuitable(void);
 
-        virtual const CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const = 0;
+        virtual CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const = 0;
 
     };
  }

@@ -37,7 +37,7 @@ namespace produce_questions
         void setLanguageId(const std::string& languageId) { _languageId = languageId; }
 
         const Level *getLevel(const std::string& id);
-        const SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType);
+        const SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
         const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
     };
 }

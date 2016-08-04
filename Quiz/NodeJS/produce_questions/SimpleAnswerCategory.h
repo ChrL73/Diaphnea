@@ -4,9 +4,12 @@
 #include "ProximityCriterionTypeEnum.h"
 
 #include <string>
+#include <vector>
 
 namespace produce_questions
 {
+    class Choice;
+
     class SimpleAnswerCategory : public Category
     {
     private:
@@ -17,12 +20,14 @@ namespace produce_questions
         const double _distribParameterCorrection;
         const ProximityCriterionTypeEnum _proximityCriterionType;
 
-        const CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
+        std::vector<const Choice *> _choiceVector;
+
+        CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
 
     public:
         SimpleAnswerCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, int choiceCount, const std::string& choiceListId,
-                             double _distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType) :
-            Category(weightIndex), _questionCount(questionCount), _questionListId(questionListId), _choiceCount(choiceCount), _choiceListId(choiceListId),
-            _distribParameterCorrection(_distribParameterCorrection), _proximityCriterionType(proximityCriterionType) {}
+                             double _distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
+
+        const std::vector<const Choice *>& getChoiceVector(void) const { return _choiceVector; }
     };
 }

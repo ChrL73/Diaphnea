@@ -3,6 +3,8 @@
 
 namespace produce_questions
 {
+    std::string Choice::_emptyString;
+
     Choice::Choice(const std::string& choiceText, const std::string& comment, const std::vector<double>& doubleCriterionVector, const std::vector<std::string>& stringCriterionVector) :
             _choiceText(choiceText), _comment(comment),
             _doubleCriterionValue(doubleCriterionVector.empty() ? 0 : doubleCriterionVector[RandomNumberGenerator::getRandomInt(doubleCriterionVector.size())]),

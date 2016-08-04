@@ -24,4 +24,36 @@ namespace produce_questions
         _choiceVector[i] = new TextAndComment(text, comment);
         if (rightAnswer) _rightAnswerSet.insert(i);
     }
+
+    const std::string& CompleteQuestion::getJson(void)
+    {
+        char j[8];
+
+        _json = "{\"question\":\"" + _question + "\",\"isMultiple\":"
+            + (_multiplicity == produce_questions::MULTIPLE ? "true" : "false")
+            + ",\"choices\":[";
+
+        int i, n = _choiceVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            _json += "{\"text\":\"" + _choiceVector[i]->getText()
+                     + "\",\"comment\":\"" + _choiceVector[i]->getComment() + "\"}";
+            if (i != n - 1) _json += ",";
+        }
+
+        _json += "],\"rightAnswers\":[";
+        std::set<int>::iterator it = _rightAnswerSet.begin();
+        while(true)
+        {
+            sprintf(j, "%d", *it);
+            _json += j;
+            ++it;
+            if (it == _rightAnswerSet.end()) break;
+            _json += ",";
+        }
+
+        _json += "]}";
+
+        return _json;
+    }
 }

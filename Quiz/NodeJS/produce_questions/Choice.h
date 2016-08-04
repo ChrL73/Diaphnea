@@ -14,7 +14,8 @@ namespace produce_questions
         const std::string _comment;
         const double _doubleCriterionValue;
         const std::string _stringCriterionValue;
-        const std::string _emptyString;
+
+        static std::string _emptyString;
 
     public:
         Choice(const std::string& choiceText, const std::string& comment, const std::vector<double>& doubleCriterionVector, const std::vector<std::string>& stringCriterionVector);

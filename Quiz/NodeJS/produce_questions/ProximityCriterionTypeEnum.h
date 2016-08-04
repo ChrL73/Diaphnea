@@ -4,7 +4,8 @@ namespace produce_questions
 {
     enum ProximityCriterionTypeEnum
     {
-        STRING = 0,
-        NUMBER = 1
+        NONE = 0,
+        STRING = 1,
+        NUMBER = 2
     };
 }

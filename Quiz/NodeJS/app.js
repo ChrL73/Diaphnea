@@ -139,10 +139,9 @@ function game(req, res, context)
    {
       quizData.getLevelMap(function(levelMap)
       {
-         var parameters = { languageId: downData.languageId };
-         parameters.levelId = levelMap[downData.questionnaireId][downData.levelId];
+         var levelId = levelMap[downData.questionnaireId][downData.levelId];
          
-         childProcess.exec('node produce_questions.js ' + parameters.levelId + ' ' + parameters.languageId, function(err, stdout, stderr)
+         childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.languageId, function(err, stdout, stderr)
          {
             if (err)
             {

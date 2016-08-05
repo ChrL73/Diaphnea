@@ -1,4 +1,4 @@
-var crypto = require('crypto');
+/*var crypto = require('crypto');
 
 function getRandomInt(valueCount)
 {
@@ -7,4 +7,4 @@ function getRandomInt(valueCount)
    return i % valueCount;
 }
 
-module.exports.getRandomInt = getRandomInt;
+module.exports.getRandomInt = getRandomInt;*/

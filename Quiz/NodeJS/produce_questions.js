@@ -1,4 +1,4 @@
-var randomIntGenerator = require('./random_int_generator');
+/*var randomIntGenerator = require('./random_int_generator');
 
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/diaphnea');
@@ -59,4 +59,4 @@ Level.findOne({ _id: levelId }, function(err, level)
       console.log(JSON.stringify(data));
       process.exit();
    }
-});
+});*/

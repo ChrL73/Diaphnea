@@ -1,4 +1,4 @@
-var randomIntGenerator = require('./random_int_generator');
+/*var randomIntGenerator = require('./random_int_generator');
 var mongoose = require('mongoose');
 
 var questionSchema = mongoose.Schema(
@@ -36,4 +36,4 @@ module.exports = function produceSimpleAnswerQuestion(category, languageId,  cal
    {
       callback(questionList.questions[0].question[languageId]);
    }
-}
+}*/

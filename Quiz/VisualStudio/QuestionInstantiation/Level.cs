@@ -289,11 +289,11 @@ namespace QuestionInstantiation
                         {
                             if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (category.setComments(questionAttributeType, _quizData) != 0) return -1;
+                                category.setComments(questionAttributeType, _quizData);
                             }
                             else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                if (category.setComments(null, _quizData) != 0) return -1;
+                                category.setComments(null, _quizData);
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
@@ -401,87 +401,73 @@ namespace QuestionInstantiation
                             }
                         }
 
-                        /*std::vector<const Element*> startElementVector = (*startEltIt).second;
-                        elementCount = startElementVector.size();
-				        for (j=0; j<elementCount; ++j)
+                        foreach (Element startElement in _elementByTypeDictionary[startElementType])
 				        {
-					        const Element* startElement = startElementVector[j];
-                            const AttributeValue* questionAttributeValue = startElement->getAttributeValue(questionAttributeType);
-                            const Element* endElement = startElement->getLinked1Element(relationType);
+                            AttributeValue questionAttributeValue = startElement.getAttributeValue(questionAttributeType);
+                            Element endElement = startElement.getLinked1Element(relationType);
 
-					        if (questionAttributeValue != 0 && endElement != 0)
+                            if (questionAttributeValue != null && endElement != null)
 					        {
-						        if (rel2Type[0] != 0) endElement = endElement->getLinked1Element(relation2Type);
-						        if (endElement != 0)
+                                if (relation2Type != null) endElement = endElement.getLinked1Element(relation2Type);
+						        if (endElement != null)
 						        {
-							        const AttributeValue* answerAttributeValue = endElement->getAttributeValue(answerAttributeType);
-							        if (answerAttributeValue != 0)
+                                    AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
+                                    if (answerAttributeValue != null)
 							        {
-								        const PossibleAnswer* answer = possibleAnswerMap[endElement];
+                                        Choice choice = choiceDictionary[endElement];
 
-                                        std::wstring questionText(questionTemplate);
-                                        questionText.replace (questionText.find ('%'), 1, questionAttributeValue->getValue());
+                                        Text questionText = new Text();
+                                        foreach (XmlQuestionText xmlQuestionText in xmlRelation1QuestionCategory.questionText)
+                                        {
+                                            string languageId = xmlQuestionText.language.ToString();
+                                            string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                            questionText.setText(languageId, questionString);
+                                        }
+                                        if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-								        SimpleAnswerQuestion* question = new SimpleAnswerQuestion(questionText, answer, startElement);
-
-                                        std::set<const Element*> mapElementSet1;
-                                        std::set<const Element*> mapElementSet2;
-                                        startElement->getMapElements(0, mapElementSet1, questionDrawDepth1, 0);
-                                        startElement->getMapElements(1, mapElementSet2, questionDrawDepth2, 0);
-                                        std::set<const Element*>::iterator it = mapElementSet2.begin();
-	                                    for (; it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
-                                        mapElementSet2.clear();
-								        endElement->getMapElements(0, mapElementSet2, answerDrawDepth1, 0);
-                                        for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
-                                        mapElementSet2.clear();
-								        endElement->getMapElements(1, mapElementSet2, answerDrawDepth2, 0);
-                                        for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
-                                        std::set<const Element*> mainMapElementSet;
-                                        mainMapElementSet.insert (startElement);
-                                        mainMapElementSet.insert (endElement);
-								        question->addMapElements(mapElementSet1, mainMapElementSet);
-
-                                        category->addQuestion(question);
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
+                                        category.addQuestion(question);
                                     }
-						        }
-					        }
-				        }
+                                }
+                            }
+                        }
 
-				        unsigned int possibleAnswerCount = category->getDistinctAnswerCount();
-				        if (startElementType == endElementType) --possibleAnswerCount;
+                        int choiceCount = category.ChoiceCount;
+                        if (startElementType == endElementType) --choiceCount;
 
-				        if (category->getQuestionCount() == 0)
+                        if (category.QuestionCount == 0)
 				        {
-                            emptyCategoryWarning2(questionTemplate);
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
+                                _nameInLog, questionNameInLog));
                             _weightSum -= weight;
-					        delete category;
-				        }
-				        else if (possibleAnswerCount<_choiceCount)
+                        }
+				        else if (choiceCount < _choiceCount)
 				        {
-                            notEnoughAnswerWarning(possibleAnswerCount, questionTemplate);
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                               "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
+                               _nameInLog, questionNameInLog, category.ChoiceCount, _choiceCount));
                             _weightSum -= weight;
-					        delete category;
-				        }
+                        }
 				        else
 				        {
-                            const wchar_t* commentMode = XmlFunctions::get_relation1QuestionCategory_commentMode(i);
-                            if (commentMode[0] == 'q')
+                            if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (relation2Type == 0) category->setComments(relationType, questionAttributeType);
-                                else category->setComments(relationType, relation2Type, questionAttributeType);
+                                if (relation2Type == null) category.setComments(relationType, questionAttributeType, _quizData);
+                                else category.setComments(relationType, relation2Type, questionAttributeType, _quizData);
                             }
-                            else if (commentMode[1] == 'a')
+                            else if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                if (relation2Type == 0) category->setComments(relationType, 0);
-                                else category->setComments(relationType, relation2Type, 0);
+                                if (relation2Type == null) category.setComments(relationType, null, _quizData);
+                                else category.setComments(relationType, relation2Type, null, _quizData);
                             }
 
-                            questionCountInfoMessage1(category->getQuestionCount(), possibleAnswerCount, questionTemplate);
-					        _categoryVector.push_back (category);
-					        _totalQuestionCount += category->getQuestionCount();
-				        }*/
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
+                                _nameInLog, questionNameInLog, category.QuestionCount, category.ChoiceCount));
+                            _categoryList.Add(category);
+                            _totalQuestionCount += category.QuestionCount;
+                        }
                     }
-			        else if (_elementByTypeDictionary.ContainsKey(startElementType))
+			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
 			        {
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                                 "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",

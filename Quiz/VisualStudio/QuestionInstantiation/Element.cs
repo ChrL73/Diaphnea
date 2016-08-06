@@ -54,6 +54,13 @@ namespace QuestionInstantiation
             return null;
         }
 
+        internal Element getLinked1Element(RelationType relationType)
+        {
+            Element element = null;
+            if (_relation1Dictionary.TryGetValue(relationType, out element)) return element;
+            return null;
+        }
+
         internal int getLinkedNElementCount(RelationType relationType)
         {
             if (_relationNDictionary.ContainsKey(relationType)) return _relationNDictionary[relationType].Count;

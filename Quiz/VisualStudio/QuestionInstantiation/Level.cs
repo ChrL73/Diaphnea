@@ -174,10 +174,9 @@ namespace QuestionInstantiation
         int addQuestions()
         {
             if (addAttributeQuestions() != 0) return -1;
+            if (addRelation1Questions() != 0) return -1;
 
-            /*if (!addAttributeQuestions()) return false;
-            if (!addAttributeOrderQuestions()) return false;
-            if (!addRelation1Questions()) return false;
+            /*if (!addAttributeOrderQuestions()) return false;
             if (!addRelationNQuestions()) return false;
             if (!addRelationLimitQuestions()) return false;
             if (!addRelationOrderQuestions()) return false;
@@ -312,6 +311,190 @@ namespace QuestionInstantiation
                     }
                 }
             }
+
+            return 0;
+        }
+
+        int addRelation1Questions()
+        {
+            foreach (XmlRelation1QuestionCategory xmlRelation1QuestionCategory in _quizData.XmlQuizData.questionCategories.relation1QuestionCategoryList)
+            {
+                int minLevel = Int32.Parse(xmlRelation1QuestionCategory.minLevel);
+                if (_value >= minLevel)
+                {
+                    RelationType relationType = _quizData.getRelationType(xmlRelation1QuestionCategory.relation);
+                    if (xmlRelation1QuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
+
+                    string questionNameInLog = xmlRelation1QuestionCategory.questionText[0].text;
+
+                    if (relationType.Nature == RelationNatureEnum.RELATION_NN || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.INVERSE))
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName));
+                        return -1;
+                    }
+
+                    if (xmlRelation1QuestionCategory.relation2 != null && !xmlRelation1QuestionCategory.way2Specified)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": way2 attribute must be specified if relation2 attribute is specified",
+                                _quizData.DataFileName, questionNameInLog));
+                        return -1;
+                    }
+
+                    RelationType relation2Type = null;
+                    if (xmlRelation1QuestionCategory.relation2 != null)
+                    {
+                        relation2Type = _quizData.getRelationType(xmlRelation1QuestionCategory.relation2);
+                        if (xmlRelation1QuestionCategory.way2 == XmlWayEnum.INVERSE) relation2Type = relation2Type.ReciprocalType;
+
+                        if (relation2Type.Nature == RelationNatureEnum.RELATION_NN || (relation2Type.Nature == RelationNatureEnum.RELATION_1N && relation2Type.Way != RelationWayEnum.INVERSE))
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                                    _quizData.DataFileName, questionNameInLog, relation2Type.FullName));
+                            return -1;
+                        }
+
+                        if (relationType.EndType != relation2Type.StartType)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": End type of relation 1 ({2}) is different from start type of relation 2 ({3})",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName, relation2Type.FullName));
+                            return -1;
+                        }
+                    }
+
+                    XmlElementType startElementType = relationType.StartType;
+                    XmlElementType endElementType;
+                    if (relation2Type != null) endElementType = relation2Type.EndType;
+                    else endElementType = relationType.EndType;
+
+                    if (_elementByTypeDictionary.ContainsKey(startElementType) && _elementByTypeDictionary.ContainsKey(endElementType))
+                    {
+                        XmlAttributeType questionAttributeType = _quizData.getXmlAttributeType(xmlRelation1QuestionCategory.questionAttribute);
+                        if (!questionAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
+                                _quizData.DataFileName, questionNameInLog, questionAttributeType.id));
+                            return -1;
+                        }
+
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlRelation1QuestionCategory.answerAttribute);
+
+                        double distribParameterCorrection = 0.0;
+                        if (xmlRelation1QuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlRelation1QuestionCategory.distribParameterCorrection;
+
+                        Int32 weight = Int32.Parse(xmlRelation1QuestionCategory.weight);
+                        _weightSum += weight;
+
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlRelation1QuestionCategory.answerProximityCriterion, distribParameterCorrection, questionNameInLog);
+                        Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
+
+                        foreach (Element endElement in _elementByTypeDictionary[endElementType])
+                        {
+                            AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
+                            if (answerAttributeValue != null)
+                            {
+                                Choice choice = new Choice(answerAttributeValue, endElement);
+                                category.addChoice(choice);
+                                choiceDictionary.Add(endElement, choice);
+                            }
+                        }
+
+                        /*std::vector<const Element*> startElementVector = (*startEltIt).second;
+                        elementCount = startElementVector.size();
+				        for (j=0; j<elementCount; ++j)
+				        {
+					        const Element* startElement = startElementVector[j];
+                            const AttributeValue* questionAttributeValue = startElement->getAttributeValue(questionAttributeType);
+                            const Element* endElement = startElement->getLinked1Element(relationType);
+
+					        if (questionAttributeValue != 0 && endElement != 0)
+					        {
+						        if (rel2Type[0] != 0) endElement = endElement->getLinked1Element(relation2Type);
+						        if (endElement != 0)
+						        {
+							        const AttributeValue* answerAttributeValue = endElement->getAttributeValue(answerAttributeType);
+							        if (answerAttributeValue != 0)
+							        {
+								        const PossibleAnswer* answer = possibleAnswerMap[endElement];
+
+                                        std::wstring questionText(questionTemplate);
+                                        questionText.replace (questionText.find ('%'), 1, questionAttributeValue->getValue());
+
+								        SimpleAnswerQuestion* question = new SimpleAnswerQuestion(questionText, answer, startElement);
+
+                                        std::set<const Element*> mapElementSet1;
+                                        std::set<const Element*> mapElementSet2;
+                                        startElement->getMapElements(0, mapElementSet1, questionDrawDepth1, 0);
+                                        startElement->getMapElements(1, mapElementSet2, questionDrawDepth2, 0);
+                                        std::set<const Element*>::iterator it = mapElementSet2.begin();
+	                                    for (; it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
+                                        mapElementSet2.clear();
+								        endElement->getMapElements(0, mapElementSet2, answerDrawDepth1, 0);
+                                        for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
+                                        mapElementSet2.clear();
+								        endElement->getMapElements(1, mapElementSet2, answerDrawDepth2, 0);
+                                        for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (* it);
+                                        std::set<const Element*> mainMapElementSet;
+                                        mainMapElementSet.insert (startElement);
+                                        mainMapElementSet.insert (endElement);
+								        question->addMapElements(mapElementSet1, mainMapElementSet);
+
+                                        category->addQuestion(question);
+                                    }
+						        }
+					        }
+				        }
+
+				        unsigned int possibleAnswerCount = category->getDistinctAnswerCount();
+				        if (startElementType == endElementType) --possibleAnswerCount;
+
+				        if (category->getQuestionCount() == 0)
+				        {
+                            emptyCategoryWarning2(questionTemplate);
+                            _weightSum -= weight;
+					        delete category;
+				        }
+				        else if (possibleAnswerCount<_choiceCount)
+				        {
+                            notEnoughAnswerWarning(possibleAnswerCount, questionTemplate);
+                            _weightSum -= weight;
+					        delete category;
+				        }
+				        else
+				        {
+                            const wchar_t* commentMode = XmlFunctions::get_relation1QuestionCategory_commentMode(i);
+                            if (commentMode[0] == 'q')
+                            {
+                                if (relation2Type == 0) category->setComments(relationType, questionAttributeType);
+                                else category->setComments(relationType, relation2Type, questionAttributeType);
+                            }
+                            else if (commentMode[1] == 'a')
+                            {
+                                if (relation2Type == 0) category->setComments(relationType, 0);
+                                else category->setComments(relationType, relation2Type, 0);
+                            }
+
+                            questionCountInfoMessage1(category->getQuestionCount(), possibleAnswerCount, questionTemplate);
+					        _categoryVector.push_back (category);
+					        _totalQuestionCount += category->getQuestionCount();
+				        }*/
+                    }
+			        else if (_elementByTypeDictionary.ContainsKey(startElementType))
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _nameInLog, questionNameInLog, startElementType.id));
+                    }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _nameInLog, questionNameInLog, endElementType.id));
+                    }
+                }
+	        }
 
             return 0;
         }

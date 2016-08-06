@@ -892,10 +892,11 @@
         <name language="en" text="Bourg-en-Bresse"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Bourg-en-Bresse"/>
+          <value language="en" value="Bourg-en-Bresse"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Bourg-en-Bresse"/>
         </attribute>-->
       </attributeList>
@@ -910,10 +911,11 @@
         <name language="en" text="Gex"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Gex"/>
+          <value language="en" value="Gex"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Gex"/>
         </attribute>-->
       </attributeList>
@@ -929,10 +931,11 @@
         <name language="en" text="Laon"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Laon"/>
+          <value language="en" value="Laon"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Laon"/>
         </attribute>-->
       </attributeList>
@@ -948,10 +951,11 @@
         <name language="en" text="Moulins"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Moulins"/>
+          <value language="en" value="Moulins"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="la_francais" value="de Moulins"/>
         </attribute>-->
       </attributeList>
@@ -967,10 +971,11 @@
         <name language="en" text="Digne-les-Bains"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Digne-les-Bains"/>
+          <value language="en" value="Digne-les-Bains"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Digne-les-Bains"/>
         </attribute>-->
       </attributeList>
@@ -986,10 +991,11 @@
         <name language="en" text="Gap"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Gap"/>
+          <value language="en" value="Gap"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Gap"/>
         </attribute>-->
       </attributeList>
@@ -1005,10 +1011,11 @@
         <name language="en" text="Nice"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Nice"/>
+          <value language="en" value="Nice"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Nice"/>
         </attribute>-->
       </attributeList>
@@ -1024,10 +1031,11 @@
         <name language="en" text="Privas"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Privas"/>
+          <value language="en" value="Privas"/>
         </attribute>
-        <attribute type="at_Nom2">
+        <!--<attribute type="at_Nom2">
           <value language="fr" value="de Privas"/>
         </attribute>-->
       </attributeList>

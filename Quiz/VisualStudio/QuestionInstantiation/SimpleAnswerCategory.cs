@@ -52,7 +52,7 @@ namespace QuestionInstantiation
             _questionList.Add(question);
         }
 
-        internal int setComments(XmlAttributeType attributeType, QuizData quizData)
+        internal void setComments(XmlAttributeType attributeType, QuizData quizData)
         {
             foreach (List<Choice> choiceList in _choiceDictionary.Values)
             {
@@ -81,8 +81,16 @@ namespace QuestionInstantiation
 
                 foreach (Choice choice in choiceList) choice.Comment = commentText;
             }
+        }
 
-            return 0;
+        internal void setComments(RelationType relationType, XmlAttributeType attributeType, QuizData quizData)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType, QuizData quizData)
+        {
+            throw new NotImplementedException();
         }
 
         internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)

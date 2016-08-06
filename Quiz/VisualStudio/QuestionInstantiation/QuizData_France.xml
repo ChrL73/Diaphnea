@@ -1060,8 +1060,61 @@
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} département bears its current name?"/>
       </attributeQuestionCategory>
-        
     </attributeQuestionCategoryList>
+    <relation1QuestionCategoryList>
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
+        <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="150" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Dans quel département se situe la ville % ?"/>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="none" commentMode="none" weight="100" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Quel est le numéro du département où se situe la ville % ?"/>
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="De quelle région fait partie le département % ?"/>
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="none" commentMode="none" weight="80" minLevel="2"
+                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="De quelle région fait partie le département dont le numéro est % ?"/>
+      <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
+        <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="inverse" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="none" commentMode="none" weight="20" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="0" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Où se jette % ?"/>-->
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
+        <questionText language="fr" text="Dans quelle région se situe la ville {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/> 
+      </relation1QuestionCategory>
+      <!--<relation1QuestionCategory relation="r1N_Riviere_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="75" minLevel="0"
+                                 questionDrawDepth1="3" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Sur quel cours d'eau se situe la ville % ?" />
+      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="direct" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="20" minLevel="1"
+                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Dans quelle ville se situe le confluent % ?" />
+      <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="15" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Près de quelle ville se situe l'embouchure % ?" />-->
+    </relation1QuestionCategoryList>
   </questionCategories>
   
 </quizData>

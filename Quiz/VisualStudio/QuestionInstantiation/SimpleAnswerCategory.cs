@@ -70,14 +70,7 @@ namespace QuestionInstantiation
                     }
                 }
 
-                Text commentText = new Text();
-                foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
-                {
-                    List<string> list = new List<string>();
-                    foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id.ToString()));
-                    string comment = String.Join(", ", list);
-                    commentText.setText(xmlLanguage.id.ToString(), comment);
-                }
+                Text commentText = Text.fromTextList(textList, quizData);
 
                 foreach (Choice choice in choiceList) choice.Comment = commentText;
             }
@@ -85,7 +78,40 @@ namespace QuestionInstantiation
 
         internal void setComments(RelationType relationType, XmlAttributeType attributeType, QuizData quizData)
         {
-            throw new NotImplementedException();
+            relationType = relationType.ReciprocalType;
+
+            foreach (List<Choice> choiceList in _choiceDictionary.Values)
+            {
+                if (choiceList.Count == 1)
+                {
+                    List<Text> textList = new List<Text>();
+                    Choice choice = choiceList[0];
+                    Element choiceElement = choice.Element;
+                    Dictionary<Element, int> questionElementDictionary = new Dictionary<Element, int>();
+
+                    Element qElement = choiceElement.getLinked1Element(relationType);
+                    if (qElement != null) questionElementDictionary.Add(qElement, 0);
+
+                    int i, n = choiceElement.getLinkedNElementCount(relationType);
+                    for (i = 0; i < n; ++i) questionElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
+
+                    foreach (Element questionElement in questionElementDictionary.Keys)
+                    {
+                        
+                        if (attributeType == null)
+                        {
+                            textList.Add(questionElement.Name);
+                        }
+                        else
+                        {
+                            AttributeValue attributeValue = questionElement.getAttributeValue(attributeType);
+                            if (attributeValue != null) textList.Add(attributeValue.Value);
+                        }
+                    }
+
+                    choice.Comment = Text.fromTextList(textList, quizData);
+                }
+            }
         }
 
         internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType, QuizData quizData)
@@ -111,6 +137,10 @@ namespace QuestionInstantiation
             else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
             {
                 proximityCriterionType = "number";
+            }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                proximityCriterionType = "3d_point";
             }
             else
             {
@@ -184,7 +214,7 @@ namespace QuestionInstantiation
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
                 }
 
                 BsonDocument choiceDocument = new BsonDocument()

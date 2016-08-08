@@ -47,6 +47,13 @@ namespace QuestionInstantiation
                     { "proximity_criterion_value", d }
                 });
             }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                questionDocument.AddRange(new BsonDocument()
+                {
+                    { "proximity_criterion_value", _choice.Element.GeoPoint.getBsonDocument() }
+                });
+            }
             else
             {
                 throw new NotImplementedException();

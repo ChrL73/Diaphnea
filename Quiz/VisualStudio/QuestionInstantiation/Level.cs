@@ -252,22 +252,25 @@ namespace QuestionInstantiation
 
                             if (answerAttributeValue != null) 
                             {
-                                Choice choice = new Choice(answerAttributeValue, element);
-                                category.addChoice(choice);
-
-                                if (questionAttributeValue != null)
+                                if (xmlAttributeQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || element.GeoPoint != null)
                                 {
-                                    Text questionText = new Text();
-                                    foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
-                                    {
-                                        string languageId = xmlQuestionText.language.ToString();
-                                        string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
-                                        questionText.setText(languageId, questionString);
-                                    }
-                                    if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+                                    Choice choice = new Choice(answerAttributeValue, element);
+                                    category.addChoice(choice);
 
-                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
-                                    category.addQuestion(question);
+                                    if (questionAttributeValue != null)
+                                    {
+                                        Text questionText = new Text();
+                                        foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
+                                        {
+                                            string languageId = xmlQuestionText.language.ToString();
+                                            string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                            questionText.setText(languageId, questionString);
+                                        }
+                                        if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
+                                        category.addQuestion(question);
+                                    }
                                 }
                             }
                         }
@@ -395,9 +398,12 @@ namespace QuestionInstantiation
                             AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
                             if (answerAttributeValue != null)
                             {
-                                Choice choice = new Choice(answerAttributeValue, endElement);
-                                category.addChoice(choice);
-                                choiceDictionary.Add(endElement, choice);
+                                if (xmlRelation1QuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
+                                {
+                                    Choice choice = new Choice(answerAttributeValue, endElement);
+                                    category.addChoice(choice);
+                                    choiceDictionary.Add(endElement, choice);
+                                }
                             }
                         }
 
@@ -411,8 +417,7 @@ namespace QuestionInstantiation
                                 if (relation2Type != null) endElement = endElement.getLinked1Element(relation2Type);
 						        if (endElement != null)
 						        {
-                                    AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
-                                    if (answerAttributeValue != null)
+                                    if (choiceDictionary.ContainsKey(endElement))
 							        {
                                         Choice choice = choiceDictionary[endElement];
 

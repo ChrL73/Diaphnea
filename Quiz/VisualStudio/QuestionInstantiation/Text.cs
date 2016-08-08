@@ -75,6 +75,19 @@ namespace QuestionInstantiation
            return d;
         }
 
+        internal static Text fromTextList(IEnumerable<Text> textList, QuizData quizData)
+        {
+            Text result = new Text();
+            foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
+            {
+                List<string> list = new List<string>();
+                foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id.ToString()));
+                string str = String.Join(", ", list);
+                result.setText(xmlLanguage.id.ToString(), str);
+            }
+            return result;
+        }
+
         internal BsonDocument getBsonDocument()
         {
             BsonDocument textDocument = new BsonDocument();

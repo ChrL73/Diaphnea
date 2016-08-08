@@ -110,14 +110,14 @@ namespace QuestionInstantiation
             if (longitudeAttributeType == null)
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                    "File {0} contains no numerical attribute type called \"nt_Longitude\". Value \"elementLocation\" of parameter \"answerProximityCriterion\" will not be taken into account",
+                    "File {0} contains no numerical attribute type called \"nt_Longitude\". Value \"elementLocation\" of parameter \"answerProximityCriterion\" can not be used",
                     _dataFileName));
             }
             
             if (latitudeAttributeType != null && latitudeAttributeType.unit != " °")
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                    "File {0}: Unit of numerical attribute type \"nt_Latitude\" is \"{1}\" instead of \" °\" expected. If latitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" will not be build as expected",
+                    "File {0}: Unit of numerical attribute type \"nt_Latitude\" is \"{1}\" instead of \" °\" expected. If latitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" can not be used",
                     _dataFileName, latitudeAttributeType.unit));
             }
 
@@ -186,6 +186,16 @@ namespace QuestionInstantiation
             XmlNumericalAttributeType numericalAttributeType;
             if (_numericalAttributeTypeDictionary.TryGetValue(id, out numericalAttributeType)) return numericalAttributeType;
             return null;
+        }
+
+        internal XmlNumericalAttributeType getLongitudeNumericalAttributeType()
+        {
+            return getXmlNumericalAttributeType("nt_Longitude");
+        }
+
+        internal XmlNumericalAttributeType getLatitudeNumericalAttributeType()
+        {
+            return getXmlNumericalAttributeType("nt_Latitude");
         }
 
         internal XmlRelation11Type getXmlRelation11Type(string id)

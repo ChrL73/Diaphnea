@@ -16,6 +16,7 @@ namespace QuestionInstantiation
         private readonly Dictionary<XmlNumericalAttributeType, NumericalAttributeValue> _numericalAttributeDictionary = new Dictionary<XmlNumericalAttributeType, NumericalAttributeValue>();
         private readonly Dictionary<RelationType, Element> _relation1Dictionary = new Dictionary<RelationType, Element>();
         private readonly Dictionary<RelationType, List<Element>> _relationNDictionary = new Dictionary<RelationType, List<Element>>();
+        private GeoPoint _geoPoint;
 
         internal Element(XmlElement xmlElement, XmlElementType type)
         {
@@ -47,10 +48,22 @@ namespace QuestionInstantiation
             get { return _attributeKeyList; }
         }
 
+        internal GeoPoint GeoPoint
+        {
+            get { return _geoPoint; }
+        }
+
         internal AttributeValue getAttributeValue(XmlAttributeType type)
         {
             AttributeValue value;
             if (_attributeDictionary.TryGetValue(type, out value)) return value;
+            return null;
+        }
+
+        internal NumericalAttributeValue getNumericalAttributeValue(XmlNumericalAttributeType type)
+        {
+            NumericalAttributeValue value;
+            if (_numericalAttributeDictionary.TryGetValue(type, out value)) return value;
             return null;
         }
 
@@ -116,6 +129,9 @@ namespace QuestionInstantiation
 
         internal int addNumericalAttributes(QuizData quizData)
         {
+            NumericalAttributeValue longitude = null;
+            NumericalAttributeValue latitude = null;
+
             foreach (XmlNumericalAttribute xmlNumericalAttribute in _xmlElement.numericalAttributeList)
 	        {
                 XmlNumericalAttributeType xmlNumericalAttributeType = quizData.getXmlNumericalAttributeType(xmlNumericalAttribute.type);
@@ -130,7 +146,12 @@ namespace QuestionInstantiation
                 }
 
                 _numericalAttributeDictionary.Add(xmlNumericalAttributeType, numericalAttributeValue);
+
+                if (xmlNumericalAttributeType == quizData.getLongitudeNumericalAttributeType()) longitude = numericalAttributeValue;
+                if (xmlNumericalAttributeType == quizData.getLatitudeNumericalAttributeType()) latitude = numericalAttributeValue;
             }
+
+            if (longitude != null && latitude != null) _geoPoint = new GeoPoint(longitude.Value, latitude.Value);
 
             return 0;
         }

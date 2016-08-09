@@ -105,6 +105,7 @@ namespace produce_questions
                         ProximityCriterionTypeEnum proximityCriterionType = produce_questions::STRING;
                         const char *criterion = dbCategory.getStringField("proximity_criterion_type");
                         if (criterion[0] == 'n') proximityCriterionType = produce_questions::NUMBER;
+                        if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
 
                         SimpleAnswerCategory *simpleAnswerCategory = new SimpleAnswerCategory(weightIndex, categoryQuestionCount, questionListId, categoryChoiceCount,
                                                                                               choiceListId, distribParameterCorrection, proximityCriterionType);
@@ -149,6 +150,7 @@ namespace produce_questions
 
                 double doubleCriterionValue = 0.0;
                 std::string stringCriterionValue;
+                const Point *pointCriterionValue = 0;
 
                 if (proximityCriterionType == produce_questions::STRING)
                 {
@@ -158,8 +160,16 @@ namespace produce_questions
                 {
                     doubleCriterionValue = dbQuestion.getField("proximity_criterion_value").Number();
                 }
+                else if (proximityCriterionType == produce_questions::POINT_3D)
+                {
+                    mongo::BSONObj criterionValue = dbQuestion.getField("proximity_criterion_value").Obj();
+                    double x = criterionValue.getField("x").Number();
+                    double y = criterionValue.getField("y").Number();
+                    double z = criterionValue.getField("z").Number();
+                    pointCriterionValue = new Point(x, y, z);
+                }
 
-                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, proximityCriterionType, doubleCriterionValue, stringCriterionValue, choiceVector);
+                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, proximityCriterionType, doubleCriterionValue, stringCriterionValue, pointCriterionValue, choiceVector);
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, question)).first;
             }
             else
@@ -193,6 +203,7 @@ namespace produce_questions
 
                 std::vector<std::string> stringCriterionVector;
                 std::vector<double> doubleCriterionVector;
+                std::vector<Point> pointCriterionVector;
                 std::vector<mongo::BSONElement> criterionVector = dbChoice.getField("proximity_criterion_values").Array();
                 int i, n = criterionVector.size();
 
@@ -206,9 +217,16 @@ namespace produce_questions
                     {
                         doubleCriterionVector.push_back(criterionVector[i].Number());
                     }
+                    else if (criterionType == produce_questions::POINT_3D)
+                    {
+                        double x = criterionVector[i].Obj().getField("x").Number();
+                        double y = criterionVector[i].Obj().getField("y").Number();
+                        double z = criterionVector[i].Obj().getField("z").Number();
+                        pointCriterionVector.push_back(Point(x, y, z));
+                    }
                 }
 
-                Choice *choice = new Choice(choiceText, comment, doubleCriterionVector, stringCriterionVector);
+                Choice *choice = new Choice(choiceText, comment, doubleCriterionVector, stringCriterionVector, pointCriterionVector);
                 it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, choice)).first;
             }
             else

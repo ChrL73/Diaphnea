@@ -8,7 +8,7 @@
 1469643397 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuestionProducer.h
 	<string>
 
-1470300697 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.cpp
+1470732470 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/QuizData.cpp
 	"QuizData.h"
 	"Level.h"
 	"SimpleAnswerCategory.h"
@@ -58,12 +58,14 @@
 	<string>
 	<vector>
 
-1470299680 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.cpp
+1470775894 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.cpp
 	"SimpleAnswerQuestion.h"
 	"Choice.h"
+	"Point.h"
 	<map>
+	<cmath>
 
-1470299967 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.h
+1470731813 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/SimpleAnswerQuestion.h
 	"ProximityCriterionTypeEnum.h"
 	<string>
 	<vector>
@@ -797,7 +799,7 @@
 
 1469697260 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Question.h
 
-1470249687 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/ProximityCriterionTypeEnum.h
+1470687808 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/ProximityCriterionTypeEnum.h
 
 1470342291 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/CompleteQuestion.cpp
 	"CompleteQuestion.h"
@@ -810,12 +812,13 @@
 	<vector>
 	<set>
 
-1470209675 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.cpp
+1470688976 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.cpp
 	"Choice.h"
 	"RandomNumberGenerator.h"
 
-1470209714 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.h
+1470775577 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Choice.h
 	"ProximityCriterionTypeEnum.h"
+	"Point.h"
 	<string>
 	<vector>
 
@@ -826,4 +829,9 @@
 
 1469971920 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/TextAndComment.cpp
 	"TextAndComment.h"
+
+1470688422 source:/home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Point.cpp
+	"Point.h"
+
+1470688542 /home/christophe/Diaphnea/Quiz/NodeJS/produce_questions/Point.h
 

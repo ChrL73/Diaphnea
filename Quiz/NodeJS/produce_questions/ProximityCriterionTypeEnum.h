@@ -6,6 +6,7 @@ namespace produce_questions
     {
         NONE = 0,
         STRING = 1,
-        NUMBER = 2
+        NUMBER = 2,
+        POINT_3D = 3
     };
 }

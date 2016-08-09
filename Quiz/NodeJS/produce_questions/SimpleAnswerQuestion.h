@@ -8,6 +8,7 @@
 namespace produce_questions
 {
     class Choice;
+    class Point;
 
     class SimpleAnswerQuestion
     {
@@ -18,12 +19,14 @@ namespace produce_questions
         const ProximityCriterionTypeEnum _proximityCriterionType;
         const double _doubleCriterionValue;
         const std::string _stringCriterionValue;
+        const Point * const _pointCriterionValue;
         std::vector<const Choice *> _sortedWrongChoiceVector1;
         std::vector<const Choice *> _sortedWrongChoiceVector2;
 
     public:
         SimpleAnswerQuestion(const std::string& question, const std::string& answer, const std::string& comment, ProximityCriterionTypeEnum proximityCriterionType,
-                             double doubleCriterionValue, const std::string& stringCriterionValue, const std::vector<const Choice *>& choiceVector);
+                             double doubleCriterionValue, const std::string& stringCriterionValue, const Point *pointCriterionValue, const std::vector<const Choice *>& choiceVector);
+        ~SimpleAnswerQuestion();
 
         const std::string& getQuestion(void) const { return _question; }
         const std::string& getAnswer(void) const { return _answer; }

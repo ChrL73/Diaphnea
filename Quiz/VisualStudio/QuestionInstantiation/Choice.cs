@@ -12,10 +12,11 @@ namespace QuestionInstantiation
         private readonly AttributeValue _attributeValue;
         private readonly Element _element;
 
-        internal Choice(AttributeValue attributeValue, Element element)
+        internal Choice(AttributeValue attributeValue, Element element, QuizData quizData)
         {
             _attributeValue = attributeValue;
             _element = element;
+            Comment = Text.emptyText(quizData);
         }
 
         internal Text Comment { get; set; }

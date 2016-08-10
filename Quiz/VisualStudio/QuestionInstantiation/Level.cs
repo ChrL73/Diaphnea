@@ -254,7 +254,7 @@ namespace QuestionInstantiation
                             {
                                 if (xmlAttributeQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || element.GeoPoint != null)
                                 {
-                                    Choice choice = new Choice(answerAttributeValue, element);
+                                    Choice choice = new Choice(answerAttributeValue, element, _quizData);
                                     category.addChoice(choice);
 
                                     if (questionAttributeValue != null)
@@ -400,7 +400,7 @@ namespace QuestionInstantiation
                             {
                                 if (xmlRelation1QuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
                                 {
-                                    Choice choice = new Choice(answerAttributeValue, endElement);
+                                    Choice choice = new Choice(answerAttributeValue, endElement, _quizData);
                                     category.addChoice(choice);
                                     choiceDictionary.Add(endElement, choice);
                                 }

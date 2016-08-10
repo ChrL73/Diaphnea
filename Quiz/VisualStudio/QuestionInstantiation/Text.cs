@@ -75,6 +75,16 @@ namespace QuestionInstantiation
            return d;
         }
 
+        internal static Text emptyText(QuizData quizData)
+        {
+            Text result = new Text();
+            foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
+            {
+                result.setText(xmlLanguage.id.ToString(), "");
+            }
+            return result;
+        }
+
         internal static Text fromTextList(IEnumerable<Text> textList, QuizData quizData)
         {
             Text result = new Text();

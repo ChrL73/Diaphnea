@@ -102,10 +102,11 @@ namespace produce_questions
                         std::string choiceListId = dbCategory.getField("choice_list").OID().toString();
                         double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
 
-                        ProximityCriterionTypeEnum proximityCriterionType = produce_questions::STRING;
+                        ProximityCriterionTypeEnum proximityCriterionType = produce_questions::NONE;
                         const char *criterion = dbCategory.getStringField("proximity_criterion_type");
-                        if (criterion[0] == 'n') proximityCriterionType = produce_questions::NUMBER;
-                        if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
+                        if (criterion[0] == 's') proximityCriterionType = produce_questions::STRING;
+                        else if (criterion[1] == 'u') proximityCriterionType = produce_questions::NUMBER;
+                        else if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
 
                         SimpleAnswerCategory *simpleAnswerCategory = new SimpleAnswerCategory(weightIndex, categoryQuestionCount, questionListId, categoryChoiceCount,
                                                                                               choiceListId, distribParameterCorrection, proximityCriterionType);

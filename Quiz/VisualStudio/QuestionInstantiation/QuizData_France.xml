@@ -36,7 +36,7 @@
   
   <typeDefinitions>
     <elementTypeList>
-      <elementType id="et_France" />
+      <!--<elementType id="et_France" />-->
       <elementType id="et_Region" />
       <elementType id="et_Departement" />
       <elementType id="et_Ville" />
@@ -84,7 +84,7 @@
   </typeDefinitions>
 
   <elementList>
-    <element id="el_France" type="et_France" minLevel="0" >
+    <!--<element id="el_France" type="et_France" minLevel="0" >
       <elementName>
         <name language="fr" text="France"/>
         <name language="en" text="France"/>
@@ -92,6 +92,82 @@
       <attributeList/>
       <numericalAttributeList/>
       <relationList/>
+    </element>-->
+    <!--Régions-->
+    <element id="el_Bretagne" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Bretagne"/>
+        <name language="en" text="Bretagne"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Bretagne"/>
+          <value language="en" value="Bretagne"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-2.89"/>
+        <numericalAttribute type="nt_Latitude" value="48.15"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r1N_Region_Departements" linkedElement="el_CotesArmor"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Finistere"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_IlleEtVilaine"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Morbihan"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BasseNormandie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+      </relationList>
+    </element>
+    <element id="el_Corse" type="et_Region" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Corse"/>
+        <name language="en" text="Corse"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Corse"/>
+          <value language="en" value="Corse"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="9.04"/>
+        <numericalAttribute type="nt_Latitude" value="42.21"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r1N_Region_Departements" linkedElement="el_CorseDuSud"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteCorse"/>
+      </relationList>
+    </element>
+    <element id="el_IleDeFrance" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Île-de-France"/>
+        <name language="en" text="Île-de-France"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Île-de-France"/>
+          <value language="en" value="Île-de-France"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="2.49"/>
+        <numericalAttribute type="nt_Latitude" value="48.67"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_ParisDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_SeineEtMarne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Yvelines"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Essonne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HautsDeSeine"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_SeineSaintDenis"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_ValDeMarne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_ValOise"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HauteNormandie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Centre"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Bourgogne"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ChampagneArdenne"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Picardie"/>-->
+      </relationList>
     </element>
     <!--Départements-->
     <element id="el_AinDepartement" sortKey="01" type="et_Departement" minLevel="0" >
@@ -113,15 +189,18 @@
           <value language="en" value="1"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="5.43"/>
+        <numericalAttribute type="nt_Latitude" value="46.06"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_BourgEnBresse"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Gex"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Belley"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nantua"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_BourgEnBresse"/>
-        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Belley"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Gex"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Belley"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Nantua"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
@@ -150,7 +229,10 @@
           <value language="en" value="2"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="3.59"/>
+        <numericalAttribute type="nt_Latitude" value="49.45"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Laon"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintQuentin"/>
@@ -189,7 +271,10 @@
           <value language="en" value="3"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="3.14"/>
+        <numericalAttribute type="nt_Latitude" value="46.37"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Moulins"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montlucon"/>
@@ -228,7 +313,10 @@
           <value language="en" value="1970" comment="The département was called Basses-Alpes before 1970"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.24"/>
+        <numericalAttribute type="nt_Latitude" value="44.17"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_DigneLesBains"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Forcalquier"/>
@@ -264,7 +352,10 @@
           <value language="en" value="5"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.25"/>
+        <numericalAttribute type="nt_Latitude" value="44.65"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Gap"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Briancon"/>-->
@@ -299,7 +390,10 @@
           <value language="en" value="1793" comment="The département was created in 1793 during the occupation of France by the County of Nice, in different limits from those of the current département. In 1814 the Savoy States reclaim the County of Nice. The department in its current borders is created in 1860, when the County of Nice was again annexed to France."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="7.17"/>
+        <numericalAttribute type="nt_Latitude" value="43.9"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Nice"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Grasse"/>-->
@@ -331,7 +425,10 @@
           <value language="en" value="7"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.37"/>
+        <numericalAttribute type="nt_Latitude" value="44.82"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Privas"/>
         <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_TournonSurRhone"/>
@@ -371,7 +468,10 @@
           <value language="en" value="1941" comment="The département was called Charente-Inférieure before 1941"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-0.62"/>
+        <numericalAttribute type="nt_Latitude" value="45.73"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Rochelle"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Saintes"/>
@@ -413,7 +513,10 @@
           <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="8.95"/>
+        <numericalAttribute type="nt_Latitude" value="41.87"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Ajaccio"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sartene"/>
@@ -445,7 +548,10 @@
           <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="9.1"/>
+        <numericalAttribute type="nt_Latitude" value="42.44"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Bastia"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Corte"/>
@@ -479,14 +585,17 @@
           <value language="en" value="1990" comment="The département was called Côtes-du-Nord before 1990"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-2.78"/>
+        <numericalAttribute type="nt_Latitude" value="48.46"/>
+      </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_SaintBrieuc"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Lannion"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_SaintBrieuc"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Lannion"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dinan"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Guingamp"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Guingamp"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintBrieuc"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Lannion"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Lannion"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Dinan"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Guingamp"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Finistere"/>
@@ -513,7 +622,10 @@
           <value language="en" value="39"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="5.72"/>
+        <numericalAttribute type="nt_Latitude" value="46.78"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_LonsLeSaunier"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dole"/>
@@ -551,7 +663,10 @@
           <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.23"/>
+        <numericalAttribute type="nt_Latitude" value="45.75"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_SaintEtienne"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Roanne"/>
@@ -592,7 +707,10 @@
           <value language="en" value="1957" comment="The département was called Loire-Inférieure before 1957"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-1.74"/>
+        <numericalAttribute type="nt_Latitude" value="47.35"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nantes"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintNazaire"/>
@@ -633,7 +751,10 @@
           <value language="en" value="1791" comment="The département was called Mayenne-et-Loire before 1791"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-0.56"/>
+        <numericalAttribute type="nt_Latitude" value="47.39"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Angers"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Cholet"/>
@@ -676,7 +797,10 @@
           <value language="en" value="1871" comment="The départements was created after the Franco-German armistice of 1871. It is composed of the parts of the former Meurthe and Moselle départements which were not annexed by Germany."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.29"/>
+        <numericalAttribute type="nt_Latitude" value="48.93"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nancy"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Luneville"/>
@@ -716,7 +840,10 @@
           <value language="en" value="1919" comment="The département was created following the Franco-German armistice of 1918. It is composed of parts of the former Meurthe and Moselle départements gived back by Germany."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.73"/>
+        <numericalAttribute type="nt_Latitude" value="49.02"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Metz"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Thionville"/>
@@ -759,7 +886,10 @@
           <value language="en" value="1969" comment="The département was called Basses-Pyrénées before 1969"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-0.88"/>
+        <numericalAttribute type="nt_Latitude" value="43.18"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Pau"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bayonne"/>
@@ -796,7 +926,10 @@
           <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.71"/>
+        <numericalAttribute type="nt_Latitude" value="45.88"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Lyon"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_VillefrancheSurSaone"/>
@@ -834,7 +967,10 @@
           <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.4"/>
+        <numericalAttribute type="nt_Latitude" value="45.49"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Chambery"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Albertville"/>
@@ -871,7 +1007,10 @@
           <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.43"/>
+        <numericalAttribute type="nt_Latitude" value="46.04"/>
+      </numericalAttributeList>
       <relationList>
         <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Annecy"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ThononLesBains"/>
@@ -892,16 +1031,20 @@
         <name language="en" text="Bourg-en-Bresse"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Bourg-en-Bresse"/>
+          <value language="en" value="Bourg-en-Bresse"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Bourg-en-Bresse"/>
-        </attribute>-->
+          <value language="en" value="Bourg-en-Bresse"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="40200"/>
-      </numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="5.225502"/>
+        <numericalAttribute type="nt_Latitude" value="46.204826"/>
+    </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Gex" type="et_Ville" minLevel="1" >
@@ -910,15 +1053,19 @@
         <name language="en" text="Gex"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Gex"/>
+          <value language="en" value="Gex"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Gex"/>
-        </attribute>-->
+          <value language="en" value="Gex"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="9700"/>
+        <numericalAttribute type="nt_Longitude" value="6.057897"/>
+        <numericalAttribute type="nt_Latitude" value="46.332187"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -929,15 +1076,19 @@
         <name language="en" text="Laon"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Laon"/>
+          <value language="en" value="Laon"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Laon"/>
-        </attribute>-->
+          <value language="en" value="Laon"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="26175"/>
+        <numericalAttribute type="nt_Longitude" value="3.61989"/>
+        <numericalAttribute type="nt_Latitude" value="49.564133"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -948,15 +1099,19 @@
         <name language="en" text="Moulins"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Moulins"/>
+          <value language="en" value="Moulins"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="la_francais" value="de Moulins"/>
-        </attribute>-->
+          <value language="fr" value="de Moulins"/>
+          <value language="en" value="Moulins"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="19760"/>
+        <numericalAttribute type="nt_Longitude" value="3.335337"/>
+        <numericalAttribute type="nt_Latitude" value="46.566104"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -967,15 +1122,19 @@
         <name language="en" text="Digne-les-Bains"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Digne-les-Bains"/>
+          <value language="en" value="Digne-les-Bains"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Digne-les-Bains"/>
-        </attribute>-->
+          <value language="en" value="Digne-les-Bains"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="17270"/>
+        <numericalAttribute type="nt_Longitude" value="6.231478"/>
+        <numericalAttribute type="nt_Latitude" value="44.091006"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -986,15 +1145,19 @@
         <name language="en" text="Gap"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Gap"/>
+          <value language="en" value="Gap"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Gap"/>
-        </attribute>-->
+          <value language="en" value="Gap"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="38585"/>
+        <numericalAttribute type="nt_Longitude" value="6.075901"/>
+        <numericalAttribute type="nt_Latitude" value="44.559901"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -1005,15 +1168,19 @@
         <name language="en" text="Nice"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Nice"/>
+          <value language="en" value="Nice"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Nice"/>
-        </attribute>-->
+          <value language="en" value="Nice"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="344875"/>
+        <numericalAttribute type="nt_Longitude" value="7.266266"/>
+        <numericalAttribute type="nt_Latitude" value="43.703427"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -1024,15 +1191,42 @@
         <name language="en" text="Privas"/>
       </elementName>
       <attributeList>
-        <!--<attribute type="at_Nom1">
+        <attribute type="at_Nom1">
           <value language="fr" value="Privas"/>
+          <value language="en" value="Privas"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Privas"/>
-        </attribute>-->
+          <value language="en" value="Privas"/>
+        </attribute>
       </attributeList>
       <numericalAttributeList>
         <numericalAttribute type="nt_Population" value="8550"/>
+        <numericalAttribute type="nt_Longitude" value="4.59888"/>
+        <numericalAttribute type="nt_Latitude" value="44.734623"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 22-->
+    <element id="el_SaintBrieuc" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Saint-Brieuc"/>
+        <name language="en" text="Saint-Brieuc"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Saint-Brieuc"/>
+          <value language="en" value="Saint-Brieuc"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Saint-Brieuc"/>
+          <value language="en" value="Saint-Brieuc"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="45880"/>
+        <numericalAttribute type="nt_Longitude" value="-2.762603"/>
+        <numericalAttribute type="nt_Latitude" value="48.513982"/>
       </numericalAttributeList>
       <relationList/>
     </element>
@@ -1040,7 +1234,7 @@
   
   <questionCategories>
     <attributeQuestionCategoryList>
-      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the département whose number is {0}?"/>
@@ -1059,9 +1253,64 @@
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="3" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} département bears its current name?"/>
-      </attributeQuestionCategory>
-        
+      </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
+    <relation1QuestionCategoryList>
+      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
+        <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
+        <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>-->
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
+        <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <!--<relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="De quelle région fait partie le département % ?"/>
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="none" commentMode="none" weight="80" minLevel="2"
+                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="De quelle région fait partie le département dont le numéro est % ?"/>
+      <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
+        <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="inverse" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="none" commentMode="none" weight="20" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="0" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Où se jette % ?"/>-->
+      <!--<relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
+        <questionText language="fr" text="Dans quelle région se situe la ville {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/> 
+      </relation1QuestionCategory>-->
+      <!--<relation1QuestionCategory relation="r1N_Riviere_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="75" minLevel="0"
+                                 questionDrawDepth1="3" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Sur quel cours d'eau se situe la ville % ?" />
+      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="direct" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="20" minLevel="1"
+                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Dans quelle ville se situe le confluent % ?" />
+      <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="15" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
+                                 question="Près de quelle ville se situe l'embouchure % ?" />-->
+    </relation1QuestionCategoryList>
   </questionCategories>
   
 </quizData>

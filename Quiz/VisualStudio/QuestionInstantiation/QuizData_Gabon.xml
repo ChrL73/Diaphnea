@@ -354,6 +354,7 @@
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
       </attributeQuestionCategory>
     </attributeQuestionCategoryList>
+    <relation1QuestionCategoryList/>
   </questionCategories>
   
 </quizData>

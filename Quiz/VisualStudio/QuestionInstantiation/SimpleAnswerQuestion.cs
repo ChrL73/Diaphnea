@@ -54,10 +54,6 @@ namespace QuestionInstantiation
                     { "proximity_criterion_value", _choice.Element.GeoPoint.getBsonDocument() }
                 });
             }
-            else
-            {
-                throw new NotImplementedException();
-            }
 
             return questionDocument;
         }

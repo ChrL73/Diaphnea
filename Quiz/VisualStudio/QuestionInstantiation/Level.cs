@@ -174,10 +174,9 @@ namespace QuestionInstantiation
         int addQuestions()
         {
             if (addAttributeQuestions() != 0) return -1;
+            if (addRelation1Questions() != 0) return -1;
 
-            /*if (!addAttributeQuestions()) return false;
-            if (!addAttributeOrderQuestions()) return false;
-            if (!addRelation1Questions()) return false;
+            /*if (!addAttributeOrderQuestions()) return false;
             if (!addRelationNQuestions()) return false;
             if (!addRelationLimitQuestions()) return false;
             if (!addRelationOrderQuestions()) return false;
@@ -253,22 +252,25 @@ namespace QuestionInstantiation
 
                             if (answerAttributeValue != null) 
                             {
-                                Choice choice = new Choice(answerAttributeValue, element);
-                                category.addChoice(choice);
-
-                                if (questionAttributeValue != null)
+                                if (xmlAttributeQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || element.GeoPoint != null)
                                 {
-                                    Text questionText = new Text();
-                                    foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
-                                    {
-                                        string languageId = xmlQuestionText.language.ToString();
-                                        string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
-                                        questionText.setText(languageId, questionString);
-                                    }
-                                    if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+                                    Choice choice = new Choice(answerAttributeValue, element, _quizData);
+                                    category.addChoice(choice);
 
-                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null);
-                                    category.addQuestion(question);
+                                    if (questionAttributeValue != null)
+                                    {
+                                        Text questionText = new Text();
+                                        foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
+                                        {
+                                            string languageId = xmlQuestionText.language.ToString();
+                                            string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                            questionText.setText(languageId, questionString);
+                                        }
+                                        if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
+                                        category.addQuestion(question);
+                                    }
                                 }
                             }
                         }
@@ -290,11 +292,11 @@ namespace QuestionInstantiation
                         {
                             if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (category.setComments(questionAttributeType, _quizData) != 0) return -1;
+                                category.setComments(questionAttributeType, _quizData);
                             }
                             else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                if (category.setComments(null, _quizData) != 0) return -1;
+                                category.setComments(null, _quizData);
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
@@ -312,6 +314,178 @@ namespace QuestionInstantiation
                     }
                 }
             }
+
+            return 0;
+        }
+
+        int addRelation1Questions()
+        {
+            foreach (XmlRelation1QuestionCategory xmlRelation1QuestionCategory in _quizData.XmlQuizData.questionCategories.relation1QuestionCategoryList)
+            {
+                int minLevel = Int32.Parse(xmlRelation1QuestionCategory.minLevel);
+                if (_value >= minLevel)
+                {
+                    RelationType relationType = _quizData.getRelationType(xmlRelation1QuestionCategory.relation);
+                    if (xmlRelation1QuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
+
+                    string questionNameInLog = xmlRelation1QuestionCategory.questionText[0].text;
+
+                    if (relationType.Nature == RelationNatureEnum.RELATION_NN || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.INVERSE))
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName));
+                        return -1;
+                    }
+
+                    if (xmlRelation1QuestionCategory.relation2 != null && !xmlRelation1QuestionCategory.way2Specified)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": way2 attribute must be specified if relation2 attribute is specified",
+                                _quizData.DataFileName, questionNameInLog));
+                        return -1;
+                    }
+
+                    RelationType relation2Type = null;
+                    if (xmlRelation1QuestionCategory.relation2 != null)
+                    {
+                        relation2Type = _quizData.getRelationType(xmlRelation1QuestionCategory.relation2);
+                        if (xmlRelation1QuestionCategory.way2 == XmlWayEnum.INVERSE) relation2Type = relation2Type.ReciprocalType;
+
+                        if (relation2Type.Nature == RelationNatureEnum.RELATION_NN || (relation2Type.Nature == RelationNatureEnum.RELATION_1N && relation2Type.Way != RelationWayEnum.INVERSE))
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                                    _quizData.DataFileName, questionNameInLog, relation2Type.FullName));
+                            return -1;
+                        }
+
+                        if (relationType.EndType != relation2Type.StartType)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": End type of relation 1 ({2}) is different from start type of relation 2 ({3})",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName, relation2Type.FullName));
+                            return -1;
+                        }
+                    }
+
+                    XmlElementType startElementType = relationType.StartType;
+                    XmlElementType endElementType;
+                    if (relation2Type != null) endElementType = relation2Type.EndType;
+                    else endElementType = relationType.EndType;
+
+                    if (_elementByTypeDictionary.ContainsKey(startElementType) && _elementByTypeDictionary.ContainsKey(endElementType))
+                    {
+                        XmlAttributeType questionAttributeType = _quizData.getXmlAttributeType(xmlRelation1QuestionCategory.questionAttribute);
+                        if (!questionAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
+                                _quizData.DataFileName, questionNameInLog, questionAttributeType.id));
+                            return -1;
+                        }
+
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlRelation1QuestionCategory.answerAttribute);
+
+                        double distribParameterCorrection = 0.0;
+                        if (xmlRelation1QuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlRelation1QuestionCategory.distribParameterCorrection;
+
+                        Int32 weight = Int32.Parse(xmlRelation1QuestionCategory.weight);
+                        _weightSum += weight;
+
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlRelation1QuestionCategory.answerProximityCriterion, distribParameterCorrection, questionNameInLog);
+                        Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
+
+                        foreach (Element endElement in _elementByTypeDictionary[endElementType])
+                        {
+                            AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
+                            if (answerAttributeValue != null)
+                            {
+                                if (xmlRelation1QuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
+                                {
+                                    Choice choice = new Choice(answerAttributeValue, endElement, _quizData);
+                                    category.addChoice(choice);
+                                    choiceDictionary.Add(endElement, choice);
+                                }
+                            }
+                        }
+
+                        foreach (Element startElement in _elementByTypeDictionary[startElementType])
+				        {
+                            AttributeValue questionAttributeValue = startElement.getAttributeValue(questionAttributeType);
+                            Element endElement = startElement.getLinked1Element(relationType);
+
+                            if (questionAttributeValue != null && endElement != null)
+					        {
+                                if (relation2Type != null) endElement = endElement.getLinked1Element(relation2Type);
+						        if (endElement != null)
+						        {
+                                    if (choiceDictionary.ContainsKey(endElement))
+							        {
+                                        Choice choice = choiceDictionary[endElement];
+
+                                        Text questionText = new Text();
+                                        foreach (XmlQuestionText xmlQuestionText in xmlRelation1QuestionCategory.questionText)
+                                        {
+                                            string languageId = xmlQuestionText.language.ToString();
+                                            string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                            questionText.setText(languageId, questionString);
+                                        }
+                                        if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
+                                        category.addQuestion(question);
+                                    }
+                                }
+                            }
+                        }
+
+                        int choiceCount = category.ChoiceCount;
+                        if (startElementType == endElementType) --choiceCount;
+
+                        if (category.QuestionCount == 0)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
+                                _nameInLog, questionNameInLog));
+                            _weightSum -= weight;
+                        }
+				        else if (choiceCount < _choiceCount)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                               "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
+                               _nameInLog, questionNameInLog, category.ChoiceCount, _choiceCount));
+                            _weightSum -= weight;
+                        }
+				        else
+				        {
+                            if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
+                            {
+                                if (relation2Type == null) category.setComments(relationType, questionAttributeType, _quizData);
+                                else category.setComments(relationType, relation2Type, questionAttributeType, _quizData);
+                            }
+                            else if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.NAME)
+                            {
+                                if (relation2Type == null) category.setComments(relationType, null, _quizData);
+                                else category.setComments(relationType, relation2Type, null, _quizData);
+                            }
+
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
+                                _nameInLog, questionNameInLog, category.QuestionCount, category.ChoiceCount));
+                            _categoryList.Add(category);
+                            _totalQuestionCount += category.QuestionCount;
+                        }
+                    }
+			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _nameInLog, questionNameInLog, startElementType.id));
+                    }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _nameInLog, questionNameInLog, endElementType.id));
+                    }
+                }
+	        }
 
             return 0;
         }

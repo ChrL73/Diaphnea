@@ -4,12 +4,12 @@
   <xsd:complexType name="XmlQuizData">
     <xsd:sequence>
       <xsd:element name="parameters" type="XmlParameters" maxOccurs="1" minOccurs="1" />
-      <xsd:element name="typeDefinitions" type="XmlTypeDefinition" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="typeDefinitions" type="XmlTypeDefinitions" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="questionCategories" type="XmlQuestionCategories" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
-  <xsd:complexType name="XmlTypeDefinition">
+  <xsd:complexType name="XmlTypeDefinitions">
     <xsd:sequence>
       <xsd:element name="elementTypeList" type="XmlElementTypeList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="attributeTypeList" type="XmlAttributeTypeList" maxOccurs="1" minOccurs="1" />
@@ -267,9 +267,9 @@
   <xsd:complexType name="XmlQuestionCategories">
     <xsd:sequence>
       <xsd:element name="attributeQuestionCategoryList" type="XmlAttributeQuestionCategoryList" maxOccurs="1" minOccurs="1" />
-      <!--<xsd:element name="attributeOrderQuestionCategoryList" type="AttributeOrderQuestionCategoryList" maxOccurs="1" minOccurs="1" />
-      <xsd:element name="relation1QuestionCategoryList" type="Relation1QuestionCategoryList" maxOccurs="1" minOccurs="1" />
-      <xsd:element name="relationNQuestionCategoryList" type="RelationNQuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <!--<xsd:element name="attributeOrderQuestionCategoryList" type="AttributeOrderQuestionCategoryList" maxOccurs="1" minOccurs="1" />-->
+      <xsd:element name="relation1QuestionCategoryList" type="XmlRelation1QuestionCategoryList" maxOccurs="1" minOccurs="1" />
+      <!--<xsd:element name="relationNQuestionCategoryList" type="RelationNQuestionCategoryList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="relationLimitQuestionCategoryList" type="RelationLimitQuestionCategoryList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="relationOrderQuestionCategoryList" type="RelationOrderQuestionCategoryList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="relationExistenceQuestionCategoryList" type="RelationExistenceQuestionCategoryList" maxOccurs="1" minOccurs="1" />-->
@@ -294,6 +294,33 @@
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
   </xsd:complexType>
+  <xsd:complexType name="XmlRelation1QuestionCategoryList">
+    <xsd:sequence>
+      <xsd:element name="relation1QuestionCategory" type="XmlRelation1QuestionCategory" maxOccurs="unbounded"
+				minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlRelation1QuestionCategory">
+    <xsd:sequence>
+      <xsd:element name="questionText" type="XmlQuestionText" maxOccurs="unbounded" minOccurs="0" />
+    </xsd:sequence>
+    <xsd:attribute name="relation" type="XmlRelation1IdRef" use="required" />
+    <xsd:attribute name="way" type="XmlWayEnum" use="required"/>
+    <xsd:attribute name="relation2" type="XmlRelation1IdRef" use="optional" />
+    <xsd:attribute name="way2" type="XmlWayEnum" use="optional"/>
+    <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
+    <xsd:attribute name="answerProximityCriterion" type="XmlAnswerProximityCriterionEnum" use="required" />
+    <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
+    <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
+    <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlRelation1IdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="r1._(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlQuestionText">
     <xsd:sequence/>
     <xsd:attribute name="language" type="XmlLanguageIdRef" use="required" />
@@ -312,6 +339,12 @@
       <xsd:enumeration value="QUESTION_ATTRIBUTE" />
       <xsd:enumeration value="NAME" />
       <xsd:enumeration value="NONE" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlWayEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="DIRECT" />
+      <xsd:enumeration value="INVERSE" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlString1P">

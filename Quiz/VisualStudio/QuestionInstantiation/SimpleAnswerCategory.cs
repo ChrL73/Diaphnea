@@ -52,7 +52,7 @@ namespace QuestionInstantiation
             _questionList.Add(question);
         }
 
-        internal int setComments(XmlAttributeType attributeType, QuizData quizData)
+        internal void setComments(XmlAttributeType attributeType, QuizData quizData)
         {
             foreach (List<Choice> choiceList in _choiceDictionary.Values)
             {
@@ -70,19 +70,53 @@ namespace QuestionInstantiation
                     }
                 }
 
-                Text commentText = new Text();
-                foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
-                {
-                    List<string> list = new List<string>();
-                    foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id.ToString()));
-                    string comment = String.Join(", ", list);
-                    commentText.setText(xmlLanguage.id.ToString(), comment);
-                }
+                Text commentText = Text.fromTextList(textList, quizData);
 
                 foreach (Choice choice in choiceList) choice.Comment = commentText;
             }
+        }
 
-            return 0;
+        internal void setComments(RelationType relationType, XmlAttributeType attributeType, QuizData quizData)
+        {
+            relationType = relationType.ReciprocalType;
+
+            foreach (List<Choice> choiceList in _choiceDictionary.Values)
+            {
+                if (choiceList.Count == 1)
+                {
+                    List<Text> textList = new List<Text>();
+                    Choice choice = choiceList[0];
+                    Element choiceElement = choice.Element;
+                    Dictionary<Element, int> questionElementDictionary = new Dictionary<Element, int>();
+
+                    Element qElement = choiceElement.getLinked1Element(relationType);
+                    if (qElement != null) questionElementDictionary.Add(qElement, 0);
+
+                    int i, n = choiceElement.getLinkedNElementCount(relationType);
+                    for (i = 0; i < n; ++i) questionElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
+
+                    foreach (Element questionElement in questionElementDictionary.Keys)
+                    {
+                        
+                        if (attributeType == null)
+                        {
+                            textList.Add(questionElement.Name);
+                        }
+                        else
+                        {
+                            AttributeValue attributeValue = questionElement.getAttributeValue(attributeType);
+                            if (attributeValue != null) textList.Add(attributeValue.Value);
+                        }
+                    }
+
+                    choice.Comment = Text.fromTextList(textList, quizData);
+                }
+            }
+        }
+
+        internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType, QuizData quizData)
+        {
+            throw new NotImplementedException();
         }
 
         internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
@@ -104,9 +138,9 @@ namespace QuestionInstantiation
             {
                 proximityCriterionType = "number";
             }
-            else
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
             {
-                throw new NotImplementedException();
+                proximityCriterionType = "3d_point";
             }
 
             BsonDocument categoryDocument = new BsonDocument()
@@ -151,40 +185,45 @@ namespace QuestionInstantiation
             BsonArray choicesArray = new BsonArray();
             foreach (List<Choice> list in _choiceDictionary.Values)
             {
-                BsonArray proximityCriterionArray = new BsonArray();
-                if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
-                {
-                    foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
-                }
-                else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
-                {
-                    foreach (Choice choice in list)
-                    {
-                        string s = choice.AttributeValue.Value.getAsNumber();
-                        if (s == null)
-                        {
-                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                                "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
-                                QuestionNameInLog, choice.Element.XmlElement.id));
-                            proximityCriterionArray.Add("0");
-                        }
-                        else
-                        {
-                            proximityCriterionArray.Add(s);
-                        }
-                    }
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-
                 BsonDocument choiceDocument = new BsonDocument()
                 {
                     { "choice", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "comment", list[0].Comment.getBsonDocument() },
-                    { "proximity_criterion_values", proximityCriterionArray }
+                    { "comment", list[0].Comment.getBsonDocument() }
                 };
+
+                if (_proximityCriterion != XmlAnswerProximityCriterionEnum.NONE)
+                {
+                    BsonArray proximityCriterionArray = new BsonArray();
+                    if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+                    {
+                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
+                    }
+                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+                    {
+                        foreach (Choice choice in list)
+                        {
+                            Double? d = choice.AttributeValue.Value.getAsDouble();
+                            if (d == null)
+                            {
+                                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                    "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
+                                    QuestionNameInLog, choice.Element.XmlElement.id));
+                                proximityCriterionArray.Add(0);
+                            }
+                            else
+                            {
+                                proximityCriterionArray.Add(d);
+                            }
+                        }
+                    }
+                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+                    {
+                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
+                    }
+
+                    choiceDocument.AddRange(new BsonDocument() { { "proximity_criterion_values", proximityCriterionArray } });
+                }
+                
                 choicesArray.Add(choiceDocument);
             }
 

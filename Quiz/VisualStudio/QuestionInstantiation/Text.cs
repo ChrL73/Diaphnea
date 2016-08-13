@@ -47,24 +47,23 @@ namespace QuestionInstantiation
             }
         }
 
-        internal string getAsNumber()
+        internal Double? getAsDouble()
         {
             if (_textDictionary.Count() == 0) return null;
 
-            bool ok = true;
             Double? d = null;
             foreach (string s in _textDictionary.Values)
             {
                 Double res;
                 if (!Double.TryParse(s, out res))
                 {
-                    ok = false;
+                    return null;
                 }
                 else
                 {
                     if (d != null)
                     {
-                        if (d != res) ok = false;
+                        if (d != res) return null;
                     }
                     else
                     {
@@ -73,32 +72,30 @@ namespace QuestionInstantiation
                 }
             }
 
-            if (ok) return _textDictionary.Values.First();
+           return d;
+        }
 
-            ok = true;
-            Int32? i = null;
-            foreach (string s in _textDictionary.Values)
+        internal static Text emptyText(QuizData quizData)
+        {
+            Text result = new Text();
+            foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
             {
-                Int32 res;
-                if (!Int32.TryParse(s, out res))
-                {
-                    ok = false;
-                }
-                else
-                {
-                    if (i != null)
-                    {
-                        if (i != res) ok = false;
-                    }
-                    else
-                    {
-                        i = res;
-                    }
-                }
+                result.setText(xmlLanguage.id.ToString(), "");
             }
+            return result;
+        }
 
-            if (ok) return _textDictionary.Values.First();
-            return null;
+        internal static Text fromTextList(IEnumerable<Text> textList, QuizData quizData)
+        {
+            Text result = new Text();
+            foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED))
+            {
+                List<string> list = new List<string>();
+                foreach (Text text in textList) list.Add(text.getText(xmlLanguage.id.ToString()));
+                string str = String.Join(", ", list);
+                result.setText(xmlLanguage.id.ToString(), str);
+            }
+            return result;
         }
 
         internal BsonDocument getBsonDocument()

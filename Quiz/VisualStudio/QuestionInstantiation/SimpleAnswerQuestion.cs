@@ -10,14 +10,16 @@ namespace QuestionInstantiation
     class SimpleAnswerQuestion
     {
         private readonly Text _questionText;
-        private readonly Element _element;
+        //private readonly Element _element;
         private readonly Choice _choice;
+        private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
 
-        internal SimpleAnswerQuestion(Text questionText, Choice choice, Element element)
+        internal SimpleAnswerQuestion(Text questionText, Choice choice/*, Element element*/, XmlAnswerProximityCriterionEnum proximityCriterion)
         {
             _questionText = questionText;
-            _element = element;
+            //_element = element;
             _choice = choice;
+            _proximityCriterion = proximityCriterion;
         }
 
         internal BsonDocument getBsonDocument()
@@ -28,6 +30,30 @@ namespace QuestionInstantiation
             };
 
             questionDocument.AddRange(_choice.getBsonDocument());
+
+            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            {
+                questionDocument.AddRange(new BsonDocument()
+                {
+                    { "proximity_criterion_value", _choice.Element.XmlElement.sortKey }
+                });
+            }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            {
+                Double? d = _choice.AttributeValue.Value.getAsDouble();
+                if (d == null) d = 0.0;
+                questionDocument.AddRange(new BsonDocument()
+                {
+                    { "proximity_criterion_value", d }
+                });
+            }
+            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                questionDocument.AddRange(new BsonDocument()
+                {
+                    { "proximity_criterion_value", _choice.Element.GeoPoint.getBsonDocument() }
+                });
+            }
 
             return questionDocument;
         }

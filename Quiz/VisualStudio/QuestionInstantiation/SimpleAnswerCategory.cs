@@ -142,10 +142,6 @@ namespace QuestionInstantiation
             {
                 proximityCriterionType = "3d_point";
             }
-            else
-            {
-                throw new NotImplementedException();
-            }
 
             BsonDocument categoryDocument = new BsonDocument()
             {
@@ -189,40 +185,45 @@ namespace QuestionInstantiation
             BsonArray choicesArray = new BsonArray();
             foreach (List<Choice> list in _choiceDictionary.Values)
             {
-                BsonArray proximityCriterionArray = new BsonArray();
-                if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
-                {
-                    foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
-                }
-                else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
-                {
-                    foreach (Choice choice in list)
-                    {
-                        Double? d = choice.AttributeValue.Value.getAsDouble();
-                        if (d == null)
-                        {
-                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                                "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
-                                QuestionNameInLog, choice.Element.XmlElement.id));
-                            proximityCriterionArray.Add(0);
-                        }
-                        else
-                        {
-                            proximityCriterionArray.Add(d);
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
-                }
-
                 BsonDocument choiceDocument = new BsonDocument()
                 {
                     { "choice", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "comment", list[0].Comment.getBsonDocument() },
-                    { "proximity_criterion_values", proximityCriterionArray }
+                    { "comment", list[0].Comment.getBsonDocument() }
                 };
+
+                if (_proximityCriterion != XmlAnswerProximityCriterionEnum.NONE)
+                {
+                    BsonArray proximityCriterionArray = new BsonArray();
+                    if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+                    {
+                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
+                    }
+                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+                    {
+                        foreach (Choice choice in list)
+                        {
+                            Double? d = choice.AttributeValue.Value.getAsDouble();
+                            if (d == null)
+                            {
+                                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                    "Category \"{0}\" (with answerProximityCriterion=\"ATTRIBUTE_VALUE_AS_NUMBER\"), choice {1}: Fail to convert attribute value to number, value 0 is used as proximity criterion",
+                                    QuestionNameInLog, choice.Element.XmlElement.id));
+                                proximityCriterionArray.Add(0);
+                            }
+                            else
+                            {
+                                proximityCriterionArray.Add(d);
+                            }
+                        }
+                    }
+                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+                    {
+                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
+                    }
+
+                    choiceDocument.AddRange(new BsonDocument() { { "proximity_criterion_values", proximityCriterionArray } });
+                }
+                
                 choicesArray.Add(choiceDocument);
             }
 

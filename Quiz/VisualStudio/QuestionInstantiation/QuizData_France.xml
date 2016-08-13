@@ -1265,17 +1265,18 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
         <questionText language="en" text="Todo: Translate [{0}]"/>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
         <questionText language="en" text="Todo: Translate [{0}]"/>
+      </relation1QuestionCategory>-->
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
+        <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
+        <questionText language="en" text="Todo: Translate [{0}]"/>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r1N_Departement_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Numero"
-                                 answerProximityCriterion="none" commentMode="none" weight="100" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="Quel est le numéro du département où se situe la ville % ?"/>
-      <relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
+      <!--<relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
                                  questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
                                  question="De quelle région fait partie le département % ?"/>

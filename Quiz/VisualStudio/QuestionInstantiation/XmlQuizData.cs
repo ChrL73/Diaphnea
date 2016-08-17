@@ -277,7 +277,7 @@ public enum XmlLanguageStatusEnum {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlRelation1QuestionCategory {
+public partial class XmlRelationNQuestionCategory {
     
     private XmlQuestionText[] questionTextField;
     
@@ -558,6 +558,196 @@ public enum XmlCommentModeEnum {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlRelation1QuestionCategory {
+    
+    private XmlQuestionText[] questionTextField;
+    
+    private string relationField;
+    
+    private XmlWayEnum wayField;
+    
+    private string relation2Field;
+    
+    private XmlWayEnum way2Field;
+    
+    private bool way2FieldSpecified;
+    
+    private string questionAttributeField;
+    
+    private string answerAttributeField;
+    
+    private XmlAnswerProximityCriterionEnum answerProximityCriterionField;
+    
+    private double distribParameterCorrectionField;
+    
+    private bool distribParameterCorrectionFieldSpecified;
+    
+    private XmlCommentModeEnum commentModeField;
+    
+    private string weightField;
+    
+    private string minLevelField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("questionText")]
+    public XmlQuestionText[] questionText {
+        get {
+            return this.questionTextField;
+        }
+        set {
+            this.questionTextField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string relation {
+        get {
+            return this.relationField;
+        }
+        set {
+            this.relationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlWayEnum way {
+        get {
+            return this.wayField;
+        }
+        set {
+            this.wayField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string relation2 {
+        get {
+            return this.relation2Field;
+        }
+        set {
+            this.relation2Field = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlWayEnum way2 {
+        get {
+            return this.way2Field;
+        }
+        set {
+            this.way2Field = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool way2Specified {
+        get {
+            return this.way2FieldSpecified;
+        }
+        set {
+            this.way2FieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string questionAttribute {
+        get {
+            return this.questionAttributeField;
+        }
+        set {
+            this.questionAttributeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string answerAttribute {
+        get {
+            return this.answerAttributeField;
+        }
+        set {
+            this.answerAttributeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlAnswerProximityCriterionEnum answerProximityCriterion {
+        get {
+            return this.answerProximityCriterionField;
+        }
+        set {
+            this.answerProximityCriterionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double distribParameterCorrection {
+        get {
+            return this.distribParameterCorrectionField;
+        }
+        set {
+            this.distribParameterCorrectionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIgnoreAttribute()]
+    public bool distribParameterCorrectionSpecified {
+        get {
+            return this.distribParameterCorrectionFieldSpecified;
+        }
+        set {
+            this.distribParameterCorrectionFieldSpecified = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlCommentModeEnum commentMode {
+        get {
+            return this.commentModeField;
+        }
+        set {
+            this.commentModeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string weight {
+        get {
+            return this.weightField;
+        }
+        set {
+            this.weightField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string minLevel {
+        get {
+            return this.minLevelField;
+        }
+        set {
+            this.minLevelField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlAttributeQuestionCategory {
     
     private XmlQuestionText[] questionTextField;
@@ -702,6 +892,8 @@ public partial class XmlQuestionCategories {
     
     private XmlRelation1QuestionCategory[] relation1QuestionCategoryListField;
     
+    private XmlRelationNQuestionCategory[] relationNQuestionCategoryListField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("attributeQuestionCategory", IsNullable=false)]
     public XmlAttributeQuestionCategory[] attributeQuestionCategoryList {
@@ -721,6 +913,17 @@ public partial class XmlQuestionCategories {
         }
         set {
             this.relation1QuestionCategoryListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("relationNQuestionCategory", IsNullable=false)]
+    public XmlRelationNQuestionCategory[] relationNQuestionCategoryList {
+        get {
+            return this.relationNQuestionCategoryListField;
+        }
+        set {
+            this.relationNQuestionCategoryListField = value;
         }
     }
 }

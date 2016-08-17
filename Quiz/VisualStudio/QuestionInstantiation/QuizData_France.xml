@@ -1740,13 +1740,101 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="20" minLevel="1">
         <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
         <questionText language="en" text="In which city is the confluence of the {0}?"/>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
         <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
         <questionText language="en" text="Near which city is the mouth of the {0}?"/>
-      </relation1QuestionCategory>
+      </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
+    <relationNQuestionCategoryList>
+      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
+        <questionText language="en" text="Todo {0}"/>
+      </relationNQuestionCategory>-->
+      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="direct" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="none" commentMode="questionAttribute" weight="80" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces villes, lesquelles se situent dans le département dont le numéro est % ?"/>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="name" weight="100" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces départements, lesquels font partie de la région % ?"/>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="none" commentMode="name" weight="70" minLevel="2"
+                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces numéros, lesquels sont associés à des départements de la région % ?"/>-->
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles se situent en région {0} ?"/>
+        <questionText language="en" text="Todo {0}"/>
+      </relationNQuestionCategory>
+      <!--<relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="80" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces départements, lesquels sont traversés par % ?"/>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Numero"
+                                 answerProximityCriterion="none" commentMode="none" weight="50" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces numéros, lesquels sont associés à des départements traversés par % ?"/>
+      <relationNQuestionCategory relation="r1N_Riviere_Villes" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="name" weight="50" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces villes, lesquelles sont traversées par % ?"/>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="30" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="1" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces régions, lesquelles sont traversées par % ?"/>
+      <relationNQuestionCategory relation="rNN_Departement_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces départements, lesquels sont limitrophes au département % ?"/>
+      <relationNQuestionCategory relation="r1N_Riviere_Affluents" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="40" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces cours d'eau, lesquels sont des affluents % ?"/>
+      <relationNQuestionCategory relation="rNN_Region_RegionsLimitrophes" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="30" minLevel="0"
+                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces régions, lesquelles sont limitrophes à la région % ?"/>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="80" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces cours d'eau, lesquels traversent le département % ?"/>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="inverse" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.2" commentMode="none" weight="50" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces cours d'eau, lesquels traversent le département dont le numéro est % ?"/>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" relation2="rNN_Riviere_Departements" way2="inverse" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="30" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces cours d'eau, lesquels traversent la région % ?"/>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="25" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces départements, lesquels ont une frontière commune avec % ?"/>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom2" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="20" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces régions, lesquelles ont une frontière commune avec % ?"/>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Numero" answerProximityCriterion="none" commentMode="name" weight="15" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces numéros, lesquels sont associés à des départements ayant une frontière commune avec % ?"/>
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="30" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces départements, lesquels sont bordés par % ?"/>
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom2" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="20" minLevel="0"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces régions, lesquelles sont bordées par % ?"/>
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Numero" answerProximityCriterion="none" commentMode="name" weight="15" minLevel="2"
+                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                 question="Parmi ces numéros, lesquels sont associés à des départements bordés par % ?"/>-->
+    </relationNQuestionCategoryList>
   </questionCategories>
   
 </quizData>

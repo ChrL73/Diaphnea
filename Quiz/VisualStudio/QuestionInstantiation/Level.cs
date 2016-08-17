@@ -118,7 +118,7 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int checkSymetricalRelations()
+        private int checkSymetricalRelations()
         {
             foreach (RelationType relationType in _quizData.RelationTypeDictionary.Values)
             {
@@ -171,13 +171,13 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int addQuestions()
+        private int addQuestions()
         {
             if (addAttributeQuestions() != 0) return -1;
             if (addRelation1Questions() != 0) return -1;
+            if (addRelationNQuestions() != 0) return -1;
 
             /*if (!addAttributeOrderQuestions()) return false;
-            if (!addRelationNQuestions()) return false;
             if (!addRelationLimitQuestions()) return false;
             if (!addRelationOrderQuestions()) return false;
             if (!addRelationExistenceQuestions()) return false;
@@ -216,7 +216,7 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int addAttributeQuestions()
+        private int addAttributeQuestions()
         {
             foreach(XmlAttributeQuestionCategory xmlAttributeQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
             {
@@ -318,7 +318,7 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int addRelation1Questions()
+        private int addRelation1Questions()
         {
             foreach (XmlRelation1QuestionCategory xmlRelation1QuestionCategory in _quizData.XmlQuizData.questionCategories.relation1QuestionCategoryList)
             {
@@ -332,7 +332,7 @@ namespace QuestionInstantiation
 
                     if (relationType.Nature == RelationNatureEnum.RELATION_NN || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.INVERSE))
                     {
-                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define questions with one answer",
                                 _quizData.DataFileName, questionNameInLog, relationType.FullName));
                         return -1;
                     }
@@ -353,7 +353,7 @@ namespace QuestionInstantiation
 
                         if (relation2Type.Nature == RelationNatureEnum.RELATION_NN || (relation2Type.Nature == RelationNatureEnum.RELATION_1N && relation2Type.Way != RelationWayEnum.INVERSE))
                         {
-                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define question with one answer",
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define questions with one answer",
                                     _quizData.DataFileName, questionNameInLog, relation2Type.FullName));
                             return -1;
                         }
@@ -475,17 +475,267 @@ namespace QuestionInstantiation
 			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
 			        {
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
-                                _nameInLog, questionNameInLog, startElementType.id));
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, startElementType.id));
                     }
 			        else
 			        {
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
-                                _nameInLog, questionNameInLog, endElementType.id));
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, endElementType.id));
                     }
                 }
 	        }
+
+            return 0;
+        }
+
+        private int addRelationNQuestions()
+        {
+            foreach (XmlRelationNQuestionCategory xmlRelationNQuestionCategory in _quizData.XmlQuizData.questionCategories.relationNQuestionCategoryList)
+	        {
+                int minLevel = Int32.Parse(xmlRelationNQuestionCategory.minLevel);
+                if (_value >= minLevel)
+		        {
+                    RelationType relationType = _quizData.getRelationType(xmlRelationNQuestionCategory.relation);
+                    if (xmlRelationNQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
+
+                    string questionNameInLog = xmlRelationNQuestionCategory.questionText[0].text;
+
+                    if (xmlRelationNQuestionCategory.relation2 != null && !xmlRelationNQuestionCategory.way2Specified)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": way2 attribute must be specified if relation2 attribute is specified",
+                                _quizData.DataFileName, questionNameInLog));
+                        return -1;
+                    }
+
+                    RelationType relation2Type = null;
+                    if (xmlRelationNQuestionCategory.relation2 != null)
+                    {
+                        relation2Type = _quizData.getRelationType(xmlRelationNQuestionCategory.relation2);
+                        if (xmlRelationNQuestionCategory.way2 == XmlWayEnum.INVERSE) relation2Type = relation2Type.ReciprocalType;
+
+                        if (relationType.EndType != relation2Type.StartType)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": End type of relation 1 ({2}) is different from start type of relation 2 ({3})",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName, relation2Type.FullName));
+                            return -1;
+                        }
+
+				        if ((relationType.Nature == RelationNatureEnum.RELATION_11 || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.DIRECT)) &&
+					        (relation2Type.Nature == RelationNatureEnum.RELATION_11 || (relation2Type.Nature == RelationNatureEnum.RELATION_1N && relation2Type.Way != RelationWayEnum.DIRECT)))
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": Relations \"{2}\" and \"{3}\" can not define questions with several answers",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName, relation2Type.FullName));
+                            return -1;
+                        }
+                    }
+                    else
+			        {
+				        if (relationType.Nature == RelationNatureEnum.RELATION_11 || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.DIRECT))
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                                "Error in {0}: Error in definition of category \"{1}\": Relation \"{2}\" can not define questions with several answers",
+                                _quizData.DataFileName, questionNameInLog, relationType.FullName));
+                            return -1;
+                        }
+			        }
+
+                    XmlElementType startElementType = relationType.StartType;
+                    XmlElementType endElementType;
+                    if (relation2Type != null) endElementType = relation2Type.EndType;
+                    else endElementType = relationType.EndType;
+
+                    if (_elementByTypeDictionary.ContainsKey(startElementType) && _elementByTypeDictionary.ContainsKey(endElementType))
+                    {
+                        XmlAttributeType questionAttributeType = _quizData.getXmlAttributeType(xmlRelationNQuestionCategory.questionAttribute);
+                        if (!questionAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
+                                _quizData.DataFileName, questionNameInLog, questionAttributeType.id));
+                            return -1;
+                        }
+
+				        /*const wchar_t *answerAttr = XmlFunctions::get_relationNQuestionCategory_answerAttribute (i);
+				        const AttributeType *answerAttributeType = attributeTypeMap[answerAttr];
+
+				        const wchar_t *criterion = XmlFunctions::get_relationNQuestionCategory_answerProximityCriterion (i);
+				        ProximityCriterionEnum proximityCriterion;
+				        if (criterion[0] == 'a') proximityCriterion = ATTRIBUTE_VALUE;
+				        else if (criterion[0] == 's') proximityCriterion = SORT_KEY;
+				        else if (criterion[0] == 'e') proximityCriterion = ELEMENT_LOCATION;
+				        else proximityCriterion = NO_CRITERION;
+
+				        int questionDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_questionDrawDepth1 (i);
+				        int answerDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_answerDrawDepth1 (i);
+				        int wrongChoiceDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_wrongChoiceDrawDepth1 (i);
+				        int questionDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_questionDrawDepth2 (i);
+				        int answerDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_answerDrawDepth2 (i);
+				        int wrongChoiceDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_wrongChoiceDrawDepth2 (i);
+				        double distribParameterCorrection = XmlFunctions::get_relationNQuestionCategory_distribParameterCorrection (i);
+
+				        int weight = XmlFunctions::get_relationNQuestionCategory_weight (i);
+				        _weightSum += weight;
+
+				        MultipleAnswerCategory *category = new MultipleAnswerCategory (_weightSum, proximityCriterion, startElementType, endElementType, distribParameterCorrection, wrongChoiceDrawDepth1, wrongChoiceDrawDepth2);
+				        std::map<const Element *, const PossibleAnswer *> possibleAnswerMap;
+
+				        std::vector<const Element *> endElementVector = (*endEltIt).second;
+				        int elementCount = endElementVector.size();
+				        int j;
+				        for (j=0; j<elementCount; ++j)
+				        {
+					        const Element *endElement = endElementVector[j];
+					        const AttributeValue *answerAttributeValue = endElement->getAttributeValue (answerAttributeType);
+					        if (answerAttributeValue != 0)
+					        {
+						        const PossibleAnswer *answer = new PossibleAnswer (answerAttributeValue, endElement);
+						        category->addAnswer (answer);
+						        possibleAnswerMap.insert (std::pair<const Element *, const PossibleAnswer *>(endElement, answer));
+					        }
+				        }
+				
+				        std::vector<const Element *> startElementVector = (*startEltIt).second;
+				        elementCount = startElementVector.size();
+				        for (j=0; j<elementCount; ++j)
+				        {
+					        const Element *startElement = startElementVector[j];
+					        const AttributeValue *questionAttributeValue = startElement->getAttributeValue (questionAttributeType);
+
+					        if (questionAttributeValue != 0)
+					        {
+						        MultipleAnswerQuestion *question = 0;
+						        std::set<const Element *> mapElementSet1, mapElementSet2;
+                                std::set<const Element *> mainMapElementSet;
+						        std::set<const Element *> endElementSet;
+						        int k, linkedElementCount1 = startElement->getLinkedNElementCount (relationType);
+						        bool relation1Is1 = false;
+						        if (linkedElementCount1 == 0 && startElement->getLinked1Element (relationType) != 0)
+						        {
+							        relation1Is1 = true;
+							        linkedElementCount1 = 1;
+						        }
+
+						        for (k=0; k<linkedElementCount1; ++k)
+						        {
+							        const Element *endElement1;
+							        if (relation1Is1) endElement1 = startElement->getLinked1Element (relationType);
+							        else endElement1 = startElement->getLinkedNElement (relationType, k);
+							
+							        if (rel2Type[0] != 0)
+							        {
+								        int l, linkedElementCount2 = endElement1->getLinkedNElementCount (relation2Type);
+								        if (linkedElementCount2 == 0 && endElement1->getLinked1Element (relation2Type) != 0)
+								        {
+									        endElementSet.insert (endElement1->getLinked1Element (relation2Type));
+								        }
+								        else
+								        {
+									        for (l=0; l<linkedElementCount2; ++l) endElementSet.insert (endElement1->getLinkedNElement (relation2Type, l));
+								        }
+							        }
+							        else
+							        {
+								        endElementSet.insert (endElement1);
+							        }
+						        }
+			
+						        if (endElementSet.size() != 0)
+						        {
+							        std::wstring questionText (questionTemplate);
+							        questionText.replace (questionText.find ('%'), 1, questionAttributeValue->getValue());
+							        question = new MultipleAnswerQuestion (questionText, startElement);
+							        startElement->getMapElements (0, mapElementSet2, questionDrawDepth1, 0);
+                                    std::set<const Element *>::iterator it = mapElementSet2.begin();
+	                                for (; it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
+                                    mapElementSet2.clear();
+							        startElement->getMapElements (1, mapElementSet2, questionDrawDepth2, 0);
+                                    for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
+                                    mapElementSet2.clear();
+                                    mainMapElementSet.insert (startElement);
+
+							        std::set<const Element *>::iterator eltIt = endElementSet.begin();
+							        for (; eltIt!=endElementSet.end(); ++eltIt)
+							        {
+								        const Element *endElement = (*eltIt);
+								        const AttributeValue *answerAttributeValue = endElement->getAttributeValue (answerAttributeType);
+								        if (answerAttributeValue != 0)
+								        {
+									        const PossibleAnswer *answer = possibleAnswerMap[endElement];
+									        endElement->getMapElements (0, mapElementSet2, answerDrawDepth1, 0);
+                                            for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
+                                            mapElementSet2.clear();
+									        endElement->getMapElements (1, mapElementSet2, answerDrawDepth2, 0);
+                                            for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
+                                            mapElementSet2.clear();
+									        question->addAnswer (answer);
+								        }
+							        }	
+						        }	
+
+						        if (question != 0 && question->getAnswerCount() != 0)
+						        {
+							        question->addMapElements (mapElementSet1, mainMapElementSet);
+							        category->addQuestion (question);
+						        }
+						        else
+						        {
+							        delete question;
+						        }
+					        }
+				        }
+
+				        unsigned int possibleAnswerCount = category->getDistinctAnswerCount();
+				        if (startElementType == endElementType) --possibleAnswerCount;
+
+				        if (category->getQuestionCount() == 0)
+				        {
+					        emptyCategoryWarning2 (questionTemplate);
+					        _weightSum -= weight;
+					        delete category;
+				        }
+				        else if (possibleAnswerCount < _choiceCount)
+				        {
+					        notEnoughAnswerWarning (possibleAnswerCount, questionTemplate);
+					        _weightSum -= weight;
+					        delete category;
+				        }
+				        else
+				        {
+                            const wchar_t *commentMode = XmlFunctions::get_relationNQuestionCategory_commentMode (i);
+                            if (commentMode[0] == 'q')
+                            {
+                                if (relation2Type == 0) category->setComments (relationType, questionAttributeType);
+                                else category->setComments (relationType, relation2Type, questionAttributeType);
+                            }
+                            else if (commentMode[1] == 'a')
+                            {
+                                if (relation2Type == 0) category->setComments (relationType, 0);
+                                else category->setComments (relationType, relation2Type, 0);
+                            }
+
+					        questionCountInfoMessage1 (category->getQuestionCount(), possibleAnswerCount, questionTemplate);
+					        _categoryVector.push_back (category);
+					        _totalQuestionCount += category->getQuestionCount();
+				        }*/
+                    }
+			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, startElementType.id));
+                    }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, endElementType.id));
+                    }
+                }
+            }
 
             return 0;
         }

@@ -450,7 +450,7 @@ namespace QuestionInstantiation
 				        {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                                "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
-                               _nameInLog, questionNameInLog, category.ChoiceCount, _choiceCount));
+                               _nameInLog, questionNameInLog, choiceCount, _choiceCount));
                             _weightSum -= weight;
                         }
 				        else
@@ -467,7 +467,7 @@ namespace QuestionInstantiation
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
-                                _nameInLog, questionNameInLog, category.QuestionCount, category.ChoiceCount));
+                                _nameInLog, questionNameInLog, category.QuestionCount, choiceCount));
                             _categoryList.Add(category);
                             _totalQuestionCount += category.QuestionCount;
                         }

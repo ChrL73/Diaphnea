@@ -71,7 +71,6 @@
       <relation1NType id="r1N_Region_Departements" startType="et_Region" endType="et_Departement" />
       <relation1NType id="r1N_Riviere_Villes" startType="et_FleuveRiviere" endType="et_Ville" />
       <relation1NType id="r1N_Riviere_Affluents" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
-      <relation1NType id="r1N_Riviere_Bras" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
       <relation1NType id="r1N_Destination_Fleuves" startType="et_DestinationFleuve" endType="et_FleuveRiviere" />
     </relation1NTypeList>
     <relationNNTypeList>
@@ -94,6 +93,36 @@
       <relationList/>
     </element>-->
     <!--Régions-->
+    <element id="el_BourgogneFrancheComte" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Bourgogne-Franche-Comté"/>
+        <name language="en" text="Bourgogne-Franche-Comté"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Bourgogne-Franche-Comté"/>
+          <value language="en" value="Bourgogne-Franche-Comté"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.9"/>
+        <numericalAttribute type="nt_Latitude" value="47.2"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_CoteOr"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Nievre"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_SaoneEtLoire"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_YonneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_DoubsDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_Jura"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_HauteSaone"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_TerritoireDeBelfort"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>-->
+      </relationList>
+    </element>
     <element id="el_Bretagne" type="et_Region" minLevel="0">
       <elementName>
         <name language="fr" text="Bretagne"/>
@@ -114,7 +143,37 @@
         <!--<relation type="r1N_Region_Departements" linkedElement="el_Finistere"/>
         <relation type="r1N_Region_Departements" linkedElement="el_IlleEtVilaine"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Morbihan"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BasseNormandie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+      </relationList>
+    </element>
+    <element id="el_CentreValDeLoire" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Centre-Val de Loire"/>
+        <name language="en" text="Centre-Val de Loire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Centre-Val de Loire"/>
+          <value language="en" value="Centre-Val de Loire"/>
+        </attribute>
+      </attributeList> 
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="1.7"/>
+        <numericalAttribute type="nt_Latitude" value="47.6"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_CherDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_EureEtLoir"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_IndreDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_IndreEtLoire"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_LoirEtCher"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Loiret"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
       </relationList>
     </element>
@@ -162,11 +221,11 @@
         <relation type="r1N_Region_Departements" linkedElement="el_SeineSaintDenis"/>
         <relation type="r1N_Region_Departements" linkedElement="el_ValDeMarne"/>
         <relation type="r1N_Region_Departements" linkedElement="el_ValOise"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HauteNormandie"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Centre"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Bourgogne"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ChampagneArdenne"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Picardie"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>-->
       </relationList>
     </element>
     <!--Départements-->
@@ -712,20 +771,20 @@
         <numericalAttribute type="nt_Latitude" value="47.35"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nantes"/>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nantes"/>-->
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintNazaire"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaubriant"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaubriant"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ancenis"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Nantes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nantes"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintNazaire"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Chateaubriant"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Chateaubriant"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Ancenis"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintHerblain"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Reze"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MaineEtLoire"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
       </relationList>
     </element>
     <element id="el_MaineEtLoire" sortKey="49" type="et_Departement" minLevel="0">
@@ -770,8 +829,8 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IndreEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VienneDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>
       </relationList>
     </element>
     <element id="el_MeurtheEtMoselle" sortKey="54" type="et_Departement" minLevel="0">
@@ -931,10 +990,10 @@
         <numericalAttribute type="nt_Latitude" value="45.88"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Lyon"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_VillefrancheSurSaone"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Lyon"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_VillefrancheSurSaone"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Lyon"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_VillefrancheSurSaone"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_VillefrancheSurSaone"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Villeurbanne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Venissieux"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintPriest"/>
@@ -1230,6 +1289,377 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 44-->
+    <element id="el_SaintNazaire" type="et_Ville" minLevel="1">
+      <elementName>
+        <name language="fr" text="Saint-Nazaire"/>
+        <name language="en" text="Saint-Nazaire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Saint-Nazaire"/>
+          <value language="en" value="Saint-Nazaire"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Saint-Nazaire"/>
+          <value language="en" value="Saint-Nazaire"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="66910"/>
+        <numericalAttribute type="nt_Longitude" value="-2.213717"/>
+        <numericalAttribute type="nt_Latitude" value="47.274331"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 69-->
+    <element id="el_Lyon" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Lyon"/>
+        <name language="en" text="Lyon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Lyon"/>
+          <value language="en" value="Lyon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Lyon"/>
+          <value language="en" value="Lyon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="474946"/>
+        <numericalAttribute type="nt_Longitude" value="4.835659"/>
+        <numericalAttribute type="nt_Latitude" value="45.764043"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes étrangères sur cours d'eau passant en France-->
+    <element id="el_Coblence" type="et_Ville" minLevel="2" >
+      <elementName>
+        <name language="fr" text="Coblence"/>
+        <name language="en" text="Koblenz"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Coblence"/>
+          <value language="en" value="Koblenz"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Coblence"/>
+          <value language="en" value="Koblenz"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="106295"/>
+        <numericalAttribute type="nt_Longitude" value="7.599617"/>
+        <numericalAttribute type="nt_Latitude" value="50.356696"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Fleuves et rivières-->
+    <element id="el_Rhin" type="et_FleuveRiviere" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Rhin"/>
+        <name language="en" text="Rhine" />
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="Le Rhin"/>
+          <value language="en" value="Rhine"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Rhin"/>
+          <value language="en" value="Rhine"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="le Rhin"/>
+          <value language="en" value="Rhine"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="le Rhin est-il"/>
+          <value language="en" value="Rhine"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longueur" value="1320"/>
+        <numericalAttribute type="nt_Longitude" value="7.9"/>
+        <numericalAttribute type="nt_Latitude" value="50"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_HautRhin"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BasRhin"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Coblence"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Cologne"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Rotterdam"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Ill"/>-->
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_MoselleRiviere"/>
+      </relationList>
+    </element>
+    <element id="el_RhoneFleuve" type="et_FleuveRiviere" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Rhône"/>
+        <name language="en" text="Rhône" />
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="Le Rhône"/>
+          <value language="en" value="Rhône"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Rhône"/>
+          <value language="en" value="Rhône"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="le Rhône"/>
+          <value language="en" value="Rhône"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="le Rhône est-il"/>
+          <value language="en" value="Rhône"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longueur" value="812"/>
+        <numericalAttribute type="nt_Longitude" value="5.6"/>
+        <numericalAttribute type="nt_Latitude" value="45.6"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HauteSavoie"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_AinDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Savoie"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_RhoneDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_IsereDepartement"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoireDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_ArdecheDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_DromeDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Vaucluse"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_GardDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BouchesDuRhone"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Villeurbanne"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Lyon"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_VienneVille"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_TournonSurRhone"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Valence"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Montelimar"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Avignon"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Arles"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_AinRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Saone"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_IsereRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_DromeRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_ArdecheRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Eygues"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Durance"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_GardRiviere"/>-->
+      </relationList>
+    </element>
+    <element id="el_LoireFleuve" type="et_FleuveRiviere" minLevel="0">
+      <elementName>
+        <name language="fr" text="Loire"/>
+        <name language="en" text="Loire" />
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Loire"/>
+          <value language="en" value="Loire"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Loire"/>
+          <value language="en" value="Loire"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Loire"/>
+          <value language="en" value="Loire"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Loire est-elle"/>
+          <value language="en" value="Loire"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longueur" value="1013"/>
+        <numericalAttribute type="nt_Longitude" value="2.5"/>
+        <numericalAttribute type="nt_Latitude" value="47.5"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_ArdecheDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_HauteLoire"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoireDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_SaoneEtLoire"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_AllierDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_Nievre"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_CherDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Loiret"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoirEtCher"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_IndreEtLoire"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_MaineEtLoire"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoireAtlantique"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Roanne"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Nevers"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_CosneCoursSurLoire"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Orleans"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Blois"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Tours"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Saumur"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Ancenis"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Nantes"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_SaintNazaire"/>
+        <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_AllierRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_CherRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_IndreRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_VienneRiviere"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Thouet"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Maine"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_SevreNantaise"/>-->
+        <relation type="r11_Fleuve_VilleEmbouchure" linkedElement="el_SaintNazaire"/>
+      </relationList>
+    </element>
+    <element id="el_MoselleRiviere" type="et_FleuveRiviere" minLevel="0">
+      <elementName>
+        <name language="fr" text="Moselle"/>
+        <name language="en" text="Moselle"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Moselle"/>
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Moselle"/>
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Moselle"/>
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Moselle est-elle"/>
+          <value language="en" value="Moselle"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Moselle et du Rhin"/>
+          <value language="en" value="Moselle and the Rhine"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longueur" value="560"/>
+        <numericalAttribute type="nt_Longitude" value="6.2"/>
+        <numericalAttribute type="nt_Latitude" value="49.25"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_Vosges"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_MeurtheEtMoselle"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_MoselleDepartement"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Epinal"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Toul"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Metz"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Thionville"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Konz"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Meurthe"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Sarre"/>-->
+        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Coblence"/>
+      </relationList>
+    </element>
+    <!--Destinations de fleuves-->
+    <element id="el_OceanAtlantique" type="et_DestinationFleuve" minLevel="0">
+      <elementName>
+        <name language="fr" text="Océan Atlantique"/>
+        <name language="en" text="Atlantic Ocean"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Dans l'océan Atlantique"/>
+          <value language="en" value="Into the Atlantic Ocean"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'océan Atlantique"/>
+          <value language="en" value="Atlantic Ocean"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r1N_Destination_Fleuves" linkedElement="el_Blavet"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Vilaine"/>-->
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_LoireFleuve"/>
+        <!--<relation type="r1N_Destination_Fleuves" linkedElement="el_SevreNiortaise"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_CharenteFleuve"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Adour"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Maroni"/>-->
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_PyreneesAtlantiques"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Landes"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Gironde"/>-->
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_CharenteMaritime"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Morbihan"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Finistere"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Guadeloupe"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Martinique"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Guyanne"/>-->
+      </relationList>
+    </element>
+    <element id="el_MerMediterranee" type="et_DestinationFleuve" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Mer Méditerranée"/>
+        <name language="en" text="Mediterranean Sea"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Dans la mer Méditerranée"/>
+          <value language="en" value="Into the Mediterranean Sea"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la mer Méditerranée"/>
+          <value language="en" value="Mediterranean Sea"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r1N_Destination_Fleuves" linkedElement="el_VarFleuve"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Argens"/>-->
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_RhoneFleuve"/>
+        <!--<relation type="r1N_Destination_Fleuves" linkedElement="el_HeraultFleuve"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Orb"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_AudeFleuve"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Tet"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Tech"/>-->
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_AlpesMaritimes"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_AudeDepartement"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_PyreneesOrientales"/>-->
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_CorseDuSud"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_HauteCorse"/>
+      </relationList>
+    </element>
+    <element id="el_MerDuNord" type="et_DestinationFleuve" minLevel="0">
+      <elementName>
+        <name language="fr" text="Mer du Nord"/>
+        <name language="en" text="North Sea"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Dans la mer du Nord"/>
+          <value language="en" value="Into the North Sea"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la mer du Nord"/>
+          <value language="en" value="North Sea"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="r1N_Destination_Fleuves" linkedElement="el_Escaut"/>
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_MeuseFleuve"/>-->
+        <relation type="r1N_Destination_Fleuves" linkedElement="el_Rhin"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_PasDeCalais"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Nord"/>-->
+      </relationList>
+    </element>
   </elementList>
   
   <questionCategories>
@@ -1259,57 +1689,63 @@
       <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/>
+        <questionText language="en" text="What is the capital of the {0} département?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/>
+        <questionText language="en" text="What is the capital of the département whose number is {0}?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/>
-      </relation1QuestionCategory>-->
+        <questionText language="en" text="In which département is the city of {0}?"/>
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/>
+        <questionText language="en" text="What is the number of the département where the city of {0} is located?"/>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="De quelle région fait partie le département % ?"/>
-      <relation1QuestionCategory relation="r1N_Region_Departements" way="inverse" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
-                                 answerProximityCriterion="none" commentMode="none" weight="80" minLevel="2"
-                                 questionDrawDepth1="1" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="De quelle région fait partie le département dont le numéro est % ?"/>
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
+        <questionText language="fr" text="De quelle région fait partie le département {0} ?"/>
+        <questionText language="en" text="In what region is the {0} département?"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
+        <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
+        <questionText language="en" text="In what region is the département whose number is {0}?"/>
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/>
+        <questionText language="en" text="What river {0} is a tributary?"/>
       </relation1QuestionCategory>
-      <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="inverse" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
-                                 answerProximityCriterion="none" commentMode="none" weight="20" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="0" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Où se jette % ?"/>-->
-      <!--<relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
+      <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="NONE" commentMode="NONE" weight="20" minLevel="0">
+        <questionText language="fr" text="Où se jette {0} ?"/>
+        <questionText language="en" text="Where flows the {0}?"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
         <questionText language="fr" text="Dans quelle région se situe la ville {0} ?"/>
-        <questionText language="en" text="Todo: Translate [{0}]"/> 
+        <questionText language="en" text="In what region is the city of {0}?"/> 
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
+        <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
+        <questionText language="en" text="On which river is the city of {0}?"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="20" minLevel="1">
+        <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
+        <questionText language="en" text="In which city is the confluence of the {0}?"/>
       </relation1QuestionCategory>-->
-      <!--<relation1QuestionCategory relation="r1N_Riviere_Villes" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="75" minLevel="0"
-                                 questionDrawDepth1="3" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Sur quel cours d'eau se situe la ville % ?" />
-      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="direct" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="20" minLevel="1"
-                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="Dans quelle ville se situe le confluent % ?" />
-      <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="15" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="3" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="10" wrongChoiceDrawDepth2="0"
-                                 question="Près de quelle ville se situe l'embouchure % ?" />-->
+      <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
+        <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
+        <questionText language="en" text="Near which city is the mouth of the {0}?"/>
+      </relation1QuestionCategory>
     </relation1QuestionCategoryList>
   </questionCategories>
   

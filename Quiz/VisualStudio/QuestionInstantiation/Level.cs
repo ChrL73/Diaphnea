@@ -243,7 +243,7 @@ namespace QuestionInstantiation
 
                         double distribParameterCorrection = 0.0;
                         if (xmlAttributeQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeQuestionCategory.distribParameterCorrection;
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlAttributeQuestionCategory.answerProximityCriterion, distribParameterCorrection, questionNameInLog);
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlAttributeQuestionCategory.answerProximityCriterion, distribParameterCorrection);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
                         {
@@ -268,7 +268,7 @@ namespace QuestionInstantiation
                                         }
                                         if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
                                         category.addQuestion(question);
                                     }
                                 }
@@ -292,11 +292,11 @@ namespace QuestionInstantiation
                         {
                             if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                category.setComments(questionAttributeType, _quizData);
+                                category.setComments(questionAttributeType);
                             }
                             else if (xmlAttributeQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                category.setComments(null, _quizData);
+                                category.setComments(null);
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
@@ -390,7 +390,7 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelation1QuestionCategory.weight);
                         _weightSum += weight;
 
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, xmlRelation1QuestionCategory.answerProximityCriterion, distribParameterCorrection, questionNameInLog);
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelation1QuestionCategory.answerProximityCriterion, distribParameterCorrection);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -430,7 +430,10 @@ namespace QuestionInstantiation
                                         }
                                         if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
+                                        Choice ExcludedChoice = null;
+                                        if (startElementType == endElementType) ExcludedChoice = choiceDictionary[startElement];
+
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, ExcludedChoice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
                                         category.addQuestion(question);
                                     }
                                 }
@@ -457,13 +460,13 @@ namespace QuestionInstantiation
 				        {
                             if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (relation2Type == null) category.setComments(relationType, questionAttributeType, _quizData);
-                                else category.setComments(relationType, relation2Type, questionAttributeType, _quizData);
+                                if (relation2Type == null) category.setComments(relationType, questionAttributeType);
+                                else category.setComments(relationType, relation2Type, questionAttributeType);
                             }
                             else if (xmlRelation1QuestionCategory.commentMode == XmlCommentModeEnum.NAME)
                             {
-                                if (relation2Type == null) category.setComments(relationType, null, _quizData);
-                                else category.setComments(relationType, relation2Type, null, _quizData);
+                                if (relation2Type == null) category.setComments(relationType, null);
+                                else category.setComments(relationType, relation2Type, null);
                             }
 
                             MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",

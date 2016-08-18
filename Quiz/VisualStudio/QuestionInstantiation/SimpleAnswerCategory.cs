@@ -16,8 +16,8 @@ namespace QuestionInstantiation
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
 
-        internal SimpleAnswerCategory(Int32 weightIndex, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection, string questionNameInLog)
-            : base(weightIndex, questionNameInLog)
+        internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
+            : base(weightIndex, questionNameInLog, quizData)
         {
             _proximityCriterion = proximityCriterion;
             _distribParameterCorrection = distribParameterCorrection;
@@ -52,7 +52,7 @@ namespace QuestionInstantiation
             _questionList.Add(question);
         }
 
-        internal void setComments(XmlAttributeType attributeType, QuizData quizData)
+        internal void setComments(XmlAttributeType attributeType)
         {
             foreach (List<Choice> choiceList in _choiceDictionary.Values)
             {
@@ -70,13 +70,13 @@ namespace QuestionInstantiation
                     }
                 }
 
-                Text commentText = Text.fromTextList(textList, quizData);
+                Text commentText = Text.fromTextList(textList, QuizData);
 
                 foreach (Choice choice in choiceList) choice.Comment = commentText;
             }
         }
 
-        internal void setComments(RelationType relationType, XmlAttributeType attributeType, QuizData quizData)
+        internal void setComments(RelationType relationType, XmlAttributeType attributeType)
         {
             relationType = relationType.ReciprocalType;
 
@@ -109,12 +109,12 @@ namespace QuestionInstantiation
                         }
                     }
 
-                    choice.Comment = Text.fromTextList(textList, quizData);
+                    choice.Comment = Text.fromTextList(textList, QuizData);
                 }
             }
         }
 
-        internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType, QuizData quizData)
+        internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType)
         {
             throw new NotImplementedException();
         }
@@ -165,7 +165,7 @@ namespace QuestionInstantiation
             BsonArray questionsArray = new BsonArray();
             foreach (SimpleAnswerQuestion question in _questionList)
             {
-                questionsArray.Add(question.getBsonDocument());
+                questionsArray.Add(question.getBsonDocument(QuizData));
             }
 
             BsonDocument questionsDocument = new BsonDocument()

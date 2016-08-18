@@ -10,19 +10,21 @@ namespace QuestionInstantiation
     class SimpleAnswerQuestion
     {
         private readonly Text _questionText;
-        //private readonly Element _element;
         private readonly Choice _choice;
+        private readonly Choice _excludedChoice;
+        //private readonly Element _element;
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
 
-        internal SimpleAnswerQuestion(Text questionText, Choice choice/*, Element element*/, XmlAnswerProximityCriterionEnum proximityCriterion)
+        internal SimpleAnswerQuestion(Text questionText, Choice choice, Choice excludedChoice/*, Element element*/, XmlAnswerProximityCriterionEnum proximityCriterion)
         {
             _questionText = questionText;
-            //_element = element;
             _choice = choice;
+            _excludedChoice = excludedChoice;
+            //_element = element;
             _proximityCriterion = proximityCriterion;
         }
 
-        internal BsonDocument getBsonDocument()
+        internal BsonDocument getBsonDocument(QuizData quizData)
         {
             BsonDocument questionDocument = new BsonDocument()
             {
@@ -30,6 +32,15 @@ namespace QuestionInstantiation
             };
 
             questionDocument.AddRange(_choice.getBsonDocument());
+
+            if (_excludedChoice != null)
+            {
+                questionDocument.AddRange(new BsonDocument() { { "excluded_choice", _excludedChoice.AttributeValue.Value.getBsonDocument() } });
+            }
+            else
+            {
+                questionDocument.AddRange(new BsonDocument() { { "excluded_choice", Text.emptyText(quizData).getBsonDocument() } });
+            }
 
             if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
             {

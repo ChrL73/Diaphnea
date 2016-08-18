@@ -7,9 +7,9 @@
 
 namespace produce_questions
 {
-    SimpleAnswerQuestion::SimpleAnswerQuestion(const std::string& question, const std::string& answer, const std::string& comment, ProximityCriterionTypeEnum proximityCriterionType,
+    SimpleAnswerQuestion::SimpleAnswerQuestion(const std::string& question, const std::string& answer, const std::string& comment, const std::string& excludedChoice, ProximityCriterionTypeEnum proximityCriterionType,
                                                double doubleCriterionValue, const std::string& stringCriterionValue, const Point *pointCriterionValue, const std::vector<const Choice *>& choiceVector) :
-            _question(question), _answer(answer), _comment(comment), _proximityCriterionType(proximityCriterionType),
+            _question(question), _answer(answer), _comment(comment), _excludedChoice(excludedChoice), _proximityCriterionType(proximityCriterionType),
             _doubleCriterionValue(doubleCriterionValue), _stringCriterionValue(stringCriterionValue), _pointCriterionValue(pointCriterionValue)
     {
         if (_proximityCriterionType == produce_questions::STRING)
@@ -33,12 +33,12 @@ namespace produce_questions
                 {
                     --it1;
                     const Choice *choice = (*it1).second;
-                    if (choice->getChoiceText() != _answer) _sortedWrongChoiceVector1.push_back(choice);
+                    if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector1.push_back(choice);
                 }
                 if (it2 != choiceMultimap.end())
                 {
                     const Choice *choice = (*it2).second;
-                    if (choice->getChoiceText() != _answer) _sortedWrongChoiceVector2.push_back(choice);
+                    if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector2.push_back(choice);
                     ++it2;
                 }
                 if (it1 == choiceMultimap.begin() && it2 == choiceMultimap.end()) break;
@@ -65,12 +65,12 @@ namespace produce_questions
                 {
                     --it1;
                     const Choice *choice = (*it1).second;
-                    if (choice->getChoiceText() != _answer) _sortedWrongChoiceVector1.push_back(choice);
+                    if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector1.push_back(choice);
                 }
                 if (it2 != choiceMultimap.end())
                 {
                     const Choice *choice = (*it2).second;
-                    if (choice->getChoiceText() != _answer) _sortedWrongChoiceVector2.push_back(choice);
+                    if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector2.push_back(choice);
                     ++it2;
                 }
                 if (it1 == choiceMultimap.begin() && it2 == choiceMultimap.end()) break;
@@ -104,14 +104,20 @@ namespace produce_questions
             }
 
             std::multimap<double, const Choice *>::iterator it = choiceMultimap.begin();
-            for (; it!=choiceMultimap.end(); ++it)
+            for (; it != choiceMultimap.end(); ++it)
             {
-                _sortedWrongChoiceVector1.push_back ((*it).second);
+                const Choice *choice = (*it).second;
+                if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector1.push_back(choice);
             }
         }
         else
         {
-
+            int i, n = choiceVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                const Choice *choice = choiceVector[i];
+                if (choice->getChoiceText() != _answer && choice->getChoiceText() != _excludedChoice) _sortedWrongChoiceVector1.push_back(choice);
+            }
         }
     }
 

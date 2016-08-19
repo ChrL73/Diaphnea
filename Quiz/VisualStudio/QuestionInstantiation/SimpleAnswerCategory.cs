@@ -10,7 +10,6 @@ namespace QuestionInstantiation
 {
     class SimpleAnswerCategory : Category
     {
-        //private readonly List<Choice> _choiceList = new List<Choice>();
         private readonly SortedDictionary<Text, List<Choice>> _choiceDictionary = new SortedDictionary<Text, List<Choice>>(new TextComparer());
         private readonly List<SimpleAnswerQuestion> _questionList = new List<SimpleAnswerQuestion>();
         private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
@@ -33,15 +32,8 @@ namespace QuestionInstantiation
             get { return _choiceDictionary.Count; }
         }
 
-        /*internal int TotalChoiceCount
-        {
-            get { return _choiceList.Count; }
-        }*/
-
         internal void addChoice(Choice choice)
         {
-            //_choiceList.Add(choice);
-
             Text choiceText = choice.AttributeValue.Value;
             if (!_choiceDictionary.ContainsKey(choiceText)) _choiceDictionary.Add(choiceText, new List<Choice>());
             _choiceDictionary[choiceText].Add(choice);

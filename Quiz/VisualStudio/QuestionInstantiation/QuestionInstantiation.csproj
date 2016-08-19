@@ -59,6 +59,8 @@
     <Compile Include="GeoPoint.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="MessageLogger.cs" />
+    <Compile Include="MultipleAnswerCategory.cs" />
+    <Compile Include="MultipleAnswerQuestion.cs" />
     <Compile Include="NumericalAttributeValue.cs" />
     <Compile Include="Choice.cs" />
     <Compile Include="Questionnaire.cs" />

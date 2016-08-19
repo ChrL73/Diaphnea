@@ -431,7 +431,7 @@ namespace QuestionInstantiation
                                         if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
                                         Choice ExcludedChoice = null;
-                                        if (startElementType == endElementType) ExcludedChoice = choiceDictionary[startElement];
+                                        if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
                                         SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, ExcludedChoice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
                                         category.addQuestion(question);
@@ -562,170 +562,141 @@ namespace QuestionInstantiation
                             return -1;
                         }
 
-				        /*const wchar_t *answerAttr = XmlFunctions::get_relationNQuestionCategory_answerAttribute (i);
-				        const AttributeType *answerAttributeType = attributeTypeMap[answerAttr];
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlRelationNQuestionCategory.answerAttribute);
 
-				        const wchar_t *criterion = XmlFunctions::get_relationNQuestionCategory_answerProximityCriterion (i);
-				        ProximityCriterionEnum proximityCriterion;
-				        if (criterion[0] == 'a') proximityCriterion = ATTRIBUTE_VALUE;
-				        else if (criterion[0] == 's') proximityCriterion = SORT_KEY;
-				        else if (criterion[0] == 'e') proximityCriterion = ELEMENT_LOCATION;
-				        else proximityCriterion = NO_CRITERION;
+                        double distribParameterCorrection = 0.0;
+                        if (xmlRelationNQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlRelationNQuestionCategory.distribParameterCorrection;
 
-				        int questionDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_questionDrawDepth1 (i);
-				        int answerDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_answerDrawDepth1 (i);
-				        int wrongChoiceDrawDepth1 = XmlFunctions::get_relationNQuestionCategory_wrongChoiceDrawDepth1 (i);
-				        int questionDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_questionDrawDepth2 (i);
-				        int answerDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_answerDrawDepth2 (i);
-				        int wrongChoiceDrawDepth2 = XmlFunctions::get_relationNQuestionCategory_wrongChoiceDrawDepth2 (i);
-				        double distribParameterCorrection = XmlFunctions::get_relationNQuestionCategory_distribParameterCorrection (i);
+                        Int32 weight = Int32.Parse(xmlRelationNQuestionCategory.weight);
+                        _weightSum += weight;
 
-				        int weight = XmlFunctions::get_relationNQuestionCategory_weight (i);
-				        _weightSum += weight;
+                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationNQuestionCategory.answerProximityCriterion, distribParameterCorrection);
+                        Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
-				        MultipleAnswerCategory *category = new MultipleAnswerCategory (_weightSum, proximityCriterion, startElementType, endElementType, distribParameterCorrection, wrongChoiceDrawDepth1, wrongChoiceDrawDepth2);
-				        std::map<const Element *, const PossibleAnswer *> possibleAnswerMap;
+                        foreach (Element endElement in _elementByTypeDictionary[endElementType])
+                        {
+                            AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
+                            if (answerAttributeValue != null)
+                            {
+                                if (xmlRelationNQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
+                                {
+                                    Choice choice = new Choice(answerAttributeValue, endElement, _quizData);
+                                    category.addChoice(choice);
+                                    choiceDictionary.Add(endElement, choice);
+                                }
+                            }
+                        }
 
-				        std::vector<const Element *> endElementVector = (*endEltIt).second;
-				        int elementCount = endElementVector.size();
-				        int j;
-				        for (j=0; j<elementCount; ++j)
-				        {
-					        const Element *endElement = endElementVector[j];
-					        const AttributeValue *answerAttributeValue = endElement->getAttributeValue (answerAttributeType);
-					        if (answerAttributeValue != 0)
-					        {
-						        const PossibleAnswer *answer = new PossibleAnswer (answerAttributeValue, endElement);
-						        category->addAnswer (answer);
-						        possibleAnswerMap.insert (std::pair<const Element *, const PossibleAnswer *>(endElement, answer));
-					        }
-				        }
-				
-				        std::vector<const Element *> startElementVector = (*startEltIt).second;
-				        elementCount = startElementVector.size();
-				        for (j=0; j<elementCount; ++j)
-				        {
-					        const Element *startElement = startElementVector[j];
-					        const AttributeValue *questionAttributeValue = startElement->getAttributeValue (questionAttributeType);
+                        foreach (Element startElement in _elementByTypeDictionary[startElementType])
+                        {
+                            AttributeValue questionAttributeValue = startElement.getAttributeValue(questionAttributeType);
 
-					        if (questionAttributeValue != 0)
-					        {
-						        MultipleAnswerQuestion *question = 0;
-						        std::set<const Element *> mapElementSet1, mapElementSet2;
-                                std::set<const Element *> mainMapElementSet;
-						        std::set<const Element *> endElementSet;
-						        int k, linkedElementCount1 = startElement->getLinkedNElementCount (relationType);
-						        bool relation1Is1 = false;
-						        if (linkedElementCount1 == 0 && startElement->getLinked1Element (relationType) != 0)
-						        {
-							        relation1Is1 = true;
-							        linkedElementCount1 = 1;
-						        }
+                            if (questionAttributeValue != null)
+                            {
+                                MultipleAnswerQuestion question = null;
+                                Dictionary<Element, int> endElementDictionary = new Dictionary<Element, int>();
+                                int k, linkedElementCount1 = startElement.getLinkedNElementCount(relationType);
+                                bool relation1Is1 = false;
+                                if (linkedElementCount1 == 0 && startElement.getLinked1Element(relationType) != null)
+                                {
+                                    relation1Is1 = true;
+                                    linkedElementCount1 = 1;
+                                }
 
-						        for (k=0; k<linkedElementCount1; ++k)
-						        {
-							        const Element *endElement1;
-							        if (relation1Is1) endElement1 = startElement->getLinked1Element (relationType);
-							        else endElement1 = startElement->getLinkedNElement (relationType, k);
+                                for (k = 0; k < linkedElementCount1; ++k)
+                                {
+                                    Element endElement1;
+                                    if (relation1Is1) endElement1 = startElement.getLinked1Element(relationType);
+                                    else endElement1 = startElement.getLinkedNElement(relationType, k);
 							
-							        if (rel2Type[0] != 0)
-							        {
-								        int l, linkedElementCount2 = endElement1->getLinkedNElementCount (relation2Type);
-								        if (linkedElementCount2 == 0 && endElement1->getLinked1Element (relation2Type) != 0)
-								        {
-									        endElementSet.insert (endElement1->getLinked1Element (relation2Type));
-								        }
-								        else
-								        {
-									        for (l=0; l<linkedElementCount2; ++l) endElementSet.insert (endElement1->getLinkedNElement (relation2Type, l));
-								        }
-							        }
-							        else
-							        {
-								        endElementSet.insert (endElement1);
-							        }
-						        }
+                                    if (relation2Type != null)
+                                    {
+                                        int l, linkedElementCount2 = endElement1.getLinkedNElementCount(relation2Type);
+                                        if (linkedElementCount2 == 0 && endElement1.getLinked1Element(relation2Type) != null)
+                                        {
+                                            endElementDictionary.Add(endElement1.getLinked1Element(relation2Type), 0);
+                                        }
+                                        else
+                                        {
+                                            for (l = 0; l < linkedElementCount2; ++l) endElementDictionary.Add(endElement1.getLinkedNElement(relation2Type, l), 0);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        endElementDictionary.Add(endElement1, 0);
+                                    }
+                                }
 			
-						        if (endElementSet.size() != 0)
-						        {
-							        std::wstring questionText (questionTemplate);
-							        questionText.replace (questionText.find ('%'), 1, questionAttributeValue->getValue());
-							        question = new MultipleAnswerQuestion (questionText, startElement);
-							        startElement->getMapElements (0, mapElementSet2, questionDrawDepth1, 0);
-                                    std::set<const Element *>::iterator it = mapElementSet2.begin();
-	                                for (; it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
-                                    mapElementSet2.clear();
-							        startElement->getMapElements (1, mapElementSet2, questionDrawDepth2, 0);
-                                    for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
-                                    mapElementSet2.clear();
-                                    mainMapElementSet.insert (startElement);
+                                if (endElementDictionary.Count != 0)
+                                {
+                                    Text questionText = new Text();
+                                    foreach (XmlQuestionText xmlQuestionText in xmlRelationNQuestionCategory.questionText)
+                                    {
+                                        string languageId = xmlQuestionText.language.ToString();
+                                        string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                        questionText.setText(languageId, questionString);
+                                    }
+                                    if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-							        std::set<const Element *>::iterator eltIt = endElementSet.begin();
-							        for (; eltIt!=endElementSet.end(); ++eltIt)
-							        {
-								        const Element *endElement = (*eltIt);
-								        const AttributeValue *answerAttributeValue = endElement->getAttributeValue (answerAttributeType);
-								        if (answerAttributeValue != 0)
-								        {
-									        const PossibleAnswer *answer = possibleAnswerMap[endElement];
-									        endElement->getMapElements (0, mapElementSet2, answerDrawDepth1, 0);
-                                            for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
-                                            mapElementSet2.clear();
-									        endElement->getMapElements (1, mapElementSet2, answerDrawDepth2, 0);
-                                            for (it=mapElementSet2.begin(); it!=mapElementSet2.end(); ++it) mapElementSet1.insert (*it);
-                                            mapElementSet2.clear();
-									        question->addAnswer (answer);
-								        }
-							        }	
-						        }	
+                                    Choice ExcludedChoice = null;
+                                    if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
-						        if (question != 0 && question->getAnswerCount() != 0)
-						        {
-							        question->addMapElements (mapElementSet1, mainMapElementSet);
-							        category->addQuestion (question);
-						        }
-						        else
-						        {
-							        delete question;
-						        }
-					        }
-				        }
+                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice/*, startElement*/, xmlRelationNQuestionCategory.answerProximityCriterion);
 
-				        unsigned int possibleAnswerCount = category->getDistinctAnswerCount();
-				        if (startElementType == endElementType) --possibleAnswerCount;
+                                    foreach(Element endElement in endElementDictionary.Keys)
+                                    {
+                                        AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
+                                        if (answerAttributeValue != null && choiceDictionary.ContainsKey(endElement))
+                                        {
+                                            Choice choice = choiceDictionary[endElement];
+                                            question.addChoice(choice);
+                                        }
+                                    }
+                                }	
 
-				        if (category->getQuestionCount() == 0)
-				        {
-					        emptyCategoryWarning2 (questionTemplate);
-					        _weightSum -= weight;
-					        delete category;
-				        }
-				        else if (possibleAnswerCount < _choiceCount)
-				        {
-					        notEnoughAnswerWarning (possibleAnswerCount, questionTemplate);
-					        _weightSum -= weight;
-					        delete category;
-				        }
-				        else
-				        {
-                            const wchar_t *commentMode = XmlFunctions::get_relationNQuestionCategory_commentMode (i);
-                            if (commentMode[0] == 'q')
-                            {
-                                if (relation2Type == 0) category->setComments (relationType, questionAttributeType);
-                                else category->setComments (relationType, relation2Type, questionAttributeType);
+                                if (question != null && question.getChoiceCount() != 0)
+                                {
+                                    category.addQuestion(question);
+                                }
                             }
-                            else if (commentMode[1] == 'a')
+                        }
+
+                        int choiceCount = category.ChoiceCount;
+                        if (startElementType == endElementType) --choiceCount;
+
+                        if (category.QuestionCount == 0)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
+                                _nameInLog, questionNameInLog));
+                            _weightSum -= weight;
+                        }
+                        else if (choiceCount < _choiceCount)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                               "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
+                               _nameInLog, questionNameInLog, choiceCount, _choiceCount));
+                            _weightSum -= weight;
+                        }
+                        else
+                        {
+                            if (xmlRelationNQuestionCategory.commentMode == XmlCommentModeEnum.QUESTION_ATTRIBUTE)
                             {
-                                if (relation2Type == 0) category->setComments (relationType, 0);
-                                else category->setComments (relationType, relation2Type, 0);
+                                if (relation2Type == null) category.setComments(relationType, questionAttributeType);
+                                else category.setComments(relationType, relation2Type, questionAttributeType);
+                            }
+                            else if (xmlRelationNQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
+                            {
+                                if (relation2Type == null) category.setComments(relationType, null);
+                                else category.setComments(relationType, relation2Type, null);
                             }
 
-					        questionCountInfoMessage1 (category->getQuestionCount(), possibleAnswerCount, questionTemplate);
-					        _categoryVector.push_back (category);
-					        _totalQuestionCount += category->getQuestionCount();
-				        }*/
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s), {3} choice(s)",
+                                _nameInLog, questionNameInLog, category.QuestionCount, choiceCount));
+                            _categoryList.Add(category);
+                            _totalQuestionCount += category.QuestionCount;
+                        }
                     }
-			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
+                    else if (!_elementByTypeDictionary.ContainsKey(startElementType))
 			        {
                         MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
                             "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",

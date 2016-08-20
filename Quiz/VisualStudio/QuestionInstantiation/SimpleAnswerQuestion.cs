@@ -13,9 +13,9 @@ namespace QuestionInstantiation
         private readonly Choice _choice;
         private readonly Choice _excludedChoice;
         //private readonly Element _element;
-        private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
+        private readonly XmlSimpleAnswerProximityCriterionEnum _proximityCriterion;
 
-        internal SimpleAnswerQuestion(Text questionText, Choice choice, Choice excludedChoice/*, Element element*/, XmlAnswerProximityCriterionEnum proximityCriterion)
+        internal SimpleAnswerQuestion(Text questionText, Choice choice, Choice excludedChoice/*, Element element*/, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
         {
             _questionText = questionText;
             _choice = choice;
@@ -42,14 +42,14 @@ namespace QuestionInstantiation
                 questionDocument.AddRange(new BsonDocument() { { "excluded_choice", Text.emptyText(quizData).getBsonDocument() } });
             }
 
-            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY)
             {
                 questionDocument.AddRange(new BsonDocument()
                 {
                     { "proximity_criterion_value", _choice.Element.XmlElement.sortKey }
                 });
             }
-            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
             {
                 Double? d = _choice.AttributeValue.Value.getAsDouble();
                 if (d == null) d = 0.0;
@@ -58,7 +58,7 @@ namespace QuestionInstantiation
                     { "proximity_criterion_value", d }
                 });
             }
-            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
             {
                 questionDocument.AddRange(new BsonDocument()
                 {
@@ -68,6 +68,5 @@ namespace QuestionInstantiation
 
             return questionDocument;
         }
-
     }
 }

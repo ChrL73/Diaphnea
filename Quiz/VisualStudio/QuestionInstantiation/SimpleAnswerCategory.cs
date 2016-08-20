@@ -12,10 +12,10 @@ namespace QuestionInstantiation
     {
         private readonly SortedDictionary<Text, List<Choice>> _choiceDictionary = new SortedDictionary<Text, List<Choice>>(new TextComparer());
         private readonly List<SimpleAnswerQuestion> _questionList = new List<SimpleAnswerQuestion>();
-        private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
+        private readonly XmlSimpleAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
 
-        internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
+        internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlSimpleAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
             : base(weightIndex, questionNameInLog, quizData)
         {
             _proximityCriterion = proximityCriterion;
@@ -88,8 +88,7 @@ namespace QuestionInstantiation
                     for (i = 0; i < n; ++i) questionElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
 
                     foreach (Element questionElement in questionElementDictionary.Keys)
-                    {
-                        
+                    {    
                         if (attributeType == null)
                         {
                             textList.Add(questionElement.Name);
@@ -122,15 +121,15 @@ namespace QuestionInstantiation
             choiceListsCollection.InsertOne(choiceListDocument);
 
             string proximityCriterionType = "none";
-            if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+            if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY)
             {
                 proximityCriterionType = "string";
             }
-            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
             {
                 proximityCriterionType = "number";
             }
-            else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
             {
                 proximityCriterionType = "3d_point";
             }
@@ -183,14 +182,14 @@ namespace QuestionInstantiation
                     { "comment", list[0].Comment.getBsonDocument() }
                 };
 
-                if (_proximityCriterion != XmlAnswerProximityCriterionEnum.NONE)
+                if (_proximityCriterion != XmlSimpleAnswerProximityCriterionEnum.NONE)
                 {
                     BsonArray proximityCriterionArray = new BsonArray();
-                    if (_proximityCriterion == XmlAnswerProximityCriterionEnum.SORT_KEY)
+                    if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY)
                     {
                         foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.XmlElement.sortKey);
                     }
-                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+                    else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
                     {
                         foreach (Choice choice in list)
                         {
@@ -208,7 +207,7 @@ namespace QuestionInstantiation
                             }
                         }
                     }
-                    else if (_proximityCriterion == XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+                    else if (_proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
                     {
                         foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
                     }

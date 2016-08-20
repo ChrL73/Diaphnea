@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,9 @@ namespace QuestionInstantiation
         private readonly List<Choice> _choiceList = new List<Choice>();
         private readonly Choice _excludedChoice;
         //private readonly Element _element;
-        private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
+        private readonly XmlMultipleAnswerProximityCriterionEnum _proximityCriterion;
 
-        internal MultipleAnswerQuestion(Text questionText, Choice excludedChoice/*, Element element*/, XmlAnswerProximityCriterionEnum proximityCriterion)
+        internal MultipleAnswerQuestion(Text questionText, Choice excludedChoice/*, Element element*/, XmlMultipleAnswerProximityCriterionEnum proximityCriterion)
         {
             _questionText = questionText;
             _excludedChoice = excludedChoice;
@@ -37,6 +38,40 @@ namespace QuestionInstantiation
         internal Choice getChoice(int i)
         {
             return _choiceList.ElementAt(i);
+        }
+
+        internal BsonDocument getBsonDocument(QuizData quizData)
+        {
+            BsonDocument questionDocument = new BsonDocument()
+            {
+                { "question", _questionText.getBsonDocument() }
+            };
+
+            BsonArray choiceArray = new BsonArray();
+            foreach (Choice choice in _choiceList) choiceArray.Add(choice.getBsonDocument());
+            questionDocument.AddRange(new BsonDocument() { { "answers", choiceArray } });
+
+            if (_excludedChoice != null)
+            {
+                questionDocument.AddRange(new BsonDocument() { { "excluded_choice", _excludedChoice.AttributeValue.Value.getBsonDocument() } });
+            }
+            else
+            {
+                questionDocument.AddRange(new BsonDocument() { { "excluded_choice", Text.emptyText(quizData).getBsonDocument() } });
+            }
+
+            if (_proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                List<GeoPoint> pointList = new List<GeoPoint>();
+                foreach (Choice choice in _choiceList) pointList.Add(choice.Element.GeoPoint);
+                GeoPoint meanGeoPoint = GeoPoint.meanGeoPoint(pointList);
+                questionDocument.AddRange(new BsonDocument()
+                {
+                    { "proximity_criterion_value", meanGeoPoint.getBsonDocument() }
+                });
+            }
+
+            return questionDocument;
         }
     }
 }

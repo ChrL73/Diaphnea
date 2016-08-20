@@ -13,7 +13,7 @@ namespace QuestionInstantiation
         private readonly double _y;
         private readonly double _z;
 
-        public GeoPoint(double longitude, double latitude)
+        internal GeoPoint(double longitude, double latitude)
         {
             const double a = 3.1415926535897932384626433832795 / 180.0;
             longitude *= a;
@@ -23,6 +23,32 @@ namespace QuestionInstantiation
             _x = r * Math.Cos(longitude) * Math.Cos(latitude);
             _y = r * Math.Sin(longitude) * Math.Cos(latitude);
             _z = r * Math.Sin(latitude);
+        }
+
+        internal GeoPoint(double x, double y, double z)
+        {
+            _x = x;
+            _y = y;
+            _z = z;
+        }
+
+        static internal GeoPoint meanGeoPoint(IEnumerable<GeoPoint> geoPoints)
+        {
+            double x = 0.0, y = 0.0, z = 0.0;
+
+            foreach(GeoPoint point in geoPoints)
+            {
+                x += point._x;
+                y += point._y;
+                z += point._z;
+            }
+
+            double invN = 1.0 / (double)geoPoints.Count();
+            x *= invN;
+            y *= invN;
+            z *= invN;
+
+            return new GeoPoint(x, y, z);
         }
 
         internal BsonDocument getBsonDocument()

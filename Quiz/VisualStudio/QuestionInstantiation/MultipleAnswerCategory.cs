@@ -12,10 +12,10 @@ namespace QuestionInstantiation
     {
         private readonly SortedDictionary<Text, List<Choice>> _choiceDictionary = new SortedDictionary<Text, List<Choice>>(new TextComparer());
         private readonly List<MultipleAnswerQuestion> _questionList = new List<MultipleAnswerQuestion>();
-        private readonly XmlAnswerProximityCriterionEnum _proximityCriterion;
+        private readonly XmlMultipleAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
 
-        internal MultipleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
+        internal MultipleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlMultipleAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
             : base(weightIndex, questionNameInLog, quizData)
         {
             _proximityCriterion = proximityCriterion;
@@ -46,7 +46,41 @@ namespace QuestionInstantiation
 
         internal void setComments(RelationType relationType, XmlAttributeType attributeType)
         {
-            throw new NotImplementedException();
+            // Following code is the same as in SimpleAnswerQuestion.setComments(RelationType relationType, XmlAttributeType attributeType)
+            // => Todo: This code should not be duplicated
+            relationType = relationType.ReciprocalType;
+
+            foreach (List<Choice> choiceList in _choiceDictionary.Values)
+            {
+                if (choiceList.Count == 1)
+                {
+                    List<Text> textList = new List<Text>();
+                    Choice choice = choiceList[0];
+                    Element choiceElement = choice.Element;
+                    Dictionary<Element, int> questionElementDictionary = new Dictionary<Element, int>();
+
+                    Element qElement = choiceElement.getLinked1Element(relationType);
+                    if (qElement != null) questionElementDictionary.Add(qElement, 0);
+
+                    int i, n = choiceElement.getLinkedNElementCount(relationType);
+                    for (i = 0; i < n; ++i) questionElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
+
+                    foreach (Element questionElement in questionElementDictionary.Keys)
+                    {
+                        if (attributeType == null)
+                        {
+                            textList.Add(questionElement.Name);
+                        }
+                        else
+                        {
+                            AttributeValue attributeValue = questionElement.getAttributeValue(attributeType);
+                            if (attributeValue != null) textList.Add(attributeValue.Value);
+                        }
+                    }
+
+                    choice.Comment = Text.fromTextList(textList, QuizData);
+                }
+            }
         }
 
         internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType)
@@ -56,7 +90,93 @@ namespace QuestionInstantiation
 
         internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
         {
-            return null;
+            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
+            BsonDocument questionListDocument = getQuestionListDocument(questionnaireId);
+            questionListsCollection.InsertOne(questionListDocument);
+
+            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
+            BsonDocument choiceListDocument = getChoiceListDocument(questionnaireId);
+            choiceListsCollection.InsertOne(choiceListDocument);
+
+            string proximityCriterionType = "none";
+            if (_proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                proximityCriterionType = "3d_point";
+            }
+
+            BsonDocument categoryDocument = new BsonDocument()
+            {
+                { "type", "MultipleAnswer" },
+                { "question_count", _questionList.Count },
+                { "question_list", questionListDocument.GetValue("_id") },
+                { "choice_count", _choiceDictionary.Count },
+                { "choice_list", choiceListDocument.GetValue("_id") },
+                { "weight_index", WeightIndex },
+                { "distrib_parameter_correction", _distribParameterCorrection },
+                { "proximity_criterion_type", proximityCriterionType }
+            };
+
+            return categoryDocument;
+        }
+
+        internal BsonDocument getQuestionListDocument(string questionnaireId)
+        {
+            BsonDocument questionListDocument = new BsonDocument();
+
+            BsonArray questionsArray = new BsonArray();
+            foreach (MultipleAnswerQuestion question in _questionList)
+            {
+                questionsArray.Add(question.getBsonDocument(QuizData));
+            }
+
+            BsonDocument questionsDocument = new BsonDocument()
+            {
+                { "questionnaire", questionnaireId },
+                { "count", _questionList.Count },
+                { "questions", questionsArray }
+            };
+
+            questionListDocument.AddRange(questionsDocument);
+
+            return questionListDocument;
+        }
+
+        internal BsonDocument getChoiceListDocument(string questionnaireId)
+        {
+            BsonArray choicesArray = new BsonArray();
+            foreach (List<Choice> list in _choiceDictionary.Values)
+            {
+                BsonDocument choiceDocument = new BsonDocument()
+                {
+                    { "choice", list[0].AttributeValue.Value.getBsonDocument() },
+                    { "comment", list[0].Comment.getBsonDocument() }
+                };
+
+                if (_proximityCriterion != XmlMultipleAnswerProximityCriterionEnum.NONE)
+                {
+                    BsonArray proximityCriterionArray = new BsonArray();
+                    if (_proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+                    {
+                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
+                    }
+
+                    choiceDocument.AddRange(new BsonDocument() { { "proximity_criterion_values", proximityCriterionArray } });
+                }
+
+                choicesArray.Add(choiceDocument);
+            }
+
+            BsonDocument choicesDocument = new BsonDocument()
+            {
+                { "questionnaire", questionnaireId },
+                { "count", _choiceDictionary.Count },
+                { "choices", choicesArray }
+            };
+
+            BsonDocument choiceListDocument = new BsonDocument();
+            choiceListDocument.AddRange(choicesDocument);
+
+            return choiceListDocument;
         }
     }
 }

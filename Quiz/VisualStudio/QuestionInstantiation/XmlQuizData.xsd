@@ -288,7 +288,7 @@
     <xsd:attribute name="elementType" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
-    <xsd:attribute name="answerProximityCriterion" type="XmlAnswerProximityCriterionEnum" use="required" />
+    <xsd:attribute name="answerProximityCriterion" type="XmlSimpleAnswerProximityCriterionEnum" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
@@ -310,7 +310,7 @@
     <xsd:attribute name="way2" type="XmlWayEnum" use="optional"/>
     <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
-    <xsd:attribute name="answerProximityCriterion" type="XmlAnswerProximityCriterionEnum" use="required" />
+    <xsd:attribute name="answerProximityCriterion" type="XmlSimpleAnswerProximityCriterionEnum" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
@@ -332,7 +332,7 @@
     <xsd:attribute name="way2" type="XmlWayEnum" use="optional"/>
     <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
-    <xsd:attribute name="answerProximityCriterion" type="XmlAnswerProximityCriterionEnum" use="required" />
+    <xsd:attribute name="answerProximityCriterion" type="XmlMultipleAnswerProximityCriterionEnum" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
@@ -348,10 +348,16 @@
     <xsd:attribute name="language" type="XmlLanguageIdRef" use="required" />
     <xsd:attribute name="text" type="XmlString1P" use="required" />
   </xsd:complexType>
-  <xsd:simpleType name="XmlAnswerProximityCriterionEnum">
+  <xsd:simpleType name="XmlSimpleAnswerProximityCriterionEnum">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="ATTRIBUTE_VALUE_AS_NUMBER" />
       <xsd:enumeration value="SORT_KEY" />
+      <xsd:enumeration value="ELEMENT_LOCATION" />
+      <xsd:enumeration value="NONE" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlMultipleAnswerProximityCriterionEnum">
+    <xsd:restriction base="xsd:string">
       <xsd:enumeration value="ELEMENT_LOCATION" />
       <xsd:enumeration value="NONE" />
     </xsd:restriction>

@@ -252,7 +252,7 @@ namespace QuestionInstantiation
 
                             if (answerAttributeValue != null) 
                             {
-                                if (xmlAttributeQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || element.GeoPoint != null)
+                                if (xmlAttributeQuestionCategory.answerProximityCriterion != XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION || element.GeoPoint != null)
                                 {
                                     Choice choice = new Choice(answerAttributeValue, element, _quizData);
                                     category.addChoice(choice);
@@ -398,7 +398,7 @@ namespace QuestionInstantiation
                             AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
                             if (answerAttributeValue != null)
                             {
-                                if (xmlRelation1QuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
+                                if (xmlRelation1QuestionCategory.answerProximityCriterion != XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
                                 {
                                     Choice choice = new Choice(answerAttributeValue, endElement, _quizData);
                                     category.addChoice(choice);
@@ -578,7 +578,7 @@ namespace QuestionInstantiation
                             AttributeValue answerAttributeValue = endElement.getAttributeValue(answerAttributeType);
                             if (answerAttributeValue != null)
                             {
-                                if (xmlRelationNQuestionCategory.answerProximityCriterion != XmlAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
+                                if (xmlRelationNQuestionCategory.answerProximityCriterion != XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION || endElement.GeoPoint != null)
                                 {
                                     Choice choice = new Choice(answerAttributeValue, endElement, _quizData);
                                     category.addChoice(choice);

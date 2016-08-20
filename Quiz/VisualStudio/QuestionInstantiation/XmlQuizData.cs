@@ -295,7 +295,7 @@ public partial class XmlRelationNQuestionCategory {
     
     private string answerAttributeField;
     
-    private XmlAnswerProximityCriterionEnum answerProximityCriterionField;
+    private XmlMultipleAnswerProximityCriterionEnum answerProximityCriterionField;
     
     private double distribParameterCorrectionField;
     
@@ -397,7 +397,7 @@ public partial class XmlRelationNQuestionCategory {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public XmlAnswerProximityCriterionEnum answerProximityCriterion {
+    public XmlMultipleAnswerProximityCriterionEnum answerProximityCriterion {
         get {
             return this.answerProximityCriterionField;
         }
@@ -523,13 +523,7 @@ public enum XmlWayEnum {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
 [System.SerializableAttribute()]
-public enum XmlAnswerProximityCriterionEnum {
-    
-    /// <remarks/>
-    ATTRIBUTE_VALUE_AS_NUMBER,
-    
-    /// <remarks/>
-    SORT_KEY,
+public enum XmlMultipleAnswerProximityCriterionEnum {
     
     /// <remarks/>
     ELEMENT_LOCATION,
@@ -576,7 +570,7 @@ public partial class XmlRelation1QuestionCategory {
     
     private string answerAttributeField;
     
-    private XmlAnswerProximityCriterionEnum answerProximityCriterionField;
+    private XmlSimpleAnswerProximityCriterionEnum answerProximityCriterionField;
     
     private double distribParameterCorrectionField;
     
@@ -678,7 +672,7 @@ public partial class XmlRelation1QuestionCategory {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public XmlAnswerProximityCriterionEnum answerProximityCriterion {
+    public XmlSimpleAnswerProximityCriterionEnum answerProximityCriterion {
         get {
             return this.answerProximityCriterionField;
         }
@@ -746,6 +740,24 @@ public partial class XmlRelation1QuestionCategory {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
 [System.SerializableAttribute()]
+public enum XmlSimpleAnswerProximityCriterionEnum {
+    
+    /// <remarks/>
+    ATTRIBUTE_VALUE_AS_NUMBER,
+    
+    /// <remarks/>
+    SORT_KEY,
+    
+    /// <remarks/>
+    ELEMENT_LOCATION,
+    
+    /// <remarks/>
+    NONE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+[System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlAttributeQuestionCategory {
@@ -758,7 +770,7 @@ public partial class XmlAttributeQuestionCategory {
     
     private string answerAttributeField;
     
-    private XmlAnswerProximityCriterionEnum answerProximityCriterionField;
+    private XmlSimpleAnswerProximityCriterionEnum answerProximityCriterionField;
     
     private double distribParameterCorrectionField;
     
@@ -816,7 +828,7 @@ public partial class XmlAttributeQuestionCategory {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public XmlAnswerProximityCriterionEnum answerProximityCriterion {
+    public XmlSimpleAnswerProximityCriterionEnum answerProximityCriterion {
         get {
             return this.answerProximityCriterionField;
         }

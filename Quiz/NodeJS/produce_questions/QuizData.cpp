@@ -2,6 +2,8 @@
 #include "Level.h"
 #include "SimpleAnswerCategory.h"
 #include "SimpleAnswerQuestion.h"
+#include "MultipleAnswerCategory.h"
+#include "MultipleAnswerQuestion.h"
 #include "Choice.h"
 
 namespace produce_questions
@@ -113,7 +115,23 @@ namespace produce_questions
 
                         categoryVector.push_back(simpleAnswerCategory);
                     }
+                    else if (strcmp(categoryType, "MultipleAnswer") == 0)
+                    {
+                        int categoryQuestionCount = dbCategory.getIntField("question_count");
+                        std::string questionListId = dbCategory.getField("question_list").OID().toString();
+                        int categoryChoiceCount = dbCategory.getIntField("choice_count");
+                        std::string choiceListId = dbCategory.getField("choice_list").OID().toString();
+                        double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
 
+                        ProximityCriterionTypeEnum proximityCriterionType = produce_questions::NONE;
+                        const char *criterion = dbCategory.getStringField("proximity_criterion_type");
+                        if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
+
+                        MultipleAnswerCategory *multipleAnswerCategory = new MultipleAnswerCategory(weightIndex, categoryQuestionCount, questionListId, categoryChoiceCount,
+                                                                                                    choiceListId, distribParameterCorrection, proximityCriterionType);
+
+                        categoryVector.push_back(multipleAnswerCategory);
+                    }
                 }
 
                 Level *level = new Level(questionCount, choiceCount, categoryCount, weightSum, distribParameter, categoryVector);

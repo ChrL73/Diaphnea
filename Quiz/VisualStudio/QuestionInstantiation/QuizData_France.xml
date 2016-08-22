@@ -1686,12 +1686,12 @@
       </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
-      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} département?"/>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the capital of the département whose number is {0}?"/>
@@ -1748,33 +1748,37 @@
       </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} département?"/>
       </relationNQuestionCategory>
-      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="direct" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="none" commentMode="questionAttribute" weight="80" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces villes, lesquelles se situent dans le département dont le numéro est % ?"/>
-      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="name" weight="100" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces départements, lesquels font partie de la région % ?"/>
-      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Numero"
-                                 answerProximityCriterion="none" commentMode="name" weight="70" minLevel="2"
-                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces numéros, lesquels sont associés à des départements de la région % ?"/>-->
-      <!--<relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="NONE" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
+        <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département dont le numéro est {0} ?"/>
+        <questionText language="en" text="Among these cities, which are located in the département whose number is {0}?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels font partie de la région {0} ?"/>
+        <questionText language="en" text="Among these départements, which are part of the {0} region?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="NONE" commentMode="NAME" weight="70" minLevel="2">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements de la région {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with départements of the {0} region?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent en région {0} ?"/>
-        <questionText language="en" text="Todo {0}"/>
+        <questionText language="en" text="Among these cities, which are located in the {0} region?"/>
       </relationNQuestionCategory>-->
-      <!--<relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="80" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces départements, lesquels sont traversés par % ?"/>
-      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Numero"
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="80" minLevel="0" >
+        <questionText language="fr" text="Parmi ces départements, lesquels sont traversés par {0} ?"/>
+        <questionText language="en" text="Among these départements, which are flowed by the {0} river?"/>
+      </relationNQuestionCategory>
+      <!--<relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Numero"
                                  answerProximityCriterion="none" commentMode="none" weight="50" minLevel="2"
                                  questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
                                  question="Parmi ces numéros, lesquels sont associés à des départements traversés par % ?"/>

@@ -85,7 +85,51 @@ namespace QuestionInstantiation
 
         internal void setComments(RelationType relationType, RelationType relation2Type, XmlAttributeType attributeType)
         {
-            throw new NotImplementedException();
+            RelationType tempRelationType = relationType;
+            relationType = relation2Type.ReciprocalType;
+            relation2Type = tempRelationType.ReciprocalType;
+
+            foreach (List<Choice> choiceList in _choiceDictionary.Values)
+            {
+                if (choiceList.Count == 1)
+                {
+                    List<Text> textList = new List<Text>();
+                    Choice choice = choiceList[0];
+                    Element choiceElement = choice.Element;
+                    Dictionary<Element, int> middleElementDictionary = new Dictionary<Element, int>();
+                    Dictionary<Element, int> questionElementDictionary = new Dictionary<Element, int>();
+
+                    Element mElement = choiceElement.getLinked1Element(relationType);
+                    if (mElement != null) middleElementDictionary.Add(mElement, 0);
+
+                    int i, n = choiceElement.getLinkedNElementCount(relationType);
+                    for (i = 0; i < n; ++i) middleElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
+
+                    foreach(Element middleElement in middleElementDictionary.Keys)
+                    {
+                        Element qElement = middleElement.getLinked1Element(relation2Type);
+                        if (qElement != null) questionElementDictionary.Add(qElement, 0);
+
+                        int j, m = middleElement.getLinkedNElementCount(relation2Type);
+                        for (j = 0; j < m; ++j) questionElementDictionary.Add(middleElement.getLinkedNElement(relation2Type, j), 0);
+                    }
+
+                    foreach (Element questionElement in questionElementDictionary.Keys)
+                    {
+                        if (attributeType == null)
+                        {
+                            textList.Add(questionElement.Name);
+                        }
+                        else
+                        {
+                            AttributeValue attributeValue = questionElement.getAttributeValue(attributeType);
+                            if (attributeValue != null) textList.Add(attributeValue.Value);
+                        }
+                    }
+
+                    choice.Comment = Text.fromTextList(textList, QuizData);
+                }
+            }
         }
 
         internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)

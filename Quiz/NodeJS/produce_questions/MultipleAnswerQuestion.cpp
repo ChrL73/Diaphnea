@@ -4,6 +4,7 @@
 #include "TextAndComment.h"
 
 #include <map>
+#include <cmath>
 
 namespace produce_questions
 {

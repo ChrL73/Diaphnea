@@ -60,6 +60,10 @@
 		<Unit filename="CompleteQuestion.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
+		<Unit filename="MultipleAnswerCategory.cpp" />
+		<Unit filename="MultipleAnswerCategory.h" />
+		<Unit filename="MultipleAnswerQuestion.cpp" />
+		<Unit filename="MultipleAnswerQuestion.h" />
 		<Unit filename="ProximityCriterionTypeEnum.h" />
 		<Unit filename="QuestionMultiplicityEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />

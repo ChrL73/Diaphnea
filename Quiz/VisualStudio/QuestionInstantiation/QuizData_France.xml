@@ -1751,7 +1751,7 @@
       <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
-        <questionText language="en" text="Todo {0}"/>
+        <questionText language="en" text="Among these cities, which are located in the {0} département?"/>
       </relationNQuestionCategory>
       <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="direct" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="none" commentMode="questionAttribute" weight="80" minLevel="2"

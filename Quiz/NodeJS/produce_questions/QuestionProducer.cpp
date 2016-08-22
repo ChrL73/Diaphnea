@@ -66,6 +66,8 @@ namespace produce_questions
 
             json += question->getJson();
             if (i != questionCount - 1) json += ",";
+
+            delete question;
         }
 
         json += "]";

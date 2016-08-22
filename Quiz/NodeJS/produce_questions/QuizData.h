@@ -1,5 +1,9 @@
 #pragma once
 
+#if _WIN32
+#include <WinSock2.h>
+#endif
+
 #include "ProximityCriterionTypeEnum.h"
 #include "mongo/client/dbclient.h"
 
@@ -10,6 +14,7 @@ namespace produce_questions
 {
     class Level;
     class SimpleAnswerQuestion;
+    class MultipleAnswerQuestion;
     class Choice;
 
     class QuizData
@@ -28,6 +33,7 @@ namespace produce_questions
         std::string _languageId;
         std::map<std::string, const Level *> _levelMap;
         std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *> _simpleAnswerQuestionMap;
+        std::map<std::pair<std::string, int>, const MultipleAnswerQuestion *> _multipleAnswerQuestionMap;
         std::map<std::pair<std::string, int>, const Choice *> _choiceMap;
 
     public:
@@ -38,6 +44,7 @@ namespace produce_questions
 
         const Level *getLevel(const std::string& id);
         const SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
+        const MultipleAnswerQuestion *getMultipleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
         const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
     };
 }

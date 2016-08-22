@@ -27,7 +27,5 @@ namespace produce_questions
     public:
         SimpleAnswerCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, int choiceCount, const std::string& choiceListId,
                              double _distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
-
-        const std::vector<const Choice *>& getChoiceVector(void) const { return _choiceVector; }
     };
 }

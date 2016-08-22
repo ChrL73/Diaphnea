@@ -5,6 +5,7 @@
 #include "MultipleAnswerCategory.h"
 #include "MultipleAnswerQuestion.h"
 #include "Choice.h"
+#include "TextAndComment.h"
 
 namespace produce_questions
 {
@@ -63,6 +64,12 @@ namespace produce_questions
 
         std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *>::iterator simpleAnswerQuestionIt = _simpleAnswerQuestionMap.begin();
         for (; simpleAnswerQuestionIt != _simpleAnswerQuestionMap.end(); ++simpleAnswerQuestionIt) delete (*simpleAnswerQuestionIt).second;
+
+        std::map<std::pair<std::string, int>, const MultipleAnswerQuestion *>::iterator multipleAnswerQuestionIt = _multipleAnswerQuestionMap.begin();
+        for (; multipleAnswerQuestionIt != _multipleAnswerQuestionMap.end(); ++multipleAnswerQuestionIt) delete (*multipleAnswerQuestionIt).second;
+
+        std::map<std::pair<std::string, int>, const Choice *>::iterator choiceIt = _choiceMap.begin();
+        for (; choiceIt != _choiceMap.end(); ++choiceIt) delete (*choiceIt).second;
 
         mongo::Status status = mongo::client::shutdown();
         if (!status.isOK())
@@ -166,7 +173,7 @@ namespace produce_questions
                 const char *questionText = dbQuestion.getField("question").Obj().getStringField(_languageId);
                 const char *answer = dbQuestion.getField("answer").Obj().getStringField(_languageId);
                 const char *comment = dbQuestion.getField("comment").Obj().getStringField(_languageId);
-                const char *excudedChoice = dbQuestion.getField("excluded_choice").Obj().getStringField(_languageId);
+                const char *excludedChoice = dbQuestion.getField("excluded_choice").Obj().getStringField(_languageId);
 
                 double doubleCriterionValue = 0.0;
                 std::string stringCriterionValue;
@@ -189,12 +196,65 @@ namespace produce_questions
                     pointCriterionValue = new Point(x, y, z);
                 }
 
-                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, excudedChoice, proximityCriterionType, doubleCriterionValue, stringCriterionValue, pointCriterionValue, choiceVector);
+                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, excludedChoice, proximityCriterionType, doubleCriterionValue, stringCriterionValue, pointCriterionValue, choiceVector);
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, question)).first;
             }
             else
             {
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, 0)).first;
+            }
+        }
+
+        return (*it).second;
+    }
+
+    const MultipleAnswerQuestion *QuizData::getMultipleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector)
+    {
+        std::pair<std::string, int> key(questionListId, index);
+        std::map<std::pair<std::string, int>, const MultipleAnswerQuestion *>::iterator it = _multipleAnswerQuestionMap.find(key);
+
+        if (it == _multipleAnswerQuestionMap.end())
+        {
+            char projectionStr[64];
+            sprintf(projectionStr, "{ questions: { $slice: [%d, 1] } }", index);
+            mongo::BSONObj projection = mongo::fromjson(projectionStr);
+            auto cursor = _connection.query("diaphnea.question_lists", MONGO_QUERY("_id" << mongo::OID(questionListId)), 1, 0, &projection);
+
+            if (cursor->more())
+            {
+                mongo::BSONObj dbList = cursor->next();
+                mongo::BSONObj dbQuestion = dbList.getField("questions").Array()[0].Obj();
+
+                const char *questionText = dbQuestion.getField("question").Obj().getStringField(_languageId);
+
+                std::vector<const TextAndComment *> answerVector;
+                int i, answerCount = dbQuestion.getIntField("answer_count");
+                for (i = 0; i < answerCount; ++i)
+                {
+                    mongo::BSONObj dbAnswer = dbQuestion.getField("answers").Array()[i].Obj();
+                    const char *answer = dbAnswer.getField("answer").Obj().getStringField(_languageId);
+                    const char *comment = dbAnswer.getField("comment").Obj().getStringField(_languageId);
+                    answerVector.push_back(new TextAndComment(answer, comment));
+                }
+
+                const char *excludedChoice = dbQuestion.getField("excluded_choice").Obj().getStringField(_languageId);
+
+                const Point *pointCriterionValue = 0;
+                if (proximityCriterionType == produce_questions::POINT_3D)
+                {
+                    mongo::BSONObj criterionValue = dbQuestion.getField("proximity_criterion_value").Obj();
+                    double x = criterionValue.getField("x").Number();
+                    double y = criterionValue.getField("y").Number();
+                    double z = criterionValue.getField("z").Number();
+                    pointCriterionValue = new Point(x, y, z);
+                }
+
+                MultipleAnswerQuestion *question = new MultipleAnswerQuestion(questionText, answerVector, excludedChoice, proximityCriterionType, pointCriterionValue, choiceVector);
+                it = _multipleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, MultipleAnswerQuestion *>(key, question)).first;
+            }
+            else
+            {
+                it = _multipleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, MultipleAnswerQuestion *>(key, 0)).first;
             }
         }
 

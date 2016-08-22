@@ -24,11 +24,10 @@
     CompleteQuestion *SimpleAnswerCategory::getNewQuestion(int choiceCount, double distribParameter) const
     {
         int draw = RandomNumberGenerator::getRandomInt(_questionCount);
-
         QuizData *quizData = QuizData::instance();
-        const SimpleAnswerQuestion *question = quizData->getSimpleAnswerQuestion(_questionListId, draw, _proximityCriterionType, getChoiceVector());
+        const SimpleAnswerQuestion *question = quizData->getSimpleAnswerQuestion(_questionListId, draw, _proximityCriterionType, _choiceVector);
 
-        CompleteQuestion *completeQuestion = new CompleteQuestion(question->getQuestion(), SIMPLE, choiceCount);
+        CompleteQuestion *completeQuestion = new CompleteQuestion(question->getQuestion(), produce_questions::SIMPLE, choiceCount);
         completeQuestion->addChoice(question->getAnswer(), question->getComment(), true);
 
         std::set<unsigned int> excludedValues;

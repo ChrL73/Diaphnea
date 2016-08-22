@@ -1,7 +1,11 @@
 *.suo
 *.user
+*.sdf
+*.opensdf
 *bin
 *obj
+*Debug
+*Release
 /Quiz/VisualStudio/packages
 /Quiz/VisualStudio/.vs
 /Experiments/VisualStudio/packages
@@ -12,4 +16,5 @@
 *node_modules
 *npm-debug.log
 /mongo-cxx-driver
+*mongo-cxx-driver_vc12
 *.exe

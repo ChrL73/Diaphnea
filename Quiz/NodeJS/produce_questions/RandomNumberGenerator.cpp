@@ -4,11 +4,27 @@
 #include <random>
 
 #if RAND_MAX != 0x7FFFFFFF
-#error unexpected RAND_MAX value
+    #ifdef _WIN32
+        #if RAND_MAX != 0x7FFF  
+            #error unexpected RAND_MAX value
+        #else
+            #pragma message("RandomNumberGenerator target is Linux. It will not behave as expected on Windows. Windows is used for development purpose")
+        #endif
+    #else
+        #error unexpected RAND_MAX value
+    #endif
 #endif
 
 #if CLOCKS_PER_SEC != 1000000
-#error unexpected CLOCKS_PER_SEC value
+    #ifdef _WIN32
+        #if CLOCKS_PER_SEC != 1000
+            #error unexpected RAND_MAX value
+        #else
+            #pragma message("RandomNumberGenerator target is Linux. It will not behave as expected on Windows. Windows is used for development purpose")
+        #endif
+    #else
+        #error unexpected CLOCKS_PER_SEC value
+    #endif
 #endif
 
 namespace produce_questions

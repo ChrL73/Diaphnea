@@ -20,6 +20,8 @@ namespace produce_questions
         Level(int questionCount, int choiceCount, int categoryCount, int weightSum, double distribParameter, const std::vector<Category *> categoryVector) :
             _questionCount(questionCount), _choiceCount(choiceCount), _categoryCount(categoryCount), _weightSum(weightSum), _distribParameter(distribParameter), _categoryVector(categoryVector) {}
 
+        ~Level();
+
         int getQuestionCount(void) const { return _questionCount; }
         int getChoiceCount(void) const { return _choiceCount; }
         int getCategoryCount(void) const { return _categoryCount; }

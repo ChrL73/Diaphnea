@@ -44,7 +44,8 @@ namespace QuestionInstantiation
         {
             BsonDocument questionDocument = new BsonDocument()
             {
-                { "question", _questionText.getBsonDocument() }
+                { "question", _questionText.getBsonDocument() },
+                { "answer_count", _choiceList.Count }
             };
 
             BsonArray choiceArray = new BsonArray();

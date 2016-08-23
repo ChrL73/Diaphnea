@@ -26,7 +26,7 @@ namespace QuestionInstantiation
 
         internal void addChoice(Choice choice)
         {
-            _choiceDictionary.Add(choice, 0);
+            _choiceDictionary[choice] = 0;
             _choiceList.Add(choice);
         }
 

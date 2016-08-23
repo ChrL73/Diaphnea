@@ -614,16 +614,16 @@ namespace QuestionInstantiation
                                         int l, linkedElementCount2 = endElement1.getLinkedNElementCount(relation2Type);
                                         if (linkedElementCount2 == 0 && endElement1.getLinked1Element(relation2Type) != null)
                                         {
-                                            endElementDictionary.Add(endElement1.getLinked1Element(relation2Type), 0);
+                                            endElementDictionary[endElement1.getLinked1Element(relation2Type)] = 0;
                                         }
                                         else
                                         {
-                                            for (l = 0; l < linkedElementCount2; ++l) endElementDictionary.Add(endElement1.getLinkedNElement(relation2Type, l), 0);
+                                            for (l = 0; l < linkedElementCount2; ++l) endElementDictionary[endElement1.getLinkedNElement(relation2Type, l)] = 0;
                                         }
                                     }
                                     else
                                     {
-                                        endElementDictionary.Add(endElement1, 0);
+                                        endElementDictionary[endElement1] = 0;
                                     }
                                 }
 			

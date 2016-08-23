@@ -82,10 +82,10 @@ namespace QuestionInstantiation
                     Dictionary<Element, int> questionElementDictionary = new Dictionary<Element, int>();
 
                     Element qElement = choiceElement.getLinked1Element(relationType);
-                    if (qElement != null) questionElementDictionary.Add(qElement, 0);
+                    if (qElement != null) questionElementDictionary[qElement] = 0;
 
                     int i, n = choiceElement.getLinkedNElementCount(relationType);
-                    for (i = 0; i < n; ++i) questionElementDictionary.Add(choiceElement.getLinkedNElement(relationType, i), 0);
+                    for (i = 0; i < n; ++i) questionElementDictionary[choiceElement.getLinkedNElement(relationType, i)] = 0;
 
                     foreach (Element questionElement in questionElementDictionary.Keys)
                     {    

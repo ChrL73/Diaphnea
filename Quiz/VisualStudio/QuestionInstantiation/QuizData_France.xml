@@ -93,6 +93,42 @@
       <relationList/>
     </element>-->
     <!--Régions-->
+    <element id="el_AuvergneRhoneAlpes" type="et_Region" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Auvergne-Rhône-Alpes"/>
+        <name language="en" text="Auvergne-Rhône-Alpes"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Auvergne-Rhône-Alpes"/>
+          <value language="en" value="Auvergne-Rhône-Alpes"/>
+        </attribute>
+      </attributeList>
+      
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.6"/>
+        <numericalAttribute type="nt_Latitude" value="45.4"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r1N_Region_Departements" linkedElement="el_AllierDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Cantal"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteLoire"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_PuyDeDome"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_AinDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_ArdecheDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_DromeDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_IsereDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_LoireDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_RhoneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Savoie"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteSavoie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_NouvelleAquitaine"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Occitanie"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ProvenceAlpesCoteAzur"/>-->
+      </relationList>
+    </element>
     <element id="el_BourgogneFrancheComte" type="et_Region" minLevel="0">
       <elementName>
         <name language="fr" text="Bourgogne-Franche-Comté"/>
@@ -119,8 +155,8 @@
         <relation type="r1N_Region_Departements" linkedElement="el_TerritoireDeBelfort"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>-->
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
       </relationList>
     </element>
     <element id="el_Bretagne" type="et_Region" minLevel="0">
@@ -173,8 +209,8 @@
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
         <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
       </relationList>
     </element>
     <element id="el_Corse" type="et_Region" minLevel="0" >
@@ -369,7 +405,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1970" comment="Le département s'appelait Basses-Alpes avant 1970"/>
-          <value language="en" value="1970" comment="The département was called Basses-Alpes before 1970"/>
+          <value language="en" value="1970" comment="The department was called Basses-Alpes before 1970"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -446,7 +482,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1793" comment="Le département est créé en 1793 lors de l'occupation par la France du Comté de Nice, dans des limites différentes de celles du département actuel. En 1814, les Etats de Savoie reprennent le Comté de Nice. Le département dans ses frontières actuelles est créé en 1860, lorsque le Comté de Nice est à nouveau rattaché à la France."/>
-          <value language="en" value="1793" comment="The département was created in 1793 during the occupation of France by the County of Nice, in different limits from those of the current département. In 1814 the Savoy States reclaim the County of Nice. The department in its current borders is created in 1860, when the County of Nice was again annexed to France."/>
+          <value language="en" value="1793" comment="The department was created in 1793 during the occupation of France by the County of Nice, in different limits from those of the current department. In 1814 the Savoy States reclaim the County of Nice. The department in its current borders is created in 1860, when the County of Nice was again annexed to France."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -524,7 +560,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1941" comment="Le département s'appelait Charente-Inférieure avant 1941"/>
-          <value language="en" value="1941" comment="The département was called Charente-Inférieure before 1941"/>
+          <value language="en" value="1941" comment="The department was called Charente-Inférieure before 1941"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -569,7 +605,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1976" comment="Le département est créé en 1976 lors du découpage en deux du département de la Corse."/>
-          <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
+          <value language="en" value="1976" comment="The department was created in 1976 when the Corse department was split in two."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -604,7 +640,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1976" comment="Le département est créé en 1976 lors du découpage en deux du département de la Corse."/>
-          <value language="en" value="1976" comment="The département was created in 1976 when the Corse département was split in two."/>
+          <value language="en" value="1976" comment="The department was created in 1976 when the Corse department was split in two."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -641,7 +677,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1990" comment="Le département s'appelait Côtes-du-Nord avant 1990"/>
-          <value language="en" value="1990" comment="The département was called Côtes-du-Nord before 1990"/>
+          <value language="en" value="1990" comment="The department was called Côtes-du-Nord before 1990"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -719,7 +755,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1793" comment="Le département est créé en 1793 lors du découpage en deux du département du Rhône-et-Loire."/>
-          <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
+          <value language="en" value="1793" comment="The department was created in 1793 when the Rhône-et-Loire department was split in two."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -763,7 +799,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1957" comment="Le département s'appelait Loire-Inférieure avant 1957"/>
-          <value language="en" value="1957" comment="The département was called Loire-Inférieure before 1957"/>
+          <value language="en" value="1957" comment="The department was called Loire-Inférieure before 1957"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -807,7 +843,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1791" comment="Le département s'appelait Mayenne-et-Loire avant 1791"/>
-          <value language="en" value="1791" comment="The département was called Mayenne-et-Loire before 1791"/>
+          <value language="en" value="1791" comment="The department was called Mayenne-et-Loire before 1791"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -853,7 +889,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1871" comment="Le département est créé suite à l'armistice franco-allemande de 1871, à partir des territoires des anciens départements de la Meurthe et de la Moselle non annexés par l'Allemagne."/>
-          <value language="en" value="1871" comment="The départements was created after the Franco-German armistice of 1871. It is composed of the parts of the former Meurthe and Moselle départements which were not annexed by Germany."/>
+          <value language="en" value="1871" comment="The department was created after the Franco-German armistice of 1871. It is composed of the parts of the former Meurthe and Moselle departments which were not annexed by Germany."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -896,7 +932,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1919" comment="Le département est créé suite à l'armistice franco-allemande de 1918, à partir des territoires des anciens départements de la Meurthe et de la Moselle rendus par l'Allemagne."/>
-          <value language="en" value="1919" comment="The département was created following the Franco-German armistice of 1918. It is composed of parts of the former Meurthe and Moselle départements gived back by Germany."/>
+          <value language="en" value="1919" comment="The department was created following the Franco-German armistice of 1918. It is composed of parts of the former Meurthe and Moselle departments gived back by Germany."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -942,7 +978,7 @@
         </attribute>
         <attribute type="at_DateNom">
           <value language="fr" value="1969" comment="Le département s'appelait Basses-Pyrénées avant 1969"/>
-          <value language="en" value="1969" comment="The département was called Basses-Pyrénées before 1969"/>
+          <value language="en" value="1969" comment="The department was called Basses-Pyrénées before 1969"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -982,7 +1018,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1793" comment="Le département est créé en 1793 lors du découpage en deux du département du Rhône-et-Loire."/>
-          <value language="en" value="1793" comment="The département was created in 1793 when the Rhône-et-Loire département was split in two."/>
+          <value language="en" value="1793" comment="The department was created in 1793 when the Rhône-et-Loire department was split in two."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -1023,7 +1059,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1860" comment="Le département est créé en 1860 lors du rattachement de la Savoie à la France."/>
-          <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
+          <value language="en" value="1860" comment="The department was created in 1860 after the incorporation of Savoy into France."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -1063,7 +1099,7 @@
         </attribute>
         <attribute type="at_DateCreation">
           <value language="fr" value="1860" comment="Le département est créé en 1860 lors du rattachement de la Savoie à la France."/>
-          <value language="en" value="1860" comment="The département was created in 1860 after the incorporation of Savoy into France."/>
+          <value language="en" value="1860" comment="The department was created in 1860 after the incorporation of Savoy into France."/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -1516,6 +1552,48 @@
         <relation type="r11_Fleuve_VilleEmbouchure" linkedElement="el_SaintNazaire"/>
       </relationList>
     </element>
+    <element id="el_MeuseFleuve" type="et_FleuveRiviere" minLevel="0">
+      <elementName>
+        <name language="fr" text="Meuse"/>
+        <name language="en" text="Meuse" />
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Meuse"/>
+          <value language="en" value="Meuse"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Meuse"/>
+          <value language="en" value="Meuse"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Meuse"/>
+          <value language="en" value="Meuse"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Meuse est-elle"/>
+          <value language="en" value="Meuse"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longueur" value="950"/>
+        <numericalAttribute type="nt_Longitude" value="4.9"/>
+        <numericalAttribute type="nt_Latitude" value="50.2"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_HauteMarne"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Vosges"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_MeuseDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ardennes"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Sambre"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Neufchateau"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Commercy"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Verdun"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Sedan"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_CharlevilleMezieres"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Namur"/>-->
+      </relationList>
+    </element>
     <element id="el_MoselleRiviere" type="et_FleuveRiviere" minLevel="0">
       <elementName>
         <name language="fr" text="Moselle"/>
@@ -1660,6 +1738,83 @@
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Nord"/>-->
       </relationList>
     </element>
+    <!--Pays limitrophes-->
+    <element id="el_Belgique" type="et_Pays" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Belgique"/>
+        <name language="en" text="Belgium"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="la Belgique"/>
+          <value language="en" value="Belgium"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Nord"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_AisneDepartement"/>
+        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ardennes"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeuseDepartement"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
+      </relationList>
+    </element>
+    <element id="el_Luxembourg" type="et_Pays" minLevel="0">
+      <elementName>
+        <name language="fr" text="Luxembourg"/>
+        <name language="en" text="Luxembourg"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="le Luxembourg"/>
+          <value language="en" value="Luxembourg"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MoselleDepartement"/>
+      </relationList>
+    </element>
+    <element id="el_Allemagne" type="et_Pays" minLevel="0">
+      <elementName>
+        <name language="fr" text="Allemagne"/>
+        <name language="en" text="Germany"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="l'Allemagne"/>
+          <value language="en" value="Germany"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MoselleDepartement"/>
+        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_BasRhin"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautRhin"/>-->
+      </relationList>
+    </element>
+    <element id="el_Suisse" type="et_Pays" minLevel="0">
+      <elementName>
+        <name language="fr" text="Suisse"/>
+        <name language="en" text="Switzerland"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="la Suisse"/>
+          <value language="en" value="Switzerland"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautRhin"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_TerritoireDeBelfort"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_DoubsDepartement"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Jura"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>
+      </relationList>
+    </element>
   </elementList>
   
   <questionCategories>
@@ -1667,54 +1822,54 @@
       <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
-        <questionText language="en" text="What is the département whose number is {0}?"/>
+        <questionText language="en" text="What is the department whose number is {0}?"/>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le numéro associé au département {0} ?"/>
-        <questionText language="en" text="What is the number associated with the {0} département?"/>
+        <questionText language="en" text="What is the number associated with the {0} department?"/>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateCreation"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="30" minLevel="2">
         <questionText language="fr" text="En quelle année a été créé le département {0} ?"/>
-        <questionText language="en" text="In what year was created the {0} département?"/>
+        <questionText language="en" text="In what year was created the {0} department?"/>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateNom"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="3" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
-        <questionText language="en" text="Since what year the {0} département bears its current name?"/>
+        <questionText language="en" text="Since what year the {0} department bears its current name?"/>
       </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
       <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
-        <questionText language="en" text="What is the capital of the {0} département?"/>
+        <questionText language="en" text="What is the capital of the {0} department?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
-        <questionText language="en" text="What is the capital of the département whose number is {0}?"/>
+        <questionText language="en" text="What is the capital of the department whose number is {0}?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
-        <questionText language="en" text="In which département is the city of {0}?"/>
+        <questionText language="en" text="In which department is the city of {0}?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
-        <questionText language="en" text="What is the number of the département where the city of {0} is located?"/>
+        <questionText language="en" text="What is the number of the department where the city of {0} is located?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
         <questionText language="fr" text="De quelle région fait partie le département {0} ?"/>
-        <questionText language="en" text="In what region is the {0} département?"/>
+        <questionText language="en" text="In what region is the {0} department?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
         <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
-        <questionText language="en" text="In what region is the département whose number is {0}?"/>
+        <questionText language="en" text="In what region is the department whose number is {0}?"/>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
@@ -1751,93 +1906,108 @@
       <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
-        <questionText language="en" text="Among these cities, which are located in the {0} département?"/>
+        <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="NONE" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département dont le numéro est {0} ?"/>
-        <questionText language="en" text="Among these cities, which are located in the département whose number is {0}?"/>
+        <questionText language="en" text="Among these cities, which are located in the department whose number is {0}?"/>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces départements, lesquels font partie de la région {0} ?"/>
-        <questionText language="en" text="Among these départements, which are part of the {0} region?"/>
+        <questionText language="en" text="Among these departments, which are part of the {0} region?"/>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="NONE" commentMode="NAME" weight="70" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements de la région {0} ?"/>
-        <questionText language="en" text="Among these numbers, which are associated with départements of the {0} region?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments of the {0} region?"/>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent en région {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} region?"/>
-      </relationNQuestionCategory>-->
+      </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="80" minLevel="0" >
         <questionText language="fr" text="Parmi ces départements, lesquels sont traversés par {0} ?"/>
-        <questionText language="en" text="Among these départements, which are flowed by the {0} river?"/>
+        <questionText language="en" text="Among these departments, which are crossed by the {0} river?"/>
       </relationNQuestionCategory>
-      <!--<relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Numero"
-                                 answerProximityCriterion="none" commentMode="none" weight="50" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces numéros, lesquels sont associés à des départements traversés par % ?"/>
-      <relationNQuestionCategory relation="r1N_Riviere_Villes" way="direct" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="name" weight="50" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="2" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces villes, lesquelles sont traversées par % ?"/>
-      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="30" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="1" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces régions, lesquelles sont traversées par % ?"/>
-      <relationNQuestionCategory relation="rNN_Departement_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="100" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces départements, lesquels sont limitrophes au département % ?"/>
-      <relationNQuestionCategory relation="r1N_Riviere_Affluents" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="40" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces cours d'eau, lesquels sont des affluents % ?"/>
-      <relationNQuestionCategory relation="rNN_Region_RegionsLimitrophes" way="direct" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="none" weight="30" minLevel="0"
-                                 questionDrawDepth1="1" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="0" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces régions, lesquelles sont limitrophes à la région % ?"/>
-      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="inverse" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.05" commentMode="none" weight="80" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces cours d'eau, lesquels traversent le département % ?"/>
-      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="inverse" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="elementLocation" distribParameterCorrection="0.2" commentMode="none" weight="50" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces cours d'eau, lesquels traversent le département dont le numéro est % ?"/>
-      <relationNQuestionCategory relation="r1N_Region_Departements" way="direct" relation2="rNN_Riviere_Departements" way2="inverse" questionAttribute="at_Nom2"
-                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.1" commentMode="none" weight="30" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces cours d'eau, lesquels traversent la région % ?"/>
-      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2"
-                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="25" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces départements, lesquels ont une frontière commune avec % ?"/>
-      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom2"
-                                 answerAttribute="at_Nom2" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="20" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces régions, lesquelles ont une frontière commune avec % ?"/>
-      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom2"
-                                 answerAttribute="at_Numero" answerProximityCriterion="none" commentMode="name" weight="15" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces numéros, lesquels sont associés à des départements ayant une frontière commune avec % ?"/>
-      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom3"
-                                 answerAttribute="at_Nom1" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="30" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces départements, lesquels sont bordés par % ?"/>
-      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" relation2="r1N_Region_Departements" way2="inverse" questionAttribute="at_Nom3"
-                                 answerAttribute="at_Nom2" answerProximityCriterion="elementLocation" distribParameterCorrection="0.02" commentMode="name" weight="20" minLevel="0"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces régions, lesquelles sont bordées par % ?"/>
-      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="direct" questionAttribute="at_Nom3"
-                                 answerAttribute="at_Numero" answerProximityCriterion="none" commentMode="name" weight="15" minLevel="2"
-                                 questionDrawDepth1="2" answerDrawDepth1="1" wrongChoiceDrawDepth1="0" questionDrawDepth2="10" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
-                                 question="Parmi ces numéros, lesquels sont associés à des départements bordés par % ?"/>-->
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Numero"
+                                 answerProximityCriterion="NONE" commentMode="NONE" weight="50" minLevel="2">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements traversés par {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments crossed by the {0} river?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NAME" weight="50" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles sont traversées par {0} ?"/>
+        <questionText language="en" text="Among these cities, which are crossed by the {0} river?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="30" minLevel="0">
+        <questionText language="fr" text="Parmi ces régions, lesquelles sont traversés par {0} ?"/>
+        <questionText language="en" text="Among these regions, which are crossed by the {0} river?"/>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Departement_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0"> 
+        <questionText language="fr" text="Parmi ces départements, lesquels sont limitrophes au département {0} ?"/>
+        <questionText language="en" text="Among these departments, which are adjacent to the {0} department?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Riviere_Affluents" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="40" minLevel="0">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels sont des affluents {0} ?"/>
+        <questionText language="en" text="Among these rivers, which are tributaries of the {0}?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Region_RegionsLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="30" minLevel="0"> 
+        <questionText language="fr" text="Parmi ces régions, lesquelles sont limitrophes à la région {0} ?"/>
+        <questionText language="en" text="Among these regions, which are adjacent to the {0} region?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="80" minLevel="0">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent le département {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the {0} department?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="INVERSE" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.2" commentMode="NONE" weight="50" minLevel="2">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent le département dont le numéro est {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the department whose number is {0}?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="rNN_Riviere_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="30" minLevel="0">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent la région {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the {0} region?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="25" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels ont une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these departments, which share a border with {0} ?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
+        <questionText language="fr" text="Parmi ces régions, lesquelles ont une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these regions, which share a border with {0} ?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements ayant une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments bordering {0} ?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="30" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels sont bordés par {0} ?"/>
+        <questionText language="en" text="Among these departments, which are bordered by {0} ?"/>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
+        <questionText language="fr" text="Parmi ces régions, lesquelles sont bordées par {0} ?"/>
+        <questionText language="en" text="Among these regions, which are bordered by {0} ?"/>   
+      </relationNQuestionCategory>-->
+      <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/>   
+      </relationNQuestionCategory>
     </relationNQuestionCategoryList>
   </questionCategories>
   

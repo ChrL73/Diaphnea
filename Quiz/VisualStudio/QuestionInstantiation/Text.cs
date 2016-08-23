@@ -43,7 +43,7 @@ namespace QuestionInstantiation
             _completedTranslationDictionary = new Dictionary<string, int>();
             foreach (XmlLanguage xmlLanguage in quizData.XmlQuizData.parameters.languageList)
             {
-                if (xmlLanguage.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED) _completedTranslationDictionary.Add(xmlLanguage.id.ToString(), 0);
+                if (xmlLanguage.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED) _completedTranslationDictionary[xmlLanguage.id.ToString()] = 0;
             }
         }
 

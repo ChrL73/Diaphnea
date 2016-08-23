@@ -11,14 +11,14 @@ namespace produce_questions
     {
         if (RandomNumberGenerator::verify() != 0)
         {
-            // Todo: handle error
+            std::cerr << "Error in RandomNumberGenerator::verify()" << std::endl;
             return -1;
         }
 
         QuizData *quizData = QuizData::instance();
         if (quizData == 0)
         {
-            // Todo: handle error
+            std::cerr << "Error in QuizData::instance()" << std::endl;
             return -1;
         }
 
@@ -27,7 +27,7 @@ namespace produce_questions
         const Level *level = quizData->getLevel(_levelId);
         if (level == 0)
         {
-            // Todo: handle error
+            std::cerr << "Error in quizData->getLevel(_levelId)" << std::endl;
             return -1;
         }
 
@@ -74,7 +74,7 @@ namespace produce_questions
 
         if (QuizData::destroyInstance() != 0)
         {
-            // Todo: handle error
+            std::cerr << "Error in QuizData::destroyInstance()" << std::endl;
             return -1;
         }
 

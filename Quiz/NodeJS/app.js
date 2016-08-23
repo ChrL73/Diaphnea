@@ -143,20 +143,19 @@ function game(req, res, context)
          
          childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.languageId, function(err, stdout, stderr)
          {
+            var data = {};
             if (err)
             {
-               // Todo: handle error
+               // Todo: handle error in view
                console.log(stderr);
             }
             else
             {
-               var data = JSON.parse(stdout);
-               console.log(data);
-
-               data.texts = translate(context.siteLanguageId).texts;
-
-               res.render('game.ejs', { data: data });
+               data.questions = JSON.parse(stdout);
             }
+            
+            data.texts = translate(context.siteLanguageId).texts;
+            res.render('game.ejs', { data: data });
          });
       });
    });

@@ -7,11 +7,5 @@ int main(int argc, char *argv[])
     produce_questions::QuestionProducer questionProducer(argv[1], argv[2]);
     int result = questionProducer.run();
 
-    if (result != 0)
-    {
-        // Todo: handle error
-        return -1;
-    }
-
-    return 0;
+    return result;
 }

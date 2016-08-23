@@ -39,7 +39,7 @@ namespace produce_questions
         mongo::Status status = mongo::client::initialize();
         if (!status.isOK())
         {
-            // Todo: Handle error
+            std::cerr << "Error in mongo::client::initialize()" << std::endl;
             _initOk = false;
             return;
         }
@@ -50,7 +50,7 @@ namespace produce_questions
         }
         catch(const mongo::DBException& e)
         {
-            // Todo: Handle exception
+            std::cerr << "Exception in _connection.connect(\"localhost\")" << std::endl;
             _initOk = false;
         }
     }
@@ -74,7 +74,7 @@ namespace produce_questions
         mongo::Status status = mongo::client::shutdown();
         if (!status.isOK())
         {
-            // Todo: Handle error
+            std::cerr << "Error in mongo::client::shutdown()" << std::endl;
             _deleteOk = false;
         }
     }

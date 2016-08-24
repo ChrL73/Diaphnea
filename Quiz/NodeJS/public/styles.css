@@ -8,6 +8,11 @@
    display: inline-block;
 }
 
+.question
+{
+   display: none;
+}
+
 #waitImg
 {
    height: 24px;

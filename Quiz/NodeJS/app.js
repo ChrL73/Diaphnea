@@ -152,6 +152,7 @@ function game(req, res, context)
             else
             {
                data.questions = JSON.parse(stdout);
+               data.displayedQuestion = 0;
             }
             
             data.texts = translate(context.siteLanguageId).texts;

@@ -27,29 +27,19 @@ namespace produce_questions
 
     const std::string& CompleteQuestion::getJson(void)
     {
-        char j[8];
-
         _json = "{\"question\":\"" + _question + "\",\"isMultiple\":"
             + (_multiplicity == produce_questions::MULTIPLE ? "true" : "false")
-            + ",\"choices\":[";
+            + ",\"answerReceived\":false,\"choices\":[";
 
         int i, n = _choiceVector.size();
         for (i = 0; i < n; ++i)
         {
             _json += "{\"text\":\"" + _choiceVector[i]->getText()
-                     + "\",\"comment\":\"" + _choiceVector[i]->getComment() + "\"}";
+                     + "\",\"comment\":\"" + _choiceVector[i]->getComment() + "\",\"isRight\":"
+                     + (_rightAnswerSet.find(i) != _rightAnswerSet.end() ? "true" : "false")
+                     + ",\"isChecked\":"
+                     + (_multiplicity == produce_questions::SIMPLE && i == 0 ?  "true" : "false")  + "}";
             if (i != n - 1) _json += ",";
-        }
-
-        _json += "],\"rightAnswers\":[";
-        std::set<int>::iterator it = _rightAnswerSet.begin();
-        while(true)
-        {
-            sprintf(j, "%d", *it);
-            _json += j;
-            ++it;
-            if (it == _rightAnswerSet.end()) break;
-            _json += ",";
         }
 
         _json += "]}";

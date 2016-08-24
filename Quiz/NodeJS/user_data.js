@@ -1,12 +1,30 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
+/*var choiceSchema = mongoose.Schema(
+{
+   text: String,
+   comment: String,
+   isRight: Boolean,
+   isChecked: Boolean
+});
+
+var questionSchema = mongoose.Schema(
+{
+   question: String,
+   isMultiple: Boolean,
+   answerReceived: Boolean,
+   choices: [choiceSchema]
+});*/
+
 var userSchema = mongoose.Schema(
 {
    name: String,
    sha1pass: String,
-   parameters: { siteLanguageId: String, questionnaireId: String, languageId: String, levelId: String }
+   parameters: { siteLanguageId: String, questionnaireId: String, languageId: String, levelId: String },
+   gameState: { displayedQuestion: Number, questions: mongoose.Schema.Types.Mixed /*[questionSchema]*/ }
 });
+
 var UserModel = mongoose.model('User', userSchema);
 
 function tryAddUser(name, pass, callback)

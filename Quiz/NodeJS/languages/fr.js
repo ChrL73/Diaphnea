@@ -15,6 +15,7 @@ module.exports =
    'previous': 'Précédent',
    'next': 'Suivant',
    'submit': 'Valider',
+   'question': "Question",
    'nameMustBeBetween2And16Chars': 'La longueur du nom doit être comprise entre 2 et 16 caractères',
    'passwordMustContainAtLeast8Chars': 'Le mot de passe doit contenir au moins 8 caractères',
    'passwordMustContainOnlyLettersNumbersEtc': 'Le mot de passe ne doit contenir que des lettres, des chiffres, et au moins un caractère parmi _,;.:?!$*+-=&',

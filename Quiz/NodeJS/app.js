@@ -133,33 +133,64 @@ function index(req, res, context, flags)
 
 function game(req, res, context)
 {
+   var newGame = (req.session.currentPage != pages.game);
    req.session.currentPage = pages.game;
+   var data = {};
    
-   quizData.getLevelChoiceDownData(context, function(downData)
+   if (newGame)
    {
-      quizData.getLevelMap(function(levelMap)
+      quizData.getLevelChoiceDownData(context, function(downData)
       {
-         var levelId = levelMap[downData.questionnaireId][downData.levelId];
-         
-         childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.languageId, function(err, stdout, stderr)
+         quizData.getLevelMap(function(levelMap)
          {
-            var data = {};
-            if (err)
+            var levelId = levelMap[downData.questionnaireId][downData.levelId];
+
+            childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.languageId, function(err, stdout, stderr)
             {
-               // Todo: handle error in view
-               console.log(stderr);
-            }
-            else
-            {
-               data.questions = JSON.parse(stdout);
-               data.displayedQuestion = 0;
-            }
-            
-            data.texts = translate(context.siteLanguageId).texts;
-            res.render('game.ejs', { data: data });
+               if (err)
+               {
+                  // Todo: handle error in view
+                  console.log(stderr);
+               }
+               else
+               {
+                  data.questions = JSON.parse(stdout);
+                  data.displayedQuestion = 0;
+                  
+                  if (context.user)
+                  {
+                     
+                  }
+                  else
+                  {
+                     req.session.gameState = data;
+                  }
+               }
+
+               renderGameView();
+            });
          });
       });
-   });
+   }
+   else
+   {
+      if (context.user)
+      {
+
+      }
+      else
+      {
+         data = req.session.gameState;
+      }
+      
+      renderGameView();
+   }
+   
+   function renderGameView()
+   {
+      data.texts = translate(context.siteLanguageId).texts;
+      res.render('game.ejs', { data: data });
+   }
 }
 
 function enterSignUp(req, res, context, flags)
@@ -328,6 +359,27 @@ io.on('connection', function(socket)
 
       return cookieObject;
    }
+   
+   socket.on('changeQuestion', function(displayedQuestion)
+   {
+      //console.log('displayedQuestion: ' + displayedQuestion);
+      //var context;
+      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      updateContext(socket.request.session, cookies, function(fContext)
+      { 
+         //context = fContext;
+         if (fContext.user)
+         {
+            
+         }
+         else
+         {
+            socket.request.session.gameState.displayedQuestion = displayedQuestion;
+            socket.request.session.save(function(err) { /*Todo: Handle error*/ });
+         }
+      });
+   });
 });
 
 if (!config.port) throw new Error("No 'port' value in config.js");

@@ -4,6 +4,8 @@
 *.opensdf
 *.VC.db
 *.VC.opendb
+*.depend
+*.layout
 *bin
 *obj
 *Debug

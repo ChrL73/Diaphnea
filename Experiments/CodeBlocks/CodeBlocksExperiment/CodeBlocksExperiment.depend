@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1469307519 source:/home/christophe/Diaphnea/Experiments/CodeBlocks/CodeBlocksExperiment/main.cpp
-	<iostream>
-	<unistd.h>
-

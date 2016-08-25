@@ -5,15 +5,13 @@ var crypto = require('crypto');
 {
    text: String,
    comment: String,
-   isRight: Boolean,
-   isChecked: Boolean
+   isRight: Boolean
 });
 
 var questionSchema = mongoose.Schema(
 {
    question: String,
-   isMultiple: Boolean,
-   answerReceived: Boolean,
+   isMultiple: Boolean
    choices: [choiceSchema]
 });*/
 
@@ -22,7 +20,12 @@ var userSchema = mongoose.Schema(
    name: String,
    sha1pass: String,
    parameters: { siteLanguageId: String, questionnaireId: String, languageId: String, levelId: String },
-   gameState: { displayedQuestion: Number, questions: mongoose.Schema.Types.Mixed /*[questionSchema]*/ }
+   gameState:
+   {
+      displayedQuestion: Number,
+      questions: mongoose.Schema.Types.Mixed /*[questionSchema]*/,
+      state: mongoose.Schema.Types.Mixed
+   }
 });
 
 var UserModel = mongoose.model('User', userSchema);

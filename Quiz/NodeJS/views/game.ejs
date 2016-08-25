@@ -8,23 +8,31 @@
 
    <body>
       
-      <% data.questions.forEach(function(question, iQuestion) { %>
-         <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == data.displayedQuestion) { %>style="display: block;"<% }%>>
-            <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=data.questions.length%></p>
+      <% var questions = data.gameState.questions;
+      var displayedQuestion = data.gameState.displayedQuestion;
+      var questionStates = data.gameState.questionStates;
+      var answered = []; // Todo : Suppress 'answered'
+      
+      questions.forEach(function(question, iQuestion) {
+         var disabled = questionStates[iQuestion].answered;
+         answered.push(disabled);%>
+         <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
+            <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
             <p><%=question.question%></p>
-            <% question.choices.forEach(function(choice) {
-            if (question.isMultiple) { %>
-               <input type="checkbox" <% if (choice.isChecked) { %>checked<% } %>> <%=choice.text%> <br>
-            <% } else { %>
-               <input type="radio" <% if (choice.isChecked) { %>checked<% } %> name="radio<%=iQuestion%>"> <%=choice.text%> <br>
+            <% question.choices.forEach(function(choice, iChoice) {
+               var checked = questionStates[iQuestion].choiceState[iChoice] & 1;
+               if (question.isMultiple) { %>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>> <%=choice.text%> <br>
+               <% } else { %>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>"> <%=choice.text%> <br>
             <%}});%>
          </div>
       <% }); %>
       
       <p>
-         <button id="previousButton" <% if (data.displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
-         <button id="submitButton"><%=data.texts.submit%></button>
-         <button id="nextButton" <% if (data.displayedQuestion == data.questions.length - 1) { %>disabled<% } %>><%=data.texts.next%></button>
+         <button id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
+         <button id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
+         <button id="nextButton" <% if (displayedQuestion == questions.length - 1) { %>disabled<% } %>><%=data.texts.next%></button>
       </p>
       
       <form id="stopForm" action="/" method="post">
@@ -34,8 +42,9 @@
       </form>
    
       <script>
-         var displayedQuestion = <%=data.displayedQuestion%>;
-         var questionCount = <%=data.questions.length%>;
+         var displayedQuestion = <%=displayedQuestion%>;
+         var questionCount = <%=questions.length%>;
+         var answered = [<%=answered%>];
       </script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>

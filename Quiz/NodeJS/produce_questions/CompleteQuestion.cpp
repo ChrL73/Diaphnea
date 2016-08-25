@@ -29,16 +29,14 @@ namespace produce_questions
     {
         _json = "{\"question\":\"" + _question + "\",\"isMultiple\":"
             + (_multiplicity == produce_questions::MULTIPLE ? "true" : "false")
-            + ",\"answerReceived\":false,\"choices\":[";
+            + ",\"choices\":[";
 
         int i, n = _choiceVector.size();
         for (i = 0; i < n; ++i)
         {
             _json += "{\"text\":\"" + _choiceVector[i]->getText()
                      + "\",\"comment\":\"" + _choiceVector[i]->getComment() + "\",\"isRight\":"
-                     + (_rightAnswerSet.find(i) != _rightAnswerSet.end() ? "true" : "false")
-                     + ",\"isChecked\":"
-                     + (_multiplicity == produce_questions::SIMPLE && i == 0 ?  "true" : "false")  + "}";
+                     + (_rightAnswerSet.find(i) != _rightAnswerSet.end() ? "true" : "false") + "}";
             if (i != n - 1) _json += ",";
         }
 

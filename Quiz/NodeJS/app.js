@@ -154,8 +154,27 @@ function game(req, res, context)
                }
                else
                {
-                  data.questions = JSON.parse(stdout);
-                  data.displayedQuestion = 0;
+                  var gameState = 
+                  {
+                     displayedQuestion: 0,
+                     questions: JSON.parse(stdout),
+                     questionStates: []
+                  };
+                  
+                  gameState.questions.forEach(function(question, iQuestion)
+                  {
+                     gameState.questionStates.push({ answered: false, choiceState: [] });
+                     question.choices.forEach(function(choice, iChoice)
+                     {
+                        // 0 <= choiceState[iChoice] <= 3 :
+                        // bit 0 = 1 if choice is checked
+                        // bit 1 = 1 if question is answered and if the player choice is correct (MUST always be 0 when the question is not answered, otherwise the player could cheat) 
+                        if (question.isMultiple) gameState.questionStates[iQuestion].choiceState.push(0);
+                        else gameState.questionStates[iQuestion].choiceState.push(iChoice == 0 ? 1 : 0);
+                     });
+                  });
+                     
+                  data.gameState = gameState;
                   
                   if (context.user)
                   {
@@ -163,7 +182,7 @@ function game(req, res, context)
                   }
                   else
                   {
-                     req.session.gameState = data;
+                     req.session.gameState = gameState;
                   }
                }
 
@@ -180,7 +199,7 @@ function game(req, res, context)
       }
       else
       {
-         data = req.session.gameState;
+         data.gameState = req.session.gameState;
       }
       
       renderGameView();

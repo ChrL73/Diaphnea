@@ -6,6 +6,7 @@ var morgan = require('morgan');
 var bodyparser = require("body-parser");
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var mongoStore = require('connect-mongo')(session);
 var favicon = require('serve-favicon');
 var childProcess = require('child_process');
 
@@ -30,9 +31,10 @@ app.use(cookieParser(config.cookieSecret));
 if (!config.sessionSecret) throw new Error("No 'sessionSecret' value in config.js");
 var sessionMiddleware = session(
 {
-  secret: config.sessionSecret,
-  resave: false,
-  saveUninitialized: true
+   secret: config.sessionSecret,
+   resave: false,
+   saveUninitialized: true,
+   store: new mongoStore({ mongooseConnection: mongoose.connection })
 });
 io.use(function(socket, next)
 {
@@ -207,6 +209,7 @@ function game(req, res, context)
    
    function renderGameView()
    {
+      console.log(req.sessionID);
       data.texts = translate(context.siteLanguageId).texts;
       res.render('game.ejs', { data: data });
    }
@@ -339,6 +342,15 @@ function updateContext(session, cookies, callback)
    }
 }
 
+var sessionSchema = mongoose.Schema(
+{
+   _id: String,
+   session: mongoose.Schema.Types.Mixed,
+   expires: mongoose.Schema.Types.Mixed,
+   gameState: mongoose.Schema.Types.Mixed
+});
+var SessionModel = mongoose.model('Session', sessionSchema);
+
 io.on('connection', function(socket)
 {
    socket.on('levelChoice', function(upData)
@@ -381,23 +393,68 @@ io.on('connection', function(socket)
    
    socket.on('changeQuestion', function(displayedQuestion)
    {
-      //console.log('displayedQuestion: ' + displayedQuestion);
-      //var context;
-      
       var cookies = extractCookies(socket.handshake.headers.cookie);  
-      updateContext(socket.request.session, cookies, function(fContext)
+      updateContext(socket.request.session, cookies, function(context)
       { 
-         //context = fContext;
-         if (fContext.user)
+         if (context.user)
          {
             
          }
          else
          {
             socket.request.session.gameState.displayedQuestion = displayedQuestion;
-            socket.request.session.save(function(err) { /*Todo: Handle error*/ });
+            socket.request.session.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
          }
       });
+   });
+   
+   socket.on('submit', function(data)
+   {
+      console.log(data);
+      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      updateContext(socket.request.session, cookies, function(context)
+      { 
+         if (context.user)
+         {
+            
+         }
+         else
+         {
+            var questionState = socket.request.session.gameState.questionStates[data.question];
+            if (!questionState.answered)
+            {
+               console.log('Not answered...')
+               questionState.answered = true;
+               data.checks.forEach(function(check, i)
+               {
+                  questionState.choiceState[i] = check;
+               });
+            }
+            else
+            {
+               console.log('Already answered...')
+            }
+            
+            console.log(socket.request.sessionID);
+            SessionModel.findOne({ _id: socket.request.sessionID }, function(err, session)
+            {
+               if (err)
+               {
+                  console.log(err);
+               }
+               else
+               {
+                  session.gameState = socket.request.session.gameState;
+                  session.save();
+               }
+            });
+            
+            //console.log(socket.request);
+            socket.request.session.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
+         }
+      });
+      
    });
 });
 

@@ -141,6 +141,26 @@ function game(req, res, context)
    
    if (newGame)
    {
+      launchNewGame();
+   }
+   else
+   {
+      userData.getGameStateDocument(context.user, req.sessionID, function(err, gameStateDocument)
+      {
+         if (err || !gameStateDocument || !gameStateDocument.gameState)
+         {
+            launchNewGame();
+         }
+         else
+         {
+            data.gameState = gameStateDocument.gameState;
+            renderGameView();
+         }
+      });
+   }
+   
+   function launchNewGame()
+   {
       quizData.getLevelChoiceDownData(context, function(downData)
       {
          quizData.getLevelMap(function(levelMap)
@@ -165,27 +185,26 @@ function game(req, res, context)
                   
                   gameState.questions.forEach(function(question, iQuestion)
                   {
-                     gameState.questionStates.push({ answered: false, choiceState: [] });
+                     gameState.questionStates.push({ answered: false, choiceStates: [] });
                      question.choices.forEach(function(choice, iChoice)
                      {
-                        // 0 <= choiceState[iChoice] <= 3 :
+                        // 0 <= choiceStates[iChoice] <= 3 :
                         // bit 0 = 1 if choice is checked
-                        // bit 1 = 1 if question is answered and if the player choice is correct (MUST always be 0 when the question is not answered, otherwise the player could cheat) 
-                        if (question.isMultiple) gameState.questionStates[iQuestion].choiceState.push(0);
-                        else gameState.questionStates[iQuestion].choiceState.push(iChoice == 0 ? 1 : 0);
+                        // bit 1 = 1 if question has been submitted and if the player choice is correct (MUST always be 0 when the question has not been submitted, otherwise the player could cheat) 
+                        if (question.isMultiple) gameState.questionStates[iQuestion].choiceStates.push(0);
+                        else gameState.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
                   });
                      
                   data.gameState = gameState;
-                  
-                  if (context.user)
+                  userData.setGameState(context.user, req.sessionID, gameState, function(err)
                   {
-                     
-                  }
-                  else
-                  {
-                     req.session.gameState = gameState;
-                  }
+                     if (err)
+                     {
+                        console.log();
+                        // Todo: Handle error
+                     }
+                  });
                }
 
                renderGameView();
@@ -193,23 +212,9 @@ function game(req, res, context)
          });
       });
    }
-   else
-   {
-      if (context.user)
-      {
-
-      }
-      else
-      {
-         data.gameState = req.session.gameState;
-      }
-      
-      renderGameView();
-   }
    
    function renderGameView()
    {
-      console.log(req.sessionID);
       data.texts = translate(context.siteLanguageId).texts;
       res.render('game.ejs', { data: data });
    }
@@ -342,15 +347,6 @@ function updateContext(session, cookies, callback)
    }
 }
 
-var sessionSchema = mongoose.Schema(
-{
-   _id: String,
-   session: mongoose.Schema.Types.Mixed,
-   expires: mongoose.Schema.Types.Mixed,
-   gameState: mongoose.Schema.Types.Mixed
-});
-var SessionModel = mongoose.model('Session', sessionSchema);
-
 io.on('connection', function(socket)
 {
    socket.on('levelChoice', function(upData)
@@ -376,35 +372,17 @@ io.on('connection', function(socket)
          socket.emit('updateSelects', downData);
       }
    });
-
-   function extractCookies(cookieString)
-   {
-      var cookieObject = {};
-      var cookieArray = cookieString.split(';');
-
-      cookieArray.forEach(function(cookie)
-      {
-         cookieParts = cookie.split('=');
-         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
-      });
-
-      return cookieObject;
-   }
    
    socket.on('changeQuestion', function(displayedQuestion)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);  
       updateContext(socket.request.session, cookies, function(context)
       { 
-         if (context.user)
+         userData.getGameStateDocument(context.user, socket.request.sessionID, function(err, gameStateDocument)
          {
-            
-         }
-         else
-         {
-            socket.request.session.gameState.displayedQuestion = displayedQuestion;
-            socket.request.session.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
-         }
+            gameStateDocument.gameState.displayedQuestion = displayedQuestion;
+            gameStateDocument.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
+         });
       });
    });
    
@@ -421,22 +399,6 @@ io.on('connection', function(socket)
          }
          else
          {
-            var questionState = socket.request.session.gameState.questionStates[data.question];
-            if (!questionState.answered)
-            {
-               console.log('Not answered...')
-               questionState.answered = true;
-               data.checks.forEach(function(check, i)
-               {
-                  questionState.choiceState[i] = check;
-               });
-            }
-            else
-            {
-               console.log('Already answered...')
-            }
-            
-            console.log(socket.request.sessionID);
             SessionModel.findOne({ _id: socket.request.sessionID }, function(err, session)
             {
                if (err)
@@ -445,17 +407,44 @@ io.on('connection', function(socket)
                }
                else
                {
-                  session.gameState = socket.request.session.gameState;
-                  session.save();
+                  //var questionState = socket.request.session.gameState.questionStates[data.question];
+                  var questionState = session.gameState.questionStates[data.question];
+                  //console.log(session.gameState.questionStates);
+
+                  if (!questionState.answered)
+                  {
+                     console.log('Not answered...')
+                     questionState.answered = true;
+                     data.checks.forEach(function(check, i)
+                     {
+                        questionState.choiceStates[i] = check;
+                     });
+                     //console.log(session.gameState.questionStates);
+                     session.save(function(err) { if (err) console.log(err); });
+                  }
+                  else
+                  {
+                     console.log('Already answered...')
+                  }
                }
             });
-            
-            //console.log(socket.request);
-            socket.request.session.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
          }
-      });
-      
+      });   
    });
+   
+   function extractCookies(cookieString)
+   {
+      var cookieObject = {};
+      var cookieArray = cookieString.split(';');
+
+      cookieArray.forEach(function(cookie)
+      {
+         cookieParts = cookie.split('=');
+         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
+      });
+
+      return cookieObject;
+   }
 });
 
 if (!config.port) throw new Error("No 'port' value in config.js");

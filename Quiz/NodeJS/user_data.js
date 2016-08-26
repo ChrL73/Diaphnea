@@ -1,33 +1,32 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
-/*var choiceSchema = mongoose.Schema(
+var questionStateSchema = mongoose.Schema(
+);
+
+var gameStateSchema = mongoose.Schema(
 {
-   text: String,
-   comment: String,
-   isRight: Boolean
+   questionStates: [{ answered: Boolean, choiceStates: [Number] }],
+   displayedQuestion: Number,
+   questions: mongoose.Schema.Types.Mixed
 });
 
-var questionSchema = mongoose.Schema(
+var sessionSchema = mongoose.Schema(
 {
-   question: String,
-   isMultiple: Boolean
-   choices: [choiceSchema]
-});*/
+   _id: String,
+   session: mongoose.Schema.Types.Mixed,
+   expires: mongoose.Schema.Types.Mixed,
+   gameState: gameStateSchema
+});
+var SessionModel = mongoose.model('Session', sessionSchema);
 
 var userSchema = mongoose.Schema(
 {
    name: String,
    sha1pass: String,
    parameters: { siteLanguageId: String, questionnaireId: String, languageId: String, levelId: String },
-   gameState:
-   {
-      displayedQuestion: Number,
-      questions: mongoose.Schema.Types.Mixed /*[questionSchema]*/,
-      state: mongoose.Schema.Types.Mixed
-   }
+   gameState: gameStateSchema
 });
-
 var UserModel = mongoose.model('User', userSchema);
 
 function tryAddUser(name, pass, callback)
@@ -104,6 +103,53 @@ function removeUser(id, callback)
    UserModel.remove({ _id: id }, callback);
 }
 
+function setGameState(user, sessionID, gameState, callback)
+{
+   if (user)
+   {
+      
+   }
+   else if (sessionID)
+   {
+      SessionModel.findOne({ _id: sessionID }, function(err, session)
+      {
+         if (err)
+         {
+            callback(err);
+         }
+         else if (!session)
+         {
+            callback('!session');
+         }
+         else
+         {
+            session.gameState = gameState;
+            session.save(callback);
+         }
+      });
+   }
+   else
+   {
+      callback('!user & !sessionID')
+   }
+}
+
+function getGameStateDocument(user, sessionID, callback)
+{
+   if (user)
+   {
+      UserModel.findOne({ _id: user._id }, callback);
+   }
+   else if (sessionID)
+   {
+      SessionModel.findOne({ _id: sessionID }, callback);
+   }
+   else
+   {
+      callback('!user & !sessionID', undefined)
+   }
+}
+
 function displayAllUsers()
 {
    UserModel.find({}, function(err, users)
@@ -120,5 +166,7 @@ module.exports.findUserId = findUserId;
 module.exports.getUser = getUser;
 module.exports.updateParameters = updateParameters;
 module.exports.removeUser = removeUser;
+module.exports.setGameState = setGameState;
+module.exports.getGameStateDocument = getGameStateDocument;
 
 module.exports.displayAllUsers = displayAllUsers;

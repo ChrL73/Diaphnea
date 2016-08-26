@@ -7,7 +7,6 @@
    </head>
 
    <body>
-      
       <% var questions = data.gameState.questions;
       var displayedQuestion = data.gameState.displayedQuestion;
       var questionStates = data.gameState.questionStates;
@@ -20,7 +19,7 @@
             <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
             <p><%=question.question%></p>
             <% question.choices.forEach(function(choice, iChoice) {
-               var checked = questionStates[iQuestion].choiceState[iChoice] & 1;
+               var checked = questionStates[iQuestion].choiceStates[iChoice] & 1;
                if (question.isMultiple) { %>
                   <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>> <%=choice.text%> <br>
                <% } else { %>
@@ -49,5 +48,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="game.js"></script>
+      
    </body>
 </html>

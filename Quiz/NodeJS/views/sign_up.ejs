@@ -8,43 +8,7 @@
    </head>
 
    <body>
-      <div>
-         <%- include('language_select.ejs', data) %>
-      </div>
-      <div>
-         <form action="/" method="post">
-            <p>
-               <label for="nameInput"><%=data.texts.name%>: </label>
-               <input type="text" id="nameInput" name="name" value="<%=data.name%>"/>
-               <span class="errorMessage" id="nameMessage1"><%=data.texts.nameMustBeBetween2And16Chars%></span>
-               <span class="errorMessage" id="nameMessage2"><%=data.texts.theNameIsAlreadyUsed%></span>
-            </p>
-            <p>
-               <label for="passInput1"><%=data.texts.password%>: </label>
-               <input type="password" id="passInput1" name="pass1" value="<%=data.pass1%>"/>
-               <span class="errorMessage" id="pass1aMessage"><%=data.texts.passwordMustContainAtLeast8Chars%></span>
-               <span class="errorMessage" id="pass1bMessage"><%=data.texts.passwordMustContainOnlyLettersNumbersEtc%></span>
-            </p>
-            <p>
-               <label for="passInput2"><%=data.texts.confirmPassword%>: </label>
-               <input type="password" id="passInput2" name="pass2" value="<%=data.pass2%>"/>
-               <span class="errorMessage" id="pass2Message"><%=data.texts.twoPasswordsAreNotIdentical%></span>
-            </p>
-            <p>
-               <input id="submitSignUp" type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
-               <input id="cancelSignUp" type="submit" value="<%=data.texts.cancel%>" name="cancelSignUp"/>
-            </p>
-            <p>
-               <span class="errorMessage" id="serverErrorMessage"><%=data.texts.failToCreateUserAccount%> (<%=data.texts.internalServerError%>)</span>
-            </p>
-         </form>
-      </div>
       
-      <script>
-         var reload = <%=data.flags.reload%>;
-         var userExists = <%=data.flags.userExists%>;
-         var error = <%=data.flags.error%>;
-      </script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="utils.js"></script>
       <script src="sign_up.js"></script>

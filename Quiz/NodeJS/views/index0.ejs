@@ -6,13 +6,13 @@
       <title>Quiz</title>
       <style>
          .errorMessage { display: none; }
-         <% if (!data.showQuestionnaireLanguageSelect) {%>
-            .questionnaireLanguageSelection { display: none; }
+         <% if (!data.showLanguageSelect) {%>
+            .languageSelection { display: none; }
          <% } %>
       </style>   
    </head>
 
-   <body>  
+   <body>
       <div>
          <% if (data.userName) { %>
             <span><%=data.userName%></span>
@@ -45,10 +45,10 @@
          </select>
       </p>     
       <p>
-         <label class="questionnaireLanguageSelection" for="questionnaireLanguageSelect"><%=data.texts.language%>: </label> 
-         <select class="questionnaireLanguageSelection" id="questionnaireLanguageSelect">
-            <% data.questionnaireLanguageList.forEach(function(language) { 
-               if (language.id == data.questionnaireLanguageId) { %>
+         <label class="languageSelection" for="languageSelect"><%=data.texts.language%>: </label> 
+         <select class="languageSelection" id="languageSelect">
+            <% data.languageList.forEach(function(language) { 
+               if (language.id == data.languageId) { %>
                <option selected value="<%= language.id %>">
                <%  } else { %>
                <option value="<%= language.id %>"> <% } %>
@@ -85,7 +85,6 @@
             var userLogged = false;
          <% } %>
       </script>
-      
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="utils.js"></script>

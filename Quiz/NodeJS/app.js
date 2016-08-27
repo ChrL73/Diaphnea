@@ -53,53 +53,54 @@ quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
 app.all('/', function(req, res)
 {
-   updateContext(req.session, req.cookies, function(context)
+   getContext(req.session, req.sessionID, req.cookies, function(context)
    {
-      if (context.user && req.body.siteLanguageSelect)
+      if (!context)
       {
-         var siteLanguageId;
-         languages.forEach(function(language)
-         {
-            if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
-         });
-
-         if (siteLanguageId)
-         {
-            context.siteLanguageId = siteLanguageId;
-            var parameters = { siteLanguageId: siteLanguageId };
-            userData.updateParameters(context.user, parameters, function(err)
-            {
-               // Todo: handle error
-            });
-         }
-      }
-
-      var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
-                       req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
-
-      if (req.body.enterSignUp || (!pageInBody && req.session.currentPage == pages.signUp))
-      {
-         enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
-      }
-      else if (req.body.submitSignUp)
-      {
-         submitSignUp(req, res, context);
-      }
-      else if (req.body.signIn)
-      {
-         signIn(req, res, context);
-      }
-      else if (req.body.signOut)
-      {
-         signOut(req, res, context);
-      }
-      else if (req.body.start || (!pageInBody && req.session.currentPage == pages.game))
-      {
-         game(req, res, context);
+         // 'context' is undefined when the session has not been saved (case of the 1st request of the session). 
+         // The session will be saved at the end of the current request, so it will be available when the page will be reload by 'redirect'
+         res.redirect('/');
       }
       else
       {
-         index(req, res, context, { unknwon: 'false', error: 'false' });
+         if (req.body.siteLanguageSelect)
+         {
+            var siteLanguageId;
+            languages.forEach(function(language)
+            {
+               if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
+            });
+
+            if (siteLanguageId) context.siteLanguageId = siteLanguageId;
+         }
+
+         /*var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
+                          req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
+
+         if (req.body.enterSignUp || (!pageInBody && context.currentPage == pages.signUp))
+         {
+            enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
+         }
+         else if (req.body.submitSignUp)
+         {
+            submitSignUp(req, res, context);
+         }
+         else if (req.body.signIn)
+         {
+            signIn(req, res, context);
+         }
+         else if (req.body.signOut)
+         {
+            signOut(req, res, context);
+         }
+         else if (req.body.start || (!pageInBody && context.currentPage == pages.game))
+         {
+            game(req, res, context);
+         }
+         else*/
+         {
+            index(req, res, context, { unknwon: 'false', error: 'false' });
+         }
       }
    });
 });
@@ -111,18 +112,18 @@ app.use(function(req, res)
         
 function index(req, res, context, flags)
 {
-   req.session.currentPage = pages.index;
+   context.currentPage = pages.index;
    quizData.getLevelChoiceDownData(context, renderView);
    
    function renderView(downData)
    {
-      if (context.user)
-      {
-         downData.userName = context.user.name;
-         var parameters = { questionnaireId: downData.questionnaireId, languageId: downData.languageId, levelId: downData.levelId };
-         userData.updateParameters(context.user, parameters, function(err) { /* Todo: handle error */ });
-      }
+      if (context.user) downData.userName = context.user.name;
       
+      context.questionnaireId = downData.questionnaireId;
+      context.questionnaireLanguageId = downData.questionnaireLanguageId;
+      context.levelId = downData.levelId;
+      context.saver.save(function(err) { /* Todo: handle error */ });
+         
       downData.siteLanguageList = languages;
       downData.siteLanguageId = context.siteLanguageId;
       downData.texts = translate(context.siteLanguageId).texts;
@@ -135,215 +136,90 @@ function index(req, res, context, flags)
 
 function game(req, res, context)
 {
-   var newGame = (req.session.currentPage != pages.game);
-   req.session.currentPage = pages.game;
-   var data = {};
    
-   if (newGame)
-   {
-      launchNewGame();
-   }
-   else
-   {
-      userData.getGameStateDocument(context.user, req.sessionID, function(err, gameStateDocument)
-      {
-         if (err || !gameStateDocument || !gameStateDocument.gameState)
-         {
-            launchNewGame();
-         }
-         else
-         {
-            data.gameState = gameStateDocument.gameState;
-            renderGameView();
-         }
-      });
-   }
-   
-   function launchNewGame()
-   {
-      quizData.getLevelChoiceDownData(context, function(downData)
-      {
-         quizData.getLevelMap(function(levelMap)
-         {
-            var levelId = levelMap[downData.questionnaireId][downData.levelId];
-
-            childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.languageId, function(err, stdout, stderr)
-            {
-               if (err)
-               {
-                  // Todo: handle error in view
-                  console.log(stderr);
-               }
-               else
-               {
-                  var gameState = 
-                  {
-                     displayedQuestion: 0,
-                     questions: JSON.parse(stdout),
-                     questionStates: []
-                  };
-                  
-                  gameState.questions.forEach(function(question, iQuestion)
-                  {
-                     gameState.questionStates.push({ answered: false, choiceStates: [] });
-                     question.choices.forEach(function(choice, iChoice)
-                     {
-                        // 0 <= choiceStates[iChoice] <= 3 :
-                        // bit 0 = 1 if choice is checked
-                        // bit 1 = 1 if question has been submitted and if the player choice is correct (MUST always be 0 when the question has not been submitted, otherwise the player could cheat) 
-                        if (question.isMultiple) gameState.questionStates[iQuestion].choiceStates.push(0);
-                        else gameState.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
-                     });
-                  });
-                     
-                  data.gameState = gameState;
-                  userData.setGameState(context.user, req.sessionID, gameState, function(err)
-                  {
-                     if (err)
-                     {
-                        console.log();
-                        // Todo: Handle error
-                     }
-                  });
-               }
-
-               renderGameView();
-            });
-         });
-      });
-   }
-   
-   function renderGameView()
-   {
-      data.texts = translate(context.siteLanguageId).texts;
-      res.render('game.ejs', { data: data });
-   }
 }
 
 function enterSignUp(req, res, context, flags)
 {
-   req.session.currentPage = pages.signUp;
-   var data =
-   {
-      name: req.body.name,
-      pass1: flags.reload ? req.body.pass1 : '',
-      pass2: flags.reload ? req.body.pass2 : '',
-      siteLanguageList: languages,
-      siteLanguageId: context.siteLanguageId,
-      texts: translate(context.siteLanguageId).texts,
-      flags: flags
-   };
    
-   if (flags.error == 'true') res.status(500);
-   res.render('sign_up.ejs', { data: data });
 }
 
 function signIn(req, res, context)
 {
-   userData.findUserId(req.body.name, req.body.pass, function(err, id)
-   {
-      if (err)
-      {
-         console.log(err);
-         index(req, res, context, { unknwon: 'false', error: 'true' });
-      }
-      else if (!id)
-      {
-         index(req, res, context, { unknwon: 'true', error: 'false' });
-      }
-      else
-      {
-         req.session.userId = id;
-         updateContext(req.session, req.cookies, function(context)
-         {
-            index(req, res, context, { unknwon: 'false', error: 'false' });          
-         });
-      }
-   });
+   
 }
 
 function submitSignUp(req, res, context)
 {
-   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
-      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
-   {
-      enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'false' });
-      return;
-   }
    
-   userData.tryAddUser(req.body.name, req.body.pass1, function(err, id)
-   {
-      if (err)
-      {
-         console.log('err: ' + err);
-         enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'true' });
-      }
-      else if (!id)
-      {
-         enterSignUp(req, res, context, { reload: 'true', userExists: 'true', error: 'false' });
-      }
-      else
-      {
-         req.session.userId = id;       
-         updateContext(req.session, req.cookies, function(context)
-         {
-            userData.updateParameters(context.user, context, function(err)
-            {
-               // Todo: handle error
-               index(req, res, context, { unknwon: 'false', error: 'false' });
-            });
-         });
-      }
-   });
 }
 
 function signOut(req, res, context)
 {
-   req.session.userId = undefined;
-   updateContext(req.session, req.cookies, function(context)
-   {
-      index(req, res, context, { unknwon: 'false', error: 'false' });          
-   });
+   
 }
 
-function updateContext(session, cookies, callback)
+function getContext(session0, sessionId, cookies, callback)
 {
-   var context = {};
-   
-   if (session.userId)
+   if (session0.userId)
    {
-      userData.getUser(session.userId, function(err, user)
+      userData.getUser(session0.userId, function(err, user)
       {
-         // Todo: Handle error
-         if (!err && user)
-         {
-            context.user = user;
-            if (user.parameters)
-            {
-               context.siteLanguageId = user.parameters.siteLanguageId;
-               context.questionnaireId = user.parameters.questionnaireId;
-               context.languageId = user.parameters.languageId;
-               context.levelId = user.parameters.levelId;
-            }
-         }
          
-         continuation();
       });
    }
    else
    {
-      continuation();
-   }
-                       
-   function continuation()
-   {
-      if (!context.siteLanguageId) context.siteLanguageId = cookies.siteLanguageId;
-      if (!context.siteLanguageId) context.siteLanguageId = defaultLanguageId;
-      if (!context.questionnaireId) context.questionnaireId = cookies.questionnaireId
-      if (!context.languageId) context.languageId = cookies.languageId;
-      if (!context.levelId) context.levelId = cookies.levelId;
-
-      callback(context);
+      userData.getSession(sessionId, function(err, session)
+      {
+         if (err)
+         {
+             console.log(err);
+            // Todo: Hanlde error
+         }
+         else if (!session)
+         {
+            console.log('!session');
+            callback();
+         }
+         else 
+         {
+            if (session.context)
+            {
+               session.context.session = session;
+               session.context.saver = session;
+               callback(session.context);
+            }
+            else
+            {
+               session.context =
+               {
+                  siteLanguageId: cookies.siteLanguageId ? cookies.siteLanguageId : defaultLanguageId,
+                  questionnaireId: cookies.questionnaireId,
+                  questionnaireLanguageId: cookies.questionnaireLanguageId,
+                  levelId: cookies.levelId,
+                  currentPage: pages.index
+               };
+               
+               session.context.session = session;
+               session.context.saver = session;
+               callback(session.context);
+               
+               session.save(function(err)
+               {
+                  if (err)
+                  {
+                     console.log(err);
+                     // Todo: handle error
+                  }
+                  else
+                  { 
+                     //callback(session.context);
+                  }
+               });
+            }
+         }
+      });
    }
 }
 
@@ -354,7 +230,7 @@ io.on('connection', function(socket)
       var context;
       
       var cookies = extractCookies(socket.handshake.headers.cookie);  
-      updateContext(socket.request.session, cookies, function(fContext)
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(fContext)
       { 
          context = fContext;
          upData.siteLanguageId = context.siteLanguageId;
@@ -363,73 +239,22 @@ io.on('connection', function(socket)
       
       function emitUpdateSelects(downData)
       {
-         if (context.user)
-         {
-            var parameters = { questionnaireId: downData.questionnaireId, languageId: downData.languageId, levelId: downData.levelId };
-            userData.updateParameters(context.user, parameters, function(err) { /* Todo: handle error */ });
-         }
-
+         context.questionnaireId = downData.questionnaireId;
+         context.questionnaireLanguageId = downData.questionnaireLanguageId;
+         context.levelId = downData.levelId;
+         context.saver.save(function(err) { /* Todo: handle error */ });
          socket.emit('updateSelects', downData);
       }
    });
    
    socket.on('changeQuestion', function(displayedQuestion)
    {
-      var cookies = extractCookies(socket.handshake.headers.cookie);  
-      updateContext(socket.request.session, cookies, function(context)
-      { 
-         userData.getGameStateDocument(context.user, socket.request.sessionID, function(err, gameStateDocument)
-         {
-            gameStateDocument.gameState.displayedQuestion = displayedQuestion;
-            gameStateDocument.save(function(err) { if (err) console.log(err); /*Todo: Handle error*/ });
-         });
-      });
+      
    });
    
    socket.on('submit', function(data)
    {
-      console.log(data);
       
-      var cookies = extractCookies(socket.handshake.headers.cookie);  
-      updateContext(socket.request.session, cookies, function(context)
-      { 
-         if (context.user)
-         {
-            
-         }
-         else
-         {
-            SessionModel.findOne({ _id: socket.request.sessionID }, function(err, session)
-            {
-               if (err)
-               {
-                  console.log(err);
-               }
-               else
-               {
-                  //var questionState = socket.request.session.gameState.questionStates[data.question];
-                  var questionState = session.gameState.questionStates[data.question];
-                  //console.log(session.gameState.questionStates);
-
-                  if (!questionState.answered)
-                  {
-                     console.log('Not answered...')
-                     questionState.answered = true;
-                     data.checks.forEach(function(check, i)
-                     {
-                        questionState.choiceStates[i] = check;
-                     });
-                     //console.log(session.gameState.questionStates);
-                     session.save(function(err) { if (err) console.log(err); });
-                  }
-                  else
-                  {
-                     console.log('Already answered...')
-                  }
-               }
-            });
-         }
-      });   
    });
    
    function extractCookies(cookieString)

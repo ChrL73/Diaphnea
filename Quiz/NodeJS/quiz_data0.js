@@ -12,12 +12,12 @@ var levelSchema =
    questionnaire: String,
    level_id: String,
    index: Number,
-   name: mongoose.Schema.Types.Mixed/*,
+   name: mongoose.Schema.Types.Mixed,
    question_count: Number,
    choice_count: Number,
    weight_sum: Number,
    category_count: Number,
-   categories: [mongoose.Schema.Types.Mixed]*/
+   categories: [mongoose.Schema.Types.Mixed]
 };
 var LevelModel = mongoose.model('Level', levelSchema);
 
@@ -36,7 +36,7 @@ function getLevelMap(callback)
             levelMap[level.questionnaire][level.level_id] = level._id;
          });
          callback(levelMap);
-      });
+      })
    }
    else
    {
@@ -46,8 +46,8 @@ function getLevelMap(callback)
 
 function getLevelChoiceDownData(upData, callback)
 {
-   var questionnaire, questionnaireLanguage, level;
-   var downData = { questionnaireList: [], questionnaireLanguageList: [], levelList: [], showQuestionnaireLanguageSelect: false };
+   var questionnaire, language, level;
+   var downData = { questionnaireList: [], languageList: [], levelList: [], showLanguageSelect: false };
    
    QuestionnaireModel.find().sort('questionnaire').exec(processQuestionnaires);
    
@@ -67,21 +67,21 @@ function getLevelChoiceDownData(upData, callback)
       {
          if (!defaultLanguage) defaultLanguage = iLanguage;
          if (iLanguage.id === upData.siteLanguageId ) siteLanguage = iLanguage;
-         if (iLanguage.id === upData.questionnaireLanguageId) questionnaireLanguage = iLanguage;
-         downData.questionnaireLanguageList.push({ id: iLanguage.id, name: iLanguage.name });
+         if (iLanguage.id === upData.languageId) language = iLanguage;
+         downData.languageList.push({ id: iLanguage.id, name: iLanguage.name });
       });
       
       // If the 'questionnaire language list' and the 'site language list' contain exactly the same languages,
       // the user does not choose the questionnaire language: The same language is used for the site and for the questionnaire.
       // Otherwise, the user can choose a different language for the questionnaire than for the site
-      if (languages.length == downData.questionnaireLanguageList.length)
+      if (languages.length == downData.languageList.length)
       {
          var array1 = [];
          languages.forEach(function(language) { array1.push(language.id); } )
          array1.sort();
          
          var array2 = [];
-         downData.questionnaireLanguageList.forEach(function(language) { array2.push(language.id); } )
+         downData.languageList.forEach(function(language) { array2.push(language.id); } )
          array2.sort();
          
          var i, n = languages.length;
@@ -89,22 +89,22 @@ function getLevelChoiceDownData(upData, callback)
          {
             if (array1[i] != array2[i])
             {
-               downData.showQuestionnaireLanguageSelect = true;
+               downData.showLanguageSelect = true;
                break;
             }
          }
       }
       else
       {
-         downData.showQuestionnaireLanguageSelect = true;
+         downData.showLanguageSelect = true;
       }
       
-      if (siteLanguage && !downData.showQuestionnaireLanguageSelect) questionnaireLanguage = siteLanguage;
-      if (!questionnaireLanguage) questionnaireLanguage = defaultLanguage;
+      if (siteLanguage && !downData.showLanguageSelect) language = siteLanguage;
+      if (!language) language = defaultLanguage;
       
       questionnaires.forEach(function(iQuestionnaire)
       {
-         var questionnaireName = iQuestionnaire.name[questionnaireLanguage.id];
+         var questionnaireName = iQuestionnaire.name[language.id];
          if (!questionnaireName) questionnaireName = iQuestionnaire.name[iQuestionnaire.languages[0].id];
          downData.questionnaireList.push({id: iQuestionnaire.questionnaire, name: questionnaireName });
       });
@@ -120,13 +120,13 @@ function getLevelChoiceDownData(upData, callback)
       {
          if (!defaultLevel) defaultLevel = iLevel;
          if (iLevel.level_id === upData.levelId) level = iLevel;
-         downData.levelList.push({ id: iLevel.level_id, name: iLevel.name[questionnaireLanguage.id] });
+         downData.levelList.push({ id: iLevel.level_id, name: iLevel.name[language.id] });
       });
       
       if (!level) level = defaultLevel;
       
       downData.questionnaireId = questionnaire.questionnaire;
-      downData.questionnaireLanguageId = questionnaireLanguage.id;
+      downData.languageId = language.id;
       downData.levelId = level.level_id;
       
       callback(downData);

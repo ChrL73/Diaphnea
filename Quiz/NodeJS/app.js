@@ -55,52 +55,43 @@ app.all('/', function(req, res)
 {
    getContext(req.session, req.sessionID, req.cookies, function(context)
    {
-      if (!context)
+      if (req.body.siteLanguageSelect)
       {
-         // 'context' is undefined when the session has not been saved (case of the 1st request of the session). 
-         // The session will be saved at the end of the current request, so it will be available when the page will be reload by 'redirect'
-         res.redirect('/');
+         var siteLanguageId;
+         languages.forEach(function(language)
+         {
+            if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
+         });
+
+         if (siteLanguageId) context.siteLanguageId = siteLanguageId;
       }
+
+      var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
+                       req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
+
+      if (req.body.enterSignUp || (!pageInBody && context.currentPage == pages.signUp))
+      {
+         enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
+      }
+      /*else if (req.body.submitSignUp)
+      {
+         submitSignUp(req, res, context);
+      }
+      else if (req.body.signIn)
+      {
+         signIn(req, res, context);
+      }
+      else if (req.body.signOut)
+      {
+         signOut(req, res, context);
+      }
+      else if (req.body.start || (!pageInBody && context.currentPage == pages.game))
+      {
+         game(req, res, context);
+      }*/
       else
       {
-         if (req.body.siteLanguageSelect)
-         {
-            var siteLanguageId;
-            languages.forEach(function(language)
-            {
-               if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
-            });
-
-            if (siteLanguageId) context.siteLanguageId = siteLanguageId;
-         }
-
-         /*var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
-                          req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
-
-         if (req.body.enterSignUp || (!pageInBody && context.currentPage == pages.signUp))
-         {
-            enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
-         }
-         else if (req.body.submitSignUp)
-         {
-            submitSignUp(req, res, context);
-         }
-         else if (req.body.signIn)
-         {
-            signIn(req, res, context);
-         }
-         else if (req.body.signOut)
-         {
-            signOut(req, res, context);
-         }
-         else if (req.body.start || (!pageInBody && context.currentPage == pages.game))
-         {
-            game(req, res, context);
-         }
-         else*/
-         {
-            index(req, res, context, { unknwon: 'false', error: 'false' });
-         }
+         index(req, res, context, { unknwon: 'false', error: 'false' });
       }
    });
 });
@@ -179,8 +170,14 @@ function getContext(session0, sessionId, cookies, callback)
          }
          else if (!session)
          {
-            console.log('!session');
-            callback();
+            // 'session' is undefined when the session has not yet been saved (case of the first request of the session). 
+            // In this case, we save the session, then call again 'getContext'
+            session0.save(function(err)
+            {
+               // Todo: handle error
+               if (err) console.log(err);
+               getContext(session0, sessionId, cookies, callback);
+            });
          }
          else 
          {
@@ -211,10 +208,6 @@ function getContext(session0, sessionId, cookies, callback)
                   {
                      console.log(err);
                      // Todo: handle error
-                  }
-                  else
-                  { 
-                     //callback(session.context);
                   }
                });
             }

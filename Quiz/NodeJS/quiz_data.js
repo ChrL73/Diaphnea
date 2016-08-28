@@ -12,12 +12,7 @@ var levelSchema =
    questionnaire: String,
    level_id: String,
    index: Number,
-   name: mongoose.Schema.Types.Mixed/*,
-   question_count: Number,
-   choice_count: Number,
-   weight_sum: Number,
-   category_count: Number,
-   categories: [mongoose.Schema.Types.Mixed]*/
+   name: mongoose.Schema.Types.Mixed
 };
 var LevelModel = mongoose.model('Level', levelSchema);
 

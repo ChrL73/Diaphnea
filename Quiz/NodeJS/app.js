@@ -73,11 +73,11 @@ app.all('/', function(req, res)
       {
          enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
       }
-      /*else if (req.body.submitSignUp)
+      else if (req.body.submitSignUp)
       {
          submitSignUp(req, res, context);
       }
-      else if (req.body.signIn)
+      /*else if (req.body.signIn)
       {
          signIn(req, res, context);
       }
@@ -113,7 +113,11 @@ function index(req, res, context, flags)
       context.questionnaireId = downData.questionnaireId;
       context.questionnaireLanguageId = downData.questionnaireLanguageId;
       context.levelId = downData.levelId;
-      context.saver.save(function(err) { /* Todo: handle error */ });
+      context.saver.save(function(err)
+      {
+         if (err) console.log(err);
+         /* Todo: handle error */
+      });
          
       downData.siteLanguageList = languages;
       downData.siteLanguageId = context.siteLanguageId;
@@ -130,9 +134,44 @@ function game(req, res, context)
    
 }
 
-function enterSignUp(req, res, context, flags)
+function enterSignUp(req, res, context0, flags)
 {
+   if (req.session.userId) // Todo: test this case
+   {
+      req.session.userId = undefined;
+      getContext(req.session, req.sessionID, req.cookies, function(context)
+      {
+         continueSignUp(context);
+      });
+   }
+   else
+   {
+      continueSignUp(context0);
+   }
    
+   function continueSignUp(context)
+   {
+      context.currentPage = pages.signUp;
+      context.saver.save(function(err)
+      {
+         if (err) console.log(err);
+         /* Todo: handle error */
+      });
+
+      var data =
+      {
+         name: req.body.name,
+         pass1: req.body.pass1 ? req.body.pass1 : '',
+         pass2: req.body.pass2 ? req.body.pass2 : '',
+         siteLanguageList: languages,
+         siteLanguageId: context.siteLanguageId,
+         texts: translate(context.siteLanguageId).texts,
+         flags: flags
+      };
+
+      if (flags.error == 'true') res.status(500);
+      res.render('sign_up.ejs', { data: data });   
+   }
 }
 
 function signIn(req, res, context)
@@ -142,7 +181,33 @@ function signIn(req, res, context)
 
 function submitSignUp(req, res, context)
 {
+   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
+      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
+   {
+      enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'false' });
+      return;
+   }
    
+   userData.tryAddUser(req.body.name, req.body.pass1, context, function(err, id)
+   {
+      if (err)
+      {
+         console.log('err: ' + err);
+         enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'true' });
+      }
+      else if (!id)
+      {
+         enterSignUp(req, res, context, { reload: 'true', userExists: 'true', error: 'false' });
+      }
+      else
+      {
+         req.session.userId = id;       
+         getContext(req.session, req.sessionID, req.cookies, function(context)
+         {
+            index(req, res, context, { unknwon: 'false', error: 'false' });
+         });
+      }
+   });
 }
 
 function signOut(req, res, context)
@@ -156,7 +221,22 @@ function getContext(session0, sessionId, cookies, callback)
    {
       userData.getUser(session0.userId, function(err, user)
       {
-         
+         if (err)
+         {
+             console.log(err);
+            // Todo: Hanlde error
+         }
+         else if (!user)
+         {
+            console.log('!user');
+            // Todo: Hanlde error
+         }
+         else 
+         {
+            user.context.user = user;
+            user.context.saver = user;
+            callback(user.context);
+         }
       });
    }
    else

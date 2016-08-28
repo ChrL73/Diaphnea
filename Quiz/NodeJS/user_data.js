@@ -30,6 +30,48 @@ var userSchema = mongoose.Schema(
 });
 var UserModel = mongoose.model('User', userSchema);
 
+function tryAddUser(name, pass, context, callback)
+{
+   UserModel.findOne({ name: name }, findEnd);
+   
+   var newUser; 
+   function findEnd(err, user)
+   {
+      if (err)
+      {
+         callback(err, null);
+         return;
+      }
+      if (user)
+      {
+         // User name already exists
+         callback(null, null);
+         return;
+      }
+      
+      var hash = crypto.createHash('sha1');
+      hash.update(pass);
+      var sha1 = hash.digest('hex');
+      
+      newUser = new UserModel();
+      newUser.name = name;
+      newUser.sha1pass = sha1;
+      newUser.context = context;
+      newUser.save(saveEnd);
+   }
+         
+   function saveEnd(err)
+   {
+      if (err)
+      {
+         callback(err, null);
+         return;
+      }
+      
+      callback(null, newUser._id);
+   }
+}
+
 function getUser(id, callback)
 {
    UserModel.findOne({ _id: id }, callback);
@@ -40,11 +82,7 @@ function getSession(id, callback)
    SessionModel.findOne({ _id: id }, callback);
 }
 
-function setContext(user, sessionID, gameState, callback)
-{
-   
-}
-
+module.exports.tryAddUser = tryAddUser;
 module.exports.getUser = getUser;
 module.exports.getSession = getSession;
 

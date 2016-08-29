@@ -21,9 +21,9 @@
             <% question.choices.forEach(function(choice, iChoice) {
                var checked = questionStates[iQuestion].choiceStates[iChoice] & 1;
                if (question.isMultiple) { %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>> <%=choice.text%> <br>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>> <%=choice.text%> <%=questionStates[iQuestion].choiceStates[iChoice]%> <br>
                <% } else { %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>"> <%=choice.text%> <br>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>"> <%=choice.text%> <%=questionStates[iQuestion].choiceStates[iChoice]%><br>
             <%}});%>
          </div>
       <% }); %>
@@ -41,7 +41,7 @@
       </form>
    
       <script>
-         var quizId = <%=data.quizId%>;
+         var quizId = "<%=data.quizId%>";
          var displayedQuestion = <%=displayedQuestion%>;
          var questionCount = <%=questions.length%>;
          var answered = [<%=answered%>];

@@ -36,7 +36,13 @@ $(function()
       if (answered[displayedQuestion]) $('#submitButton').attr('disabled', 'disabled');
       else $('#submitButton').removeAttr('disabled');
       
-      socket.emit('changeQuestion', displayedQuestion);
+      var data = 
+      {
+         quizId: quizId,
+         displayedQuestion: displayedQuestion
+      };
+      
+      socket.emit('changeQuestion', data);
    }
    
    $('#submitButton').click(function(e)
@@ -47,6 +53,7 @@ $(function()
       
       var data = 
       {
+         quizId: quizId,
          question: displayedQuestion,
          checks: []
       };
@@ -55,5 +62,10 @@ $(function()
       for (i = 0; i < n; ++i) data.checks.push($('#input' + displayedQuestion + '_' + i).is(':checked'));
       
       socket.emit('submit', data);
+   });
+   
+   socket.on('reload', function()
+   {
+      location.replace('/');
    });
 });

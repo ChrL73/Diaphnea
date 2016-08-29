@@ -94,6 +94,10 @@ app.all('/', function(req, res)
       {
          game(req, res, context);
       }
+      else if (req.body.stop)
+      {
+         stop(req, res, context);
+      }
       else
       {
          index(req, res, context, { unknwon: 'false', error: 'false' });
@@ -152,7 +156,8 @@ function game(req, res, context)
                if (err)
                {
                   console.log(stderr);
-                  context.displayedQuestion = 0;
+                  context.quizId = undefined;
+                  context.displayedQuestion = undefined;
                   context.questions = undefined;
                   context.questionStates = [];
                }
@@ -170,7 +175,7 @@ function game(req, res, context)
                      {
                         // 0 <= choiceStates[iChoice] <= 3 :
                         // bit 0 = 1 if choice is checked
-                        // bit 1 = 1 if question has been submitted and if the player choice is correct (MUST always be 0 when the question has not been submitted, otherwise the player could cheat) 
+                        // bit 1 = 1 if answer has been submitted and if the player choice is correct (MUST always be 0 when the answer has not been submitted, otherwise the player could cheat) 
                         if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
                         else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
@@ -207,6 +212,15 @@ function game(req, res, context)
       
       res.render('game.ejs', { data: data });
    }
+}
+
+function stop(req, res, context)
+{
+   context.quizId = undefined;
+   context.displayedQuestion = undefined;
+   context.questions = undefined;
+   context.questionStates = [];
+   index(req, res, context, { unknwon: 'false', error: 'false' });
 }
 
 function enterSignUp(req, res, context0, flags)
@@ -419,13 +433,20 @@ io.on('connection', function(socket)
       }
    });
    
-   socket.on('changeQuestion', function(displayedQuestion)
+   socket.on('changeQuestion', function(data)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);  
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
-         context.displayedQuestion = displayedQuestion;
-         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+         if (context.quizId && context.quizId == data.quizId)
+         {
+            context.displayedQuestion = data.displayedQuestion;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } }); 
+         }
+         else
+         {
+            socket.emit('reload');
+         }
       });
    });
    
@@ -434,23 +455,28 @@ io.on('connection', function(socket)
       var cookies = extractCookies(socket.handshake.headers.cookie);  
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
-         var questionState = context.questionStates[data.question];
-
-         if (!questionState.answered)
+         if (context.quizId && context.quizId == data.quizId)
          {
-            console.log('Not answered...')
-            questionState.answered = true;
-            data.checks.forEach(function(check, i)
+            var questionState = context.questionStates[data.question];
+            var question = context.questions[data.question];
+
+            if (!questionState.answered)
             {
-               questionState.choiceStates[i] = check;
-            });
-            
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+               questionState.answered = true;
+               data.checks.forEach(function(check, i)
+               {
+                  // Note: With 'questionState.choiceStates[index] = value;' the value will not be saved to database
+                  // -> use 'questionState.choiceStates.set(index, value);'
+                  questionState.choiceStates.set(i, (check ? 1 : 0) + (question.choices[i].isRight == check ? 2 : 0));
+               });
+
+               context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+            }
          }
          else
          {
-            console.log('Already answered...')
-         }  
+            socket.emit('reload');
+         }
       }); 
    });
    

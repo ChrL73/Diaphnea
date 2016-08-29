@@ -8,6 +8,7 @@ var contextSchema = mongoose.Schema(
    questionnaireLanguageId: String,
    levelId: String,
    currentPage: Number,
+   quizId: String,
    questions: mongoose.Schema.Types.Mixed,
    displayedQuestion: Number,
    questionStates: [{ answered: Boolean, choiceStates: [Number] }]
@@ -72,9 +73,26 @@ function tryAddUser(name, pass, context, callback)
    }
 }
 
+function findUserId(name, pass, callback)
+{
+   var hash = crypto.createHash('sha1');
+   hash.update(pass);
+   var sha1 = hash.digest('hex');
+   UserModel.findOne({ name: name, sha1pass: sha1 }, { _id: 1 }, function(err, user)
+   {
+      if (user) callback(err, user._id);
+      else callback(err, null);
+   });
+}
+
 function getUser(id, callback)
 {
    UserModel.findOne({ _id: id }, callback);
+}
+
+function removeUser(id, callback)
+{
+   UserModel.remove({ _id: id }, callback);
 }
 
 function getSession(id, callback)
@@ -83,6 +101,8 @@ function getSession(id, callback)
 }
 
 module.exports.tryAddUser = tryAddUser;
+module.exports.findUserId = findUserId;
 module.exports.getUser = getUser;
+module.exports.removeUser = removeUser;
 module.exports.getSession = getSession;
 

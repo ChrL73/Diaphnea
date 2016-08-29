@@ -9,6 +9,7 @@ var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var favicon = require('serve-favicon');
 var childProcess = require('child_process');
+var shortId = require('shortid');
 
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/diaphnea');
@@ -34,7 +35,11 @@ var sessionMiddleware = session(
    secret: config.sessionSecret,
    resave: false,
    saveUninitialized: true,
-   store: new mongoStore({ mongooseConnection: mongoose.connection })
+   store: new mongoStore(
+   {
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 3600
+   })
 });
 io.use(function(socket, next)
 {
@@ -77,7 +82,7 @@ app.all('/', function(req, res)
       {
          submitSignUp(req, res, context);
       }
-      /*else if (req.body.signIn)
+      else if (req.body.signIn)
       {
          signIn(req, res, context);
       }
@@ -88,7 +93,7 @@ app.all('/', function(req, res)
       else if (req.body.start || (!pageInBody && context.currentPage == pages.game))
       {
          game(req, res, context);
-      }*/
+      }
       else
       {
          index(req, res, context, { unknwon: 'false', error: 'false' });
@@ -116,7 +121,7 @@ function index(req, res, context, flags)
       context.saver.save(function(err)
       {
          if (err) console.log(err);
-         /* Todo: handle error */
+         // Todo: handle error
       });
          
       downData.siteLanguageList = languages;
@@ -131,7 +136,77 @@ function index(req, res, context, flags)
 
 function game(req, res, context)
 {
+   var newGame = (context.currentPage != pages.game || !context.questions);
+   context.currentPage = pages.game;
    
+   if (newGame)
+   {
+      quizData.getLevelChoiceDownData(context, function(downData)
+      {
+         quizData.getLevelMap(function(levelMap)
+         {
+            var levelId = levelMap[downData.questionnaireId][downData.levelId];
+
+            childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId, function(err, stdout, stderr)
+            {
+               if (err)
+               {
+                  console.log(stderr);
+                  context.displayedQuestion = 0;
+                  context.questions = undefined;
+                  context.questionStates = [];
+               }
+               else
+               {
+                  context.quizId =  shortId.generate();
+                  context.displayedQuestion = 0;
+                  context.questions = JSON.parse(stdout);
+                  context.questionStates = [];
+                  
+                  context.questions.forEach(function(question, iQuestion)
+                  {
+                     context.questionStates.push({ answered: false, choiceStates: [] });
+                     question.choices.forEach(function(choice, iChoice)
+                     {
+                        // 0 <= choiceStates[iChoice] <= 3 :
+                        // bit 0 = 1 if choice is checked
+                        // bit 1 = 1 if question has been submitted and if the player choice is correct (MUST always be 0 when the question has not been submitted, otherwise the player could cheat) 
+                        if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
+                        else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
+                     });
+                  });
+               }
+
+               renderGameView();
+            });
+         });
+      });
+   }
+   else
+   {
+      renderGameView();
+   }
+   
+   function renderGameView()
+   {
+      context.saver.save(function(err)
+      {
+         if (err) console.log(err);
+         // Todo: handle error
+      });
+      
+      var data =
+      {
+         texts: translate(context.siteLanguageId).texts,
+         quizId: context.quizId,
+         displayedQuestion: context.displayedQuestion,
+         questions: context.questions,
+         questionStates: context.questionStates,
+         error: !context.questions // Todo: handle error in view
+      };
+      
+      res.render('game.ejs', { data: data });
+   }
 }
 
 function enterSignUp(req, res, context0, flags)
@@ -176,7 +251,27 @@ function enterSignUp(req, res, context0, flags)
 
 function signIn(req, res, context)
 {
-   
+   userData.findUserId(req.body.name, req.body.pass, function(err, id)
+   {
+      if (err)
+      {
+         console.log(err);
+         index(req, res, context, { unknwon: 'false', error: 'true' });
+      }
+      else if (!id)
+      {
+         index(req, res, context, { unknwon: 'true', error: 'false' });
+      }
+      else
+      {
+         req.session.userId = id;
+         res.redirect('/');
+         /*getContext(req.session, req.sessionID, req.cookies, function(context)
+         {
+            index(req, res, context, { unknwon: 'false', error: 'false' });          
+         });*/
+      }
+   });
 }
 
 function submitSignUp(req, res, context)
@@ -212,7 +307,11 @@ function submitSignUp(req, res, context)
 
 function signOut(req, res, context)
 {
-   
+   req.session.userId = undefined;
+   getContext(req.session, req.sessionID, req.cookies, function(context)
+   {
+      index(req, res, context, { unknwon: 'false', error: 'false' }); 
+   });
 }
 
 function getContext(session0, sessionId, cookies, callback)
@@ -315,19 +414,44 @@ io.on('connection', function(socket)
          context.questionnaireId = downData.questionnaireId;
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
-         context.saver.save(function(err) { /* Todo: handle error */ });
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
          socket.emit('updateSelects', downData);
       }
    });
    
    socket.on('changeQuestion', function(displayedQuestion)
    {
-      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.displayedQuestion = displayedQuestion;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+      });
    });
    
    socket.on('submit', function(data)
    {
-      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         var questionState = context.questionStates[data.question];
+
+         if (!questionState.answered)
+         {
+            console.log('Not answered...')
+            questionState.answered = true;
+            data.checks.forEach(function(check, i)
+            {
+               questionState.choiceStates[i] = check;
+            });
+            
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+         }
+         else
+         {
+            console.log('Already answered...')
+         }  
+      }); 
    });
    
    function extractCookies(cookieString)

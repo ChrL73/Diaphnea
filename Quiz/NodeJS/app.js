@@ -174,8 +174,10 @@ function game(req, res, context)
                      question.choices.forEach(function(choice, iChoice)
                      {
                         // 0 <= choiceStates[iChoice] <= 3 :
-                        // bit 0 = 1 if choice is checked
-                        // bit 1 = 1 if answer has been submitted and if the player choice is correct (MUST always be 0 when the answer has not been submitted, otherwise the player could cheat) 
+                        // bit 0 = 1 if choice is checked.
+                        // bit 1 = 1 if answer has been submitted and if the choice is right.
+                        // (bit 1 must be 0 when the answer has not been submitted, otherwise the player can cheat:
+                        // the value can be sent (by web socket) before the question is answered by the user). 
                         if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
                         else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
@@ -207,7 +209,7 @@ function game(req, res, context)
          displayedQuestion: context.displayedQuestion,
          questions: context.questions,
          questionStates: context.questionStates,
-         error: !context.questions // Todo: handle error in view
+         error: !context.quizId // Todo: handle error in view
       };
       
       res.render('game.ejs', { data: data });
@@ -461,13 +463,13 @@ io.on('connection', function(socket)
             var question = context.questions[data.question];
 
             if (!questionState.answered)
-            {
+            {  
                questionState.answered = true;
                data.checks.forEach(function(check, i)
                {
-                  // Note: With 'questionState.choiceStates[index] = value;' the value will not be saved to database
-                  // -> use 'questionState.choiceStates.set(index, value);'
-                  questionState.choiceStates.set(i, (check ? 1 : 0) + (question.choices[i].isRight == check ? 2 : 0));
+                  // Note: With 'choiceStates[index] = value;' the value will not be saved to database by mongoose
+                  // -> use 'choiceStates.set(index, value);' instead
+                  questionState.choiceStates.set(i, (check ? 1 : 0) + (question.choices[i].isRight ? 2 : 0));
                });
 
                context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  

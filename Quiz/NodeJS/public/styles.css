@@ -13,6 +13,21 @@
    display: none;
 }
 
+.boldChoice
+{
+   font-weight: bold;
+}
+
+.redChoice
+{
+   color: red;
+}
+
+.greenChoice
+{
+   color: green;
+}
+
 #waitImg
 {
    height: 24px;

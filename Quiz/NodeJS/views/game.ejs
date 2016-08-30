@@ -10,7 +10,7 @@
       <% var questions = data.questions;
       var displayedQuestion = data.displayedQuestion;
       var questionStates = data.questionStates;
-      var answered = []; // Todo : Suppress 'answered'
+      var answered = [];
       
       questions.forEach(function(question, iQuestion) {
          var disabled = questionStates[iQuestion].answered;
@@ -19,11 +19,28 @@
             <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
             <p><%=question.question%></p>
             <% question.choices.forEach(function(choice, iChoice) {
-               var checked = questionStates[iQuestion].choiceStates[iChoice] & 1;
-               if (question.isMultiple) { %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>> <%=choice.text%> <%=questionStates[iQuestion].choiceStates[iChoice]%> <br>
-               <% } else { %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>"> <%=choice.text%> <%=questionStates[iQuestion].choiceStates[iChoice]%><br>
+               var checked = (Boolean)(questionStates[iQuestion].choiceStates[iChoice] & 1);
+               var rightChoice = (Boolean)(questionStates[iQuestion].choiceStates[iChoice] & 2);
+               var classStr;
+               if (disabled && rightChoice) classStr = 'boldChoice';
+   
+               if (question.isMultiple) {
+                  if (disabled)
+                  {
+                     if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                  } %>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
+                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span><br>
+            
+               <% } else {
+                  if (disabled && checked)
+                  {
+                     if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                  } %>
+                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
+                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span> <%=rightChoice%><br>
             <%}});%>
          </div>
       <% }); %>

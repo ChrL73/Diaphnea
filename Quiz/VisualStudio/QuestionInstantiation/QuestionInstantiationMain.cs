@@ -14,7 +14,7 @@ namespace QuestionInstantiation
         {
             if (args.Length < 1)
             {
-                Console.WriteLine("usage: QuestionInstantiation path1 [path2 ...]");
+                Console.WriteLine("usage: QuestionInstantiation.exe path1 [path2 ...]");
                 return;
             }
 

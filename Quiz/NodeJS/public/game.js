@@ -68,4 +68,46 @@ $(function()
    {
       location.replace('/');
    });
+   
+   socket.on('updateQuestions', function(data)
+   {      
+      if (data.quizId != quizId)
+      {
+         location.replace('/');
+      }
+      else
+      {
+         data.questionStates.forEach(function(state)
+         {
+            var i = state.index;
+            state.choiceStates.forEach(function(choice, j)
+            {
+               var id = '#input' + i + '_' + j;
+               $(id).attr('disabled', 'disabled');
+               answered[i] = 1;
+               if (i == displayedQuestion) $('#submitButton').attr('disabled', 'disabled');
+               
+               var isChecked = Boolean(choice & 1);
+               if (isChecked) $(id).prop('checked', true);
+               else $(id).removeAttr('checked');
+                           
+               var isRight = Boolean(choice & 2);
+               $(id).next().removeClass();
+               if (isRight) $(id).next().addClass('boldChoice');
+               
+               var isMultiple = ($(id).prop('type') == 'checkbox');
+               if (isMultiple)
+               {
+                  if (isChecked == isRight) $(id).next().addClass('greenChoice');
+                  else $(id).next().addClass('redChoice');
+               }
+               else if (isChecked)
+               {
+                  if (isRight) $(id).next().addClass('greenChoice');
+                  else $(id).next().addClass('redChoice');
+               }
+            });
+         });
+      }
+   });
 });

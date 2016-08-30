@@ -175,9 +175,7 @@ function game(req, res, context)
                      {
                         // 0 <= choiceStates[iChoice] <= 3 :
                         // bit 0 = 1 if choice is checked.
-                        // bit 1 = 1 if answer has been submitted and if the choice is right.
-                        // (bit 1 must be 0 when the answer has not been submitted, otherwise the player can cheat:
-                        // the value can be sent (by web socket) before the question is answered by the user). 
+                        // bit 1 = 1 if answer has been submitted and if the choice is right
                         if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
                         else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
@@ -282,10 +280,6 @@ function signIn(req, res, context)
       {
          req.session.userId = id;
          res.redirect('/');
-         /*getContext(req.session, req.sessionID, req.cookies, function(context)
-         {
-            index(req, res, context, { unknwon: 'false', error: 'false' });          
-         });*/
       }
    });
 }
@@ -444,6 +438,7 @@ io.on('connection', function(socket)
          {
             context.displayedQuestion = data.displayedQuestion;
             context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } }); 
+            socket.emit('updateQuestions', getOutData(context));
          }
          else
          {
@@ -472,8 +467,10 @@ io.on('connection', function(socket)
                   questionState.choiceStates.set(i, (check ? 1 : 0) + (question.choices[i].isRight ? 2 : 0));
                });
 
-               context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });  
+               context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
             }
+            
+            socket.emit('updateQuestions', getOutData(context));
          }
          else
          {
@@ -494,6 +491,22 @@ io.on('connection', function(socket)
       });
 
       return cookieObject;
+   }
+   
+   function getOutData(context)
+   {
+      var outData = { quizId: context.quizId, questionStates: [] };
+      context.questionStates.forEach(function(questionState, i)
+      {
+         if (questionState.answered)
+         {
+            var outState = { index: i, choiceStates: [] };
+            questionState.choiceStates.forEach(function(choice) { outState.choiceStates.push(choice); });
+            outData.questionStates.push(outState);
+         }
+      });
+      
+      return outData;
    }
 });
 

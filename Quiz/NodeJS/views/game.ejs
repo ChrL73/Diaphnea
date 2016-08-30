@@ -19,8 +19,8 @@
             <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
             <p><%=question.question%></p>
             <% question.choices.forEach(function(choice, iChoice) {
-               var checked = (Boolean)(questionStates[iQuestion].choiceStates[iChoice] & 1);
-               var rightChoice = (Boolean)(questionStates[iQuestion].choiceStates[iChoice] & 2);
+               var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
+               var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
                var classStr;
                if (disabled && rightChoice) classStr = 'boldChoice';
    
@@ -40,7 +40,7 @@
                      else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
                   } %>
                   <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
-                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span> <%=rightChoice%><br>
+                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span><br>
             <%}});%>
          </div>
       <% }); %>

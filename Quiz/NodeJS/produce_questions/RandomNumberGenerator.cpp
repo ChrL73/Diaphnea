@@ -25,15 +25,15 @@ namespace produce_questions
         }
 
         int *p = new int;
-        int q = 0;
+        unsigned int q = 0;
 
         #if defined(__linux)
-            long q0 = reinterpret_cast<long>(p);
-            int q1 = static_cast<int>((q0 & 0xffffffff00000000) >> 32);
-            int q2 = static_cast<int>(q0 & 0xffffffff);
+            unsigned long q0 = reinterpret_cast<unsigned long>(p);
+            unsigned int q1 = static_cast<unsigned int>((q0 & 0xffffffff00000000) >> 32);
+            unsigned int q2 = static_cast<unsigned int>(q0 & 0xffffffff);
             q = q1 + q2;
         #elif defined(_WIN32)
-            q = reinterpret_cast<int>(p);
+            q = reinterpret_cast<unsigned int>(p);
         #endif
 
         delete p;
@@ -55,7 +55,7 @@ namespace produce_questions
 
         #if defined(__linux) && !defined(_WIN32)
             if (sizeof(int *) != 8) return -1;
-            if (sizeof(long) != 8) return -1;
+            if (sizeof(unsigned long) != 8) return -1;
             if (RAND_MAX != 0x7FFFFFFF) return -1;
             if (CLOCKS_PER_SEC != 1000000) return -1;
         #elif defined(_WIN32)

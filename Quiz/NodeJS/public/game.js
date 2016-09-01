@@ -30,8 +30,8 @@ $(function()
       if (displayedQuestion == 0) $('#previousButton').attr('disabled', 'disabled');
       else if (previousQuestion == 0) $('#previousButton').removeAttr('disabled');
       
-      if (displayedQuestion == questionCount - 1) $('#nextButton').attr('disabled', 'disabled');
-      else if (previousQuestion == questionCount - 1) $('#nextButton').removeAttr('disabled');
+      if (displayedQuestion == questionCount - 1 || !answered[displayedQuestion]) $('#nextButton').attr('disabled', 'disabled');
+      else $('#nextButton').removeAttr('disabled');
       
       if (answered[displayedQuestion]) $('#submitButton').attr('disabled', 'disabled');
       else $('#submitButton').removeAttr('disabled');
@@ -49,6 +49,7 @@ $(function()
    {
       $('#submitButton').attr('disabled', 'disabled');
       $('.input' + displayedQuestion).attr('disabled', 'disabled');
+      if (displayedQuestion != questionCount - 1) $('#nextButton').removeAttr('disabled');
       answered[displayedQuestion] = 1;
       
       var data = 
@@ -61,6 +62,8 @@ $(function()
       var i, n = $('.input' + displayedQuestion).length;
       for (i = 0; i < n; ++i) data.checks.push($('#input' + displayedQuestion + '_' + i).is(':checked'));
       
+      console.log('#wait' + displayedQuestion);
+      $('#wait' + displayedQuestion).css('display', 'inline');
       socket.emit('submit', data);
    });
    
@@ -108,6 +111,8 @@ $(function()
                }
             });
          });
+         
+         $('.waitImg').css('display', 'none');
       }
    });
 });

@@ -6,4 +6,6 @@ config.port = 3000;
 config.sessionSecret = "dev1";
 config.cookieSecret = "dev2";
 
+//config.debugDelay = 2000;
+
 module.exports = config;

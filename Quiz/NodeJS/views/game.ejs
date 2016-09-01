@@ -17,7 +17,7 @@
          answered.push(disabled);%>
          <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
             <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
-            <p><%=question.question%></p>
+            <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg"/></p>
             <% question.choices.forEach(function(choice, iChoice) {
                var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
                var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
@@ -48,7 +48,7 @@
       <p>
          <button id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
          <button id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
-         <button id="nextButton" <% if (displayedQuestion == questions.length - 1) { %>disabled<% } %>><%=data.texts.next%></button>
+         <button id="nextButton" <% if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.next%></button>
       </p>
       
       <form id="stopForm" action="/" method="post">

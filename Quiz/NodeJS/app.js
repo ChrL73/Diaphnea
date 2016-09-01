@@ -54,6 +54,8 @@ var pages =
    game: 2,
 };
 
+var debugDelay = config.debugDelay ? config.debugDelay : 0;
+
 quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
 app.all('/', function(req, res)
@@ -425,7 +427,7 @@ io.on('connection', function(socket)
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
          context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
-         socket.emit('updateSelects', downData);
+         setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
       }
    });
    
@@ -442,7 +444,7 @@ io.on('connection', function(socket)
          }
          else
          {
-            socket.emit('reload');
+            setTimeout(function() { socket.emit('reload'); }, debugDelay);
          }
       });
    });
@@ -470,11 +472,11 @@ io.on('connection', function(socket)
                context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
             }
             
-            socket.emit('updateQuestions', getOutData(context));
+            setTimeout(function() { socket.emit('updateQuestions', getOutData(context)); }, debugDelay);
          }
          else
          {
-            socket.emit('reload');
+            setTimeout(function() { socket.emit('reload'); }, debugDelay);
          }
       }); 
    });

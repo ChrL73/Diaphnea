@@ -12,9 +12,24 @@ $(function()
       $('#siteLanguageForm').trigger('submit');
    });
    
-   $('#questionnaireSelect').change(emitLevelChoice);
-   $('#questionnaireLanguageSelect').change(emitLevelChoice);
-   $('#levelSelect').change(emitLevelChoice);
+   $('#questionnaireSelect').change(function()
+   {
+      emitLevelChoice();
+      $('#questionnaireWait').css('display', 'inline');
+   });
+   
+   $('#questionnaireLanguageSelect').change(function()
+   {
+      emitLevelChoice();
+      $('#questionnaireLanguageWait').css('display', 'inline');
+   });
+   
+   $('#levelSelect').change(function()
+   {
+      emitLevelChoice();
+      $('#levelWait').css('display', 'inline');
+   });
+   
    
    function emitLevelChoice()
    {
@@ -30,11 +45,14 @@ $(function()
          document.cookie = 'levelId=' + levelId + expires;
       }
       
+      
       socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId }); 
    }
    
    socket.on('updateSelects', function(data)
    {
+      $('.waitImg').css('display', 'none');
+      
       $('#questionnaireSelect').find('option').remove(); 
       data.questionnaireList.forEach(function(questionnaire)
       {

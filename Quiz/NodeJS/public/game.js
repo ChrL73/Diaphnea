@@ -83,18 +83,18 @@ $(function()
          data.questionStates.forEach(function(state)
          {
             var i = state.index;
-            state.choiceStates.forEach(function(choice, j)
+            state.choiceStates.forEach(function(choiceState, j)
             {
                var id = '#input' + i + '_' + j;
                $(id).attr('disabled', 'disabled');
                answered[i] = 1;
                if (i == displayedQuestion) $('#submitButton').attr('disabled', 'disabled');
                
-               var isChecked = Boolean(choice & 1);
+               var isChecked = Boolean(choiceState.state & 1);
                if (isChecked) $(id).prop('checked', true);
                else $(id).removeAttr('checked');
                            
-               var isRight = Boolean(choice & 2);
+               var isRight = Boolean(choiceState.state & 2);
                $(id).next().removeClass();
                if (isRight) $(id).next().addClass('boldChoice');
                
@@ -108,6 +108,11 @@ $(function()
                {
                   if (isRight) $(id).next().addClass('greenChoice');
                   else $(id).next().addClass('redChoice');
+               }
+               
+               if (choiceState.comment)
+               {
+                  $(id).next().after(' (' + choiceState.comment + ')');
                }
             });
          });

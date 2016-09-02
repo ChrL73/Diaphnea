@@ -503,7 +503,11 @@ io.on('connection', function(socket)
          if (questionState.answered)
          {
             var outState = { index: i, choiceStates: [] };
-            questionState.choiceStates.forEach(function(choice) { outState.choiceStates.push(choice); });
+            questionState.choiceStates.forEach(function(state, j)
+            {
+               var comment = context.questions[i].choices[j].comment;
+               outState.choiceStates.push({ state: state, comment: comment.length ? comment : undefined } );
+            });
             outData.questionStates.push(outState);
          }
       });

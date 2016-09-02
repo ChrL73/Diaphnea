@@ -31,7 +31,8 @@
                      else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
                   } %>
                   <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
-                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span><br>
+                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                  <% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %><br>
             
                <% } else {
                   if (disabled && checked)
@@ -40,7 +41,8 @@
                      else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
                   } %>
                   <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
-                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span><br>
+                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                  <% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %><br>
             <%}});%>
          </div>
       <% }); %>

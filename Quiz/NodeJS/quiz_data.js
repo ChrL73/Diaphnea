@@ -101,7 +101,7 @@ function getLevelChoiceDownData(upData, callback)
       {
          var questionnaireName = iQuestionnaire.name[questionnaireLanguage.id];
          if (!questionnaireName) questionnaireName = iQuestionnaire.name[iQuestionnaire.languages[0].id];
-         downData.questionnaireList.push({id: iQuestionnaire.questionnaire, name: questionnaireName });
+         downData.questionnaireList.push({ id: iQuestionnaire.questionnaire, name: questionnaireName });
       });
       
       LevelModel.find({ questionnaire: questionnaire.questionnaire }).sort('index').exec(processLevels);
@@ -121,8 +121,10 @@ function getLevelChoiceDownData(upData, callback)
       if (!level) level = defaultLevel;
       
       downData.questionnaireId = questionnaire.questionnaire;
+      downData.questionnaireName = questionnaire.name[questionnaireLanguage.id];
       downData.questionnaireLanguageId = questionnaireLanguage.id;
       downData.levelId = level.level_id;
+      downData.levelName = level.name[questionnaireLanguage.id];
       
       callback(downData);
    }

@@ -7,6 +7,8 @@ var contextSchema = mongoose.Schema(
    questionnaireId: String,
    questionnaireLanguageId: String,
    levelId: String,
+   questionnaireName: String,
+   levelName: String,
    currentPage: Number,
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,

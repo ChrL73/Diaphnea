@@ -169,6 +169,8 @@ function game(req, res, context)
                   context.displayedQuestion = 0;
                   context.questions = JSON.parse(stdout);
                   context.questionStates = [];
+                  context.questionnaireName = downData.questionnaireName;
+                  context.levelName = downData.levelName;
                   
                   context.questions.forEach(function(question, iQuestion)
                   {
@@ -209,6 +211,8 @@ function game(req, res, context)
          displayedQuestion: context.displayedQuestion,
          questions: context.questions,
          questionStates: context.questionStates,
+         questionnaireName: context.questionnaireName,
+         levelName: context.levelName,
          error: !context.quizId // Todo: handle error in view
       };
       

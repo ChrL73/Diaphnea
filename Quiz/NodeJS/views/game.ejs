@@ -10,9 +10,14 @@
       <% var questions = data.questions;
       var displayedQuestion = data.displayedQuestion;
       var questionStates = data.questionStates;
-      var answered = [];
+      var answered = [];%>
       
-      questions.forEach(function(question, iQuestion) {
+      <p>
+         <%=data.texts.questionnaire%>: <%=data.questionnaireName%>.
+         <%=data.texts.level%>: <%=data.levelName%>.
+      </p>
+      
+      <%questions.forEach(function(question, iQuestion) {
          var disabled = questionStates[iQuestion].answered;
          answered.push(disabled);%>
          <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>

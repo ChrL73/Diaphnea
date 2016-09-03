@@ -13,7 +13,11 @@ var contextSchema = mongoose.Schema(
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,
    displayedQuestion: Number,
-   questionStates: [{ answered: Boolean, choiceStates: [Number] }]
+   questionStates: [{ answered: Boolean, choiceStates: [Number] }],
+   rightAnswerCount: Number,
+   answerCount: Number,
+   startDate: Date,
+   finalTime: Number
 });
 
 var sessionSchema = mongoose.Schema(

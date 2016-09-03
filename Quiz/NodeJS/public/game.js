@@ -2,9 +2,20 @@ $(function()
 {
    var socket = io.connect();
    
+   var date0 = Date.now();   
+   var timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
+   
+   function updateTime()
+   {
+      var t = (Date.now() - date0) + t0;
+      var tSeconds = Math.floor(0.001 * t);
+      $('#timeSpan').text(tSeconds);
+      timeout = setTimeout(updateTime, 1000 * (1 + tSeconds) - t);
+   }
+   
    $('#nextButton').click(function(e)
    {
-      if (displayedQuestion < questionCount - 1)
+      if (displayedQuestion < questionCount - 1)   
       {
          $('#question' + displayedQuestion).css('display', 'none');
          ++displayedQuestion;
@@ -62,7 +73,6 @@ $(function()
       var i, n = $('.input' + displayedQuestion).length;
       for (i = 0; i < n; ++i) data.checks.push($('#input' + displayedQuestion + '_' + i).is(':checked'));
       
-      console.log('#wait' + displayedQuestion);
       $('#wait' + displayedQuestion).css('display', 'inline');
       socket.emit('submit', data);
    });
@@ -80,6 +90,12 @@ $(function()
       }
       else
       {
+         if (data.finalTime)
+         {
+            clearInterval(timeout);
+            $('#timeSpan').text(data.finalTime);
+         }
+            
          data.questionStates.forEach(function(state)
          {
             var i = state.index;
@@ -112,10 +128,12 @@ $(function()
                
                if (choiceState.comment)
                {
-                  $(id).next().after(' (' + choiceState.comment + ')');
+                  $('#comment' + i + '_' + j).text(' (' + choiceState.comment + ')');
                }
             });
          });
+         
+         $('#scoreSpan').text(data.rightAnswerCount + '/' + data.answerCount);
          
          $('.waitImg').css('display', 'none');
       }

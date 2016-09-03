@@ -8,6 +8,11 @@
    display: inline-block;
 }
 
+.gameHeader
+{
+   margin-right: 32px;
+}
+
 .question
 {
    display: none;

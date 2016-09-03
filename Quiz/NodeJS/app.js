@@ -162,6 +162,10 @@ function game(req, res, context)
                   context.displayedQuestion = undefined;
                   context.questions = undefined;
                   context.questionStates = [];
+                  context.answerCount = undefined;
+                  context.rightAnswerCount = undefined;
+                  context.startDate = undefined;
+                  context.finalTime = undefined;
                }
                else
                {
@@ -171,6 +175,10 @@ function game(req, res, context)
                   context.questionStates = [];
                   context.questionnaireName = downData.questionnaireName;
                   context.levelName = downData.levelName;
+                  context.answerCount = 0;
+                  context.rightAnswerCount = 0;
+                  context.startDate = Date.now();
+                  context.finalTime = undefined;
                   
                   context.questions.forEach(function(question, iQuestion)
                   {
@@ -213,6 +221,9 @@ function game(req, res, context)
          questionStates: context.questionStates,
          questionnaireName: context.questionnaireName,
          levelName: context.levelName,
+         answerCount: context.answerCount,
+         rightAnswerCount: context.rightAnswerCount,
+         time: Date.now() - context.startDate,
          error: !context.quizId // Todo: handle error in view
       };
       
@@ -461,17 +472,29 @@ io.on('connection', function(socket)
          if (context.quizId && context.quizId == data.quizId)
          {
             var questionState = context.questionStates[data.question];
-            var question = context.questions[data.question];
 
             if (!questionState.answered)
-            {  
+            {   
+               ++context.answerCount;
+               if (context.answerCount == context.questions.length)
+               {
+                  context.finalTime = 0.1 * Math.floor(0.01 * (Date.now() - context.startDate));
+               }
+               
                questionState.answered = true;
+               var question = context.questions[data.question];
+               var error = false;
+               
                data.checks.forEach(function(check, i)
                {
+                  var right = question.choices[i].isRight;
                   // Note: With 'choiceStates[index] = value;' the value will not be saved to database by mongoose
                   // -> use 'choiceStates.set(index, value);' instead
-                  questionState.choiceStates.set(i, (check ? 1 : 0) + (question.choices[i].isRight ? 2 : 0));
+                  questionState.choiceStates.set(i, (check ? 1 : 0) + (right ? 2 : 0));
+                  if (Boolean(check) != Boolean(right)) error = true;
                });
+               
+               if (!error) ++context.rightAnswerCount;
 
                context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
             }
@@ -501,7 +524,15 @@ io.on('connection', function(socket)
    
    function getOutData(context)
    {
-      var outData = { quizId: context.quizId, questionStates: [] };
+      var outData =
+      {
+         quizId: context.quizId,
+         rightAnswerCount: context.rightAnswerCount,
+         answerCount: context.answerCount,
+         questionStates: [],
+         finalTime: context.finalTime
+      };
+      
       context.questionStates.forEach(function(questionState, i)
       {
          if (questionState.answered)

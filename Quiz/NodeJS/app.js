@@ -508,6 +508,15 @@ io.on('connection', function(socket)
       }); 
    });
    
+   socket.on('timeRequest', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         setTimeout(function() { socket.emit('time', Date.now() - context.startDate); }, debugDelay);
+      });
+   });
+   
    function extractCookies(cookieString)
    {
       var cookieObject = {};

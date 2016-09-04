@@ -2,15 +2,39 @@ $(function()
 {
    var socket = io.connect();
    
-   var date0 = Date.now();   
-   var timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
+   var finished = false;
+   var timeout;
+   initTime(t0);
+   socket.on('time', initTime);
    
-   function updateTime()
+   function initTime(t0)
    {
-      var t = (Date.now() - date0) + t0;
-      var tSeconds = Math.floor(0.001 * t);
-      $('#timeSpan').text(tSeconds);
-      timeout = setTimeout(updateTime, 1000 * (1 + tSeconds) - t);
+      if (timeout) clearInterval(timeout);
+      if (finished)
+      {
+         timeout = undefined;
+         return;
+      }
+      
+      var lastDisplayedTime;
+      var date0 = Date.now();   
+      timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
+
+      function updateTime()
+      {
+         var t = (Date.now() - date0) + t0;
+         var displayedTime = Math.floor(0.001 * t);
+         if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
+         {
+            socket.emit('timeRequest');
+            timeout = undefined;
+            return;
+         }
+         
+         $('#timeSpan').text(displayedTime);
+         lastDisplayedTime = displayedTime;
+         timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
+      }
    }
    
    $('#nextButton').click(function(e)
@@ -92,7 +116,9 @@ $(function()
       {
          if (data.finalTime)
          {
-            clearInterval(timeout);
+            finished = true;
+            if (timeout) clearInterval(timeout);
+            timeout = undefined;
             $('#timeSpan').text(data.finalTime);
          }
             

@@ -4,19 +4,24 @@
   <parameters questionnaireId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
       <language id="fr" name="Français" status="TRANSLATION_COMPLETED"/>
+      <language id="en" name="English" status="TRANSLATION_COMPLETED"/>
     </languageList>
     <questionnaireName>
       <name language="fr" text="Gabon"/>
+      <name language="en" text="Gabon"/>
     </questionnaireName>
     <levelList>
       <level levelId="lv_Facile" value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
         <name language="fr" text="Facile"/>
+        <name language="en" text="Easy"/>
       </level>
       <level levelId="lv_Moyen" value="1" choiceCount="5" questionCount="15" distribParameter="0.2">
         <name language="fr" text="Moyen"/>
+        <name language="en" text="Medium"/>
       </level>
       <level levelId="lv_Difficile" value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
         <name language="fr" text="Difficile"/>
+        <name language="en" text="Hard"/>
       </level>
     </levelList>
   </parameters>
@@ -29,6 +34,7 @@
     </elementTypeList>
     <attributeTypeList>
       <attributeType id="at_Nom1" canBeQuestion="true" />
+      <attributeType id="at_Nom2" canBeQuestion="true" />
       <attributeType id="at_Numero" canBeQuestion="true" />
     </attributeTypeList>
     <numericalAttributeTypeList>
@@ -56,16 +62,26 @@
     <element id="el_Estuaire" sortKey="1" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Estuaire"/>
+        <name language="en" text="Estuaire"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="L'Estuaire"/>
+          <value language="en" value="Estuaire"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Estuaire"/>
+          <value language="en" value="Estuaire"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="1"/>
+          <value language="en" value="1"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10"/>
+        <numericalAttribute type="nt_Latitude" value="0.25"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Libreville"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
@@ -76,16 +92,26 @@
     <element id="el_HautOgooue" sortKey="2" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Haut-Ogooué"/>
+        <name language="en" text="Haut-Ogooué"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Le Haut-Ogooué"/>
+          <value language="en" value="Haut-Ogooué"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Haut-Ogooué"/>
+          <value language="en" value="Haut-Ogooué"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="2"/>
+          <value language="en" value="2"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.8"/>
+        <numericalAttribute type="nt_Latitude" value="-1.3"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Franceville"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
@@ -95,16 +121,26 @@
     <element id="el_MoyenOgooue" sortKey="3" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Moyen-Ogooué"/>
+        <name language="en" text="Moyen-Ogooué"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Le Moyen-Ogooué"/>
+          <value language="en" value="Moyen-Ogooué"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Moyen-Ogooué"/>
+          <value language="en" value="Moyen-Ogooué"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="3"/>
+          <value language="en" value="3"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.55"/>
+        <numericalAttribute type="nt_Latitude" value="-0.35"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Lambarene"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
@@ -117,16 +153,26 @@
     <element id="el_Ngounie" sortKey="4" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Ngounié"/>
+        <name language="en" text="Ngounié"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="La Ngounié"/>
+          <value language="en" value="Ngounié"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Ngounié"/>
+          <value language="en" value="Ngounié"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="4"/>
+          <value language="en" value="4"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.25"/>
+        <numericalAttribute type="nt_Latitude" value="-1.65"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Mouila"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
@@ -138,16 +184,26 @@
     <element id="el_Nyanga" sortKey="5" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Nyanga"/>
+        <name language="en" text="Nyanga"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="La Nyanga"/>
+          <value language="en" value="Nyanga"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Nyanga"/>
+          <value language="en" value="Nyanga"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="5"/>
+          <value language="en" value="5"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.05"/>
+        <numericalAttribute type="nt_Latitude" value="-3.05"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Tchibanga"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
@@ -157,16 +213,26 @@
     <element id="el_OgooueIvindo" sortKey="6" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Ogooué-Ivindo"/>
+        <name language="en" text="Ogooué-Ivindo"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="L'Ogooué-Ivindo"/>
+          <value language="en" value="Ogooué-Ivindo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ogooué-Ivindo"/>
+          <value language="en" value="Ogooué-Ivindo"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="6"/>
+          <value language="en" value="6"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.8"/>
+        <numericalAttribute type="nt_Latitude" value="0.45"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Makokou"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
@@ -178,16 +244,26 @@
     <element id="el_OgooueLolo" sortKey="7" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Ogooué-Lolo"/>
+        <name language="en" text="Ogooué-Lolo"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="L'Ogooué-Lolo"/>
+          <value language="en" value="Ogooué-Lolo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ogooué-Lolo"/>
+          <value language="en" value="Ogooué-Lolo"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="7"/>
+          <value language="en" value="7"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.65"/>
+        <numericalAttribute type="nt_Latitude" value="-0.8"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Koulamoutou"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
@@ -198,16 +274,26 @@
     <element id="el_OgooueMaritime" sortKey="8" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Ogooué-Maritime"/>
+        <name language="en" text="Ogooué-Maritime"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="L'Ogooué-Maritime"/>
+          <value language="en" value="Ogooué-Maritime"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ogooué-Maritime"/>
+          <value language="en" value="Ogooué-Maritime"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="8"/>
+          <value language="en" value="8"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="9.55"/>
+        <numericalAttribute type="nt_Latitude" value="-1.6"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_PortGentil"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
@@ -219,16 +305,26 @@
     <element id="el_WoleuNtem" sortKey="9" type="et_Province" minLevel="0" >
       <elementName>
         <name language="fr" text="Woleu-Ntem"/>
+        <name language="en" text="Woleu-Ntem"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Le Woleu-Ntem"/>
+          <value language="en" value="Woleu-Ntem"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Woleu-Ntem"/>
+          <value language="en" value="Woleu-Ntem"/>
         </attribute>
         <attribute type="at_Numero">
           <value language="fr" value="9"/>
+          <value language="en" value="9"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.9"/>
+        <numericalAttribute type="nt_Latitude" value="1.4"/>
+      </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Oyem"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
@@ -240,109 +336,154 @@
     <element id="el_Libreville" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Libreville"/>
+        <name language="en" text="Libreville"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Libreville"/>
+          <value language="en" value="Libreville"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="9.45"/>
+        <numericalAttribute type="nt_Latitude" value="0.39"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Franceville" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Franceville"/>
+        <name language="en" text="Franceville"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Franceville"/>
+          <value language="en" value="Franceville"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.58"/>
+        <numericalAttribute type="nt_Latitude" value="-1.62"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Lambarene" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Lambaréné"/>
+        <name language="en" text="Lambaréné"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Lambaréné"/>
+          <value language="en" value="Lambaréné"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.23"/>
+        <numericalAttribute type="nt_Latitude" value="-0.7"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Mouila" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Mouila"/>
+        <name language="en" text="Mouila"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Mouila"/>
+          <value language="en" value="Mouila"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.01"/>
+        <numericalAttribute type="nt_Latitude" value="-1.86"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Tchibanga" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Tchibanga"/>
+        <name language="en" text="Tchibanga"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Tchibanga"/>
+          <value language="en" value="Tchibanga"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.98"/>
+        <numericalAttribute type="nt_Latitude" value="-2.93"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Makokou" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Makokou"/>
+        <name language="en" text="Makokou"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Makokou"/>
+          <value language="en" value="Makokou"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.87"/>
+        <numericalAttribute type="nt_Latitude" value="0.56"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Koulamoutou" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Koulamoutou"/>
+        <name language="en" text="Koulamoutou"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Koulamoutou"/>
+          <value language="en" value="Koulamoutou"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.46"/>
+        <numericalAttribute type="nt_Latitude" value="-1.14"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_PortGentil" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Port-Gentil"/>
+        <name language="en" text="Port-Gentil"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Port-Gentil"/>
+          <value language="en" value="Port-Gentil"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="8.77"/>
+        <numericalAttribute type="nt_Latitude" value="-0.72"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
     <element id="el_Oyem" type="et_Ville" minLevel="0" >
       <elementName>
         <name language="fr" text="Oyem"/>
+        <name language="en" text="Oyem"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Oyem"/>
+          <value language="en" value="Oyem"/>
         </attribute>
       </attributeList>
-      <numericalAttributeList/>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.58"/>
+        <numericalAttribute type="nt_Latitude" value="1.62"/>
+      </numericalAttributeList>
       <relationList/>
     </element>
   </elementList>
@@ -352,9 +493,26 @@
       <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
+        <questionText language="en" text="What is the province whose number is {0}?"/>
+      </attributeQuestionCategory>
+      <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le numéro associé à la province {0} ?"/>
+        <questionText language="en" text="What is the number associated with the {0} province?"/>
       </attributeQuestionCategory>
     </attributeQuestionCategoryList>
-    <relation1QuestionCategoryList/>
+    <relation1QuestionCategoryList>
+      <relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le chef-lieu de la province {0} ?"/>
+        <questionText language="en" text="What is the capital of the {0} province?"/>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
+        <questionText language="fr" text="Quel est le chef-lieu de la province dont le numéro est {0} ?"/>
+        <questionText language="en" text="What is the capital of the province whose number is {0}?"/>
+      </relation1QuestionCategory>
+    </relation1QuestionCategoryList>
     <relationNQuestionCategoryList/>
   </questionCategories>
   

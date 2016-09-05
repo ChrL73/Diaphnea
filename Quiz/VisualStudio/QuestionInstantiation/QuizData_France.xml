@@ -155,7 +155,7 @@
         <relation type="r1N_Region_Departements" linkedElement="el_TerritoireDeBelfort"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
       </relationList>
     </element>
@@ -178,9 +178,9 @@
         <relation type="r1N_Region_Departements" linkedElement="el_CotesArmor"/>
         <!--<relation type="r1N_Region_Departements" linkedElement="el_Finistere"/>
         <relation type="r1N_Region_Departements" linkedElement="el_IlleEtVilaine"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_Morbihan"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Morbihan"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
       </relationList>
     </element>
     <element id="el_CentreValDeLoire" type="et_Region" minLevel="0">
@@ -204,8 +204,8 @@
         <relation type="r1N_Region_Departements" linkedElement="el_IndreDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_IndreEtLoire"/>
         <relation type="r1N_Region_Departements" linkedElement="el_LoirEtCher"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_Loiret"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_Loiret"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
         <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
@@ -233,6 +233,63 @@
         <relation type="r1N_Region_Departements" linkedElement="el_HauteCorse"/>
       </relationList>
     </element>
+    <element id="el_GrandEst" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Grand-Est"/>
+        <name language="en" text="Grand-Est"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Grand-Est"/>
+          <value language="en" value="Grand-Est"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="5.9"/>
+        <numericalAttribute type="nt_Latitude" value="48.65"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_BasRhin"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HautRhin"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_Ardennes"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_AubeDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_MarneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteMarne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_MeurtheEtMoselle"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_MeuseDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_MoselleDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Vosges"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>
+      </relationList>
+    </element>
+    <element id="el_HautsDeFrance" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Hauts-de-France"/>
+        <name language="en" text="Hauts-de-France"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Hauts-de-France"/>
+          <value language="en" value="Hauts-de-France"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="2.8"/>
+        <numericalAttribute type="nt_Latitude" value="49.8"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Nord"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_PasDeCalais"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_AisneDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_OiseDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_SommeDepartement"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
+      </relationList>
+    </element>
     <element id="el_IleDeFrance" type="et_Region" minLevel="0">
       <elementName>
         <name language="fr" text="Île-de-France"/>
@@ -256,12 +313,40 @@
         <relation type="r1N_Region_Departements" linkedElement="el_HautsDeSeine"/>
         <relation type="r1N_Region_Departements" linkedElement="el_SeineSaintDenis"/>
         <relation type="r1N_Region_Departements" linkedElement="el_ValDeMarne"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_ValOise"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_ValOise"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>
+      </relationList>
+    </element>
+    <element id="el_Normandie" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Normandie"/>
+        <name language="en" text="Normandie"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Normandie"/>
+          <value language="en" value="Normandie"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="0.1"/>
+        <numericalAttribute type="nt_Latitude" value="49.1"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Calvados"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_MancheDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_OrneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_EureDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_SeineMaritime"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Bretagne"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>
       </relationList>
     </element>
     <!--Départements-->
@@ -343,8 +428,8 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SommeDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OiseDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineEtMarne"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ardennes"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ardennes"/>
       </relationList>
     </element>
     <element id="el_AllierDepartement" sortKey="03" type="et_Departement" minLevel="0" >
@@ -538,6 +623,115 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>-->
+      </relationList>
+    </element>
+    <element id="el_Ardennes" sortKey="08" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Ardennes"/>
+        <name language="en" text="Ardennes"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Les Ardennes"/>
+          <value language="en" value="Ardennes"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="des Ardennes"/>
+          <value language="en" value="Ardennes"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="8"/>
+          <value language="en" value="8"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.65"/>
+        <numericalAttribute type="nt_Latitude" value="49.65"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_CharlevilleMezieres"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sedan"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Rethel"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vouziers"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_CharlevilleMezieres"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Sedan"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Rethel"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Vouziers"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AisneDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeuseDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_AriegeDepartement" sortKey="09" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Ariège"/>
+        <name language="en" text="Ariège"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Ariège"/>
+          <value language="en" value="Ariège"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ariège"/>
+          <value language="en" value="Ariège"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="9"/>
+          <value language="en" value="9"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="1.5"/>
+        <numericalAttribute type="nt_Latitude" value="42.9"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Foix"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Pamiers"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintGirons"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Foix"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Pamiers"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintGirons"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteGaronne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AudeDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PyreneesOrientales"/>-->
+      </relationList>
+    </element>
+    <element id="el_AubeDepartement" sortKey="10" type="et_Departement" minLevel="0">
+      <elementName>
+        <name language="fr" text="Aube"/>
+        <name language="en" text="Aube"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Aube"/>
+          <value language="en" value="Aube"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Aube"/>
+          <value language="en" value="Aube"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="10"/>
+          <value language="en" value="10"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.15"/>
+        <numericalAttribute type="nt_Latitude" value="48.3"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Troyes"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_NogentSurSeine"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_BarSurAube"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Troyes"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_NogentSurSeine"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_BarSurAube"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_YonneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteMarne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineEtMarne"/>-->
       </relationList>
     </element>
     <element id="el_CharenteMaritime" sortKey="17" type="et_Departement" minLevel="0" >
@@ -1302,6 +1496,75 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 08-->
+    <element id="el_CharlevilleMezieres" type="et_Ville" minLevel="0">
+      <elementName>
+        <name language="fr" text="Charleville-Mézières"/>
+        <name language="en" text="Charleville-Mézières"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Charleville-Mézières"/>
+          <value language="en" value="Charleville-Mézières"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Charleville-Mézières"/>
+          <value language="en" value="Charleville-Mézières"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="50875"/>
+        <numericalAttribute type="nt_Longitude" value="4.72021"/>
+        <numericalAttribute type="nt_Latitude" value="49.773609"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 09-->
+    <element id="el_Foix" type="et_Ville" minLevel="0">
+      <elementName>
+        <name language="fr" text="Foix"/>
+        <name language="en" text="Foix"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Foix"/>
+          <value language="en" value="Foix"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Foix"/>
+          <value language="en" value="Foix"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="9710"/>
+        <numericalAttribute type="nt_Longitude" value="1.607081"/>
+        <numericalAttribute type="nt_Latitude" value="42.96398"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 10-->
+    <element id="el_Troyes" type="et_Ville" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Troyes"/>
+        <name language="en" text="Troyes"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Troyes"/>
+          <value language="en" value="Troyes"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Troyes"/>
+          <value language="en" value="Troyes"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="61545"/>
+        <numericalAttribute type="nt_Longitude" value="4.074801"/>
+        <numericalAttribute type="nt_Latitude" value="48.297469"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
     <!--Villes 22-->
     <element id="el_SaintBrieuc" type="et_Ville" minLevel="0" >
       <elementName>
@@ -1583,15 +1846,15 @@
       <relationList>
         <!--<relation type="rNN_Riviere_Departements" linkedElement="el_HauteMarne"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Vosges"/>
-        <relation type="rNN_Riviere_Departements" linkedElement="el_MeuseDepartement"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_MeuseDepartement"/>-->
         <relation type="rNN_Riviere_Departements" linkedElement="el_Ardennes"/>
-        <relation type="r1N_Riviere_Affluents" linkedElement="el_Sambre"/>
+        <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Sambre"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Neufchateau"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Commercy"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Verdun"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Sedan"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Sedan"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_CharlevilleMezieres"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Namur"/>-->
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Namur"/>-->
       </relationList>
     </element>
     <element id="el_MoselleRiviere" type="et_FleuveRiviere" minLevel="0">
@@ -1627,10 +1890,10 @@
         <numericalAttribute type="nt_Latitude" value="49.25"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_Vosges"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_Vosges"/>-->
         <relation type="rNN_Riviere_Departements" linkedElement="el_MeurtheEtMoselle"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_MoselleDepartement"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Epinal"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Epinal"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Toul"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Metz"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Thionville"/>
@@ -1754,8 +2017,8 @@
       <relationList>
         <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Nord"/>-->
         <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_AisneDepartement"/>
-        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ardennes"/>
-        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeuseDepartement"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ardennes"/>
+        <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeuseDepartement"/>-->
         <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
       </relationList>
     </element>

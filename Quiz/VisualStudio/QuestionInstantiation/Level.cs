@@ -180,41 +180,22 @@ namespace QuestionInstantiation
             /*if (!addAttributeOrderQuestions()) return false;
             if (!addRelationLimitQuestions()) return false;
             if (!addRelationOrderQuestions()) return false;
-            if (!addRelationExistenceQuestions()) return false;
+            if (!addRelationExistenceQuestions()) return false;*/
 
-            const wchar_t *cMessage;
-            std::wstring message;
-            wchar_t countStr[16];
-
-            std::map<const ElementType *, std::vector<const Element *> >::iterator it = _elementByTypeMap.begin();
-            for (; it!=_elementByTypeMap.end(); ++it)
+            foreach(KeyValuePair<XmlElementType, List<Element>> pair in _elementByTypeDictionary)
             {
-                const std::wstring typeName = (*it).first->getId();
-                unsigned int elementCount = (*it).second.size();
-                cMessage = XmlFunctions::get_informationMessages_elementCountInfo();
-                message = cMessage;
-                swprintf (countStr, 16, L"%d", elementCount);
-                message.replace (message.find ('%'), 1, typeName);
-                message.replace (message.find ('#'), 1, countStr);
-                MessageLogger::instance()->addMessage (MESSAGE, message.c_str());
+                string typeName = pair.Key.id;
+                int elementCount = pair.Value.Count;
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Number of element(s) for type \"{0}\": {1}", typeName, elementCount));
             }
 
-            cMessage = XmlFunctions::get_informationMessages_totalQuestionCountInfo();
-            message = cMessage;
-            swprintf (countStr, 16, L"%d", _totalQuestionCount);
-            message.replace (message.find ('%'), 1, _name);
-            message.replace (message.find ('#'), 1, countStr);
-            MessageLogger::instance()->addMessage (MESSAGE, message.c_str());
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Total number of question(s) for level \"{0}\": {1}", _nameInLog, _totalQuestionCount));
 
-            cMessage = XmlFunctions::get_informationMessages_categoryCountInfo();
-            message = cMessage;
-            swprintf (countStr, 16, L"%d", _categoryVector.size());
-            message.replace (message.find ('%'), 1, _name);
-            message.replace (message.find ('#'), 1, countStr);
-            MessageLogger::instance()->addMessage (MESSAGE, message.c_str());*/
+            int categoryCount = _categoryList.Count;
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Total number of categor{0} for level \"{1}\": {2}", categoryCount > 1 ? "ies" : "y", _nameInLog, categoryCount));
 
             return 0;
-        }
+         }
 
         private int addAttributeQuestions()
         {

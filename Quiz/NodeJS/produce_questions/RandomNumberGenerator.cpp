@@ -92,7 +92,7 @@ namespace produce_questions
 
     double RandomNumberGenerator::getRandomDouble(void)
     {
-        return static_cast<double>(getRandomInt()) / static_cast<double>(0xFFFFFFFF);
+        return static_cast<double>(getRandomInt() % RAND_MAX) / static_cast<double>(RAND_MAX);
     }
 
     unsigned int RandomNumberGenerator::getRandomInt(int valueCount)

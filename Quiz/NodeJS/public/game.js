@@ -9,6 +9,7 @@ $(function()
    
    function initTime(t0)
    {
+      $('#waitTimeImg').css('display', 'none');
       if (timeout) clearInterval(timeout);
       if (finished)
       {
@@ -28,6 +29,7 @@ $(function()
          {
             socket.emit('timeRequest');
             timeout = undefined;
+            $('#waitTimeImg').css('display', 'inline');
             return;
          }
          
@@ -161,7 +163,7 @@ $(function()
          
          $('#scoreSpan').text(data.rightAnswerCount + '/' + data.answerCount);
          
-         $('.waitImg').css('display', 'none');
+         $('.waitAnswerImg').css('display', 'none');
       }
    });
 });

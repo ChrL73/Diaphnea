@@ -16,7 +16,7 @@
          <span class="gameHeader"><%=data.texts.questionnaire%>: <%=data.questionnaireName%></span>
          <span class="gameHeader"><%=data.texts.level%>: <%=data.levelName%></span>
          <%=data.texts.score%>: <span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
-         <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span><span class="gameHeader">s</span>
+         <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span>s<img src="wait.gif" class="waitImg" id="waitTimeImg"/>
       </p>
       
       <%questions.forEach(function(question, iQuestion) {
@@ -24,7 +24,7 @@
          answered.push(disabled);%>
          <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
             <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
-            <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg"/></p>
+            <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg waitAnswerImg"/></p>
             <% question.choices.forEach(function(choice, iChoice) {
                var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
                var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);

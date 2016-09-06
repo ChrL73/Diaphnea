@@ -52,6 +52,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AttributeOrderCategory.cpp" />
+		<Unit filename="AttributeOrderCategory.h" />
+		<Unit filename="AttributeOrderChoice.cpp" />
+		<Unit filename="AttributeOrderChoice.h" />
 		<Unit filename="Category.cpp" />
 		<Unit filename="Category.h" />
 		<Unit filename="Choice.cpp" />

@@ -55,8 +55,8 @@
       <attributeType id="at_DateNom" canBeQuestion="false" />
     </attributeTypeList>
     <numericalAttributeTypeList>
-      <numericalAttributeType id="nt_Latitude" unit=" °" ambiguityThreshold="0.4" displayPrecision="2"/>
-      <numericalAttributeType id="nt_Longitude" unit=" °" ambiguityThreshold="0.6" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Latitude" unit="°" ambiguityThreshold="0.4" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longitude" unit="°" ambiguityThreshold="0.6" displayPrecision="2"/>
       <numericalAttributeType id="nt_Longueur" unit=" km" ambiguityThreshold="120" displayPrecision="0"/>
       <numericalAttributeType id="nt_Population" unit=" h" ambiguityThreshold="25000" displayPrecision="0"/>
     </numericalAttributeTypeList>
@@ -124,9 +124,9 @@
         <relation type="r1N_Region_Departements" linkedElement="el_HauteSavoie"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_NouvelleAquitaine"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_NouvelleAquitaine"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Occitanie"/>
-        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ProvenceAlpesCoteAzur"/>-->
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ProvenceAlpesCoteAzur"/>-->
       </relationList>
     </element>
     <element id="el_BourgogneFrancheComte" type="et_Region" minLevel="0">
@@ -207,9 +207,9 @@
         <relation type="r1N_Region_Departements" linkedElement="el_Loiret"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
-        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_GrandEst"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_BourgogneFrancheComte"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_NouvelleAquitaine"/>
         <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
       </relationList>
     </element>
@@ -347,6 +347,74 @@
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_IleDeFrance"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_HautsDeFrance"/>
+      </relationList>
+    </element>
+    <element id="el_NouvelleAquitaine" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Nouvelle-Aquitaine"/>
+        <name language="en" text="Nouvelle-Aquitaine"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Nouvelle-Aquitaine"/>
+          <value language="en" value="Nouvelle-Aquitaine"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="0.25"/>
+        <numericalAttribute type="nt_Latitude" value="45.25"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_DordogneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Gironde"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Landes"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_LotEtGaronne"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_PyreneesAtlantiques"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_CorrezeDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_CreuseDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteVienne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_CharenteDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_CharenteMaritime"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_DeuxSevres"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_VienneDepartement"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Occitanie"/>
+      </relationList>
+    </element>
+    <element id="el_Occitanie" type="et_Region" minLevel="0">
+      <elementName>
+        <name language="fr" text="Occitanie"/>
+        <name language="en" text="Occitanie"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="Occitanie"/>
+          <value language="en" value="Occitanie"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="2.4"/>
+        <numericalAttribute type="nt_Latitude" value="43.7"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_AudeDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_GardDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HeraultDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Lozere"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_PyreneesOrientales"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_AriegeDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_AveyronDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HauteGaronne"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_GersDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_LotDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_HautesPyrenees"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_TarnDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_TarnEtGaronne"/>-->
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_NouvelleAquitaine"/>
+        <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_AuvergneRhoneAlpes"/>
+        <!--<relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_ProvenceAlpesCoteAzur"/>-->
       </relationList>
     </element>
     <!--Départements-->
@@ -2082,7 +2150,7 @@
   
   <questionCategories>
     <attributeQuestionCategoryList>
-      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
@@ -2101,10 +2169,10 @@
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="3" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} department bears its current name?"/>
-      </attributeQuestionCategory>
+      </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
-      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
@@ -2163,10 +2231,10 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
         <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
         <questionText language="en" text="Near which city is the mouth of the {0}?"/>
-      </relation1QuestionCategory>
+      </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
@@ -2270,8 +2338,35 @@
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
         <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/>   
-      </relationNQuestionCategory>
+      </relationNQuestionCategory>-->
     </relationNQuestionCategoryList>
+    <attributeOrderQuestionCategoryList>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
+                                      distribParameterCorrection="0.1">
+        <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
+        <questionText language="en" text="Which of thes cities is the northernmost?"/> 
+      </attributeOrderQuestionCategory>
+      <!--<attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="lowest" answerAttribute="at_Nom1" weight="30" minLevel="0"
+                                      distribParameterCorrection="0.1"
+                                      answerDrawDepth1="1" wrongChoiceDrawDepth1="1" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                      question="Laquelle de ces villes est la plus au sud ?"/>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="greatest" answerAttribute="at_Nom1" weight="30" minLevel="0"
+                                      distribParameterCorrection="0.1"
+                                      answerDrawDepth1="1" wrongChoiceDrawDepth1="1" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                      question="Laquelle de ces villes est la plus à l'est ?"/>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="lowest" answerAttribute="at_Nom1" weight="30" minLevel="0"
+                                      distribParameterCorrection="0.1"
+                                      answerDrawDepth1="1" wrongChoiceDrawDepth1="1" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                      question="Laquelle de ces villes est la plus à l'ouest ?"/>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Population" mode="greatest" answerAttribute="at_Nom1" weight="40" minLevel="2"
+                                      distribParameterCorrection="0.2"
+                                      answerDrawDepth1="1" wrongChoiceDrawDepth1="1" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                      question="Laquelle de ces villes est la plus peuplée (en 2008) ?"/>
+      <attributeOrderQuestionCategory elementType="et_FleuveRiviere" attribute="nt_Longueur" mode="greatest" answerAttribute="at_Nom1" weight="50" minLevel="1"
+                                      distribParameterCorrection="0.2"
+                                      answerDrawDepth1="1" wrongChoiceDrawDepth1="1" answerDrawDepth2="0" wrongChoiceDrawDepth2="0"
+                                      question="Lequel de ces cours d'eau est le plus long ?"/>-->
+    </attributeOrderQuestionCategoryList>
   </questionCategories>
   
 </quizData>

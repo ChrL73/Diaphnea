@@ -176,9 +176,9 @@ namespace QuestionInstantiation
             if (addAttributeQuestions() != 0) return -1;
             if (addRelation1Questions() != 0) return -1;
             if (addRelationNQuestions() != 0) return -1;
+            if (addAttributeOrderQuestions() != 0) return -1;
 
-            /*if (!addAttributeOrderQuestions()) return false;
-            if (!addRelationLimitQuestions()) return false;
+            /*if (!addRelationLimitQuestions()) return false;
             if (!addRelationOrderQuestions()) return false;
             if (!addRelationExistenceQuestions()) return false;*/
 
@@ -199,7 +199,7 @@ namespace QuestionInstantiation
 
         private int addAttributeQuestions()
         {
-            foreach(XmlAttributeQuestionCategory xmlAttributeQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
+            foreach (XmlAttributeQuestionCategory xmlAttributeQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
             {
                 Int32 minLevel = Int32.Parse(xmlAttributeQuestionCategory.minLevel);
                 if (_value >= minLevel)
@@ -241,7 +241,7 @@ namespace QuestionInstantiation
                                     if (questionAttributeValue != null)
                                     {
                                         Text questionText = new Text();
-                                        foreach (XmlQuestionText xmlQuestionText in xmlAttributeQuestionCategory.questionText)
+                                        foreach (XmlQuestionText1P xmlQuestionText in xmlAttributeQuestionCategory.questionText)
                                         {
                                             string languageId = xmlQuestionText.language.ToString();
                                             string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
@@ -403,7 +403,7 @@ namespace QuestionInstantiation
                                         Choice choice = choiceDictionary[endElement];
 
                                         Text questionText = new Text();
-                                        foreach (XmlQuestionText xmlQuestionText in xmlRelation1QuestionCategory.questionText)
+                                        foreach (XmlQuestionText1P xmlQuestionText in xmlRelation1QuestionCategory.questionText)
                                         {
                                             string languageId = xmlQuestionText.language.ToString();
                                             string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
@@ -611,7 +611,7 @@ namespace QuestionInstantiation
                                 if (endElementDictionary.Count != 0)
                                 {
                                     Text questionText = new Text();
-                                    foreach (XmlQuestionText xmlQuestionText in xmlRelationNQuestionCategory.questionText)
+                                    foreach (XmlQuestionText1P xmlQuestionText in xmlRelationNQuestionCategory.questionText)
                                     {
                                         string languageId = xmlQuestionText.language.ToString();
                                         string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
@@ -691,6 +691,90 @@ namespace QuestionInstantiation
                     }
                 }
             }
+
+            return 0;
+        }
+
+        private int addAttributeOrderQuestions()
+        {
+            foreach (XmlAttributeOrderQuestionCategory xmlAttributeOrderQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeOrderQuestionCategoryList)
+	        {
+                Int32 minLevel = Int32.Parse(xmlAttributeOrderQuestionCategory.minLevel);
+                if (_value >= minLevel)
+                {
+                    XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeOrderQuestionCategory.elementType);
+
+                    string questionNameInLog = xmlAttributeOrderQuestionCategory.questionText[0].text;
+
+                    if (_elementByTypeDictionary.ContainsKey(elementType))
+                    {
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlAttributeOrderQuestionCategory.answerAttribute);
+                        if (!answerAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as an answer",
+                                _quizData.DataFileName, questionNameInLog, answerAttributeType.id));
+                            return -1;
+                        }
+
+                        XmlNumericalAttributeType numericalAttributeType = _quizData.getXmlNumericalAttributeType(xmlAttributeOrderQuestionCategory.attribute);
+                        Int32 weight = Int32.Parse(xmlAttributeOrderQuestionCategory.weight);
+                        _weightSum += weight;
+
+                        Text questionText = new Text();
+                        foreach (XmlQuestionText0P xmlQuestionText in xmlAttributeOrderQuestionCategory.questionText)
+                        {
+                            string languageId = xmlQuestionText.language.ToString();
+                            questionText.setText(languageId, xmlQuestionText.text);
+                        }
+                        if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
+                        double distribParameterCorrection = 0.0;
+                        if (xmlAttributeOrderQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeOrderQuestionCategory.distribParameterCorrection;
+                        AttributeOrderCategory category = new AttributeOrderCategory(_weightSum, questionNameInLog, _quizData, numericalAttributeType/*, answerAttributeType*/, questionText,
+                                                                                     xmlAttributeOrderQuestionCategory.mode, distribParameterCorrection);
+
+                        foreach (Element element in _elementByTypeDictionary[elementType])
+                        {
+                            AttributeValue answerAttributeValue = element.getAttributeValue(answerAttributeType);	        
+					        if (answerAttributeValue != null)
+					        {
+                                NumericalAttributeValue value = element.getNumericalAttributeValue(numericalAttributeType);
+						        if (value != null) category.addAnswer(value.Value, element);
+					        }
+				        }
+
+				        if (category.ChoiceCount < _choiceCount)
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\", category \"{1}\": Not enough choices ({2} choices, {3} required). The category is ignored",
+                                _nameInLog, questionNameInLog, category.ChoiceCount, _choiceCount));
+					        _weightSum -= weight;
+				        }
+				        else
+				        {
+					        if (category.setElementVector(_choiceCount) != 0)
+					        {
+                                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                        "Level \"{0}\": No question in category \"{1}\". The category is ignored", _nameInLog, questionNameInLog));
+						        _weightSum -= weight;
+					        }
+					        else
+					        {
+                                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": 1 question, {2} choice(s)",
+                                                         _nameInLog, questionNameInLog, category.ChoiceCount));
+						        _categoryList.Add(category);
+						        ++_totalQuestionCount;
+					        }
+				        }
+			        }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                                "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                                _nameInLog, questionNameInLog, elementType.id));
+			        }
+		        }
+	        }
 
             return 0;
         }

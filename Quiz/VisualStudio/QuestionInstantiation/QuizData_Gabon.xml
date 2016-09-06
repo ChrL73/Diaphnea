@@ -38,8 +38,8 @@
       <attributeType id="at_Numero" canBeQuestion="true" />
     </attributeTypeList>
     <numericalAttributeTypeList>
-      <numericalAttributeType id="nt_Latitude" unit=" °" ambiguityThreshold="0.4" displayPrecision="2"/>
-      <numericalAttributeType id="nt_Longitude" unit=" °" ambiguityThreshold="0.6" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Latitude" unit="°" ambiguityThreshold="0.4" displayPrecision="2"/>
+      <numericalAttributeType id="nt_Longitude" unit="°" ambiguityThreshold="0.6" displayPrecision="2"/>
       <numericalAttributeType id="nt_Longueur" unit=" km" ambiguityThreshold="120" displayPrecision="0"/>
       <numericalAttributeType id="nt_Population" unit=" h" ambiguityThreshold="25000" displayPrecision="0"/>
     </numericalAttributeTypeList>
@@ -514,6 +514,7 @@
       </relation1QuestionCategory>
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList/>
+    <attributeOrderQuestionCategoryList/>
   </questionCategories>
   
 </quizData>

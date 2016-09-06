@@ -114,17 +114,17 @@ namespace QuestionInstantiation
                     _dataFileName));
             }
             
-            if (latitudeAttributeType != null && latitudeAttributeType.unit != " °")
+            if (latitudeAttributeType != null && latitudeAttributeType.unit != "°")
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                    "File {0}: Unit of numerical attribute type \"nt_Latitude\" is \"{1}\" instead of \" °\" expected. If latitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" can not be used",
+                    "File {0}: Unit of numerical attribute type \"nt_Latitude\" is \"{1}\" instead of \"°\" expected. If latitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" can not be used",
                     _dataFileName, latitudeAttributeType.unit));
             }
 
-            if (longitudeAttributeType != null && longitudeAttributeType.unit != " °")
+            if (longitudeAttributeType != null && longitudeAttributeType.unit != "°")
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
-                    "File {0}: Unit of numerical attribute type \"nt_Longitude\" is \"{1}\" instead of \" °\" expected. If longitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" will not be build as expected",
+                    "File {0}: Unit of numerical attribute type \"nt_Longitude\" is \"{1}\" instead of \"°\" expected. If longitudes are not in degrees, questions with \"elementLocation=answerProximityCriterion\" will not be build as expected",
                     _dataFileName, longitudeAttributeType.unit));
             }
         }

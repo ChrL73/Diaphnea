@@ -60,6 +60,12 @@
     <ClCompile Include="vld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\produce_questions\AttributeOrderCategory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\produce_questions\AttributeOrderChoice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\produce_questions\TextAndComment.h">
@@ -105,6 +111,12 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\produce_questions\Category.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\produce_questions\AttributeOrderCategory.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\produce_questions\AttributeOrderChoice.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

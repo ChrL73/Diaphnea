@@ -84,6 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\NodeJS\produce_questions\AttributeOrderCategory.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\AttributeOrderChoice.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\Category.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\Choice.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\CompleteQuestion.cpp" />
@@ -101,6 +103,8 @@
     <ClCompile Include="vld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\NodeJS\produce_questions\AttributeOrderCategory.h" />
+    <ClInclude Include="..\..\NodeJS\produce_questions\AttributeOrderChoice.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\Category.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\Choice.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\CompleteQuestion.h" />

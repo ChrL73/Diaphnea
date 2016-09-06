@@ -730,7 +730,7 @@ namespace QuestionInstantiation
 
                         double distribParameterCorrection = 0.0;
                         if (xmlAttributeOrderQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeOrderQuestionCategory.distribParameterCorrection;
-                        AttributeOrderCategory category = new AttributeOrderCategory(_weightSum, questionNameInLog, _quizData, numericalAttributeType/*, answerAttributeType*/, questionText,
+                        AttributeOrderCategory category = new AttributeOrderCategory(_weightSum, questionNameInLog, _quizData, numericalAttributeType, questionText,
                                                                                      xmlAttributeOrderQuestionCategory.mode, distribParameterCorrection);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])

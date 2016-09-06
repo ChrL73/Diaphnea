@@ -14,19 +14,17 @@ namespace QuestionInstantiation
         private readonly SortedDictionary<double, List<Element>> _choiceDictionary = new SortedDictionary<double, List<Element>>();
         private readonly List<AttributeOrderElement> _elementList = new List<AttributeOrderElement>();
         private readonly XmlNumericalAttributeType _numericalAttributeType;
-        //private readonly XmlAttributeType _answerAttributeType;
         private readonly Text _questionText;
         private readonly XmlAttributeOrderModeEnum _mode;
         private readonly double _distribParameterCorrection;
         private readonly string _valueFormat;
         private int _maxIndex;
 
-        internal AttributeOrderCategory (int weightIndex, string questionNameInLog, QuizData quizData, XmlNumericalAttributeType numericalAttributeType/*, XmlAttributeType answerAttributeType*/,
+        internal AttributeOrderCategory (int weightIndex, string questionNameInLog, QuizData quizData, XmlNumericalAttributeType numericalAttributeType,
                                          Text questionText, XmlAttributeOrderModeEnum mode, double distribParameterCorrection)
             : base(weightIndex, questionNameInLog, quizData)
         {
             _numericalAttributeType = numericalAttributeType;
-            //_answerAttributeType = answerAttributeType;
             _questionText = questionText;
             _mode = mode;
             _distribParameterCorrection = distribParameterCorrection;
@@ -94,6 +92,7 @@ namespace QuestionInstantiation
             BsonDocument categoryDocument = new BsonDocument()
             {
                 { "type", "AttributeOrder" },
+                { "question", _questionText.getBsonDocument() },
                 { "choice_count", _elementList.Count },
                 { "choice_list", choiceListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },

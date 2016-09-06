@@ -24,6 +24,6 @@ namespace produce_questions
 
     public:
         MultipleAnswerCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, int choiceCount, const std::string& choiceListId,
-                               double _distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
+                               double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
     };
 }

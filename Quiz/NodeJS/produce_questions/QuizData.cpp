@@ -4,7 +4,9 @@
 #include "SimpleAnswerQuestion.h"
 #include "MultipleAnswerCategory.h"
 #include "MultipleAnswerQuestion.h"
+#include "AttributeOrderCategory.h"
 #include "Choice.h"
+#include "AttributeOrderChoice.h"
 #include "TextAndComment.h"
 
 namespace produce_questions
@@ -70,6 +72,9 @@ namespace produce_questions
 
         std::map<std::pair<std::string, int>, const Choice *>::iterator choiceIt = _choiceMap.begin();
         for (; choiceIt != _choiceMap.end(); ++choiceIt) delete (*choiceIt).second;
+
+        std::map<std::pair<std::string, int>, const AttributeOrderChoice *>::iterator attributeOrderChoiceIt = _attributeOrderChoiceMap.begin();
+        for (; attributeOrderChoiceIt != _attributeOrderChoiceMap.end(); ++attributeOrderChoiceIt) delete (*attributeOrderChoiceIt).second;
 
         mongo::Status status = mongo::client::shutdown();
         if (!status.isOK())
@@ -138,6 +143,18 @@ namespace produce_questions
                                                                                                     choiceListId, distribParameterCorrection, proximityCriterionType);
 
                         categoryVector.push_back(multipleAnswerCategory);
+                    }
+                    else if (strcmp(categoryType, "AttributeOrder") == 0)
+                    {
+                        const char *questionText = dbCategory.getField("question").Obj().getStringField(_languageId);
+                        int categoryChoiceCount = dbCategory.getIntField("choice_count");
+                        std::string choiceListId = dbCategory.getField("choice_list").OID().toString();
+                        double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
+                        int maxIndex = dbCategory.getIntField("max_index");
+
+                        AttributeOrderCategory *attributeOrderCategory = new AttributeOrderCategory(weightIndex, questionText, categoryChoiceCount, choiceListId, distribParameterCorrection, maxIndex);
+
+                        categoryVector.push_back(attributeOrderCategory);
                     }
                 }
 
@@ -316,6 +333,39 @@ namespace produce_questions
             else
             {
                 it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, 0)).first;
+            }
+        }
+
+        return (*it).second;
+    }
+
+    const AttributeOrderChoice *QuizData::getAttributeOrderChoice(const std::string& choiceListId, int index)
+    {
+        std::pair<std::string, int> key(choiceListId, index);
+        std::map<std::pair<std::string, int>, const AttributeOrderChoice *>::iterator it = _attributeOrderChoiceMap.find(key);
+
+        if (it == _attributeOrderChoiceMap.end())
+        {
+            char projectionStr[64];
+            sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
+            mongo::BSONObj projection = mongo::fromjson(projectionStr);
+            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY("_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+
+            if (cursor->more())
+            {
+                mongo::BSONObj dbList = cursor->next();
+                mongo::BSONObj dbChoice = dbList.getField("choices").Array()[0].Obj();
+
+                const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
+                const char *comment = dbChoice.getStringField("comment");
+                int minIndex = dbChoice.getIntField("min_index");
+
+                AttributeOrderChoice *choice = new AttributeOrderChoice(choiceText, comment, minIndex);
+                it = _attributeOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, AttributeOrderChoice *>(key, choice)).first;
+            }
+            else
+            {
+                it = _attributeOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, AttributeOrderChoice *>(key, 0)).first;
             }
         }
 

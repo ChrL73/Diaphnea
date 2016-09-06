@@ -16,6 +16,7 @@ namespace produce_questions
     class SimpleAnswerQuestion;
     class MultipleAnswerQuestion;
     class Choice;
+    class AttributeOrderChoice;
 
     class QuizData
     {
@@ -35,6 +36,7 @@ namespace produce_questions
         std::map<std::pair<std::string, int>, const SimpleAnswerQuestion *> _simpleAnswerQuestionMap;
         std::map<std::pair<std::string, int>, const MultipleAnswerQuestion *> _multipleAnswerQuestionMap;
         std::map<std::pair<std::string, int>, const Choice *> _choiceMap;
+        std::map<std::pair<std::string, int>, const AttributeOrderChoice *> _attributeOrderChoiceMap;
 
     public:
         static QuizData *instance(void);
@@ -46,5 +48,6 @@ namespace produce_questions
         const SimpleAnswerQuestion *getSimpleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
         const MultipleAnswerQuestion *getMultipleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
         const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
+        const AttributeOrderChoice *getAttributeOrderChoice(const std::string& choiceListId, int index);
     };
 }

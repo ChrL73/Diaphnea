@@ -10,7 +10,8 @@
 		<styleUrl>#s</styleUrl>
 		<LineString>
 			<tessellate>1</tessellate>
-			<coordinates/>
+			<coordinates>
+         </coordinates>
 		</LineString>
 	</Placemark>
 </kml>

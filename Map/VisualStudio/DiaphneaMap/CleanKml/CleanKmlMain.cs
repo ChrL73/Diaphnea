@@ -16,6 +16,7 @@ namespace CleanKml
         static string _lineTemplatePath;
         static string _polygonTemplatePath;
         static List<string> fileList = new List<string>();
+        static List<string> _cleanedFiles = new List<string>();
         static CultureInfo _cultureInfo = new CultureInfo("en-US");
 
         static void Main(string[] args)
@@ -36,6 +37,11 @@ namespace CleanKml
                 {
                     foreach (string path in fileList) cleanFile(path);
                 }
+
+                Console.WriteLine();
+                int n = _cleanedFiles.Count;
+                Console.WriteLine(n + " file" + (n > 1 ? "s" : "") + " cleaned" + (n > 0 ? ":" : ""));
+                foreach (String file in _cleanedFiles) Console.WriteLine(file);
             }
 
             Console.WriteLine("Press any key to continue...");
@@ -127,6 +133,13 @@ namespace CleanKml
                 return;
             }
 
+            XmlNode rootNode = inputDocument.DocumentElement;
+            if (rootNode.Attributes.Count == 0)
+            {
+                Console.WriteLine(path + " already cleaned, file ignored");
+                return;
+            }
+
             XmlNodeList inputCoordinatesList = inputDocument.GetElementsByTagName("coordinates");
             if (inputCoordinatesList.Count == 0)
             {
@@ -166,6 +179,7 @@ namespace CleanKml
             }
 
             XmlDocument outputDocument = new XmlDocument();
+            outputDocument.PreserveWhitespace = true; // Necessary to set 'indentationPattern' below  
             try
             {
                 outputDocument.Load(templatePath);
@@ -186,16 +200,19 @@ namespace CleanKml
             if (outputCoordinatesList.Count > 1) Console.WriteLine("!!! More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
 
             XmlNode outputCoodinatesNode = outputCoordinatesList.Item(0);
+            String indentationPattern = outputCoodinatesNode.InnerText;
+            if (!indentationPattern.Contains("\n")) indentationPattern = "\n";
 
             string coordinates = inputCoodinatesNode.FirstChild.Value;
             string[] pointArray = coordinates.Split(' ', '\n', '\t');
 
             StringBuilder newCoordinates = new StringBuilder();
-            newCoordinates.Append("\n");
             foreach (String pointStr in pointArray)
             {
                 if (pointStr.Length != 0)
                 {
+                    newCoordinates.Append("   ");
+
                     string[] coordinateArray = pointStr.Split(',');
                     double lon;
                     if (!Double.TryParse(coordinateArray[0], NumberStyles.Number, _cultureInfo, out lon))
@@ -213,14 +230,14 @@ namespace CleanKml
                         return;
                     }
                     newCoordinates.Append(lat.ToString("#.######", _cultureInfo));
-                    newCoordinates.Append("\n");
+                    newCoordinates.Append(indentationPattern);
                 }
             }
 
             XmlText xmlText = outputDocument.CreateTextNode(newCoordinates.ToString());
             outputCoodinatesNode.AppendChild(xmlText);
-            outputDocument.Save("test.kml");
-
+            outputDocument.Save(path);
+            _cleanedFiles.Add(path);
         }
     }
 }

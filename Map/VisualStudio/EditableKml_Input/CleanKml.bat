@@ -1,1 +1,1 @@
-..\DiaphneaMap\CleanKml\bin\Release\CleanKml.exe .
+..\CleanKml\bin\Release\CleanKml.exe .

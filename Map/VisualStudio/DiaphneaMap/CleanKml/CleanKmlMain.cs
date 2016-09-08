@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace CleanKml
         static string _lineTemplatePath;
         static string _polygonTemplatePath;
         static List<string> fileList = new List<string>();
+        static CultureInfo _cultureInfo = new CultureInfo("en-US");
 
         static void Main(string[] args)
         {
@@ -93,10 +95,15 @@ namespace CleanKml
                     string fileStatus = process.StandardOutput.ReadToEnd();
                     process.WaitForExit();
 
-                    // Todo: test 'fileStatus' value to decide if file must be added
-
-                    Console.WriteLine("Adding " + path);
-                    fileList.Add(path);
+                    if (fileStatus == "")
+                    {
+                        Console.WriteLine("Unmodified file " + path + " is ignored");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Adding " + path);
+                        fileList.Add(path);
+                    }
                 }
                 else
                 {
@@ -120,19 +127,18 @@ namespace CleanKml
                 return;
             }
 
-            XmlNodeList coordinatesList = inputDocument.GetElementsByTagName("coordinates");
-
-            if (coordinatesList.Count == 0)
+            XmlNodeList inputCoordinatesList = inputDocument.GetElementsByTagName("coordinates");
+            if (inputCoordinatesList.Count == 0)
             {
                 Console.WriteLine("!!! No 'coordinates' tags found, file " + path + " ignored");
                 return;
             }
 
-            if (coordinatesList.Count > 1) Console.WriteLine("!!! More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
+            if (inputCoordinatesList.Count > 1) Console.WriteLine("!!! More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
 
             String templatePath = null;
-            XmlNode coodinatesNode = coordinatesList.Item(0);
-            XmlNode parent = coodinatesNode.ParentNode;
+            XmlNode inputCoodinatesNode = inputCoordinatesList.Item(0);
+            XmlNode parent = inputCoodinatesNode.ParentNode;
             while (parent != null)
             {
                 if (parent.Name == "Point")
@@ -169,6 +175,52 @@ namespace CleanKml
                 Console.WriteLine("!!! Invalid template file " + templatePath + ". File" + path + " ignored");
                 return;
             }
+
+            XmlNodeList outputCoordinatesList = outputDocument.GetElementsByTagName("coordinates");
+            if (outputCoordinatesList.Count == 0)
+            {
+                Console.WriteLine("!!! No 'coordinates' tags found, file " + path + " ignored");
+                return;
+            }
+
+            if (outputCoordinatesList.Count > 1) Console.WriteLine("!!! More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
+
+            XmlNode outputCoodinatesNode = outputCoordinatesList.Item(0);
+
+            string coordinates = inputCoodinatesNode.FirstChild.Value;
+            string[] pointArray = coordinates.Split(' ', '\n', '\t');
+
+            StringBuilder newCoordinates = new StringBuilder();
+            newCoordinates.Append("\n");
+            foreach (String pointStr in pointArray)
+            {
+                if (pointStr.Length != 0)
+                {
+                    string[] coordinateArray = pointStr.Split(',');
+                    double lon;
+                    if (!Double.TryParse(coordinateArray[0], NumberStyles.Number, _cultureInfo, out lon))
+                    {
+                        Console.WriteLine("!!! Invalid file, can't convert " + coordinateArray[0]  + " to double, " + path + " ignored");
+                        return;
+                    }
+                    newCoordinates.Append(lon.ToString("#.######", _cultureInfo));
+                    newCoordinates.Append(",");
+
+                    double lat;
+                    if (!Double.TryParse(coordinateArray[1], NumberStyles.Number, _cultureInfo, out lat))
+                    {
+                        Console.WriteLine("!!! Invalid file, can't convert " + coordinateArray[1] + " to double, " + path + " ignored");
+                        return;
+                    }
+                    newCoordinates.Append(lat.ToString("#.######", _cultureInfo));
+                    newCoordinates.Append("\n");
+                }
+            }
+
+            XmlText xmlText = outputDocument.CreateTextNode(newCoordinates.ToString());
+            outputCoodinatesNode.AppendChild(xmlText);
+            outputDocument.Save("test.kml");
+
         }
     }
 }

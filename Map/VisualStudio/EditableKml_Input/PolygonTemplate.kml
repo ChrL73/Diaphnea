@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ff00ff00</color>
+            <width>2</width>
+         </LineStyle>
+         <PolyStyle>
+            <fill>0</fill>
+         </PolyStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <Polygon>
+         <tessellate>1</tessellate>
+         <outerBoundaryIs>
+            <LinearRing>
+               <coordinates/>
+            </LinearRing>
+         </outerBoundaryIs>
+      </Polygon>
+   </Placemark>
+</kml>

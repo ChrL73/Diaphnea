@@ -28,6 +28,7 @@ namespace produce_questions
         if (level == 0)
         {
             std::cerr << "Error in quizData->getLevel(_levelId)" << std::endl;
+            QuizData::destroyInstance();
             return -1;
         }
 

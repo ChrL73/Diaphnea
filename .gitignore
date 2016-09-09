@@ -10,6 +10,7 @@
 *obj
 *Debug
 *Release
+*tmp
 /Quiz/VisualStudio/packages
 /Quiz/VisualStudio/.vs
 /Experiments/VisualStudio/packages
@@ -18,7 +19,7 @@
 !/Shared/readme.txt
 .directory
 *node_modules
-*npm-debug.log
+*.log
 /mongo-cxx-driver
 *mongo-cxx-driver_vc12
 *.exe

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml>
-	<Placemark>
+   <Placemark>
       <Style id="s">
          <LineStyle>
             <color>ffff0000</color>
             <width>2</width>
          </LineStyle>
       </Style>
-		<styleUrl>#s</styleUrl>
-		<LineString>
-			<tessellate>1</tessellate>
-			<coordinates>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
          </coordinates>
-		</LineString>
-	</Placemark>
+      </LineString>
+   </Placemark>
 </kml>

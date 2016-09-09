@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml>
-	<Placemark>
-		<Point>	
-			<coordinates>
+   <Placemark>
+      <Point>	
+         <coordinates>
          </coordinates>
-		</Point>
-	</Placemark>
+      </Point>
+   </Placemark>
 </kml>

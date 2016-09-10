@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
+
+  <elementList>
+    <element id="e_France" name=""/>
+    <!--Régions-->
+    <element id="e_ARA" name="Auvergne-Rhône-Alpes"/>
+    <element id="e_BFC" name="Bourgogne-Franche-Comté"/>
+    <element id="e_Bretagne" name="Bretagne"/>
+    <element id="e_CVL" name="Centre-Val de Loire"/>
+    <element id="e_Corse" name="Corse"/>
+    <element id="e_Est" name="Grand-Est"/>
+    <element id="e_HDF" name="Hauts-de-France"/>
+    <element id="e_IDF" name="Île-de-France"/>
+    <element id="e_Normandie" name="Normandie"/>
+    <element id="e_Aquitaine" name="Nouvelle-Aquitaine"/>
+    <element id="e_Occitanie" name="Occitanie"/>
+    <element id="e_PDDL" name="Pays de la Loire"/>
+    <element id="e_PACA" name="Provence-Alpes-Côte d'Azur"/>
+    <!--Départements-->
+    <element id="e_01" name="Ain (01)" shortName="01"/>
+    <element id="e_02" name="Aisne (02)" shortName="02"/>
+    <!--Villes-->
+    <element id="e_BourgEnBresse" name="Bourg-en-Bresse"/>
+    <!--Fleuves et rivières-->
+    <element id="e_Rhin" name="Rhin"/>
+  </elementList>
+  
+</mapData>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ff00ff00</color>
+            <width>2</width>
+         </LineStyle>
+         <PolyStyle>
+            <fill>0</fill>
+         </PolyStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <Polygon>
+         <tessellate>1</tessellate>
+         <outerBoundaryIs>
+            <LinearRing>
+               <coordinates>
+                  2.998671,49.192904
+                  2.998539,49.193053
+                  2.997922,49.192792
+                  2.997421,49.192681
+                  2.996665,49.19257
+                  2.996758,49.192155
+                  2.996011,49.191999
+                  2.996628,49.191237
+                  2.997805,49.191163
+                  2.998363,49.190441
+                  2.999111,49.190158
+                  2.999067,49.189597
+                  2.999498,49.189515
+                  3.000319,49.190805
+                  2.99885,49.191116
+                  2.999017,49.192547
+                  2.998671,49.192904
+               </coordinates>
+            </LinearRing>
+         </outerBoundaryIs>
+      </Polygon>
+   </Placemark>
+</kml>

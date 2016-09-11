@@ -3,8 +3,21 @@
   <xsd:element name="mapData" type="XmlMapData" />
   <xsd:complexType name="XmlMapData">
     <xsd:sequence>
+      <xsd:element name="resolutionList" type="XmlResolutionList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlResolutionList">
+    <xsd:sequence>
+      <xsd:element name="resolution" type="XmlResolution" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlResolution">
+    <xsd:sequence/>
+    <xsd:attribute name="outputDir" type="xsd:string" use="required" />
+    <xsd:attribute name="sampleLength1" type="xsd:double" use="required" />
+    <xsd:attribute name="sampleRatio" type="xsd:integer" use="required" />
+    <xsd:attribute name="smoothingWidth" type="xsd:integer" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlElementList">
     <xsd:sequence>

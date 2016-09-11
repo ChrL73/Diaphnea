@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Express 14 for Windows Desktop
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanKml", "CleanKml\CleanKml.csproj", "{14547501-0836-48F5-A3FD-71DA1CD5B240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapDataProcessing", "MapDataProcessing\MapDataProcessing.csproj", "{6F19156E-01AE-4357-8D97-7BF54B520416}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{14547501-0836-48F5-A3FD-71DA1CD5B240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14547501-0836-48F5-A3FD-71DA1CD5B240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14547501-0836-48F5-A3FD-71DA1CD5B240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F19156E-01AE-4357-8D97-7BF54B520416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F19156E-01AE-4357-8D97-7BF54B520416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F19156E-01AE-4357-8D97-7BF54B520416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F19156E-01AE-4357-8D97-7BF54B520416}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

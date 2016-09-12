@@ -15,13 +15,14 @@ namespace QuestionInstantiation
             if (args.Length < 1)
             {
                 Console.WriteLine("usage: QuestionInstantiation.exe path1 [path2 ...]");
-                return;
             }
-
-            foreach (string path in args)
+            else
             {
-                Questionnaire questionnaire = new Questionnaire();
-                questionnaire.instantiate(path);
+                foreach (string path in args)
+                {
+                    Questionnaire questionnaire = new Questionnaire();
+                    questionnaire.instantiate(path);
+                }
             }
 
             Console.WriteLine("Press any key to continue...");

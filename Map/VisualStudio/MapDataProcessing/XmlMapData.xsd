@@ -3,10 +3,28 @@
   <xsd:element name="mapData" type="XmlMapData" />
   <xsd:complexType name="XmlMapData">
     <xsd:sequence>
+      <xsd:element name="parameters" type="XmlParameters" maxOccurs="1" minOccurs="1" />
       <xsd:element name="resolutionList" type="XmlResolutionList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="lookList" type="XmlLookList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
+  <xsd:complexType name="XmlParameters">
+    <xsd:sequence/>
+    <xsd:attribute name="logFileName" type="xsd:string" use="required" />
+    <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
+    <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
+    <xsd:attribute name="databaseName" type="xsd:string" use="required" />
+    <xsd:attribute name="kmlDir" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="XmlLogLevelEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NO_LOG" />
+      <xsd:enumeration value="ERROR" />
+      <xsd:enumeration value="WARNING" />
+      <xsd:enumeration value="MESSAGE" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlResolutionList">
     <xsd:sequence>
       <xsd:element name="resolution" type="XmlResolution" minOccurs="1" maxOccurs="unbounded" />
@@ -19,20 +37,116 @@
     <xsd:attribute name="sampleRatio" type="xsd:integer" use="required" />
     <xsd:attribute name="smoothingWidth" type="xsd:integer" use="required" />
   </xsd:complexType>
-  <xsd:complexType name="XmlElementList">
+  <xsd:complexType name="XmlLookList">
     <xsd:sequence>
-      <xsd:element name="element" type="XmlElement" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="polygonLookList" type="XmlPolygonLookList" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="lineLookList" type="XmlLineLookList" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="pointLookList" type="XmlPointLookList" minOccurs="1" maxOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
-  <xsd:complexType name="XmlElement">
+  <xsd:complexType name="XmlPolygonLookList">
+    <xsd:sequence>
+      <xsd:element name="polygonLook" type="XmlPolygonLook" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineLookList">
+    <xsd:sequence>
+      <xsd:element name="lineLook" type="XmlLineLook" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointLookList">
+    <xsd:sequence>
+      <xsd:element name="pointLook" type="XmlPointLook" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonLook">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineLook">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlLineLookId" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointLook">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlPointLookId" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlElementList">
+    <xsd:sequence>
+      <xsd:element name="polygonElementList" type="XmlPolygonElementList" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="lineElementList" type="XmlLineElementList" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="pointElementList" type="XmlPointElementList" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonElementList">
+    <xsd:sequence>
+      <xsd:element name="polygonElement" type="XmlPolygonElement" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineElementList">
+    <xsd:sequence>
+      <xsd:element name="lineElement" type="XmlLineElement" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointElementList">
+    <xsd:sequence>
+      <xsd:element name="pointElement" type="XmlPointElement" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonElement">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
     <xsd:attribute name="name" type="xsd:string" use="required" />
     <xsd:attribute name="shortName" type="xsd:string" use="optional" />
+    <xsd:attribute name="look" type="XmlPolygonLookIdRef" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineElement">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="shortName" type="xsd:string" use="optional" />
+    <xsd:attribute name="look" type="XmlLineLookIdRef" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointElement">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="shortName" type="xsd:string" use="optional" />
+    <xsd:attribute name="look" type="XmlPointLookIdRef" use="required"/>
   </xsd:complexType>
   <xsd:simpleType name="XmlElementId">
     <xsd:restriction base="xsd:ID">
       <xsd:pattern value="e_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPolygonLookId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="pl_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPolygonLookIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="pl_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlLineLookId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="ll_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlLineLookIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="ll_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPointLookId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="tl_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlPointLookIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="tl_(.)+" />
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>

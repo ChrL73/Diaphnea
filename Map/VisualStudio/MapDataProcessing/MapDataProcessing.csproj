@@ -54,8 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LineMapElement.cs" />
+    <Compile Include="MapData.cs" />
     <Compile Include="MapDataProcessingMain.cs" />
+    <Compile Include="MapDataProcessor.cs" />
+    <Compile Include="MapElement.cs" />
+    <Compile Include="MessageLogger.cs" />
+    <Compile Include="PointMapElement.cs" />
+    <Compile Include="PolygonMapElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlMapData.cs">
+      <DependentUpon>XmlMapData.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -63,7 +73,7 @@
     <None Include="XmlMapData.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MapConfig_France.xml">
+    <Content Include="MapData_France.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

@@ -94,7 +94,7 @@ namespace CleanKml
             {
                 logMessage("Browsing " + path);
                 List<String> entries = new List<String>(Directory.EnumerateFileSystemEntries(path));
-                foreach (var entry in entries) browse(entry);
+                foreach (String entry in entries) browse(entry);
             }
             else
             {

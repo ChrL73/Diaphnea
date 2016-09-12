@@ -14,7 +14,7 @@ namespace QuestionInstantiation
     class Questionnaire
     {
         private QuizData _quizData;
-        Text _name = new Text();
+        private Text _name = new Text();
         private List<Level> _levelList = new List<Level>();
 
         internal void instantiate(string path)

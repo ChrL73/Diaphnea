@@ -8,13 +8,38 @@ namespace MapDataProcessing
 {
     class PointMapElement : MapElement
     {
-        private String _KmlFile;
+        private KmlFileData _KmlFile = null;
 
         internal PointMapElement(String id) : base(id) { }
 
-        internal override void addKmlFile(String path)
+        internal override int addKmlFile(String path)
         {
+            KmlFileData data = KmlFileData.getData(path);
 
+            if (data.Type == KmlFileTypeEnum.LINE)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not add line file '{0}' to point element '{1}'", path, Id));
+                return -1;
+            }
+            else if (data.Type == KmlFileTypeEnum.POLYGON)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not add polygon file '{0}' to point element '{1}'", path, Id));
+                return -1;
+            }
+            else if (data.Type == KmlFileTypeEnum.POINT)
+            {
+                if (_KmlFile != null)
+                {
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not add several files ('{0}' and '{1}') to point element '{2}'", _KmlFile.Path, path, Id));
+                    return -1;
+                }
+                else
+                {
+                    _KmlFile = data;
+                }
+            }
+
+            return 0;
         }
     }
 }

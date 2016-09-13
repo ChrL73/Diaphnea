@@ -15,6 +15,8 @@ namespace MapDataProcessing
             _id = id;
         }
 
-        abstract internal void addKmlFile(String path);
+        abstract internal int addKmlFile(String path);
+
+        internal String Id { get { return _id; } }
     }
 }

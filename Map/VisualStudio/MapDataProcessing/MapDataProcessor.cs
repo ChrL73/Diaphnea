@@ -146,7 +146,11 @@ namespace MapDataProcessing
             String[] idList = name.Split('_');
             foreach (String id in idList)
             {
-
+                MapElement element;
+                if (_elementDictionary.TryGetValue(id, out element))
+                {
+                    if (element.addKmlFile(path) != 0) return -1;
+                }
             }
 
             return 0;

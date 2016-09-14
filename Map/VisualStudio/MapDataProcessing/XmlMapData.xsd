@@ -16,6 +16,7 @@
     <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="databaseName" type="xsd:string" use="required" />
     <xsd:attribute name="kmlDir" type="xsd:string" use="required" />
+    <xsd:attribute name="maxConnectionDistanceInKm" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:simpleType name="XmlLogLevelEnum">
     <xsd:restriction base="xsd:string">

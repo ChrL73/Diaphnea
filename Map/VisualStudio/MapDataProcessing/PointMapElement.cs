@@ -41,5 +41,10 @@ namespace MapDataProcessing
 
             return 0;
         }
+
+        internal override int formParts(double dMaxInKm)
+        {
+            return 0;
+        }
     }
 }

@@ -20,11 +20,6 @@ namespace MapDataProcessing
                 data = new KmlFileData(path);
                 _fileDictionary.Add(path, data);
             }
-            else
-            {
-                // Todo: Delete the following line when the case is tested
-                System.Diagnostics.Debugger.Break();
-            }
 
             return data;
         }
@@ -62,8 +57,8 @@ namespace MapDataProcessing
                 MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("More than one 'coordinates' tags in file {0}. Only the first one is taken into account", path));
             }
 
-            XmlNode inputCoodinatesNode = inputCoordinatesList.Item(0);
-            XmlNode parent = inputCoodinatesNode.ParentNode;
+            XmlNode inputCoordinatesNode = inputCoordinatesList.Item(0);
+            XmlNode parent = inputCoordinatesNode.ParentNode;
             while (parent != null)
             {
                 if (parent.Name == "Point")
@@ -90,13 +85,22 @@ namespace MapDataProcessing
                 return;
             }
 
-            String coordinates = inputCoodinatesNode.FirstChild.Value;
+            String coordinates = inputCoordinatesNode.FirstChild.Value;
             String[] pointArray = coordinates.Split(' ', '\n', '\t');
+            int pointCount = 0;
 
             foreach (String pointStr in pointArray)
             {
                 if (pointStr.Length != 0)
                 {
+                    if (_type == KmlFileTypeEnum.POINT && pointCount != 0)
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Point file must contain only one point, {0} ignored", path));
+                        _type = KmlFileTypeEnum.NONE;
+                        _pointList.Clear();
+                        return;
+                    }
+
                     String[] coordinateArray = pointStr.Split(',');
                     double lon;
                     if (!Double.TryParse(coordinateArray[0], NumberStyles.Number | NumberStyles.AllowExponent, _cultureInfo, out lon))
@@ -117,7 +121,24 @@ namespace MapDataProcessing
                     }
 
                     _pointList.Add(new GeoPoint(lon, lat));
+                    ++pointCount;
                 }
+            }
+
+            if (_type == KmlFileTypeEnum.LINE && pointCount < 2)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Line file must contain at least 2 points, {0} ignored", path));
+                _type = KmlFileTypeEnum.NONE;
+                _pointList.Clear();
+                return;
+            }
+
+            if (_type == KmlFileTypeEnum.POLYGON && pointCount < 4)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Polygon file must contain at least 4 points, {0} ignored", path));
+                _type = KmlFileTypeEnum.NONE;
+                _pointList.Clear();
+                return;
             }
         }
 

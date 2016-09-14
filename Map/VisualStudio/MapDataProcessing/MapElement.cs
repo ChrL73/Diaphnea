@@ -16,6 +16,7 @@ namespace MapDataProcessing
         }
 
         abstract internal int addKmlFile(String path);
+        abstract internal int formParts(double dMaxInKm);
 
         internal String Id { get { return _id; } }
     }

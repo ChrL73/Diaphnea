@@ -28,7 +28,7 @@ namespace MapDataProcessing
                 }
                 else if (pointData2 != part._pointData2)
                 {
-                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Different point12s ('{0}' and '{1}') for line polygon part '{2}'",
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Different point2s ('{0}' and '{1}') for line polygon part '{2}'",
                                              pointData2, part._pointData2, lineData));
                     return null;
                 }

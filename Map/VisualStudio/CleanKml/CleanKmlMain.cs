@@ -162,8 +162,8 @@ namespace CleanKml
             }
 
             String templatePath = null;
-            XmlNode inputCoodinatesNode = inputCoordinatesList.Item(0);
-            XmlNode parent = inputCoodinatesNode.ParentNode;
+            XmlNode inputCoordinatesNode = inputCoordinatesList.Item(0);
+            XmlNode parent = inputCoordinatesNode.ParentNode;
             while (parent != null)
             {
                 if (parent.Name == "Point")
@@ -218,11 +218,11 @@ namespace CleanKml
                 Console.WriteLine("More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
             }
 
-            XmlNode outputCoodinatesNode = outputCoordinatesList.Item(0);
-            String indentationPattern = outputCoodinatesNode.InnerText;
+            XmlNode outputCoordinatesNode = outputCoordinatesList.Item(0);
+            String indentationPattern = outputCoordinatesNode.InnerText;
             if (!indentationPattern.Contains("\n")) indentationPattern = "\n";
 
-            String coordinates = inputCoodinatesNode.FirstChild.Value;
+            String coordinates = inputCoordinatesNode.FirstChild.Value;
             String[] pointArray = coordinates.Split(' ', '\n', '\t');
 
             StringBuilder newCoordinates = new StringBuilder();
@@ -256,7 +256,7 @@ namespace CleanKml
             }
 
             XmlText xmlText = outputDocument.CreateTextNode(newCoordinates.ToString());
-            outputCoodinatesNode.AppendChild(xmlText);
+            outputCoordinatesNode.AppendChild(xmlText);
             outputDocument.Save(path);
             _cleanedFiles.Add(path);
             Console.WriteLine(path + " cleaned");

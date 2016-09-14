@@ -28,6 +28,7 @@ namespace MapDataProcessing
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
+            if (result == 0) result = formParts();
 
             return result;
         }
@@ -151,6 +152,16 @@ namespace MapDataProcessing
                 {
                     if (element.addKmlFile(path) != 0) return -1;
                 }
+            }
+
+            return 0;
+        }
+
+        private int formParts()
+        {
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                if (element.formParts(_mapData.XmlMapData.parameters.maxConnectionDistanceInKm) != 0) return -1;
             }
 
             return 0;

@@ -34,5 +34,14 @@ namespace MapDataProcessing
         internal double X { get { return _x; } }
         internal double Y { get { return _y; } }
         internal double Z { get { return _z; } }
+
+        static internal double distance(GeoPoint p1, GeoPoint p2)
+        {
+            double dx = p1._x - p2._x;
+            double dy = p1._y - p2._y;
+            double dz = p1._z - p2._z;
+
+            return Math.Sqrt(dx * dx + dy * dy + dz * dz);
+        }
     }
 }

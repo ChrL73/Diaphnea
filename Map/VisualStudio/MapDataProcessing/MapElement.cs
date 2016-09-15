@@ -9,15 +9,19 @@ namespace MapDataProcessing
     abstract class MapElement
     {
         private readonly String _id;
+        private readonly MapData _mapData;
 
-        internal MapElement(String id)
+        internal MapElement(String id, MapData mapData)
         {
             _id = id;
+            _mapData = mapData;
         }
 
         abstract internal int addKmlFile(String path);
-        abstract internal int formParts(double dMaxInKm);
+        abstract internal int formParts();
+        abstract internal int smoothParts();
 
-        internal String Id { get { return _id; } }
+        protected String Id { get { return _id; } }
+        protected MapData MapData { get { return _mapData; } }
     }
 }

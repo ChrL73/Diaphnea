@@ -10,7 +10,7 @@ namespace MapDataProcessing
     {
         private KmlFileData _KmlFile = null;
 
-        internal PointMapElement(String id) : base(id) { }
+        internal PointMapElement(String id, MapData mapData) : base(id, mapData) { }
 
         internal override int addKmlFile(String path)
         {
@@ -42,7 +42,12 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal override int formParts(double dMaxInKm)
+        internal override int formParts()
+        {
+            return 0;
+        }
+
+        internal override int smoothParts()
         {
             return 0;
         }

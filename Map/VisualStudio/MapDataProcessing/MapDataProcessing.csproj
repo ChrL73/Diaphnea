@@ -69,6 +69,7 @@
     <Compile Include="PolygonMapElement.cs" />
     <Compile Include="PolygonPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmoothedElementPart.cs" />
     <Compile Include="XmlMapData.cs">
       <DependentUpon>XmlMapData.xsd</DependentUpon>
     </Compile>

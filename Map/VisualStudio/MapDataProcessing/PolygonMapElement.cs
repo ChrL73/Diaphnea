@@ -14,8 +14,9 @@ namespace MapDataProcessing
 
         private readonly Dictionary<KmlFileData, List<OrientedPolygonPart>> _partDictionary = new Dictionary<KmlFileData, List<OrientedPolygonPart>>();
         private readonly List<OrientedPolygonPart> _sortedPartList = new List<OrientedPolygonPart>();
-        
-        internal PolygonMapElement(String id) : base(id) { }
+        private readonly List<SmoothedElementPart> _smootedPartList = new List<SmoothedElementPart>();
+
+        internal PolygonMapElement(String id, MapData mapData) : base(id, mapData) { }
 
         internal override int addKmlFile(String path)
         {
@@ -27,7 +28,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal override int formParts(double dMaxInKm)
+        internal override int formParts()
         {
             if (_pointKmlFileList.Count != _lineKmlFileList.Count)
             {
@@ -44,10 +45,11 @@ namespace MapDataProcessing
             }
 
             OrientedPolygonPart startPart = null;
+            double dMaxInKm = MapData.XmlMapData.parameters.maxConnectionDistanceInKm;
 
             foreach (KmlFileData line in _lineKmlFileList)
             {
-                KmlFileData point1 = getNearestPoint(line.PointList[0], dMaxInKm);
+                KmlFileData point1 = getNearestPoint(line.PointList[0]);
                 if (point1 == null)
                 {
                     MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can't associate point1 to line '{0}' for element '{1}' with maxConnectionDistanceInKm={2}",
@@ -55,7 +57,7 @@ namespace MapDataProcessing
                     return -1;
                 }
 
-                KmlFileData point2 = getNearestPoint(line.PointList[line.PointList.Count - 1], dMaxInKm);
+                KmlFileData point2 = getNearestPoint(line.PointList[line.PointList.Count - 1]);
                 if (point2 == null)
                 {
                     MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can't associate point2 to line '{0}' for element '{1}' with maxConnectionDistanceInKm={2}",
@@ -129,10 +131,10 @@ namespace MapDataProcessing
             return null;
         }
 
-        private KmlFileData getNearestPoint(GeoPoint point, double dMaxInKm)
+        private KmlFileData getNearestPoint(GeoPoint point)
         {
             KmlFileData result = null;
-            double dMin = dMaxInKm;
+            double dMin = MapData.XmlMapData.parameters.maxConnectionDistanceInKm;
 
             foreach (KmlFileData kmlFileData in _pointKmlFileList)
             {
@@ -146,6 +148,17 @@ namespace MapDataProcessing
             }
 
             return result;
+        }
+
+        internal override int smoothParts()
+        {
+            foreach(OrientedPolygonPart part in _sortedPartList)
+            {
+                SmoothedElementPart smoothedPart = new SmoothedElementPart(part, MapData);
+                _smootedPartList.Add(smoothedPart);
+            }
+
+            return 0;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace MapDataProcessing
             if (result == 0) result = createElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
             if (result == 0) result = formParts();
+            if (result == 0) result = smoothParts();
 
             return result;
         }
@@ -86,21 +87,21 @@ namespace MapDataProcessing
             foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList)
             {
                 String id = xmlPolygonElement.id.Substring(2);
-                PolygonMapElement polygonMapElement = new PolygonMapElement(id);
+                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
             {
                 String id = xmlLineElement.id.Substring(2);
-                LineMapElement lineMapElement = new LineMapElement(id);
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
             {
                 String id = xmlPointElement.id.Substring(2);
-                PointMapElement pointMapElement = new PointMapElement(id);
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData);
                 _elementDictionary.Add(id, pointMapElement);
             }
 
@@ -161,7 +162,17 @@ namespace MapDataProcessing
         {
             foreach (MapElement element in _elementDictionary.Values)
             {
-                if (element.formParts(_mapData.XmlMapData.parameters.maxConnectionDistanceInKm) != 0) return -1;
+                if (element.formParts() != 0) return -1;
+            }
+
+            return 0;
+        }
+
+        private int smoothParts()
+        {
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                if (element.smoothParts() != 0) return -1;
             }
 
             return 0;

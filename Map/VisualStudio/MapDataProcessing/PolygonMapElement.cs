@@ -12,12 +12,8 @@ namespace MapDataProcessing
         private readonly List<KmlFileData> _lineKmlFileList = new List<KmlFileData>();
         private readonly List<KmlFileData> _polygonKmlFileList = new List<KmlFileData>();
 
-        private readonly Dictionary<KmlFileData, OrientedPolygonPart> _partDictionary = new Dictionary<KmlFileData, OrientedPolygonPart>();
+        private readonly Dictionary<KmlFileData, List<OrientedPolygonPart>> _partDictionary = new Dictionary<KmlFileData, List<OrientedPolygonPart>>();
         private readonly List<OrientedPolygonPart> _sortedPartList = new List<OrientedPolygonPart>();
-
-        private readonly Dictionary<KmlFileData, OrientedPolygonPart> _lineToPartDictionary = new Dictionary<KmlFileData, OrientedPolygonPart>();
-        private readonly Dictionary<KmlFileData, OrientedPolygonPart> _point1ToPartDictionary = new Dictionary<KmlFileData, OrientedPolygonPart>();
-        private readonly Dictionary<KmlFileData, OrientedPolygonPart> _point2ToPartDictionary = new Dictionary<KmlFileData, OrientedPolygonPart>();
         
         internal PolygonMapElement(String id) : base(id) { }
 
@@ -74,11 +70,63 @@ namespace MapDataProcessing
                 OrientedPolygonPart inversePart = new OrientedPolygonPart(part, OrientationEnum.INVERSE);
                 if (startPart == null) startPart = directPart;
 
-                _partDictionary.Add(point1, directPart);
-                _partDictionary.Add(point2, inversePart);
+                if (!_partDictionary.ContainsKey(point1)) _partDictionary.Add(point1, new List<OrientedPolygonPart>());
+                _partDictionary[point1].Add(directPart);
+
+                if (!_partDictionary.ContainsKey(point2)) _partDictionary.Add(point2, new List<OrientedPolygonPart>());
+                _partDictionary[point2].Add(inversePart);
+            }
+
+            if (_partDictionary.Count != _lineKmlFileList.Count)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to form parts for element '{0}': {1} lines in element, {2} parts formed",
+                                                                              Id, _lineKmlFileList.Count, _partDictionary.Count));
+                return -1;
+            }
+
+            foreach (KeyValuePair<KmlFileData, List<OrientedPolygonPart>> pair in _partDictionary)
+            {
+                if (pair.Value.Count != 2)
+                {
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to form parts for element '{0}': {1} oriented lines instead of 2 for point '{2}'",
+                                                                                  Id, pair.Value.Count, pair.Key.Path));
+                    return -1;
+                }
+            }
+
+            OrientedPolygonPart nextPart = startPart;
+            while (true)
+            {
+                _sortedPartList.Add(nextPart);
+                nextPart = getNextPart(nextPart);
+                if (nextPart == startPart || nextPart == null) break;
+            }
+
+            if (_sortedPartList.Count != _lineKmlFileList.Count)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}': {1} lines in element, {2} parts sorted",
+                                                                               Id, _lineKmlFileList.Count, _sortedPartList.Count));
+                return -1;
+            }
+
+            if (nextPart == null)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}' (Next part not found)", Id));
+                return -1;
             }
 
             return 0;
+        }
+
+        private OrientedPolygonPart getNextPart(OrientedPolygonPart part)
+        {
+            List<OrientedPolygonPart> partList;
+            if (!_partDictionary.TryGetValue(part.Point2, out partList)) return null;
+
+            if (partList[0].Line == part.Line && partList[1].Line != part.Line) return partList[1];
+            if (partList[0].Line != part.Line && partList[1].Line == part.Line) return partList[0];
+
+            return null;
         }
 
         private KmlFileData getNearestPoint(GeoPoint point, double dMaxInKm)

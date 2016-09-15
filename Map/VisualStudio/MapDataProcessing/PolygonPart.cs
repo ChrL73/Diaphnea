@@ -47,5 +47,9 @@ namespace MapDataProcessing
             _pointData1 = pointData1;
             _pointData2 = pointData2;
         }
+
+        internal KmlFileData Line { get { return _lineData; } }
+        internal KmlFileData Point1 { get { return _pointData1; } }
+        internal KmlFileData Point2 { get { return _pointData2; } }
     }
 }

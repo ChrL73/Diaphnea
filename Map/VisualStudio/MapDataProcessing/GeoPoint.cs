@@ -29,6 +29,23 @@ namespace MapDataProcessing
             _z = r * Math.Sin(latitude);
         }
 
+        internal GeoPoint(double x, double y, double z)
+        {
+            _x = x;
+            _y = y;
+            _z = z;
+
+            double r = Math.Sqrt(x * x + y * y + z * z);
+            x /= r;
+            y /= r;
+            z /= r;
+
+            const double b = 180.0 / 3.1415926535897932384626433832795;
+            _latitude = Math.Asin(z);
+            _longitude = b * Math.Asin(y / Math.Cos(_latitude));
+            _latitude *= b;
+        }
+
         internal double Longitude { get { return _longitude; } }
         internal double Latitude { get { return _latitude; } }
         internal double X { get { return _x; } }

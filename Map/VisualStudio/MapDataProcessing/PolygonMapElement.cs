@@ -154,7 +154,11 @@ namespace MapDataProcessing
         {
             foreach(OrientedPolygonPart part in _sortedPartList)
             {
-                SmoothedElementPart smoothedPart = new SmoothedElementPart(part, MapData);
+                SmoothedElementPart smoothedPart;
+
+                try { smoothedPart = new SmoothedElementPart(part, MapData); }
+                catch(Exception) { return -1; }
+
                 _smootedPartList.Add(smoothedPart);
             }
 

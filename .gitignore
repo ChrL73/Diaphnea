@@ -22,3 +22,4 @@
 /mongo-cxx-driver
 *mongo-cxx-driver_vc12
 *.exe
+*InfoKml_Output

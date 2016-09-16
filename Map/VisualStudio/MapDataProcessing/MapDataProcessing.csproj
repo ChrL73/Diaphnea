@@ -57,6 +57,7 @@
     <Compile Include="GeoPoint.cs" />
     <Compile Include="KmlFileData.cs" />
     <Compile Include="KmlFileTypeEnum.cs" />
+    <Compile Include="KmlWriter.cs" />
     <Compile Include="LineMapElement.cs" />
     <Compile Include="MapData.cs" />
     <Compile Include="MapDataProcessingMain.cs" />
@@ -76,7 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="LineTemplate.kml" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="PointTemplate.kml" />
+    <EmbeddedResource Include="PolygonTemplate.kml" />
     <None Include="XmlMapData.xsd" />
   </ItemGroup>
   <ItemGroup>

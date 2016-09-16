@@ -5,11 +5,11 @@
               kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0"/>
     
   <resolutionList>
-    <resolution outputDir="_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
-    <resolution outputDir="_500m" sampleLength1="0.1" sampleRatio="5" smoothingWidth="14" />
-    <resolution outputDir="_1km" sampleLength1="0.1" sampleRatio="10" smoothingWidth="24" />
-    <resolution outputDir="_2km" sampleLength1="0.1" sampleRatio="20" smoothingWidth="40" />
-    <resolution outputDir="_4km" sampleLength1="0.1" sampleRatio="40" smoothingWidth="64" />
+    <resolution outputDir="../../../InfoKml_Output/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
+    <resolution outputDir="../../../InfoKml_Output/_500m" sampleLength1="0.1" sampleRatio="5" smoothingWidth="14" />
+    <resolution outputDir="../../../InfoKml_Output/_1km" sampleLength1="0.1" sampleRatio="10" smoothingWidth="24" />
+    <resolution outputDir="../../../InfoKml_Output/_2km" sampleLength1="0.1" sampleRatio="20" smoothingWidth="40" />
+    <resolution outputDir="../../../InfoKml_Output/_4km" sampleLength1="0.1" sampleRatio="40" smoothingWidth="64" />
   </resolutionList>
 
   <lookList>

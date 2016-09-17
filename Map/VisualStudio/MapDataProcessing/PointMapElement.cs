@@ -46,10 +46,5 @@ namespace MapDataProcessing
         {
             return 0;
         }
-
-        internal override int smoothParts()
-        {
-            return 0;
-        }
     }
 }

@@ -19,7 +19,6 @@ namespace MapDataProcessing
 
         abstract internal int addKmlFile(String path);
         abstract internal int formParts();
-        abstract internal int smoothParts();
 
         protected String Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }

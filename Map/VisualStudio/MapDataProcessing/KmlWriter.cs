@@ -14,12 +14,13 @@ namespace MapDataProcessing
     {
         static private CultureInfo _cultureInfo = new CultureInfo("en-US");
 
-        static internal int write(List<GeoPoint> pointList, KmlFileTypeEnum type, String fileName, XmlResolution resolution)
+        static internal int write(List<GeoPoint> pointList, KmlFileTypeEnum type, String subDir, String fileName, XmlResolution resolution)
         {
+            String dir = resolution.outputDir + "/" + subDir;
+            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
             if (type == KmlFileTypeEnum.LINE)
             {
-                if (!Directory.Exists(resolution.outputDir)) Directory.CreateDirectory(resolution.outputDir);
-
                 String templateResource = "MapDataProcessing.LineTemplate.kml";
                 Assembly assembly = Assembly.GetExecutingAssembly();
 
@@ -48,7 +49,7 @@ namespace MapDataProcessing
 
                 XmlText xmlText = document.CreateTextNode(coordinates.ToString());
                 coordinatesNode.AppendChild(xmlText);
-                document.Save(resolution.outputDir + "/" + fileName);
+                document.Save(dir + "/" + fileName);
             }
 
             return 0;

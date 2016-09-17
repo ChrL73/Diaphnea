@@ -29,7 +29,7 @@ namespace MapDataProcessing
             if (result == 0) result = createElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
             if (result == 0) result = formParts();
-            if (result == 0) result = smoothParts();
+            if (result == 0) result = PolygonPart.smoothAll(_mapData); 
 
             return result;
         }
@@ -163,16 +163,6 @@ namespace MapDataProcessing
             foreach (MapElement element in _elementDictionary.Values)
             {
                 if (element.formParts() != 0) return -1;
-            }
-
-            return 0;
-        }
-
-        private int smoothParts()
-        {
-            foreach (MapElement element in _elementDictionary.Values)
-            {
-                if (element.smoothParts() != 0) return -1;
             }
 
             return 0;

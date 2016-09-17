@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly KmlFileData _pointData1;
         private readonly KmlFileData _pointData2;
+        private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
 
         private PolygonPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {
@@ -51,5 +53,26 @@ namespace MapDataProcessing
         internal KmlFileData Line { get { return _lineData; } }
         internal KmlFileData Point1 { get { return _pointData1; } }
         internal KmlFileData Point2 { get { return _pointData2; } }
+
+        internal static int smoothAll(MapData mapData)
+        {
+            foreach (PolygonPart part in _partDictionary.Values)
+            {
+                List<GeoPoint> line = new List<GeoPoint>();
+                line.Add(part.Point1.PointList[0]);
+                line.AddRange(part.Line.PointList);
+                line.Add(part.Point2.PointList[0]);
+
+                foreach (XmlResolution resolution in mapData.XmlMapData.resolutionList)
+                {
+                    List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, part.Line.Path);
+                    if (smoothedLine == null) return -1;
+                    part._lineDictionary.Add(resolution, smoothedLine);
+                    KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution);
+                }
+            }
+
+            return 0;
+        }
     }
 }

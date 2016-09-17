@@ -14,7 +14,6 @@ namespace MapDataProcessing
 
         private readonly Dictionary<KmlFileData, List<OrientedPolygonPart>> _partDictionary = new Dictionary<KmlFileData, List<OrientedPolygonPart>>();
         private readonly List<OrientedPolygonPart> _sortedPartList = new List<OrientedPolygonPart>();
-        private readonly List<SmoothedElementPart> _smootedPartList = new List<SmoothedElementPart>();
 
         internal PolygonMapElement(String id, MapData mapData) : base(id, mapData) { }
 
@@ -148,21 +147,6 @@ namespace MapDataProcessing
             }
 
             return result;
-        }
-
-        internal override int smoothParts()
-        {
-            foreach(OrientedPolygonPart part in _sortedPartList)
-            {
-                SmoothedElementPart smoothedPart;
-
-                try { smoothedPart = new SmoothedElementPart(part, MapData); }
-                catch(Exception) { return -1; }
-
-                _smootedPartList.Add(smoothedPart);
-            }
-
-            return 0;
         }
     }
 }

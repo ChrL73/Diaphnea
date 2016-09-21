@@ -64,7 +64,7 @@ namespace MapDataProcessing
                     return -1;
                 }
 
-                PolygonPart part = PolygonPart.getPart(line, point1, point2);
+                PolygonLinePart part = PolygonLinePart.getPart(line, point1, point2);
                 if (part == null) return -1;
 
                 OrientedPolygonPart directPart = new OrientedPolygonPart(part, OrientationEnum.DIRECT);
@@ -114,6 +114,11 @@ namespace MapDataProcessing
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}' (Next part not found)", Id));
                 return -1;
+            }
+
+            foreach (KmlFileData polygon in _polygonKmlFileList)
+            {
+                PolygonPolygonPart part = PolygonPolygonPart.getPart(polygon);
             }
 
             return 0;

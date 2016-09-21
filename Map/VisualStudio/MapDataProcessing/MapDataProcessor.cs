@@ -29,7 +29,8 @@ namespace MapDataProcessing
             if (result == 0) result = createElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
             if (result == 0) result = formParts();
-            if (result == 0) result = PolygonPart.smoothAll(_mapData); 
+            if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
+            if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData); 
 
             return result;
         }

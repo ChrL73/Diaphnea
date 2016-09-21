@@ -8,10 +8,10 @@ namespace MapDataProcessing
 {
     class OrientedPolygonPart
     {
-        private readonly PolygonPart _part;
+        private readonly PolygonLinePart _part;
         private readonly OrientationEnum _orientation;
 
-        internal OrientedPolygonPart(PolygonPart part, OrientationEnum orientation)
+        internal OrientedPolygonPart(PolygonLinePart part, OrientationEnum orientation)
         {
             _part = part;
             _orientation = orientation;

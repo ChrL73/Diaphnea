@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace MapDataProcessing
 {
-    class PolygonPart
+    class PolygonLinePart
     {
-        private static Dictionary<KmlFileData, PolygonPart> _partDictionary = new Dictionary<KmlFileData, PolygonPart>();
+        private static Dictionary<KmlFileData, PolygonLinePart> _partDictionary = new Dictionary<KmlFileData, PolygonLinePart>();
 
-        internal static PolygonPart getPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
+        internal static PolygonLinePart getPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {
-            PolygonPart part;
+            PolygonLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
-                part = new PolygonPart(lineData, pointData1, pointData2);
+                part = new PolygonLinePart(lineData, pointData1, pointData2);
                 _partDictionary.Add(lineData, part);
             }
             else
@@ -41,9 +41,9 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly KmlFileData _pointData1;
         private readonly KmlFileData _pointData2;
-        private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
+        private readonly Dictionary<XmlResolution, List<GeoPoint>> _smoothedLineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
 
-        private PolygonPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
+        private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {
             _lineData = lineData;
             _pointData1 = pointData1;
@@ -56,7 +56,7 @@ namespace MapDataProcessing
 
         internal static int smoothAll(MapData mapData)
         {
-            foreach (PolygonPart part in _partDictionary.Values)
+            foreach (PolygonLinePart part in _partDictionary.Values)
             {
                 List<GeoPoint> line = new List<GeoPoint>();
                 line.Add(part.Point1.PointList[0]);
@@ -67,8 +67,8 @@ namespace MapDataProcessing
                 {
                     List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, part.Line.Path);
                     if (smoothedLine == null) return -1;
-                    part._lineDictionary.Add(resolution, smoothedLine);
-                    KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution);
+                    part._smoothedLineDictionary.Add(resolution, smoothedLine);
+                    if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution) != 0) return -1;
                 }
             }
 

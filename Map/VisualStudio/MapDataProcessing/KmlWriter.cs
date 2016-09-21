@@ -19,9 +19,18 @@ namespace MapDataProcessing
             String dir = resolution.outputDir + "/" + subDir;
             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
-            if (type == KmlFileTypeEnum.LINE)
+            String templateResource = null;
+            if (type == KmlFileTypeEnum.LINE) templateResource = "MapDataProcessing.LineTemplate.kml";
+            else if (type == KmlFileTypeEnum.POLYGON) templateResource = "MapDataProcessing.PolygonTemplate.kml";
+            else if (type == KmlFileTypeEnum.POINT) templateResource = "MapDataProcessing.PointTemplate.kml";
+
+            if (templateResource == null)
             {
-                String templateResource = "MapDataProcessing.LineTemplate.kml";
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not find KML template for type '{0}' to write file '{1}'", type, fileName));
+                return -1;
+            }
+            else
+            {
                 Assembly assembly = Assembly.GetExecutingAssembly();
 
                 XmlDocument document = new XmlDocument();

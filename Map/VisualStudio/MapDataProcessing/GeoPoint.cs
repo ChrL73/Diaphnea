@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,6 +60,20 @@ namespace MapDataProcessing
             double dz = p1._z - p2._z;
 
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
+        }
+
+        internal BsonDocument getBsonDocument()
+        {
+            BsonDocument pointDocument = new BsonDocument()
+            {
+                { "x", _x},
+                { "y", _y},
+                { "z", _z},
+                { "lo", _longitude},
+                { "la", _latitude},
+            };
+
+            return pointDocument;
         }
     }
 }

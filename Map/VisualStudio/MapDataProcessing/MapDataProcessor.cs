@@ -7,6 +7,8 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.IO;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace MapDataProcessing
 {
@@ -15,6 +17,7 @@ namespace MapDataProcessing
         private readonly String _configFile;
         private MapData _mapData;
         private readonly Dictionary<String, MapElement> _elementDictionary = new Dictionary<string, MapElement>();
+        private readonly Dictionary<String, int> _fileNameDictionary = new Dictionary<string, int>();
 
         internal MapDataProcessor(String configFile)
         {
@@ -30,7 +33,8 @@ namespace MapDataProcessing
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
             if (result == 0) result = formParts();
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
-            if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData); 
+            if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
+            if (result == 0) result = fillDatabase();
 
             return result;
         }
@@ -133,7 +137,6 @@ namespace MapDataProcessing
             }
             else
             {
-                String fileName = Path.GetFileName(path);
                 if (String.Equals(Path.GetExtension(path), ".kml", StringComparison.OrdinalIgnoreCase))
                 {
                     if (addKmlFile(path) != 0) return -1;
@@ -146,6 +149,13 @@ namespace MapDataProcessing
         private int addKmlFile(String path)
         {
             String name = Path.GetFileNameWithoutExtension(path);
+            if (_fileNameDictionary.ContainsKey(name))
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Several KMl files have the same name '{0}'", name));
+                return -1;
+            }
+
+            _fileNameDictionary.Add(name, 0);
             String[] idList = name.Split('_');
             foreach (String id in idList)
             {
@@ -165,6 +175,21 @@ namespace MapDataProcessing
             {
                 if (element.formParts() != 0) return -1;
             }
+
+            return 0;
+        }
+
+        private int fillDatabase()
+        {
+            MongoClient mongoClient = new MongoClient();
+            IMongoDatabase database = mongoClient.GetDatabase(_mapData.XmlMapData.parameters.databaseName);
+
+            FilterDefinition<BsonDocument> filter = new BsonDocument();
+            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("point_lists");
+            levelCollection.DeleteMany(filter);
+
+            if (PolygonLinePart.fillDatabase(database) != 0) return -1;
+            if (PolygonPolygonPart.fillDatabase(database) != 0) return -1;
 
             return 0;
         }

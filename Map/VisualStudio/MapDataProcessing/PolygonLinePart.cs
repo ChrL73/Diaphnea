@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,7 +43,7 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly KmlFileData _pointData1;
         private readonly KmlFileData _pointData2;
-        private readonly Dictionary<XmlResolution, List<GeoPoint>> _smoothedLineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
+        private readonly Dictionary<XmlResolution, DatabasePointList> _smoothedLineDictionary = new Dictionary<XmlResolution, DatabasePointList>();
 
         private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {
@@ -67,8 +69,41 @@ namespace MapDataProcessing
                 {
                     List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, part.Line.Path);
                     if (smoothedLine == null) return -1;
-                    part._smoothedLineDictionary.Add(resolution, smoothedLine);
+                    part._smoothedLineDictionary.Add(resolution, new DatabasePointList(smoothedLine));
                     if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution) != 0) return -1;
+                }
+            }
+
+            return 0;
+        }
+
+        internal static int fillDatabase(IMongoDatabase database)
+        {
+            IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
+
+            foreach (PolygonLinePart part in _partDictionary.Values)
+            {
+                foreach (KeyValuePair<XmlResolution, DatabasePointList> pair in part._smoothedLineDictionary)
+                {
+                    DatabasePointList list = pair.Value;
+                    double resolution = pair.Key.sampleLength1 * Double.Parse(pair.Key.sampleRatio);
+
+                    BsonArray pointArray = new BsonArray();
+                    foreach (GeoPoint point in list.PointList)
+                    {
+                        pointArray.Add(point.getBsonDocument());
+                    }
+
+                    BsonDocument pointListDocument = new BsonDocument()
+                    {
+                        { "item", Path.GetFileNameWithoutExtension(part.Line.Path) },
+                        { "resolution", resolution },
+                        { "count", list.PointList.Count },
+                        { "points", pointArray }
+                    };
+
+                    pointListCollection.InsertOne(pointListDocument);
+                    list.Id = pointListDocument.GetValue("_id");
                 }
             }
 

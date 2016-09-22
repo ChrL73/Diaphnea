@@ -35,6 +35,13 @@ namespace MapDataProcessing
 
         internal KmlFileData Polygon { get { return _polygonData; } }
 
+        internal List<GeoPoint> getPointList(XmlResolution resolution)
+        {
+            DatabasePointList list;
+            if (_smoothedPolygonDictionary.TryGetValue(resolution, out list)) return list.PointList;
+            return null;
+        }
+
         internal static int smoothAll(MapData mapData)
         {
             foreach (PolygonPolygonPart part in _partDictionary.Values)

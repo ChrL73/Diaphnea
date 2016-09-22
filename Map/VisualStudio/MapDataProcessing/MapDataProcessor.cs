@@ -34,6 +34,7 @@ namespace MapDataProcessing
             if (result == 0) result = formParts();
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
             if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
+            if (result == 0) result = formContours();
             if (result == 0) result = fillDatabase();
 
             return result;
@@ -174,6 +175,16 @@ namespace MapDataProcessing
             foreach (MapElement element in _elementDictionary.Values)
             {
                 if (element.formParts() != 0) return -1;
+            }
+
+            return 0;
+        }
+
+        private int formContours()
+        {
+            foreach (PolygonMapElement element in _elementDictionary.Values.OfType<PolygonMapElement>())
+            {
+                if (element.formContours() != 0) return -1;
             }
 
             return 0;

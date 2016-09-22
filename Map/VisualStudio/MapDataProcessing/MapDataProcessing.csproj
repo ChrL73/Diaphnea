@@ -66,7 +66,7 @@
     <Compile Include="MapElement.cs" />
     <Compile Include="MessageLogger.cs" />
     <Compile Include="OrientationEnum.cs" />
-    <Compile Include="OrientedPolygonPart.cs" />
+    <Compile Include="OrientedPolygonLinePart.cs" />
     <Compile Include="PointMapElement.cs" />
     <Compile Include="PolygonMapElement.cs" />
     <Compile Include="PolygonLinePart.cs" />

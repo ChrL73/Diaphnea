@@ -195,12 +195,12 @@ namespace MapDataProcessing
             MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_mapData.XmlMapData.parameters.databaseName);
 
-            FilterDefinition<BsonDocument> filter = new BsonDocument();
+            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("map", _mapData.XmlMapData.parameters.mapId);
             IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("point_lists");
             levelCollection.DeleteMany(filter);
 
-            if (PolygonLinePart.fillDatabase(database) != 0) return -1;
-            if (PolygonPolygonPart.fillDatabase(database) != 0) return -1;
+            if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
+            if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;
 
             return 0;
         }

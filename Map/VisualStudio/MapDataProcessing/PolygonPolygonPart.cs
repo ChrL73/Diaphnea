@@ -60,7 +60,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal static int fillDatabase(IMongoDatabase database)
+        internal static int fillDatabase(IMongoDatabase database, MapData mapData)
         {
             IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
 
@@ -79,6 +79,7 @@ namespace MapDataProcessing
 
                     BsonDocument pointListDocument = new BsonDocument()
                     {
+                        { "map", mapData.XmlMapData.parameters.mapId },
                         { "item", Path.GetFileNameWithoutExtension(part.Polygon.Path) },
                         { "resolution", resolution },
                         { "count", list.PointList.Count },

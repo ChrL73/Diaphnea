@@ -80,6 +80,8 @@ public partial class XmlMapData {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlParameters {
     
+    private string mapIdField;
+    
     private string logFileNameField;
     
     private XmlLogLevelEnum fileLogLevelField;
@@ -91,6 +93,17 @@ public partial class XmlParameters {
     private string kmlDirField;
     
     private double maxConnectionDistanceInKmField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string mapId {
+        get {
+            return this.mapIdField;
+        }
+        set {
+            this.mapIdField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]

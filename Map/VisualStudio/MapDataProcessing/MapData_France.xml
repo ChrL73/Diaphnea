@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
-  <parameters logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
+  <parameters mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
               kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0"/>
     
   <resolutionList>
-    <resolution outputDir="../../../InfoKml_Output/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
-    <resolution outputDir="../../../InfoKml_Output/_500m" sampleLength1="0.1" sampleRatio="5" smoothingWidth="14" />
-    <resolution outputDir="../../../InfoKml_Output/_1km" sampleLength1="0.1" sampleRatio="10" smoothingWidth="24" />
-    <resolution outputDir="../../../InfoKml_Output/_2km" sampleLength1="0.1" sampleRatio="20" smoothingWidth="40" />
-    <resolution outputDir="../../../InfoKml_Output/_4km" sampleLength1="0.1" sampleRatio="40" smoothingWidth="64" />
+    <resolution outputDir="../../../InfoKml_Output/France/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
+    <resolution outputDir="../../../InfoKml_Output/France/_500m" sampleLength1="0.1" sampleRatio="5" smoothingWidth="14" />
+    <resolution outputDir="../../../InfoKml_Output/France/_1km" sampleLength1="0.1" sampleRatio="10" smoothingWidth="24" />
+    <resolution outputDir="../../../InfoKml_Output/France/_2km" sampleLength1="0.1" sampleRatio="20" smoothingWidth="40" />
+    <resolution outputDir="../../../InfoKml_Output/France/_4km" sampleLength1="0.1" sampleRatio="40" smoothingWidth="64" />
   </resolutionList>
 
   <lookList>

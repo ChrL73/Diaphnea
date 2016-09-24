@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Komo_KomoMandah.kml</name>
+	<Style id="s">
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>2</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="s0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s1">
+		<ListStyle>
+		</ListStyle>
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>2</width>
+		</LineStyle>
+		<gx:IconStackStyle>
+		</gx:IconStackStyle>
+	</Style>
+	<Placemark>
+		<name>Komo_KomoMandah</name>
+		<styleUrl>#s0</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				9.818627226462999,0.1959611528501662,0 9.825254016988801,0.2241044884435674,0 9.839494461794997,0.2512331697244472,0 9.842240933333212,0.286944384446776,0 9.862697663258984,0.3052730762755431,0 9.863441301193074,0.3060749014075095,0 9.867410370948536,0.3165600348314901,0 9.889509743332301,0.3450155061503698,0 9.891835088829836,0.3564698296836456,0 9.88625608365216,0.3634983361390901,0 9.888520751833624,0.3827667220617036,0 9.90304537149483,0.4192333821585311,0 9.923017353298159,0.4557652669424109,0 9.932180839696137,0.4756907627097133,0 9.938236223038468,0.4832083829094134,0 9.937465400333503,0.4932698481542603,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

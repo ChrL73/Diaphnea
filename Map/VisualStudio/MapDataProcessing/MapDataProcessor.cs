@@ -196,8 +196,26 @@ namespace MapDataProcessing
             IMongoDatabase database = mongoClient.GetDatabase(_mapData.XmlMapData.parameters.databaseName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("map", _mapData.XmlMapData.parameters.mapId);
-            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("point_lists");
-            levelCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
+            pointListCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> resolutionCollection = database.GetCollection<BsonDocument>("resolutions");
+            resolutionCollection.DeleteMany(filter);
+
+            int i, n = _mapData.XmlMapData.resolutionList.Length;
+            for (i = 0; i < n; ++i)
+            {
+                XmlResolution resolution = _mapData.XmlMapData.resolutionList[i];
+                double sample_length = resolution.sampleLength1 * Double.Parse(resolution.sampleRatio);
+
+                BsonDocument resolutionDocument = new BsonDocument()
+                {
+                    { "map", _mapData.XmlMapData.parameters.mapId },
+                    { "index", i},
+                    { "sample_length", sample_length}
+                };
+
+                resolutionCollection.InsertOne(resolutionDocument);
+            }
 
             if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
             if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;

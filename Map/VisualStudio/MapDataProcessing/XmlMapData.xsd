@@ -87,17 +87,17 @@
   </xsd:complexType>
   <xsd:complexType name="XmlPolygonElementList">
     <xsd:sequence>
-      <xsd:element name="polygonElement" type="XmlPolygonElement" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="polygonElement" type="XmlPolygonElement" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlLineElementList">
     <xsd:sequence>
-      <xsd:element name="lineElement" type="XmlLineElement" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="lineElement" type="XmlLineElement" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlPointElementList">
     <xsd:sequence>
-      <xsd:element name="pointElement" type="XmlPointElement" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="pointElement" type="XmlPointElement" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlPolygonElement">

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
+
+  <parameters mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="5.0"/>
+
+  <resolutionList>
+    <resolution outputDir="../../../InfoKml_Output/Gabon/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
+    <resolution outputDir="../../../InfoKml_Output/Gabon/_500m" sampleLength1="0.1" sampleRatio="5" smoothingWidth="14" />
+    <resolution outputDir="../../../InfoKml_Output/Gabon/_1km" sampleLength1="0.1" sampleRatio="10" smoothingWidth="24" />
+    <resolution outputDir="../../../InfoKml_Output/Gabon/_2km" sampleLength1="0.1" sampleRatio="20" smoothingWidth="40" />
+    <resolution outputDir="../../../InfoKml_Output/Gabon/_4km" sampleLength1="0.1" sampleRatio="40" smoothingWidth="64" />
+  </resolutionList>
+
+  <lookList>
+    <polygonLookList>
+      <polygonLook id="pl_Gabon"/>
+      <polygonLook id="pl_Province"/>
+      <polygonLook id="pl_Departement"/>
+    </polygonLookList>
+    <lineLookList>
+      <lineLook id="ll_FleuveRiviere"/>
+    </lineLookList>
+    <pointLookList>
+      <pointLook id="tl_ChefLieuProvince"/>
+      <pointLook id="tl_ChefLieuDepartement"/>
+      <pointLook id="tl_Ville"/>
+    </pointLookList>
+  </lookList>
+
+  <elementList>
+    <polygonElementList>
+      <!--<polygonElement id="e_Gabon" name="" look="pl_Gabon"/>-->
+      <!--Province-->
+      <!--<polygonElement id="e_Estuaire" name="Estuaire (1)" shortName="1" look="pl_Province"/>-->
+      <!--Départements-->
+      <polygonElement id="e_Noya" name="Noya" look="pl_Departement"/>
+      <polygonElement id="e_KomoMondah" name="Noya" look="pl_Departement"/>
+      <polygonElement id="e_LibrevilleDepartement" name="" look="pl_Departement"/>
+    </polygonElementList>
+    <lineElementList/>
+    <pointElementList/>
+  </elementList>
+
+</mapData>
+

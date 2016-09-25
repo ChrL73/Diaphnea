@@ -32,11 +32,12 @@
     <polygonElementList>
       <!--<polygonElement id="e_Gabon" name="" look="pl_Gabon"/>-->
       <!--Province-->
-      <!--<polygonElement id="e_Estuaire" name="Estuaire (1)" shortName="1" look="pl_Province"/>-->
+      <polygonElement id="e_Estuaire" name="Estuaire (1)" shortName="1" look="pl_Province"/>
       <!--Départements-->
       <polygonElement id="e_Noya" name="Noya" look="pl_Departement"/>
-      <polygonElement id="e_KomoMondah" name="Noya" look="pl_Departement"/>
+      <!--<polygonElement id="e_KomoMondah" name="Noya" look="pl_Departement"/>-->
       <polygonElement id="e_LibrevilleDepartement" name="" look="pl_Departement"/>
+      <polygonElement id="e_Komo" name="" look="pl_Departement"/>
     </polygonElementList>
     <lineElementList/>
     <pointElementList/>

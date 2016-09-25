@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            9.758315,-.339629
+            9.734956,-.367244
+            9.721549,-.371155
+            9.676421,-.36872
+            9.601008,-.39884
+            9.564956,-.417076
+            9.563756,-.436218
+            9.572129,-.460763
+            9.574528,-.492742
+            9.580422,-.532429
+            9.584497,-.553675
+            9.580386,-.561509
+         </coordinates>
+      </LineString>
+   </Placemark>
+</kml>

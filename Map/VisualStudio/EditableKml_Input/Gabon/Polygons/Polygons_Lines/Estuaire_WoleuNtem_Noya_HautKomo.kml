@@ -1,44 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>Estuaire_WoleuNtem_Noya_HautKomo.kml</name>
-	<Style id="s">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-	</Style>
-	<StyleMap id="s0">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#s1</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#s</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="s1">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-		<gx:IconStackStyle>
-		</gx:IconStackStyle>
-	</Style>
-	<Placemark>
-		<name>Estuaire_WoleuNtem_Noya_HautKomo.kml</name>
-		<styleUrl>#s0</styleUrl>
-		<LineString>
-			<tessellate>1</tessellate>
-			<coordinates>
-				10.42294337186891,0.9880126091039414,0 10.41977535599144,0.837754164977597,0 10.372826,0.7822490000000001,0 10.358702,0.7195010000000001,0 10.362311,0.706303,0 10.363143,0.699078,0 10.367828,0.693717,0 10.380355,0.675681,0 10.385291,0.673751,0 10.389681,0.669051,0 10.390561,0.66522,0 10.388467,0.658113,0 10.388994,0.656226,0 10.398222,0.649186,0 
-			</coordinates>
-		</LineString>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            10.422943,.988013
+            10.419775,.837754
+            10.372826,.782249
+            10.358702,.719501
+            10.362311,.706303
+            10.363143,.699078
+            10.367828,.693717
+            10.380355,.675681
+            10.385291,.673751
+            10.389681,.669051
+            10.390561,.66522
+            10.388467,.658113
+            10.388994,.656226
+            10.398222,.649186
+         </coordinates>
+      </LineString>
+   </Placemark>
 </kml>

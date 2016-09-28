@@ -13,9 +13,10 @@ namespace MapDataProcessing
         private readonly List<KmlFileData> _polygonKmlFileList = new List<KmlFileData>();
 
         private readonly Dictionary<KmlFileData, List<OrientedPolygonLinePart>> _linePartDictionary = new Dictionary<KmlFileData, List<OrientedPolygonLinePart>>();
-        private readonly List<OrientedPolygonLinePart> _sortedLinePartList = new List<OrientedPolygonLinePart>();
+        private readonly List<OrientedLineList> _compoundPolygonList = new List<OrientedLineList>();
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
         private readonly Dictionary<XmlResolution, DatabasePointList> _contourDictionary = new Dictionary<XmlResolution, DatabasePointList>();
+        private readonly Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>> _subPolygonDictionary = new Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>>();
 
         internal PolygonMapElement(String id, MapData mapData) : base(id, mapData) { }
 
@@ -51,7 +52,6 @@ namespace MapDataProcessing
                 return -1;
             }
 
-            OrientedPolygonLinePart startPart = null;
             double dMaxInKm = MapData.XmlMapData.parameters.maxConnectionDistanceInKm;
 
             foreach (KmlFileData line in _lineKmlFileList)
@@ -77,7 +77,6 @@ namespace MapDataProcessing
 
                 OrientedPolygonLinePart directPart = new OrientedPolygonLinePart(part, OrientationEnum.DIRECT);
                 OrientedPolygonLinePart inversePart = new OrientedPolygonLinePart(part, OrientationEnum.INVERSE);
-                if (startPart == null) startPart = directPart;
 
                 if (!_linePartDictionary.ContainsKey(point1)) _linePartDictionary.Add(point1, new List<OrientedPolygonLinePart>());
                 _linePartDictionary[point1].Add(directPart);
@@ -103,74 +102,37 @@ namespace MapDataProcessing
                 }
             }
 
-            OrientedPolygonLinePart nextPart = startPart;
-            while (true)
+            while (_linePartDictionary.Count != 0)
             {
-                _sortedLinePartList.Add(nextPart);
-                nextPart = getNextPart(nextPart);
-                if (nextPart == startPart || nextPart == null) break;
-            }
+                OrientedPolygonLinePart startPart = _linePartDictionary.FirstOrDefault().Value[0];
+                OrientedPolygonLinePart nextPart = startPart;
 
-            if (_sortedLinePartList.Count != _lineKmlFileList.Count)
-            {
-                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}': {1} lines in element, {2} parts sorted",
-                                                                               Id, _lineKmlFileList.Count, _sortedLinePartList.Count));
-                return -1;
-            }
+                OrientedLineList orientedLineList = new OrientedLineList();
+                List<KmlFileData> keysToRemove = new List<KmlFileData>();
 
-            if (nextPart == null)
-            {
-                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}' (Next part not found)", Id));
-                return -1;
+                while (true)
+                {
+                    orientedLineList.LineList.Add(nextPart);
+                    keysToRemove.Add(nextPart.Point1);
+                    nextPart = getNextPart(nextPart);
+                    if (nextPart == startPart || nextPart == null) break;
+                }
+
+                if (nextPart == null)
+                {
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Fail to sort parts for element '{0}' (Next part not found)", Id));
+                    return -1;
+                }
+
+                foreach (KmlFileData key in keysToRemove) _linePartDictionary.Remove(key);
+
+                _compoundPolygonList.Add(orientedLineList);
             }
 
             foreach (KmlFileData polygon in _polygonKmlFileList)
             {
                 PolygonPolygonPart part = PolygonPolygonPart.getPart(polygon);
                 _polygonPartList.Add(part);
-            }
-
-            return 0;
-        }
-
-        internal int formContours()
-        {
-            foreach (XmlResolution resolution in MapData.XmlMapData.resolutionList)
-            {
-                List<List<GeoPoint>> polygonList = new List<List<GeoPoint>>();
-
-                if (_sortedLinePartList.Count != 0)
-                {
-                    List<GeoPoint> list = new List<GeoPoint>();
-                    foreach (OrientedPolygonLinePart part in _sortedLinePartList)
-                    {
-                        List<GeoPoint> subList = part.getPointList(resolution);
-                        list.AddRange(subList);
-                        list.RemoveAt(list.Count - 1);
-                    }
-
-                    polygonList.Add(list);
-                }
-
-                foreach (PolygonPolygonPart part in _polygonPartList)
-                {
-                    List<GeoPoint> list = new List<GeoPoint>(part.getPointList(resolution));
-                    list.RemoveAt(list.Count - 1);
-                    polygonList.Add(list);
-                }
-
-                List<GeoPoint> contour = polygonList[0];
-                GeoPoint p = contour[contour.Count - 1];
-                int i, n = polygonList.Count;
-                for (i = 1; i < n; ++i)
-                {
-                    contour.AddRange(polygonList[i]);
-                    contour.Add(polygonList[i][0]);
-                    contour.Add(p);
-                }
-                contour.Add(contour[0]);
-
-                _contourDictionary.Add(resolution, new DatabasePointList(contour));
             }
 
             return 0;
@@ -204,6 +166,64 @@ namespace MapDataProcessing
             }
 
             return result;
+        }
+
+        internal int formContours()
+        {
+            foreach (XmlResolution resolution in MapData.XmlMapData.resolutionList)
+            {
+                List<List<GeoPoint>> polygonList = new List<List<GeoPoint>>();
+                SortedDictionary<double, List<GeoPoint>> polygonSortedDictionary = new SortedDictionary<double, List<GeoPoint>>();
+
+                foreach (OrientedLineList lineList in _compoundPolygonList)
+                {
+                    List<GeoPoint> list = new List<GeoPoint>();
+                    foreach (OrientedPolygonLinePart part in lineList.LineList)
+                    {
+                        List<GeoPoint> subList = part.getPointList(resolution);
+                        list.AddRange(subList);
+                        list.RemoveAt(list.Count - 1);
+                    }
+
+                    polygonList.Add(list);
+
+                    List<GeoPoint> list2 = new List<GeoPoint>(list);
+                    list2.Add(list2[0]);
+                    polygonSortedDictionary.Add(-Smoother.getLineLength(list2), list2);
+                }
+
+                foreach (PolygonPolygonPart part in _polygonPartList)
+                {
+                    List<GeoPoint> list = new List<GeoPoint>(part.getPointList(resolution));
+                    polygonSortedDictionary.Add(-Smoother.getLineLength(list), new List<GeoPoint>(list));
+                    list.RemoveAt(list.Count - 1);
+                    polygonList.Add(list);
+                }
+
+                List<GeoPoint> contour = polygonList[0];
+                GeoPoint p = contour[contour.Count - 1];
+                int i, n = polygonList.Count;
+                for (i = 1; i < n; ++i)
+                {
+                    contour.AddRange(polygonList[i]);
+                    contour.Add(polygonList[i][0]);
+                    contour.Add(p);
+                }
+                contour.Add(contour[0]);
+
+                _contourDictionary.Add(resolution, new DatabasePointList(contour));
+                _subPolygonDictionary.Add(resolution, polygonSortedDictionary);
+
+                int index = 1;
+                foreach (List<GeoPoint> pointList in polygonSortedDictionary.Values)
+                {
+                    if (polygonSortedDictionary.Count > 1) KmlWriter.write(pointList, KmlFileTypeEnum.POLYGON, "Polygons", String.Format("{0}_#{1}.kml", Id, index), resolution);
+                    else KmlWriter.write(pointList, KmlFileTypeEnum.POLYGON, "Polygons", String.Format("{0}.kml", Id), resolution);
+                    ++index;
+                }
+            }
+
+            return 0;
         }
     }
 }

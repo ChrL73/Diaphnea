@@ -30,6 +30,28 @@ namespace MapDataProcessing
             return smoothedPolygon;
         }
 
+        static internal double getLineLength(List<GeoPoint> line)
+        {
+            int pointCount = line.Count;
+            if (pointCount < 2) return 0.0;
+
+            int i;
+            double length = 0.0;
+
+            for (i = 1; i < pointCount; ++i)
+            {
+                if (i != 0)
+                {
+                    double dx = line[i].X - line[i - 1].X;
+                    double dy = line[i].Y - line[i - 1].Y;
+                    double dz = line[i].Z - line[i - 1].Z;
+                    length += Math.Sqrt(dx * dx + dy * dy + dz * dz);
+                }
+            }
+
+            return length;
+        }
+
         static private List<GeoPoint> getSampledLine(List<GeoPoint> originalLine, XmlResolution resolution, int minMultiplicity, String originalLinePath)
         {
             List<double> lengthList = new List<double>();

@@ -29,8 +29,10 @@
   <typeDefinitions>
     <elementTypeList>
       <elementType id="et_Province" />
+      <elementType id="et_Departement" />
       <elementType id="et_Ville" />
       <elementType id="et_FleuveRiviere" />
+      <elementType id="et_Pays" />
     </elementTypeList>
     <attributeTypeList>
       <attributeType id="at_Nom1" canBeQuestion="true" />
@@ -45,15 +47,19 @@
     </numericalAttributeTypeList>
     <relation11TypeList>
       <relation11Type id="r11_Province_ChefLieu" startType="et_Province" endType="et_Ville" />
+      <relation11Type id="r11_Departement_ChefLieu" startType="et_Departement" endType="et_Ville" />
     </relation11TypeList>
     <relation1NTypeList>
-      <relation1NType id="r1N_Province_Villes" startType="et_Province" endType="et_Ville"/>
+      <relation1NType id="r1N_Province_Departements" startType="et_Province" endType="et_Departement" />
+      <relation1NType id="r1N_Departement_Villes" startType="et_Departement" endType="et_Ville"/>
       <relation1NType id="r1N_Riviere_Villes" startType="et_FleuveRiviere" endType="et_Ville" />
       <relation1NType id="r1N_Riviere_Affluents" startType="et_FleuveRiviere" endType="et_FleuveRiviere" />
     </relation1NTypeList>
     <relationNNTypeList>
-      <relationNNType id="rNN_Riviere_Provinces" startType="et_FleuveRiviere" endType="et_Province" />
+      <relationNNType id="rNN_Riviere_Departements" startType="et_FleuveRiviere" endType="et_Departement" />
       <relationNNType id="rNN_Province_ProvincesLimitrophes" startType="et_Province" endType="et_Province" checkSymetry="YES_ERROR" />
+      <relationNNType id="rNN_Departement_DepartementsLimitrophes" startType="et_Departement" endType="et_Departement" checkSymetry="YES_ERROR" />
+      <relationNNType id="rNN_Pays_DepartementsLimitrophes" startType="et_Pays" endType="et_Departement" />
     </relationNNTypeList>
   </typeDefinitions>
 

@@ -65,6 +65,12 @@
           <name language="en" text="Komo-Mondah"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_KomoOcean" look="pl_Departement">
+        <name>
+          <name language="fr" text="Komo-Océan"/>
+          <name language="en" text="Komo-Océan"/>
+        </name>
+      </polygonElement>
       <polygonElement id="e_LibrevilleDepartement" look="pl_Departement">
         <name>
           <name language="fr" text="Libreville"/>

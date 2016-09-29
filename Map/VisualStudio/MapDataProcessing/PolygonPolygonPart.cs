@@ -26,7 +26,7 @@ namespace MapDataProcessing
         }
 
         private readonly KmlFileData _polygonData;
-        private readonly Dictionary<XmlResolution, DatabasePointList> _smoothedPolygonDictionary = new Dictionary<XmlResolution, DatabasePointList>();
+        private readonly DatabaseMapItem _smoothedPolygonMapItem = new DatabaseMapItem();
 
         private PolygonPolygonPart(KmlFileData polygonData)
         {
@@ -37,9 +37,7 @@ namespace MapDataProcessing
 
         internal List<GeoPoint> getPointList(XmlResolution resolution)
         {
-            DatabasePointList list;
-            if (_smoothedPolygonDictionary.TryGetValue(resolution, out list)) return list.PointList;
-            return null;
+            return _smoothedPolygonMapItem.getPointList(resolution);
         }
 
         internal static int smoothAll(MapData mapData)
@@ -52,7 +50,7 @@ namespace MapDataProcessing
                 {
                     List<GeoPoint> smoothedPolygon = Smoother.smoothPolygon(line, resolution, part.Polygon.Path);
                     if (smoothedPolygon == null) return -1;
-                    part._smoothedPolygonDictionary.Add(resolution, new DatabasePointList(smoothedPolygon));
+                    part._smoothedPolygonMapItem.addLine(resolution, smoothedPolygon);
                     KmlWriter.write(smoothedPolygon, KmlFileTypeEnum.POLYGON, "Polygons_Polygons", Path.GetFileName(part.Polygon.Path), resolution);
                 }
             }
@@ -62,33 +60,9 @@ namespace MapDataProcessing
 
         internal static int fillDatabase(IMongoDatabase database, MapData mapData)
         {
-            IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
-
             foreach (PolygonPolygonPart part in _partDictionary.Values)
             {
-                foreach (KeyValuePair<XmlResolution, DatabasePointList> pair in part._smoothedPolygonDictionary)
-                {
-                    DatabasePointList list = pair.Value;
-                    double resolution = pair.Key.sampleLength1 * Double.Parse(pair.Key.sampleRatio);
-
-                    BsonArray pointArray = new BsonArray();
-                    foreach (GeoPoint point in list.PointList)
-                    {
-                        pointArray.Add(point.getBsonDocument());
-                    }
-
-                    BsonDocument pointListDocument = new BsonDocument()
-                    {
-                        { "map", mapData.XmlMapData.parameters.mapId },
-                        { "item", Path.GetFileNameWithoutExtension(part.Polygon.Path) },
-                        { "resolution", resolution },
-                        { "count", list.PointList.Count },
-                        { "points", pointArray }
-                    };
-
-                    pointListCollection.InsertOne(pointListDocument);
-                    list.Id = pointListDocument.GetValue("_id");
-                }
+                if (part._smoothedPolygonMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part.Polygon.Path)) != 0) return -1;
             }
 
             return 0;

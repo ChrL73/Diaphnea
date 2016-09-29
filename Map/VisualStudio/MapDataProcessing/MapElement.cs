@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace MapDataProcessing
 
         abstract internal int addKmlFile(String path);
         abstract internal int formParts();
+        abstract internal int fillDatabase(IMongoDatabase database);
 
         protected String Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }

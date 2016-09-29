@@ -80,6 +80,8 @@ public partial class XmlMapData {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlParameters {
     
+    private XmlLanguage[] languageListField;
+    
     private string mapIdField;
     
     private string logFileNameField;
@@ -93,6 +95,17 @@ public partial class XmlParameters {
     private string kmlDirField;
     
     private double maxConnectionDistanceInKmField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("language", IsNullable=false)]
+    public XmlLanguage[] languageList {
+        get {
+            return this.languageListField;
+        }
+        set {
+            this.languageListField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
@@ -175,39 +188,17 @@ public partial class XmlParameters {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
-public enum XmlLogLevelEnum {
-    
-    /// <remarks/>
-    NO_LOG,
-    
-    /// <remarks/>
-    ERROR,
-    
-    /// <remarks/>
-    WARNING,
-    
-    /// <remarks/>
-    MESSAGE,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlPointElement {
+public partial class XmlLanguage {
     
-    private string idField;
+    private XmlLanguageId idField;
     
     private string nameField;
     
-    private string shortNameField;
-    
-    private string lookField;
-    
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-    public string id {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageId id {
         get {
             return this.idField;
         }
@@ -226,15 +217,65 @@ public partial class XmlPointElement {
             this.nameField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLanguageId {
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string shortName {
+    fr,
+    
+    /// <remarks/>
+    en,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlPointElement {
+    
+    private XmlName[] nameField;
+    
+    private XmlName[] shortNameField;
+    
+    private string idField;
+    
+    private string lookField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] shortName {
         get {
             return this.shortNameField;
         }
         set {
             this.shortNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
         }
     }
     
@@ -255,30 +296,65 @@ public partial class XmlPointElement {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlLineElement {
+public partial class XmlName {
     
-    private string idField;
+    private XmlLanguageIdRef languageField;
     
-    private string nameField;
-    
-    private string shortNameField;
-    
-    private string lookField;
+    private string textField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-    public string id {
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageIdRef language {
         get {
-            return this.idField;
+            return this.languageField;
         }
         set {
-            this.idField = value;
+            this.languageField = value;
         }
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    public string text {
+        get {
+            return this.textField;
+        }
+        set {
+            this.textField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLanguageIdRef {
+    
+    /// <remarks/>
+    fr,
+    
+    /// <remarks/>
+    en,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlLineElement {
+    
+    private XmlName[] nameField;
+    
+    private XmlName[] shortNameField;
+    
+    private string idField;
+    
+    private string lookField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
         get {
             return this.nameField;
         }
@@ -288,13 +364,24 @@ public partial class XmlLineElement {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string shortName {
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] shortName {
         get {
             return this.shortNameField;
         }
         set {
             this.shortNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
         }
     }
     
@@ -317,28 +404,17 @@ public partial class XmlLineElement {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlPolygonElement {
     
+    private XmlName[] nameField;
+    
+    private XmlName[] shortNameField;
+    
     private string idField;
-    
-    private string nameField;
-    
-    private string shortNameField;
     
     private string lookField;
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-    public string id {
-        get {
-            return this.idField;
-        }
-        set {
-            this.idField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
         get {
             return this.nameField;
         }
@@ -348,13 +424,24 @@ public partial class XmlPolygonElement {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string shortName {
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] shortName {
         get {
             return this.shortNameField;
         }
         set {
             this.shortNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
         }
     }
     
@@ -585,4 +672,22 @@ public partial class XmlResolution {
             this.smoothingWidthField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLogLevelEnum {
+    
+    /// <remarks/>
+    NO_LOG,
+    
+    /// <remarks/>
+    ERROR,
+    
+    /// <remarks/>
+    WARNING,
+    
+    /// <remarks/>
+    MESSAGE,
 }

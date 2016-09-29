@@ -2,7 +2,12 @@
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
   <parameters mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="5.0"/>
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="5.0">
+    <languageList>
+      <language id="fr" name="Français"/>
+      <language id="en" name="English"/>
+    </languageList>
+  </parameters>
 
   <resolutionList>
     <resolution outputDir="../../../InfoKml_Output/Gabon/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
@@ -30,14 +35,48 @@
 
   <elementList>
     <polygonElementList>
-      <!--<polygonElement id="e_Gabon" name="" look="pl_Gabon"/>-->
+      <!--<polygonElement id="e_Gabon" look="pl_Gabon">
+        <name>
+          <name language="fr" text=""/>
+          <name language="en" text=""/>
+        </name>
+      </polygonElement>-->
       <!--Province-->
-      <polygonElement id="e_Estuaire" name="Estuaire (1)" shortName="1" look="pl_Province"/>
+      <polygonElement id="e_Estuaire" look="pl_Province">
+        <name>
+          <name language="fr" text="Estuaire (1)"/>
+          <name language="en" text="Estuaire (1)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="1"/>
+          <name language="en" text="1"/>
+        </shortName>
+      </polygonElement>
       <!--Départements-->
-      <polygonElement id="e_Noya" name="Noya" look="pl_Departement"/>
-      <polygonElement id="e_KomoMondah" name="Noya" look="pl_Departement"/>
-      <polygonElement id="e_LibrevilleDepartement" name="" look="pl_Departement"/>
-      <polygonElement id="e_Komo" name="" look="pl_Departement"/>
+      <polygonElement id="e_Noya" look="pl_Departement">
+        <name>
+          <name language="fr" text="Noya"/>
+          <name language="en" text="Noya"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_KomoMondah" look="pl_Departement">
+        <name>
+          <name language="fr" text="Komo-Mondah"/>
+          <name language="en" text="Komo-Mondah"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LibrevilleDepartement" look="pl_Departement">
+        <name>
+          <name language="fr" text="Libreville"/>
+          <name language="en" text="Libreville"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Komo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Komo"/>
+          <name language="en" text="Komo"/>
+        </name>
+      </polygonElement>
     </polygonElementList>
     <lineElementList/>
     <pointElementList/>

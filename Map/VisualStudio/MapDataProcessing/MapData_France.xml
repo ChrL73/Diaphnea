@@ -2,7 +2,12 @@
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
   <parameters mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0"/>
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0">
+    <languageList>
+      <language id="fr" name="Français"/>
+      <language id="en" name="English"/>
+    </languageList>
+  </parameters>
     
   <resolutionList>
     <resolution outputDir="../../../InfoKml_Output/France/_250m" sampleLength1="0.05" sampleRatio="5" smoothingWidth="15" />
@@ -30,35 +35,156 @@
   
   <elementList>
     <polygonElementList>
-      <!--<polygonElement id="e_France" name="" look="pl_France"/>-->
+      <!--<polygonElement id="e_France" look="pl_France">
+        <name>
+          <name language="fr" text=""/>
+          <name language="en" text=""/>
+        </name>
+      </polygonElement>-->
       <!--Régions-->
-      <!--<polygonElement id="e_ARA" name="Auvergne-Rhône-Alpes" look="pl_Region"/>
-      <polygonElement id="e_BFC" name="Bourgogne-Franche-Comté" look="pl_Region"/>
-      <polygonElement id="e_Bretagne" name="Bretagne" look="pl_Region"/>
-      <polygonElement id="e_CVL" name="Centre-Val de Loire" look="pl_Region"/>
-      <polygonElement id="e_Corse" name="Corse" look="pl_Region"/>
-      <polygonElement id="e_Est" name="Grand-Est" look="pl_Region"/>
-      <polygonElement id="e_HDF" name="Hauts-de-France" look="pl_Region"/>
-      <polygonElement id="e_IDF" name="Île-de-France" look="pl_Region"/>
-      <polygonElement id="e_Normandie" name="Normandie" look="pl_Region"/>
-      <polygonElement id="e_Aquitaine" name="Nouvelle-Aquitaine" look="pl_Region"/>
-      <polygonElement id="e_Occitanie" name="Occitanie" look="pl_Region"/>
-      <polygonElement id="e_PDDL" name="Pays de la Loire" look="pl_Region"/>
-      <polygonElement id="e_PACA" name="Provence-Alpes-Côte d'Azur" look="pl_Region"/>-->
+      <!--<polygonElement id="e_ARA" look="pl_Region">
+        <name>
+          <name language="fr" text="Auvergne-Rhône-Alpes"/>
+          <name language="en" text="Auvergne-Rhône-Alpes"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_BFC" look="pl_Region">
+        <name>
+          <name language="fr" text="Bourgogne-Franche-Comté"/>
+          <name language="en" text="Bourgogne-Franche-Comté"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Bretagne" look="pl_Region">
+        <name>
+          <name language="fr" text="Bretagne"/>
+          <name language="en" text="Bretagne"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_CVL" look="pl_Region">
+        <name>
+          <name language="fr" text="Centre-Val de Loire"/>
+          <name language="en" text="Centre-Val de Loire"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Corse" look="pl_Region">
+        <name>
+          <name language="fr" text="Corse"/>
+          <name language="en" text="Corse"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Est" look="pl_Region">
+        <name>
+          <name language="fr" text="Grand-Est"/>
+          <name language="en" text="Grand-Est"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_HDF" look="pl_Region">
+        <name>
+          <name language="fr" text="Hauts-de-France"/>
+          <name language="en" text="Hauts-de-France"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_IDF" look="pl_Region">
+        <name>
+          <name language="fr" text="Île-de-France"/>
+          <name language="en" text="Île-de-France"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Normandie" look="pl_Region">
+        <name>
+          <name language="fr" text="Normandie"/>
+          <name language="en" text="Normandie"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Aquitaine" look="pl_Region">
+        <name>
+          <name language="fr" text="Nouvelle-Aquitaine"/>
+          <name language="en" text="Nouvelle-Aquitaine"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Occitanie" look="pl_Region">
+        <name>
+          <name language="fr" text="Occitanie"/>
+          <name language="en" text="Occitanie"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_PDDL" look="pl_Region">
+        <name>
+          <name language="fr" text="Pays de la Loire"/>
+          <name language="en" text="Pays de la Loire"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_PACA" look="pl_Region">
+        <name>
+          <name language="fr" text="Provence-Alpes-Côte d'Azur"/>
+          <name language="en" text="Provence-Alpes-Côte d'Azur"/>
+        </name>
+      </polygonElement>-->
       <!--Départements-->
-      <polygonElement id="e_01" name="Ain (01)" shortName="01" look="pl_Departement"/>
-      <polygonElement id="e_02" name="Aisne (02)" shortName="02" look="pl_Departement"/>
-      <polygonElement id="e_08" name="Ardennes (08)" shortName="08" look="pl_Departement"/>
-      <polygonElement id="e_60" name="Oise (60)" shortName="60" look="pl_Departement"/>
+      <polygonElement id="e_01" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ain (01)"/>
+          <name language="en" text="Ain (01)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="01"/>
+          <name language="en" text="01"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_02" look="pl_Departement">
+        <name>
+          <name language="fr" text="Aisne (02)"/>
+          <name language="en" text="Aisne (02)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="02"/>
+          <name language="en" text="02"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_08" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ardennes (08)"/>
+          <name language="en" text="Ardennes (08)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="08"/>
+          <name language="en" text="08"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_60" look="pl_Departement">
+        <name>
+          <name language="fr" text="Oise (60)"/>
+          <name language="en" text="Oise (60)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="60"/>
+          <name language="en" text="60"/>
+        </shortName>
+      </polygonElement>
     </polygonElementList>
     <lineElementList>
       <!--Fleuves et rivières-->
-      <lineElement id="e_Rhin" name="Rhin" look="ll_FleuveRiviere"/>
-      <lineElement id="e_Rhone" name="Rhône" look="ll_FleuveRiviere"/>
+      <lineElement id="e_Rhin" look="ll_FleuveRiviere">
+        <name>
+          <name language="fr" text="Rhin"/>
+          <name language="en" text="Rhin"/>
+        </name>
+      </lineElement>
+      <lineElement id="e_Rhone" look="ll_FleuveRiviere">
+        <name>
+          <name language="fr" text="Rhône"/>
+          <name language="en" text="Rhône"/>
+        </name>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes-->
-      <pointElement id="e_BourgEnBresse" name="Bourg-en-Bresse" look="tl_Prefecture"/>
+      <pointElement id="e_BourgEnBresse" look="tl_Prefecture">
+        <name>
+          <name language="fr" text="Bourg-en-Bresse"/>
+          <name language="en" text="Bourg-en-Bresse"/>
+        </name>
+      </pointElement>
     </pointElementList>
   </elementList>
   

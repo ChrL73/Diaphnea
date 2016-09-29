@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson;
+﻿/*using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,4 +19,4 @@ namespace MapDataProcessing
         internal List<GeoPoint> PointList { get { return _pointList; } }
         internal BsonValue Id { get; set; }
     }
-}
+}*/

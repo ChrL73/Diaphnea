@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +17,7 @@ namespace MapDataProcessing
         private readonly Dictionary<KmlFileData, List<OrientedPolygonLinePart>> _linePartDictionary = new Dictionary<KmlFileData, List<OrientedPolygonLinePart>>();
         private readonly List<OrientedLineList> _compoundPolygonList = new List<OrientedLineList>();
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
-        private readonly Dictionary<XmlResolution, DatabasePointList> _contourDictionary = new Dictionary<XmlResolution, DatabasePointList>();
+        private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
         private readonly Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>> _subPolygonDictionary = new Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>>();
 
         internal PolygonMapElement(String id, MapData mapData) : base(id, mapData) { }
@@ -211,7 +213,7 @@ namespace MapDataProcessing
                 }
                 contour.Add(contour[0]);
 
-                _contourDictionary.Add(resolution, new DatabasePointList(contour));
+                _contourMapItem.addLine(resolution, contour);
                 _subPolygonDictionary.Add(resolution, polygonSortedDictionary);
 
                 int index = 1;
@@ -222,6 +224,21 @@ namespace MapDataProcessing
                     ++index;
                 }
             }
+
+            return 0;
+        }
+
+        internal override int fillDatabase(IMongoDatabase database)
+        {
+            IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
+
+            BsonDocument elementDocument = new BsonDocument()
+            {
+                { "map", MapData.XmlMapData.parameters.mapId },
+                { "id", Id }
+            };
+
+            polygonElementCollection.InsertOne(elementDocument);
 
             return 0;
         }

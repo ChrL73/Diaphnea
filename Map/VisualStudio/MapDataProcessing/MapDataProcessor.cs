@@ -200,6 +200,10 @@ namespace MapDataProcessing
             pointListCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> resolutionCollection = database.GetCollection<BsonDocument>("resolutions");
             resolutionCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
+            polygonElementCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
+            itemCollection.DeleteMany(filter);
 
             int i, n = _mapData.XmlMapData.resolutionList.Length;
             for (i = 0; i < n; ++i)
@@ -219,6 +223,11 @@ namespace MapDataProcessing
 
             if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
             if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;
+
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                if (element.fillDatabase(database) != 0) return -1;
+            }
 
             return 0;
         }

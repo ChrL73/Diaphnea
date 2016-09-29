@@ -13,6 +13,11 @@ namespace MapDataProcessing
     {
         private static Dictionary<KmlFileData, PolygonPolygonPart> _partDictionary = new Dictionary<KmlFileData, PolygonPolygonPart>();
 
+        internal static void clearAll()
+        {
+            _partDictionary.Clear();
+        }
+
         internal static PolygonPolygonPart getPart(KmlFileData polygonData)
         {
             PolygonPolygonPart part;

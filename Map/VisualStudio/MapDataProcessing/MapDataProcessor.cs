@@ -28,6 +28,9 @@ namespace MapDataProcessing
         {
             int result = 0;
 
+            PolygonLinePart.clearAll();
+            PolygonPolygonPart.clearAll();
+
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);

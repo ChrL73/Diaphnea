@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseMapItem.cs" />
-    <Compile Include="DatabasePointList.cs" />
     <Compile Include="GeoPoint.cs" />
     <Compile Include="KmlFileData.cs" />
     <Compile Include="KmlFileTypeEnum.cs" />

@@ -31,6 +31,8 @@ namespace MapDataProcessing
         {
             IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
 
+            BsonArray lineArray = new BsonArray();
+
             foreach (KeyValuePair<XmlResolution, List<GeoPoint>> pair in _lineDictionary)
             {
                 List<GeoPoint> list = pair.Value;
@@ -43,17 +45,31 @@ namespace MapDataProcessing
                 }
 
                 BsonDocument pointListDocument = new BsonDocument()
-                    {
-                        { "map", mapData.XmlMapData.parameters.mapId },
-                        { "item", itemName },
-                        { "resolution", resolution },
-                        { "count", list.Count },
-                        { "points", pointArray }
-                    };
+                {
+                    { "map", mapData.XmlMapData.parameters.mapId },
+                    { "item", itemName },
+                    { "resolution", resolution },
+                    { "count", list.Count },
+                    { "points", pointArray }
+                };
 
                 pointListCollection.InsertOne(pointListDocument);
-                //list.Id = pointListDocument.GetValue("_id");
+
+                lineArray.Add(pointListDocument.GetValue("_id"));
             }
+
+            IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
+
+            BsonDocument itemDocument = new BsonDocument()
+            {
+                { "map", mapData.XmlMapData.parameters.mapId },
+                { "item", itemName },
+                { "point_lists", lineArray }
+            };
+
+            itemCollection.InsertOne(itemDocument);
+
+            Id = itemDocument.GetValue("_id");
 
             return 0;
         }

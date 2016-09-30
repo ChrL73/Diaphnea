@@ -230,12 +230,26 @@ namespace MapDataProcessing
 
         internal override int fillDatabase(IMongoDatabase database)
         {
+            _contourMapItem.fillDataBase(database, MapData, Id);
+
             IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
+
+            BsonArray itemArray = new BsonArray();
+
+            foreach (OrientedLineList list in _compoundPolygonList)
+            {
+                foreach (OrientedPolygonLinePart linePart in list.LineList)
+                {
+                    itemArray.Add(linePart.MapItemId);
+                }
+            }
 
             BsonDocument elementDocument = new BsonDocument()
             {
                 { "map", MapData.XmlMapData.parameters.mapId },
-                { "id", Id }
+                { "id", Id },
+                { "contour", _contourMapItem.Id },
+                { "items", itemArray}
             };
 
             polygonElementCollection.InsertOne(elementDocument);

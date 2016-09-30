@@ -52,7 +52,7 @@
           <name language="en" text="1"/>
         </shortName>
       </polygonElement>
-      <!--Départements-->
+      <!--Départements Estuaire-->
       <polygonElement id="e_Noya" look="pl_Departement">
         <name>
           <name language="fr" text="Noya"/>
@@ -81,6 +81,31 @@
         <name>
           <name language="fr" text="Komo"/>
           <name language="en" text="Komo"/>
+        </name>
+      </polygonElement>
+      <!--Départements Woleu-Ntem-->
+      <polygonElement id="e_HautKomo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Haut-Komo"/>
+          <name language="en" text="Haut-Komo"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Okano" look="pl_Departement">
+        <name>
+          <name language="fr" text="Okano"/>
+          <name language="en" text="Okano"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Woleu" look="pl_Departement">
+        <name>
+          <name language="fr" text="Woleu"/>
+          <name language="en" text="Woleu"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Ntem" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ntem"/>
+          <name language="en" text="Ntem"/>
         </name>
       </polygonElement>
     </polygonElementList>

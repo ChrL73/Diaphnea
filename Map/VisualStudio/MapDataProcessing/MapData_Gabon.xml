@@ -52,6 +52,16 @@
           <name language="en" text="1"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_WoleuNtem" look="pl_Province">
+        <name>
+          <name language="fr" text="Woleu-Ntem (9)"/>
+          <name language="en" text="Woleu-Ntem (9)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="9"/>
+          <name language="en" text="9"/>
+        </shortName>
+      </polygonElement>
       <!--Départements Estuaire-->
       <polygonElement id="e_Noya" look="pl_Departement">
         <name>
@@ -106,6 +116,12 @@
         <name>
           <name language="fr" text="Ntem"/>
           <name language="en" text="Ntem"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_HautNtem" look="pl_Departement">
+        <name>
+          <name language="fr" text="Haut-Ntem"/>
+          <name language="en" text="Haut-Ntem"/>
         </name>
       </polygonElement>
     </polygonElementList>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<GroundOverlay>
+	<name>Sans titre - Superposition d&apos;image</name>
+	<Icon>
+		<href>Komo.png</href>
+		<viewBoundScale>0.75</viewBoundScale>
+	</Icon>
+	<LatLonBox>
+		<north>0.8594702113558603</north>
+		<south>-0.5013945681669889</south>
+		<east>11.00254573379499</east>
+		<west>9.628875105140498</west>
+	</LatLonBox>
+</GroundOverlay>
+</kml>

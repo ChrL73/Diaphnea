@@ -42,7 +42,7 @@
         </name>
       </polygonElement>-->
       <!--Province-->
-      <polygonElement id="e_Estuaire" look="pl_Province">
+      <!--<polygonElement id="e_Estuaire" look="pl_Province">
         <name>
           <name language="fr" text="Estuaire (1)"/>
           <name language="en" text="Estuaire (1)"/>
@@ -61,7 +61,7 @@
           <name language="fr" text="9"/>
           <name language="en" text="9"/>
         </shortName>
-      </polygonElement>
+      </polygonElement>-->
       <!--Départements Estuaire-->
       <polygonElement id="e_Noya" look="pl_Departement">
         <name>
@@ -75,12 +75,12 @@
           <name language="en" text="Komo-Mondah"/>
         </name>
       </polygonElement>
-      <polygonElement id="e_KomoOcean" look="pl_Departement">
+      <!--<polygonElement id="e_KomoOcean" look="pl_Departement">
         <name>
           <name language="fr" text="Komo-Océan"/>
           <name language="en" text="Komo-Océan"/>
         </name>
-      </polygonElement>
+      </polygonElement>-->
       <polygonElement id="e_LibrevilleDepartement" look="pl_Departement">
         <name>
           <name language="fr" text="Libreville"/>
@@ -94,7 +94,7 @@
         </name>
       </polygonElement>
       <!--Départements Woleu-Ntem-->
-      <polygonElement id="e_HautKomo" look="pl_Departement">
+      <!--<polygonElement id="e_HautKomo" look="pl_Departement">
         <name>
           <name language="fr" text="Haut-Komo"/>
           <name language="en" text="Haut-Komo"/>
@@ -123,7 +123,7 @@
           <name language="fr" text="Haut-Ntem"/>
           <name language="en" text="Haut-Ntem"/>
         </name>
-      </polygonElement>
+      </polygonElement>-->
     </polygonElementList>
     <lineElementList/>
     <pointElementList/>

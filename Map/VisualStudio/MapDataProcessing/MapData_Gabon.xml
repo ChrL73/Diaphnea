@@ -100,7 +100,7 @@
           <name language="en" text="Haut-Komo"/>
         </name>
       </polygonElement>
-      <!--<polygonElement id="e_Okano" look="pl_Departement">
+      <polygonElement id="e_Okano" look="pl_Departement">
         <name>
           <name language="fr" text="Okano"/>
           <name language="en" text="Okano"/>
@@ -112,7 +112,7 @@
           <name language="en" text="Woleu"/>
         </name>
       </polygonElement>
-      <polygonElement id="e_Ntem" look="pl_Departement">
+      <!--<polygonElement id="e_Ntem" look="pl_Departement">
         <name>
           <name language="fr" text="Ntem"/>
           <name language="en" text="Ntem"/>

@@ -3,14 +3,14 @@
 <GroundOverlay>
 	<name>Sans titre - Superposition d&apos;image</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/HautKomo.png</href>
+		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/Okano.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.116438235512303</north>
-		<south>0.5484594533676782</south>
-		<east>11.08852578600353</east>
-		<west>10.19283779025032</west>
+		<north>1.330782111473202</north>
+		<south>0.05000127761223601</south>
+		<east>12.43761970531992</east>
+		<west>10.64019518021246</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

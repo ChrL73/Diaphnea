@@ -96,6 +96,8 @@ public partial class XmlParameters {
     
     private double maxConnectionDistanceInKmField;
     
+    private XmlProjectionEnum projectionField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("language", IsNullable=false)]
     public XmlLanguage[] languageList {
@@ -181,6 +183,17 @@ public partial class XmlParameters {
         }
         set {
             this.maxConnectionDistanceInKmField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlProjectionEnum projection {
+        get {
+            return this.projectionField;
+        }
+        set {
+            this.projectionField = value;
         }
     }
 }
@@ -690,4 +703,16 @@ public enum XmlLogLevelEnum {
     
     /// <remarks/>
     MESSAGE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlProjectionEnum {
+    
+    /// <remarks/>
+    ORTHOGRAPHIC,
+    
+    /// <remarks/>
+    MERCATOR,
 }

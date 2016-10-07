@@ -2,7 +2,7 @@
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
   <parameters mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0">
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="1.0" projection="ORTHOGRAPHIC">
     <languageList>
       <language id="fr" name="Français"/>
       <language id="en" name="English"/>

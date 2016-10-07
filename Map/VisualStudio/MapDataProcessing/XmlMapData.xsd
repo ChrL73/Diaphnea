@@ -20,7 +20,14 @@
     <xsd:attribute name="databaseName" type="xsd:string" use="required" />
     <xsd:attribute name="kmlDir" type="xsd:string" use="required" />
     <xsd:attribute name="maxConnectionDistanceInKm" type="xsd:double" use="required"/>
+    <xsd:attribute name="projection" type="XmlProjectionEnum" use="required"/>
   </xsd:complexType>
+  <xsd:simpleType name="XmlProjectionEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ORTHOGRAPHIC" />
+      <xsd:enumeration value="MERCATOR" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlLanguageList">
     <xsd:sequence>
       <xsd:element name="language" type="XmlLanguage" minOccurs="1" maxOccurs="unbounded" />

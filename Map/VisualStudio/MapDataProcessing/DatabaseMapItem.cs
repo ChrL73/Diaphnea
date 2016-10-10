@@ -41,7 +41,7 @@ namespace MapDataProcessing
                 BsonArray pointArray = new BsonArray();
                 foreach (GeoPoint point in list)
                 {
-                    pointArray.Add(point.getBsonDocument());
+                    pointArray.Add(point.getBsonDocument(mapData.XmlMapData.parameters.projection));
                 }
 
                 BsonDocument pointListDocument = new BsonDocument()

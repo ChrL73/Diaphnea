@@ -66,24 +66,32 @@ namespace MapDataProcessing
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
 
-        internal BsonDocument getBsonDocument()
+        internal BsonDocument getBsonDocument(XmlProjectionEnum projection)
         {
-            BsonDocument pointDocument = new BsonDocument()
+            double x, y;
+            if (getProjection(projection, out x, out y))
             {
-                { "x", _x},
-                { "y", _y},
-                { "z", _z},
-                { "lo", _longitude},
-                { "la", _latitude},
-            };
+                BsonDocument pointDocument = new BsonDocument()
+                {
+                    { "x", x},
+                    { "y", y}
+                };
 
-            return pointDocument;
+                return pointDocument;
+            }
+
+            return null;
         }
 
         private class Pair
         {
-            internal double X { get; set; }
-            internal double Y { get; set; }
+            private readonly double _x;
+            private readonly double _y;
+
+            internal Pair(double x, double y) { _x = x; _y = y; }
+
+            internal double X { get { return _x; } }
+            internal double Y { get { return _y; } }
         }
 
         private readonly Dictionary<XmlProjectionEnum, Pair> _projectionDictionary = new Dictionary<XmlProjectionEnum, Pair>();
@@ -131,6 +139,13 @@ namespace MapDataProcessing
                 return true;
             }
 
+            if (projection == XmlProjectionEnum.ORTHOGRAPHIC)
+            {
+                X = _x * _uX1 + _y * _uX2 + _z * _uX3;
+                Y = _x * _uY1 + _y * _uY2 + _z * _uY3;
+                _projectionDictionary.Add(projection, new Pair(X, Y));
+                return true;
+            }
 
             throw new NotImplementedException();
         }

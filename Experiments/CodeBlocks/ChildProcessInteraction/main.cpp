@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <set>
+#include <vector>
 
 #include <thread>
 #include <future>

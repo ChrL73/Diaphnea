@@ -10,7 +10,6 @@ class ThreadInfo
 {
 private:
     std::thread *_t;
-    std::packaged_task<void(std::string)> *_p;
     std::future<void> *_f;
     std::string _str;
 
@@ -43,6 +42,7 @@ void deleteFunction(void)
 
         mutex.lock();
 
+		std::vector<std::set<ThreadInfo *>::iterator> threadsToDelete;
         std::set<ThreadInfo *>::iterator it = threadSet.begin();
         for (; it != threadSet.end(); ++it)
         {
@@ -50,11 +50,18 @@ void deleteFunction(void)
             if (status == std::future_status::ready)
             {
                 (*it)->getT()->join();
-                std::cout << "Delete: " << (*it)->getStr()<< std::endl;
-                delete (*it);
-                threadSet.erase(it);
+				threadsToDelete.push_back(it);
             }
         }
+
+		int i, n = threadsToDelete.size();
+		for (i = 0; i < n; ++i)
+		{
+			std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
+			std::cout << "Delete: " << (*it)->getStr() << std::endl;
+			delete (*it);
+			threadSet.erase(it);
+		}
 
         if (stop && threadSet.empty())
         {

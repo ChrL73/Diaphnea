@@ -24,34 +24,36 @@ public:
     const std::string& getStr(void) const { return _str; }
 };
 
-std::mutex mutex;
 std::set<ThreadInfo *> threadSet;
-bool stop = false;
+std::mutex threadSetMutex;
+
 time_t lastEntryTime;
+std::mutex timeMutex;
+
+std::mutex coutMutex;
 
 void f(std::string str)
 {
+    coutMutex.lock();
     std::cout << "Start: " << str << std::endl;
+    coutMutex.unlock();
+
     std::this_thread::sleep_for(std::chrono::seconds(5));
+
+    coutMutex.lock();
     std::cout << "End: " << str << std::endl;
+    coutMutex.unlock();
 }
 
 void deleteFunction(void)
 {
     std::vector<std::set<ThreadInfo *>::iterator> threadsToDelete;
-    bool forceExit = false;
 
     while(true)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-        mutex.lock();
-
-        if (time(0) - lastEntryTime > 10)
-        {
-            stop = true;
-            forceExit = true;
-        }
+        threadSetMutex.lock();
 
         std::set<ThreadInfo *>::iterator it = threadSet.begin();
         for (; it != threadSet.end(); ++it)
@@ -65,48 +67,62 @@ void deleteFunction(void)
 		{
 			std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
             (*it)->getT().join();
+
+            coutMutex.lock();
 			std::cout << "Delete: " << (*it)->getStr() << std::endl;
+			coutMutex.unlock();
+
 			delete (*it);
 			threadSet.erase(it);
 		}
 
 		threadsToDelete.clear();
 
-        if (stop && threadSet.empty())
-        {
-            mutex.unlock();
-            break;
-        }
-
-        mutex.unlock();
+        threadSetMutex.unlock();
     }
+}
 
-    if (forceExit)
+void exitProcess()
+{
+    // We don't try to properly stop threads and wait for them.
+    // We roughly interrupt all threads with 'exit'
+    exit(0);
+}
+
+void timeoutFunction(void)
+{
+    while (true)
     {
-        std::cout << "Timeout reached, force 'std::cin' interruption with 'exit()'..." << std::endl;
-        exit(0);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
+        timeMutex.lock();
+        if (time(0) - lastEntryTime > 10)
+        {
+            timeMutex.unlock();
+            std::cout << "Timeout reached, exit process..." << std::endl;
+            exitProcess();
+        }
+        timeMutex.unlock();
     }
 }
 
 int main()
 {
     std::thread deleteThread(deleteFunction);
+    std::thread timeoutThread(timeoutFunction);
     lastEntryTime = time(0);
 
     while(true)
     {
         std::string str;
         std::cin >> str;
-        if (str[0] == 'q') break;
 
-        mutex.lock();
+        // When the process was spawned by node and node crashes, 'std::cin >> str' returns and str size is 0
+        if (str.size() == 0 || str[0] == 'q') break;
+
+        timeMutex.lock();
         lastEntryTime = time(0);
-        if (stop)
-        {
-            mutex.unlock();
-            break;
-        }
-        mutex.unlock();
+        timeMutex.unlock();
 
         std::packaged_task<void(std::string)> task(f);
         std::future<void> future = task.get_future();
@@ -114,18 +130,11 @@ int main()
 
         ThreadInfo *threadInfo = new ThreadInfo(std::move(t), std::move(future), std::move(str));
 
-        mutex.lock();
+        threadSetMutex.lock();
         threadSet.insert(threadInfo);
-        mutex.unlock();
+        threadSetMutex.unlock();
     }
 
-    mutex.lock();
-    stop = true;
-    mutex.unlock();
-
-    std::cout << "Waiting for threads..." << std::endl;
-    deleteThread.join();
-    std::cout << "All threads terminated..." << std::endl;
-
-    return 0;
+    std::cout << "Stop requested, exit process..." << std::endl;
+    exitProcess();
 }

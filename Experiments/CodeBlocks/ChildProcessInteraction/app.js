@@ -19,3 +19,6 @@ for (i = 0; i < 30; ++i)
 }
 
 //child.stdin.write('q\n');
+
+// Crash node to verify that the spawned process terminates
+setTimeout(function() {aaa;}, 5000);

@@ -1,6 +1,6 @@
 var childProcess = require('child_process');
 
-var child;
+var cppProcess;
 var sendResponse;
 
 function setResponseHandler(responseHandler)
@@ -12,21 +12,20 @@ function sendRequest(request, recursiveCall)
 {
    try
    {
-      child.stdin.write(request + '\n');
+      cppProcess.stdin.write(request + '\n');
    }
    catch (err)
    {
-      child = childProcess.spawn('./map_server.exe');
+      cppProcess = childProcess.spawn('./map_server.exe');
       
-      child.stdout.on('data', function(data)
+      cppProcess.stdout.on('data', function(data)
       {
          var array = data.toString().split('\n');  
-         console.log(array.length.toString() + ' responses received:');
-
-         array.forEach(function(s)
-         {
-            console.log(s);
-         });
+         var array2 = [];
+         array.forEach(function(s) { if (s.length > 0) array2.push(s); });
+               
+         console.log(array2.length.toString() + ' responses received:');
+         array2.forEach(function(s) { console.log(s); });
       });
       
       if (recursiveCall) throw new Error(err); // Todo: hande error

@@ -18,9 +18,9 @@ namespace map_server
         while(true)
         {
             std::string request;
-            std::cin >> request;
+            std::getline(std::cin, request);
 
-            // When the process was spawned by node and node crashes, 'std::cin >> request' returns and request size is 0
+            // When the process was spawned by node and node crashes, 'getline' returns and request size is 0
             if (request.size() == 0 || request[0] == 'q') break;
 
             _timeMutex.lock();

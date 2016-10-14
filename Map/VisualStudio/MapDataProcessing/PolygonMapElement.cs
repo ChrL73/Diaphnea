@@ -20,7 +20,8 @@ namespace MapDataProcessing
         private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
         private readonly Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>> _subPolygonDictionary = new Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>>();
 
-        internal PolygonMapElement(String id, MapData mapData) : base(id, mapData) { }
+        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName) :
+            base(id, mapData, name, shortName) { }
 
         internal override int addKmlFile(String path)
         {
@@ -244,13 +245,13 @@ namespace MapDataProcessing
                 }
             }
 
-            BsonDocument elementDocument = new BsonDocument()
+            BsonDocument elementDocument = new BsonDocument();
+            elementDocument.AddRange(getBsonDocument());
+            elementDocument.AddRange(new BsonDocument()
             {
-                { "map", MapData.XmlMapData.parameters.mapId },
-                { "id", Id },
                 { "contour", _contourMapItem.Id },
                 { "items", itemArray}
-            };
+            });
 
             polygonElementCollection.InsertOne(elementDocument);
 

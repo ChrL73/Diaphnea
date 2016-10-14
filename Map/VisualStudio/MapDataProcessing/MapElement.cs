@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,15 @@ namespace MapDataProcessing
     {
         private readonly String _id;
         private readonly MapData _mapData;
+        private readonly ElementName _name;
+        private readonly ElementName _shortName;
 
-        internal MapElement(String id, MapData mapData)
+        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName)
         {
             _id = id;
             _mapData = mapData;
+            _name = new ElementName(name);
+            _shortName = new ElementName(shortName);
         }
 
         abstract internal int addKmlFile(String path);
@@ -24,5 +29,18 @@ namespace MapDataProcessing
 
         protected String Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }
+
+        protected BsonDocument getBsonDocument()
+        {
+            BsonDocument elementDocument = new BsonDocument()
+            {
+                { "map", _mapData.XmlMapData.parameters.mapId },
+                { "id", _id},
+                { "name", _name.getBsonDocument() },
+                { "short_name", _shortName.getBsonDocument() }
+            };
+
+            return elementDocument;
+        }
     }
 }

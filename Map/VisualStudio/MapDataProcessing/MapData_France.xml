@@ -7,6 +7,10 @@
       <language id="fr" name="Français"/>
       <language id="en" name="English"/>
     </languageList>
+    <mapName>
+      <name language="fr" text="France"/>
+      <name language="en" text="France"/>
+    </mapName>
   </parameters>
     
   <resolutionList>

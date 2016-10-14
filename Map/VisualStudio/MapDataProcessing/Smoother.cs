@@ -262,7 +262,7 @@ namespace MapDataProcessing
             return smoothedPolygon;
         }
 
-        static double getArea(List<GeoPoint> pointList)
+        private static double getArea(List<GeoPoint> pointList)
         {
             double x0 = 0.0, y0 = 0.0, z0 = 0.0;
 

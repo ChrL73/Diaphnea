@@ -31,6 +31,7 @@ namespace MapDataProcessing
             PolygonLinePart.clearAll();
             PolygonPolygonPart.clearAll();
             GeoPoint.reset();
+            ElementName.reset();
 
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();
@@ -97,21 +98,21 @@ namespace MapDataProcessing
             foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList)
             {
                 String id = xmlPolygonElement.id.Substring(2);
-                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData);
+                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
             {
                 String id = xmlLineElement.id.Substring(2);
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData);
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
             {
                 String id = xmlPointElement.id.Substring(2);
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData);
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName);
                 _elementDictionary.Add(id, pointMapElement);
             }
 
@@ -202,13 +203,36 @@ namespace MapDataProcessing
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("map", _mapData.XmlMapData.parameters.mapId);
             IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
             pointListCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> resolutionCollection = database.GetCollection<BsonDocument>("resolutions");
-            resolutionCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> mapCollection = database.GetCollection<BsonDocument>("maps");
+            mapCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
             polygonElementCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
             itemCollection.DeleteMany(filter);
 
+            BsonDocument mapDocument = new BsonDocument()
+            {
+                { "map", _mapData.XmlMapData.parameters.mapId },
+                { "name", new ElementName(_mapData.XmlMapData.parameters.mapName).getBsonDocument() }
+            };
+
+            BsonArray languagesArray = new BsonArray();
+            foreach (XmlLanguage language in _mapData.XmlMapData.parameters.languageList)
+            {
+                BsonDocument languageDocument = new BsonDocument()
+                {
+                    { "id", language.id.ToString() },
+                    { "name", language.name }
+                };
+                languagesArray.Add(languageDocument);
+            }
+            BsonDocument languagesDocument = new BsonDocument()
+            {
+                { "languages", languagesArray }
+            };
+            mapDocument.AddRange(languagesDocument);
+
+            BsonArray resolutionArray = new BsonArray();
             int i, n = _mapData.XmlMapData.resolutionList.Length;
             for (i = 0; i < n; ++i)
             {
@@ -217,13 +241,19 @@ namespace MapDataProcessing
 
                 BsonDocument resolutionDocument = new BsonDocument()
                 {
-                    { "map", _mapData.XmlMapData.parameters.mapId },
                     { "index", i},
                     { "sample_length", sample_length}
                 };
 
-                resolutionCollection.InsertOne(resolutionDocument);
+                resolutionArray.Add(resolutionDocument);
             }
+            BsonDocument resolutionsDocument = new BsonDocument()
+            {
+                { "resolutions", resolutionArray }
+            };
+            mapDocument.AddRange(resolutionsDocument);
+
+            mapCollection.InsertOne(mapDocument);
 
             if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
             if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;

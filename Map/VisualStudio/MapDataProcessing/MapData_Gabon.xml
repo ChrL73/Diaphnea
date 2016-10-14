@@ -7,6 +7,10 @@
       <language id="fr" name="Français"/>
       <language id="en" name="English"/>
     </languageList>
+    <mapName>
+      <name language="fr" text="Gabon"/>
+      <name language="en" text="Gabon"/>
+    </mapName>
   </parameters>
 
   <resolutionList>

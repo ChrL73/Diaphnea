@@ -82,6 +82,8 @@ public partial class XmlParameters {
     
     private XmlLanguage[] languageListField;
     
+    private XmlName[] mapNameField;
+    
     private string mapIdField;
     
     private string logFileNameField;
@@ -106,6 +108,17 @@ public partial class XmlParameters {
         }
         set {
             this.languageListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] mapName {
+        get {
+            return this.mapNameField;
+        }
+        set {
+            this.mapNameField = value;
         }
     }
     

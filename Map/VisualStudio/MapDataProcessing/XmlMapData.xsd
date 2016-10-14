@@ -12,6 +12,7 @@
   <xsd:complexType name="XmlParameters">
     <xsd:sequence>
       <xsd:element name="languageList" type="XmlLanguageList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="mapName" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="mapId" type="XmlMapId" use="required" />
     <xsd:attribute name="logFileName" type="xsd:string" use="required" />

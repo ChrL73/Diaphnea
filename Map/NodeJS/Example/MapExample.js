@@ -1,11 +1,23 @@
 $(function()
 {
-   var url = 'http://192.168.50.56:3001';
+   var url = 'http://192.168.50.155:3001';
    
    diaphneaMap.connect(url, onConnected);
    
-   function onConnected(maps)
+   function onConnected()
    {
-      map = maps['_Gabon'];
+      diaphneaMap.getMapIds(function(mapIds)
+      {
+         console.log(mapIds);
+      });
+        
+      var canvasId = 'canvas';
+      var mapId = '_Gabon';
+      var map = new diaphneaMap.Map(mapId, canvasId);
+      
+      map.getMapName('fr', function(mapName)
+      {
+         console.log(mapName);
+      });
    }
 });

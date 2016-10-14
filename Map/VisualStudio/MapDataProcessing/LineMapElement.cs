@@ -11,7 +11,8 @@ namespace MapDataProcessing
     {
         private readonly List<KmlFileData> _KmlFileList = new List<KmlFileData>();
 
-        internal LineMapElement(String id, MapData mapData) : base(id, mapData) { }
+        internal LineMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName) :
+            base(id, mapData, name, shortName) { }
 
         internal override int addKmlFile(String path)
         {

@@ -51,8 +51,15 @@
 		</Compiler>
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />
+		<Unit filename="Request.cpp" />
+		<Unit filename="Request.h" />
+		<Unit filename="RequestTypeEnum.h" />
 		<Unit filename="ThreadInfo.cpp" />
 		<Unit filename="ThreadInfo.h" />
+		<Unit filename="getMapIdsRequest.cpp" />
+		<Unit filename="getMapIdsRequest.h" />
+		<Unit filename="getMapNameRequest.cpp" />
+		<Unit filename="getMapNameRequest.h" />
 		<Unit filename="map_server.cpp" />
 		<Extensions>
 			<code_completion />

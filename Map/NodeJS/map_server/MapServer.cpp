@@ -1,8 +1,10 @@
 #include "MapServer.h"
 #include "ThreadInfo.h"
+#include "Request.h"
 
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 #include <thread>
 #include <future>
@@ -90,13 +92,30 @@ namespace map_server
         }
     }
 
-    void MapServer::processRequest(std::string request)
+    void MapServer::processRequest(std::string requestString)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        std::vector<const char *> tokenVector;
+        char *req = new char[requestString.size() + 1];
+        strcpy(req, requestString.c_str());
+        char *token = strtok(req, " ");
+        while (token != 0)
+        {
+            tokenVector.push_back(token);
+            token = strtok(0, " ");
+        }
 
+        Request *request = Request::createRequest(tokenVector);
+        request->execute();
+        delete[] req;
+        delete request;
+
+        /*std::this_thread::sleep_for(std::chrono::seconds(5));
         _coutMutex.lock();
-        std::cout << "Processed: " << request << std::endl;
-        _coutMutex.unlock();
+        int i, n = tokenVector.size();
+        std::cout << "Tokens: ";
+        for (i = 0; i < n; ++i) std::cout << tokenVector[i] << (i == n - 1 ? "" : ", ");
+        std::cout << std::endl;
+        _coutMutex.unlock();*/
     }
 
     int MapServer::exitProcess(void)

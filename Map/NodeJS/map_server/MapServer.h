@@ -28,7 +28,7 @@ namespace map_server
         const int _checkTimeoutSleepMs;
         void checkTimeout(void);
 
-        void processRequest(std::string request);
+        void processRequest(std::string requestString);
         int exitProcess(void);
 
     public:

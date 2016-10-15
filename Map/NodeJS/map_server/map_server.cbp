@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="../../../mongo-cxx-driver/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-pthread" />
@@ -31,6 +32,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
+					<Add directory="../../../mongo-cxx-driver/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -49,6 +51,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="GetMapIdsRequest.cpp" />
+		<Unit filename="GetMapIdsRequest.h" />
+		<Unit filename="GetMapNameRequest.cpp" />
+		<Unit filename="GetMapNameRequest.h" />
+		<Unit filename="Map.cpp" />
+		<Unit filename="Map.h" />
+		<Unit filename="MapData.cpp" />
+		<Unit filename="MapData.h" />
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />
 		<Unit filename="Request.cpp" />
@@ -56,10 +66,6 @@
 		<Unit filename="RequestTypeEnum.h" />
 		<Unit filename="ThreadInfo.cpp" />
 		<Unit filename="ThreadInfo.h" />
-		<Unit filename="getMapIdsRequest.cpp" />
-		<Unit filename="getMapIdsRequest.h" />
-		<Unit filename="getMapNameRequest.cpp" />
-		<Unit filename="getMapNameRequest.h" />
 		<Unit filename="map_server.cpp" />
 		<Extensions>
 			<code_completion />

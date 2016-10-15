@@ -1,6 +1,7 @@
 #include "MapServer.h"
 #include "ThreadInfo.h"
 #include "Request.h"
+#include "MapData.h"
 
 #include <iostream>
 #include <vector>
@@ -13,6 +14,13 @@ namespace map_server
 {
     int MapServer::run(void)
     {
+        MapData *mapData = MapData::instance();
+        if (mapData == 0)
+        {
+            std::cerr << "Error in MapData::instance()" << std::endl;
+            return -1;
+        }
+
         std::thread deleteThread(&MapServer::cleanThreads, this);
         std::thread timeoutThread(&MapServer::checkTimeout, this);
         _timeoutReference = time(0);
@@ -105,7 +113,18 @@ namespace map_server
         }
 
         Request *request = Request::createRequest(tokenVector);
-        request->execute();
+
+        if (request != 0)
+        {
+            request->execute();
+        }
+        else
+        {
+            _coutMutex.lock();
+            std::cerr << "Incorrect request" << std::endl; // Todo: Handle this error on Node JS
+            _coutMutex.unlock();
+        }
+
         delete[] req;
         delete request;
 
@@ -120,6 +139,12 @@ namespace map_server
 
     int MapServer::exitProcess(void)
     {
+        if (MapData::destroyInstance() != 0)
+        {
+            std::cerr << "Error in QuizData::destroyInstance()" << std::endl;
+            exit(-1);
+        }
+
         exit(0);
     }
 }

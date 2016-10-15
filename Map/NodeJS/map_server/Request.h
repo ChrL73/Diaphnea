@@ -7,8 +7,8 @@
     class Request
     {
     private:
-        const char *_socketId;
-        const char *_requestId;
+        const char * const _socketId;
+        const char * const _requestId;
 
     protected:
         Request(const char *socketId, const char *requestId) :

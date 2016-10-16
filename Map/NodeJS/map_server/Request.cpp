@@ -7,6 +7,8 @@
 
 namespace map_server
 {
+    std::mutex *Request::_coutMutexPtr = 0;
+
     Request *Request::createRequest(std::vector<const char *> tokenVector)
     {
         if (tokenVector.size() < 3) return 0;

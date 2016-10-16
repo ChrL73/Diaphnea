@@ -68,7 +68,14 @@ namespace map_server
     {
         if (_mapIdVector.empty())
         {
-
+            mongo::BSONObj projection = BSON("map" << 1);
+            auto cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
+            while (cursor->more())
+            {
+                mongo::BSONObj dbMap = cursor->next();
+                const char *debug = dbMap.getStringField("map");
+                _mapIdVector.push_back(dbMap.getStringField("map"));
+            }
         }
 
         return _mapIdVector;

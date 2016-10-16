@@ -14,6 +14,8 @@ namespace map_server
 {
     int MapServer::run(void)
     {
+        Request::setCoutMutex(&_coutMutex);
+
         MapData *mapData = MapData::instance();
         if (mapData == 0)
         {
@@ -31,7 +33,7 @@ namespace map_server
             std::getline(std::cin, request);
 
             // When the process was spawned by node and node crashes, 'getline' returns and request size is 0
-            if (request.size() == 0 || request[0] == 'q') break;
+            if (request.size() == 0) break;
 
             _timeMutex.lock();
             _timeoutReference = time(0);

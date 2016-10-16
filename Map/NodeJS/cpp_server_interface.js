@@ -20,12 +20,23 @@ function sendRequest(request, recursiveCall)
       
       cppProcess.stdout.on('data', function(data)
       {
-         var array = data.toString().split('\n');  
-         var array2 = [];
-         array.forEach(function(s) { if (s.length > 0) array2.push(s); });
+         var dataArray = data.toString().split('\n');  
+         var responseArray = [];
+         dataArray.forEach(function(s) { if (s.length > 0) responseArray.push(s); });
                
-         console.log(array2.length.toString() + ' responses received:');
-         array2.forEach(function(s) { console.log(s); });
+         //console.log(array2.length.toString() + ' responses received:');
+         responseArray.forEach(function(response)
+         {
+            var tokenArray = response.split(' ');
+            var tokenSubArray = [];
+            tokenArray.forEach(function(token, i)
+            {
+               if (i > 2) tokenSubArray.push(token);
+            });
+            
+            sendResponse(tokenArray[0], Number(tokenArray[1]), tokenArray[2], tokenSubArray);
+            //console.log(response);
+         });
       });
       
       if (recursiveCall) throw new Error(err); // Todo: hande error

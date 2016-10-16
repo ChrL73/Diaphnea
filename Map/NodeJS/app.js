@@ -27,10 +27,26 @@ io.on('connection', function(socket)
    });
 });
 
-cppServer.setResponseHandler(function(socketId, requestId, requestType, response)
+cppServer.setResponseHandler(function(socketId, requestId, requestType, responseArray)
 {
-   //io.to(socketId).emit(...);
-   //io.sockets.connected[socketId].emit(...);
+   /*console.log('socketId: ' + socketId);
+   console.log('requestId: ' + requestId);
+   console.log('requestType: ' + requestType);
+   console.log('responseArray: ' + responseArray);*/
+   
+   var response = { requestId: requestId }
+   var messageName;
+   
+   if (requestType == requestTypes.getMapIds)
+   {
+      messageName = 'mapIds';
+      response.content = responseArray;
+   }
+   
+   if (messageName)
+   {
+      io.sockets.connected[socketId].emit(messageName, response);
+   }
 });
 
 console.log('Map server listening on port 3001...');

@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://192.168.50.155:3001';
+   var url = 'http://albertine:3001';
    
    diaphneaMap.connect(url, onConnected);
    

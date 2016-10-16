@@ -19,7 +19,7 @@ var diaphneaMap =
          {
             var requestId = response.requestId.toString();
             callBacks[requestId](response.content);
-            callBacks[requestId] = undefined;
+            delete callBacks[requestId];
          }
       });  
    },

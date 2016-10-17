@@ -105,13 +105,15 @@ namespace map_server
     void MapServer::processRequest(std::string requestString)
     {
         std::vector<const char *> tokenVector;
-        char *req = new char[requestString.size() + 1];
-        strcpy(req, requestString.c_str());
-        char *token = strtok(req, " ");
+		int n = requestString.size() + 1;
+        char *req = new char[n];
+        strcpy_s(req, n, requestString.c_str());
+		char *context = 0;
+        char *token = strtok_s(req, " ", &context);
         while (token != 0)
         {
             tokenVector.push_back(token);
-            token = strtok(0, " ");
+            token = strtok_s(0, " ", &context);
         }
 
         Request *request = Request::createRequest(tokenVector);

@@ -21,5 +21,6 @@
 *.log
 /mongo-cxx-driver
 *mongo-cxx-driver_vc12
+*mongo-cxx-driver_vc14
 *.exe
 *InfoKml_Output

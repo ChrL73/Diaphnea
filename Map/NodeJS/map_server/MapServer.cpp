@@ -107,6 +107,8 @@ namespace map_server
         std::vector<const char *> tokenVector;
 		int n = requestString.size() + 1;
         char *req = new char[n];
+
+#if _WIN32
         strcpy_s(req, n, requestString.c_str());
 		char *context = 0;
         char *token = strtok_s(req, " ", &context);
@@ -115,6 +117,15 @@ namespace map_server
             tokenVector.push_back(token);
             token = strtok_s(0, " ", &context);
         }
+#else
+        strcpy(req, requestString.c_str());
+        char *token = strtok(req, " ");
+        while (token != 0)
+        {
+            tokenVector.push_back(token);
+            token = strtok(0, " ");
+        }
+#endif // _WIN32
 
         Request *request = Request::createRequest(tokenVector);
 
@@ -125,7 +136,7 @@ namespace map_server
         else
         {
             _coutMutex.lock();
-            std::cerr << "Incorrect request" << std::endl; // Todo: Handle this error on Node JS
+            std::cerr << "Incorrect request" << std::endl; // Todo: Handle this error in Node JS
             _coutMutex.unlock();
         }
 

@@ -130,7 +130,22 @@
       </polygonElement>
     </polygonElementList>
     <lineElementList/>
-    <pointElementList/>
+    <pointElementList>
+      <!--Villes Estuaire-->
+      <pointElement id="e_Libreville" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Libreville"/>
+          <name language="en" text="Libreville"/>
+        </name>
+      </pointElement>
+      <!--Villes Ogooué-Maritime-->
+      <pointElement id="e_PortGentil" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Port-Gentil"/>
+          <name language="en" text="Port-Gentil"/>
+        </name>
+      </pointElement>
+    </pointElementList>
   </elementList>
 
 </mapData>

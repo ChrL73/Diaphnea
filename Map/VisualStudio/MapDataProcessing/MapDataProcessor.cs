@@ -207,6 +207,8 @@ namespace MapDataProcessing
             mapCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
             polygonElementCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> pointElementCollection = database.GetCollection<BsonDocument>("point_elements");
+            pointElementCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
             itemCollection.DeleteMany(filter);
 

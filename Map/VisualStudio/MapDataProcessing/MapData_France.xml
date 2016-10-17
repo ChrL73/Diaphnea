@@ -189,6 +189,12 @@
           <name language="en" text="Bourg-en-Bresse"/>
         </name>
       </pointElement>
+      <pointElement id="e_Laon" look="tl_Prefecture">
+        <name>
+          <name language="fr" text="Laon"/>
+          <name language="en" text="Laon"/>
+        </name>
+      </pointElement>
     </pointElementList>
   </elementList>
   

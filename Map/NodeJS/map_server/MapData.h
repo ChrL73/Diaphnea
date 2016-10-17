@@ -8,7 +8,6 @@
 
 #include <map>
 #include <string>
-#include <vector>
 
 namespace map_server
 {
@@ -27,15 +26,15 @@ namespace map_server
         static bool _deleteOk;
         mongo::DBClientConnection _connection;
 
-        std::vector<std::string> _mapIdVector;
-        std::map<std::string, const Map *> _mapMap;
+        std::string _mapIds;
+        std::map<std::string, Map *> _mapMap;
 
     public:
         static MapData *instance(void);
         static int destroyInstance(void);
 
-        const std::vector<std::string>& getMapIdVector();
         const Map *getMap(const std::string& id);
+        const std::string& getMapIds(void) const { return _mapIds; }
     };
 }
 

@@ -8,18 +8,8 @@ namespace map_server
     {
         MapData *mapData = MapData::instance();
 
-        const std::vector<std::string>& mapIdVector = mapData->getMapIdVector();
-
-        int i, n = mapIdVector.size();
-
         _coutMutexPtr->lock();
-        std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_IDS << " ";
-        for (i = 0; i < n; ++i)
-        {
-            std::cout << mapIdVector[i];
-            if (i != n - 1) std::cout << " ";
-        }
-        std::cout << std::endl;
+        std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_IDS << " " << mapData->getMapIds() << std::endl;
         _coutMutexPtr->unlock();
     }
 }

@@ -47,13 +47,24 @@ namespace map_server
             std::cerr << "Exception in _connection.connect(\"localhost\")" << std::endl;
             _initOk = false;
         }
+
+        mongo::BSONObj projection = BSON("map" << 1);
+        auto cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbMap = cursor->next();
+            Map *map = new Map(dbMap.getField("_id").OID(), dbMap.getStringField("map"));
+            _mapMap.insert(std::pair<std::string, Map *>(map->getId(), map));
+            if (!_mapIds.empty()) _mapIds += " ";
+            _mapIds += map->getId();
+        }
     }
 
     MapData::~MapData()
     {
         _deleteOk = true;
 
-        std::map<std::string, const Map *>::iterator mapIt = _mapMap.begin();
+        std::map<std::string, Map *>::iterator mapIt = _mapMap.begin();
         for (; mapIt != _mapMap.end(); ++mapIt) delete (*mapIt).second;
 
         mongo::Status status = mongo::client::shutdown();
@@ -64,25 +75,14 @@ namespace map_server
         }
     }
 
-    const std::vector<std::string>& MapData::getMapIdVector()
-    {
-        if (_mapIdVector.empty())
-        {
-            mongo::BSONObj projection = BSON("map" << 1);
-            auto cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
-            while (cursor->more())
-            {
-                mongo::BSONObj dbMap = cursor->next();
-                const char *debug = dbMap.getStringField("map");
-                _mapIdVector.push_back(dbMap.getStringField("map"));
-            }
-        }
-
-        return _mapIdVector;
-    }
-
     const Map *MapData::getMap(const std::string& id)
     {
-        return 0;
+        std::map<std::string, Map *>::iterator mapIt = _mapMap.find(id);
+        if (mapIt == _mapMap.end()) return 0;
+
+        Map *map = (*mapIt).second;
+        if (!map->isLoaded()) map->load();
+        return map;
+
     }
 }

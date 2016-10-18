@@ -31,6 +31,7 @@ namespace map_server
     public:
         Map(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
             _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false) {}
+		~Map();
 
         const std::string& getId(void) const { return _id; }
         bool isLoaded(void) const { return _loaded; }

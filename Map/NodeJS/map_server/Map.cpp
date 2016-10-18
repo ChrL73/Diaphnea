@@ -5,6 +5,12 @@
 
 namespace map_server
 {
+	Map::~Map()
+	{
+		std::map<std::string, MapElement *>::iterator it = _elementMap.begin();
+		for (; it != _elementMap.end(); ++it) delete (*it).second;
+	}
+
     void Map::load(void)
     {
         _loaded = true;

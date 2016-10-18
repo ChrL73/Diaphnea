@@ -50,7 +50,22 @@ namespace map_server
             _threadSetMutex.unlock();
         }
 
-        return exitProcess();
+		if (!_softExit) exit(0);
+
+		_threadSetMutex.lock();
+		_stopRequested = true;
+		_threadSetMutex.unlock();
+
+		deleteThread.join();
+		timeoutThread.join();
+
+		if (MapData::destroyInstance() != 0)
+		{
+			std::cerr << "Error in MapData::destroyInstance()" << std::endl;
+			return -1;
+		}
+
+		return 0;
     }
 
     void MapServer::cleanThreads(void)
@@ -82,6 +97,12 @@ namespace map_server
 
             threadsToDelete.clear();
 
+			if (_stopRequested && _threadSet.empty())
+			{
+				_threadSetMutex.unlock();
+				break;
+			}
+
             _threadSetMutex.unlock();
         }
     }
@@ -95,10 +116,27 @@ namespace map_server
             _timeMutex.lock();
             if (time(0) - _timeoutReference > _timeoutInSeconds)
             {
-                _timeMutex.unlock();
-                exitProcess();
+				if (!_softExit)
+				{
+					_timeMutex.unlock();
+					exit(0);
+				}
+
+				_timeMutex.unlock();
+				break;
             }
             _timeMutex.unlock();
+
+			if (_softExit)
+			{
+				_threadSetMutex.lock();
+				if (_stopRequested)
+				{
+					_threadSetMutex.unlock();
+					break;
+				}
+				_threadSetMutex.unlock();
+			}
         }
     }
 
@@ -150,16 +188,5 @@ namespace map_server
         for (i = 0; i < n; ++i) std::cout << tokenVector[i] << (i == n - 1 ? "" : ", ");
         std::cout << std::endl;
         _coutMutex.unlock();*/
-    }
-
-    int MapServer::exitProcess(void)
-    {
-        if (MapData::destroyInstance() != 0)
-        {
-            std::cerr << "Error in QuizData::destroyInstance()" << std::endl;
-            exit(-1);
-        }
-
-        exit(0);
     }
 }

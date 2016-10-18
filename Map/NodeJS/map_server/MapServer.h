@@ -29,11 +29,13 @@ namespace map_server
         void checkTimeout(void);
 
         void processRequest(std::string requestString);
-        int exitProcess(void);
+
+		const bool _softExit;
+		bool _stopRequested;
 
     public:
-        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs) :
-            _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs), _checkTimeoutSleepMs(checkTimeoutSleepMs) {}
+        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
+            _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs), _checkTimeoutSleepMs(checkTimeoutSleepMs), _softExit(softExit), _stopRequested(false) {}
 
         int run(void);
     };

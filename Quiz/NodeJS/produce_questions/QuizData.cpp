@@ -248,7 +248,7 @@ namespace produce_questions
                 int i, answerCount = dbQuestion.getIntField("answer_count");
                 for (i = 0; i < answerCount; ++i)
                 {
-                    mongo::BSONObj dbAnswer = dbQuestion.getField("answers").Array()[i].Obj();
+                    mongo::BSONObj dbAnswer = dbQuestion.getField("answers").Array()[i].Obj(); // Todo: Call 'Array()' once, before the loop
                     const char *answer = dbAnswer.getField("answer").Obj().getStringField(_languageId);
                     const char *comment = dbAnswer.getField("comment").Obj().getStringField(_languageId);
                     answerVector.push_back(new TextAndComment(answer, comment));

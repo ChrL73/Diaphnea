@@ -5,6 +5,7 @@ namespace map_server
 {
     MapData *MapData::_instance = 0;
     bool MapData::_deleteOk = true;
+    std::mutex MapData::_mutex;
 
     MapData *MapData::instance(void)
     {

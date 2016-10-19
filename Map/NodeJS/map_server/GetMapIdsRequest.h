@@ -10,7 +10,7 @@ namespace map_server
         void execute(void);
 
     public:
-        GetMapIdsRequest(const char *socketId, const char *requestId) :
-            Request(socketId, requestId) {}
+        GetMapIdsRequest(const char *socketId, const char *requestId, bool sendResponse) :
+            Request(socketId, requestId, sendResponse) {}
     };
 }

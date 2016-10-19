@@ -10,6 +10,8 @@ function setResponseHandler(responseHandler)
 
 function sendRequest(request, recursiveCall)
 {
+   if (!recursiveCall) console.log('Request: ' + request);
+   
    try
    {
       cppProcess.stdin.write(request + '\n');
@@ -35,7 +37,7 @@ function sendRequest(request, recursiveCall)
             });
             
             sendResponse(tokenArray[0], Number(tokenArray[1]), tokenArray[2], tokenSubArray);
-            //console.log(response);
+            console.log('Response: ' + response);
          });
       });
       

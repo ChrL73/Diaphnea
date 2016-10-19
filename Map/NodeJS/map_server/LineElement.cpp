@@ -2,5 +2,7 @@
 
 namespace map_server
 {
-
+    void LineElement::load(void)
+    {
+    }
 }

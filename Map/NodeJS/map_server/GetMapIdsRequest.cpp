@@ -6,10 +6,21 @@ namespace map_server
 {
     void GetMapIdsRequest::execute(void)
     {
+        MapData::lock();
         MapData *mapData = MapData::instance();
 
-        _coutMutexPtr->lock();
-        std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_IDS << " " << mapData->getMapIds() << std::endl;
-        _coutMutexPtr->unlock();
+        if (_sendResponse)
+        {
+            std::string ids = mapData->getMapIds();
+            MapData::unlock();
+
+            _coutMutexPtr->lock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_IDS << " " << ids << std::endl;
+            _coutMutexPtr->unlock();
+        }
+        else
+        {
+            MapData::unlock();
+        }
     }
 }

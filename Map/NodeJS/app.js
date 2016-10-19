@@ -13,7 +13,7 @@ var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
 {
-   console.log(socket.id);
+   //console.log(socket.id);
    
    socket.on('getMapIds', function(request)
    {
@@ -41,6 +41,11 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    {
       messageName = 'mapIds';
       response.content = responseArray;
+   }
+   else if (requestType = requestTypes.getMapName)
+   {
+      messageName = 'mapName';
+      response.content = responseArray[0];
    }
    
    if (messageName)

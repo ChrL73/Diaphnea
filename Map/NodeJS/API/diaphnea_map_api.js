@@ -49,11 +49,6 @@ var diaphneaMap =
 
       };
 
-      this.getElementShortName = function(elementId, languageId, onElementShortName)
-      {
-
-      }
-
 
    }
 }

@@ -40,11 +40,25 @@ namespace map_server
 
     void MapServer::testInputLoop(void)
     {
-        char req[1024];
+        char req[128];
 
         int i;
         for (i = 0; i < 200000; ++i)
         {
+#if _WIN32
+			if (rand() % 2 == 0)
+			{
+				sprintf_s(req, 128, "%d %d 0", rand(), rand());
+			}
+			else
+			{
+				int draw = rand() % 4;
+				if (draw == 0) sprintf_s(req, 128, "%d %d 1 _France fr", rand(), rand());
+				else if (draw == 1) sprintf_s(req, 128, "%d %d 1 _France en", rand(), rand());
+				else if (draw == 2) sprintf_s(req, 128, "%d %d 1 _Gabon fr", rand(), rand());
+				else sprintf_s(req, 128, "%d %d 1 _Gabon en", rand(), rand());
+			}
+#else
             if (rand() % 2 == 0)
             {
                 sprintf(req, "%d %d 0", rand(), rand());
@@ -57,6 +71,7 @@ namespace map_server
                 else if (draw == 2) sprintf(req, "%d %d 1 _Gabon fr", rand(), rand());
                 else sprintf(req, "%d %d 1 _Gabon en", rand(), rand());
             }
+#endif
 
             //std::cout << "Request: "<< req << std::endl;
 

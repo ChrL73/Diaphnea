@@ -1,23 +1,32 @@
 $(function()
 {
-   var url = 'http://192.168.50.89:3001';
+   var url = 'http://192.168.50.138:3001';
+   mapServerInterface.createNewConnection(url, onConnected);
    
-   diaphneaMap.connect(url, onConnected);
-   
-   function onConnected()
+   function onConnected(mapServerConnection)
    {
-      diaphneaMap.getMapIds(function(mapIds)
+      mapServerConnection.getMapIds(function(mapIds)
       {
          console.log(mapIds);
       });
-        
+         
       var canvasId = 'canvas';
       var mapId = '_Gabon';
-      var map = new diaphneaMap.Map(mapId, canvasId);
+      var map = mapServerConnection.createNewMap(mapId, canvasId);
       
-      map.getMapName('fr', function(mapName)
+      map.getLanguages(function(mapLanguages)
+      {
+         console.log(mapLanguages);
+      });
+      
+      map.getName('fr', function(mapName)
       {
          console.log(mapName);
+      });
+      
+      map.getElementIds(function(elementIds)
+      {
+         console.log(elementIds);
       });
    }
 });

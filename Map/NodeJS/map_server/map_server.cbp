@@ -11,7 +11,6 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="mutexTest" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -52,8 +51,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="GetElementIdsRequest.cpp" />
+		<Unit filename="GetElementIdsRequest.h" />
 		<Unit filename="GetMapIdsRequest.cpp" />
 		<Unit filename="GetMapIdsRequest.h" />
+		<Unit filename="GetMapLanguagesRequest.cpp" />
+		<Unit filename="GetMapLanguagesRequest.h" />
 		<Unit filename="GetMapNameRequest.cpp" />
 		<Unit filename="GetMapNameRequest.h" />
 		<Unit filename="LineElement.cpp" />

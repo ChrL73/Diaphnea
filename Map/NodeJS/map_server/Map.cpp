@@ -23,6 +23,10 @@ namespace map_server
             mongo::BSONObj dbElement = cursor->next();
             PointElement *element = new PointElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+            if (_elementIdsJson.empty()) _elementIdsJson = "[\"";
+            else _elementIdsJson += "\",\"";
+            _elementIdsJson += element->getId();
         }
 
         cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
@@ -31,7 +35,12 @@ namespace map_server
             mongo::BSONObj dbElement = cursor->next();
             PolygonElement *element = new PolygonElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+            if (_elementIdsJson.empty()) _elementIdsJson = "[\"";
+            else _elementIdsJson += "\",\"";
+            _elementIdsJson += element->getId();
         }
+        if (!_elementIdsJson.empty()) _elementIdsJson += "\"]";
 
         cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
@@ -47,9 +56,15 @@ namespace map_server
                 const char *languageId = dbLanguage.getStringField("id");
                 const char *languageName = dbLanguage.getStringField("name");
                 _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
+
                 const char *mapName = dbName.getStringField(languageId);
                 _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
+
+                if (_languagesJson.empty()) _languagesJson = "[{\"id\":\"";
+                else _languagesJson += "\"},{\"id\":\"";
+                _languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
             }
+            if (!_languagesJson.empty()) _languagesJson += "\"}]";
 
             std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
             _sampleLengthVector.resize(dbResolutionVector.size());

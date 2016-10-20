@@ -56,9 +56,12 @@ namespace map_server
             mongo::BSONObj dbMap = cursor->next();
             Map *map = new Map(dbMap.getField("_id").OID(), dbMap.getStringField("map"), &_connection);
             _mapMap.insert(std::pair<std::string, Map *>(map->getId(), map));
-            if (!_mapIds.empty()) _mapIds += " ";
-            _mapIds += map->getId();
+
+            if (_mapIdsJson.empty()) _mapIdsJson = "[\"";
+            else _mapIdsJson += "\",\"";
+            _mapIdsJson += map->getId();
         }
+        if (!_mapIdsJson.empty()) _mapIdsJson += "\"]";
     }
 
     MapData::~MapData()

@@ -26,18 +26,11 @@ function sendRequest(request, recursiveCall)
          var responseArray = [];
          dataArray.forEach(function(s) { if (s.length > 0) responseArray.push(s); });
                
-         //console.log(array2.length.toString() + ' responses received:');
          responseArray.forEach(function(response)
          {
-            var tokenArray = response.split(' ');
-            var tokenSubArray = [];
-            tokenArray.forEach(function(token, i)
-            {
-               if (i > 2) tokenSubArray.push(token);
-            });
-            
-            sendResponse(tokenArray[0], Number(tokenArray[1]), tokenArray[2], tokenSubArray);
             console.log('Response: ' + response);
+            var tokenArray = response.split(' ');
+            sendResponse(tokenArray[0], Number(tokenArray[1]), tokenArray[2], JSON.parse(tokenArray[3]));
          });
       });
       

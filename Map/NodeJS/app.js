@@ -6,18 +6,31 @@ var cppServer = require('./cpp_server_interface');
 var requestTypes =
 {
    getMapIds: '0',
-   getMapName: '1'
+   getMapLanguages: '1',
+   getMapName: '2',
+   getElementIds: '3'
 };
+
+var responseNames =
+[
+   'mapIds',
+   'mapLanguages',
+   'mapName',
+   'elementIds'
+];
 
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
 {
-   //console.log(socket.id);
-   
    socket.on('getMapIds', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapIds);
+   });
+   
+   socket.on('getMapLanguages', function(request)
+   {
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapLanguages + ' ' + request.mapId);
    });
    
    socket.on('getMapName', function(request)
@@ -25,32 +38,22 @@ io.on('connection', function(socket)
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapName
                             + ' ' + request.mapId + ' ' + request.languageId);
    });
+   
+   socket.on('getElementIds', function(request)
+   {
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getElementIds + ' ' + request.mapId);
+   });
 });
 
-cppServer.setResponseHandler(function(socketId, requestId, requestType, responseArray)
+cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
 {
-   /*console.log('socketId: ' + socketId);
-   console.log('requestId: ' + requestId);
-   console.log('requestType: ' + requestType);
-   console.log('responseArray: ' + responseArray);*/
+   var messageName = responseNames[requestType];
+   var socket = io.sockets.connected[socketId];
    
-   var response = { requestId: requestId }
-   var messageName;
-   
-   if (requestType == requestTypes.getMapIds)
+   if (messageName && socket)
    {
-      messageName = 'mapIds';
-      response.content = responseArray;
-   }
-   else if (requestType = requestTypes.getMapName)
-   {
-      messageName = 'mapName';
-      response.content = responseArray[0];
-   }
-   
-   if (messageName)
-   {
-      io.sockets.connected[socketId].emit(messageName, response);
+      var response = { requestId: requestId, content: responseContent };
+      socket.emit(messageName, response);
    }
 });
 

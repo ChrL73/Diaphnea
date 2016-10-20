@@ -1,11 +1,11 @@
-#include "GetMapNameRequest.h"
+#include "GetMapLanguagesRequest.h"
 #include "MapData.h"
-#include "RequestTypeEnum.h"
 #include "Map.h"
+#include "RequestTypeEnum.h"
 
 namespace map_server
 {
-    void GetMapNameRequest::execute(void)
+    void GetMapLanguagesRequest::execute(void)
     {
         MapData::lock();
         MapData *mapData = MapData::instance();
@@ -13,11 +13,11 @@ namespace map_server
         const Map *map = mapData->getMap(_mapId);
         if (map != 0 && _sendResponse)
         {
-            std::string name = map->getName(_languageId);
+            std::string languages = map->getLanguagesJson();
             MapData::unlock();
 
             _coutMutexPtr->lock();
-            std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_NAME << " \"" << name << "\"" << std::endl;
+            std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_LANGUAGES << " " << languages << std::endl;
             _coutMutexPtr->unlock();
         }
         else

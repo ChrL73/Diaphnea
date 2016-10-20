@@ -11,7 +11,7 @@ namespace map_server
 
         if (_sendResponse)
         {
-            std::string ids = mapData->getMapIds();
+            std::string ids = mapData->getMapIdsJson();
             MapData::unlock();
 
             _coutMutexPtr->lock();

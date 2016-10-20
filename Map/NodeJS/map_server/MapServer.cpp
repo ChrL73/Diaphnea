@@ -12,6 +12,43 @@
 
 namespace map_server
 {
+    int MapServer::run(void)
+    {
+        Request::setCoutMutex(&_coutMutex);
+
+        MapData *mapData = MapData::instance();
+        if (mapData == 0)
+        {
+            std::cerr << "Error in MapData::instance()" << std::endl;
+            return -1;
+        }
+
+        _timeoutReference = time(0);
+
+        std::thread deleteThread(&MapServer::cleanThreads, this);
+        std::thread timeoutThread(&MapServer::checkTimeout, this, _softExit);
+		if (_softExit) timeoutThread.join();
+
+        if (_mutexTest) testInputLoop();
+        else inputLoop();
+
+		if (!_softExit) exit(0);
+
+		_threadSetMutex.lock();
+		_stopRequested = true;
+		_threadSetMutex.unlock();
+
+		deleteThread.join();
+
+		if (MapData::destroyInstance() != 0)
+		{
+			std::cerr << "Error in MapData::destroyInstance()" << std::endl;
+			return -1;
+		}
+
+		return 0;
+    }
+
     void MapServer::inputLoop(void)
     {
         while(true)
@@ -93,43 +130,6 @@ namespace map_server
             _threadSet.insert(threadInfo);
             _threadSetMutex.unlock();
         }
-    }
-
-    int MapServer::run(void)
-    {
-        Request::setCoutMutex(&_coutMutex);
-
-        MapData *mapData = MapData::instance();
-        if (mapData == 0)
-        {
-            std::cerr << "Error in MapData::instance()" << std::endl;
-            return -1;
-        }
-
-        _timeoutReference = time(0);
-
-        std::thread deleteThread(&MapServer::cleanThreads, this);
-        std::thread timeoutThread(&MapServer::checkTimeout, this, _softExit);
-		if (_softExit) timeoutThread.join();
-
-        if (_mutexTest) testInputLoop();
-        else inputLoop();
-
-		if (!_softExit) exit(0);
-
-		_threadSetMutex.lock();
-		_stopRequested = true;
-		_threadSetMutex.unlock();
-
-		deleteThread.join();
-
-		if (MapData::destroyInstance() != 0)
-		{
-			std::cerr << "Error in MapData::destroyInstance()" << std::endl;
-			return -1;
-		}
-
-		return 0;
     }
 
     void MapServer::cleanThreads(void)

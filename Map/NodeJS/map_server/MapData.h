@@ -29,7 +29,7 @@ namespace map_server
         mongo::DBClientConnection _connection;
         static std::mutex _mutex;
 
-        std::string _mapIds;
+        std::string _mapIdsJson;
         std::map<std::string, Map *> _mapMap;
 
     public:
@@ -40,7 +40,7 @@ namespace map_server
         static void unlock(void) { _mutex.unlock(); }
 
         const Map *getMap(const std::string& id);
-        const std::string& getMapIds(void) const { return _mapIds; }
+        const std::string& getMapIdsJson(void) const { return _mapIdsJson; }
     };
 }
 

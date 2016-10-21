@@ -1,11 +1,11 @@
-#include "GetElementIdsRequest.h"
+#include "GetMapInfoRequest.h"
 #include "MapData.h"
 #include "Map.h"
 #include "RequestTypeEnum.h"
 
 namespace map_server
 {
-    void GetElementIdsRequest::execute(void)
+    void GetMapInfoRequest::execute(void)
     {
         MapData::lock();
         MapData *mapData = MapData::instance();
@@ -13,11 +13,11 @@ namespace map_server
         const Map *map = mapData->getMap(_mapId);
         if (map != 0 && _sendResponse)
         {
-            std::string ids = map->getElementIdsJson();
+            std::string info = map->getInfoJson();
             MapData::unlock();
 
             _coutMutexPtr->lock();
-            std::cout << _socketId << " " << _requestId << " " << map_server::GET_ELEMENT_IDS << " " << ids << std::endl;
+            std::cout << _socketId << " " << _requestId << " " << map_server::GET_MAP_INFO << " " << info << std::endl;
             _coutMutexPtr->unlock();
         }
         else

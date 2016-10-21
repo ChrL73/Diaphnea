@@ -1,9 +1,7 @@
 #include "Request.h"
 #include "RequestTypeEnum.h"
 #include "GetMapIdsRequest.h"
-#include "GetMapLanguagesRequest.h"
-#include "GetMapNameRequest.h"
-#include "GetElementIdsRequest.h"
+#include "GetMapInfoRequest.h"
 
 #include <cstdlib>
 
@@ -20,20 +18,10 @@ namespace map_server
         {
             return new GetMapIdsRequest(tokenVector[0], tokenVector[1], sendResponse);
         }
-        else if (requestType == map_server::GET_MAP_LANGUAGES)
+        else if (requestType == map_server::GET_MAP_INFO)
         {
             if (tokenVector.size() < 4) return 0;
-            return new GetMapLanguagesRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
-        }
-        else if (requestType == map_server::GET_MAP_NAME)
-        {
-            if (tokenVector.size() < 5) return 0;
-            return new GetMapNameRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
-        }
-        else if (requestType == map_server::GET_ELEMENT_IDS)
-        {
-            if (tokenVector.size() < 4) return 0;
-            return new GetElementIdsRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
+            return new GetMapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
         }
 
         return 0;

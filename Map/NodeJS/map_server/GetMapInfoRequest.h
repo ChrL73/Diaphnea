@@ -4,7 +4,7 @@
 
 namespace map_server
 {
-    class GetMapLanguagesRequest : public Request
+    class GetMapInfoRequest : public Request
     {
     private:
         const char * const _mapId;
@@ -12,7 +12,7 @@ namespace map_server
         void execute(void);
 
     public:
-        GetMapLanguagesRequest(const char *socketId, const char *requestId, const char *mapId, bool sendResponse) :
+        GetMapInfoRequest(const char *socketId, const char *requestId, const char *mapId, bool sendResponse) :
             Request(socketId, requestId, sendResponse), _mapId(mapId) {}
     };
 }

@@ -14,6 +14,7 @@ namespace map_server
     void Map::load(void)
     {
         _loaded = true;
+        std::string elementIdsJson, languagesJson, namesJson;
 
         mongo::BSONObj projection = BSON("id" << 1);
 
@@ -24,9 +25,9 @@ namespace map_server
             PointElement *element = new PointElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
-            if (_elementIdsJson.empty()) _elementIdsJson = "[\"";
-            else _elementIdsJson += "\",\"";
-            _elementIdsJson += element->getId();
+            if (elementIdsJson.empty()) elementIdsJson = "[\"";
+            else elementIdsJson += "\",\"";
+            elementIdsJson += element->getId();
         }
 
         cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
@@ -36,11 +37,11 @@ namespace map_server
             PolygonElement *element = new PolygonElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
-            if (_elementIdsJson.empty()) _elementIdsJson = "[\"";
-            else _elementIdsJson += "\",\"";
-            _elementIdsJson += element->getId();
+            if (elementIdsJson.empty()) elementIdsJson = "[\"";
+            else elementIdsJson += "\",\"";
+            elementIdsJson += element->getId();
         }
-        if (!_elementIdsJson.empty()) _elementIdsJson += "\"]";
+        if (!elementIdsJson.empty()) elementIdsJson += "\"]";
 
         cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
@@ -60,11 +61,16 @@ namespace map_server
                 const char *mapName = dbName.getStringField(languageId);
                 _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
 
-                if (_languagesJson.empty()) _languagesJson = "[{\"id\":\"";
-                else _languagesJson += "\"},{\"id\":\"";
-                _languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
+                if (languagesJson.empty()) languagesJson = "[{\"id\":\"";
+                else languagesJson += "\"},{\"id\":\"";
+                languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
+
+                if (namesJson.empty()) namesJson = "{\"";
+                else namesJson += "\",\"";
+                namesJson += std::string(languageId) + "\":\"" + mapName;
             }
-            if (!_languagesJson.empty()) _languagesJson += "\"}]";
+            if (!languagesJson.empty()) languagesJson += "\"}]";
+            if (!namesJson.empty()) namesJson += "\"}";
 
             std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
             _sampleLengthVector.resize(dbResolutionVector.size());
@@ -76,13 +82,11 @@ namespace map_server
                 double sampleLength = dbResolution.getField("sample_length").Double();
                 _sampleLengthVector[index] = sampleLength;
             }
-        }
-    }
 
-    const std::string& Map::getName(const std::string& languageId) const
-    {
-        std::map<std::string, std::string>::const_iterator it = _nameMap.find(languageId);
-        if (it != _nameMap.end()) return (*it).second;
-        return _emptyString;
+            if (elementIdsJson.empty()) elementIdsJson = "undefined";
+            if (languagesJson.empty()) languagesJson = "undefined";
+            if (namesJson.empty()) namesJson = "undefined";
+            _infoJson = "{\"elementIds\":" + elementIdsJson + ",\"languages\":" + languagesJson + ",\"names\":" + namesJson + "}";
+        }
     }
 }

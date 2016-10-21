@@ -6,17 +6,15 @@ var cppServer = require('./cpp_server_interface');
 var requestTypes =
 {
    getMapIds: '0',
-   getMapLanguages: '1',
-   getMapName: '2',
-   getElementIds: '3'
+   getMapInfo: '1',
+   getElementInfo: '2'
 };
 
 var responseNames =
 [
    'mapIds',
-   'mapLanguages',
-   'mapName',
-   'elementIds'
+   'mapInfo',
+   'elementInfo'
 ];
 
 var io = require('socket.io').listen(server);
@@ -28,20 +26,14 @@ io.on('connection', function(socket)
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapIds);
    });
    
-   socket.on('getMapLanguages', function(request)
+   socket.on('getMapInfo', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapLanguages + ' ' + request.mapId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapInfo + ' ' + request.mapId);
    });
    
-   socket.on('getMapName', function(request)
+   socket.on('getElementInfo', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getMapName
-                            + ' ' + request.mapId + ' ' + request.languageId);
-   });
-   
-   socket.on('getElementIds', function(request)
-   {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getElementIds + ' ' + request.mapId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getElementInfo + ' ' + request.mapId + ' ' + request.elementId);
    });
 });
 

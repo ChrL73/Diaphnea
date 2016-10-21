@@ -51,14 +51,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="GetElementIdsRequest.cpp" />
-		<Unit filename="GetElementIdsRequest.h" />
+		<Unit filename="GetElementInfoRequest.cpp" />
+		<Unit filename="GetElementInfoRequest.h" />
 		<Unit filename="GetMapIdsRequest.cpp" />
 		<Unit filename="GetMapIdsRequest.h" />
-		<Unit filename="GetMapLanguagesRequest.cpp" />
-		<Unit filename="GetMapLanguagesRequest.h" />
-		<Unit filename="GetMapNameRequest.cpp" />
-		<Unit filename="GetMapNameRequest.h" />
+		<Unit filename="GetMapInfoRequest.cpp" />
+		<Unit filename="GetMapInfoRequest.h" />
 		<Unit filename="LineElement.cpp" />
 		<Unit filename="LineElement.h" />
 		<Unit filename="Map.cpp" />

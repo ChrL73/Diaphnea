@@ -23,13 +23,13 @@ namespace map_server
         bool _loaded;
         std::string _emptyString;
 
-        std::string _languagesJson;
         std::map<std::string, std::string> _languageNameMap;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
 
-        std::string _elementIdsJson;
         std::map<std::string, MapElement *> _elementMap;
+
+        std::string _infoJson;
 
     public:
         Map(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
@@ -40,8 +40,6 @@ namespace map_server
         bool isLoaded(void) const { return _loaded; }
         void load(void);
 
-        const std::string& getName(const std::string& languageId) const;
-        const std::string& getLanguagesJson(void) const { return _languagesJson; }
-        const std::string& getElementIdsJson(void) const { return _elementIdsJson; }
+        const std::string& getInfoJson(void) const { return _infoJson; }
     };
 }

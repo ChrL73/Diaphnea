@@ -2,134 +2,96 @@ var mapServerInterface =
 {
    createNewConnection: function(url, onConnected)
    {
-      var connection = new Connection(url, function()
+      var connection = new Connection(function()
       {
          onConnected(connection);
       });
 
-      function Connection(url, onConnected)
+      function Connection(onConnected)
       {   
          var socket;
          var requestCounter = -1;
-         var callBacks = {}; 
+         var callBacks = {};
+         
+         var mapIds;
+         this.getMapIds = function() { return mapIds; }
 
          $.getScript(url + '/socket.io/socket.io.js', function()
          {         
             socket = io(url);
-
-            socket.on('mapIds', handleSimpleResponse);
-            socket.on('mapLanguages', handleSimpleResponse);
-            socket.on('mapName', handleSimpleResponse);
-            socket.on('elementIds', handleSimpleResponse);
-
-            onConnected();   
-
-            function handleSimpleResponse(response)
+            
+            socket.on('mapIds', function(response)
+            {
+               if (!mapIds)
+               {
+                  mapIds = response.content;
+                  onConnected();
+               }
+            });
+            
+            var id = ++requestCounter;
+            var request = { id: id };
+            socket.emit('getMapIds', request);
+            
+            socket.on('mapInfo', handleResponse);
+            
+            function handleResponse(response)
             {
                var requestId = response.requestId.toString();
                callBacks[requestId](response.content);
                delete callBacks[requestId];
             }
          });  
-
-         var mapIds;
-         this.getMapIds = function(onMapIds)
+         
+         this.loadMap = function(mapId, canvasId, onMapLoaded)
          {
-            if (mapIds)
+            var map = new Map(mapId, canvasId, function()
             {
-               onMapIds(mapIds);
-            }
-            else
-            {
-               var id = ++requestCounter;
-               var request = { id: id };
-               callBacks[id.toString()] = setMapIds;  
-               socket.emit('getMapIds', request);
-            }
-
-            function setMapIds(responseContent)
-            {
-               mapIds = responseContent;
-               onMapIds(responseContent);
-            }
-         };
-
-         this.createNewMap = function(mapId, canvasId)
+               onMapLoaded(map);
+            });
+         }
+         
+         function Map(mapId, canvasId, onMapLoaded)
          {
-            return new Map(mapId, canvasId);
-         };
-
-         function Map(mapId, canvasId)
-         {
-            var languages;
-            this.getLanguages = function(onMapLanguages)
-            {
-               if (languages)
-               {
-                  onMapLanguages(languages);
-               }
-               else
-               {
-                  var id = ++requestCounter;
-                  var request = { id: id, mapId: mapId };
-                  callBacks[id.toString()] = setMapLanguages;
-                  socket.emit('getMapLanguages', request);
-               }
-
-               function setMapLanguages(responseContent)
-               {
-                  languages = responseContent;
-                  onMapLanguages(responseContent);
-               }
-            };
-
-            names = {};
-            this.getName = function(languageId, onMapName)
-            {
-               if (names[languageId])
-               {
-                  onMapName(names[languageId]);
-               }
-               else
-               {
-                  var id = ++requestCounter;
-                  var request = { id: id, mapId: mapId, languageId: languageId };
-                  callBacks[id.toString()] = setMapName;
-                  socket.emit('getMapName', request);
-               }
-
-               function setMapName(responseContent)
-               {
-                  names[languageId] = responseContent;
-                  onMapName(responseContent);
-               }
-            };
+            var mapInfo;
+            this.getLanguages = function() { return mapInfo.languages; };
+            this.getName = function(languageId) { return mapInfo.names[languageId]; };
+            this.getElementIds = function() { return mapInfo.elementIds; };
             
-            var elementsIds;
-            this.getElementIds = function(onElementIds)
-            {
-               if (elementsIds)
-               {
-                  onElementIds(elementsIds);
-               }
-               else
-               {
-                  var id = ++requestCounter;
-                  var request = { id: id, mapId: mapId };
-                  callBacks[id.toString()] = setElementIds;
-                  socket.emit('getElementIds', request);
-               }
+            var id = ++requestCounter;
+            var request = { id: id, mapId: mapId };
+            callBacks[id.toString()] = setMapInfo;
+            socket.emit('getMapInfo', request);
 
-               function setElementIds(responseContent)
-               {
-                  elementsIds = responseContent;
-                  onElementIds(responseContent);
-               }
-            };
-            
-            function Element(elementId)
+            function setMapInfo(responseContent)
             {
+               mapInfo = responseContent;
+               onMapLoaded();
+            }
+            
+            this.loadElement = function(elementId, onElementLoad)
+            {
+               var element = new Element(elementId, function()
+               {
+                  onElementLoad(element);
+               });
                
+               function Element(elementId, onElementLoad)
+               {
+                  var names;
+                  this.getName = function(languageId) { return names[languageId]; }
+                  
+                  var id = ++requestCounter;
+                  var request = { id: id, mapId: mapId, elementId: elementId };
+                  callBacks[id.toString()] = setElementInfo;
+                  socket.emit('getElementInfo', request);
+
+                  function setElementInfo(responseContent)
+                  {
+                     names = responseContent;
+                     onElementLoad();
+                  }
+               }
             }
          }
       }

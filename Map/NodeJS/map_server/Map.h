@@ -8,6 +8,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 namespace map_server
 {
@@ -24,6 +25,7 @@ namespace map_server
         std::string _emptyString;
 
         std::map<std::string, std::string> _languageNameMap;
+        std::vector<std::string> _languageIdVector;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
 
@@ -41,5 +43,6 @@ namespace map_server
         void load(void);
 
         const std::string& getInfoJson(void) const { return _infoJson; }
+        MapElement *getElement(const std::string& id);
     };
 }

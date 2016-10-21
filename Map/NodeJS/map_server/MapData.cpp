@@ -79,7 +79,7 @@ namespace map_server
         }
     }
 
-    const Map *MapData::getMap(const std::string& id)
+    Map *MapData::getMap(const std::string& id)
     {
         std::map<std::string, Map *>::iterator mapIt = _mapMap.find(id);
         if (mapIt == _mapMap.end()) return 0;
@@ -87,6 +87,5 @@ namespace map_server
         Map *map = (*mapIt).second;
         if (!map->isLoaded()) map->load();
         return map;
-
     }
 }

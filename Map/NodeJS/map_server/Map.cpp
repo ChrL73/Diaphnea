@@ -11,6 +11,17 @@ namespace map_server
 		for (; it != _elementMap.end(); ++it) delete (*it).second;
 	}
 
+
+    MapElement *Map::getElement(const std::string& id)
+    {
+        std::map<std::string, MapElement *>::iterator elementIt = _elementMap.find(id);
+        if (elementIt == _elementMap.end()) return 0;
+
+        MapElement *element = (*elementIt).second;
+        if (!element->isLoaded()) element->load();
+        return element;
+    }
+
     void Map::load(void)
     {
         _loaded = true;
@@ -22,7 +33,7 @@ namespace map_server
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
-            PointElement *element = new PointElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
+            PointElement *element = new PointElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"), _connectionPtr, &_languageIdVector);
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
             if (elementIdsJson.empty()) elementIdsJson = "[\"";
@@ -34,7 +45,7 @@ namespace map_server
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
-            PolygonElement *element = new PolygonElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"));
+            PolygonElement *element = new PolygonElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"), _connectionPtr, &_languageIdVector);
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
             if (elementIdsJson.empty()) elementIdsJson = "[\"";
@@ -57,6 +68,7 @@ namespace map_server
                 const char *languageId = dbLanguage.getStringField("id");
                 const char *languageName = dbLanguage.getStringField("name");
                 _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
+                _languageIdVector.push_back(languageId);
 
                 const char *mapName = dbName.getStringField(languageId);
                 _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));

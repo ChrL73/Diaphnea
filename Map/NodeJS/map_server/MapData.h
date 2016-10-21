@@ -39,7 +39,7 @@ namespace map_server
         static void lock(void) { _mutex.lock(); }
         static void unlock(void) { _mutex.unlock(); }
 
-        const Map *getMap(const std::string& id);
+        Map *getMap(const std::string& id);
         const std::string& getMapIdsJson(void) const { return _mapIdsJson; }
     };
 }

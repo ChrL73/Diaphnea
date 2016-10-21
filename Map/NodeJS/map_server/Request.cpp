@@ -2,6 +2,7 @@
 #include "RequestTypeEnum.h"
 #include "GetMapIdsRequest.h"
 #include "GetMapInfoRequest.h"
+#include "GetElementInfoRequest.h"
 
 #include <cstdlib>
 
@@ -22,6 +23,11 @@ namespace map_server
         {
             if (tokenVector.size() < 4) return 0;
             return new GetMapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
+        }
+        else if (requestType == map_server::GET_ELEMENT_INFO)
+        {
+            if (tokenVector.size() < 5) return 0;
+            return new GetElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
         }
 
         return 0;

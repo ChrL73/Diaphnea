@@ -10,8 +10,8 @@ namespace map_server
         void load(void);
 
     public:
-        PolygonElement(const mongo::OID& mongoId, const std::string& id) :
-            MapElement(mongoId, id) {}
+        PolygonElement(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr, std::vector<std::string> *languageIdVectorPtr) :
+            MapElement(mongoId, id, connectionPtr, languageIdVectorPtr) {}
     };
 }
 

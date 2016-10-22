@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://192.168.50.52:3001';
+   var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -17,29 +17,32 @@ $(function()
          console.log(map.getName('fr'));
          console.log(map.getElementIds());
          
-         var noya, estuaire, woleuNtem;
+         var libreville, estuaire, woleuNtem;
          
-         map.loadElement('Noya', onElementLoaded);
+         map.loadElement('Libreville', onElementLoaded);
          
          function onElementLoaded(element)
          {
-            noya = element;
-            console.log(noya.getName('fr'));
+            libreville = element;
+            console.log(libreville.getName('fr'));
             
-            //map.loadElements(['Estuaire', 'WoleuNtem'], onElementsLoaded);
+            map.loadElements(['Estuaire', 'WoleuNtem'], onElementsLoaded);
          }
          
-         /*function onElementsLoaded(elements)
+         function onElementsLoaded(elements)
          {
             estuaire = elements[0];
             woleuNtem = elements[1];
+             
+            console.log(estuaire.getName('fr'));
+            console.log(woleuNtem.getName('fr'));
             
-            noya.show();
+            /*libreville.show();
             estuaire.show();
             woleuNtem.show();
-            noya.hide();
-            map.render();
-         }*/
+            libreville.hide();
+            map.render();*/
+         }
       }
    }
 });

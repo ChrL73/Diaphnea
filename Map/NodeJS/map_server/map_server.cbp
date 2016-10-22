@@ -53,6 +53,8 @@
 		</Compiler>
 		<Unit filename="GetElementInfoRequest.cpp" />
 		<Unit filename="GetElementInfoRequest.h" />
+		<Unit filename="GetElementsInfoRequest.cpp" />
+		<Unit filename="GetElementsInfoRequest.h" />
 		<Unit filename="GetMapIdsRequest.cpp" />
 		<Unit filename="GetMapIdsRequest.h" />
 		<Unit filename="GetMapInfoRequest.cpp" />

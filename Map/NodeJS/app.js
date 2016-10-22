@@ -7,14 +7,16 @@ var requestTypes =
 {
    getMapIds: '0',
    getMapInfo: '1',
-   getElementInfo: '2'
+   getElementInfo: '2',
+   getElementsInfo: '3'
 };
 
 var responseNames =
 [
    'mapIds',
    'mapInfo',
-   'elementInfo'
+   'elementInfo',
+   'elementsInfo'
 ];
 
 var io = require('socket.io').listen(server);
@@ -34,6 +36,16 @@ io.on('connection', function(socket)
    socket.on('getElementInfo', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + requestTypes.getElementInfo + ' ' + request.mapId + ' ' + request.elementId);
+   });
+   
+   socket.on('getElementsInfo', function(request)
+   {
+      var req = socket.id + ' ' + request.id + ' ' + requestTypes.getElementsInfo + ' ' + request.mapId;
+      request.elementIds.forEach(function(elementId)
+      {
+         req += ' ' + elementId;
+      });
+      cppServer.sendRequest(req);
    });
 });
 

@@ -20,6 +20,8 @@ namespace map_server
         std::map<std::string, std::string> _nameMap;
         std::string _infoJson;
 
+        void loadCommon(mongo::BSONObj dbElement);
+
     public:
         MapElement(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr, std::vector<std::string> *languageIdVectorPtr) :
             _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _languageIdVectorPtr(languageIdVectorPtr), _loaded(false) {}

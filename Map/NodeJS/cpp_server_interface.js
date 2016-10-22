@@ -29,8 +29,18 @@ function sendRequest(request, recursiveCall)
          responseArray.forEach(function(response)
          {
             console.log('Response: ' + response);
-            var tokenArray = response.split(' ');
-            sendResponse(tokenArray[0], Number(tokenArray[1]), tokenArray[2], JSON.parse(tokenArray[3]));
+            
+            var i = response.indexOf(' ');
+            var socketId = response.substring(0, i);
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestId = Number(response.substring(0, i));
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestType = response.substring(0, i);
+            var responseContent = JSON.parse(response.substring(i + 1));
+            
+            sendResponse(socketId, requestId, requestType, responseContent);
          });
       });
       

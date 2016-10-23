@@ -60,6 +60,8 @@ var mapServerInterface =
          
          function Map(mapId, canvasId, mapInfo)
          {
+            var visibleElements = {};
+            
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
             this.getElementIds = function() { return mapInfo.elementIds; };  
@@ -98,6 +100,28 @@ var mapServerInterface =
             function Element(elementId, elementInfo)
             {
                this.getName = function(languageId) { return elementInfo.names[languageId]; }
+               
+               this.show = function() { visibleElements[elementId] = true; }
+               this.hide = function() { visibleElements[elementId] = false; }
+            }
+            
+            this.render = function()
+            {
+               var elementIds = [];
+               Object.getOwnPropertyNames(visibleElements).forEach(function(elementId)
+               {
+                  if (visibleElements[elementId]) elementIds.push(elementId);
+               });
+               
+               var id = ++requestCounter;
+               var request = { id: id, mapId: mapId, elementIds: elementIds };
+               callBacks[id.toString()] = renderStep;
+               socket.emit('render', request);
+               
+               function renderStep()
+               {
+                  
+               }
             }
          }
       }

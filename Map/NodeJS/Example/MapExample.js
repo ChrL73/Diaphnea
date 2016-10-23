@@ -37,11 +37,11 @@ $(function()
             console.log(estuaire.getName('fr'));
             console.log(woleuNtem.getName('fr'));
             
-            /*libreville.show();
+            libreville.show();
             estuaire.show();
             woleuNtem.show();
             libreville.hide();
-            map.render();*/
+            map.render();
          }
       }
    }

@@ -73,6 +73,8 @@
 		<Unit filename="PointElement.h" />
 		<Unit filename="PolygonElement.cpp" />
 		<Unit filename="PolygonElement.h" />
+		<Unit filename="RenderRequest.cpp" />
+		<Unit filename="RenderRequest.h" />
 		<Unit filename="Request.cpp" />
 		<Unit filename="Request.h" />
 		<Unit filename="RequestTypeEnum.h" />

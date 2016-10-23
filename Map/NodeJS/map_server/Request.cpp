@@ -4,6 +4,7 @@
 #include "GetMapInfoRequest.h"
 #include "GetElementInfoRequest.h"
 #include "GetElementsInfoRequest.h"
+#include "RenderRequest.h"
 
 #include <cstdlib>
 
@@ -37,6 +38,14 @@ namespace map_server
             std::vector<const char *> elementIds;
             for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
             return new GetElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
+        }
+        else if (requestType == map_server::RENDER)
+        {
+            int i, n = tokenVector.size();
+            if (n < 5) return 0;
+            std::vector<const char *> elementIds;
+            for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
         }
 
         return 0;

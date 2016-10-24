@@ -101,15 +101,61 @@
   <xsd:complexType name="XmlPolygonLook">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
+    <xsd:attribute name="contourZIndex" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="contourAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourSize" type="PositiveDouble" use="required" />
+    <xsd:attribute name="fillLightRatio" type="RatioType" use="required" />
+    <xsd:attribute name="fillZIndex" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="textAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textSize" type="PositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlLineLook">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlLineLookId" use="required" />
+    <xsd:attribute name="lineZIndex" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="lineAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="lineRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="lineGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="lineBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="lineSize" type="PositiveDouble" use="required" />
+    <xsd:attribute name="textAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textSize" type="PositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlPointLook">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlPointLookId" use="required" />
+    <xsd:attribute name="pointZIndex" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="pointAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="pointRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="pointGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="pointBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="pointSize" type="PositiveDouble" use="required" />
+    <xsd:attribute name="textAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textSize" type="PositiveDouble" use="required" />
   </xsd:complexType>
+  <xsd:simpleType name="RatioType">
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="1" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PositiveDouble">
+    <xsd:restriction base="xsd:double">
+      <xsd:minExclusive value="0" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlElementList">
     <xsd:sequence>
       <xsd:element name="polygonElementList" type="XmlPolygonElementList" minOccurs="1" maxOccurs="1" />

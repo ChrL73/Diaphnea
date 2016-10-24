@@ -60,7 +60,9 @@
     <Compile Include="KmlFileData.cs" />
     <Compile Include="KmlFileTypeEnum.cs" />
     <Compile Include="KmlWriter.cs" />
+    <Compile Include="LineLook.cs" />
     <Compile Include="LineMapElement.cs" />
+    <Compile Include="Look.cs" />
     <Compile Include="MapData.cs" />
     <Compile Include="MapDataProcessingMain.cs" />
     <Compile Include="MapDataProcessor.cs" />
@@ -69,7 +71,9 @@
     <Compile Include="OrientationEnum.cs" />
     <Compile Include="OrientedLineList.cs" />
     <Compile Include="OrientedPolygonLinePart.cs" />
+    <Compile Include="PointLook.cs" />
     <Compile Include="PointMapElement.cs" />
+    <Compile Include="PolygonLook.cs" />
     <Compile Include="PolygonMapElement.cs" />
     <Compile Include="PolygonLinePart.cs" />
     <Compile Include="PolygonPolygonPart.cs" />
@@ -91,7 +95,9 @@
     <Content Include="MapData_France.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MapData_Gabon.xml" />
+    <Content Include="MapData_Gabon.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -539,6 +539,28 @@ public partial class XmlPointLook {
     
     private string idField;
     
+    private string pointZIndexField;
+    
+    private byte pointAlphaField;
+    
+    private byte pointRedField;
+    
+    private byte pointGreenField;
+    
+    private byte pointBlueField;
+    
+    private double pointSizeField;
+    
+    private byte textAlphaField;
+    
+    private byte textRedField;
+    
+    private byte textGreenField;
+    
+    private byte textBlueField;
+    
+    private double textSizeField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
     public string id {
@@ -547,6 +569,127 @@ public partial class XmlPointLook {
         }
         set {
             this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string pointZIndex {
+        get {
+            return this.pointZIndexField;
+        }
+        set {
+            this.pointZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte pointAlpha {
+        get {
+            return this.pointAlphaField;
+        }
+        set {
+            this.pointAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte pointRed {
+        get {
+            return this.pointRedField;
+        }
+        set {
+            this.pointRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte pointGreen {
+        get {
+            return this.pointGreenField;
+        }
+        set {
+            this.pointGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte pointBlue {
+        get {
+            return this.pointBlueField;
+        }
+        set {
+            this.pointBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double pointSize {
+        get {
+            return this.pointSizeField;
+        }
+        set {
+            this.pointSizeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textAlpha {
+        get {
+            return this.textAlphaField;
+        }
+        set {
+            this.textAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textRed {
+        get {
+            return this.textRedField;
+        }
+        set {
+            this.textRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textGreen {
+        get {
+            return this.textGreenField;
+        }
+        set {
+            this.textGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textBlue {
+        get {
+            return this.textBlueField;
+        }
+        set {
+            this.textBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double textSize {
+        get {
+            return this.textSizeField;
+        }
+        set {
+            this.textSizeField = value;
         }
     }
 }
@@ -560,6 +703,28 @@ public partial class XmlLineLook {
     
     private string idField;
     
+    private string lineZIndexField;
+    
+    private byte lineAlphaField;
+    
+    private byte lineRedField;
+    
+    private byte lineGreenField;
+    
+    private byte lineBlueField;
+    
+    private double lineSizeField;
+    
+    private byte textAlphaField;
+    
+    private byte textRedField;
+    
+    private byte textGreenField;
+    
+    private byte textBlueField;
+    
+    private double textSizeField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
     public string id {
@@ -568,6 +733,127 @@ public partial class XmlLineLook {
         }
         set {
             this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string lineZIndex {
+        get {
+            return this.lineZIndexField;
+        }
+        set {
+            this.lineZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte lineAlpha {
+        get {
+            return this.lineAlphaField;
+        }
+        set {
+            this.lineAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte lineRed {
+        get {
+            return this.lineRedField;
+        }
+        set {
+            this.lineRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte lineGreen {
+        get {
+            return this.lineGreenField;
+        }
+        set {
+            this.lineGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte lineBlue {
+        get {
+            return this.lineBlueField;
+        }
+        set {
+            this.lineBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double lineSize {
+        get {
+            return this.lineSizeField;
+        }
+        set {
+            this.lineSizeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textAlpha {
+        get {
+            return this.textAlphaField;
+        }
+        set {
+            this.textAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textRed {
+        get {
+            return this.textRedField;
+        }
+        set {
+            this.textRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textGreen {
+        get {
+            return this.textGreenField;
+        }
+        set {
+            this.textGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textBlue {
+        get {
+            return this.textBlueField;
+        }
+        set {
+            this.textBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double textSize {
+        get {
+            return this.textSizeField;
+        }
+        set {
+            this.textSizeField = value;
         }
     }
 }
@@ -581,6 +867,32 @@ public partial class XmlPolygonLook {
     
     private string idField;
     
+    private string contourZIndexField;
+    
+    private byte contourAlphaField;
+    
+    private byte contourRedField;
+    
+    private byte contourGreenField;
+    
+    private byte contourBlueField;
+    
+    private double contourSizeField;
+    
+    private double fillLightRatioField;
+    
+    private string fillZIndexField;
+    
+    private byte textAlphaField;
+    
+    private byte textRedField;
+    
+    private byte textGreenField;
+    
+    private byte textBlueField;
+    
+    private double textSizeField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
     public string id {
@@ -589,6 +901,149 @@ public partial class XmlPolygonLook {
         }
         set {
             this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string contourZIndex {
+        get {
+            return this.contourZIndexField;
+        }
+        set {
+            this.contourZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourAlpha {
+        get {
+            return this.contourAlphaField;
+        }
+        set {
+            this.contourAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourRed {
+        get {
+            return this.contourRedField;
+        }
+        set {
+            this.contourRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourGreen {
+        get {
+            return this.contourGreenField;
+        }
+        set {
+            this.contourGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourBlue {
+        get {
+            return this.contourBlueField;
+        }
+        set {
+            this.contourBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double contourSize {
+        get {
+            return this.contourSizeField;
+        }
+        set {
+            this.contourSizeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double fillLightRatio {
+        get {
+            return this.fillLightRatioField;
+        }
+        set {
+            this.fillLightRatioField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string fillZIndex {
+        get {
+            return this.fillZIndexField;
+        }
+        set {
+            this.fillZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textAlpha {
+        get {
+            return this.textAlphaField;
+        }
+        set {
+            this.textAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textRed {
+        get {
+            return this.textRedField;
+        }
+        set {
+            this.textRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textGreen {
+        get {
+            return this.textGreenField;
+        }
+        set {
+            this.textGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textBlue {
+        get {
+            return this.textBlueField;
+        }
+        set {
+            this.textBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double textSize {
+        get {
+            return this.textSizeField;
+        }
+        set {
+            this.textSizeField = value;
         }
     }
 }

@@ -73,8 +73,8 @@ namespace MapDataProcessing
             {
                 BsonDocument pointDocument = new BsonDocument()
                 {
-                    { "x", x},
-                    { "y", y}
+                    { "x", x },
+                    { "y", y }
                 };
 
                 return pointDocument;

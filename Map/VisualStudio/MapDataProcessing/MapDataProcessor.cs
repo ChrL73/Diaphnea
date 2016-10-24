@@ -98,21 +98,21 @@ namespace MapDataProcessing
             foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList)
             {
                 String id = xmlPolygonElement.id.Substring(2);
-                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName);
+                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName, xmlPolygonElement.look);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
             {
                 String id = xmlLineElement.id.Substring(2);
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName);
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.look);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
             {
                 String id = xmlPointElement.id.Substring(2);
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName);
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.look);
                 _elementDictionary.Add(id, pointMapElement);
             }
 
@@ -254,6 +254,17 @@ namespace MapDataProcessing
                 { "resolutions", resolutionArray }
             };
             mapDocument.AddRange(resolutionsDocument);
+
+            BsonArray lookArray = new BsonArray();
+            foreach (Look look in _mapData.LookList)
+            {
+                lookArray.Add(look.getBsonDocument());
+            }
+            BsonDocument lookDocument = new BsonDocument()
+            {
+                { "looks", lookArray }
+            };
+            mapDocument.AddRange(lookDocument);
 
             mapCollection.InsertOne(mapDocument);
 

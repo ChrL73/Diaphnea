@@ -20,8 +20,8 @@ namespace MapDataProcessing
         private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
         private readonly Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>> _subPolygonDictionary = new Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>>();
 
-        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName) :
-            base(id, mapData, name, shortName) { }
+        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId) :
+            base(id, mapData, name, shortName, lookId) { }
 
         internal override int addKmlFile(String path)
         {

@@ -14,13 +14,15 @@ namespace MapDataProcessing
         private readonly MapData _mapData;
         private readonly ElementName _name;
         private readonly ElementName _shortName;
+        private readonly string _lookId;
 
-        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName)
+        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId)
         {
             _id = id;
             _mapData = mapData;
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
+            _lookId = lookId;
         }
 
         abstract internal int addKmlFile(String path);
@@ -37,7 +39,8 @@ namespace MapDataProcessing
                 { "map", _mapData.XmlMapData.parameters.mapId },
                 { "id", _id},
                 { "name", _name.getBsonDocument() },
-                { "short_name", _shortName.getBsonDocument() }
+                { "short_name", _shortName.getBsonDocument() },
+                { "look_id", _lookId }
             };
 
             return elementDocument;

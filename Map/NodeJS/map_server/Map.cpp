@@ -2,6 +2,9 @@
 #include "PointElement.h"
 #include "PolygonElement.h"
 #include "LineElement.h"
+#include "PointLook.h"
+#include "LineLook.h"
+#include "PolygonLook.h"
 
 namespace map_server
 {
@@ -10,7 +13,6 @@ namespace map_server
 		std::map<std::string, MapElement *>::iterator it = _elementMap.begin();
 		for (; it != _elementMap.end(); ++it) delete (*it).second;
 	}
-
 
     MapElement *Map::getElement(const std::string& id)
     {
@@ -93,6 +95,19 @@ namespace map_server
                 int index = dbResolution.getIntField("index");
                 double sampleLength = dbResolution.getField("sample_length").Double();
                 _sampleLengthVector[index] = sampleLength;
+            }
+
+            std::vector<mongo::BSONElement> dbLookVector = dbMap.getField("looks").Array();
+            n = dbLookVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                mongo::BSONObj dbLook = dbLookVector[i].Obj();
+                const char *id = dbLook.getStringField("id");
+                const char *type = dbLook.getStringField("type");
+
+
+
+
             }
 
             if (elementIdsJson.empty()) elementIdsJson = "undefined";

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "IMap.h"
+
 #if _WIN32
 #include <WinSock2.h>
 #endif
@@ -13,8 +15,9 @@
 namespace map_server
 {
     class MapElement;
+    class Look;
 
-    class Map
+    class Map : public IMap
     {
     private:
         const mongo::OID _mongoId;
@@ -28,6 +31,7 @@ namespace map_server
         std::vector<std::string> _languageIdVector;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
+        std::vector<Look *> _lookVector;
 
         std::map<std::string, MapElement *> _elementMap;
 

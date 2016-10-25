@@ -7,10 +7,10 @@ namespace map_server
         std::string namesJson;
 
         mongo::BSONObj dbName = dbElement.getField("name").Obj();
-        int i, n = _languageIdVectorPtr->size();
+        int i, n = _iMap->getLanguageIdVectorPtr()->size();
         for (i = 0; i < n; ++i)
         {
-            const char *languageId = (*_languageIdVectorPtr)[i].c_str();
+            const char *languageId = (*_iMap->getLanguageIdVectorPtr())[i].c_str();
             const char *elementName = dbName.getStringField(languageId);
             _nameMap.insert(std::pair<std::string, std::string>(languageId, elementName));
 

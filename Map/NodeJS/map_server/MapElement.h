@@ -1,10 +1,6 @@
 #pragma once
 
-#if _WIN32
-#include <WinSock2.h>
-#endif
-
-#include "mongo/client/dbclient.h"
+#include "IMap.h"
 
 namespace map_server
 {
@@ -14,8 +10,7 @@ namespace map_server
         const mongo::OID _mongoId;
         const std::string _id;
 
-        mongo::DBClientConnection * const _connectionPtr;
-        std::vector<std::string> * const _languageIdVectorPtr;
+        IMap * const _iMap;
         bool _loaded;
         std::map<std::string, std::string> _nameMap;
         std::string _infoJson;
@@ -23,8 +18,8 @@ namespace map_server
         void loadCommon(mongo::BSONObj dbElement);
 
     public:
-        MapElement(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr, std::vector<std::string> *languageIdVectorPtr) :
-            _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _languageIdVectorPtr(languageIdVectorPtr), _loaded(false) {}
+        MapElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
+            _mongoId(mongoId), _id(id), _iMap(iMap), _loaded(false) {}
         virtual ~MapElement() {}
 
         bool isLoaded(void) const { return _loaded; }

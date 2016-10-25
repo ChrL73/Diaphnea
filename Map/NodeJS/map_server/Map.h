@@ -2,16 +2,6 @@
 
 #include "IMap.h"
 
-#if _WIN32
-#include <WinSock2.h>
-#endif
-
-#include "mongo/client/dbclient.h"
-
-#include <map>
-#include <string>
-#include <vector>
-
 namespace map_server
 {
     class MapElement;
@@ -27,11 +17,15 @@ namespace map_server
         bool _loaded;
         std::string _emptyString;
 
+        mongo::DBClientConnection *getConnectionPtr(void) { return _connectionPtr; }
+        std::vector<std::string> *getLanguageIdVectorPtr(void) { return &_languageIdVector; }
+        const Look *getLook(const std::string& lookId);
+
         std::map<std::string, std::string> _languageNameMap;
         std::vector<std::string> _languageIdVector;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
-        std::vector<Look *> _lookVector;
+        std::map<std::string, const Look *> _lookMap;
 
         std::map<std::string, MapElement *> _elementMap;
 

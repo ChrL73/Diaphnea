@@ -22,7 +22,7 @@ namespace MapDataProcessing
             {
                 { "id", _look.id },
                 { "type", "line" },
-                { "line_z_index", _look.lineZIndex },
+                { "line_z_index", Int32.Parse(_look.lineZIndex) },
                 { "line_alpha", _look.lineAlpha },
                 { "line_red", _look.lineRed },
                 { "line_green", _look.lineGreen },

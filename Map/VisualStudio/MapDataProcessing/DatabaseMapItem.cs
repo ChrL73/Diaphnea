@@ -11,6 +11,7 @@ namespace MapDataProcessing
 {
     class DatabaseMapItem
     {
+        private readonly ItemId _itemId = new ItemId();
         private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution,List<GeoPoint>>();
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
@@ -62,6 +63,7 @@ namespace MapDataProcessing
 
             BsonDocument itemDocument = new BsonDocument()
             {
+                { "item_id", _itemId.Value },
                 { "map", mapData.XmlMapData.parameters.mapId },
                 { "item", itemName },
                 { "point_lists", lineArray }

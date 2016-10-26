@@ -11,6 +11,7 @@ namespace MapDataProcessing
     class PointMapElement : MapElement
     {
         private KmlFileData _KmlFile = null;
+        private readonly ItemId _itemId = new ItemId();
 
         internal PointMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId) :
             base(id, mapData, name, shortName, lookId) { }
@@ -58,6 +59,7 @@ namespace MapDataProcessing
             elementDocument.AddRange(getBsonDocument());
             elementDocument.AddRange(new BsonDocument()
             {
+                { "item_id", _itemId.Value },
                 { "point", _KmlFile.PointList[0].getBsonDocument(MapData.XmlMapData.parameters.projection) }
             });
 

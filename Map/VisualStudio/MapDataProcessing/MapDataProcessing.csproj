@@ -57,6 +57,7 @@
     <Compile Include="DatabaseMapItem.cs" />
     <Compile Include="ElementName.cs" />
     <Compile Include="GeoPoint.cs" />
+    <Compile Include="ItemId.cs" />
     <Compile Include="KmlFileData.cs" />
     <Compile Include="KmlFileTypeEnum.cs" />
     <Compile Include="KmlWriter.cs" />

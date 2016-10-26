@@ -32,6 +32,7 @@ namespace MapDataProcessing
             PolygonPolygonPart.clearAll();
             GeoPoint.reset();
             ElementName.reset();
+            ItemId.reset();
 
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();

@@ -5,7 +5,6 @@
 namespace map_server
 {
     class MapElement;
-    class Look;
 
     class Map : public IMap
     {
@@ -28,6 +27,8 @@ namespace map_server
         std::map<std::string, const Look *> _lookMap;
 
         std::map<std::string, MapElement *> _elementMap;
+        std::map<std::string, LineItem *> _lineItemMap;
+        std::map<std::string, FilledPolygonItem *> _filledPolygonItemMap;
 
         std::string _infoJson;
 
@@ -42,5 +43,7 @@ namespace map_server
 
         const std::string& getInfoJson(void) const { return _infoJson; }
         MapElement *getElement(const std::string& id);
+        LineItem *getLineItem(const std::string& mongoId);
+        FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
     };
 }

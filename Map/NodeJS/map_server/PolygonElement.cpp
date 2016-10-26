@@ -16,6 +16,9 @@ namespace map_server
 
             const char *lookId = dbElement.getStringField("look_id");
             _look = dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId));
+
+            std::string contourId = dbElement.getField("contour").OID().toString();
+            _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
         }
     }
 }

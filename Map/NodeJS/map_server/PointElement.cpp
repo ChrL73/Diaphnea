@@ -1,5 +1,7 @@
 #include "PointElement.h"
 #include "PointLook.h"
+#include "Point.h"
+#include "PointItem.h"
 
 namespace map_server
 {
@@ -16,6 +18,15 @@ namespace map_server
 
             const char *lookId = dbElement.getStringField("look_id");
             _look = dynamic_cast<const PointLook *>(_iMap->getLook(lookId));
+
+            int id = dbElement.getIntField("item_id");
+
+            mongo::BSONObj dbPoint = dbElement.getField("point").Obj();
+            double x = dbPoint.getField("x").Double();
+            double y = dbPoint.getField("y").Double();
+            Point *point = new Point(x, y);
+
+            _item = new PointItem(id, point);
         }
     }
 }

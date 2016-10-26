@@ -5,11 +5,13 @@
 namespace map_server
 {
     class PointLook;
+    class PointItem;
 
     class PointElement : public MapElement
     {
     private:
         const PointLook *_look;
+        PointItem *_item;
 
         void load(void);
 

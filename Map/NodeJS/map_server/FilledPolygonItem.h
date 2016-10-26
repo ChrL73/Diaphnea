@@ -6,6 +6,10 @@ namespace map_server
 {
     class FilledPolygonItem : public MultipointsItem
     {
+    private:
 
+
+    public:
+        FilledPolygonItem(int id) : MultipointsItem(id) {}
     };
 }

@@ -4,11 +4,13 @@
 
 namespace map_server
 {
+    class FilledPolygonItem;
     class PolygonLook;
 
     class PolygonElement : public MapElement
     {
     private:
+        FilledPolygonItem *_filledPolygonItem;
         const PolygonLook *_look;
 
         void load(void);

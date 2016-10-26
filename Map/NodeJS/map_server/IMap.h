@@ -13,6 +13,8 @@
 namespace map_server
 {
     class Look;
+    class LineItem;
+    class FilledPolygonItem;
 
     class IMap
     {
@@ -21,6 +23,8 @@ namespace map_server
 
         virtual mongo::DBClientConnection *getConnectionPtr(void) = 0;
         virtual std::vector<std::string> *getLanguageIdVectorPtr(void) = 0;
+        virtual LineItem *getLineItem(const std::string& mongoId) = 0;
+        virtual FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId) = 0;
         virtual const Look *getLook(const std::string& lookId) = 0;
     };
 }

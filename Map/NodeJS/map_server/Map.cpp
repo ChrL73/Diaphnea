@@ -5,6 +5,8 @@
 #include "PointLook.h"
 #include "LineLook.h"
 #include "PolygonLook.h"
+#include "LineItem.h"
+#include "FilledPolygonItem.h"
 
 namespace map_server
 {
@@ -12,6 +14,12 @@ namespace map_server
     {
         std::map<std::string, MapElement *>::iterator elementIt = _elementMap.begin();
         for (; elementIt != _elementMap.end(); ++elementIt) delete (*elementIt).second;
+
+        std::map<std::string, LineItem *>::iterator lineItemIt = _lineItemMap.begin();
+        for (; lineItemIt != _lineItemMap.end(); ++lineItemIt) delete (*lineItemIt).second;
+
+        std::map<std::string, FilledPolygonItem *>::iterator filledPolygonItemIt = _filledPolygonItemMap.begin();
+        for (; filledPolygonItemIt != _filledPolygonItemMap.end(); ++filledPolygonItemIt) delete (*filledPolygonItemIt).second;
 
         std::map<std::string, const Look *>::iterator lookIt = _lookMap.begin();
         for (; lookIt != _lookMap.end(); ++lookIt) delete (*lookIt).second;
@@ -25,6 +33,56 @@ namespace map_server
         MapElement *element = (*elementIt).second;
         if (!element->isLoaded()) element->load();
         return element;
+    }
+
+    LineItem *Map::getLineItem(const std::string& mongoId)
+    {
+        std::map<std::string, LineItem *>::iterator itemIt = _lineItemMap.find(mongoId);
+
+        if (itemIt == _lineItemMap.end())
+        {
+            auto cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
+            if (cursor->more())
+            {
+                mongo::BSONObj dbItem = cursor->next();
+
+                int itemId = dbItem.getIntField("item_id");
+
+                LineItem *item = new LineItem(itemId);
+                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;
+            }
+            else
+            {
+                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, 0)).first;
+            }
+        }
+
+        return (*itemIt).second;
+    }
+
+    FilledPolygonItem *Map::getFilledPolygonItem(const std::string& mongoId)
+    {
+        std::map<std::string, FilledPolygonItem *>::iterator itemIt = _filledPolygonItemMap.find(mongoId);
+
+        if (itemIt == _filledPolygonItemMap.end())
+        {
+            auto cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
+            if (cursor->more())
+            {
+                mongo::BSONObj dbItem = cursor->next();
+
+                int itemId = dbItem.getIntField("item_id");
+
+                FilledPolygonItem *item = new FilledPolygonItem(itemId);
+                itemIt = _filledPolygonItemMap.insert(std::pair<std::string, FilledPolygonItem *>(mongoId, item)).first;
+            }
+            else
+            {
+                itemIt = _filledPolygonItemMap.insert(std::pair<std::string, FilledPolygonItem *>(mongoId, 0)).first;
+            }
+        }
+
+        return (*itemIt).second;
     }
 
     const Look *Map::getLook(const std::string& lookId)

@@ -5,6 +5,11 @@
 
 namespace map_server
 {
+	PointElement::~PointElement()
+	{
+		delete _item;
+	}
+
     void PointElement::load(void)
     {
         _loaded = true;

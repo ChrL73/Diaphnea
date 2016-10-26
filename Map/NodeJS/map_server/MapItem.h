@@ -11,6 +11,8 @@
         MapItem(int id) : _id(id) {}
 
     public:
+		virtual ~MapItem() {}
+
         int getId(void) const { return _id; }
 
     };

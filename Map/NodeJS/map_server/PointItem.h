@@ -13,6 +13,7 @@ namespace map_server
 
     public:
         PointItem(int id, Point *point) : MapItem(id), _point(point) {}
+		~PointItem();
 
     };
 }

@@ -16,7 +16,7 @@ namespace map_server
 
     public:
         LineLook(const std::string& id, int textAlpha, int textRed, int textGreen, int textBlue, double textSize,
-                 int lineZIndex, int lineAlpha, int lineRed, int lineGreen, int lineBlue, int lineSize) :
+                 int lineZIndex, int lineAlpha, int lineRed, int lineGreen, int lineBlue, double lineSize) :
             Look(id, textAlpha, textRed, textGreen, textBlue, textSize),
             _lineZIndex(lineZIndex), _lineAlpha(lineAlpha), _lineRed(lineRed), _lineGreen(lineGreen), _lineBlue(lineBlue), _lineSize(lineSize) {}
 

@@ -16,7 +16,7 @@ namespace map_server
 
     public:
         PointLook(const std::string& id, int textAlpha, int textRed, int textGreen, int textBlue, double textSize,
-                  int pointZIndex, int pointAlpha, int pointRed, int pointGreen, int pointBlue, int pointSize) :
+                  int pointZIndex, int pointAlpha, int pointRed, int pointGreen, int pointBlue, double pointSize) :
             Look(id, textAlpha, textRed, textGreen, textBlue, textSize),
             _pointZIndex(pointZIndex), _pointAlpha(pointAlpha), _pointRed(pointRed), _pointGreen(pointGreen), _pointBlue(pointBlue), _pointSize(pointSize) {}
 

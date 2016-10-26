@@ -18,5 +18,6 @@ namespace map_server
     public:
         PointElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
             MapElement(mongoId, id, iMap), _look(0) {}
+		~PointElement();
     };
 }

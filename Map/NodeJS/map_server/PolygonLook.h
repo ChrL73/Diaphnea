@@ -18,7 +18,7 @@ namespace map_server
 
     public:
         PolygonLook(const std::string& id, int textAlpha, int textRed, int textGreen, int textBlue, double textSize,
-                    int contourZIndex, int contourAlpha, int contourRed, int contourGreen, int contourBlue, int contourSize, double fillLightRatio, int fillZIndex) :
+                    int contourZIndex, int contourAlpha, int contourRed, int contourGreen, int contourBlue, double contourSize, double fillLightRatio, int fillZIndex) :
             Look(id, textAlpha, textRed, textGreen, textBlue, textSize),
             _contourZIndex(contourZIndex), _contourAlpha(contourAlpha), _contourRed(contourRed), _contourGreen(contourGreen),
             _contourBlue(contourBlue), _contourSize(contourSize), _fillLightRatio(fillLightRatio), _fillZIndex(fillZIndex) {}

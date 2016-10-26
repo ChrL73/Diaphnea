@@ -18,6 +18,7 @@ namespace map_server
         MultipointsItem(int id) : MapItem(id) {}
 
     public:
+		virtual ~MultipointsItem();
 
         void addPoint(double samplingLength, Point *point);
     };

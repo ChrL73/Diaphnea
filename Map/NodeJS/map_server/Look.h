@@ -25,7 +25,7 @@ namespace map_server
         const int getTextAlpha(void) const { return _textAlpha; }
         const int getTextRed(void) const { return _textRed; }
         const int getTextGreen(void) const { return _textGreen; }
-        const int getTextBlue(void) const { return _textSize; }
+        const int getTextBlue(void) const { return _textBlue; }
         const double getTextSize(void) const { return _textSize; }
     };
 }

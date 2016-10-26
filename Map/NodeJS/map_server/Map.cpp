@@ -7,6 +7,7 @@
 #include "PolygonLook.h"
 #include "LineItem.h"
 #include "FilledPolygonItem.h"
+#include "Point.h"
 
 namespace map_server
 {
@@ -47,8 +48,9 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-
                 LineItem *item = new LineItem(itemId);
+                addPointLists(item, dbItem);
+
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;
             }
             else
@@ -72,8 +74,9 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-
                 FilledPolygonItem *item = new FilledPolygonItem(itemId);
+                addPointLists(item, dbItem);
+
                 itemIt = _filledPolygonItemMap.insert(std::pair<std::string, FilledPolygonItem *>(mongoId, item)).first;
             }
             else
@@ -83,6 +86,30 @@ namespace map_server
         }
 
         return (*itemIt).second;
+    }
+
+    void Map::addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem)
+    {
+        std::vector<mongo::BSONElement> pointListIdVector = dbItem.getField("point_lists").Array();
+        int i, n = pointListIdVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            auto cursor = _connectionPtr->query("diaphnea.point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
+            if (cursor->more())
+            {
+                mongo::BSONObj pointList = cursor->next();
+                std::vector<mongo::BSONElement> pointVector = pointList.getField("points").Array();
+                int j, m = pointVector.size();
+                for (j = 0; j < m; ++j)
+                {
+                    mongo::BSONObj dbPoint = pointVector[j].Obj();
+                    double x = dbPoint.getField("x").Double();
+                    double y = dbPoint.getField("y").Double();
+                    Point *point = new Point(x, y);
+                    item->addPoint(_sampleLengthVector[i], point);
+                }
+            }
+        }
     }
 
     const Look *Map::getLook(const std::string& lookId)

@@ -5,6 +5,7 @@
 namespace map_server
 {
     class MapElement;
+    class MultipointsItem;
 
     class Map : public IMap
     {
@@ -29,6 +30,8 @@ namespace map_server
         std::map<std::string, MapElement *> _elementMap;
         std::map<std::string, LineItem *> _lineItemMap;
         std::map<std::string, FilledPolygonItem *> _filledPolygonItemMap;
+
+        void addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
 
         std::string _infoJson;
 

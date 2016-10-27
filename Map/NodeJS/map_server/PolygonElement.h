@@ -2,6 +2,8 @@
 
 #include "MapElement.h"
 
+#include <vector>
+
 namespace map_server
 {
     class FilledPolygonItem;
@@ -11,6 +13,7 @@ namespace map_server
     {
     private:
         FilledPolygonItem *_filledPolygonItem;
+        std::vector<LineItem *> _lineItemVector;
         const PolygonLook *_look;
 
         void load(void);

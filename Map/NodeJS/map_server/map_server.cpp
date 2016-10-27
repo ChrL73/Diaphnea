@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
 
     int cleanThreadSleepMs = 5;
     int checkTimeoutSleepMs = 200;
-    time_t timeoutInseconds = 60;
+    time_t timeoutInSeconds = 300;
 
-    map_server::MapServer mapServer(timeoutInseconds, cleanThreadSleepMs, checkTimeoutSleepMs, softExit, mutexTest);
+    map_server::MapServer mapServer(timeoutInSeconds, cleanThreadSleepMs, checkTimeoutSleepMs, softExit, mutexTest);
 
     int result = mapServer.run();
 

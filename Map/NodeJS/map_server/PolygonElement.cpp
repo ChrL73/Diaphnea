@@ -19,6 +19,15 @@ namespace map_server
 
             std::string contourId = dbElement.getField("contour").OID().toString();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
+
+            std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
+            int i, n = dbLineItems.size();
+            for (i = 0; i < n; ++i)
+            {
+                std::string itemId = dbLineItems[i].OID().toString();
+                LineItem *lineItem = _iMap->getLineItem(itemId);
+                _lineItemVector.push_back(lineItem);
+            }
         }
     }
 }

@@ -36,6 +36,7 @@ var mapServerInterface =
             socket.on('mapInfo', handleResponse);
             socket.on('elementInfo', handleResponse);
             socket.on('elementsInfo', handleResponse);
+            socket.on('items', handleResponse);
             
             function handleResponse(response)
             {
@@ -118,9 +119,9 @@ var mapServerInterface =
                callBacks[id.toString()] = renderStep;
                socket.emit('render', request);
                
-               function renderStep()
+               function renderStep(items)
                {
-                  
+                  console.log(items);
                }
             }
          }

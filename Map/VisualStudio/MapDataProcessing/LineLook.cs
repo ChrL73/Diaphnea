@@ -20,7 +20,8 @@ namespace MapDataProcessing
         {
             BsonDocument lookDocument = new BsonDocument()
             {
-                { "id", _look.id },
+                { "id", Id },
+                { "xml_id", _look.id },
                 { "type", "line" },
                 { "line_z_index", Int32.Parse(_look.lineZIndex) },
                 { "line_alpha", _look.lineAlpha },

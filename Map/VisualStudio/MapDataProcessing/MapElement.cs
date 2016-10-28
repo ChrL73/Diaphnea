@@ -14,7 +14,7 @@ namespace MapDataProcessing
         private readonly MapData _mapData;
         private readonly ElementName _name;
         private readonly ElementName _shortName;
-        private readonly string _lookId;
+        private readonly int _lookId;
 
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId)
         {
@@ -22,7 +22,7 @@ namespace MapDataProcessing
             _mapData = mapData;
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
-            _lookId = lookId;
+            _lookId = _mapData.getLook(lookId).Id;
         }
 
         abstract internal int addKmlFile(String path);

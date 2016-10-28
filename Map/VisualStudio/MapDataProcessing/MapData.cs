@@ -10,7 +10,7 @@ namespace MapDataProcessing
     {
         private readonly string _dataFileName;
         private readonly XmlMapData _xmlMapData;
-        //private readonly Dictionary<string, Look> _lookDictionary = new Dictionary<string, Look>();
+        private readonly Dictionary<string, Look> _lookDictionary = new Dictionary<string, Look>();
         private readonly List<Look> _lookList = new List<Look>();
 
         internal MapData(string dataFileName, XmlMapData xmlMapData)
@@ -20,21 +20,21 @@ namespace MapDataProcessing
             foreach (XmlPolygonLook polygonLook in _xmlMapData.lookList.polygonLookList)
             {
                 Look look = new PolygonLook(polygonLook);
-                //_lookDictionary.Add(polygonLook.id.ToString(), look);
+                _lookDictionary.Add(polygonLook.id.ToString(), look);
                 _lookList.Add(look);
             }
 
             foreach (XmlLineLook lineLook in _xmlMapData.lookList.lineLookList)
             {
                 Look look = new LineLook(lineLook);
-                //_lookDictionary.Add(lineLook.id.ToString(), look);
+                _lookDictionary.Add(lineLook.id.ToString(), look);
                 _lookList.Add(look);
             }
 
             foreach (XmlPointLook pointLook in _xmlMapData.lookList.pointLookList)
             {
                 Look look = new PointLook(pointLook);
-                //_lookDictionary.Add(pointLook.id.ToString(), look);
+                _lookDictionary.Add(pointLook.id.ToString(), look);
                 _lookList.Add(look);
             }
         }
@@ -49,12 +49,12 @@ namespace MapDataProcessing
             get { return _dataFileName; }
         }
 
-        /*internal Look geLook(string id)
+        internal Look getLook(string id)
         {
             Look look;
             if (_lookDictionary.TryGetValue(id, out look)) return look;
             return null;
-        }*/
+        }
 
         internal List<Look> LookList { get { return _lookList; } }
     }

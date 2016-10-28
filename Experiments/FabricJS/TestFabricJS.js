@@ -32,7 +32,7 @@ var array2 = [ { x: 1, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 2 }, { x: -3, y: 0 },
 var line1 = new fabric.Polyline(array1, options);
 var line2 = new fabric.Polyline(array2, options);
 
-line1.stroke = 'red';
+line1.stroke = 'rgba(255, 30, 30, 0.8)';
 line2.stroke = 'blue';
 
 // 'group' does not work properly when lines have different strokeWidths:

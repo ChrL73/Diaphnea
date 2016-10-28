@@ -33,6 +33,7 @@ namespace MapDataProcessing
             GeoPoint.reset();
             ElementName.reset();
             ItemId.reset();
+            Look.reset();
 
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();

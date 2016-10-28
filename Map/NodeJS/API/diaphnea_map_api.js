@@ -62,6 +62,8 @@ var mapServerInterface =
          function Map(mapId, canvasId, mapInfo)
          {
             var visibleElements = {};
+            var items = {};
+            var looks = {};
             
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
@@ -119,9 +121,34 @@ var mapServerInterface =
                callBacks[id.toString()] = renderStep;
                socket.emit('render', request);
                
-               function renderStep(items)
+               function renderStep(data)
                {
-                  console.log(items);
+                  if (data.items)
+                  {
+                     console.log(data.items);
+
+                     data.items.forEach(function(item)
+                     {
+                        var id = item.id;
+                        var look = item.lk;
+                        if (!items[id])
+                        {
+                           var id = ++requestCounter;
+                           var request = { id: id, mapId: mapId, itemId: id };
+                           callBacks[id.toString()] = setItemInfo;
+                           socket.emit('getItemInfo', request)
+                        }
+                     });
+                  }
+                  /*else if (data...)
+                  {
+                     
+                  }*/
+               }
+               
+               function setItemInfo(data)
+               {
+                  
                }
             }
          }

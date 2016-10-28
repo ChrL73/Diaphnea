@@ -9,7 +9,8 @@ var messageTypes =
    getMapInfo: '1',
    getElementInfo: '2',
    getElementsInfo: '3',
-   render: '4'
+   getItemInfo: '4',
+   render: '5',
 };
 
 var responseNames =
@@ -18,7 +19,8 @@ var responseNames =
    'mapInfo',
    'elementInfo',
    'elementsInfo',
-   'items'
+   'itemInfo',
+   'items',
 ];
 
 var io = require('socket.io').listen(server);
@@ -48,6 +50,11 @@ io.on('connection', function(socket)
          req += ' ' + elementId;
       });
       cppServer.sendRequest(req);
+   });
+   
+   socket.on('getItemInfo', function(request)
+   {
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemInfo + ' ' + request.mapId + ' ' + request.itemId);
    });
    
    socket.on('render', function(request)

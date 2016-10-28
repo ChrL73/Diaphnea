@@ -1,6 +1,6 @@
 #include "GetMapIdsRequest.h"
 #include "MapData.h"
-#include "RequestTypeEnum.h"
+#include "MessageTypeEnum.h"
 
 namespace map_server
 {

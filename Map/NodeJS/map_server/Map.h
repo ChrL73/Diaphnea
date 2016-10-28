@@ -6,6 +6,7 @@ namespace map_server
 {
     class MapElement;
     class MultipointsItem;
+    class MapItem;
 
     class Map : public IMap
     {
@@ -33,6 +34,7 @@ namespace map_server
         std::map<std::string, MapElement *> _elementMap;
         std::map<std::string, LineItem *> _lineItemMap;
         std::map<std::string, FilledPolygonItem *> _filledPolygonItemMap;
+        std::map<int, MapItem *> _itemMap;
 
         void addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
 
@@ -46,10 +48,12 @@ namespace map_server
         const std::string& getId(void) const { return _id; }
         bool isLoaded(void) const { return _loaded; }
         void load(void);
+        void addPointItem(PointItem *pointItem);
 
         const std::string& getInfoJson(void) const { return _infoJson; }
         MapElement *getElement(const std::string& id);
         LineItem *getLineItem(const std::string& mongoId);
         FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
+        MapItem *getItem(int itemId);
     };
 }

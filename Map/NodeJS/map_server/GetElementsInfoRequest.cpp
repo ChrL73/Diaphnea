@@ -1,7 +1,7 @@
 #include "GetElementsInfoRequest.h"
 #include "MapData.h"
 #include "Map.h"
-#include "RequestTypeEnum.h"
+#include "MessageTypeEnum.h"
 #include "MapElement.h"
 
 namespace map_server

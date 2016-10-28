@@ -1,7 +1,7 @@
 #include "RenderRequest.h"
 #include "MapData.h"
 #include "Map.h"
-#include "RequestTypeEnum.h"
+#include "MessageTypeEnum.h"
 #include "PolygonElement.h"
 #include "PointElement.h"
 #include "LineElement.h"

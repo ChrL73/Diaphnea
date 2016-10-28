@@ -15,6 +15,7 @@ namespace map_server
     class Look;
     class LineItem;
     class FilledPolygonItem;
+    class PointItem;
     class ItemLook;
 
     class IMap
@@ -28,5 +29,6 @@ namespace map_server
         virtual FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId) = 0;
         virtual const Look *getLook(int lookId) = 0;
         virtual void addItemLook(const ItemLook *look) = 0;
+        virtual void addPointItem(PointItem *pointItem) = 0;
     };
 }

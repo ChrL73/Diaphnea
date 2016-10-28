@@ -7,6 +7,7 @@
 #include "PolygonLook.h"
 #include "LineItem.h"
 #include "FilledPolygonItem.h"
+#include "PointItem.h"
 #include "Point.h"
 #include "ItemLook.h"
 
@@ -17,11 +18,8 @@ namespace map_server
         std::map<std::string, MapElement *>::iterator elementIt = _elementMap.begin();
         for (; elementIt != _elementMap.end(); ++elementIt) delete (*elementIt).second;
 
-        std::map<std::string, LineItem *>::iterator lineItemIt = _lineItemMap.begin();
-        for (; lineItemIt != _lineItemMap.end(); ++lineItemIt) delete (*lineItemIt).second;
-
-        std::map<std::string, FilledPolygonItem *>::iterator filledPolygonItemIt = _filledPolygonItemMap.begin();
-        for (; filledPolygonItemIt != _filledPolygonItemMap.end(); ++filledPolygonItemIt) delete (*filledPolygonItemIt).second;
+        std::map<int, MapItem *>::iterator itemIt = _itemMap.begin();
+        for (; itemIt != _itemMap.end(); ++itemIt) delete (*itemIt).second;
 
         std::map<int, const Look *>::iterator lookIt = _lookMap.begin();
         for (; lookIt != _lookMap.end(); ++lookIt) delete (*lookIt).second;
@@ -53,6 +51,7 @@ namespace map_server
                 addPointLists(item, dbItem);
 
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;
+                _itemMap.insert(std::pair<int, MapItem *>(itemId, item));
             }
             else
             {
@@ -79,6 +78,7 @@ namespace map_server
                 addPointLists(item, dbItem);
 
                 itemIt = _filledPolygonItemMap.insert(std::pair<std::string, FilledPolygonItem *>(mongoId, item)).first;
+                _itemMap.insert(std::pair<int, MapItem *>(itemId, item));
             }
             else
             {
@@ -111,6 +111,18 @@ namespace map_server
                 }
             }
         }
+    }
+
+    void Map::addPointItem(PointItem *pointItem)
+    {
+        _itemMap.insert(std::pair<int, MapItem *>(pointItem->getId(), pointItem));
+    }
+
+    MapItem *Map::getItem(int itemId)
+    {
+        std::map<int, MapItem *>::iterator it = _itemMap.find(itemId);
+        if (it != _itemMap.end()) return (*it).second;
+        return 0;
     }
 
     const Look *Map::getLook(int lookId)

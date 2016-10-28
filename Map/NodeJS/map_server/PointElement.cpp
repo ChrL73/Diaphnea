@@ -33,6 +33,7 @@ namespace map_server
 
             _item = new PointItem(id, point);
             _item->setCurrentLook(_look->getPointLook());
+            _iMap->addPointItem(_item);
         }
     }
 }

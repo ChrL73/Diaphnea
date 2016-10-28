@@ -8,6 +8,7 @@ namespace map_server
         GET_MAP_INFO = 1,
         GET_ELEMENT_INFO = 2,
         GET_ELEMENTS_INFO = 3,
-        RENDER = 4
+        GET_ITEM_INFO = 4,
+        RENDER = 5
     };
 }

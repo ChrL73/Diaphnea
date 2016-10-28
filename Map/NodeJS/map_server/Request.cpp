@@ -1,5 +1,5 @@
 #include "Request.h"
-#include "RequestTypeEnum.h"
+#include "MessageTypeEnum.h"
 #include "GetMapIdsRequest.h"
 #include "GetMapInfoRequest.h"
 #include "GetElementInfoRequest.h"
@@ -15,7 +15,7 @@ namespace map_server
     Request *Request::createRequest(std::vector<const char *> tokenVector, bool sendResponse)
     {
         if (tokenVector.size() < 3) return 0;
-        RequestTypeEnum requestType = static_cast<RequestTypeEnum>(atoi(tokenVector[2]));
+        MessageTypeEnum requestType = static_cast<MessageTypeEnum>(atoi(tokenVector[2]));
 
         if (requestType == map_server::GET_MAP_IDS)
         {

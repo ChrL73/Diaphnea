@@ -19,13 +19,16 @@ namespace map_server
 
         mongo::DBClientConnection *getConnectionPtr(void) { return _connectionPtr; }
         std::vector<std::string> *getLanguageIdVectorPtr(void) { return &_languageIdVector; }
-        const Look *getLook(const std::string& lookId);
+        const Look *getLook(int lookId);
+        void addItemLook(const ItemLook *look);
 
         std::map<std::string, std::string> _languageNameMap;
         std::vector<std::string> _languageIdVector;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
-        std::map<std::string, const Look *> _lookMap;
+
+        std::map<int, const Look *> _lookMap;
+        std::map<int, const ItemLook *> _itemLookMap;
 
         std::map<std::string, MapElement *> _elementMap;
         std::map<std::string, LineItem *> _lineItemMap;

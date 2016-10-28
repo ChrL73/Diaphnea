@@ -62,6 +62,8 @@
 		<Unit filename="GetMapInfoRequest.cpp" />
 		<Unit filename="GetMapInfoRequest.h" />
 		<Unit filename="IMap.h" />
+		<Unit filename="ItemLook.cpp" />
+		<Unit filename="ItemLook.h" />
 		<Unit filename="LineElement.cpp" />
 		<Unit filename="LineElement.h" />
 		<Unit filename="LineItem.cpp" />
@@ -80,6 +82,7 @@
 		<Unit filename="MapItem.h" />
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />
+		<Unit filename="MessageTypeEnum.h" />
 		<Unit filename="MultipointsItem.cpp" />
 		<Unit filename="MultipointsItem.h" />
 		<Unit filename="Point.cpp" />
@@ -98,7 +101,6 @@
 		<Unit filename="RenderRequest.h" />
 		<Unit filename="Request.cpp" />
 		<Unit filename="Request.h" />
-		<Unit filename="RequestTypeEnum.h" />
 		<Unit filename="TextItem.cpp" />
 		<Unit filename="TextItem.h" />
 		<Unit filename="ThreadInfo.cpp" />

@@ -21,7 +21,7 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            const char *lookId = dbElement.getStringField("look_id");
+            int lookId = dbElement.getIntField("look_id");
             _look = dynamic_cast<const PointLook *>(_iMap->getLook(lookId));
 
             int id = dbElement.getIntField("item_id");
@@ -32,6 +32,7 @@ namespace map_server
             Point *point = new Point(x, y);
 
             _item = new PointItem(id, point);
+            _item->setCurrentLook(_look->getPointLook());
         }
     }
 }

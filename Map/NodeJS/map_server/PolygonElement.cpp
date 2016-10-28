@@ -1,5 +1,6 @@
 #include "PolygonElement.h"
 #include "PolygonLook.h"
+#include "FilledPolygonItem.h"
 
 namespace map_server
 {
@@ -14,11 +15,12 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            const char *lookId = dbElement.getStringField("look_id");
+            int lookId = dbElement.getIntField("look_id");
             _look = dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId));
 
             std::string contourId = dbElement.getField("contour").OID().toString();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
+            _filledPolygonItem->setCurrentLook(_look->getFillLook());
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
             int i, n = dbLineItems.size();

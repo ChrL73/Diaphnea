@@ -4,28 +4,21 @@
 
 namespace map_server
 {
+    class ItemLook;
+
     class Look
     {
     private:
-        const std::string _id;
-        const int _textAlpha;
-        const int _textRed;
-        const int _textGreen;
-        const int _textBlue;
-        const double _textSize;
+        const int _id;
+        const ItemLook * const _textLook;
 
     protected:
-        Look(const std::string& id, int textAlpha, int textRed, int textGreen, int textBlue, double textSize) :
-            _id(id), _textAlpha(textAlpha), _textRed(textRed), _textGreen(textGreen), _textBlue(textBlue), _textSize(textSize) {}
+        Look(int id, const ItemLook *textLook) : _id(id), _textLook(textLook) {}
 
     public:
-        virtual ~Look() {}
+        virtual ~Look();
 
-        const std::string& getId(void) const { return _id; }
-        const int getTextAlpha(void) const { return _textAlpha; }
-        const int getTextRed(void) const { return _textRed; }
-        const int getTextGreen(void) const { return _textGreen; }
-        const int getTextBlue(void) const { return _textBlue; }
-        const double getTextSize(void) const { return _textSize; }
+        int getId(void) const { return _id; }
+        const ItemLook *getTextLook(void) const { return _textLook; }
     };
 }

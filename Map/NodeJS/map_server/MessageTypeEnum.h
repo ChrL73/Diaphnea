@@ -2,7 +2,7 @@
 
 namespace map_server
 {
-    enum RequestTypeEnum
+    enum MessageTypeEnum
     {
         GET_MAP_IDS = 0,
         GET_MAP_INFO = 1,

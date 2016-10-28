@@ -15,6 +15,7 @@ namespace map_server
     class Look;
     class LineItem;
     class FilledPolygonItem;
+    class ItemLook;
 
     class IMap
     {
@@ -25,6 +26,7 @@ namespace map_server
         virtual std::vector<std::string> *getLanguageIdVectorPtr(void) = 0;
         virtual LineItem *getLineItem(const std::string& mongoId) = 0;
         virtual FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId) = 0;
-        virtual const Look *getLook(const std::string& lookId) = 0;
+        virtual const Look *getLook(int lookId) = 0;
+        virtual void addItemLook(const ItemLook *look) = 0;
     };
 }

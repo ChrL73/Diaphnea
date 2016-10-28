@@ -8,7 +8,7 @@
     {
     private:
         const int _id;
-        ItemLook *_currentLook;
+        const ItemLook *_currentLook;
 
     protected:
         MapItem(int id) : _id(id), _currentLook(0) {}
@@ -16,9 +16,10 @@
     public:
 		virtual ~MapItem() {}
 
-        void setCurrentLook(ItemLook *look);
+        void setCurrentLook(const ItemLook *look) { _currentLook = look; }
 
         int getId(void) const { return _id; }
+        const ItemLook *getCurrentLook(void) { return _currentLook; }
 
     };
  }

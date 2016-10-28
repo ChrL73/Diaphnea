@@ -14,7 +14,7 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            const char *lookId = dbElement.getStringField("look_id");
+            int lookId = dbElement.getIntField("look_id");
             _look = dynamic_cast<const LineLook *>(_iMap->getLook(lookId));
         }
     }

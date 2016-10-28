@@ -8,6 +8,7 @@
 #include "LineItem.h"
 #include "FilledPolygonItem.h"
 #include "Point.h"
+#include "ItemLook.h"
 
 namespace map_server
 {
@@ -22,7 +23,7 @@ namespace map_server
         std::map<std::string, FilledPolygonItem *>::iterator filledPolygonItemIt = _filledPolygonItemMap.begin();
         for (; filledPolygonItemIt != _filledPolygonItemMap.end(); ++filledPolygonItemIt) delete (*filledPolygonItemIt).second;
 
-        std::map<std::string, const Look *>::iterator lookIt = _lookMap.begin();
+        std::map<int, const Look *>::iterator lookIt = _lookMap.begin();
         for (; lookIt != _lookMap.end(); ++lookIt) delete (*lookIt).second;
     }
 
@@ -112,11 +113,16 @@ namespace map_server
         }
     }
 
-    const Look *Map::getLook(const std::string& lookId)
+    const Look *Map::getLook(int lookId)
     {
-        std::map<std::string, const Look *>::iterator it = _lookMap.find(lookId);
+        std::map<int, const Look *>::iterator it = _lookMap.find(lookId);
         if (it != _lookMap.end()) return (*it).second;
         return 0;
+    }
+
+    void Map::addItemLook(const ItemLook *look)
+    {
+        _itemLookMap.insert(std::pair<int, const ItemLook *>(look->getId(), look));
     }
 
     void Map::load(void)
@@ -197,7 +203,7 @@ namespace map_server
             for (i = 0; i < n; ++i)
             {
                 mongo::BSONObj dbLook = dbLookVector[i].Obj();
-                const char *id = dbLook.getStringField("id");
+                int id = dbLook.getIntField("id");
                 const char *type = dbLook.getStringField("type");
                 int textAlpha = dbLook.getIntField("text_alpha");
                 int textRed = dbLook.getIntField("text_red");
@@ -215,8 +221,8 @@ namespace map_server
                     double pointSize = dbLook.getField("point_size").Double();
 
                     PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSize, pointZIndex, pointAlpha,
-                                                    pointRed, pointGreen, pointBlue, pointSize);
-                    _lookMap.insert(std::pair<std::string, const Look *> (id, look));
+                                                    pointRed, pointGreen, pointBlue, pointSize, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
                 }
                 else if (strcmp(type, "line") == 0)
                 {
@@ -228,8 +234,8 @@ namespace map_server
                     double lineSize = dbLook.getField("line_size").Double();
 
                     LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSize, lineZIndex, lineAlpha,
-                                                   lineRed, lineGreen, lineBlue, lineSize);
-                    _lookMap.insert(std::pair<std::string, const Look *> (id, look));
+                                                   lineRed, lineGreen, lineBlue, lineSize, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
                 }
                 else if (strcmp(type, "polygon") == 0)
                 {
@@ -243,8 +249,8 @@ namespace map_server
                     int fillZIndex = dbLook.getIntField("fill_z_index");
 
                     PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize, contourZIndex, contourAlpha,
-                                                               contourRed, contourGreen, contourBlue, contourSize, fillLightRatio, fillZIndex);
-                    _lookMap.insert(std::pair<std::string, const Look *> (id, look));
+                                                               contourRed, contourGreen, contourBlue, contourSize, fillLightRatio, fillZIndex, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
                   }
             }
 

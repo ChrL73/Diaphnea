@@ -13,16 +13,6 @@ var messageTypes =
    render: '5',
 };
 
-var responseNames =
-[
-   'mapIds',
-   'mapInfo',
-   'elementInfo',
-   'elementsInfo',
-   'itemInfo',
-   'items',
-];
-
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
@@ -54,7 +44,7 @@ io.on('connection', function(socket)
    
    socket.on('getItemInfo', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemInfo + ' ' + request.mapId + ' ' + request.itemId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemInfo + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
    });
    
    socket.on('render', function(request)
@@ -70,11 +60,11 @@ io.on('connection', function(socket)
 
 cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
 {
-   var messageName = responseNames[requestType];
    var socket = io.sockets.connected[socketId];
    
-   if (messageName && socket)
+   if (socket)
    {
+      var messageName = (requestType == 0 ? 'mapIds' : 'res');
       var response = { requestId: requestId, content: responseContent };
       socket.emit(messageName, response);
    }

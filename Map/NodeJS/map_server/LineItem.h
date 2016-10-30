@@ -7,9 +7,9 @@ namespace map_server
     class LineItem : public MultipointsItem
     {
     private:
-
+        void setInfoJsonVector(void);
 
     public:
-        LineItem(int id) : MultipointsItem(id) {}
+        LineItem(int id, int resolutionCount) : MultipointsItem(id, resolutionCount) {}
     };
 }

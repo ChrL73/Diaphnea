@@ -8,13 +8,14 @@ namespace map_server
     {
     private:
         const char * const _mapId;
-        int _itemId;
+        const int _itemId;
+        const int _resolutionIndex;
 
         void execute(void);
 
     public:
-        GetItemInfoRequest(const char *socketId, const char *requestId, const char *mapId, int itemId, bool sendResponse) :
-            Request(socketId, requestId, sendResponse), _mapId(mapId), _itemId(itemId) {}
+        GetItemInfoRequest(const char *socketId, const char *requestId, const char *mapId, int itemId, int resolutionIndex, bool sendResponse) :
+            Request(socketId, requestId, sendResponse), _mapId(mapId), _itemId(itemId), _resolutionIndex(resolutionIndex) {}
     };
 }
 

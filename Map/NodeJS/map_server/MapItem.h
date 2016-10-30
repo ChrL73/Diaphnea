@@ -1,6 +1,7 @@
  #pragma once
 
  #include <string>
+ #include <vector>
 
  namespace map_server
  {
@@ -13,9 +14,10 @@
         const ItemLook *_currentLook;
 
     protected:
-        MapItem(int id) : _id(id), _currentLook(0) {}
+        MapItem(int id, int resolutionCount);
 
-        std::string _infoJson;
+        std::vector<std::string> _infoJsonVector;
+        double _xMin, _xMax, _yMin, _yMax;
 
     public:
 		virtual ~MapItem() {}
@@ -24,7 +26,6 @@
 
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(void) const { return _currentLook; }
-        const std::string& getInfoJson(void) const { return _infoJson; }
-
+        const std::string& getInfoJson(unsigned int resolutionIndex) const;
     };
  }

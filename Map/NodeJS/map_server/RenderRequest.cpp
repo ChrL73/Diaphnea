@@ -95,7 +95,7 @@ namespace map_server
                     if (i != 0) response << ",";
                     response << "{\"id\":" << item->getId() << ",\"lk\":" << item->getCurrentLook()->getId() << "}";
                 }
-                response << "]}";
+                response << "],\"resolution\":4}";
             }
 
             MapData::unlock();

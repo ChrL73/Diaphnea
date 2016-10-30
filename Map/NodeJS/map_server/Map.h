@@ -14,6 +14,12 @@ namespace map_server
         const mongo::OID _mongoId;
         const std::string _id;
 
+        double _zoomMinDistance;
+        double _zoomMaxDistance;
+        double _resolutionThreshold;
+        double _sizeParameter1;
+        double _sizeParameter2;
+
         mongo::DBClientConnection * const _connectionPtr;
         bool _loaded;
         std::string _emptyString;

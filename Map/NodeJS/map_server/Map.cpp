@@ -47,7 +47,7 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-                LineItem *item = new LineItem(itemId);
+                LineItem *item = new LineItem(itemId, _sampleLengthVector.size());
                 addPointLists(item, dbItem);
 
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;
@@ -74,7 +74,7 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-                FilledPolygonItem *item = new FilledPolygonItem(itemId);
+                FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size());
                 addPointLists(item, dbItem);
 
                 itemIt = _filledPolygonItemMap.insert(std::pair<std::string, FilledPolygonItem *>(mongoId, item)).first;
@@ -107,10 +107,12 @@ namespace map_server
                     double x = dbPoint.getField("x").Double();
                     double y = dbPoint.getField("y").Double();
                     Point *point = new Point(x, y);
-                    item->addPoint(_sampleLengthVector[i], point);
+                    item->addPoint(i, _sampleLengthVector[i], point);
                 }
             }
         }
+
+        item->setInfoJsonVector();
     }
 
     void Map::addPointItem(PointItem *pointItem)

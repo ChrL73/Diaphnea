@@ -49,17 +49,18 @@ namespace map_server
         }
         else if (requestType == map_server::GET_ITEM_INFO)
         {
-            if (tokenVector.size() < 5) return 0;
-            int itemId;
+            if (tokenVector.size() < 6) return 0;
+            int itemId, resolutionIndex;
             try
             {
                 itemId = std::stoi(tokenVector[4]);
+                resolutionIndex = std::stoi(tokenVector[5]);
             }
             catch (...)
             {
                 return 0;
             }
-            return new GetItemInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, sendResponse);
+            return new GetItemInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
         }
         else if (requestType == map_server::RENDER)
         {

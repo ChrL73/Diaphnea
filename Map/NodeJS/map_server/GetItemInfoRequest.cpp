@@ -22,7 +22,7 @@ namespace map_server
             const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
             if (filledPolygonItem != 0)
             {
-                info = filledPolygonItem->getInfoJson();
+                info = filledPolygonItem->getInfoJson(_resolutionIndex);
                 MapData::unlock();
 
                 _coutMutexPtr->lock();
@@ -34,7 +34,7 @@ namespace map_server
                 const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
                 if (lineItem != 0)
                 {
-                    info = lineItem->getInfoJson();
+                    info = lineItem->getInfoJson(_resolutionIndex);
                     MapData::unlock();
 
                     _coutMutexPtr->lock();
@@ -46,7 +46,7 @@ namespace map_server
                     const PointItem *pointItem = dynamic_cast<const PointItem *>(item);
                     if (pointItem != 0)
                     {
-                        info = pointItem->getInfoJson();
+                        info = pointItem->getInfoJson(_resolutionIndex);
                         MapData::unlock();
 
                         _coutMutexPtr->lock();

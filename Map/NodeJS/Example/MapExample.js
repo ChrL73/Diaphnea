@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://albertine:3001';
+   var url = 'http://192.168.50.124:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -40,8 +40,9 @@ $(function()
             libreville.show();
             estuaire.show();
             woleuNtem.show();
-            libreville.hide();
+            woleuNtem.hide();
             map.render();
+            //setTimeout(function() { map.render(); }, 1000);
          }
       }
    }

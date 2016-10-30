@@ -12,6 +12,7 @@ var mapServerInterface =
          var socket;
          var requestCounter = -1;
          var callBacks = {};
+         var contexts = {};
          
          var mapIds;
          this.getMapIds = function() { return mapIds; }
@@ -33,17 +34,13 @@ var mapServerInterface =
             var request = { id: id };
             socket.emit('getMapIds', request);
             
-            socket.on('mapInfo', handleResponse);
-            socket.on('elementInfo', handleResponse);
-            socket.on('elementsInfo', handleResponse);
-            socket.on('items', handleResponse);
-            
-            function handleResponse(response)
+            socket.on('res', function(response)
             {
                var requestId = response.requestId.toString();
-               callBacks[requestId](response.content);
+               callBacks[requestId](response.content, contexts[requestId]);
                delete callBacks[requestId];
-            }
+               delete contexts[requestId];
+            });
          });  
          
          this.loadMap = function(mapId, canvasId, onMapLoaded)
@@ -125,17 +122,20 @@ var mapServerInterface =
                {
                   if (data.items)
                   {
-                     console.log(data.items);
+                     console.log(data);
+                     var resolution = data.resolution;
 
                      data.items.forEach(function(item)
                      {
-                        var id = item.id;
+                        var itemId = item.id;
                         var look = item.lk;
-                        if (!items[id])
-                        {
+                        if (!items[itemId]) items[itemId] = [];
+                        if (!items[itemId][resolution])
+                        {                           
                            var id = ++requestCounter;
-                           var request = { id: id, mapId: mapId, itemId: id };
+                           var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
                            callBacks[id.toString()] = setItemInfo;
+                           contexts[id.toString()] = { itemId: itemId, resolution: resolution }
                            socket.emit('getItemInfo', request)
                         }
                      });
@@ -146,9 +146,10 @@ var mapServerInterface =
                   }*/
                }
                
-               function setItemInfo(data)
+               function setItemInfo(data, context)
                {
-                  
+                  items[context.itemId][context.resolution] = data;
+                  console.log(data);
                }
             }
          }

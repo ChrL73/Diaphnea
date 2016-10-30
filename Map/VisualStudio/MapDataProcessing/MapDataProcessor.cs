@@ -214,12 +214,6 @@ namespace MapDataProcessing
             IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
             itemCollection.DeleteMany(filter);
 
-            BsonDocument mapDocument = new BsonDocument()
-            {
-                { "map", _mapData.XmlMapData.parameters.mapId },
-                { "name", new ElementName(_mapData.XmlMapData.parameters.mapName).getBsonDocument() }
-            };
-
             BsonArray languagesArray = new BsonArray();
             foreach (XmlLanguage language in _mapData.XmlMapData.parameters.languageList)
             {
@@ -230,11 +224,6 @@ namespace MapDataProcessing
                 };
                 languagesArray.Add(languageDocument);
             }
-            BsonDocument languagesDocument = new BsonDocument()
-            {
-                { "languages", languagesArray }
-            };
-            mapDocument.AddRange(languagesDocument);
 
             BsonArray resolutionArray = new BsonArray();
             int i, n = _mapData.XmlMapData.resolutionList.Length;
@@ -251,22 +240,26 @@ namespace MapDataProcessing
 
                 resolutionArray.Add(resolutionDocument);
             }
-            BsonDocument resolutionsDocument = new BsonDocument()
-            {
-                { "resolutions", resolutionArray }
-            };
-            mapDocument.AddRange(resolutionsDocument);
 
             BsonArray lookArray = new BsonArray();
             foreach (Look look in _mapData.LookList)
             {
                 lookArray.Add(look.getBsonDocument());
             }
-            BsonDocument lookDocument = new BsonDocument()
+
+            BsonDocument mapDocument = new BsonDocument()
             {
-                { "looks", lookArray }
+                { "map", _mapData.XmlMapData.parameters.mapId },
+                { "name", new ElementName(_mapData.XmlMapData.parameters.mapName).getBsonDocument() },
+                { "languages", languagesArray },
+                { "resolutions", resolutionArray },
+                { "looks", lookArray },
+                { "zoom_min_distance", _mapData.XmlMapData.parameters.zoomMinDistance },
+                { "zoom_max_distance", _mapData.XmlMapData.parameters.zoomMaxDistance },
+                { "resolution_threshold", _mapData.XmlMapData.parameters.resolutionThreshold },
+                { "size_parameter1", _mapData.XmlMapData.parameters.sizeParameter1 },
+                { "size_parameter2", _mapData.XmlMapData.parameters.sizeParameter2 }
             };
-            mapDocument.AddRange(lookDocument);
 
             mapCollection.InsertOne(mapDocument);
 

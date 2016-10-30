@@ -100,6 +100,16 @@ public partial class XmlParameters {
     
     private XmlProjectionEnum projectionField;
     
+    private double zoomMinDistanceField;
+    
+    private double zoomMaxDistanceField;
+    
+    private double resolutionThresholdField;
+    
+    private double sizeParameter1Field;
+    
+    private double sizeParameter2Field;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("language", IsNullable=false)]
     public XmlLanguage[] languageList {
@@ -207,6 +217,61 @@ public partial class XmlParameters {
         }
         set {
             this.projectionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double zoomMinDistance {
+        get {
+            return this.zoomMinDistanceField;
+        }
+        set {
+            this.zoomMinDistanceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double zoomMaxDistance {
+        get {
+            return this.zoomMaxDistanceField;
+        }
+        set {
+            this.zoomMaxDistanceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double resolutionThreshold {
+        get {
+            return this.resolutionThresholdField;
+        }
+        set {
+            this.resolutionThresholdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double sizeParameter1 {
+        get {
+            return this.sizeParameter1Field;
+        }
+        set {
+            this.sizeParameter1Field = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double sizeParameter2 {
+        get {
+            return this.sizeParameter2Field;
+        }
+        set {
+            this.sizeParameter2Field = value;
         }
     }
 }

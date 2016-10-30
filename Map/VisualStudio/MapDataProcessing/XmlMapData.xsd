@@ -22,6 +22,11 @@
     <xsd:attribute name="kmlDir" type="xsd:string" use="required" />
     <xsd:attribute name="maxConnectionDistanceInKm" type="xsd:double" use="required"/>
     <xsd:attribute name="projection" type="XmlProjectionEnum" use="required"/>
+    <xsd:attribute name="zoomMinDistance" type="PositiveDouble" use="required" />
+    <xsd:attribute name="zoomMaxDistance" type="PositiveDouble" use="required" />
+    <xsd:attribute name="resolutionThreshold" type="PositiveDouble" use="required" />
+    <xsd:attribute name="sizeParameter1" type="PositiveDouble" use="required" />
+    <xsd:attribute name="sizeParameter2" type="PositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:simpleType name="XmlProjectionEnum">
     <xsd:restriction base="xsd:string">

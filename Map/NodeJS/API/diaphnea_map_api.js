@@ -58,6 +58,7 @@ var mapServerInterface =
          
          function Map(mapId, canvasId, mapInfo)
          {
+            var canvas = new fabric.Canvas(canvasId);
             var visibleElements = {};
             var items = {};
             var looks = {};
@@ -114,7 +115,7 @@ var mapServerInterface =
                });
                
                var id = ++requestCounter;
-               var request = { id: id, mapId: mapId, elementIds: elementIds };
+               var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
                callBacks[id.toString()] = renderStep;
                socket.emit('render', request);
                

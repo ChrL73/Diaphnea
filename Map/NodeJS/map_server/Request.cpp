@@ -65,10 +65,22 @@ namespace map_server
         else if (requestType == map_server::RENDER)
         {
             int i, n = tokenVector.size();
-            if (n < 5) return 0;
+            if (n < 7) return 0;
+
+            double widthInPixels, heightInPixels;
+            try
+            {
+                widthInPixels = std::stod(tokenVector[4]);
+                heightInPixels = std::stod(tokenVector[5]);
+            }
+            catch (...)
+            {
+                return 0;
+            }
+
             std::vector<const char *> elementIds;
-            for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
-            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
+            for (i = 6; i < n; ++i) elementIds.push_back(tokenVector[i]);
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, sendResponse);
         }
 
         return 0;

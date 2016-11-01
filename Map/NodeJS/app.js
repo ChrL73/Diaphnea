@@ -49,7 +49,7 @@ io.on('connection', function(socket)
    
    socket.on('render', function(request)
    {
-      var req = socket.id + ' ' + request.id + ' ' + messageTypes.render + ' ' + request.mapId;
+      var req = socket.id + ' ' + request.id + ' ' + messageTypes.render + ' ' + request.mapId + ' ' + request.width + ' ' + request.height;
       request.elementIds.forEach(function(elementId)
       {
          req += ' ' + elementId;

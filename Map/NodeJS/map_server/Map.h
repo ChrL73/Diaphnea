@@ -56,6 +56,12 @@ namespace map_server
         void load(void);
         void addPointItem(PointItem *pointItem);
 
+        double getZoomMinDistance(void) const { return _zoomMinDistance; }
+        double getZoomMaxDistance(void) const { return _zoomMaxDistance; }
+        double getResolutionThreshold(void) const { return _resolutionThreshold; }
+        double getSizeParameter1(void) const { return _sizeParameter1; }
+        double getSizeParameter2(void) const { return _sizeParameter2; }
+
         const std::string& getInfoJson(void) const { return _infoJson; }
         MapElement *getElement(const std::string& id);
         LineItem *getLineItem(const std::string& mongoId);

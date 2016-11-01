@@ -176,6 +176,12 @@ namespace map_server
         {
             mongo::BSONObj dbMap = cursor->next();
 
+            _zoomMinDistance = dbMap.getField("zoom_min_distance").Double();
+            _zoomMaxDistance = dbMap.getField("zoom_max_distance").Double();
+            _resolutionThreshold = dbMap.getField("resolution_threshold").Double();
+            _sizeParameter1 = dbMap.getField("size_parameter1").Double();
+            _sizeParameter2 = dbMap.getField("size_parameter2").Double();
+
             mongo::BSONObj dbName = dbMap.getField("name").Obj();
             std::vector<mongo::BSONElement> dbLanguageVector = dbMap.getField("languages").Array();
             int i, n = dbLanguageVector.size();

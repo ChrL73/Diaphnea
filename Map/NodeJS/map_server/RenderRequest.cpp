@@ -13,6 +13,8 @@
 
 #include <map>
 #include <sstream>
+#include <limits>
+#include <cmath>
 
 namespace map_server
 {
@@ -88,14 +90,53 @@ namespace map_server
 
             if (n > 0)
             {
+                double xMin = std::numeric_limits<double>::max();
+                double xMax = std::numeric_limits<double>::lowest();
+                double yMin = std::numeric_limits<double>::max();
+                double yMax = std::numeric_limits<double>::lowest();
+
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 for (i = 0; i < n; ++i)
                 {
                     MapItem *item = itemVector[i];
+
+                    if (item->getXMin() < xMin) xMin = item->getXMin();
+                    if (item->getXMax() > xMax) xMax = item->getXMax();
+                    if (item->getYMin() < yMin) yMin = item->getYMin();
+                    if (item->getYMax() > yMax) yMax = item->getYMax();
+
+
                     if (i != 0) response << ",";
                     response << "{\"id\":" << item->getId() << ",\"lk\":" << item->getCurrentLook()->getId() << "}";
                 }
-                response << "],\"resolution\":4}";
+
+                double xFocus = 0.5 * (xMin + xMax);
+                double yFocus = 0.5 * (yMin + yMax);
+                double geoWidth = 1.15 * (xMax - xMin);
+                double geoHeight = 1.15 * (yMax - yMin);
+                if (geoWidth <= 0) geoWidth = 1.0;
+                if (geoHeight <= 0) geoHeight = 1.0;
+                double geoSize;
+
+                if (geoWidth * _heightInPixels > geoHeight * _widthInPixels)
+                {
+                    double a = _heightInPixels / _widthInPixels;
+                    geoSize = geoWidth * sqrt(1.0 + a * a);
+                }
+                else
+                {
+                    double a = _widthInPixels / _heightInPixels;
+                    geoSize = geoHeight * sqrt(1.0 + a * a);
+                }
+
+                if (geoSize < map->getZoomMinDistance()) geoSize = map->getZoomMinDistance();
+
+                double scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
+
+                int resolutionIndex = 4; // Todo: Set 'resolutionIndex' to the appropriate value
+
+                response << "],\"xFocus\":" << xFocus << ",\"yFocus\":" << yFocus
+                         << ",\"scale\":" << scale << ",\"resolution\":" << resolutionIndex << "}";
             }
 
             MapData::unlock();

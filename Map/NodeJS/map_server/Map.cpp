@@ -139,6 +139,13 @@ namespace map_server
         _itemLookMap.insert(std::pair<int, const ItemLook *>(look->getId(), look));
     }
 
+    const ItemLook *Map::getItemLook(int lookId)
+    {
+        std::map<int, const ItemLook *>::iterator it = _itemLookMap.find(lookId);
+        if (it != _itemLookMap.end()) return (*it).second;
+        return 0;
+    }
+
     void Map::load(void)
     {
         _loaded = true;
@@ -277,7 +284,12 @@ namespace map_server
             if (elementIdsJson.empty()) elementIdsJson = "undefined";
             if (languagesJson.empty()) languagesJson = "undefined";
             if (namesJson.empty()) namesJson = "undefined";
-            _infoJson = "{\"elementIds\":" + elementIdsJson + ",\"languages\":" + languagesJson + ",\"names\":" + namesJson + "}";
+
+            std::stringstream jsonStream;
+            jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson << ",\"names\":" << namesJson
+                       << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
+                       << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
+            _infoJson = jsonStream.str();
         }
     }
 }

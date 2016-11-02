@@ -67,5 +67,6 @@ namespace map_server
         LineItem *getLineItem(const std::string& mongoId);
         FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
         MapItem *getItem(int itemId);
+        const ItemLook *getItemLook(int lookId);
     };
 }

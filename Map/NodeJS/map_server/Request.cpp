@@ -5,6 +5,7 @@
 #include "GetElementInfoRequest.h"
 #include "GetElementsInfoRequest.h"
 #include "GetItemInfoRequest.h"
+#include "GetLookRequest.h"
 #include "RenderRequest.h"
 
 namespace map_server
@@ -61,6 +62,20 @@ namespace map_server
                 return 0;
             }
             return new GetItemInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
+        }
+        else if (requestType == map_server::GET_LOOK)
+        {
+            if (tokenVector.size() < 5) return 0;
+            int lookId;
+            try
+            {
+                lookId = std::stoi(tokenVector[4]);
+            }
+            catch (...)
+            {
+                return 0;
+            }
+            return new GetLookRequest(tokenVector[0], tokenVector[1], tokenVector[3], lookId, sendResponse);
         }
         else if (requestType == map_server::RENDER)
         {

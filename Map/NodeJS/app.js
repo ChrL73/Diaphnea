@@ -10,7 +10,8 @@ var messageTypes =
    getElementInfo: '2',
    getElementsInfo: '3',
    getItemInfo: '4',
-   render: '5',
+   getLook: '5',
+   render: '6',
 };
 
 var io = require('socket.io').listen(server);
@@ -45,6 +46,11 @@ io.on('connection', function(socket)
    socket.on('getItemInfo', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemInfo + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+   });
+   
+   socket.on('getLook', function(request)
+   {
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getLook + ' ' + request.mapId + ' ' + request.lookId);
    });
    
    socket.on('render', function(request)

@@ -59,6 +59,8 @@
 		<Unit filename="GetElementsInfoRequest.h" />
 		<Unit filename="GetItemInfoRequest.cpp" />
 		<Unit filename="GetItemInfoRequest.h" />
+		<Unit filename="GetLookRequest.cpp" />
+		<Unit filename="GetLookRequest.h" />
 		<Unit filename="GetMapIdsRequest.cpp" />
 		<Unit filename="GetMapIdsRequest.h" />
 		<Unit filename="GetMapInfoRequest.cpp" />

@@ -42,7 +42,7 @@ $(function()
             woleuNtem.show();
             woleuNtem.hide();
             map.render();
-            //setTimeout(function() { map.render(); }, 1000);
+            setTimeout(function() { map.render(); }, 1000);
          }
       }
    }

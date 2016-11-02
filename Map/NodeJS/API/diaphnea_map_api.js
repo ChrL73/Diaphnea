@@ -125,32 +125,51 @@ var mapServerInterface =
                   {
                      console.log(data);
                      var resolution = data.resolution;
+                     var requestedLooks = {};
 
-                     data.items.forEach(function(item)
+                     data.items.forEach(renderItem);
+                     
+                     function renderItem(item)
                      {
                         var itemId = item.id;
-                        var look = item.lk;
                         if (!items[itemId]) items[itemId] = [];
                         if (!items[itemId][resolution])
                         {                           
                            var id = ++requestCounter;
                            var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
                            callBacks[id.toString()] = setItemInfo;
-                           contexts[id.toString()] = { itemId: itemId, resolution: resolution }
+                           contexts[id.toString()] = { item: item, resolution: resolution }
                            socket.emit('getItemInfo', request)
                         }
-                     });
+                                           
+                        var lookId = item.lk;
+                        if (!looks[lookId] && !requestedLooks[lookId])
+                        {
+                           requestedLooks[lookId] = true;
+                           var id = ++requestCounter;
+                           var request = { id: id, mapId: mapId, lookId: lookId };
+                           callBacks[id.toString()] = setLook;
+                           contexts[id.toString()] = { item: item }
+                           socket.emit('getLook', request)
+                        }
+                     }
+                     
+                     function setItemInfo(itemInfo, context)
+                     {
+                        items[context.item.id][context.resolution] = itemInfo;
+                        console.log(itemInfo);
+                     }
+                     
+                     function setLook(look, context)
+                     {
+                        looks[context.item.lk] = look;
+                        console.log(look);
+                     }
                   }
                   /*else if (data...)
                   {
                      
                   }*/
-               }
-               
-               function setItemInfo(data, context)
-               {
-                  items[context.itemId][context.resolution] = data;
-                  console.log(data);
                }
             }
          }

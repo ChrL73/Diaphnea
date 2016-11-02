@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://192.168.50.124:3001';
+   var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -42,7 +42,7 @@ $(function()
             woleuNtem.show();
             woleuNtem.hide();
             map.render();
-            setTimeout(function() { map.render(); }, 1000);
+            //setTimeout(function() { map.render(); }, 1000);
          }
       }
    }

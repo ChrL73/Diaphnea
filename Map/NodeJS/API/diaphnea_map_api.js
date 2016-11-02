@@ -62,6 +62,7 @@ var mapServerInterface =
             var visibleElements = {};
             var items = {};
             var looks = {};
+            var xFocus, yFocus, scale;
             
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
@@ -116,64 +117,73 @@ var mapServerInterface =
                
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
-               callBacks[id.toString()] = renderStep;
+               callBacks[id.toString()] = renderInit;
                socket.emit('render', request);
+            }
                
-               function renderStep(data)
-               {
-                  if (data.items)
-                  {
-                     console.log(data);
-                     var resolution = data.resolution;
-                     var requestedLooks = {};
+            function renderInit(renderInfo)
+            {
+               console.log(renderInfo);      
+               
+               xFocus = renderInfo.xFocus;
+               yFocus = renderInfo.yFocus;
+               scale = renderInfo.scale;
+               
+               var resolution = renderInfo.resolution;
+               var requestedLooks = {};
+               renderInfo.items.forEach(function(itemInfo) { checkRenderData(itemInfo, true);} );
 
-                     data.items.forEach(renderItem);
-                     
-                     function renderItem(item)
-                     {
-                        var itemId = item.id;
-                        if (!items[itemId]) items[itemId] = [];
-                        if (!items[itemId][resolution])
-                        {                           
-                           var id = ++requestCounter;
-                           var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
-                           callBacks[id.toString()] = setItemInfo;
-                           contexts[id.toString()] = { item: item, resolution: resolution }
-                           socket.emit('getItemInfo', request)
-                        }
-                                           
-                        var lookId = item.lk;
-                        if (!looks[lookId] && !requestedLooks[lookId])
-                        {
-                           requestedLooks[lookId] = true;
-                           var id = ++requestCounter;
-                           var request = { id: id, mapId: mapId, lookId: lookId };
-                           callBacks[id.toString()] = setLook;
-                           contexts[id.toString()] = { item: item }
-                           socket.emit('getLook', request)
-                        }
+               function checkRenderData(itemInfo, firstCall)
+               {
+                  var itemId = itemInfo.id;
+                  var lookId = itemInfo.lk;
+
+                  if (firstCall)
+                  {
+                     if (!items[itemId]) items[itemId] = [];
+                     if (!items[itemId][resolution])
+                     {                           
+                        var id = ++requestCounter;
+                        var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
+                        callBacks[id.toString()] = setItemData;
+                        contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution }
+                        socket.emit('getItemData', request)
                      }
-                     
-                     function setItemInfo(itemInfo, context)
+
+                     if (!looks[lookId] && !requestedLooks[lookId])
                      {
-                        items[context.item.id][context.resolution] = itemInfo;
-                        console.log(itemInfo);
-                     }
-                     
-                     function setLook(look, context)
-                     {
-                        looks[context.item.lk] = look;
-                        console.log(look);
+                        requestedLooks[lookId] = true;
+                        var id = ++requestCounter;
+                        var request = { id: id, mapId: mapId, lookId: lookId };
+                        callBacks[id.toString()] = setLookData;
+                        contexts[id.toString()] = { itemInfo: itemInfo }
+                        socket.emit('getLook', request)
                      }
                   }
-                  /*else if (data...)
-                  {
-                     
-                  }*/
+
+                  if (items[itemId] && items[itemId][resolution] && looks[lookId]) renderItem(itemInfo, resolution);
                }
+
+               function setItemData(itemData, context)
+               {
+                  console.log(itemData);
+                  items[context.itemInfo.id][context.resolution] = itemData;
+                  checkRenderData(context.itemInfo, false);
+               }
+
+               function setLookData(lookData, context)
+               {
+                  console.log(lookData);
+                  looks[context.itemInfo.lk] = lookData; 
+                  checkRenderData(context.itemInfo, false);
+               }
+            }
+
+            function renderItem(itemInfo, resolution)
+            {
+               console.log("Item " + itemInfo.id + " (resolution " + resolution + ") ready to be rendered...");
             }
          }
       }
    }
 }
-

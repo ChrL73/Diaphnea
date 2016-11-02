@@ -9,7 +9,7 @@ var messageTypes =
    getMapInfo: '1',
    getElementInfo: '2',
    getElementsInfo: '3',
-   getItemInfo: '4',
+   getItemData: '4',
    getLook: '5',
    render: '6',
 };
@@ -43,9 +43,9 @@ io.on('connection', function(socket)
       cppServer.sendRequest(req);
    });
    
-   socket.on('getItemInfo', function(request)
+   socket.on('getItemData', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemInfo + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
    });
    
    socket.on('getLook', function(request)

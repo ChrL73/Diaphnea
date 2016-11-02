@@ -4,7 +4,7 @@
 #include "GetMapInfoRequest.h"
 #include "GetElementInfoRequest.h"
 #include "GetElementsInfoRequest.h"
-#include "GetItemInfoRequest.h"
+#include "GetItemDataRequest.h"
 #include "GetLookRequest.h"
 #include "RenderRequest.h"
 
@@ -48,7 +48,7 @@ namespace map_server
             for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
             return new GetElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
         }
-        else if (requestType == map_server::GET_ITEM_INFO)
+        else if (requestType == map_server::GET_ITEM_DATA)
         {
             if (tokenVector.size() < 6) return 0;
             int itemId, resolutionIndex;
@@ -61,7 +61,7 @@ namespace map_server
             {
                 return 0;
             }
-            return new GetItemInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
+            return new GetItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
         }
         else if (requestType == map_server::GET_LOOK)
         {

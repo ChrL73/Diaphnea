@@ -29,7 +29,7 @@ namespace map_server
             mongo::BSONObj dbPoint = dbElement.getField("point").Obj();
             double x = dbPoint.getField("x").Double();
             double y = dbPoint.getField("y").Double();
-            Point *point = new Point(x, y);
+            Point *point = new Point(x, -y);
 
             _item = new PointItem(id, point);
             _item->setCurrentLook(_look->getPointLook());

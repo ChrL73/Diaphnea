@@ -133,7 +133,7 @@ namespace map_server
 
                 double scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
 
-                int resolutionIndex = 4; // Todo: Set 'resolutionIndex' to the appropriate value
+                int resolutionIndex = 1; // Todo: Set 'resolutionIndex' to the appropriate value
 
                 response << "],\"xFocus\":" << xFocus << ",\"yFocus\":" << yFocus
                          << ",\"scale\":" << scale << ",\"resolution\":" << resolutionIndex << "}";

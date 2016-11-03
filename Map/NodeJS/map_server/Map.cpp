@@ -106,7 +106,7 @@ namespace map_server
                     mongo::BSONObj dbPoint = pointVector[j].Obj();
                     double x = dbPoint.getField("x").Double();
                     double y = dbPoint.getField("y").Double();
-                    Point *point = new Point(x, y);
+                    Point *point = new Point(x, -y);
                     item->addPoint(i, _sampleLengthVector[i], point);
                 }
             }

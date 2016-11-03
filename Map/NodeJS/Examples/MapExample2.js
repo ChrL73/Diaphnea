@@ -1,6 +1,6 @@
 $(function()
 {            
-   var url = 'http://192.168.50.91:3001';
+   var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -11,19 +11,24 @@ $(function()
       
       function onMapLoaded(map)
       {
-         var elements = {};
-         
          var elementIds = map.getElementIds();
          map.loadElements(elementIds, function(elementArray)
          {
             elementArray.forEach(function(element)
             {
                var elementId = element.getId();
-               elements[elementId] = element;
                $('#elementList').append('<p><input type="checkbox" id="' + elementId + '"/><label for="' + elementId + '"> ' + element.getName('fr') + '</label></p>');
+               $('#' + elementId).change(function()
+               {
+                  if ($('#' + elementId).prop('checked')) element.show();
+                  else element.hide();
+               });
             });
             
-            
+            $('#render').click(function()
+            {
+               map.render();
+            });
          });
       }
    }

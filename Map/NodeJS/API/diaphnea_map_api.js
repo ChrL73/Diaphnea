@@ -51,6 +51,8 @@ var mapServerInterface =
                callBacks[requestId](response.content, contexts[requestId]);
                delete callBacks[requestId];
                delete contexts[requestId];
+               
+               console.log(callBacks);
             });
          });  
          
@@ -72,6 +74,7 @@ var mapServerInterface =
             var canvas = new fabric.Canvas(canvasId);
             canvas.hoverCursor = 'default';
             canvas.selection = false;
+            var renderTimeout;
             
             var visibleElements = {};
             var items = {};
@@ -138,7 +141,7 @@ var mapServerInterface =
                
             function renderInit(renderInfo)
             {
-               console.log(renderInfo);      
+               //console.log(renderInfo);      
                
                xFocus = renderInfo.xFocus;
                yFocus = renderInfo.yFocus;
@@ -161,8 +164,8 @@ var mapServerInterface =
                         var id = ++requestCounter;
                         var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
                         callBacks[id.toString()] = setItemData;
-                        contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution }
-                        socket.emit('getItemData', request)
+                        contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution };
+                        socket.emit('getItemData', request);
                      }
 
                      if (!looks[lookId] && !requestedLooks[lookId])
@@ -171,8 +174,8 @@ var mapServerInterface =
                         var id = ++requestCounter;
                         var request = { id: id, mapId: mapId, lookId: lookId };
                         callBacks[id.toString()] = setLookData;
-                        contexts[id.toString()] = { itemInfo: itemInfo }
-                        socket.emit('getLook', request)
+                        contexts[id.toString()] = { itemInfo: itemInfo };
+                        socket.emit('getLook', request);
                      }
                   }
 
@@ -181,7 +184,7 @@ var mapServerInterface =
 
                function setItemData(itemData, context)
                {
-                  console.log(itemData);
+                  //console.log(itemData);
                   
                   var item = { type: itemData.type };
                   if (item.type == 'line')
@@ -198,7 +201,7 @@ var mapServerInterface =
 
                function setLookData(lookData, context)
                {
-                  console.log(lookData);
+                  //console.log(lookData);
                   looks[context.itemInfo.lk] = lookData; 
                   checkRenderData(context.itemInfo, false);
                }
@@ -206,7 +209,7 @@ var mapServerInterface =
 
             function renderItem(itemInfo, resolution)
             {
-               console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
+               //console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
                
                var item = items[itemInfo.id][resolution];
                var look = looks[itemInfo.lk];
@@ -225,6 +228,11 @@ var mapServerInterface =
                   {
                      canvas.add(polyline);
                      item.added = true;
+                  }
+                  else
+                  {
+                     clearTimeout(renderTimeout);
+                     renderTimeout = setTimeout(function() { canvas.renderAll(); }, 100);
                   }
                }
             }

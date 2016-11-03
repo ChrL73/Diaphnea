@@ -8,3 +8,8 @@ canvas, div
    display: inline-block;
    vertical-align: top;
 }
+
+button
+{
+   margin-top: 8px;
+}

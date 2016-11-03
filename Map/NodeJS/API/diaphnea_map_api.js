@@ -6,6 +6,17 @@ var mapServerInterface =
       {
          onConnected(connection);
       });
+      
+      var polylineOptions =
+      {
+         strokeLineCap: 'round',
+         strokeLineJoin: 'round',
+         fill: '',
+         hasControls: false,
+         hasBorders: false,
+         lockMovementX: true,
+         lockMovementY: true
+      };
 
       function Connection(onConnected)
       {   
@@ -59,6 +70,9 @@ var mapServerInterface =
          function Map(mapId, canvasId, mapInfo)
          {
             var canvas = new fabric.Canvas(canvasId);
+            canvas.hoverCursor = 'default';
+            canvas.selection = false;
+            
             var visibleElements = {};
             var items = {};
             var looks = {};
@@ -101,6 +115,7 @@ var mapServerInterface =
                
             function Element(elementId, elementInfo)
             {
+               this.getId = function() { return elementId; }
                this.getName = function(languageId) { return elementInfo.names[languageId]; }
                
                this.show = function() { visibleElements[elementId] = true; }
@@ -167,7 +182,17 @@ var mapServerInterface =
                function setItemData(itemData, context)
                {
                   console.log(itemData);
-                  items[context.itemInfo.id][context.resolution] = itemData;
+                  
+                  var item = { type: itemData.type };
+                  if (item.type == 'line')
+                  {
+                     var polyline = new fabric.Polyline(itemData.points, polylineOptions);
+                     item.polyline = polyline;
+                     item.top0 = polyline.top;
+                     item.left0 = polyline.left;
+                  }
+                  
+                  items[context.itemInfo.id][context.resolution] = item;
                   checkRenderData(context.itemInfo, false);
                }
 
@@ -181,7 +206,27 @@ var mapServerInterface =
 
             function renderItem(itemInfo, resolution)
             {
-               console.log("Item " + itemInfo.id + " (resolution " + resolution + ") ready to be rendered...");
+               console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
+               
+               var item = items[itemInfo.id][resolution];
+               var look = looks[itemInfo.lk];
+               
+               if (item.type == 'line')
+               {
+                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
+                  var polyline = item.polyline;
+                  polyline.stroke = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                  polyline.strokeWidth = look.size * sizeFactor;
+                  polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                  polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                  polyline.scaleX = scale;
+                  polyline.scaleY = scale;
+                  if (!item.added)
+                  {
+                     canvas.add(polyline);
+                     item.added = true;
+                  }
+               }
             }
          }
       }

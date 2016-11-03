@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://albertine:3001';
+   var url = 'http://192.168.50.91:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -26,13 +26,14 @@ $(function()
             libreville = element;
             console.log(libreville.getName('fr'));
             
-            map.loadElements(['Estuaire', 'WoleuNtem'], onElementsLoaded);
+            map.loadElements(['Estuaire', 'WoleuNtem', 'KomoOcean'], onElementsLoaded);
          }
          
          function onElementsLoaded(elements)
          {
             estuaire = elements[0];
             woleuNtem = elements[1];
+            komoOcean = elements[2];
              
             console.log(estuaire.getName('fr'));
             console.log(woleuNtem.getName('fr'));
@@ -40,6 +41,7 @@ $(function()
             libreville.show();
             estuaire.show();
             woleuNtem.show();
+            komoOcean.show();
             woleuNtem.hide();
             map.render();
             //setTimeout(function() { map.render(); }, 1000);

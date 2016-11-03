@@ -1,0 +1,10 @@
+canvas
+{
+  border: 1px solid black;
+}
+
+canvas, div
+{
+   display: inline-block;
+   vertical-align: top;
+}

@@ -227,9 +227,9 @@ var mapServerInterface =
 
             function setLookData(lookData, context)
             {
-               console.log(lookData);
-               looks[context.lookId] = lookData; 
+               //console.log(lookData);
                
+               looks[context.lookId] = lookData;     
                context.itemArray.forEach(function(itemInfo)
                {
                   renderItem(itemInfo, context.resolution);

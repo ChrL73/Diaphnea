@@ -245,6 +245,11 @@ namespace MapDataProcessing
                 }
             }
 
+            foreach (PolygonPolygonPart part in _polygonPartList)
+            {
+                itemArray.Add(part.MapItemId);
+            }
+
             BsonDocument elementDocument = new BsonDocument();
             elementDocument.AddRange(getBsonDocument());
             elementDocument.AddRange(new BsonDocument()

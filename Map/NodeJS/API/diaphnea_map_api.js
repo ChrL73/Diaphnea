@@ -52,7 +52,7 @@ var mapServerInterface =
                delete callBacks[requestId];
                delete contexts[requestId];
                
-               console.log(callBacks);
+               //console.log(callBacks);
             });
          });  
          
@@ -133,10 +133,23 @@ var mapServerInterface =
                   if (visibleElements[elementId]) elementIds.push(elementId);
                });
                
-               var id = ++requestCounter;
-               var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
-               callBacks[id.toString()] = renderInit;
-               socket.emit('render', request);
+               if (elementIds.length)
+               {
+                  var id = ++requestCounter;
+                  var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
+                  callBacks[id.toString()] = renderInit;
+                  socket.emit('render', request);
+               }
+               else
+               {
+                  Object.getOwnPropertyNames(items).forEach(function(itemId)
+                  {
+                     items[itemId].forEach(function(item)
+                     {
+                        removeItem(item);
+                     });
+                  });
+               }
             }
                
             function renderInit(renderInfo)
@@ -148,91 +161,125 @@ var mapServerInterface =
                scale = renderInfo.scale;
                
                var resolution = renderInfo.resolution;
-               var requestedLooks = {};
-               renderInfo.items.forEach(function(itemInfo) { checkRenderData(itemInfo, true);} );
-
-               function checkRenderData(itemInfo, firstCall)
+               var lookToItems = {};
+               var itemsToRender = {};
+               
+               renderInfo.items.forEach(function(itemInfo)
                {
                   var itemId = itemInfo.id;
                   var lookId = itemInfo.lk;
-
-                  if (firstCall)
-                  {
-                     if (!items[itemId]) items[itemId] = [];
-                     if (!items[itemId][resolution])
-                     {                           
-                        var id = ++requestCounter;
-                        var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
-                        callBacks[id.toString()] = setItemData;
-                        contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution };
-                        socket.emit('getItemData', request);
-                     }
-
-                     if (!looks[lookId] && !requestedLooks[lookId])
-                     {
-                        requestedLooks[lookId] = true;
-                        var id = ++requestCounter;
-                        var request = { id: id, mapId: mapId, lookId: lookId };
-                        callBacks[id.toString()] = setLookData;
-                        contexts[id.toString()] = { itemInfo: itemInfo };
-                        socket.emit('getLook', request);
-                     }
+                  itemsToRender[itemId] = true;
+         
+                  if (!items[itemId]) items[itemId] = [];
+                  if (!items[itemId][resolution])
+                  {                           
+                     var id = ++requestCounter;
+                     var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
+                     callBacks[id.toString()] = setItemData;
+                     contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution };
+                     socket.emit('getItemData', request);
                   }
 
-                  if (items[itemId] && items[itemId][resolution] && looks[lookId]) renderItem(itemInfo, resolution);
-               }
-
-               function setItemData(itemData, context)
-               {
-                  //console.log(itemData);
-                  
-                  var item = { type: itemData.type };
-                  if (item.type == 'line')
+                  if (!looks[lookId])
                   {
-                     var polyline = new fabric.Polyline(itemData.points, polylineOptions);
-                     item.polyline = polyline;
-                     item.top0 = polyline.top;
-                     item.left0 = polyline.left;
+                     if (!lookToItems[lookId]) lookToItems[lookId] = [];
+                     lookToItems[lookId].push(itemInfo);
                   }
-                  
-                  items[context.itemInfo.id][context.resolution] = item;
-                  checkRenderData(context.itemInfo, false);
-               }
 
-               function setLookData(lookData, context)
+                  renderItem(itemInfo, resolution);
+               });
+               
+               Object.getOwnPropertyNames(lookToItems).forEach(function(lookId)
                {
-                  //console.log(lookData);
-                  looks[context.itemInfo.lk] = lookData; 
-                  checkRenderData(context.itemInfo, false);
-               }
+                  var id = ++requestCounter;
+                  var request = { id: id, mapId: mapId, lookId: lookId };
+                  callBacks[id.toString()] = setLookData;
+                  contexts[id.toString()] = { lookId: lookId, itemArray: lookToItems[lookId], resolution: resolution };
+                  socket.emit('getLook', request);
+               });
+               
+               Object.getOwnPropertyNames(items).forEach(function(itemId)
+               {
+                  if (!itemsToRender[itemId])
+                  {
+                     var item = items[itemId][resolution];
+                     removeItem(item);
+                  }
+               });
             }
 
-            function renderItem(itemInfo, resolution)
+            function setItemData(itemData, context)
             {
-               //console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
-               
-               var item = items[itemInfo.id][resolution];
-               var look = looks[itemInfo.lk];
-               
+               //console.log(itemData);
+
+               var item = { type: itemData.type };
                if (item.type == 'line')
                {
-                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
-                  var polyline = item.polyline;
-                  polyline.stroke = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                  polyline.strokeWidth = look.size * sizeFactor;
-                  polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                  polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                  polyline.scaleX = scale;
-                  polyline.scaleY = scale;
-                  if (!item.added)
+                  var polyline = new fabric.Polyline(itemData.points, polylineOptions);
+                  item.polyline = polyline;
+                  item.top0 = polyline.top;
+                  item.left0 = polyline.left;
+               }
+
+               items[context.itemInfo.id][context.resolution] = item;
+               renderItem(context.itemInfo, context.resolution);
+            }
+
+            function setLookData(lookData, context)
+            {
+               console.log(lookData);
+               looks[context.lookId] = lookData; 
+               
+               context.itemArray.forEach(function(itemInfo)
+               {
+                  renderItem(itemInfo, context.resolution);
+               });
+            }
+            
+            function renderItem(itemInfo, resolution)
+            {
+               var itemId = itemInfo.id;
+               var lookId = itemInfo.lk;
+               
+               if (items[itemId] && items[itemId][resolution] && looks[lookId])
+               {
+                  //console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
+                  
+                  var item = items[itemId][resolution];
+                  var look = looks[lookId];
+
+                  if (item.type == 'line')
                   {
-                     canvas.add(polyline);
-                     item.added = true;
+                     var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
+                     var polyline = item.polyline;
+                     polyline.stroke = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                     polyline.strokeWidth = look.size * sizeFactor;
+                     polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                     polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                     polyline.scaleX = scale;
+                     polyline.scaleY = scale;
+                     if (!item.added)
+                     {
+                        canvas.add(polyline);
+                        item.added = true;
+                     }
+                     else
+                     {
+                        clearTimeout(renderTimeout);
+                        renderTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
+                     }
                   }
-                  else
+               }
+            }
+            
+            function removeItem(item)
+            {
+               if (item.added)
+               {
+                  if (item.type == 'line')
                   {
-                     clearTimeout(renderTimeout);
-                     renderTimeout = setTimeout(function() { canvas.renderAll(); }, 100);
+                     item.added = false;
+                     canvas.remove(item.polyline);
                   }
                }
             }

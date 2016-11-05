@@ -32,6 +32,7 @@ namespace MapDataProcessing
 
         private readonly KmlFileData _polygonData;
         private readonly DatabaseMapItem _smoothedPolygonMapItem = new DatabaseMapItem();
+        internal BsonValue MapItemId { get { return _smoothedPolygonMapItem.Id; } }
 
         private PolygonPolygonPart(KmlFileData polygonData)
         {

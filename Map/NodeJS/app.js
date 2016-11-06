@@ -14,6 +14,17 @@ var messageTypes =
    render: '6',
 };
 
+var responseNames =
+[
+   'mapIds',
+   'mapInfo',
+   'elementInfo',
+   'elementsInfo',
+   'itemData',
+   'look',
+   'items'
+];
+
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
@@ -67,10 +78,10 @@ io.on('connection', function(socket)
 cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
 {
    var socket = io.sockets.connected[socketId];
+   var messageName = responseNames[requestType];
    
-   if (socket)
+   if (socket && messageName)
    {
-      var messageName = (requestType == 0 ? 'mapIds' : 'res');
       var response = { requestId: requestId, content: responseContent };
       socket.emit(messageName, response);
    }

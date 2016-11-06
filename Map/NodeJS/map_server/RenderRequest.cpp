@@ -95,6 +95,8 @@ namespace map_server
                 double yMin = std::numeric_limits<double>::max();
                 double yMax = std::numeric_limits<double>::lowest();
 
+                int resolutionIndex = 1; // Todo: Set 'resolutionIndex' to the appropriate value
+
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 for (i = 0; i < n; ++i)
                 {
@@ -107,7 +109,9 @@ namespace map_server
 
 
                     if (i != 0) response << ",";
-                    response << "{\"id\":" << item->getId() << ",\"lk\":" << item->getCurrentLook()->getId() << "}";
+                    response << "[" << item->getId() << "," << item->getCurrentLook()->getId();
+                    if (item->hasResolution()) response << "," << resolutionIndex;
+                    response << "]";
                 }
 
                 double xFocus = 0.5 * (xMin + xMax);
@@ -133,10 +137,8 @@ namespace map_server
 
                 double scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
 
-                int resolutionIndex = 1; // Todo: Set 'resolutionIndex' to the appropriate value
-
                 response << "],\"xFocus\":" << xFocus << ",\"yFocus\":" << yFocus
-                         << ",\"scale\":" << scale << ",\"resolution\":" << resolutionIndex << "}";
+                         << ",\"scale\":" << scale << "}";
             }
 
             MapData::unlock();

@@ -15,6 +15,7 @@ namespace map_server
     private:
         std::map<double, std::vector<Point *> > _pointVectorMap;
         std::vector<std::vector<Point *> > _pointVectorVector;
+        bool hasResolution(void) const { return true; }
 
     protected:
         MultipointsItem(int id, int resolutionCount) : MapItem(id, resolutionCount), _resolutionCount(resolutionCount) {}

@@ -27,6 +27,7 @@
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(void) const { return _currentLook; }
         const std::string& getInfoJson(unsigned int resolutionIndex) const;
+        virtual bool hasResolution(void) const = 0;
 
         double getXMin(void) const { return _xMin; }
         double getXMax(void) const { return _xMax; }

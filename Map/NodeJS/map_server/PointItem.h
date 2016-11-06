@@ -10,6 +10,7 @@ namespace map_server
     {
     private:
         Point *_point;
+        bool hasResolution(void) const { return false; }
 
     public:
         PointItem(int id, Point *point);

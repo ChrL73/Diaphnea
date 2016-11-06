@@ -20,17 +20,28 @@ var mapServerInterface =
 
       function Connection(onConnected)
       {   
-         var socket;
-         var requestCounter = -1;
-         var callBacks = {};
-         var contexts = {};
-         
          var mapIds;
          this.getMapIds = function() { return mapIds; }
+         
+         var socket;
+         var requestCounter = -1;
+            
+         var contexts = {};
+         function getContext(response)
+         {
+            var requestId = response.requestId.toString();
+            var context = contexts[requestId];
+            delete contexts[requestId];
+            return context;
+         }
 
          $.getScript(url + '/socket.io/socket.io.js', function()
          {         
             socket = io(url);
+            
+            var id = ++requestCounter;
+            var request = { id: id };
+            socket.emit('getMapIds', request);
             
             socket.on('mapIds', function(response)
             {
@@ -40,19 +51,11 @@ var mapServerInterface =
                   onConnected();
                }
             });
-            
-            var id = ++requestCounter;
-            var request = { id: id };
-            socket.emit('getMapIds', request);
-            
-            socket.on('res', function(response)
+         
+            socket.on('mapInfo', function(response)
             {
-               var requestId = response.requestId.toString();
-               callBacks[requestId](response.content, contexts[requestId]);
-               delete callBacks[requestId];
-               delete contexts[requestId];
-               
-               //console.log(callBacks);
+               var context = getContext(response);
+               context.onMapLoaded(new Map(context.mapId, context.canvasId, response.content));
             });
          });  
          
@@ -60,13 +63,8 @@ var mapServerInterface =
          {
             var id = ++requestCounter;
             var request = { id: id, mapId: mapId };
-            callBacks[id.toString()] = setMapInfo;
+            contexts[id.toString()] = { mapId: mapId, canvasId: canvasId, onMapLoaded: onMapLoaded };
             socket.emit('getMapInfo', request);
-
-            function setMapInfo(mapInfo)
-            {
-               onMapLoaded(new Map(mapId, canvasId, mapInfo));
-            }
          }
          
          function Map(mapId, canvasId, mapInfo)
@@ -90,32 +88,34 @@ var mapServerInterface =
             {
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementId: elementId };
-               callBacks[id.toString()] = setElementInfo;
+               contexts[id.toString()] = { elementId: elementId, onElementLoaded: onElementLoaded };
                socket.emit('getElementInfo', request);
-
-               function setElementInfo(elementInfo)
-               {
-                  onElementLoaded(new Element(elementId, elementInfo));
-               }
             }
+            
+            socket.on('elementInfo', function(response)
+            {
+               var context = getContext(response);
+               context.onElementLoaded(new Element(context.elementId, response.content));
+            });
             
             this.loadElements = function(elementIds, onElementsLoaded)
             {
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementIds: elementIds };
-               callBacks[id.toString()] = setElementsInfo;
+               contexts[id.toString()] = { elementIds: elementIds, onElementsLoaded: onElementsLoaded };
                socket.emit('getElementsInfo', request);
-
-               function setElementsInfo(elementsInfo)
-               {
-                  var elements = [];
-                  elementsInfo.forEach(function(elementInfo, i)
-                  {
-                     elements.push(new Element(elementIds[i], elementInfo));
-                  });
-                  onElementsLoaded(elements);
-               }
             }
+            
+            socket.on('elementsInfo', function(response)
+            {
+               var context = getContext(response);
+               var elements = [];
+               response.content.forEach(function(elementInfo, i)
+               {
+                  elements.push(new Element(context.elementIds[i], elementInfo));
+               });
+               context.onElementsLoaded(elements);
+            });
                
             function Element(elementId, elementInfo)
             {
@@ -138,7 +138,7 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
-                  callBacks[id.toString()] = renderInit;
+                  contexts[id.toString()] = {};
                   socket.emit('render', request);
                }
                else
@@ -150,8 +150,10 @@ var mapServerInterface =
                }
             }
                
-            function renderInit(renderInfo)
+            socket.on('items', function(response)
             {
+               var context = getContext(response);
+               var renderInfo = response.content;
                //console.log(renderInfo);      
                
                xFocus = renderInfo.xFocus;
@@ -174,7 +176,6 @@ var mapServerInterface =
                   {                           
                      var id = ++requestCounter;
                      var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
-                     callBacks[id.toString()] = setItemData;
                      contexts[id.toString()] = { itemId: itemId, lookId: lookId };
                      socket.emit('getItemData', request);
                   }
@@ -192,7 +193,6 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, lookId: lookId };
-                  callBacks[id.toString()] = setLookData;
                   contexts[id.toString()] = { lookId: lookId, itemIdArray: lookToItems[lookId] };
                   socket.emit('getLook', request);
                });
@@ -205,10 +205,12 @@ var mapServerInterface =
                      removeItem(item);
                   }
                });
-            }
+            });
 
-            function setItemData(itemData, context)
+            socket.on('itemData', function (response)
             {
+               var context = getContext(response);
+               var itemData = response.content;
                //console.log(itemData);
 
                var item = { id: context.itemId, type: itemData.type };
@@ -236,10 +238,12 @@ var mapServerInterface =
 
                items[item.id] = item;
                renderItem(context.itemId, context.lookId);
-            }
+            });
 
-            function setLookData(lookData, context)
+            socket.on('look', function (response)
             {
+               var context = getContext(response);
+               var lookData = response.content;
                //console.log(lookData);
                
                looks[context.lookId] = lookData;     
@@ -247,7 +251,7 @@ var mapServerInterface =
                {
                   renderItem(itemId, context.lookId);
                });
-            }
+            });
             
             function renderItem(itemId, lookId)
             {

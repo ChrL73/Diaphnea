@@ -44,12 +44,12 @@ var circle1 = new fabric.Circle(
    left: xCircle1 - 0.5,
    top: yCircle1 - 0.5,
    fill: 'rgb(0, 255, 255)',
+   stroke: 'black',
    hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true
 });
 
 line1.stroke = 'rgba(255, 30, 30, 0.8)';
 line2.stroke = 'blue';
-circle1.stroke = 'black';
 
 // 'group' does not work properly when lines have different strokeWidths:
 // Property 'top' (or 'left') is calculated in a different way for 'line1' and 'line2' in the function 'updateFocus' .

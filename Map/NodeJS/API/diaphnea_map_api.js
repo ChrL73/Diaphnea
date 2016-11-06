@@ -78,6 +78,7 @@ var mapServerInterface =
             
             var visibleElements = {};
             var items = {};
+            var addedItems = {};
             var looks = {};
             var xFocus, yFocus, scale;
             
@@ -142,12 +143,9 @@ var mapServerInterface =
                }
                else
                {
-                  Object.getOwnPropertyNames(items).forEach(function(itemId)
+                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
                   {
-                     items[itemId].forEach(function(item)
-                     {
-                        removeItem(item);
-                     });
+                     removeItem(items[itemId]);
                   });
                }
             }
@@ -160,33 +158,34 @@ var mapServerInterface =
                yFocus = renderInfo.yFocus;
                scale = renderInfo.scale;
                
-               var resolution = renderInfo.resolution;
                var lookToItems = {};
                var itemsToRender = {};
                
                renderInfo.items.forEach(function(itemInfo)
                {
-                  var itemId = itemInfo.id;
-                  var lookId = itemInfo.lk;
+                  var itemId = itemInfo[0].toString();
+                  var lookId = itemInfo[1];
+                  var resolution = itemInfo[2];
+                  if (resolution) itemId += '_' + resolution;
+                  
                   itemsToRender[itemId] = true;
          
-                  if (!items[itemId]) items[itemId] = [];
-                  if (!items[itemId][resolution])
+                  if (!items[itemId])
                   {                           
                      var id = ++requestCounter;
-                     var request = { id: id, mapId: mapId, itemId: itemId, resolution: resolution };
+                     var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
                      callBacks[id.toString()] = setItemData;
-                     contexts[id.toString()] = { itemInfo: itemInfo, resolution: resolution };
+                     contexts[id.toString()] = { itemId: itemId, lookId: lookId };
                      socket.emit('getItemData', request);
                   }
 
                   if (!looks[lookId])
                   {
                      if (!lookToItems[lookId]) lookToItems[lookId] = [];
-                     lookToItems[lookId].push(itemInfo);
+                     lookToItems[lookId].push(itemId);
                   }
 
-                  renderItem(itemInfo, resolution);
+                  renderItem(itemId, lookId);
                });
                
                Object.getOwnPropertyNames(lookToItems).forEach(function(lookId)
@@ -194,15 +193,15 @@ var mapServerInterface =
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, lookId: lookId };
                   callBacks[id.toString()] = setLookData;
-                  contexts[id.toString()] = { lookId: lookId, itemArray: lookToItems[lookId], resolution: resolution };
+                  contexts[id.toString()] = { lookId: lookId, itemIdArray: lookToItems[lookId] };
                   socket.emit('getLook', request);
                });
                
-               Object.getOwnPropertyNames(items).forEach(function(itemId)
+               Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
                {
                   if (!itemsToRender[itemId])
                   {
-                     var item = items[itemId][resolution];
+                     var item = items[itemId];
                      removeItem(item);
                   }
                });
@@ -212,7 +211,7 @@ var mapServerInterface =
             {
                //console.log(itemData);
 
-               var item = { type: itemData.type };
+               var item = { id: context.itemId, type: itemData.type };
                if (item.type == 'line')
                {
                   var polyline = new fabric.Polyline(itemData.points, polylineOptions);
@@ -220,9 +219,23 @@ var mapServerInterface =
                   item.top0 = polyline.top;
                   item.left0 = polyline.left;
                }
+               else if (item.type == 'point')
+               {
+                  var circle = new fabric.Circle(
+                  {
+                     radius: 0.5,
+                     left: itemData.x - 0.5,
+                     top: itemData.y - 0.5,
+                     stroke: 'black',
+                     hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true
+                  });
+                  item.circle = circle;
+                  item.top0 = circle.top;
+                  item.left0 = circle.left;
+               }
 
-               items[context.itemInfo.id][context.resolution] = item;
-               renderItem(context.itemInfo, context.resolution);
+               items[item.id] = item;
+               renderItem(context.itemId, context.lookId);
             }
 
             function setLookData(lookData, context)
@@ -230,27 +243,25 @@ var mapServerInterface =
                //console.log(lookData);
                
                looks[context.lookId] = lookData;     
-               context.itemArray.forEach(function(itemInfo)
+               context.itemIdArray.forEach(function(itemId)
                {
-                  renderItem(itemInfo, context.resolution);
+                  renderItem(itemId, context.lookId);
                });
             }
             
-            function renderItem(itemInfo, resolution)
+            function renderItem(itemId, lookId)
             {
-               var itemId = itemInfo.id;
-               var lookId = itemInfo.lk;
-               
-               if (items[itemId] && items[itemId][resolution] && looks[lookId])
-               {
-                  //console.log('Render item ' + itemInfo.id + ' (resolution ' + resolution + ')...');
+               var item = items[itemId];
+               var look = looks[lookId];
                   
-                  var item = items[itemId][resolution];
-                  var look = looks[lookId];
+               if (item && look)
+               {
+                  //console.log('Render item ' + itemId;
+                  
+                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
 
                   if (item.type == 'line')
                   {
-                     var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
                      var polyline = item.polyline;
                      polyline.stroke = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
                      polyline.strokeWidth = look.size * sizeFactor;
@@ -258,28 +269,58 @@ var mapServerInterface =
                      polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
                      polyline.scaleX = scale;
                      polyline.scaleY = scale;
-                     if (!item.added)
+                     if (!addedItems[itemId])
                      {
                         canvas.add(polyline);
-                        item.added = true;
+                        addedItems[itemId] = true;
                      }
                      else
                      {
                         clearTimeout(renderTimeout);
                         renderTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
+                     canvas.moveTo(polyline, -look.zI);
+                  }
+                  else if (item.type == 'point')
+                  {
+                     var circle = item.circle;
+                     circle.fill = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                     circle.radius = 0.5 * look.size * sizeFactor;
+                     circle.strokeWidth = sizeFactor;
+                     circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                     circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                     circle.scaleX = scale;
+                     circle.scaleY = scale;
+                     if (!addedItems[itemId])
+                     {
+                        canvas.add(circle);
+                        addedItems[itemId] = true;
+                     }
+                     else
+                     {
+                        clearTimeout(renderTimeout);
+                        renderTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
+                     }
+                     canvas.moveTo(circle, -look.zI);
                   }
                }
             }
             
             function removeItem(item)
             {
-               if (item.added)
+               var itemId = item.id;
+               
+               if (addedItems[itemId])
                {
                   if (item.type == 'line')
                   {
-                     item.added = false;
+                     addedItems[itemId] = false;
                      canvas.remove(item.polyline);
+                  }
+                  else if (item.type == 'point')
+                  {
+                     addedItems[itemId] = false;
+                     canvas.remove(item.circle);
                   }
                }
             }

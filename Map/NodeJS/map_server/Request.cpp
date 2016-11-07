@@ -26,21 +26,21 @@ namespace map_server
             return 0;
         }
 
-        if (requestType == map_server::GET_MAP_IDS)
+        if (requestType == map_server::MAP_IDS)
         {
             return new GetMapIdsRequest(tokenVector[0], tokenVector[1], sendResponse);
         }
-        else if (requestType == map_server::GET_MAP_INFO)
+        else if (requestType == map_server::MAP_INFO)
         {
             if (tokenVector.size() < 4) return 0;
             return new GetMapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
         }
-        else if (requestType == map_server::GET_ELEMENT_INFO)
+        else if (requestType == map_server::ELEMENT_INFO)
         {
             if (tokenVector.size() < 5) return 0;
             return new GetElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
         }
-        else if (requestType == map_server::GET_ELEMENTS_INFO)
+        else if (requestType == map_server::ELEMENTS_INFO)
         {
             int i, n = tokenVector.size();
             if (n < 5) return 0;
@@ -48,7 +48,7 @@ namespace map_server
             for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
             return new GetElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
         }
-        else if (requestType == map_server::GET_ITEM_DATA)
+        else if (requestType == map_server::ITEM_DATA)
         {
             if (tokenVector.size() < 6) return 0;
             int itemId, resolutionIndex;
@@ -63,7 +63,7 @@ namespace map_server
             }
             return new GetItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
         }
-        else if (requestType == map_server::GET_LOOK)
+        else if (requestType == map_server::LOOK)
         {
             if (tokenVector.size() < 5) return 0;
             int lookId;

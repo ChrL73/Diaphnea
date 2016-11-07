@@ -21,7 +21,7 @@ namespace map_server
                 MapData::unlock();
 
                 _coutMutexPtr->lock();
-                std::cout << _socketId << " " << _requestId << " " << map_server::GET_LOOK << " " << info << std::endl;
+                std::cout << _socketId << " " << _requestId << " " << map_server::LOOK << " " << info << std::endl;
                 _coutMutexPtr->unlock();
             }
             else

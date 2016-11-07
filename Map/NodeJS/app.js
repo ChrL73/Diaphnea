@@ -3,50 +3,46 @@ var server = http.createServer(function(req, res) { res.end(); });
 
 var cppServer = require('./cpp_server_interface');
 
-var messageTypes =
-{
-   getMapIds: '0',
-   getMapInfo: '1',
-   getElementInfo: '2',
-   getElementsInfo: '3',
-   getItemData: '4',
-   getLook: '5',
-   render: '6',
-};
 
-var responseNames =
+var messageNames =
 [
-   'mapIds',
-   'mapInfo',
-   'elementInfo',
-   'elementsInfo',
-   'itemData',
-   'look',
-   'items'
+   'mapIds', // 0
+   'mapInfo', // 1
+   'elementInfo', // 2
+   'elementsInfo', // 3
+   'itemData', // 4
+   'look', // 5
+   'render' // 6
 ];
+
+var messageTypes = {};
+messageNames.forEach(function(name, i)
+{
+   messageTypes[name] = i.toString();
+});
 
 var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
 {
-   socket.on('getMapIds', function(request)
+   socket.on('mapIdsReq', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getMapIds);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.mapIds);
    });
    
-   socket.on('getMapInfo', function(request)
+   socket.on('mapInfoReq', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getMapInfo + ' ' + request.mapId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId);
    });
    
-   socket.on('getElementInfo', function(request)
+   socket.on('elementInfoReq', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getElementInfo + ' ' + request.mapId + ' ' + request.elementId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId);
    });
    
-   socket.on('getElementsInfo', function(request)
+   socket.on('elementsInfoReq', function(request)
    {
-      var req = socket.id + ' ' + request.id + ' ' + messageTypes.getElementsInfo + ' ' + request.mapId;
+      var req = socket.id + ' ' + request.id + ' ' + messageTypes.elementsInfo + ' ' + request.mapId;
       request.elementIds.forEach(function(elementId)
       {
          req += ' ' + elementId;
@@ -54,17 +50,17 @@ io.on('connection', function(socket)
       cppServer.sendRequest(req);
    });
    
-   socket.on('getItemData', function(request)
+   socket.on('itemDataReq', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getItemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
    });
    
-   socket.on('getLook', function(request)
+   socket.on('lookReq', function(request)
    {
-      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.getLook + ' ' + request.mapId + ' ' + request.lookId);
+      cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.look + ' ' + request.mapId + ' ' + request.lookId);
    });
    
-   socket.on('render', function(request)
+   socket.on('renderReq', function(request)
    {
       var req = socket.id + ' ' + request.id + ' ' + messageTypes.render + ' ' + request.mapId + ' ' + request.width + ' ' + request.height;
       request.elementIds.forEach(function(elementId)
@@ -78,12 +74,12 @@ io.on('connection', function(socket)
 cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
 {
    var socket = io.sockets.connected[socketId];
-   var messageName = responseNames[requestType];
+   var messageName = messageNames[requestType];
    
    if (socket && messageName)
    {
       var response = { requestId: requestId, content: responseContent };
-      socket.emit(messageName, response);
+      socket.emit(messageName + 'Res', response);
    }
 });
 

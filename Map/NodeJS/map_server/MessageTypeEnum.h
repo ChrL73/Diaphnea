@@ -4,12 +4,12 @@ namespace map_server
 {
     enum MessageTypeEnum
     {
-        GET_MAP_IDS = 0,
-        GET_MAP_INFO = 1,
-        GET_ELEMENT_INFO = 2,
-        GET_ELEMENTS_INFO = 3,
-        GET_ITEM_DATA = 4,
-        GET_LOOK = 5,
+        MAP_IDS = 0,
+        MAP_INFO = 1,
+        ELEMENT_INFO = 2,
+        ELEMENTS_INFO = 3,
+        ITEM_DATA = 4,
+        LOOK = 5,
         RENDER = 6
     };
 }

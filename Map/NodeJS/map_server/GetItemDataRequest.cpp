@@ -26,7 +26,7 @@ namespace map_server
                 MapData::unlock();
 
                 _coutMutexPtr->lock();
-                std::cout << _socketId << " " << _requestId << " " << map_server::GET_ITEM_DATA << " " << info << std::endl;
+                std::cout << _socketId << " " << _requestId << " " << map_server::ITEM_DATA << " " << info << std::endl;
                 _coutMutexPtr->unlock();
             }
             else
@@ -38,7 +38,7 @@ namespace map_server
                     MapData::unlock();
 
                     _coutMutexPtr->lock();
-                    std::cout << _socketId << " " << _requestId << " " << map_server::GET_ITEM_DATA << " " << info << std::endl;
+                    std::cout << _socketId << " " << _requestId << " " << map_server::ITEM_DATA << " " << info << std::endl;
                     _coutMutexPtr->unlock();
                 }
                 else
@@ -50,7 +50,7 @@ namespace map_server
                         MapData::unlock();
 
                         _coutMutexPtr->lock();
-                        std::cout << _socketId << " " << _requestId << " " << map_server::GET_ITEM_DATA << " " << info << std::endl;
+                        std::cout << _socketId << " " << _requestId << " " << map_server::ITEM_DATA << " " << info << std::endl;
                         _coutMutexPtr->unlock();
                     }
                     else

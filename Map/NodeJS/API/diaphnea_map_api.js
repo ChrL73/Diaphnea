@@ -41,9 +41,9 @@ var mapServerInterface =
             
             var id = ++requestCounter;
             var request = { id: id };
-            socket.emit('getMapIds', request);
+            socket.emit('mapIdsReq', request);
             
-            socket.on('mapIds', function(response)
+            socket.on('mapIdsRes', function(response)
             {
                if (!mapIds)
                {
@@ -52,7 +52,7 @@ var mapServerInterface =
                }
             });
          
-            socket.on('mapInfo', function(response)
+            socket.on('mapInfoRes', function(response)
             {
                var context = getContext(response);
                context.onMapLoaded(new Map(context.mapId, context.canvasId, response.content));
@@ -64,7 +64,7 @@ var mapServerInterface =
             var id = ++requestCounter;
             var request = { id: id, mapId: mapId };
             contexts[id.toString()] = { mapId: mapId, canvasId: canvasId, onMapLoaded: onMapLoaded };
-            socket.emit('getMapInfo', request);
+            socket.emit('mapInfoReq', request);
          }
          
          function Map(mapId, canvasId, mapInfo)
@@ -89,10 +89,10 @@ var mapServerInterface =
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementId: elementId };
                contexts[id.toString()] = { elementId: elementId, onElementLoaded: onElementLoaded };
-               socket.emit('getElementInfo', request);
+               socket.emit('elementInfoReq', request);
             }
             
-            socket.on('elementInfo', function(response)
+            socket.on('elementInfoRes', function(response)
             {
                var context = getContext(response);
                context.onElementLoaded(new Element(context.elementId, response.content));
@@ -103,10 +103,10 @@ var mapServerInterface =
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementIds: elementIds };
                contexts[id.toString()] = { elementIds: elementIds, onElementsLoaded: onElementsLoaded };
-               socket.emit('getElementsInfo', request);
+               socket.emit('elementsInfoReq', request);
             }
             
-            socket.on('elementsInfo', function(response)
+            socket.on('elementsInfoRes', function(response)
             {
                var context = getContext(response);
                var elements = [];
@@ -139,7 +139,7 @@ var mapServerInterface =
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
                   contexts[id.toString()] = {};
-                  socket.emit('render', request);
+                  socket.emit('renderReq', request);
                }
                else
                {
@@ -150,7 +150,7 @@ var mapServerInterface =
                }
             }
                
-            socket.on('items', function(response)
+            socket.on('renderRes', function(response)
             {
                var context = getContext(response);
                var renderInfo = response.content;
@@ -177,7 +177,7 @@ var mapServerInterface =
                      var id = ++requestCounter;
                      var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
                      contexts[id.toString()] = { itemId: itemId, lookId: lookId };
-                     socket.emit('getItemData', request);
+                     socket.emit('itemDataReq', request);
                   }
 
                   if (!looks[lookId])
@@ -194,7 +194,7 @@ var mapServerInterface =
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, lookId: lookId };
                   contexts[id.toString()] = { lookId: lookId, itemIdArray: lookToItems[lookId] };
-                  socket.emit('getLook', request);
+                  socket.emit('lookReq', request);
                });
                
                Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
@@ -207,7 +207,7 @@ var mapServerInterface =
                });
             });
 
-            socket.on('itemData', function (response)
+            socket.on('itemDataRes', function (response)
             {
                var context = getContext(response);
                var itemData = response.content;
@@ -240,7 +240,7 @@ var mapServerInterface =
                renderItem(context.itemId, context.lookId);
             });
 
-            socket.on('look', function (response)
+            socket.on('lookRes', function (response)
             {
                var context = getContext(response);
                var lookData = response.content;
@@ -256,6 +256,8 @@ var mapServerInterface =
             function renderItem(itemId, lookId)
             {
                var item = items[itemId];
+               if (item) item.lookId = lookId;
+               
                var look = looks[lookId];
                   
                if (item && look)
@@ -328,6 +330,117 @@ var mapServerInterface =
                   }
                }
             }
+            
+            var mustTranslate = false;
+            var xRef, yRef;
+            
+            canvas.on('mouse:down', function(arg)
+            {
+               xRef = arg.e.clientX;
+               yRef = arg.e.clientY;
+               mustTranslate = true;
+               canvas.defaultCursor = 'move';   
+            });
+            
+            canvas.on('mouse:move', function(arg)
+            {
+               if (mustTranslate && (arg.e.buttons & 1))
+               {
+                  var dx = arg.e.clientX - xRef;
+                  var dy = arg.e.clientY - yRef;
+
+                  xFocus -= dx / scale;
+                  yFocus -= dy / scale;
+                  
+                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
+                  {
+                     var item = items[itemId];
+                     if (item.type == 'line')
+                     {
+                        var polyline = item.polyline;
+                        polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                        polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                     }
+                     else if (item.type == 'point')
+                     {
+                        var circle = item.circle;
+                        circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                        circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                     }
+                  });
+
+                  clearTimeout(renderTimeout);
+                  renderTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+
+                  xRef = arg.e.clientX;
+                  yRef = arg.e.clientY;
+               }
+            });
+            
+            canvas.on('mouse:up', function(arg)
+            {
+               mustTranslate = false;
+               canvas.defaultCursor = 'default';
+            });
+            
+            canvas.on('mouse:wheel', function(arg)
+            {
+               var delta = arg.e.deltaY;
+               /*var sizeInMapUnit0 = _sizeInMapUnit;
+
+               if (delta > 0) _sizeInMapUnit *= 1.15;
+               else _sizeInMapUnit /= 1.15;
+
+               if (_sizeInMapUnit < _zoomMinDistance) _sizeInMapUnit = _zoomMinDistance;
+               else if (_sizeInMapUnit > _zoomMaxDistance) _sizeInMapUnit = _zoomMaxDistance;*/
+
+               //if (_sizeInMapUnit != sizeInMapUnit0)
+               {   
+                  //var zoomFactor = _sizeInMapUnit / sizeInMapUnit0;
+                  var zoomFactor = (delta < 0 ? 1.15 : 1/1.15);
+                  if (delta > 0)
+                  {
+                     xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 - zoomFactor) / scale;
+                     yFocus += (0.5 *  canvas.height - arg.e.clientY) * (1.0 - zoomFactor) / scale;
+                  }
+                  else
+                  {
+                     xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 / zoomFactor - 1.0) / scale;
+                     yFocus += (0.5 *  canvas.height - arg.e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
+                  }
+                  
+                  scale *= zoomFactor;
+                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
+
+                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
+                  {
+                     var item = items[itemId];
+                     var look = looks[item.lookId];
+                     if (item.type == 'line')
+                     {
+                        var polyline = item.polyline;
+                        polyline.strokeWidth = look.size * sizeFactor;
+                        polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                        polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                        polyline.scaleX = scale;
+                        polyline.scaleY = scale;
+                     }
+                     else if (item.type == 'point')
+                     {
+                        var circle = item.circle;
+                        circle.radius = 0.5 * look.size * sizeFactor;
+                        circle.strokeWidth = sizeFactor;
+                        circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
+                        circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
+                        circle.scaleX = scale;
+                        circle.scaleY = scale;
+                     }
+                  });
+                   
+                  clearTimeout(renderTimeout);
+                  renderTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+               }
+            });
          }
       }
    }

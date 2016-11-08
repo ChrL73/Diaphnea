@@ -115,6 +115,13 @@
           <name language="en" text="Komo"/>
         </name>
       </polygonElement>
+      <!--Départements Ogooué-Maritime-->
+      <polygonElement id="e_Bendje" look="pl_Departement">
+        <name>
+          <name language="fr" text="Bendjé"/>
+          <name language="en" text="Bendjé"/>
+        </name>
+      </polygonElement>
       <!--Départements Woleu-Ntem-->
       <polygonElement id="e_HautKomo" look="pl_Departement">
         <name>

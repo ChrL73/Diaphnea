@@ -25,7 +25,7 @@ $(function()
                });
             });
             
-            $('#render').click(function()
+            $('#update').click(function()
             {
                map.render();
             });

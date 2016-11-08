@@ -69,10 +69,11 @@ var mapServerInterface =
          
          function Map(mapId, canvasId, mapInfo)
          {
+            var thisMap = this;
             var canvas = new fabric.Canvas(canvasId);
             canvas.hoverCursor = 'default';
             canvas.selection = false;
-            var renderTimeout;
+            var renderCanvasTimeout;
             
             var visibleElements = {};
             var items = {};
@@ -126,7 +127,14 @@ var mapServerInterface =
                this.hide = function() { visibleElements[elementId] = false; }
             }
             
+            var renderTimeout;
             this.render = function()
+            {
+               clearTimeout(renderTimeout);
+               renderTimeout = setTimeout(startRender, 100);
+            }
+            
+            function startRender()
             {
                var elementIds = [];
                Object.getOwnPropertyNames(visibleElements).forEach(function(elementId)
@@ -138,6 +146,12 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
+                  if (scale && xFocus && yFocus)
+                  {
+                     request.scale = scale;
+                     request.xFocus = xFocus;
+                     request.yFocus = yFocus;
+                  }
                   contexts[id.toString()] = {};
                   socket.emit('renderReq', request);
                }
@@ -264,7 +278,7 @@ var mapServerInterface =
                {
                   //console.log('Render item ' + itemId;
                   
-                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
+                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
 
                   if (item.type == 'line')
                   {
@@ -282,8 +296,8 @@ var mapServerInterface =
                      }
                      else
                      {
-                        clearTimeout(renderTimeout);
-                        renderTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
+                        clearTimeout(renderCanvasTimeout);
+                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
                      canvas.moveTo(polyline, -look.zI);
                   }
@@ -304,8 +318,8 @@ var mapServerInterface =
                      }
                      else
                      {
-                        clearTimeout(renderTimeout);
-                        renderTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
+                        clearTimeout(renderCanvasTimeout);
+                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
                      canvas.moveTo(circle, -look.zI);
                   }
@@ -339,7 +353,7 @@ var mapServerInterface =
                xRef = arg.e.clientX;
                yRef = arg.e.clientY;
                mustTranslate = true;
-               canvas.defaultCursor = 'move';   
+               //canvas.defaultCursor = 'move';   
             });
             
             canvas.on('mouse:move', function(arg)
@@ -369,8 +383,9 @@ var mapServerInterface =
                      }
                   });
 
-                  clearTimeout(renderTimeout);
-                  renderTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  clearTimeout(renderCanvasTimeout);
+                  renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  thisMap.render();
 
                   xRef = arg.e.clientX;
                   yRef = arg.e.clientY;
@@ -380,37 +395,37 @@ var mapServerInterface =
             canvas.on('mouse:up', function(arg)
             {
                mustTranslate = false;
-               canvas.defaultCursor = 'default';
+               //canvas.defaultCursor = 'default';
             });
             
             canvas.on('mouse:wheel', function(arg)
             {
                var delta = arg.e.deltaY;
-               /*var sizeInMapUnit0 = _sizeInMapUnit;
+               var geoSize = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) / scale;
+               var geoSize0 = geoSize;
 
-               if (delta > 0) _sizeInMapUnit *= 1.15;
-               else _sizeInMapUnit /= 1.15;
+               if (delta > 0) geoSize *= 1.15;
+               else geoSize /= 1.15;
 
-               if (_sizeInMapUnit < _zoomMinDistance) _sizeInMapUnit = _zoomMinDistance;
-               else if (_sizeInMapUnit > _zoomMaxDistance) _sizeInMapUnit = _zoomMaxDistance;*/
+               if (geoSize < mapInfo.zoomMinDistance) geoSize = mapInfo.zoomMinDistance;
+               else if (geoSize > mapInfo.zoomMaxDistance) geoSize = mapInfo.zoomMaxDistance;
 
-               //if (_sizeInMapUnit != sizeInMapUnit0)
+               if (geoSize != geoSize0)
                {   
-                  //var zoomFactor = _sizeInMapUnit / sizeInMapUnit0;
-                  var zoomFactor = (delta < 0 ? 1.15 : 1/1.15);
+                  var zoomFactor = geoSize0 / geoSize;
                   if (delta > 0)
                   {
                      xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 - zoomFactor) / scale;
-                     yFocus += (0.5 *  canvas.height - arg.e.clientY) * (1.0 - zoomFactor) / scale;
+                     yFocus += (0.5 * canvas.height - arg.e.clientY) * (1.0 - zoomFactor) / scale;
                   }
                   else
                   {
                      xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 / zoomFactor - 1.0) / scale;
-                     yFocus += (0.5 *  canvas.height - arg.e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
+                     yFocus += (0.5 * canvas.height - arg.e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
                   }
                   
                   scale *= zoomFactor;
-                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter1 + scale);
+                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
 
                   Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
                   {
@@ -437,8 +452,9 @@ var mapServerInterface =
                      }
                   });
                    
-                  clearTimeout(renderTimeout);
-                  renderTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  clearTimeout(renderCanvasTimeout);
+                  renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  thisMap.render();
                }
             });
          }

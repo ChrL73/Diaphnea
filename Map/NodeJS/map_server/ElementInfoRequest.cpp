@@ -1,4 +1,4 @@
-#include "GetElementInfoRequest.h"
+#include "ElementInfoRequest.h"
 #include "MapData.h"
 #include "Map.h"
 #include "MessageTypeEnum.h"

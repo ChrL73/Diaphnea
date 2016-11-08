@@ -146,6 +146,18 @@ namespace map_server
         return 0;
     }
 
+    int Map::getResolutionIndex(double scale)
+    {
+        double wantedLength = _resolutionThreshold / scale;
+        int i, n = _sampleLengthVector.size();
+        for (i = n - 1; i > 0; --i)
+        {
+            if (wantedLength > _sampleLengthVector[i]) break;
+        }
+
+        return i;
+    }
+
     void Map::load(void)
     {
         _loaded = true;

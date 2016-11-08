@@ -1,21 +1,23 @@
-#include "GetMapIdsRequest.h"
+#include "MapInfoRequest.h"
 #include "MapData.h"
+#include "Map.h"
 #include "MessageTypeEnum.h"
 
 namespace map_server
 {
-    void GetMapIdsRequest::execute(void)
+    void GetMapInfoRequest::execute(void)
     {
         MapData::lock();
         MapData *mapData = MapData::instance();
 
-        if (_sendResponse)
+        const Map *map = mapData->getMap(_mapId);
+        if (map != 0 && _sendResponse)
         {
-            std::string ids = mapData->getMapIdsJson();
+            std::string info = map->getInfoJson();
             MapData::unlock();
 
             _coutMutexPtr->lock();
-            std::cout << _socketId << " " << _requestId << " " << map_server::MAP_IDS << " " << ids << std::endl;
+            std::cout << _socketId << " " << _requestId << " " << map_server::MAP_INFO << " " << info << std::endl;
             _coutMutexPtr->unlock();
         }
         else

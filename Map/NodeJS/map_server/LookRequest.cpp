@@ -1,4 +1,4 @@
-#include "GetLookRequest.h"
+#include "LookRequest.h"
 #include "MapData.h"
 #include "ItemLook.h"
 #include "Map.h"

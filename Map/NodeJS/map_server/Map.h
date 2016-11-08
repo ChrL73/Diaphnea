@@ -68,5 +68,6 @@ namespace map_server
         FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
         MapItem *getItem(int itemId);
         const ItemLook *getItemLook(int lookId);
+        int getResolutionIndex(double scale);
     };
 }

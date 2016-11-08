@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     int cleanThreadSleepMs = 5;
     int checkTimeoutSleepMs = 200;
-    time_t timeoutInSeconds = 300;
+    time_t timeoutInSeconds = 90;
 
     map_server::MapServer mapServer(timeoutInSeconds, cleanThreadSleepMs, checkTimeoutSleepMs, softExit, mutexTest);
 

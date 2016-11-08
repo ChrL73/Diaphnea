@@ -1,11 +1,11 @@
 #include "Request.h"
 #include "MessageTypeEnum.h"
-#include "GetMapIdsRequest.h"
-#include "GetMapInfoRequest.h"
-#include "GetElementInfoRequest.h"
-#include "GetElementsInfoRequest.h"
-#include "GetItemDataRequest.h"
-#include "GetLookRequest.h"
+#include "MapIdsRequest.h"
+#include "MapInfoRequest.h"
+#include "ElementInfoRequest.h"
+#include "ElementsInfoRequest.h"
+#include "ItemDataRequest.h"
+#include "LookRequest.h"
 #include "RenderRequest.h"
 
 namespace map_server
@@ -80,7 +80,7 @@ namespace map_server
         else if (requestType == map_server::RENDER)
         {
             int i, n = tokenVector.size();
-            if (n < 7) return 0;
+            if (n < 10) return 0;
 
             double widthInPixels, heightInPixels;
             try
@@ -94,8 +94,21 @@ namespace map_server
             }
 
             std::vector<const char *> elementIds;
-            for (i = 6; i < n; ++i) elementIds.push_back(tokenVector[i]);
-            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, sendResponse);
+            for (i = 9; i < n; ++i) elementIds.push_back(tokenVector[i]);
+
+            double scale, xFocus, yFocus;
+            try
+            {
+                scale = std::stod(tokenVector[6]);
+                xFocus = std::stod(tokenVector[7]);
+                yFocus = std::stod(tokenVector[8]);
+            }
+            catch (...)
+            {
+                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, sendResponse);
+            }
+
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, scale, xFocus, yFocus, sendResponse);
         }
 
         return 0;

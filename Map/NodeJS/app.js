@@ -2,7 +2,9 @@ var http = require('http');
 var server = http.createServer(function(req, res) { res.end(); });
 
 var cppServer = require('./cpp_server_interface');
+var config = require('./config');
 
+var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
 var messageNames =
 [
@@ -80,9 +82,10 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    if (socket && messageName)
    {
       var response = { requestId: requestId, content: responseContent };
-      socket.emit(messageName + 'Res', response);
+      setTimeout(function() { socket.emit(messageName + 'Res', response); }, debugDelay);
    }
 });
 
-console.log('Map server listening on port 3001...');
-server.listen(3001);
+if (!config.port) throw new Error("No 'port' value in config.js");
+console.log('Quiz server listening on port ' + config.port + '...');
+server.listen(config.port);

@@ -97,23 +97,9 @@ namespace map_server
                 {
                     xFocus = _xFocus;
                     yFocus = _yFocus;
+                    scale = _scale;
 
-                    double sizeInPixels = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels);
-                    double geoSize =  sizeInPixels / _scale;
-                    if (geoSize < map->getZoomMinDistance())
-                    {
-                        scale = sizeInPixels / map->getZoomMinDistance();
-                    }
-                    else if (geoSize > map->getZoomMaxDistance())
-                    {
-                        scale = sizeInPixels / map->getZoomMaxDistance();
-                    }
-                    else
-                    {
-                        scale = _scale;
-                    }
-
-                    const double r = 0.75;
+                    const double r = 0.7;
                     double dx = r * _widthInPixels / scale;
                     double xMin = xFocus - dx;
                     double xMax = xFocus + dx;

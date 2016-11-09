@@ -78,6 +78,7 @@ var mapServerInterface =
             var visibleElements = {};
             var items = {};
             var addedItems = {};
+            var itemsToRemove = {};
             var looks = {};
             var xFocus, yFocus, scale;
             
@@ -134,6 +135,7 @@ var mapServerInterface =
                renderTimeout = setTimeout(startRender, 100);
             }
             
+            var lastRenderRequestId;
             function startRender()
             {
                var elementIds = [];
@@ -146,13 +148,16 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, elementIds: elementIds, width: canvas.width, height: canvas.height };
+                  var context = {}
                   if (scale && xFocus && yFocus)
                   {
                      request.scale = scale;
                      request.xFocus = xFocus;
                      request.yFocus = yFocus;
+                     context.ignoreServerScale = true;
                   }
-                  contexts[id.toString()] = {};
+                  contexts[id.toString()] = context;
+                  lastRenderRequestId = id;
                   socket.emit('renderReq', request);
                }
                else
@@ -167,24 +172,32 @@ var mapServerInterface =
             socket.on('renderRes', function(response)
             {
                var context = getContext(response);
+               if (response.requestId != lastRenderRequestId) return;
+               
                var renderInfo = response.content;
                //console.log(renderInfo);      
                
-               xFocus = renderInfo.xFocus;
-               yFocus = renderInfo.yFocus;
-               scale = renderInfo.scale;
+               if (!context.ignoreServerScale)
+               {
+                  xFocus = renderInfo.xFocus;
+                  yFocus = renderInfo.yFocus;
+                  scale = renderInfo.scale;
+               }
                
                var lookToItems = {};
-               var itemsToRender = {};
+               var itemsToRender_fullId = {};
+               var itemsToRender_idWithoutRes = {};
+               var itemsToRender_idAndLook = [];
                
                renderInfo.items.forEach(function(itemInfo)
                {
                   var itemId = itemInfo[0].toString();
                   var lookId = itemInfo[1];
                   var resolution = itemInfo[2];
-                  if (resolution) itemId += '_' + resolution;
+                  if (resolution || resolution === 0) itemId += '_' + resolution;
                   
-                  itemsToRender[itemId] = true;
+                  itemsToRender_fullId[itemId] = true;
+                  itemsToRender_idWithoutRes[itemInfo[0]] = true;
          
                   if (!items[itemId])
                   {                           
@@ -198,9 +211,9 @@ var mapServerInterface =
                   {
                      if (!lookToItems[lookId]) lookToItems[lookId] = [];
                      lookToItems[lookId].push(itemId);
-                  }
-
-                  renderItem(itemId, lookId);
+                  } 
+                  
+                  itemsToRender_idAndLook.push({ itemId: itemId, lookId: lookId});
                });
                
                Object.getOwnPropertyNames(lookToItems).forEach(function(lookId)
@@ -213,11 +226,24 @@ var mapServerInterface =
                
                Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
                {
-                  if (!itemsToRender[itemId])
+                  if (!itemsToRender_fullId[itemId])
                   {
-                     var item = items[itemId];
-                     removeItem(item);
+                     var idWithoutRes = itemId.substring(0, itemId.indexOf('_'));
+                     if (itemsToRender_idWithoutRes[idWithoutRes])
+                     {
+                        itemsToRemove[itemId] = true;
+                     }
+                     else
+                     {      
+                        var item = items[itemId];
+                        removeItem(item);
+                     }
                   }
+               });
+               
+               itemsToRender_idAndLook.forEach(function(ids)
+               {
+                  renderItem(ids.itemId, ids.lookId);
                });
             });
 
@@ -276,7 +302,15 @@ var mapServerInterface =
                   
                if (item && look)
                {
-                  //console.log('Render item ' + itemId;
+                  // console.log('Render item ' + itemId);
+                  
+                  Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemId2)
+                  {
+                     if (itemId != itemId2 && itemId.substring(0, itemId.indexOf('_')) == itemId2.substring(0, itemId2.indexOf('_')))
+                     {
+                        removeItem(items[itemId2]);
+                     }
+                  });
                   
                   var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
 
@@ -334,14 +368,15 @@ var mapServerInterface =
                {
                   if (item.type == 'line')
                   {
-                     addedItems[itemId] = false;
                      canvas.remove(item.polyline);
                   }
                   else if (item.type == 'point')
-                  {
-                     addedItems[itemId] = false;
+                  {    
                      canvas.remove(item.circle);
                   }
+                  
+                  delete addedItems[itemId];
+                  delete itemsToRemove[itemId];
                }
             }
             

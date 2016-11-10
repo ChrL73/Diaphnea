@@ -122,6 +122,12 @@
           <name language="en" text="Bendjé"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_Etimboue" look="pl_Departement">
+        <name>
+          <name language="fr" text="Etimboué"/>
+          <name language="en" text="Etimboué"/>
+        </name>
+      </polygonElement>
       <!--Départements Woleu-Ntem-->
       <polygonElement id="e_HautKomo" look="pl_Departement">
         <name>

@@ -8,6 +8,8 @@
 #include "LookRequest.h"
 #include "RenderRequest.h"
 
+#include <string>
+
 namespace map_server
 {
     std::mutex *Request::_coutMutexPtr = 0;

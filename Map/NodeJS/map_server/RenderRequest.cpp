@@ -16,6 +16,10 @@
 #include <limits>
 #include <cmath>
 
+#if _WIN32
+#undef max
+#endif
+
 namespace map_server
 {
     void RenderRequest::execute()

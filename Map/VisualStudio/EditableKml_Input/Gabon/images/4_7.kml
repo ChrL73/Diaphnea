@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>4_7</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/HautNtem.png</href>
+		<href>map_4_7.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>2.356847954072202</north>
-		<south>1.149246149720178</south>
-		<east>13.37525047937569</east>
-		<west>11.64819970282213</west>
+		<north>-3.117053339269678</north>
+		<south>-3.993346797243961</south>
+		<east>12.42244113445239</east>
+		<west>11.53921933073081</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

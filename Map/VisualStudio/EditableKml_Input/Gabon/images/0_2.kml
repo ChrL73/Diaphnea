@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>0_2</name>
 	<Icon>
-		<href>Ntem.png</href>
+		<href>map_0_2.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>2.336288896531077</north>
-		<south>1.732113312860866</south>
-		<east>11.99078278794364</east>
-		<west>11.27931209485689</west>
+		<north>0.906336216207053</north>
+		<south>-0.04777548507425751</south>
+		<east>9.468657725189068</east>
+		<west>8.667655262957299</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

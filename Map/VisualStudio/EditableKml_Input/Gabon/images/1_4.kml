@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>1_4</name>
 	<Icon>
-		<href>Woleu.png</href>
+		<href>map_1_4.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.986255897779067</north>
-		<south>0.8467787860523912</south>
-		<east>12.61722627808331</east>
-		<west>11.19856596932011</west>
+		<north>-0.6910237724848868</north>
+		<south>-1.663197740680707</south>
+		<east>10.20122069208181</east>
+		<west>9.315473535187016</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

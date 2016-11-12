@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Etimboue</name>
+	<name>3_0</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/Etimboue.png</href>
+		<href>map_3_0.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>-0.9664851055350701</north>
-		<south>-2.344434963547857</south>
-		<east>10.25175133528368</east>
-		<west>8.810398453026856</west>
+		<north>2.443423225990826</north>
+		<south>1.558997867023519</south>
+		<east>11.69281243623505</east>
+		<west>10.80509036350646</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

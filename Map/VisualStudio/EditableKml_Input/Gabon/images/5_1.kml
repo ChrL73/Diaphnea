@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>5_1</name>
+	<visibility>0</visibility>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/HautKomo.png</href>
+		<href>map_5_1.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.116438235512303</north>
-		<south>0.5484594533676782</south>
-		<east>11.08852578600353</east>
-		<west>10.19283779025032</west>
+		<north>1.711873920408865</north>
+		<south>0.7535345303459599</south>
+		<east>13.17325275493423</east>
+		<west>12.28531967271702</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

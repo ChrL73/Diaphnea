@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>ImageBendje</name>
+	<name>7_4</name>
 	<Icon>
-		<href>Bendje.png</href>
+		<href>map_7_4.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>-0.2000893992788169</north>
-		<south>-1.423985244087412</south>
-		<east>10.03517471148174</east>
-		<west>8.652310730384929</west>
+		<north>-0.7025506684869319</north>
+		<south>-1.659628686546634</south>
+		<east>14.58020331432009</east>
+		<west>13.75716002416002</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

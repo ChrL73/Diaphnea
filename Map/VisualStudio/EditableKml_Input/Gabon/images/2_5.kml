@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Noya</name>
+	<name>2_5</name>
 	<Icon>
-		<href>Noya.png</href>
+		<href>map_2_5.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.101510609618617</north>
-		<south>0.4379817684994424</south>
-		<east>10.43806711427449</east>
-		<west>9.478433857042454</west>
+		<north>-1.506062763923513</north>
+		<south>-2.473712824003735</south>
+		<east>10.94874017845603</east>
+		<west>10.05270145809218</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

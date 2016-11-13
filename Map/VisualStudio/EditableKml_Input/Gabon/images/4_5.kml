@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>4_6</name>
+	<name>4_5</name>
 	<Icon>
-		<href>map_4_6.png</href>
+		<href>map_4_5.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>-2.314925146939389</north>
-		<south>-3.269429113580422</south>
-		<east>12.4242035629641</east>
-		<west>11.54215223706603</west>
+		<north>-1.506378787364601</north>
+		<south>-2.467843423391074</south>
+		<east>12.42508598511813</east>
+		<west>11.5415046212926</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

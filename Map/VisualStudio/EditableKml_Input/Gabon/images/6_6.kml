@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>HautKomo</name>
+	<name>6_6</name>
 	<Icon>
-		<href>HautKomo.png</href>
+		<href>map_6_6.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.116438235512303</north>
-		<south>0.5484594533676782</south>
-		<east>11.08852578600353</east>
-		<west>10.19283779025032</west>
+		<north>-2.315142773239699</north>
+		<south>-3.269948722023912</south>
+		<east>13.9033576857361</east>
+		<west>13.01696904705878</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

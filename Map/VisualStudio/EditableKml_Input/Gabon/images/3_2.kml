@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>3_2</name>
 	<Icon>
-		<href>KomoOcean.png</href>
+		<href>map_3_2.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>0.4165014975699986</north>
-		<south>-0.6252288489537246</south>
-		<east>9.970510913431109</east>
-		<west>9.222320227303737</west>
+		<north>0.9063221702760985</north>
+		<south>-0.05081211922932272</south>
+		<east>11.68994506679108</east>
+		<west>10.80305152953899</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

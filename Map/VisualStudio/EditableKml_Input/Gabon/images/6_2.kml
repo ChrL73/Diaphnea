@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>HautNtem</name>
+	<name>6_2</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/HautNtem.png</href>
+		<href>map_6_2.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>2.356847954072202</north>
-		<south>1.149246149720178</south>
-		<east>13.37525047937569</east>
-		<west>11.64819970282213</west>
+		<north>0.9003267389112083</north>
+		<south>-0.04709785766024567</south>
+		<east>13.91343202626624</east>
+		<west>13.02341598902443</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

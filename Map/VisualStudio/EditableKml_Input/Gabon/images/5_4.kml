@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>5_4</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/Okano.png</href>
+		<href>map_5_4.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.330782111473202</north>
-		<south>0.05000127761223601</south>
-		<east>12.43761970531992</east>
-		<west>10.64019518021246</west>
+		<north>-0.7034692135899512</north>
+		<south>-1.659859225274581</south>
+		<east>13.16856023674313</east>
+		<west>12.28042321111582</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

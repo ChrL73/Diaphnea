@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Sans titre - Superposition d&apos;image</name>
+	<name>3_5</name>
 	<Icon>
-		<href>KomoMondah_Libreville.png</href>
+		<href>map_3_5.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>0.7557676081208081</north>
-		<south>0.04959841835774436</south>
-		<east>10.0012356956397</east>
-		<west>9.143734431506056</west>
+		<north>-1.506622993263847</north>
+		<south>-2.467560406003194</south>
+		<east>11.68636789560086</east>
+		<west>10.80240527711469</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

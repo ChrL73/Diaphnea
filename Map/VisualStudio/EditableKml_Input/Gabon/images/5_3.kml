@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Woleu</name>
+	<name>5_3</name>
 	<Icon>
-		<href>G:/P/Christophe/Développement/Diaphnea/Map/VisualStudio/EditableKml_Input/Gabon/Woleu.png</href>
+		<href>map_5_3.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>1.986255897779067</north>
-		<south>0.8467787860523912</south>
-		<east>12.61722627808331</east>
-		<west>11.19856596932011</west>
+		<north>0.1035043833011834</north>
+		<south>-0.8565104173421901</south>
+		<east>13.16955439355998</east>
+		<west>12.28462635030604</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

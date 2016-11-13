@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <GroundOverlay>
-	<name>Ntem</name>
+	<name>7_6</name>
 	<Icon>
-		<href>Ntem.png</href>
+		<href>map_7_6.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>2.336288896531077</north>
-		<south>1.732113312860866</south>
-		<east>11.99078278794364</east>
-		<west>11.27931209485689</west>
+		<north>-2.315181528598855</north>
+		<south>-3.269845462839847</south>
+		<east>14.58144327398304</east>
+		<west>13.75608999145604</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

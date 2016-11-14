@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:atom="http://www.w3.org/2005/Atom" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.opengis.net/kml/2.2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="kml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="GroundOverlay">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string" />
+              <xs:element name="Icon">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="href" type="xs:string" />
+                    <xs:element name="viewBoundScale" type="xs:double" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="LatLonBox">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="north" type="xs:double" />
+                    <xs:element name="south" type="xs:double" />
+                    <xs:element name="east" type="xs:double" />
+                    <xs:element name="west" type="xs:double" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -51,9 +51,7 @@ namespace MapDistortion
                 D[i] = new double[m + 2];
             }
 
-            double A0 = 0, B0 = 0, C0 = 0, D0 = 0;
-            int count = 0;
-         
+            int count = 0;         
             for (i = 0; i < n; ++i)
             {
                 for (j = 0; j < m; ++j)
@@ -107,18 +105,19 @@ namespace MapDistortion
                     C[i + 1][j + 1] = (box.south - box.north) / (yMax - yMin);
                     D[i + 1][j + 1] = (box.south * yMin - box.north * yMax) / (yMax - yMin);
 
-                    A0 += A[i + 1][j + 1];
-                    B0 += B[i + 1][j + 1];
-                    C0 += C[i + 1][j + 1];
-                    D0 += D[i + 1][j + 1];
                     ++count;
                 }
             }
 
-            A0 /= count;
-            B0 /= count;
-            C0 /= count;
-            D0 /= count;
+            completeArray(A, count);
+            completeArray(B, count);
+            completeArray(C, count);
+            completeArray(D, count);
+
+            double A0 = average(A);
+            double B0 = average(B);
+            double C0 = average(C);
+            double D0 = average(D);
 
             using (StreamWriter file = new System.IO.StreamWriter("coeff.csv"))
             {
@@ -126,6 +125,77 @@ namespace MapDistortion
                 writeFile(file, B, B0);
                 writeFile(file, C, C0);
                 writeFile(file, D, D0);
+            }
+        }
+
+        static double average(double[][] T)
+        {
+            double S = 0.0;
+
+            int i, j;
+            for (i = 0; i < n + 2; ++i)
+            {
+                for (j = 0; j < m + 2; ++j)
+                {
+                    S += T[i][j];
+                }
+            }
+
+            return S / (((double)n + 2.0) * ((double)m + 2.0));
+        }
+
+        static void completeArray(double[][] T, int count)
+        {
+            double[][] T1 = new double[n + 2][];
+
+            int i, j;
+            for (i = 0; i < n + 2; ++i) T1[i] = new double[m + 2];
+
+            while (count < (n + 2) * (m + 2))
+            {
+                for (i = 0; i < n + 2; ++i)
+                {
+                    for (j = 0; j < m + 2; ++j)
+                    {
+                        if (T[i][j] == 0.0)
+                        {
+                            int nb = 0;
+                            if (j < m + 1 && T[i][j + 1] != 0.0)
+                            {
+                                T1[i][j] += T[i][j + 1];
+                                ++nb;
+                            }
+                            if (j > 0 && T[i][j - 1] != 0.0)
+                            {
+                                T1[i][j] += T[i][j - 1];
+                                ++nb;
+                            }
+                            if (i < n + 1 && T[i + 1][j] != 0.0)
+                            {
+                                T1[i][j] += T[i + 1][j];
+                                ++nb;
+                            }
+                            if (i > 0 && T[i - 1][j] != 0.0)
+                            {
+                                T1[i][j] += T[i - 1][j];
+                                ++nb;
+                            }
+                            if (nb != 0)
+                            {
+                                T1[i][j] /= nb;
+                                ++count;
+                            }
+                        }
+                    }
+                }
+
+                for (i = 0; i < n + 2; ++i)
+                {
+                    for (j = 0; j < m + 2; ++j)
+                    {
+                        if (T1[i][j] != 0) T[i][j] = T1[i][j];
+                    }
+                }
             }
         }
 

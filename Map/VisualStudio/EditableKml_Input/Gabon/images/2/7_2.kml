@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<GroundOverlay>
+	<name>7_2</name>
+	<Icon>
+		<href>map_7_2.png</href>
+		<viewBoundScale>0.75</viewBoundScale>
+	</Icon>
+	<LatLonBox>
+		<north>0.9058612584653319</north>
+		<south>-0.05339437646123385</south>
+		<east>14.56937487509555</east>
+		<west>13.75576258424783</west>
+	</LatLonBox>
+</GroundOverlay>
+</kml>

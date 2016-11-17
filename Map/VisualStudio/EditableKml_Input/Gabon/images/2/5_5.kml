@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.opengis.net/kml/2.2">
+  <GroundOverlay>
+    <name>5_5</name>
+    <Icon>
+      <href>map_5_5.png</href>
+      <viewBoundScale>0.75</viewBoundScale>
+    </Icon>
+    <LatLonBox>
+      <north>-1.5077059593635158</north>
+      <south>-2.4669615942900811</south>
+      <east>13.166639661098619</east>
+      <west>12.28003037967016</west>
+    </LatLonBox>
+  </GroundOverlay>
+</kml>

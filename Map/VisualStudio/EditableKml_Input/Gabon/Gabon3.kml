@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<GroundOverlay>
+	<name>Gabon2</name>
+	<Icon>
+		<href>DepartementsGabon3.png</href>
+		<viewBoundScale>0.75</viewBoundScale>
+	</Icon>
+	<LatLonBox>
+		<north>2.450618321971007</north>
+		<south>-3.999869554297869</south>
+		<east>14.57655331684133</east>
+		<west>8.65258478322523</west>
+	</LatLonBox>
+</GroundOverlay>
+</kml>

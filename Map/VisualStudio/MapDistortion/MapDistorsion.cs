@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
-using System.Globalization;
 
 namespace MapDistortion
 {
@@ -58,55 +57,27 @@ namespace MapDistortion
                 for (j = 0; j < m; ++j)
                 {
                     string path = String.Format("{0}_{1}.kml", i, j);
-                    kml kml;
+                    kml kml = readKml(path);
 
-                    XmlReader reader;
-                    XmlReaderSettings settings = new XmlReaderSettings();
-
-                    try
+                    if (kml != null)
                     {
-                        reader = XmlReader.Create(path, settings);
+                        int xMin = i * w - dw;
+                        if (xMin < 0) xMin = 0;
+                        int yMin = j * h - dw;
+                        if (yMin < 0) yMin = 0;
+                        int xMax = (i + 1) * w + dw;
+                        if (xMax > w0) xMax = w0;
+                        int yMax = (j + 1) * h + dh;
+                        if (yMax > h0) yMax = h0;
+
+                        kmlGroundOverlayLatLonBox box = kml.GroundOverlay.LatLonBox;
+                        A[i + 1][j + 1] = (box.east - box.west) / (xMax - xMin);
+                        B[i + 1][j + 1] = (box.east * xMin - box.west * xMax) / (xMin - xMax);
+                        C[i + 1][j + 1] = (box.south - box.north) / (yMax - yMin);
+                        D[i + 1][j + 1] = (box.south * yMin - box.north * yMax) / (yMin - yMax);
+
+                        ++count;
                     }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Fail to open file {0}", path);
-                        continue;
-                    }
-
-                    Console.WriteLine("Reading file " + path + " ...");
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(kml));
-
-                    try
-                    {
-                        kml = (kml)serializer.Deserialize(reader);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Fail to deserialize content of file {0}", path);
-                        Console.WriteLine(e.Message);
-                        if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
-                        return;
-                    }
-
-                    reader.Close();
-
-                    int xMin = i * w - dw;
-                    if (xMin < 0) xMin = 0;
-                    int yMin = j * h - dw;
-                    if (yMin < 0) yMin = 0;
-                    int xMax = (i + 1) * w + dw;
-                    if (xMax > w0) xMax = w0;
-                    int yMax = (j + 1) * h + dh;
-                    if (yMax > h0) yMax = h0;
-
-                    kmlGroundOverlayLatLonBox box = kml.GroundOverlay.LatLonBox;
-                    A[i + 1][j + 1] = (box.east - box.west) / (xMax - xMin);
-                    B[i + 1][j + 1] = (box.east * xMin - box.west * xMax) / (xMin - xMax);
-                    C[i + 1][j + 1] = (box.south - box.north) / (yMax - yMin);
-                    D[i + 1][j + 1] = (box.south * yMin - box.north * yMax) / (yMin - yMax);
-
-                    ++count;
                 }
             }
 
@@ -138,55 +109,28 @@ namespace MapDistortion
                     }
 
                     string path = String.Format("{0}_{1}.kml", i, j);
-                    kml kml;
+                    kml kml = readKml(path);
 
-                    XmlReader reader;
-                    XmlReaderSettings settings = new XmlReaderSettings();
-
-                    try
+                    if (kml != null)
                     {
-                        reader = XmlReader.Create(path, settings);
+                        kmlGroundOverlayLatLonBox box = kml.GroundOverlay.LatLonBox;
+
+                        double west = box.west;
+                        double east = box.east;
+                        box.west = 0.5 * (east + west + A0 * (west - east) / A[i + 1][j + 1]);
+                        box.east = 0.5 * (east + west + A0 * (east - west) / A[i + 1][j + 1]);
+
+                        double north = box.north;
+                        double south = box.south;
+                        box.north = 0.5 * (south + north + C0 * (north - south) / C[i + 1][j + 1]);
+                        box.south = 0.5 * (south + north + C0 * (south - north) / C[i + 1][j + 1]);
+
+                        path = String.Format("{0}_{1}.kml", i, j);
+                        TextWriter writer = new StreamWriter(path);
+                        XmlSerializer serializer = new XmlSerializer(typeof(kml));
+                        serializer.Serialize(writer, kml);
+                        writer.Close();
                     }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Fail to open file {0}", path);
-                        continue;
-                    }
-
-                    Console.WriteLine("Reading file " + path + " ...");
-
-                    XmlSerializer serializer = new XmlSerializer(typeof(kml));
-
-                    try
-                    {
-                        kml = (kml)serializer.Deserialize(reader);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Fail to deserialize content of file {0}", path);
-                        Console.WriteLine(e.Message);
-                        if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
-                        return;
-                    }
-
-                    reader.Close();
-
-                    kmlGroundOverlayLatLonBox box = kml.GroundOverlay.LatLonBox;
-
-                    double west = box.west;
-                    double east = box.east;
-                    box.west = 0.5 * (east + west + A0 * (west - east) / A[i + 1][j + 1]);
-                    box.east = 0.5 * (east + west + A0 * (east - west) / A[i + 1][j + 1]);
-
-                    double north = box.north;
-                    double south = box.south;
-                    box.north = 0.5 * (south + north + C0 * (north - south) / C[i + 1][j + 1]);
-                    box.south = 0.5 * (south + north + C0 * (south - north) / C[i + 1][j + 1]);
-
-                    path = String.Format("{0}_{1}.kml", i, j);
-                    TextWriter writer = new StreamWriter(path); 
-                    serializer.Serialize(writer, kml);
-                    writer.Close();
                 }
             }
 
@@ -339,6 +283,44 @@ namespace MapDistortion
                 file.WriteLine();
             }
             file.WriteLine();
+        }
+
+        static kml readKml(string path)
+        {
+            kml kml;
+
+            XmlReader reader;
+            XmlReaderSettings settings = new XmlReaderSettings();
+
+            try
+            {
+                reader = XmlReader.Create(path, settings);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Fail to open file {0}", path);
+                return null;
+            }
+
+            Console.WriteLine("Reading file " + path + " ...");
+
+            XmlSerializer serializer = new XmlSerializer(typeof(kml));
+
+            try
+            {
+                kml = (kml)serializer.Deserialize(reader);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fail to deserialize content of file {0}", path);
+                Console.WriteLine(e.Message);
+                if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
+                return null;
+            }
+
+            reader.Close();
+
+            return kml;
         }
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>OgooueMaritime_Ngounie_Nyanga_Ndougou_Mougalaba_Douigni_Mougoutsi.kml</name>
+	<Style id="default">
+	</Style>
+	<Style id="hl">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<StyleMap id="default0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>OgooueMaritime_Ngounie_Nyanga_Ndougou_Mougalaba_Douigni_Mougoutsi</name>
+		<LookAt>
+			<longitude>10.61907225104387</longitude>
+			<latitude>-2.365745203057261</latitude>
+			<altitude>0</altitude>
+			<heading>-0.2748264578069024</heading>
+			<tilt>0</tilt>
+			<range>22902.58926546684</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#default0</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>10.58048135986494,-2.338835902619106,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>OgooueMaritime_Nyanga_Ndougou_Mougoutsi_BasseBanio.kml</name>
+	<Style id="default">
+	</Style>
+	<Style id="hl">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<StyleMap id="default0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#default</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>OgooueMaritime_Nyanga_Ndougou_Mougoutsi_BasseBanio</name>
+		<LookAt>
+			<longitude>10.64091295435795</longitude>
+			<latitude>-2.804177150530751</latitude>
+			<altitude>0</altitude>
+			<heading>-0.2759181012036497</heading>
+			<tilt>0</tilt>
+			<range>22460.77721421057</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#default0</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>10.59879249274989,-2.826900792184459,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

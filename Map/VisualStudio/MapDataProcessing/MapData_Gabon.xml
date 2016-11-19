@@ -74,6 +74,16 @@
           <name language="en" text="1"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_OgooueMaritime" look="pl_Province">
+        <name>
+          <name language="fr" text="Ogooué-Maritime (8)"/>
+          <name language="en" text="Ogooué-Maritime (8)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="1"/>
+          <name language="en" text="1"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_WoleuNtem" look="pl_Province">
         <name>
           <name language="fr" text="Woleu-Ntem (9)"/>
@@ -126,6 +136,12 @@
         <name>
           <name language="fr" text="Etimboué"/>
           <name language="en" text="Etimboué"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Ndougou" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ndougou"/>
+          <name language="en" text="Ndougou"/>
         </name>
       </polygonElement>
       <!--Départements Woleu-Ntem-->

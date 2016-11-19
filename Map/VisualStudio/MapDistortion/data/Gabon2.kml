@@ -3,14 +3,14 @@
 <GroundOverlay>
 	<name>Gabon2</name>
 	<Icon>
-		<href>DepartementsGabon3.png</href>
+		<href>DepartementsGabon2.png</href>
 		<viewBoundScale>0.75</viewBoundScale>
 	</Icon>
 	<LatLonBox>
-		<north>2.450618321971007</north>
-		<south>-3.999869554297869</south>
-		<east>14.57655331684133</east>
-		<west>8.65258478322523</west>
+		<north>2.444064317062876</north>
+		<south>-3.996314899579271</south>
+		<east>14.58009178132905</east>
+		<west>8.649895556782818</west>
 	</LatLonBox>
 </GroundOverlay>
 </kml>

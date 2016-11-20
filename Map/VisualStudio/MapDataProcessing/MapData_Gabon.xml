@@ -125,6 +125,13 @@
           <name language="en" text="Komo"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_OgooueLacs" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ogooué et Lacs"/>
+          <name language="en" text="Ogooué et Lacs"/>
+        </name>
+      </polygonElement>
+      <!--Départements Moyen-Gooué-->
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

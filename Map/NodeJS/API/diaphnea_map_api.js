@@ -17,6 +17,15 @@ var mapServerInterface =
          lockMovementX: true,
          lockMovementY: true
       };
+      
+      var polygonOptions =
+      {
+         strokeWidth: 0,
+         hasControls: false,
+         hasBorders: false,
+         lockMovementX: true,
+         lockMovementY: true
+      };
 
       function Connection(onConnected)
       {   
@@ -261,6 +270,13 @@ var mapServerInterface =
                   item.top0 = polyline.top;
                   item.left0 = polyline.left;
                }
+               /*else if (item.type == 'polygon')
+               {
+                  var polygon = new fabric.Polygon(itemData.points, polygonOptions);
+                  item.polygon = polygon;
+                  item.top0 = polygon.top;
+                  item.left0 = polygon.left;
+               }*/
                else if (item.type == 'point')
                {
                   var circle = new fabric.Circle(
@@ -335,6 +351,26 @@ var mapServerInterface =
                      }
                      canvas.moveTo(polyline, -look.zI);
                   }
+                  /*else if (item.type == 'polygon')
+                  {
+                     var polygon = item.polygon;
+                     polygon.fill = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                     polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
+                     polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
+                     polygon.scaleX = scale;
+                     polygon.scaleY = scale;
+                     if (!addedItems[itemId])
+                     {
+                        canvas.add(polygon);
+                        addedItems[itemId] = true;
+                     }
+                     else
+                     {
+                        clearTimeout(renderCanvasTimeout);
+                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
+                     }
+                     canvas.moveTo(polygon, -look.zI);
+                  }*/
                   else if (item.type == 'point')
                   {
                      var circle = item.circle;
@@ -370,6 +406,10 @@ var mapServerInterface =
                   {
                      canvas.remove(item.polyline);
                   }
+                  /*else if (item.type == 'polygon')
+                  {
+                     canvas.remove(item.polygon);
+                  }*/
                   else if (item.type == 'point')
                   {    
                      canvas.remove(item.circle);
@@ -410,6 +450,12 @@ var mapServerInterface =
                         polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
                         polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
                      }
+                     /*else if (item.type == 'polygon')
+                     {
+                        var polygon = item.polygon;
+                        polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
+                        polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
+                     }*/
                      else if (item.type == 'point')
                      {
                         var circle = item.circle;
@@ -475,6 +521,14 @@ var mapServerInterface =
                         polyline.scaleX = scale;
                         polyline.scaleY = scale;
                      }
+                     /*else if (item.type == 'polygon')
+                     {
+                        var polygon = item.polygon;
+                        polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
+                        polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
+                        polygon.scaleX = scale;
+                        polygon.scaleY = scale;
+                     }*/
                      else if (item.type == 'point')
                      {
                         var circle = item.circle;

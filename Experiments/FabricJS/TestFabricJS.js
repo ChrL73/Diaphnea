@@ -36,6 +36,13 @@ var array2 = [ { x: 1, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 2 }, { x: -3, y: 0 },
 var line1 = new fabric.Polyline(array1, options);
 var line2 = new fabric.Polyline(array2, options);
 
+var polygon2 = new fabric.Polygon(array2,
+{
+   fill: 'rgb(192, 224, 255)',
+   strokeWidth: 0,
+   hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true
+});
+
 var xCircle1 = 0;
 var yCircle1 = -1;
 var circle1 = new fabric.Circle(
@@ -56,6 +63,7 @@ line2.stroke = 'blue';
 //var group = new fabric.Group([ line1, line2 ], { hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true });
 
 //canvas.add(group);
+canvas.add(polygon2);
 canvas.add(line1);
 canvas.add(line2);
 canvas.add(circle1);
@@ -74,6 +82,8 @@ var top2_0 = line2.top;
 var left2_0 = line2.left;
 var topC1_0 = circle1.top;
 var leftC1_0 = circle1.left;
+var topP2_0 = polygon2.top;
+var leftP2_0 = polygon2.left;
 
 setFocus(0, 0, 10, 10);
 
@@ -185,6 +195,11 @@ function updateFocus()
    line2.left = (left2_0 - 0.5 * line2.strokeWidth - _xFocus) * _scale + 0.5 * _mapWidth;
    line2.scaleX = _scale;
    line2.scaleY = _scale;
+   
+   polygon2.top = (topP2_0 - _yFocus) * _scale + 0.5 * _mapHeight;   
+   polygon2.left = (leftP2_0 - _xFocus) * _scale + 0.5 * _mapWidth;
+   polygon2.scaleX = _scale;
+   polygon2.scaleY = _scale;
    
    circle1.top = (topC1_0 - 0.5 * circle1.strokeWidth - _yFocus) * _scale + 0.5 * _mapHeight;   
    circle1.left = (leftC1_0 - 0.5 * circle1.strokeWidth - _xFocus) * _scale + 0.5 * _mapWidth;

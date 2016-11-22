@@ -74,6 +74,16 @@
           <name language="en" text="1"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_MoyenOgooue" look="pl_Province">
+        <name>
+          <name language="fr" text="Moyen-Ogooué (3)"/>
+          <name language="en" text="Moyen-Ogooué (3)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="3"/>
+          <name language="en" text="3"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_OgooueMaritime" look="pl_Province">
         <name>
           <name language="fr" text="Ogooué-Maritime (8)"/>
@@ -125,13 +135,19 @@
           <name language="en" text="Komo"/>
         </name>
       </polygonElement>
+      <!--Départements Moyen-Gooué-->
       <polygonElement id="e_OgooueLacs" look="pl_Departement">
         <name>
           <name language="fr" text="Ogooué et Lacs"/>
           <name language="en" text="Ogooué et Lacs"/>
         </name>
       </polygonElement>
-      <!--Départements Moyen-Gooué-->
+      <polygonElement id="e_AbangaBigne" look="pl_Departement">
+        <name>
+          <name language="fr" text="Abanga-Bigné"/>
+          <name language="en" text="Abanga-Bigné"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

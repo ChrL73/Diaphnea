@@ -15,7 +15,8 @@ var mapServerInterface =
          hasControls: false,
          hasBorders: false,
          lockMovementX: true,
-         lockMovementY: true
+         lockMovementY: true,
+         selectable: false
       };
       
       var polygonOptions =
@@ -24,7 +25,8 @@ var mapServerInterface =
          hasControls: false,
          hasBorders: false,
          lockMovementX: true,
-         lockMovementY: true
+         lockMovementY: true,
+         selectable: false
       };
 
       function Connection(onConnected)
@@ -222,7 +224,10 @@ var mapServerInterface =
                      lookToItems[lookId].push(itemId);
                   } 
                   
-                  itemsToRender_idAndLook.push({ itemId: itemId, lookId: lookId});
+                  if (!addedItems[itemId] || items[itemId].lookId != lookId)
+                  {
+                     itemsToRender_idAndLook.push({ itemId: itemId, lookId: lookId });
+                  }
                });
                
                Object.getOwnPropertyNames(lookToItems).forEach(function(lookId)
@@ -270,13 +275,13 @@ var mapServerInterface =
                   item.top0 = polyline.top;
                   item.left0 = polyline.left;
                }
-               /*else if (item.type == 'polygon')
+               else if (item.type == 'polygon')
                {
                   var polygon = new fabric.Polygon(itemData.points, polygonOptions);
                   item.polygon = polygon;
                   item.top0 = polygon.top;
                   item.left0 = polygon.left;
-               }*/
+               }
                else if (item.type == 'point')
                {
                   var circle = new fabric.Circle(
@@ -285,7 +290,7 @@ var mapServerInterface =
                      left: itemData.x - 0.5,
                      top: itemData.y - 0.5,
                      stroke: 'black',
-                     hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true
+                     hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true, selectable: false
                   });
                   item.circle = circle;
                   item.top0 = circle.top;
@@ -349,9 +354,10 @@ var mapServerInterface =
                         clearTimeout(renderCanvasTimeout);
                         renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
-                     canvas.moveTo(polyline, -look.zI);
+                     item.zIndex = look.zI;
+                     canvas.moveTo(polyline, getIndex(item));
                   }
-                  /*else if (item.type == 'polygon')
+                  else if (item.type == 'polygon')
                   {
                      var polygon = item.polygon;
                      polygon.fill = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
@@ -369,8 +375,9 @@ var mapServerInterface =
                         clearTimeout(renderCanvasTimeout);
                         renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
-                     canvas.moveTo(polygon, -look.zI);
-                  }*/
+                     item.zIndex = look.zI;
+                     canvas.moveTo(polygon, getIndex(item));
+                  }
                   else if (item.type == 'point')
                   {
                      var circle = item.circle;
@@ -391,9 +398,20 @@ var mapServerInterface =
                         clearTimeout(renderCanvasTimeout);
                         renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
                      }
-                     canvas.moveTo(circle, -look.zI);
+                     item.zIndex = look.zI;
+                     canvas.moveTo(circle, getIndex(item));
                   }
                }
+            }
+            
+            function getIndex(item)
+            {
+               var count = 0;
+               Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
+               {
+                  if (itemId != item.Id && items[itemId].zIndex > item.zIndex) ++count;      
+               });
+               return count;
             }
             
             function removeItem(item)
@@ -406,10 +424,10 @@ var mapServerInterface =
                   {
                      canvas.remove(item.polyline);
                   }
-                  /*else if (item.type == 'polygon')
+                  else if (item.type == 'polygon')
                   {
                      canvas.remove(item.polygon);
-                  }*/
+                  }
                   else if (item.type == 'point')
                   {    
                      canvas.remove(item.circle);
@@ -450,12 +468,12 @@ var mapServerInterface =
                         polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
                         polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
                      }
-                     /*else if (item.type == 'polygon')
+                     else if (item.type == 'polygon')
                      {
                         var polygon = item.polygon;
                         polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
                         polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
-                     }*/
+                     }
                      else if (item.type == 'point')
                      {
                         var circle = item.circle;
@@ -521,14 +539,14 @@ var mapServerInterface =
                         polyline.scaleX = scale;
                         polyline.scaleY = scale;
                      }
-                     /*else if (item.type == 'polygon')
+                     else if (item.type == 'polygon')
                      {
                         var polygon = item.polygon;
                         polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
                         polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
                         polygon.scaleX = scale;
                         polygon.scaleY = scale;
-                     }*/
+                     }
                      else if (item.type == 'point')
                      {
                         var circle = item.circle;

@@ -135,7 +135,7 @@
           <name language="en" text="Komo"/>
         </name>
       </polygonElement>
-      <!--Départements Moyen-Gooué-->
+      <!--Départements Moyen-Ogooué-->
       <polygonElement id="e_OgooueLacs" look="pl_Departement">
         <name>
           <name language="fr" text="Ogooué et Lacs"/>
@@ -146,6 +146,13 @@
         <name>
           <name language="fr" text="Abanga-Bigné"/>
           <name language="en" text="Abanga-Bigné"/>
+        </name>
+      </polygonElement>
+      <!--Départements Ngounié-->
+      <polygonElement id="e_Ndolou" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ndolou"/>
+          <name language="en" text="Ndolou"/>
         </name>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->

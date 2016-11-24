@@ -85,7 +85,7 @@ var leftC1_0 = circle1.left;
 var topP2_0 = polygon2.top;
 var leftP2_0 = polygon2.left;
 
-setFocus(0, 0, 10, 10);
+setFocus(1, 1, 10, 10);
 
 var mustTranslate = false;
 var xRef, yRef;

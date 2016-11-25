@@ -86,7 +86,7 @@ namespace MapDataProcessing
             }
 
             String coordinates = inputCoordinatesNode.FirstChild.Value;
-            String[] pointArray = coordinates.Split(' ', '\n', '\t');
+            String[] pointArray = coordinates.Split(' ', '\n', '\t', '\r');
             int pointCount = 0;
 
             foreach (String pointStr in pointArray)

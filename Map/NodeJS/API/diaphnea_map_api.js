@@ -73,6 +73,10 @@ var mapServerInterface =
             var looks = {};
             var xFocus, yFocus, scale;
             
+            var addedItemsByZIndex = [];
+            var i;
+            for (i = 0; i < 32; ++i) addedItemsByZIndex.push({});
+            
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
             this.getElementIds = function() { return mapInfo.elementIds; };  
@@ -123,11 +127,11 @@ var mapServerInterface =
             this.render = function()
             {
                clearTimeout(renderTimeout);
-               renderTimeout = setTimeout(startRender, 100);
+               renderTimeout = setTimeout(sendRenderRequest, 100);
             }
             
             var lastRenderRequestId;
-            function startRender()
+            function sendRenderRequest()
             {
                var elementIds = [];
                Object.getOwnPropertyNames(visibleElements).forEach(function(elementId)
@@ -312,6 +316,7 @@ var mapServerInterface =
                   });
                   
                   addedItems[itemKey] = true;
+                  addedItemsByZIndex[look.zI][itemKey] = true;
                           
                   clearTimeout(renderCanvasTimeout);
                   renderCanvasTimeout = setTimeout(renderCanvas, 50);
@@ -326,6 +331,10 @@ var mapServerInterface =
                {
                   delete addedItems[itemKey];
                   delete itemsToRemove[itemKey];
+                  delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
+                  
+                  clearTimeout(renderCanvasTimeout);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 50);
                }
             }
             
@@ -337,49 +346,54 @@ var mapServerInterface =
                ctx.scale(scale, scale);
                var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
                
-               Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
+               var i;
+               for (i = 31; i >= 0; --i)
                {
-                  var item = items[itemKey];
-                  var look = looks[item.lookId];
-                  
-                  if (item.type == 'line')
+                  var itemList = addedItemsByZIndex[i];
+                  Object.getOwnPropertyNames(itemList).forEach(function(itemKey)
                   {
-                     ctx.beginPath();
-                     item.points.forEach(function(p, i)
+                     var item = items[itemKey];
+                     var look = looks[item.lookId];
+
+                     if (item.type == 'line')
                      {
-                        if (i == 0) ctx.moveTo(p.x, p.y);
-                        else ctx.lineTo(p.x, p.y);
-                     });
+                        ctx.beginPath();
+                        item.points.forEach(function(p, i)
+                        {
+                           if (i == 0) ctx.moveTo(p.x, p.y);
+                           else ctx.lineTo(p.x, p.y);
+                        });
 
-                     ctx.strokeStyle = look.color;
-                     ctx.lineWidth = look.size * sizeFactor;
-                     ctx.stroke();
-                  }
-                  else if (item.type == 'polygon')
-                  {
-                     ctx.beginPath();
-                     item.points.forEach(function(p, i)
+                        ctx.strokeStyle = look.color;
+                        ctx.lineWidth = look.size * sizeFactor;
+                        ctx.stroke();
+                     }
+                     else if (item.type == 'polygon')
                      {
-                        if (i == 0) ctx.moveTo(p.x, p.y);
-                        else ctx.lineTo(p.x, p.y);
-                     });
+                        ctx.beginPath();
+                        item.points.forEach(function(p, i)
+                        {
+                           if (i == 0) ctx.moveTo(p.x, p.y);
+                           else ctx.lineTo(p.x, p.y);
+                        });
 
-                     ctx.fillStyle = look.color;
-                     ctx.fill();
-                  }
-                  else  if (item.type == 'point')
-                  {
-                     ctx.beginPath();
-                     ctx.arc(item.x, item.y, 0.5 * look.size * sizeFactor, 0, 2 * Math.PI);
+                        ctx.fillStyle = look.color;
+                        ctx.fill();
+                     }
+                     else if (item.type == 'point')
+                     {
+                        ctx.beginPath();
+                        ctx.arc(item.x, item.y, 0.5 * look.size * sizeFactor, 0, 2 * Math.PI);
 
-                     ctx.fillStyle = look.color;
-                     ctx.fill();
+                        ctx.fillStyle = look.color;
+                        ctx.fill();
 
-                     ctx.strokeStyle = 'black';
-                     ctx.lineWidth = sizeFactor;
-                     ctx.stroke();
-                  }
-               });
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = sizeFactor;
+                        ctx.stroke();
+                     }
+                  });
+               }
                                                               
                ctx.restore();
             }

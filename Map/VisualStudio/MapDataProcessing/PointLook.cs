@@ -23,7 +23,7 @@ namespace MapDataProcessing
                 { "id", Id },
                 { "xml_id", _look.id },
                 { "type", "point" },
-                { "point_z_index", Int32.Parse(_look.pointZIndex) },
+                { "point_z_index", _look.pointZIndex },
                 { "point_alpha", _look.pointAlpha },
                 { "point_red", _look.pointRed },
                 { "point_green", _look.pointGreen },

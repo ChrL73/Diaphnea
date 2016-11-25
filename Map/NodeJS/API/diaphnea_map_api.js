@@ -6,28 +6,6 @@ var mapServerInterface =
       {
          onConnected(connection);
       });
-      
-      var polylineOptions =
-      {
-         strokeLineCap: 'round',
-         strokeLineJoin: 'round',
-         fill: '',
-         hasControls: false,
-         hasBorders: false,
-         lockMovementX: true,
-         lockMovementY: true,
-         selectable: false
-      };
-      
-      var polygonOptions =
-      {
-         strokeWidth: 0,
-         hasControls: false,
-         hasBorders: false,
-         lockMovementX: true,
-         lockMovementY: true,
-         selectable: false
-      };
 
       function Connection(onConnected)
       {   
@@ -81,9 +59,11 @@ var mapServerInterface =
          function Map(mapId, canvasId, mapInfo)
          {
             var thisMap = this;
-            var canvas = new fabric.Canvas(canvasId);
-            canvas.hoverCursor = 'default';
-            canvas.selection = false;
+            var canvas = document.querySelector('#' + canvasId);
+            var ctx = canvas.getContext('2d');
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
             var renderCanvasTimeout;
             
             var visibleElements = {};
@@ -173,9 +153,9 @@ var mapServerInterface =
                }
                else
                {
-                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
+                  Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
                   {
-                     removeItem(items[itemId]);
+                     removeItem(items[itemKey]);
                   });
                }
             }
@@ -196,37 +176,44 @@ var mapServerInterface =
                }
                
                var lookToItems = {};
-               var itemsToRender_fullId = {};
-               var itemsToRender_idWithoutRes = {};
-               var itemsToRender_idAndLook = [];
+               var itemsToRender_itemKey = {};
+               var itemsToRender_itemId = {};
+               var itemsToRender_keyAndLook = [];
                
                renderInfo.items.forEach(function(itemInfo)
                {
-                  var itemId = itemInfo[0].toString();
+                  var itemKey = itemInfo[0].toString();
                   var lookId = itemInfo[1];
                   var resolution = itemInfo[2];
-                  if (resolution || resolution === 0) itemId += '_' + resolution;
+                  if (resolution || resolution === 0) itemKey += '_' + resolution;
                   
-                  itemsToRender_fullId[itemId] = true;
-                  itemsToRender_idWithoutRes[itemInfo[0]] = true;
+                  itemsToRender_itemKey[itemKey] = true;
+                  itemsToRender_itemId[itemInfo[0]] = true;
          
-                  if (!items[itemId])
+                  if (!items[itemKey])
                   {                           
                      var id = ++requestCounter;
                      var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
-                     contexts[id.toString()] = { itemId: itemId, lookId: lookId };
+                     contexts[id.toString()] = { itemKey: itemKey, itemId: itemInfo[0], resolution: resolution, lookId: lookId };
                      socket.emit('itemDataReq', request);
+                     
+                     items[itemKey] =
+                     {
+                        key: itemKey,
+                        id: itemInfo[0],
+                        resolution: resolution
+                     };
                   }
 
                   if (!looks[lookId])
                   {
                      if (!lookToItems[lookId]) lookToItems[lookId] = [];
-                     lookToItems[lookId].push(itemId);
+                     lookToItems[lookId].push(itemKey);
                   } 
                   
-                  if (!addedItems[itemId] || items[itemId].lookId != lookId)
+                  if (!addedItems[itemKey] || items[itemKey].lookId != lookId)
                   {
-                     itemsToRender_idAndLook.push({ itemId: itemId, lookId: lookId });
+                     itemsToRender_keyAndLook.push({ itemKey: itemKey, lookId: lookId });
                   }
                });
                
@@ -234,272 +221,208 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, lookId: lookId };
-                  contexts[id.toString()] = { lookId: lookId, itemIdArray: lookToItems[lookId] };
+                  contexts[id.toString()] = { lookId: lookId, itemKeyArray: lookToItems[lookId] };
                   socket.emit('lookReq', request);
                });
                
-               Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
+               Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
                {
-                  if (!itemsToRender_fullId[itemId])
+                  var item = items[itemKey];
+                  if (!itemsToRender_itemKey[itemKey])
                   {
-                     var idWithoutRes = itemId.substring(0, itemId.indexOf('_'));
-                     if (itemsToRender_idWithoutRes[idWithoutRes])
+                     var itemId = item.itemId;
+                     if (itemsToRender_itemId[itemId])
                      {
-                        itemsToRemove[itemId] = true;
+                        itemsToRemove[itemKey] = true;
                      }
                      else
                      {      
-                        var item = items[itemId];
                         removeItem(item);
                      }
                   }
                });
                
-               itemsToRender_idAndLook.forEach(function(ids)
+               itemsToRender_keyAndLook.forEach(function(ids)
                {
-                  renderItem(ids.itemId, ids.lookId);
+                  addItem(ids.itemKey, ids.lookId);
                });
             });
 
-            socket.on('itemDataRes', function (response)
+            socket.on('itemDataRes', function(response)
             {
                var context = getContext(response);
                var itemData = response.content;
                //console.log(itemData);
 
-               var item = { id: context.itemId, type: itemData.type };
-               if (item.type == 'line')
+               var item = items[context.itemKey];
+               
+               if (item)
                {
-                  var polyline = new fabric.Polyline(itemData.points, polylineOptions);
-                  item.polyline = polyline;
-                  item.top0 = polyline.top;
-                  item.left0 = polyline.left;
-               }
-               else if (item.type == 'polygon')
-               {
-                  var polygon = new fabric.Polygon(itemData.points, polygonOptions);
-                  item.polygon = polygon;
-                  item.top0 = polygon.top;
-                  item.left0 = polygon.left;
-               }
-               else if (item.type == 'point')
-               {
-                  var circle = new fabric.Circle(
+                  item.type = itemData.type;
+                  if (item.type == 'line' || item.type == 'polygon')
                   {
-                     radius: 0.5,
-                     left: itemData.x - 0.5,
-                     top: itemData.y - 0.5,
-                     stroke: 'black',
-                     hasControls: false, hasBorders: false, lockMovementX: true, lockMovementY: true, selectable: false
-                  });
-                  item.circle = circle;
-                  item.top0 = circle.top;
-                  item.left0 = circle.left;
+                     item.points = itemData.points;
+                  }
+                  else if (item.type == 'point')
+                  {
+                     item.x = itemData.x;
+                     item.y = itemData.y;
+                  }
+                  
+                  addItem(context.itemKey, context.lookId);
                }
-
-               items[item.id] = item;
-               renderItem(context.itemId, context.lookId);
             });
 
-            socket.on('lookRes', function (response)
+            socket.on('lookRes', function(response)
             {
                var context = getContext(response);
                var lookData = response.content;
-               //console.log(lookData);
                
-               looks[context.lookId] = lookData;     
-               context.itemIdArray.forEach(function(itemId)
+               looks[context.lookId] =
                {
-                  renderItem(itemId, context.lookId);
+                  zI: lookData.zI,
+                  size: lookData.size,
+                  color: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')'
+               };
+               
+               context.itemKeyArray.forEach(function(itemKey)
+               {
+                  addItem(itemKey, context.lookId);
                });
             });
             
-            function renderItem(itemId, lookId)
+            function addItem(itemKey, lookId)
             {
-               var item = items[itemId];
+               var item = items[itemKey];
                if (item) item.lookId = lookId;
                
                var look = looks[lookId];
                   
                if (item && look)
                {
-                  // console.log('Render item ' + itemId);
+                  // console.log('Render item ' + itemKey);
                   
-                  Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemId2)
+                  Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemKey2)
                   {
-                     if (itemId != itemId2 && itemId.substring(0, itemId.indexOf('_')) == itemId2.substring(0, itemId2.indexOf('_')))
+                     var item2 = items[itemKey2];
+                     if (itemKey != itemKey2 && item.itemId == item2.itemId)
                      {
-                        removeItem(items[itemId2]);
+                        removeItem(item2);
                      }
                   });
                   
-                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
-
-                  if (item.type == 'line')
-                  {
-                     var polyline = item.polyline;
-                     polyline.stroke = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                     polyline.strokeWidth = look.size * sizeFactor;
-                     polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                     polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                     polyline.scaleX = scale;
-                     polyline.scaleY = scale;
-                     if (!addedItems[itemId])
-                     {
-                        canvas.add(polyline);
-                        addedItems[itemId] = true;
-                     }
-                     else
-                     {
-                        clearTimeout(renderCanvasTimeout);
-                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
-                     }
-                     item.zIndex = look.zI;
-                     canvas.moveTo(polyline, getIndex(item));
-                  }
-                  else if (item.type == 'polygon')
-                  {
-                     var polygon = item.polygon;
-                     polygon.fill = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                     polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
-                     polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
-                     polygon.scaleX = scale;
-                     polygon.scaleY = scale;
-                     if (!addedItems[itemId])
-                     {
-                        canvas.add(polygon);
-                        addedItems[itemId] = true;
-                     }
-                     else
-                     {
-                        clearTimeout(renderCanvasTimeout);
-                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
-                     }
-                     item.zIndex = look.zI;
-                     canvas.moveTo(polygon, getIndex(item));
-                  }
-                  else if (item.type == 'point')
-                  {
-                     var circle = item.circle;
-                     circle.fill = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                     circle.radius = 0.5 * look.size * sizeFactor;
-                     circle.strokeWidth = sizeFactor;
-                     circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                     circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                     circle.scaleX = scale;
-                     circle.scaleY = scale;
-                     if (!addedItems[itemId])
-                     {
-                        canvas.add(circle);
-                        addedItems[itemId] = true;
-                     }
-                     else
-                     {
-                        clearTimeout(renderCanvasTimeout);
-                        renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 50);
-                     }
-                     item.zIndex = look.zI;
-                     canvas.moveTo(circle, getIndex(item));
-                  }
+                  addedItems[itemKey] = true;
+                          
+                  clearTimeout(renderCanvasTimeout);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 50);
                }
-            }
-            
-            function getIndex(item)
-            {
-               var count = 0;
-               Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
-               {
-                  if (itemId != item.Id && items[itemId].zIndex > item.zIndex) ++count;      
-               });
-               return count;
             }
             
             function removeItem(item)
             {
-               var itemId = item.id;
+               var itemKey = item.key;
                
-               if (addedItems[itemId])
+               if (addedItems[itemKey])
                {
+                  delete addedItems[itemKey];
+                  delete itemsToRemove[itemKey];
+               }
+            }
+            
+            function renderCanvas()
+            {
+               ctx.clearRect(0, 0, canvas.width, canvas.height);
+               ctx.save();
+               ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
+               ctx.scale(scale, scale);
+               var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
+               
+               Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
+               {
+                  var item = items[itemKey];
+                  var look = looks[item.lookId];
+                  
                   if (item.type == 'line')
                   {
-                     canvas.remove(item.polyline);
+                     ctx.beginPath();
+                     item.points.forEach(function(p, i)
+                     {
+                        if (i == 0) ctx.moveTo(p.x, p.y);
+                        else ctx.lineTo(p.x, p.y);
+                     });
+
+                     ctx.strokeStyle = look.color;
+                     ctx.lineWidth = look.size * sizeFactor;
+                     ctx.stroke();
                   }
                   else if (item.type == 'polygon')
                   {
-                     canvas.remove(item.polygon);
+                     ctx.beginPath();
+                     item.points.forEach(function(p, i)
+                     {
+                        if (i == 0) ctx.moveTo(p.x, p.y);
+                        else ctx.lineTo(p.x, p.y);
+                     });
+
+                     ctx.fillStyle = look.color;
+                     ctx.fill();
                   }
-                  else if (item.type == 'point')
-                  {    
-                     canvas.remove(item.circle);
+                  else  if (item.type == 'point')
+                  {
+                     ctx.beginPath();
+                     ctx.arc(item.x, item.y, 0.5 * look.size * sizeFactor, 0, 2 * Math.PI);
+
+                     ctx.fillStyle = look.color;
+                     ctx.fill();
+
+                     ctx.strokeStyle = 'black';
+                     ctx.lineWidth = sizeFactor;
+                     ctx.stroke();
                   }
-                  
-                  delete addedItems[itemId];
-                  delete itemsToRemove[itemId];
-               }
+               });
+                                                              
+               ctx.restore();
             }
             
             var mustTranslate = false;
             var xRef, yRef;
             
-            canvas.on('mouse:down', function(arg)
+            canvas.addEventListener('mousedown', function(e)
             {
-               xRef = arg.e.clientX;
-               yRef = arg.e.clientY;
+               xRef = e.clientX;
+               yRef = e.clientY;
                mustTranslate = true;
-               //canvas.defaultCursor = 'move';   
+               canvas.style.cursor = 'move';   
             });
             
-            canvas.on('mouse:move', function(arg)
+            canvas.addEventListener('mousemove', function(e)
             {
-               if (mustTranslate && (arg.e.buttons & 1))
+               if (mustTranslate && (e.buttons & 1))
                {
-                  var dx = arg.e.clientX - xRef;
-                  var dy = arg.e.clientY - yRef;
+                  var dx = e.clientX - xRef;
+                  var dy = e.clientY - yRef;
 
                   xFocus -= dx / scale;
                   yFocus -= dy / scale;
-                  
-                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
-                  {
-                     var item = items[itemId];
-                     if (item.type == 'line')
-                     {
-                        var polyline = item.polyline;
-                        polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                        polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                     }
-                     else if (item.type == 'polygon')
-                     {
-                        var polygon = item.polygon;
-                        polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
-                        polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
-                     }
-                     else if (item.type == 'point')
-                     {
-                        var circle = item.circle;
-                        circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                        circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                     }
-                  });
 
                   clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 1);
                   thisMap.render();
 
-                  xRef = arg.e.clientX;
-                  yRef = arg.e.clientY;
+                  xRef = e.clientX;
+                  yRef = e.clientY;
                }
             });
             
-            canvas.on('mouse:up', function(arg)
+            canvas.addEventListener('mouseup', function(e)
             {
                mustTranslate = false;
-               //canvas.defaultCursor = 'default';
+               canvas.style.cursor = 'default';
             });
             
-            canvas.on('mouse:wheel', function(arg)
+            canvas.addEventListener('wheel', function(e)
             {
-               var delta = arg.e.deltaY;
+               var delta = e.deltaY;
                var geoSize = Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) / scale;
                var geoSize0 = geoSize;
 
@@ -514,53 +437,19 @@ var mapServerInterface =
                   var zoomFactor = geoSize0 / geoSize;
                   if (delta > 0)
                   {
-                     xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 - zoomFactor) / scale;
-                     yFocus += (0.5 * canvas.height - arg.e.clientY) * (1.0 - zoomFactor) / scale;
+                     xFocus += (0.5 * canvas.width - e.clientX) * (1.0 - zoomFactor) / scale;
+                     yFocus += (0.5 * canvas.height - e.clientY) * (1.0 - zoomFactor) / scale;
                   }
                   else
                   {
-                     xFocus += (0.5 * canvas.width - arg.e.clientX) * (1.0 / zoomFactor - 1.0) / scale;
-                     yFocus += (0.5 * canvas.height - arg.e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
+                     xFocus += (0.5 * canvas.width - e.clientX) * (1.0 / zoomFactor - 1.0) / scale;
+                     yFocus += (0.5 * canvas.height - e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
                   }
                   
                   scale *= zoomFactor;
-                  var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
-
-                  Object.getOwnPropertyNames(addedItems).forEach(function(itemId)
-                  {
-                     var item = items[itemId];
-                     var look = looks[item.lookId];
-                     if (item.type == 'line')
-                     {
-                        var polyline = item.polyline;
-                        polyline.strokeWidth = look.size * sizeFactor;
-                        polyline.top = (item.top0 - 0.5 * polyline.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                        polyline.left = (item.left0 - 0.5 * polyline.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                        polyline.scaleX = scale;
-                        polyline.scaleY = scale;
-                     }
-                     else if (item.type == 'polygon')
-                     {
-                        var polygon = item.polygon;
-                        polygon.top = (item.top0 - yFocus) * scale + 0.5 * canvas.height;   
-                        polygon.left = (item.left0 - xFocus) * scale + 0.5 * canvas.width;
-                        polygon.scaleX = scale;
-                        polygon.scaleY = scale;
-                     }
-                     else if (item.type == 'point')
-                     {
-                        var circle = item.circle;
-                        circle.radius = 0.5 * look.size * sizeFactor;
-                        circle.strokeWidth = sizeFactor;
-                        circle.top = (item.top0 - 0.5 * circle.strokeWidth - yFocus) * scale + 0.5 * canvas.height;   
-                        circle.left = (item.left0 - 0.5 * circle.strokeWidth - xFocus) * scale + 0.5 * canvas.width;
-                        circle.scaleX = scale;
-                        circle.scaleY = scale;
-                     }
-                  });
                    
                   clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(function() { canvas.renderAll(); }, 1);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 1);
                   thisMap.render();
                }
             });

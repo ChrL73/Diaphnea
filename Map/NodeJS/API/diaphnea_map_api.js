@@ -298,7 +298,12 @@ var mapServerInterface =
             function addItem(itemKey, lookId)
             {
                var item = items[itemKey];
-               if (item) item.lookId = lookId;
+               
+               if (item && item.lookId != lookId)
+               {
+                  if (item.lookId) delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
+                  item.lookId = lookId;
+               }
                
                var look = looks[lookId];
                   
@@ -319,7 +324,7 @@ var mapServerInterface =
                   addedItemsByZIndex[look.zI][itemKey] = true;
                           
                   clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 50);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 30);
                }
             }
             
@@ -334,7 +339,7 @@ var mapServerInterface =
                   delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
                   
                   clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 50);
+                  renderCanvasTimeout = setTimeout(renderCanvas, 30);
                }
             }
             

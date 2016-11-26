@@ -155,6 +155,12 @@
           <name language="en" text="Ndolou"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_TsambaMagotsi" look="pl_Departement">
+        <name>
+          <name language="fr" text="Tsamba-Magotsi"/>
+          <name language="en" text="Tsamba-Magotsi"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

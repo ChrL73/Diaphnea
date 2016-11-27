@@ -161,6 +161,12 @@
           <name language="en" text="Tsamba-Magotsi"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_Mougalaba" look="pl_Departement">
+        <name>
+          <name language="fr" text="Mougalaba"/>
+          <name language="en" text="Mougalaba"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

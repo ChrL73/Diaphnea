@@ -43,8 +43,6 @@ $(function()
             woleuNtem.show();
             komoOcean.show();
             woleuNtem.hide();
-            map.render();
-            //setTimeout(function() { map.render(); }, 1000);
          }
       }
    }

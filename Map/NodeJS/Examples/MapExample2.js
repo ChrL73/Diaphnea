@@ -36,11 +36,6 @@ $(function()
                   $(this).prop('checked', checked).change();
                });
             });
-            
-            $('#update').click(function()
-            {
-               map.render();
-            });
          });
       }
    }

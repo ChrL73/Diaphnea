@@ -58,13 +58,12 @@ var mapServerInterface =
          
          function Map(mapId, canvasId, mapInfo)
          {
-            var thisMap = this;
             var canvas = document.querySelector('#' + canvasId);
             var ctx = canvas.getContext('2d');
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             
-            var renderCanvasTimeout;
+            var reqAnimFrameId;
             
             var visibleElements = {};
             var items = {};
@@ -119,15 +118,24 @@ var mapServerInterface =
                this.getId = function() { return elementId; }
                this.getName = function(languageId) { return elementInfo.names[languageId]; }
                
-               this.show = function() { visibleElements[elementId] = true; }
-               this.hide = function() { visibleElements[elementId] = false; }
+               this.show = function()
+               {
+                  visibleElements[elementId] = true;
+                  scheduleRenderRequest();
+               }
+               
+               this.hide = function()
+               {
+                  visibleElements[elementId] = false;
+                  scheduleRenderRequest();
+               }
             }
             
-            var renderTimeout;
-            this.render = function()
+            var renderRequestTimeout;
+            function scheduleRenderRequest()
             {
-               clearTimeout(renderTimeout);
-               renderTimeout = setTimeout(sendRenderRequest, 100);
+               clearTimeout(renderRequestTimeout);
+               renderRequestTimeout = setTimeout(sendRenderRequest, 100);
             }
             
             var lastRenderRequestId;
@@ -204,7 +212,7 @@ var mapServerInterface =
                      items[itemKey] =
                      {
                         key: itemKey,
-                        id: itemInfo[0],
+                        itemId: itemInfo[0],
                         resolution: resolution
                      };
                   }
@@ -298,8 +306,9 @@ var mapServerInterface =
             function addItem(itemKey, lookId)
             {
                var item = items[itemKey];
+               if (addedItems[itemKey] && item.lookId == lookId) return;
                
-               if (item && item.lookId != lookId)
+               if (item.type && item.lookId != lookId)
                {
                   if (item.lookId) delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
                   item.lookId = lookId;
@@ -307,9 +316,9 @@ var mapServerInterface =
                
                var look = looks[lookId];
                   
-               if (item && look)
+               if (item.type && look)
                {
-                  // console.log('Render item ' + itemKey);
+                  // console.log('Add item ' + itemKey);
                   
                   Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemKey2)
                   {
@@ -323,8 +332,8 @@ var mapServerInterface =
                   addedItems[itemKey] = true;
                   addedItemsByZIndex[look.zI][itemKey] = true;
                           
-                  clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 30);
+                  cancelAnimationFrame(reqAnimFrameId);
+                  reqAnimFrameId = requestAnimationFrame(renderCanvas);
                }
             }
             
@@ -338,8 +347,8 @@ var mapServerInterface =
                   delete itemsToRemove[itemKey];
                   delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
                   
-                  clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 30);
+                  cancelAnimationFrame(reqAnimFrameId);
+                  reqAnimFrameId = requestAnimationFrame(renderCanvas);
                }
             }
             
@@ -424,9 +433,9 @@ var mapServerInterface =
                   xFocus -= dx / scale;
                   yFocus -= dy / scale;
 
-                  clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 1);
-                  thisMap.render();
+                  cancelAnimationFrame(reqAnimFrameId);
+                  reqAnimFrameId = requestAnimationFrame(renderCanvas);
+                  scheduleRenderRequest();
 
                   xRef = e.clientX;
                   yRef = e.clientY;
@@ -467,9 +476,9 @@ var mapServerInterface =
                   
                   scale *= zoomFactor;
                    
-                  clearTimeout(renderCanvasTimeout);
-                  renderCanvasTimeout = setTimeout(renderCanvas, 1);
-                  thisMap.render();
+                  cancelAnimationFrame(reqAnimFrameId);
+                  reqAnimFrameId = requestAnimationFrame(renderCanvas);
+                  scheduleRenderRequest();
                }
             });
          }

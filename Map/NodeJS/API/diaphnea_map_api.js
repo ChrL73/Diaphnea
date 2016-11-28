@@ -306,7 +306,7 @@ var mapServerInterface =
             function addItem(itemKey, lookId)
             {
                var item = items[itemKey];
-               if (addedItems[itemKey] && item.lookId == lookId) return;
+               if (addedItems[itemKey] && item.lookId === lookId) return;
                
                if (item.type && item.lookId != lookId)
                {
@@ -323,7 +323,7 @@ var mapServerInterface =
                   Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemKey2)
                   {
                      var item2 = items[itemKey2];
-                     if (itemKey != itemKey2 && item.itemId == item2.itemId)
+                     if (itemKey != itemKey2 && item.itemId === item2.itemId)
                      {
                         removeItem(item2);
                      }
@@ -374,7 +374,7 @@ var mapServerInterface =
                         ctx.beginPath();
                         item.points.forEach(function(p, i)
                         {
-                           if (i == 0) ctx.moveTo(p.x, p.y);
+                           if (i === 0) ctx.moveTo(p.x, p.y);
                            else ctx.lineTo(p.x, p.y);
                         });
 
@@ -387,7 +387,7 @@ var mapServerInterface =
                         ctx.beginPath();
                         item.points.forEach(function(p, i)
                         {
-                           if (i == 0) ctx.moveTo(p.x, p.y);
+                           if (i === 0) ctx.moveTo(p.x, p.y);
                            else ctx.lineTo(p.x, p.y);
                         });
 

@@ -167,6 +167,18 @@
           <name language="en" text="Mougalaba"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_DouyaOnoye" look="pl_Departement">
+        <name>
+          <name language="fr" text="Douya-Onoyé"/>
+          <name language="en" text="Douya-Onoyé"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Ogoulou" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ogoulou"/>
+          <name language="en" text="Ogoulou"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

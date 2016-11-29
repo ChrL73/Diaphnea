@@ -173,6 +173,16 @@
           <name language="en" text="08"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_13" look="pl_Departement">
+        <name>
+          <name language="fr" text="Bouches-du-Rhône (13)"/>
+          <name language="en" text="Bouches-du-Rhône (13)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="13"/>
+          <name language="en" text="13"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_60" look="pl_Departement">
         <name>
           <name language="fr" text="Oise (60)"/>
@@ -191,12 +201,25 @@
           <name language="fr" text="Rhin"/>
           <name language="en" text="Rhin"/>
         </name>
+        <attachmentList/>
       </lineElement>
       <lineElement id="e_Rhone" look="ll_FleuveRiviere">
         <name>
           <name language="fr" text="Rhône"/>
           <name language="en" text="Rhône"/>
         </name>
+        <attachmentList>
+          <element id="e_13"/>
+        </attachmentList>
+      </lineElement>
+    <lineElement id="e_Saone" look="ll_FleuveRiviere">
+        <name>
+          <name language="fr" text="Saône"/>
+          <name language="en" text="Saône"/>
+        </name>
+        <attachmentList>
+          <element id="e_Rhone"/>
+        </attachmentList>
       </lineElement>
     </lineElementList>
     <pointElementList>

@@ -18,7 +18,6 @@ namespace MapDataProcessing
         private readonly List<OrientedLineList> _compoundPolygonList = new List<OrientedLineList>();
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
         private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
-        private readonly Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>> _subPolygonDictionary = new Dictionary<XmlResolution, SortedDictionary<double, List<GeoPoint>>>();
 
         internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId) :
             base(id, mapData, name, shortName, lookId) { }
@@ -215,7 +214,6 @@ namespace MapDataProcessing
                 contour.Add(contour[0]);
 
                 _contourMapItem.addLine(resolution, contour);
-                _subPolygonDictionary.Add(resolution, polygonSortedDictionary);
 
                 int index = 1;
                 foreach (List<GeoPoint> pointList in polygonSortedDictionary.Values)

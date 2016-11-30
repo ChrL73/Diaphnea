@@ -185,6 +185,12 @@
           <name language="en" text="Dola"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_LouetsiWano" look="pl_Departement">
+        <name>
+          <name language="fr" text="Louetsi-Wano"/>
+          <name language="en" text="Louetsi-Wano"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

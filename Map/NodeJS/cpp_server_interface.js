@@ -38,7 +38,7 @@ function sendRequest(request, recursiveCall)
          sendResponse(socketId, requestId, requestType, responseContent);
       });
       
-      if (recursiveCall) throw new Error(err); // Todo: hande error
+      if (recursiveCall) throw new Error(err); // Todo: handle error
       sendRequest(request, true);
    }
 }

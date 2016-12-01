@@ -191,6 +191,12 @@
           <name language="en" text="Louetsi-Wano"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_BoumiLouetsi" look="pl_Departement">
+        <name>
+          <name language="fr" text="Boumi-Louetsi"/>
+          <name language="en" text="Boumi-Louetsi"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

@@ -32,7 +32,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal override int formParts()
+        internal override int formParts1()
         {
             if (_pointKmlFileList.Count == 0 && _lineKmlFileList.Count == 0 && _polygonKmlFileList.Count == 0)
             {
@@ -137,6 +137,11 @@ namespace MapDataProcessing
                 _polygonPartList.Add(part);
             }
 
+            return 0;
+        }
+
+        internal override int formParts2()
+        {
             return 0;
         }
 

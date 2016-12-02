@@ -55,12 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseMapItem.cs" />
+    <Compile Include="DistanceCalculator.cs" />
     <Compile Include="ElementName.cs" />
     <Compile Include="GeoPoint.cs" />
+    <Compile Include="IAttachment.cs" />
     <Compile Include="ItemId.cs" />
     <Compile Include="KmlFileData.cs" />
     <Compile Include="KmlFileTypeEnum.cs" />
     <Compile Include="KmlWriter.cs" />
+    <Compile Include="LineLinePart.cs" />
     <Compile Include="LineLook.cs" />
     <Compile Include="LineMapElement.cs" />
     <Compile Include="Look.cs" />

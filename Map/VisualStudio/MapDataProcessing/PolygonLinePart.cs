@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MapDataProcessing
 {
-    class PolygonLinePart
+    class PolygonLinePart : IAttachment
     {
         private static Dictionary<KmlFileData, PolygonLinePart> _partDictionary = new Dictionary<KmlFileData, PolygonLinePart>();
 
@@ -18,8 +18,19 @@ namespace MapDataProcessing
             _partDictionary.Clear();
         }
 
+        internal static bool exists(KmlFileData lineData)
+        {
+            return _partDictionary.ContainsKey(lineData);
+        }
+
         internal static PolygonLinePart getPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {
+            if (LineLinePart.exists(lineData))
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("The same line KML file ({0}) can not be use for a line element and for a polygon element", lineData.Path));
+                return null;
+            }
+
             PolygonLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
@@ -31,18 +42,27 @@ namespace MapDataProcessing
                 if (pointData1 != part._pointData1)
                 {
                     MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Different point1s ('{0}' and '{1}') for line polygon part '{2}'",
-                                             pointData1, part._pointData1, lineData));
+                                             pointData1.Path, part._pointData1.Path, lineData.Path));
                     return null;
                 }
                 else if (pointData2 != part._pointData2)
                 {
                     MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Different point2s ('{0}' and '{1}') for line polygon part '{2}'",
-                                             pointData2, part._pointData2, lineData));
+                                             pointData2.Path, part._pointData2.Path, lineData.Path));
                     return null;
                 }
             }
 
             return part;
+        }
+
+        internal static PolygonLinePart getPart(KmlFileData lineData)
+        {
+            PolygonLinePart part;
+            if (_partDictionary.TryGetValue(lineData, out part)) return part;
+
+            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Polygon line part '{0}' does not exists", lineData.Path, part._pointData2.Path, lineData.Path));
+            return null;
         }
 
         private readonly KmlFileData _lineData;
@@ -96,6 +116,18 @@ namespace MapDataProcessing
             }
 
             return 0;
+        }
+
+        public List<GeoPoint> AttachmentLine
+        {
+            get
+            {
+                List<GeoPoint> line = new List<GeoPoint>();
+                line.Add(_pointData1.PointList[0]);
+                line.AddRange(_lineData.PointList);
+                line.Add(_pointData2.PointList[0]); 
+                return line;
+            }
         }
     }
 }

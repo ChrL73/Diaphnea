@@ -26,7 +26,8 @@ namespace MapDataProcessing
         }
 
         abstract internal int addKmlFile(String path);
-        abstract internal int formParts();
+        abstract internal int formParts1();
+        abstract internal int formParts2();
         abstract internal int fillDatabase(IMongoDatabase database);
 
         protected String Id { get { return _id; } }

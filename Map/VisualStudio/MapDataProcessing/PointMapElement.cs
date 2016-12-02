@@ -10,7 +10,7 @@ namespace MapDataProcessing
 {
     class PointMapElement : MapElement
     {
-        private KmlFileData _KmlFile = null;
+        private KmlFileData _kmlFile = null;
         private readonly ItemId _itemId = new ItemId();
 
         internal PointMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId) :
@@ -32,21 +32,26 @@ namespace MapDataProcessing
             }
             else if (data.Type == KmlFileTypeEnum.POINT)
             {
-                if (_KmlFile != null)
+                if (_kmlFile != null)
                 {
-                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not add several files ('{0}' and '{1}') to point element '{2}'", _KmlFile.Path, path, Id));
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Can not add several files ('{0}' and '{1}') to point element '{2}'", _kmlFile.Path, path, Id));
                     return -1;
                 }
                 else
                 {
-                    _KmlFile = data;
+                    _kmlFile = data;
                 }
             }
 
             return 0;
         }
 
-        internal override int formParts()
+        internal override int formParts1()
+        {
+            return 0;
+        }
+
+        internal override int formParts2()
         {
             return 0;
         }
@@ -60,7 +65,7 @@ namespace MapDataProcessing
             elementDocument.AddRange(new BsonDocument()
             {
                 { "item_id", _itemId.Value },
-                { "point", _KmlFile.PointList[0].getBsonDocument(MapData.XmlMapData.parameters.projection) }
+                { "point", _kmlFile.PointList[0].getBsonDocument(MapData.XmlMapData.parameters.projection) }
             });
 
             pointElementCollection.InsertOne(elementDocument);

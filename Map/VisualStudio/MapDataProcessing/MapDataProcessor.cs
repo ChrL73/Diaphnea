@@ -17,6 +17,8 @@ namespace MapDataProcessing
         private readonly String _configFile;
         private MapData _mapData;
         private readonly Dictionary<String, MapElement> _elementDictionary = new Dictionary<string, MapElement>();
+        private readonly Dictionary<String, List<LineMapElement>> _attachedLineElementDictionary = new Dictionary<string, List<LineMapElement>>();
+        private readonly Dictionary<String, List<LineMapElement>> _attachedPolygonElementDictionary = new Dictionary<string, List<LineMapElement>>();
         private readonly Dictionary<String, int> _fileNameDictionary = new Dictionary<string, int>();
 
         internal MapDataProcessor(String configFile)
@@ -30,6 +32,7 @@ namespace MapDataProcessing
 
             PolygonLinePart.clearAll();
             PolygonPolygonPart.clearAll();
+            LineLinePart.clearAll();
             GeoPoint.reset();
             ElementName.reset();
             ItemId.reset();
@@ -37,6 +40,7 @@ namespace MapDataProcessing
 
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();
+            if (result == 0) result = attachElements();
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
             if (result == 0) result = formParts();
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
@@ -121,6 +125,40 @@ namespace MapDataProcessing
             return 0;
         }
 
+        private int attachElements()
+        {
+            foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
+            {
+                String id = xmlLineElement.id.Substring(2);
+                LineMapElement lineMapElement = (LineMapElement)_elementDictionary[id];
+
+                foreach(XmlAttachedElement xmlAttachedElement in xmlLineElement.attachmentList)
+                {
+                    string attachedElementId = xmlAttachedElement.id.Substring(2);
+                    MapElement attachedElement = _elementDictionary[attachedElementId];
+
+                    if (attachedElement is LineMapElement)
+                    {
+                        if (!_attachedLineElementDictionary.ContainsKey(attachedElementId)) _attachedLineElementDictionary.Add(attachedElementId, new List<LineMapElement>());
+                        _attachedLineElementDictionary[attachedElementId].Add(lineMapElement);
+                    }
+                    else if (attachedElement is PolygonMapElement)
+                    {
+                        if (!_attachedPolygonElementDictionary.ContainsKey(attachedElementId)) _attachedPolygonElementDictionary.Add(attachedElementId, new List<LineMapElement>());
+                        _attachedPolygonElementDictionary[attachedElementId].Add(lineMapElement);
+                    }
+                    else
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Element '{0}' can not be attached to element '{1}': Only line elements and polygon elements can be attached",
+                                                 attachedElementId, id));
+                        return -1;
+                    }
+                }
+            }
+
+            return 0;
+        }
+
         private int addKmlFiles(String path)
         {
             FileAttributes attr;
@@ -172,6 +210,23 @@ namespace MapDataProcessing
                 {
                     if (element.addKmlFile(path) != 0) return -1;
                 }
+
+                List<LineMapElement> lineElementList;
+                if (_attachedLineElementDictionary.TryGetValue(id, out lineElementList))
+                {
+                    foreach (LineMapElement lineElement in lineElementList)
+                    {
+                        if (lineElement.attachLineLineKmlFile(path) != 0) return -1;
+                    }
+                }
+
+                if (_attachedPolygonElementDictionary.TryGetValue(id, out lineElementList))
+                {
+                    foreach (LineMapElement lineElement in lineElementList)
+                    {
+                        if (lineElement.attachPolygonLineKmlFile(path) != 0) return -1;
+                    }
+                }
             }
 
             return 0;
@@ -181,7 +236,12 @@ namespace MapDataProcessing
         {
             foreach (MapElement element in _elementDictionary.Values)
             {
-                if (element.formParts() != 0) return -1;
+                if (element.formParts1() != 0) return -1;
+            }
+
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                if (element.formParts2() != 0) return -1;
             }
 
             return 0;

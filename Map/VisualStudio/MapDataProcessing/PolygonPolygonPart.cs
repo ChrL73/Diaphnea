@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MapDataProcessing
 {
-    class PolygonPolygonPart
+    class PolygonPolygonPart : IAttachment
     {
         private static Dictionary<KmlFileData, PolygonPolygonPart> _partDictionary = new Dictionary<KmlFileData, PolygonPolygonPart>();
 
@@ -74,5 +74,13 @@ namespace MapDataProcessing
             return 0;
         }
 
+
+        public List<GeoPoint> AttachmentLine
+        {
+            get
+            {
+                return _polygonData.PointList;
+            }
+        }
     }
 }

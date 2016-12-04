@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MapDataProcessing
 {
@@ -39,6 +40,8 @@ namespace MapDataProcessing
         }
 
         private readonly KmlFileData _lineData;
+        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem();
+        private bool _smoothed = false;
 
         private LineLinePart(KmlFileData lineData)
         {
@@ -51,12 +54,39 @@ namespace MapDataProcessing
         internal IAttachment Attachment1 { get; set; }
         internal IAttachment Attachment2 { get; set; }
 
-        public List<GeoPoint> AttachmentLine
+        public List<GeoPoint> AttachmentLine { get { return _lineData.PointList; } }
+        public DatabaseMapItem SmoothedAttachmentLine { get { return _smoothedLineMapItem; } }
+
+        internal static int smoothAll(MapData mapData)
         {
-            get
+            foreach (LineLinePart part in _partDictionary.Values)
             {
-                return _lineData.PointList;
+                if (part.smooth(mapData) != 0) return -1;
             }
+
+            return 0;
+        }
+
+        private int smooth(MapData mapData)
+        {
+            if (_smoothed) return 0;
+            if (Attachment1 is LineLinePart) ((LineLinePart)Attachment1).smooth(mapData);
+            if (Attachment2 is LineLinePart) ((LineLinePart)Attachment2).smooth(mapData);
+
+            foreach (XmlResolution resolution in mapData.XmlMapData.resolutionList)
+            {
+                List<GeoPoint> line = new List<GeoPoint>(_lineData.PointList);
+                if (Attachment1 != null) line[0] = DistanceCalculator.getNearestPoint(Attachment1.SmoothedAttachmentLine.getPointList(resolution), Point1);
+                if (Attachment2 != null) line[line.Count - 1] = DistanceCalculator.getNearestPoint(Attachment2.SmoothedAttachmentLine.getPointList(resolution), Point2);
+
+                List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, _lineData.Path);
+                if (smoothedLine == null) return -1;
+                _smoothedLineMapItem.addLine(resolution, smoothedLine);
+                if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Lines", Path.GetFileName(_lineData.Path), resolution) != 0) return -1;
+            }
+
+            _smoothed = true;
+            return 0;
         }
     }
 }

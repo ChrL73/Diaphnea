@@ -9,5 +9,6 @@ namespace MapDataProcessing
     interface IAttachment
     {
         List<GeoPoint> AttachmentLine { get; }
+        DatabaseMapItem SmoothedAttachmentLine { get; }
     }
 }

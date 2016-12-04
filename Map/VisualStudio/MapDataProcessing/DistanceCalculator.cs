@@ -58,5 +58,47 @@ namespace MapDataProcessing
 
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
+
+        static internal GeoPoint getNearestPoint(List<GeoPoint> line, GeoPoint point)
+        {
+            int n = line.Count;
+            if (n == 0) return null;
+            if (n == 1) return line[0];
+
+            double dMin = Double.MaxValue;
+            int i, i0 = 1;
+            for (i = 1; i < n; ++i)
+            {
+                double d = getDistance(line[i - 1], line[i], point);
+                if (d < dMin)
+                {
+                    dMin = d;
+                    i0 = i;
+                }
+            }
+
+            return getNearestPoint(line[i0 - 1], line[i0], point);
+        }
+
+        static internal GeoPoint getNearestPoint(GeoPoint A1, GeoPoint A2, GeoPoint B)
+        {
+            double ux = A2.X - A1.X;
+            double uy = A2.Y - A1.Y;
+            double uz = A2.Z - A1.Z;
+            double r = Math.Sqrt(ux * ux + uy * uy + uz * uz);
+            ux /= r;
+            uy /= r;
+            uz /= r;
+
+            double vx = B.X - A1.X;
+            double vy = B.Y - A1.Y;
+            double vz = B.Z - A1.Z;
+            double a = vx * ux + vy * uy + vz * uz;
+
+            if (a <= 0) return A1;
+            if (a >= r) return A2;
+
+            return new GeoPoint(A1.X + a * ux, A1.Y + a * uy, A1.Z + a * uz);
+        }
     }
 }

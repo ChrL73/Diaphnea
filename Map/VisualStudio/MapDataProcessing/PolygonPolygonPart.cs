@@ -74,13 +74,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-
-        public List<GeoPoint> AttachmentLine
-        {
-            get
-            {
-                return _polygonData.PointList;
-            }
-        }
+        public List<GeoPoint> AttachmentLine { get { return _polygonData.PointList; } }
+        public DatabaseMapItem SmoothedAttachmentLine { get { return _smoothedPolygonMapItem; } }
     }
 }

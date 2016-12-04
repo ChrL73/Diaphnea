@@ -129,5 +129,7 @@ namespace MapDataProcessing
                 return line;
             }
         }
+
+        public DatabaseMapItem SmoothedAttachmentLine { get { return _smoothedLineMapItem; } }
     }
 }

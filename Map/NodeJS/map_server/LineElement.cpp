@@ -1,4 +1,5 @@
 #include "LineElement.h"
+#include "LineItem.h"
 #include "LineLook.h"
 
 namespace map_server
@@ -23,6 +24,7 @@ namespace map_server
             {
                 std::string itemId = dbLineItems[i].OID().toString();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
+				lineItem->setCurrentLook(_look->getLineLook());
                 _itemVector.push_back(lineItem);
             }
         }

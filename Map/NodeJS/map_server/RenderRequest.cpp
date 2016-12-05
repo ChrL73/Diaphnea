@@ -56,7 +56,13 @@ namespace map_server
                 LineElement *lineElement = dynamic_cast<LineElement *>(element);
                 if (lineElement != 0)
                 {
-                    // Todo: handle this case
+                    int j, m = lineElement->getItemVector().size();
+                    for (j = 0; j < m; ++j)
+                    {
+                        LineItem *lineItem = lineElement->getItemVector()[j];
+                        itemVector.push_back(lineItem);
+                    }
+
                     continue;
                 }
 

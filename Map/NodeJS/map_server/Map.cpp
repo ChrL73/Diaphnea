@@ -188,6 +188,18 @@ namespace map_server
             else elementIdsJson += "\",\"";
             elementIdsJson += element->getId();
         }
+
+        cursor = _connectionPtr->query("diaphnea.line_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbElement = cursor->next();
+            LineElement *element = new LineElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"), this);
+            _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+            if (elementIdsJson.empty()) elementIdsJson = "[\"";
+            else elementIdsJson += "\",\"";
+            elementIdsJson += element->getId();
+        }
         if (!elementIdsJson.empty()) elementIdsJson += "\"]";
 
         cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);

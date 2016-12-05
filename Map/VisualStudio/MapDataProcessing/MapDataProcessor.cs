@@ -272,6 +272,8 @@ namespace MapDataProcessing
             polygonElementCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> pointElementCollection = database.GetCollection<BsonDocument>("point_elements");
             pointElementCollection.DeleteMany(filter);
+            IMongoCollection<BsonDocument> lineElementCollection = database.GetCollection<BsonDocument>("line_elements");
+            lineElementCollection.DeleteMany(filter);
             IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
             itemCollection.DeleteMany(filter);
 
@@ -326,6 +328,7 @@ namespace MapDataProcessing
 
             if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
             if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;
+            if (LineLinePart.fillDatabase(database, _mapData) != 0) return -1;
 
             foreach (MapElement element in _elementDictionary.Values)
             {

@@ -119,7 +119,7 @@ namespace MapDataProcessing
             GeoPoint lastSample = sampledLine[sampledLine.Count - 1];
             sample = new GeoPoint(originalLine[pointCount - 1].Longitude, originalLine[pointCount - 1].Latitude);
 
-            if (GeoPoint.distance(sample, lastSample) < sampleLength1 * 0.001)
+            if (GeoPoint.distance(sample, lastSample) < sampleLength1 * 0.01)
             {
                 sampledLine.RemoveAt(sampledLine.Count - 1);
             }

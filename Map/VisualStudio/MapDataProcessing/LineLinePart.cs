@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace MapDataProcessing
 {
@@ -42,6 +44,7 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem();
         private bool _smoothed = false;
+        internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
 
         private LineLinePart(KmlFileData lineData)
         {
@@ -86,6 +89,16 @@ namespace MapDataProcessing
             }
 
             _smoothed = true;
+            return 0;
+        }
+
+        internal static int fillDatabase(IMongoDatabase database, MapData mapData)
+        {
+            foreach (LineLinePart part in _partDictionary.Values)
+            {
+                if (part._smoothedLineMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part._lineData.Path)) != 0) return -1;
+            }
+
             return 0;
         }
     }

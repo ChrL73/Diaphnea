@@ -87,5 +87,5 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
 });
 
 if (!config.port) throw new Error("No 'port' value in config.js");
-console.log('Quiz server listening on port ' + config.port + '...');
+console.log('Map server listening on port ' + config.port + '...');
 server.listen(config.port);

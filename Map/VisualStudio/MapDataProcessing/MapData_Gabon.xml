@@ -94,6 +94,16 @@
           <name language="en" text="1"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_Ngounie" look="pl_Province">
+        <name>
+          <name language="fr" text="Ngounié (4)"/>
+          <name language="en" text="Ngounié (4)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="4"/>
+          <name language="en" text="4"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_WoleuNtem" look="pl_Province">
         <name>
           <name language="fr" text="Woleu-Ntem (9)"/>
@@ -196,6 +206,12 @@
           <name language="fr" text="Boumi-Louetsi"/>
           <name language="en" text="Boumi-Louetsi"/>
         </name>
+      </polygonElement>
+      <polygonElement id="e_LouetsiBibaka" look="pl_Departement">
+          <name>
+            <name language="fr" text="Louetsi-Bibaka"/>
+            <name language="en" text="Louetsi-Bibaka"/>
+          </name>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">

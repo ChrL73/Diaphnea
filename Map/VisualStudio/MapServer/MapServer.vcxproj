@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,67 +150,67 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\NodeJS\map_server\ElementInfoRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\ElementsInfoRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\FilledPolygonItem.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\ItemDataRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\ItemLook.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\LineElement.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\LineItem.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\LineLook.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\Look.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\LookRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\Map.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MapData.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MapElement.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MapIdsRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MapInfoRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MapItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\ItemLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\LineElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\LineItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\LineLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Look.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Map.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\MapData.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\MapElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\MapItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\MultipointsItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Point.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PointElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PointItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PointLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\TextItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\MapServer.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\map_server.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\MultipointsItem.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\Point.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\PointElement.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\PointItem.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\PointLook.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\PolygonElement.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\PolygonLook.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\RenderRequest.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\Request.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\TextItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\ElementsInfoRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\ItemDataRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\LookRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\MapIdsRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\ThreadInfo.cpp" />
     <ClCompile Include="vld.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\NodeJS\map_server\ElementInfoRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\ElementsInfoRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\FilledPolygonItem.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\IMap.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\ItemDataRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\ItemLook.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\LineElement.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\LineItem.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\LineLook.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\Look.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\LookRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\Map.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MapData.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MapElement.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MapIdsRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MapInfoRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MapItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\IMap.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\ItemLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\LineElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\LineItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\LineLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Look.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Map.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\MapData.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\MapElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\MapItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\MultipointsItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Point.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PointElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PointItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PointLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\TextItem.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MessageTypeEnum.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\MultipointsItem.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\Point.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\PointElement.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\PointItem.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\PointLook.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\PolygonElement.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\PolygonLook.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\RenderRequest.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\Request.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\TextItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\ElementsInfoRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\ItemDataRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\LookRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\MapIdsRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
     <ClInclude Include="..\..\NodeJS\map_server\ThreadInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

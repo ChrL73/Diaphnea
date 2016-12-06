@@ -30,17 +30,17 @@ namespace map_server
 
         if (requestType == map_server::MAP_IDS)
         {
-            return new GetMapIdsRequest(tokenVector[0], tokenVector[1], sendResponse);
+            return new MapIdsRequest(tokenVector[0], tokenVector[1], sendResponse);
         }
         else if (requestType == map_server::MAP_INFO)
         {
             if (tokenVector.size() < 4) return 0;
-            return new GetMapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
+            return new MapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
         }
         else if (requestType == map_server::ELEMENT_INFO)
         {
             if (tokenVector.size() < 5) return 0;
-            return new GetElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
+            return new ElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
         }
         else if (requestType == map_server::ELEMENTS_INFO)
         {
@@ -48,7 +48,7 @@ namespace map_server
             if (n < 5) return 0;
             std::vector<const char *> elementIds;
             for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
-            return new GetElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
+            return new ElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
         }
         else if (requestType == map_server::ITEM_DATA)
         {
@@ -63,7 +63,7 @@ namespace map_server
             {
                 return 0;
             }
-            return new GetItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
+            return new ItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
         }
         else if (requestType == map_server::LOOK)
         {
@@ -77,7 +77,7 @@ namespace map_server
             {
                 return 0;
             }
-            return new GetLookRequest(tokenVector[0], tokenVector[1], tokenVector[3], lookId, sendResponse);
+            return new LookRequest(tokenVector[0], tokenVector[1], tokenVector[3], lookId, sendResponse);
         }
         else if (requestType == map_server::RENDER)
         {

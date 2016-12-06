@@ -6,7 +6,7 @@
 
 namespace map_server
 {
-    void GetElementsInfoRequest::execute()
+    void ElementsInfoRequest::execute()
     {
         MapData::lock();
         MapData *mapData = MapData::instance();

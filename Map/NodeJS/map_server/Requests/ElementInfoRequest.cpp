@@ -1,12 +1,12 @@
-#include "LookRequest.h"
+#include "ElementInfoRequest.h"
 #include "MapData.h"
-#include "ItemLook.h"
 #include "Map.h"
 #include "MessageTypeEnum.h"
+#include "MapElement.h"
 
 namespace map_server
 {
-    void GetLookRequest::execute()
+    void ElementInfoRequest::execute()
     {
         MapData::lock();
         MapData *mapData = MapData::instance();
@@ -14,14 +14,14 @@ namespace map_server
         Map *map = mapData->getMap(_mapId);
         if (map != 0 && _sendResponse)
         {
-            const ItemLook *look = map->getItemLook(_lookId);
-            if (look != 0)
+            const MapElement *element = map->getElement(_elementId);
+            if (element != 0)
             {
-                std::string info = look->getJson();
+                std::string info = element->getInfoJson();
                 MapData::unlock();
 
                 _coutMutexPtr->lock();
-                std::cout << _socketId << " " << _requestId << " " << map_server::LOOK << " " << info << std::endl;
+                std::cout << _socketId << " " << _requestId << " " << map_server::ELEMENT_INFO << " " << info << std::endl;
                 _coutMutexPtr->unlock();
             }
             else

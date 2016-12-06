@@ -4,13 +4,13 @@
 
 namespace map_server
 {
-    class GetMapIdsRequest : public Request
+    class MapIdsRequest : public Request
     {
     private:
         void execute(void);
 
     public:
-        GetMapIdsRequest(const char *socketId, const char *requestId, bool sendResponse) :
+        MapIdsRequest(const char *socketId, const char *requestId, bool sendResponse) :
             Request(socketId, requestId, sendResponse) {}
     };
 }

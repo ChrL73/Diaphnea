@@ -8,7 +8,7 @@
 
 namespace map_server
 {
-    void GetItemDataRequest::execute()
+    void ItemDataRequest::execute()
     {
         std::string info;
         MapData::lock();

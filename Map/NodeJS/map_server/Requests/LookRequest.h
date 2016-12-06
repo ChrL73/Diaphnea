@@ -4,7 +4,7 @@
 
 namespace map_server
 {
-    class GetLookRequest : public Request
+    class LookRequest : public Request
     {
     private:
         const char * const _mapId;
@@ -13,7 +13,7 @@ namespace map_server
         void execute(void);
 
     public:
-        GetLookRequest(const char *socketId, const char *requestId, const char *mapId, int lookId, bool sendResponse) :
+        LookRequest(const char *socketId, const char *requestId, const char *mapId, int lookId, bool sendResponse) :
             Request(socketId, requestId, sendResponse), _mapId(mapId), _lookId(lookId) {}
     };
 }

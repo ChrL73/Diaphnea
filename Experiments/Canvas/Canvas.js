@@ -14,6 +14,7 @@ var canvas  = document.querySelector('#canvas');
 var _context = canvas.getContext('2d');
 _context.lineCap = 'round';
 _context.lineJoin = 'round';
+_context.textBaseline = 'bottom';
 
 var array1 = [ { x: 0, y: 1 }, { x: -1, y: 0 }, { x: -1, y: -1 }, { x: 0, y: -2 }, { x: 1, y: -2 }, { x: 2, y: -1 }, { x: 2, y: 1}, { x: 0, y: 3} ];
 var array2 = [ { x: 1, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 2 }, { x: -3, y: 0 }, { x: 0, y: -3 } ];
@@ -46,6 +47,27 @@ var point1 =
    radius: 2,
    stroke: 0.8
 };
+
+var text1 =
+{
+   x: 0.1,
+   y: -1.1,
+   text: 'abfgpbdqW_A',
+   color: 'rgb(0, 0, 255)',
+   size: 5,
+   font: 'arial',
+   bgColor: 'rgba(0, 0, 255, 0.3)'
+}
+
+_context.save();
+var helpSize = 40;
+_context.font = helpSize + 'px ' + text1.font;
+var measure = _context.measureText(text1.text);
+text1.width = measure.width * text1.size / helpSize;
+text1.height = _context.measureText('W').width * text1.size / helpSize;
+_context.restore();
+
+console.log(text1);
 
 setFocus(1, 1, 10, 10);
 
@@ -138,54 +160,98 @@ function updateFocus()
    var sizeFactor = _sizeParameter1 / (_sizeParameter2 + _scale);
      
    _context.clearRect(0, 0, canvas.width, canvas.height);
-   _context.save();
-   _context.translate(0.5 * _mapWidth - _xFocus * _scale, 0.5 * _mapHeight - _yFocus * _scale);
-   _context.scale(_scale, _scale);
+   //_context.save();
+   //_context.translate(0.5 * _mapWidth - _xFocus * _scale, 0.5 * _mapHeight - _yFocus * _scale);
+   //_context.scale(_scale, _scale);
    
    drawPolygon(polygon2);
    drawPolyline(polyline1, sizeFactor);
    drawPolyline(polyline2, sizeFactor);
    drawPoint(point1, sizeFactor);
+   drawText(text1, sizeFactor);
    
-   _context.restore();
+   //_context.restore();
 }
 
 function drawPolyline(polyline, sizeFactor)
 {
+   _context.save();
+   _context.translate(0.5 * _mapWidth - _xFocus * _scale, 0.5 * _mapHeight - _yFocus * _scale);
+   _context.scale(_scale, _scale);
+   
    _context.beginPath();
    polyline.points.forEach(function(p, i)
    {
       if (i == 0) _context.moveTo(p.x, p.y);
       else _context.lineTo(p.x, p.y);
+      
+      //var x = (p.x - _xFocus) * _scale + 0.5 * _mapWidth;
+      //var y = (p.y - _yFocus) * _scale + 0.5 * _mapHeight;
+      //if (i == 0) _context.moveTo(x, y);
+      //else _context.lineTo(x, y);
    });
    
    _context.strokeStyle = polyline.color;
    _context.lineWidth = polyline.size * sizeFactor;
+   //_context.lineWidth = polyline.size * sizeFactor * _scale;
    _context.stroke();
+   
+   _context.restore();
 }
 
 function drawPolygon(polygon)
 {
+   _context.save();
+   _context.translate(0.5 * _mapWidth - _xFocus * _scale, 0.5 * _mapHeight - _yFocus * _scale);
+   _context.scale(_scale, _scale);
+   
    _context.beginPath();
    polygon.points.forEach(function(p, i)
    {
       if (i == 0) _context.moveTo(p.x, p.y);
       else _context.lineTo(p.x, p.y);
+      
+      //var x = (p.x - _xFocus) * _scale + 0.5 * _mapWidth;
+      //var y = (p.y - _yFocus) * _scale + 0.5 * _mapHeight;
+      //if (i == 0) _context.moveTo(x, y);
+      //else _context.lineTo(x, y);
    });
    
    _context.fillStyle = polygon.color;
    _context.fill();
+   
+   _context.restore();
 }
 
 function drawPoint(point, sizeFactor)
 {
    _context.beginPath();
-   _context.arc(point.x, point.y, point.radius * sizeFactor, 0, 2 * Math.PI);
+   //_context.arc(point.x, point.y, point.radius * sizeFactor, 0, 2 * Math.PI);
+   
+   var x = (point.x - _xFocus) * _scale + 0.5 * _mapWidth;
+   var y = (point.y - _yFocus) * _scale + 0.5 * _mapHeight;
+   _context.arc(x, y, point.radius * sizeFactor * _scale, 0, 2 * Math.PI);
    
    _context.fillStyle = point.color;
    _context.fill();
    
    _context.strokeStyle = 'black';
-   _context.lineWidth = point.stroke * sizeFactor;
+   //_context.lineWidth = point.stroke * sizeFactor;
+   _context.lineWidth = point.stroke * sizeFactor * _scale;
    _context.stroke();
+}
+
+function drawText(text, sizeFactor)
+{
+   var x = (text.x - _xFocus) * _scale + 0.5 * _mapWidth;
+   var y = (text.y - _yFocus) * _scale + 0.5 * _mapHeight;
+   var w = text.width * sizeFactor * _scale;
+   var h = text.height * sizeFactor * _scale;
+   
+   _context.fillStyle = text.bgColor;
+   _context.fillRect(x, y - h, w, h);
+   
+   _context.fillStyle = text.color;
+   _context.font = text.size * sizeFactor * _scale + 'px ' + text.font;
+   _context.fillText(text.text, x, y);
 }

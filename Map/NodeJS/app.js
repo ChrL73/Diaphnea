@@ -1,6 +1,22 @@
 var http = require('http');
 var server = http.createServer(function(req, res) { res.end(); });
 
+// Test
+var Canvas = require('canvas');
+var canvas = new Canvas(200, 200)
+var ctx = canvas.getContext('2d');
+var helpSize = 40;
+var fontFamily = 'Loma';
+var text = 'abfgpbdqM_A';
+var textSize = 0.8;
+ctx.font = helpSize + 'px ' + fontFamily;
+var measure = ctx.measureText(text);
+var w = measure.width * textSize / helpSize;
+var h = ctx.measureText('W').width * textSize / helpSize;
+
+console.log('w: ' + w);
+console.log('h: ' + h);
+
 var cppServer = require('./cpp_server_interface');
 var config = require('./config');
 

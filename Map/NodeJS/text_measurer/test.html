@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <meta charset="utf-8" />
+       <link rel="stylesheet" href="test.css"/>
+       <title>Test text measurer</title>
+   </head>
+
+   <body>
+      <form>
+         <p><label for="text">Text </label><input type="text" id="text" name="text"></p>
+         <p><label for="text">Font size </label><input type="text" id="fontSize" name="fontSize"></p>
+         <p><label for="text">Font family </label><input type="text" id="fontFamily" name="fontFamily"></p>
+         <p><input type="submit"></p>
+      </form>
+       
+      <p>Status: <span id="serverStatus"></span></p>
+      <p>Width: <span id="serverWidth"></span></p>
+      <p>Height: <span id="serverHeight"></span></p>
+      <p>Left: <span id="serverLeft"></span></p>
+      <p>Bottom: <span id="serverBottom"></span></p>
+      
+      <canvas width="800" height="600" id="canvas"></canvas>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="test.js"></script>
+   </body>
+</html>

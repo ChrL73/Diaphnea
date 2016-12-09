@@ -22,26 +22,46 @@ var server = http.createServer(function(req, res)
          
          var text = body.text;
          var fontSize = body.fontSize;
-         var fontFamily = body.fontFamily;    
+         var fontFamily = body.fontFamily;
+         var message;
          
-         if (!text || !fontSize || !fontFamily || isNaN(fontSize) || fontSize < 1)
+         if (!text) message = 'No text';
+         else if (!fontSize) message = 'No font size';
+         else if (isNaN(fontSize) || fontSize < 1 || fontSize > 999)  message = 'Bad font size';
+         else if (!fontFamily) message = 'No font family';
+         
+         if (message)
          {
             res.writeHead(200, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }); 
-            res.end(JSON.stringify({ message: 'Bad request' }));
+            res.end(JSON.stringify({ message: message }));
          }
          else
          {         
+            ctx.font = fontSize + 'px sans-serif';
+            var defaultMeasure = ctx.measureText(text);
+            console.log('');
+            //console.log(defaultMeasure);
+            
             ctx.font = fontSize + 'px ' + fontFamily;
             var measure = ctx.measureText(text);
             console.log(measure);
             
+            if (fontFamily.toLowerCase().trim() != 'arial' && fontFamily.toLowerCase().trim() != 'sans-serif' && JSON.stringify(measure) === JSON.stringify(defaultMeasure))
+            {
+               message = 'Unknown font';
+            }
+            else
+            {
+               message = 'OK';
+            }
+            
             var m = 
             {
-               message: 'OK',
+               message: message,
                width: measure.actualBoundingBoxRight + measure.actualBoundingBoxLeft,
                height: measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent,
                left: -measure.actualBoundingBoxLeft,
-               bottom: measure.emHeightDescent - measure.actualBoundingBoxDescent - 1
+               bottom: measure.emHeightDescent - measure.actualBoundingBoxDescent
             }
 
             console.log(m);

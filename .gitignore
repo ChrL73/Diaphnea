@@ -18,6 +18,8 @@
 !/Shared/readme.txt
 .directory
 *node_modules
+*node_modules_vc12
+*node_modules_vc14
 *.log
 /mongo-cxx-driver
 *mongo-cxx-driver_vc12

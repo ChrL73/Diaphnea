@@ -1,33 +1,31 @@
 $(function()
 {
-   $('#serverStatus').css('color', 'rgb(128, 0, 128)').css('font-weight', 'bold');
-   $('#serverWidth').css('color', 'rgb(128, 0, 128)').css('font-weight', 'bold');
-   $('#serverHeight').css('color', 'rgb(128, 0, 128)').css('font-weight', 'bold');
-   $('#serverLeft').css('color', 'rgb(128, 0, 128)').css('font-weight', 'bold');
-   $('#serverBottom').css('color', 'rgb(128, 0, 128)').css('font-weight', 'bold');
+   var canvas1  = document.querySelector('#canvas1');
+   var context1 = canvas1.getContext('2d');
+   context1.textBaseline = 'bottom';
    
-   var canvas  = document.querySelector('#canvas');
-   var context = canvas.getContext('2d');
-   context.textBaseline = 'bottom';
+   var canvas2 = document.querySelector('#canvas2');
+   var context2 = canvas2.getContext('2d');
+   context2.textBaseline = 'bottom';
    
-   $('form').submit(function(e)
+   $('#form1').submit(function(e)
    {
-      var text = $('#text').val();
-      var fontSize = $('#fontSize').val();
-      var fontFamily = $('#fontFamily').val();
+      var text = $('#text1').val();
+      var fontSize = $('#fontSize1').val();
+      var fontFamily = $('#fontFamily1').val();
       
-      $.post('http://localhost:3002', $('form').serialize(), function(data)
+      $.post('http://localhost:3002', $('#form1').serialize(), function(data)
       {
-         $('#serverStatus').html(data.message);
+         $('#status1').html(data.message);
          
-         context.clearRect(0, 0, canvas.width, canvas.height);
+         context1.clearRect(0, 0, canvas1.width, canvas1.height);
          
-         if (data.message == 'OK')
+         if (data.message == 'OK' || data.message == 'Unknown font')
          {
-            $('#serverWidth').html(data.width);
-            $('#serverHeight').html(data.height);
-            $('#serverLeft').html(data.left);
-            $('#serverBottom').html(data.bottom);
+            $('#width1').html(data.width);
+            $('#height1').html(data.height);
+            $('#left1').html(data.left);
+            $('#bottom1').html(data.bottom);
             
             var ws = data.width;
             var hs = data.height;
@@ -36,19 +34,65 @@ $(function()
             var x = 10;
             var y = 10 + hs + bs;
 
-            context.fillStyle = 'rgb(255, 128, 255)';
-            context.fillRect(x + ls, y - hs - bs, ws, hs);
+            context1.fillStyle = 'rgb(255, 128, 255)';
+            context1.fillRect(x + ls, y - hs - bs, ws, hs);
 
-            context.fillStyle = 'rgb(0, 0, 0)';
-            context.font = fontSize + 'px ' + fontFamily;
-            context.fillText(text, x, y);
+            context1.fillStyle = 'rgb(0, 0, 0)';
+            context1.font = fontSize + 'px ' + fontFamily;
+            context1.fillText(text, x, y);
          }
          else
          {
-            $('#serverWidth').html('');
-            $('#serverHeight').html('');
-            $('#serverLeft').html('');
-            $('#serverBottom').html('');
+            $('#width1').html('');
+            $('#height1').html('');
+            $('#left1').html('');
+            $('#bottom1').html('');
+         }
+      });
+      
+      e.preventDefault();
+   });
+   
+   $('#form2').submit(function(e)
+   {
+      var text = $('#text2').val();
+      var refFontSize = $('#refFontSize2').val();
+      var fontSize = $('#fontSize2').val();
+      var fontFamily = $('#fontFamily2').val();
+      
+      $.post('http://localhost:3002', $('#form2').serialize(), function(data)
+      {
+         $('#status2').html(data.message);
+         
+         context2.clearRect(0, 0, canvas2.width, canvas2.height);
+         
+         if (data.message == 'OK' || data.message == 'Unknown font')
+         {
+            $('#width2').html(data.width);
+            $('#height2').html(data.height);
+            $('#left2').html(data.left);
+            $('#bottom2').html(data.bottom);
+            
+            var ws = data.width * fontSize / refFontSize;
+            var hs = data.height * fontSize / refFontSize;
+            var ls = data.left * fontSize / refFontSize;
+            var bs = data.bottom * fontSize / refFontSize;
+            var x = 10;
+            var y = 10 + hs + bs;
+
+            context2.fillStyle = 'rgb(255, 128, 255)';
+            context2.fillRect(x + ls, y - hs - bs, ws, hs);
+
+            context2.fillStyle = 'rgb(0, 0, 0)';
+            context2.font = fontSize + 'px ' + fontFamily;
+            context2.fillText(text, x, y);
+         }
+         else
+         {
+            $('#width2').html('');
+            $('#height2').html('');
+            $('#left2').html('');
+            $('#bottom2').html('');
          }
       });
       

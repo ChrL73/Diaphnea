@@ -7,20 +7,42 @@
    </head>
 
    <body>
-      <form>
-         <p><label for="text">Text </label><input type="text" id="text" name="text"></p>
-         <p><label for="text">Font size </label><input type="text" id="fontSize" name="fontSize"></p>
-         <p><label for="text">Font family </label><input type="text" id="fontFamily" name="fontFamily"></p>
-         <p><input type="submit"></p>
-      </form>
-       
-      <p>Status: <span id="serverStatus"></span></p>
-      <p>Width: <span id="serverWidth"></span></p>
-      <p>Height: <span id="serverHeight"></span></p>
-      <p>Left: <span id="serverLeft"></span></p>
-      <p>Bottom: <span id="serverBottom"></span></p>
+      <div>
+         <form id="form1">
+            <p><label for="text">Text </label><input type="text" id="text1" name="text"></p>
+            <p><label for="text">Font size </label><input type="text" id="fontSize1" name="fontSize"></p>
+            <p><label for="text">Font family </label><input type="text" id="fontFamily1" name="fontFamily"></p>
+            <p><input type="submit"></p>
+         </form>
+
+         <p>Status: <span id="status1"></span></p>
+         <p>Width: <span id="width1"></span></p>
+         <p>Height: <span id="height1"></span></p>
+         <p>Left: <span id="left1"></span></p>
+         <p>Bottom: <span id="bottom1"></span></p>
+
+         <canvas width="600" height="400" id="canvas1"></canvas>
+      </div>
       
-      <canvas width="800" height="600" id="canvas"></canvas>
+      <div>
+         <form id="form2">
+            <p><label for="text">Text </label><input type="text" id="text2" name="text"></p>
+            <p>
+               <label for="text">Font size </label><input type="text" id="fontSize2">
+               <label for="text">Ref Font size </label><input type="text" id="refFontSize2" name="fontSize">
+            </p>
+            <p><label for="text">Font family </label><input type="text" id="fontFamily2" name="fontFamily"></p>
+            <p><input type="submit"></p>
+         </form>
+
+         <p>Status: <span id="status2"></span></p>
+         <p>Width: <span id="width2"></span></p>
+         <p>Height: <span id="height2"></span></p>
+         <p>Left: <span id="left2"></span></p>
+         <p>Bottom: <span id="bottom2"></span></p>
+
+         <canvas width="600" height="400" id="canvas2"></canvas>
+      </div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="test.js"></script>

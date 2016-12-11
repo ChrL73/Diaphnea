@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Express 14 for Windows Desktop
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanKml", "CleanKml\CleanKml.csproj", "{14547501-0836-48F5-A3FD-71DA1CD5B240}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageSplit", "ImageSplit\ImageSplit.csproj", "{DFCABD49-F8D6-4E87-83F5-7F1E2E54F410}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapDistortion", "MapDistortion\MapDistortion.csproj", "{92BB4BB2-D403-427D-8A01-0FD2356A97D2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreeTypeExperiment", "FreeTypeExperiment\FreeTypeExperiment.vcxproj", "{266EC361-852B-4B84-A68C-558BDE9CDC15}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreeTypeExperiment2", "FreeTypeExperiment2\FreeTypeExperiment2.vcxproj", "{90A64385-F0F1-4415-881B-FAB19DE5E048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +103,34 @@ Global
 		{92BB4BB2-D403-427D-8A01-0FD2356A97D2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{92BB4BB2-D403-427D-8A01-0FD2356A97D2}.Release|x64.ActiveCfg = Release|Any CPU
 		{92BB4BB2-D403-427D-8A01-0FD2356A97D2}.Release|x86.ActiveCfg = Release|Any CPU
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|x64.ActiveCfg = Debug|x64
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|x64.Build.0 = Debug|x64
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|x86.ActiveCfg = Debug|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Debug|x86.Build.0 = Debug|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|Any CPU.ActiveCfg = Release|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|x64.ActiveCfg = Release|x64
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|x64.Build.0 = Release|x64
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|x86.ActiveCfg = Release|Win32
+		{266EC361-852B-4B84-A68C-558BDE9CDC15}.Release|x86.Build.0 = Release|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|x64.ActiveCfg = Debug|x64
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|x64.Build.0 = Debug|x64
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|x86.ActiveCfg = Debug|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Debug|x86.Build.0 = Debug|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|Any CPU.ActiveCfg = Release|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|x64.ActiveCfg = Release|x64
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|x64.Build.0 = Release|x64
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|x86.ActiveCfg = Release|Win32
+		{90A64385-F0F1-4415-881B-FAB19DE5E048}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

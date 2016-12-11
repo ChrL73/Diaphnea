@@ -18,14 +18,15 @@ int main()
 
     FT_Face face;
 
-    error = FT_New_Face(library, "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf", 0, &face);
+    //error = FT_New_Face(library, "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf", 0, &face);
+	error = FT_New_Face(library, "Arial.ttf", 0, &face);
 
     if (error == FT_Err_Unknown_File_Format)
     {
         std::cout << "FT_New_Face: the font file could be opened and read, but it appears that its font format is unsupported" << std::endl;
         return -1;
     }
-    else if ( error )
+    else if (error)
     {
         std::cout << "FT_New_Face: another error code means that the font file could not be opened or read, or that it is broken" << std::endl;
         return -1;
@@ -33,11 +34,11 @@ int main()
 
     std::cout << "FT_New_Face success !" << std::endl;
 
-    std::cout << "face−>num_glyphs: " << face->num_glyphs << std::endl;
-    std::cout << "face−>face_flags: " << face->face_flags << std::endl;
-    std::cout << "face−>units_per_EM: " << face->units_per_EM << std::endl;
-    std::cout << "face−>num_fixed_sizes: " << face->num_fixed_sizes << std::endl;
-    std::cout << "face−>available_sizes: " << face->available_sizes << std::endl;
+    std::cout << "face->num_glyphs: " << face->num_glyphs << std::endl;
+    std::cout << "face->face_flags: " << face->face_flags << std::endl;
+    std::cout << "face->units_per_EM: " << face->units_per_EM << std::endl;
+    std::cout << "face->num_fixed_sizes: " << face->num_fixed_sizes << std::endl;
+    std::cout << "face->available_sizes: " << face->available_sizes << std::endl;
 
     error = FT_Set_Pixel_Sizes(face, 0, 20);
 

@@ -12,14 +12,21 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	std::string text(argv[1]);
-	std::string fontFamily(argv[3]);
+    std::string text;
+    int i, wordCount = argc - 3;
+    for (i = 0; i < wordCount; ++i)
+    {
+        if (i != 0) text += " ";
+        text += argv[i + 1];
+    }
+
+    std::string fontFamily(argv[wordCount + 2]);
 	std::string fontFile = fontFamily + ".ttf";
 
 	double fontSize;
 	try
 	{
-		fontSize = std::stod(argv[2]);
+        fontSize = std::stod(argv[wordCount + 1]);
 	}
 	catch (...)
 	{
@@ -66,7 +73,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-	int i, n = text.size();
+	int n = text.size();
+    int width = 0, yMaxMax = 0, yMinMin = 0, left = 0;
 
     for (i = 0; i < n; ++i)
     {
@@ -88,14 +96,37 @@ int main(int argc, char *argv[])
 			return -1;
 		}
 
-        std::cout << "i: " << i
-            << " text[i]: " << text[i]
-            << " face->glyph->bitmap_left: " << face->glyph->bitmap_left
-            << " face->glyph->bitmap_top: " << face->glyph->bitmap_top
-            << " face->glyph->advance.x: " << face->glyph->advance.x
-            << " face->glyph->advance.y: " << face->glyph->advance.y
-            << std::endl;
+        if (i == 0)
+        {
+            left = face->glyph->metrics.horiBearingX;
+
+            if (n == 1)
+            {
+                width += face->glyph->metrics.width;
+            }
+            else
+            {
+                width += face->glyph->advance.x - face->glyph->metrics.horiBearingX;
+            }
+        }
+        else if (i == n - 1)
+        {
+            width += face->glyph->metrics.width + face->glyph->metrics.horiBearingX;
+        }
+        else
+        {
+            width += face->glyph->advance.x;
+        }
+
+        if (face->glyph->metrics.horiBearingY > yMaxMax) yMaxMax = face->glyph->metrics.horiBearingY;
+        
+        int yMin = face->glyph->metrics.horiBearingY - face->glyph->metrics.height;
+        if (yMin < yMinMin) yMinMin = yMin;
     }
+
+    std::cout << "{\"message\":\"OK\",\"width\":" << static_cast<double>(width) / 64.0
+        << ",\"height\":" << static_cast<double>(yMaxMax - yMinMin) / 64.0
+        << ",\"left\":" << static_cast<double>(left) / 64.0 << ",\"bottom\":" << static_cast<double>(yMinMin) / 64.0 << "}";
 
     return 0;
 }

@@ -61,7 +61,7 @@ var server = http.createServer(function(req, res)
                width: measure.actualBoundingBoxRight + measure.actualBoundingBoxLeft,
                height: measure.actualBoundingBoxAscent + measure.actualBoundingBoxDescent,
                left: -measure.actualBoundingBoxLeft,
-               bottom: measure.emHeightDescent - measure.actualBoundingBoxDescent
+               bottom: -measure.actualBoundingBoxDescent
             }
 
             console.log(m);

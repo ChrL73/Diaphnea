@@ -2,6 +2,11 @@ var http = require('http');
 var querystring = require('querystring');
 var childProcess = require('child_process');
 
+var file = {};
+file['arial'] = 'arial';
+file['verdana'] = 'verdana';
+file['courier new'] = 'cour';
+
 var server = http.createServer(function(req, res)
 {
    if (req.method == 'POST')
@@ -27,6 +32,9 @@ var server = http.createServer(function(req, res)
          else if (isNaN(fontSize) || fontSize < 1 || fontSize > 999)  message = 'Bad font size';
          else if (!fontFamily) message = 'No font family';
          
+         var fontFile = file[fontFamily.toLowerCase()];
+         if (!fontFile) message = 'Unkwown font family';
+         
          if (message)
          {
             res.writeHead(200, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }); 
@@ -34,18 +42,17 @@ var server = http.createServer(function(req, res)
          }
          else
          {         
-            var response = { message: 'Not implemented'};
-            
-            childProcess.exec('.\\..\\..\\..\\Map\\VisualStudio\\Debug\\FreeTypeExperiment2.exe', function(err, stdout, stderr)
+            childProcess.exec('.\\..\\..\\..\\Map\\VisualStudio\\Debug\\FreeTypeExperiment2.exe'
+                              + ' ' + text + ' ' + fontSize + ' ' + fontFile, function(err, stdout, stderr)
             {
                if (err) console.log('err: ' + err);
                if (stdout) console.log('stdout: ' + stdout);
                if (stderr) console.log('stderr: ' + stderr);
+               
+               res.writeHead(200, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }); 
+               res.end(stdout);
             });
-
             
-            res.writeHead(200, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }); 
-            res.end(JSON.stringify(response));
          }
       });
    }

@@ -2,7 +2,7 @@ $(function()
 {
    var canvas1  = document.querySelector('#canvas1');
    var context1 = canvas1.getContext('2d');
-   context1.textBaseline = 'bottom';
+   //context1.textBaseline = 'bottom';
    
    var canvas2 = document.querySelector('#canvas2');
    var context2 = canvas2.getContext('2d');

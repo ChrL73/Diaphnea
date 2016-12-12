@@ -42,7 +42,8 @@ var server = http.createServer(function(req, res)
          }
          else
          {         
-            childProcess.exec('.\\..\\..\\..\\Map\\VisualStudio\\Debug\\FreeTypeExperiment2.exe'
+            //childProcess.exec('.\\..\\..\\..\\Map\\VisualStudio\\Debug\\FreeTypeExperiment2.exe' // Windows
+            childProcess.exec('./bin/Debug/FreeTypeExperiment' // Linux
                               + ' ' + text + ' ' + fontSize + ' ' + fontFile, function(err, stdout, stderr)
             {
                if (err) console.log('err: ' + err);

@@ -21,7 +21,12 @@ int main(int argc, char *argv[])
     }
 
     std::string fontFamily(argv[wordCount + 2]);
+
+#ifdef __WIN32
 	std::string fontFile = fontFamily + ".ttf";
+#else
+	std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/" + fontFamily + ".ttf";
+#endif
 
 	double fontSize;
 	try
@@ -61,7 +66,7 @@ int main(int argc, char *argv[])
     }
     else if (error)
     {
-		std::cout << "{\"message\":\"FT_New_Face error: Fail to open font file\"}";
+		std::cout << "{\"message\":\"FT_New_Face error: Fail to open font file " + fontFile + "\"}";
         return -1;
     }
 
@@ -119,7 +124,7 @@ int main(int argc, char *argv[])
         }
 
         if (face->glyph->metrics.horiBearingY > yMaxMax) yMaxMax = face->glyph->metrics.horiBearingY;
-        
+
         int yMin = face->glyph->metrics.horiBearingY - face->glyph->metrics.height;
         if (yMin < yMinMin) yMinMin = yMin;
     }

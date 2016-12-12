@@ -6,7 +6,7 @@ $(function()
    
    var canvas2 = document.querySelector('#canvas2');
    var context2 = canvas2.getContext('2d');
-   context2.textBaseline = 'bottom';
+   //context2.textBaseline = 'bottom';
    
    $('#form1').submit(function(e)
    {

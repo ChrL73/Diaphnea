@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
     std::string fontFamily(argv[wordCount + 2]);
 
-#ifdef __WIN32
+#ifdef _WIN32
 	std::string fontFile = fontFamily + ".ttf";
 #else
 	std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/" + fontFamily + ".ttf";
@@ -56,8 +56,7 @@ int main(int argc, char *argv[])
 
     FT_Face face;
 
-    //error = FT_New_Face(library, "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf", 0, &face);
-	error = FT_New_Face(library, fontFile.c_str(), 0, &face);
+    error = FT_New_Face(library, fontFile.c_str(), 0, &face);
 
     if (error == FT_Err_Unknown_File_Format)
     {

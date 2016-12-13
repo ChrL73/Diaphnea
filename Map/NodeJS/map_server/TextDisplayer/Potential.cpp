@@ -1,4 +1,4 @@
-#include "TextDisplayer.h"
+#include "Potential.h"
 
 namespace map_server
 {

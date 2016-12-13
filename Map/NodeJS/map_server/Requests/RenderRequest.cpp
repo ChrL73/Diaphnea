@@ -101,21 +101,16 @@ namespace map_server
             if (n > 0)
             {
                 std::vector<MapItem *> itemVector2;
-                double xFocus, yFocus, scale;
 
                 if (_focusSetByClient)
                 {
-                    xFocus = _xFocus;
-                    yFocus = _yFocus;
-                    scale = _scale;
-
-                    const double r = 0.7;
-                    double dx = r * _widthInPixels / scale;
-                    double xMin = xFocus - dx;
-                    double xMax = xFocus + dx;
-                    double dy = r * _heightInPixels / scale;
-                    double yMin = yFocus - dy;
-                    double yMax = yFocus + dy;
+                    const double r = 0.6;
+                    double dx = r * _widthInPixels / _scale;
+                    double xMin = _xFocus - dx;
+                    double xMax = _xFocus + dx;
+                    double dy = r * _heightInPixels / _scale;
+                    double yMin = _yFocus - dy;
+                    double yMax = _yFocus + dy;
 
                     for (i = 0; i < n; ++i)
                     {
@@ -144,8 +139,8 @@ namespace map_server
                         itemVector2.push_back(item);
                     }
 
-                    xFocus = 0.5 * (xMin + xMax);
-                    yFocus = 0.5 * (yMin + yMax);
+                    _xFocus = 0.5 * (xMin + xMax);
+                    _yFocus = 0.5 * (yMin + yMax);
                     double geoWidth = 1.15 * (xMax - xMin);
                     double geoHeight = 1.15 * (yMax - yMin);
                     if (geoWidth <= 0) geoWidth = 1.0;
@@ -166,10 +161,10 @@ namespace map_server
                     if (geoSize < map->getZoomMinDistance()) geoSize = map->getZoomMinDistance();
                     if (geoSize > map->getZoomMaxDistance()) geoSize = map->getZoomMaxDistance();
 
-                    scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
+                    _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
                 }
 
-                int resolutionIndex = map->getResolutionIndex(scale);
+                int resolutionIndex = map->getResolutionIndex(_scale);
 
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 n = itemVector2.size();
@@ -182,8 +177,8 @@ namespace map_server
                     response << "]";
                 }
 
-                response << "],\"xFocus\":" << xFocus << ",\"yFocus\":" << yFocus
-                         << ",\"scale\":" << scale << "}";
+                response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus
+                         << ",\"scale\":" << _scale << "}";
             }
 
             MapData::unlock();
@@ -193,11 +188,23 @@ namespace map_server
                 _coutMutexPtr->lock();
                 std::cout << response.str() << std::endl;
                 _coutMutexPtr->unlock();
+
+                displayText();
             }
         }
         else
         {
             MapData::unlock();
         }
+    }
+
+    void RenderRequest::displayText()
+    {
+        double dx = 0.5 * _widthInPixels / _scale;
+        double xMin = _xFocus - dx;
+        double xMax = _xFocus + dx;
+        double dy = 0.5 * _heightInPixels / _scale;
+        double yMin = _yFocus - dy;
+        double yMax = _yFocus + dy;
     }
 }

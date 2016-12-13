@@ -6,6 +6,8 @@
 
 namespace map_server
 {
+    class MapItem;
+
     class RenderRequest : public Request
     {
     private:
@@ -14,11 +16,12 @@ namespace map_server
         const double _heightInPixels;
         const std::vector<const char *> _elementIds;
         const bool _focusSetByClient;
-        const double _scale;
-        const double _xFocus;
-        const double _yFocus;
+        double _scale;
+        double _xFocus;
+        double _yFocus;
 
         void execute(void);
+        void displayText(void);
 
     public:
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, double widthInPixels, double heightInPixels,

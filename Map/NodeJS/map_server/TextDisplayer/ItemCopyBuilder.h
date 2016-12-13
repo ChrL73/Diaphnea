@@ -1,8 +1,8 @@
- #pragma once
+#pragma once
 
 namespace map_server
 {
-    class TextDisplayer
+    class ItemCopyBuilder
     {
 
     };

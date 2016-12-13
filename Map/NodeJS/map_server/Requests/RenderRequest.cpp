@@ -206,5 +206,7 @@ namespace map_server
         double dy = 0.5 * _heightInPixels / _scale;
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
+
+
     }
 }

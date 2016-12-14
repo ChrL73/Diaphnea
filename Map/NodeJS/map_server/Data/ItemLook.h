@@ -12,8 +12,8 @@ namespace map_server
         /*const int _alpha;
         const int _red;
         const int _green;
-        const int _blue;
-        const double _size;*/
+        const int _blue;*/
+        const double _size;
         char _json[128];
 
     public:
@@ -24,8 +24,8 @@ namespace map_server
         /*int getAlpha(void) const { return _alpha; }
         int getRed(void) const { return _red; }
         int getGreen(void) const { return _green; }
-        int getBlue(void) const { return _blue; }
-        double getSize(void) const { return _size; }*/
+        int getBlue(void) const { return _blue; }*/
+        double getSize(void) const { return _size; }
 
         const char *getJson(void) const { return _json; }
     };

@@ -6,7 +6,8 @@
 
 namespace map_server
 {
-    class MapItem;
+    class ItemCopyBuilder;
+    class Map;
 
     class RenderRequest : public Request
     {
@@ -20,6 +21,9 @@ namespace map_server
         double _xFocus;
         double _yFocus;
 
+        Map *_map;
+        std::vector<ItemCopyBuilder *> _itemCopyBuilderVector;
+
         void execute(void);
         void displayText(void);
 
@@ -27,7 +31,7 @@ namespace map_server
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, double widthInPixels, double heightInPixels,
                       const std::vector<const char *>& elementIds, bool sendResponse) :
             Request(socketId, requestId, sendResponse), _mapId(mapId), _widthInPixels(widthInPixels), _heightInPixels(heightInPixels), _elementIds(elementIds),
-            _focusSetByClient(false), _scale(1.0), _xFocus(0.0), _yFocus(0.0) {}
+            _focusSetByClient(false), _scale(1.0), _xFocus(0.0), _yFocus(0.0), _map(0) {}
 
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, double widthInPixels, double heightInPixels,
                       const std::vector<const char *>& elementIds, double scale, double xFocus, double yFocus, bool sendResponse) :

@@ -10,6 +10,8 @@
 #include "LineItem.h"
 #include "PolygonLook.h"
 #include "ItemLook.h"
+#include "ItemCopyBuilder.h"
+#include "TextDisplayer.h"
 
 #include <map>
 #include <sstream>
@@ -27,14 +29,14 @@ namespace map_server
         MapData::lock();
         MapData *mapData = MapData::instance();
 
-        Map *map = mapData->getMap(_mapId);
-        if (map != 0 && _sendResponse)
+        _map = mapData->getMap(_mapId);
+        if (_map != 0 && _sendResponse)
         {
             std::vector<MapElement *> elementVector;
             unsigned int i, n = _elementIds.size();
             for (i = 0; i < n; ++i)
             {
-                MapElement *element = map->getElement(_elementIds[i]);
+                MapElement *element = _map->getElement(_elementIds[i]);
                 if (element != 0) elementVector.push_back(element);
             }
 
@@ -158,13 +160,13 @@ namespace map_server
                         geoSize = geoHeight * sqrt(1.0 + a * a);
                     }
 
-                    if (geoSize < map->getZoomMinDistance()) geoSize = map->getZoomMinDistance();
-                    if (geoSize > map->getZoomMaxDistance()) geoSize = map->getZoomMaxDistance();
+                    if (geoSize < _map->getZoomMinDistance()) geoSize = _map->getZoomMinDistance();
+                    if (geoSize > _map->getZoomMaxDistance()) geoSize = _map->getZoomMaxDistance();
 
                     _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
                 }
 
-                int resolutionIndex = map->getResolutionIndex(_scale);
+                int resolutionIndex = _map->getResolutionIndex(_scale);
 
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 n = itemVector2.size();
@@ -175,6 +177,9 @@ namespace map_server
                     response << "[" << item->getId() << "," << item->getCurrentLook()->getId();
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
+
+                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), resolutionIndex);
+                    _itemCopyBuilderVector.push_back(itemCopyBuilder);
                 }
 
                 response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus
@@ -207,6 +212,32 @@ namespace map_server
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
 
+        TextDisplayer textDisplayer;
 
+        MapData::lock();
+
+        double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() * _scale);
+
+        int i, n = _itemCopyBuilderVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            ItemCopyBuilder *itemCopyBuilder = _itemCopyBuilderVector[i];
+            const MapItem *item = itemCopyBuilder->getItem();
+
+            if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
+            {
+                const PointItem *pointItem = dynamic_cast<const PointItem *>(item);
+                if (pointItem != 0)
+                {
+
+                }
+            }
+
+            delete itemCopyBuilder;
+        }
+
+        MapData::unlock();
+
+        textDisplayer.start();
     }
 }

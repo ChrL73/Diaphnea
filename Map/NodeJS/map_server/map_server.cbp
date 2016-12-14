@@ -15,9 +15,10 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="../../../mongo-cxx-driver/include" />
+					<Add directory="." />
 					<Add directory="Data" />
 					<Add directory="Requests" />
-					<Add directory="." />
+					<Add directory="TextDisplayer" />
 				</Compiler>
 				<Linker>
 					<Add option="-pthread" />
@@ -36,9 +37,10 @@
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
 					<Add directory="../../../mongo-cxx-driver/include" />
+					<Add directory="." />
 					<Add directory="Data" />
 					<Add directory="Requests" />
-					<Add directory="." />
+					<Add directory="TextDisplayer" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

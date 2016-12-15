@@ -213,6 +213,13 @@
             <name language="en" text="Louetsi-Bibaka"/>
           </name>
       </polygonElement>
+      <!--Départements Nyanga-->
+      <polygonElement id="e_Douigni" look="pl_Departement">
+        <name>
+          <name language="fr" text="Douigni"/>
+          <name language="en" text="Douigni"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

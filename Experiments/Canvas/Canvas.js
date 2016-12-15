@@ -14,7 +14,7 @@ var canvas  = document.querySelector('#canvas');
 var _context = canvas.getContext('2d');
 _context.lineCap = 'round';
 _context.lineJoin = 'round';
-_context.textBaseline = 'bottom';
+//_context.textBaseline = 'bottom';
 
 var array1 = [ { x: 0, y: 1 }, { x: -1, y: 0 }, { x: -1, y: -1 }, { x: 0, y: -2 }, { x: 1, y: -2 }, { x: 2, y: -1 }, { x: 2, y: 1}, { x: 0, y: 3} ];
 var array2 = [ { x: 1, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 2 }, { x: -3, y: 0 }, { x: 0, y: -3 } ];
@@ -56,16 +56,16 @@ var text1 =
    color: 'rgb(0, 0, 255)',
    size: 5,
    font: 'arial',
-   bgColor: 'rgba(0, 0, 255, 0.3)'
+   //bgColor: 'rgba(0, 0, 255, 0.3)'
 }
 
-_context.save();
+/*_context.save();
 var helpSize = 40;
 _context.font = helpSize + 'px ' + text1.font;
 var measure = _context.measureText(text1.text);
 text1.width = measure.width * text1.size / helpSize;
 text1.height = _context.measureText('W').width * text1.size / helpSize;
-_context.restore();
+_context.restore();*/
 
 console.log(text1);
 
@@ -245,11 +245,11 @@ function drawText(text, sizeFactor)
 {
    var x = (text.x - _xFocus) * _scale + 0.5 * _mapWidth;
    var y = (text.y - _yFocus) * _scale + 0.5 * _mapHeight;
-   var w = text.width * sizeFactor * _scale;
-   var h = text.height * sizeFactor * _scale;
+   //var w = text.width * sizeFactor * _scale;
+   //var h = text.height * sizeFactor * _scale;
    
-   _context.fillStyle = text.bgColor;
-   _context.fillRect(x, y - h, w, h);
+   //_context.fillStyle = text.bgColor;
+   //_context.fillRect(x, y - h, w, h);
    
    _context.fillStyle = text.color;
    _context.font = text.size * sizeFactor * _scale + 'px ' + text.font;

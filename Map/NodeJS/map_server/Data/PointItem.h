@@ -9,12 +9,13 @@ namespace map_server
     class PointItem : public MapItem
     {
     private:
-        Point *_point;
+        const Point *_point;
         bool hasResolution(void) const { return false; }
 
     public:
-        PointItem(int id, Point *point);
+        PointItem(int id, const Point *point);
 		~PointItem();
 
+        const Point *getPoint(void) const { return _point; }
     };
 }

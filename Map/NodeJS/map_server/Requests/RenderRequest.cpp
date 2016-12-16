@@ -12,6 +12,9 @@
 #include "ItemLook.h"
 #include "ItemCopyBuilder.h"
 #include "TextDisplayer.h"
+#include "PointItemCopy.h"
+#include "RepulsiveCenter.h"
+#include "Point.h"
 
 #include <map>
 #include <sstream>
@@ -212,7 +215,7 @@ namespace map_server
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
 
-        TextDisplayer textDisplayer;
+        TextDisplayer textDisplayer(xMin, xMax, yMin, yMax);
 
         MapData::lock();
 
@@ -229,7 +232,15 @@ namespace map_server
                 const PointItem *pointItem = dynamic_cast<const PointItem *>(item);
                 if (pointItem != 0)
                 {
+                    PointItemCopy *pointItemCopy = new PointItemCopy();
 
+                    const double coeff = 2.0; // Todo: Check relevance of this value
+                    double radius = coeff * itemCopyBuilder->getSize() * sizeFactor;
+                    const double u0 = 2.0; // Todo: Check relevance of this value
+                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
+                                                                           1.0, 0.0, radius, radius, u0, true);
+                    pointItemCopy->addRepulsiveCenter(repulsiveCenter);
+                    textDisplayer.addItem(pointItemCopy);
                 }
             }
 

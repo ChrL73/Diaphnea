@@ -16,5 +16,7 @@ namespace map_server
             _item(item), _size(size), _resolutionIndex(resolutionIndex) {}
 
         const MapItem *getItem(void) const { return _item; }
+        double getSize(void) const { return _size; }
+        int getResolutionIndex(void) const { return _resolutionIndex; }
     };
 }

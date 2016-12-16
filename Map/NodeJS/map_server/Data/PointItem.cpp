@@ -5,7 +5,7 @@
 
 namespace map_server
 {
-    PointItem::PointItem(int id, Point *point) : MapItem(id, 1), _point(point)
+    PointItem::PointItem(int id, const Point *point) : MapItem(id, 1), _point(point)
     {
         _xMin = point->getX();
         _xMax = point->getX();

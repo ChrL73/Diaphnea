@@ -8,7 +8,7 @@
 #include "LineItem.h"
 #include "FilledPolygonItem.h"
 #include "PointItem.h"
-#include "Point.h"
+#include "Point.h">
 #include "ItemLook.h"
 
 namespace map_server

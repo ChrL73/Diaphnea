@@ -5,7 +5,7 @@ namespace map_server
 {
 	MultipointsItem::~MultipointsItem()
 	{
-		std::map<double, std::vector<Point *> >::iterator it = _pointVectorMap.begin();
+		std::map<double, std::vector<const Point *> >::iterator it = _pointVectorMap.begin();
 		for (; it != _pointVectorMap.end(); ++it)
 		{
 			int i, n = (*it).second.size();
@@ -15,14 +15,14 @@ namespace map_server
 
     void MultipointsItem::addPoint(unsigned int resolutionIndex, double samplingLength, Point *point)
     {
-        std::map<double, std::vector<Point *> >::iterator it = _pointVectorMap.find(samplingLength);
+        std::map<double, std::vector<const Point *> >::iterator it = _pointVectorMap.find(samplingLength);
         if (it == _pointVectorMap.end())
         {
-            it = _pointVectorMap.insert(std::pair<double, std::vector<Point *> >(samplingLength, std::vector<Point *>())).first;
+            it = _pointVectorMap.insert(std::pair<double, std::vector<const Point *> >(samplingLength, std::vector<const Point *>())).first;
         }
         (*it).second.push_back(point);
 
-        while (_pointVectorVector.size() <= resolutionIndex) _pointVectorVector.push_back(std::vector<Point *>());
+        while (_pointVectorVector.size() <= resolutionIndex) _pointVectorVector.push_back(std::vector<const Point *>());
         _pointVectorVector[resolutionIndex].push_back(point);
 
         if (point->getX() < _xMin) _xMin = point->getX();
@@ -37,7 +37,7 @@ namespace map_server
         for (i = 0; i < n; ++i)
         {
             if (i != 0) s << ",";
-            Point *point =  _pointVectorVector[resolutionIndex][i];
+            const Point *point =  _pointVectorVector[resolutionIndex][i];
             s << "{\"x\":" << point->getX() << ",\"y\":" << point->getY() << "}";
         }
     }

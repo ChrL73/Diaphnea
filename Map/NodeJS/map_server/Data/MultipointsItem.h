@@ -13,8 +13,8 @@ namespace map_server
     class MultipointsItem : public MapItem
     {
     private:
-        std::map<double, std::vector<Point *> > _pointVectorMap;
-        std::vector<std::vector<Point *> > _pointVectorVector;
+        std::map<double, std::vector<const Point *> > _pointVectorMap;
+        std::vector<std::vector<const Point *> > _pointVectorVector;
         bool hasResolution(void) const { return true; }
 
     protected:
@@ -26,6 +26,7 @@ namespace map_server
     public:
 		virtual ~MultipointsItem();
 
+		const std::vector<const Point *>& getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
         void addPoint(unsigned int resolutionIndex, double samplingLength, Point *point);
         virtual void setInfoJsonVector(void) = 0;
     };

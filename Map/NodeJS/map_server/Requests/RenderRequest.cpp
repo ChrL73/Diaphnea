@@ -13,6 +13,7 @@
 #include "ItemCopyBuilder.h"
 #include "TextDisplayer.h"
 #include "PointItemCopy.h"
+#include "LineItemCopy.h"
 #include "RepulsiveCenter.h"
 #include "Point.h"
 
@@ -226,6 +227,8 @@ namespace map_server
         {
             ItemCopyBuilder *itemCopyBuilder = _itemCopyBuilderVector[i];
             const MapItem *item = itemCopyBuilder->getItem();
+			double size = itemCopyBuilder->getSize();
+			int resolutionIndex = itemCopyBuilder->getResolutionIndex();
 
             if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
             {
@@ -234,14 +237,58 @@ namespace map_server
                 {
                     PointItemCopy *pointItemCopy = new PointItemCopy();
 
-                    const double coeff = 2.0; // Todo: Check relevance of this value
-                    double radius = coeff * itemCopyBuilder->getSize() * sizeFactor;
-                    const double u0 = 2.0; // Todo: Check relevance of this value
+                    const double coeff = 2.0;
+                    double radius = coeff * size * sizeFactor;
+                    const double u0 = 2.0;
                     RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
                                                                            1.0, 0.0, radius, radius, u0, true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
                     textDisplayer.addItem(pointItemCopy);
                 }
+				else
+				{
+					const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
+					if (lineItem != 0)
+					{
+						LineItemCopy *lineItemCopy = new LineItemCopy();
+
+						int j, m = lineItem->getPointVector(resolutionIndex).size();
+						for (j = 0; j < m - 1; ++j)
+						{
+							const Point *point1 = lineItem->getPointVector(resolutionIndex)[j];
+							const Point *point2 = lineItem->getPointVector(resolutionIndex)[j + 1];
+							double x1 = point1->getX();
+							double y1 = point1->getY();
+							double x2 = point2->getX();
+							double y2 = point2->getY();
+
+							if ((x1 >= xMin && x1 <= xMax && y1 >= yMin && y1 <= yMax) || (x2 >= xMin && x2 <= xMax && y2 >= yMin && y2 <= yMax))
+							{
+								double x = 0.5 * (x1 + x2);
+								double y = 0.5 * (y1 + y2);
+								const double coeff1 = 0.9;
+								double radius1 = coeff1 * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+								const double coeff2 = 2.5;
+								double radius2 = coeff2 * size * sizeFactor;
+								double axisDx = x2 - x1;
+								double axisDy = y2 - y1;
+								const double u0 = 1.5;
+								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(x, y, axisDx, axisDy, radius1, radius2, u0, false);
+								lineItemCopy->addRepulsiveCenter(repulsiveCenter);
+							}
+						}
+
+						textDisplayer.addItem(lineItemCopy);
+					}
+					else
+					{
+						const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
+						if (filledPolygonItem != 0)
+						{
+
+						}
+					}
+				}
             }
 
             delete itemCopyBuilder;

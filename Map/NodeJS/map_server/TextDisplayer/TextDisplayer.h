@@ -18,6 +18,7 @@ namespace map_server
 
     public:
         TextDisplayer(double xMin, double xMax, double yMin, double yMax) : _xMin(xMin), _xMax(xMax), _yMin(yMin), _yMax(yMax) {}
+		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }
         void start(void);

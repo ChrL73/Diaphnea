@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,7 +167,6 @@
     <ClCompile Include="..\..\NodeJS\map_server\Data\PointLook.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonElement.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonLook.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\Data\TextItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\MapServer.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\map_server.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.cpp" />
@@ -178,6 +177,15 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Potential.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\ThreadInfo.cpp" />
     <ClCompile Include="vld.cpp" />
   </ItemGroup>
@@ -200,7 +208,6 @@
     <ClInclude Include="..\..\NodeJS\map_server\Data\PointLook.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonElement.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonLook.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\Data\TextItem.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MessageTypeEnum.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.h" />
@@ -211,6 +218,15 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\Potential.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.h" />
     <ClInclude Include="..\..\NodeJS\map_server\ThreadInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

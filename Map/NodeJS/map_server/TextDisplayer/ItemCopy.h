@@ -12,7 +12,7 @@ namespace map_server
         std::vector<const RepulsiveCenter *> _repulsiveCenterVector;
 
     public:
-        virtual ~ItemCopy() {}
+		virtual ~ItemCopy();
 
         void addRepulsiveCenter(RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
 

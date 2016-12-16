@@ -25,6 +25,12 @@
     <Filter Include="Fichiers sources\Requests">
       <UniqueIdentifier>{41cd178d-e977-4f6b-a1df-6f19ce21992b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\TextDisplayer">
+      <UniqueIdentifier>{ef9d2548-795d-418c-b66d-a083747ca254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\TextDisplayer">
+      <UniqueIdentifier>{2049d9d3-ec69-4a11-b066-704dcd1aca6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vld.cpp">
@@ -90,9 +96,6 @@
     <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonLook.cpp">
       <Filter>Fichiers sources\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NodeJS\map_server\Data\TextItem.cpp">
-      <Filter>Fichiers sources\Data</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.cpp">
       <Filter>Fichiers sources\Requests</Filter>
     </ClCompile>
@@ -116,6 +119,33 @@
     </ClCompile>
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp">
       <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Potential.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +212,6 @@
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonLook.h">
       <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\Data\TextItem.h">
-      <Filter>Fichiers d%27en-tête\Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.h">
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
@@ -208,6 +235,33 @@
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h">
       <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\Potential.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -68,7 +68,7 @@ namespace map_server
 
         if (itemIt == _filledPolygonItemMap.end())
         {
-			std::auto_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -95,7 +95,7 @@ namespace map_server
         int i, n = pointListIdVector.size();
         for (i = 0; i < n; ++i)
         {
-			std::auto_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
             if (cursor->more())
             {
                 mongo::BSONObj pointList = cursor->next();
@@ -165,7 +165,7 @@ namespace map_server
 
         mongo::BSONObj projection = BSON("id" << 1);
 
-		std::auto_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();

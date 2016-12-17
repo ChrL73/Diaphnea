@@ -183,7 +183,9 @@ namespace map_server
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
 
-                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook()->getSize(), resolutionIndex);
+                    double textSize = 1.0;
+                    if (item->getCurrentTextLook() != 0) textSize = item->getCurrentTextLook()->getSize();
+                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), textSize, resolutionIndex);
                     _itemCopyBuilderVector.push_back(itemCopyBuilder);
                 }
 

@@ -129,8 +129,8 @@
 		<Unit filename="TextDisplayer/RepulsiveCenter.h" />
 		<Unit filename="TextDisplayer/TextDisplayer.cpp" />
 		<Unit filename="TextDisplayer/TextDisplayer.h" />
-		<Unit filename="TextDisplayer/TextItemCopy.cpp" />
-		<Unit filename="TextDisplayer/TextItemCopy.h" />
+		<Unit filename="TextDisplayer/TextInfo.cpp" />
+		<Unit filename="TextDisplayer/TextInfo.h" />
 		<Unit filename="ThreadInfo.cpp" />
 		<Unit filename="ThreadInfo.h" />
 		<Unit filename="map_server.cpp" />

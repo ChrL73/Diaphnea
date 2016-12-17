@@ -50,7 +50,7 @@ namespace map_server
         }
 
         mongo::BSONObj projection = BSON("map" << 1);
-        auto cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
+		std::auto_ptr<mongo::DBClientCursor> cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbMap = cursor->next();

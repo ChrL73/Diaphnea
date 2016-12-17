@@ -1,4 +1,4 @@
-#include "TextItemCopy.h"
+#include "TextInfo.h"
 
 namespace map_server
 {

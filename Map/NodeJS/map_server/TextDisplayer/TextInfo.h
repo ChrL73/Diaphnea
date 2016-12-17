@@ -4,7 +4,7 @@
 
 namespace map_server
 {
-    class TextItemCopy : public ItemCopy
+    class TextInfo : public ItemCopy
     {
 
     };

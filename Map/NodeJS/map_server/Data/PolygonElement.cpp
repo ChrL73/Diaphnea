@@ -8,7 +8,7 @@ namespace map_server
     {
         _loaded = true;
 
-        auto cursor = _iMap->getConnectionPtr()->query("diaphnea.polygon_elements", MONGO_QUERY("_id" << _mongoId), 1);
+		std::auto_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.polygon_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -21,6 +21,7 @@ namespace map_server
             std::string contourId = dbElement.getField("contour").OID().toString();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
             _filledPolygonItem->setCurrentLook(_look->getFillLook());
+			_filledPolygonItem->setCurrentTextLook(_look->getTextLook());
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
             int i, n = dbLineItems.size();

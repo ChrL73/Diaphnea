@@ -129,9 +129,6 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.cpp">
-      <Filter>Fichiers sources\TextDisplayer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
@@ -145,6 +142,9 @@
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,9 +248,6 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextItemCopy.h">
-      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
@@ -261,6 +258,9 @@
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
   </ItemGroup>

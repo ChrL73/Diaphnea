@@ -9,7 +9,7 @@ namespace map_server
     {
         _loaded = true;
 
-        auto cursor = _iMap->getConnectionPtr()->query("diaphnea.point_elements", MONGO_QUERY("_id" << _mongoId), 1);
+		std::auto_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.point_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -28,6 +28,7 @@ namespace map_server
 
             _item = new PointItem(id, point);
             _item->setCurrentLook(_look->getPointLook());
+			_item->setCurrentTextLook(_look->getTextLook());
             _iMap->addPointItem(_item);
         }
     }

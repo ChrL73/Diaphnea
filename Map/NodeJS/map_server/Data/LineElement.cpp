@@ -8,7 +8,7 @@ namespace map_server
     {
         _loaded = true;
 
-        auto cursor = _iMap->getConnectionPtr()->query("diaphnea.line_elements", MONGO_QUERY("_id" << _mongoId), 1);
+		std::auto_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.line_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -25,6 +25,7 @@ namespace map_server
                 std::string itemId = dbLineItems[i].OID().toString();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 				lineItem->setCurrentLook(_look->getLineLook());
+				lineItem->setCurrentTextLook(_look->getTextLook());
                 _itemVector.push_back(lineItem);
             }
         }

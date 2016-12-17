@@ -14,6 +14,7 @@
 #include "TextDisplayer.h"
 #include "PointItemCopy.h"
 #include "LineItemCopy.h"
+#include "FilledPolygonItemCopy.h"
 #include "RepulsiveCenter.h"
 #include "Point.h"
 
@@ -182,7 +183,7 @@ namespace map_server
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
 
-                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), resolutionIndex);
+                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook()->getSize(), resolutionIndex);
                     _itemCopyBuilderVector.push_back(itemCopyBuilder);
                 }
 
@@ -285,7 +286,8 @@ namespace map_server
 						const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
 						if (filledPolygonItem != 0)
 						{
-
+							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy();
+							textDisplayer.addItem(filledPolygonItemCopy);
 						}
 					}
 				}

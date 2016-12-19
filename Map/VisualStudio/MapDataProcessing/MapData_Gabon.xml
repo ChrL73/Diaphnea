@@ -220,6 +220,18 @@
           <name language="en" text="Douigni"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_Mougoutsi" look="pl_Departement">
+        <name>
+          <name language="fr" text="Mougoutsi"/>
+          <name language="en" text="Mougoutsi"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_BasseBanio" look="pl_Departement">
+        <name>
+          <name language="fr" text="Basse-Banio"/>
+          <name language="en" text="Basse-Banio"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

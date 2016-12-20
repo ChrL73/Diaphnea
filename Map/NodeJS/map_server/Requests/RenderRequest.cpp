@@ -17,6 +17,7 @@
 #include "FilledPolygonItemCopy.h"
 #include "RepulsiveCenter.h"
 #include "Point.h"
+#include "TextInfo.h"
 
 #include <map>
 #include <sstream>
@@ -243,9 +244,10 @@ namespace map_server
                     const double coeff = 2.0;
                     double radius = coeff * size * sizeFactor;
                     const double u0 = 2.0;
-                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
+                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
                                                                            1.0, 0.0, radius, radius, u0, true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
+                    setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor);
                     textDisplayer.addItem(pointItemCopy);
                 }
 				else
@@ -276,11 +278,12 @@ namespace map_server
 								double axisDx = x2 - x1;
 								double axisDy = y2 - y1;
 								const double u0 = 1.5;
-								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(x, y, axisDx, axisDy, radius1, radius2, u0, false);
+								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, x, y, axisDx, axisDy, radius1, radius2, u0, false);
 								lineItemCopy->addRepulsiveCenter(repulsiveCenter);
 							}
 						}
 
+                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor);
 						textDisplayer.addItem(lineItemCopy);
 					}
 					else
@@ -289,6 +292,7 @@ namespace map_server
 						if (filledPolygonItem != 0)
 						{
 							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy();
+                            setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor);
 							textDisplayer.addItem(filledPolygonItemCopy);
 						}
 					}
@@ -301,5 +305,24 @@ namespace map_server
         MapData::unlock();
 
         textDisplayer.start();
+    }
+
+    void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor)
+    {
+        const MapItem *item = itemCopyBuilder->getItem();
+
+        const std::string& text1 = item->getText1(_languageId);
+        if (!text1.empty())
+        {
+            TextInfo *textInfo1 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text1);
+            itemCopy->setTextInfo1(textInfo1);
+
+            const std::string& text2 = item->getText2(_languageId);
+            if (!text2.empty())
+            {
+                TextInfo *textInfo2 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text2);
+                itemCopy->setTextInfo2(textInfo2);
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace map_server
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 				lineItem->setCurrentLook(_look->getLineLook());
 				lineItem->setCurrentTextLook(_look->getTextLook());
+				lineItem->setNameMap(&_nameMap);
                 _itemVector.push_back(lineItem);
             }
         }

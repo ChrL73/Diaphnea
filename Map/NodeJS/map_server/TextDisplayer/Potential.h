@@ -12,9 +12,6 @@ namespace map_server
         Potential(double exlcudingTerm, double notExlcudingTerm) :
             _exlcudingTerm(exlcudingTerm), _notExlcudingTerm(notExlcudingTerm) { }
 
-        static Potential MaxValue;
-        static Potential MinValue;
-
         void addExculdingTerm(double p);
         void addNotExculdingTerm (double p);
 

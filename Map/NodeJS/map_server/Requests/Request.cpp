@@ -82,13 +82,13 @@ namespace map_server
         else if (requestType == map_server::RENDER)
         {
             int i, n = tokenVector.size();
-            if (n < 10) return 0;
+            if (n < 11) return 0;
 
             double widthInPixels, heightInPixels;
             try
             {
-                widthInPixels = std::stod(tokenVector[4]);
-                heightInPixels = std::stod(tokenVector[5]);
+                widthInPixels = std::stod(tokenVector[5]);
+                heightInPixels = std::stod(tokenVector[6]);
             }
             catch (...)
             {
@@ -96,21 +96,21 @@ namespace map_server
             }
 
             std::vector<const char *> elementIds;
-            for (i = 9; i < n; ++i) elementIds.push_back(tokenVector[i]);
+            for (i = 10; i < n; ++i) elementIds.push_back(tokenVector[i]);
 
             double scale, xFocus, yFocus;
             try
             {
-                scale = std::stod(tokenVector[6]);
-                xFocus = std::stod(tokenVector[7]);
-                yFocus = std::stod(tokenVector[8]);
+                scale = std::stod(tokenVector[7]);
+                xFocus = std::stod(tokenVector[8]);
+                yFocus = std::stod(tokenVector[9]);
             }
             catch (...)
             {
-                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, sendResponse);
+                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, elementIds, sendResponse);
             }
 
-            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], widthInPixels, heightInPixels, elementIds, scale, xFocus, yFocus, sendResponse);
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, elementIds, scale, xFocus, yFocus, sendResponse);
         }
 
         return 0;

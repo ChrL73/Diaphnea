@@ -1,11 +1,16 @@
 #pragma once
 
-#include "ItemCopy.h"
+#include <string>
 
 namespace map_server
 {
-    class TextInfo : public ItemCopy
+    class TextInfo
     {
+    private:
+
+
+    public:
+        TextInfo(double size, double scale, const std::string& text);
 
     };
 }

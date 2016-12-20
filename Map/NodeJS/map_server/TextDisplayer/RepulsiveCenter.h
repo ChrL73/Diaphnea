@@ -2,6 +2,8 @@
 
 namespace map_server
 {
+    class IDisplayerConstants;
+
     class RepulsiveCenter
     {
     private:
@@ -17,9 +19,7 @@ namespace map_server
         double _sinAlpha;
 
     public:
-        RepulsiveCenter(double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);
+        RepulsiveCenter(const IDisplayerConstants *constants, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);
 
-        static double _maxRepulsionRatio;
-        static int _potentialTableSize;
     };
 }

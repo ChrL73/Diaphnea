@@ -29,6 +29,7 @@ namespace map_server
             _item = new PointItem(id, point);
             _item->setCurrentLook(_look->getPointLook());
 			_item->setCurrentTextLook(_look->getTextLook());
+            _item->setNameMap(&_nameMap);
             _iMap->addPointItem(_item);
         }
     }

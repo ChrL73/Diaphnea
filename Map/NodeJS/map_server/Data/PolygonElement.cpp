@@ -22,6 +22,7 @@ namespace map_server
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
             _filledPolygonItem->setCurrentLook(_look->getFillLook());
 			_filledPolygonItem->setCurrentTextLook(_look->getTextLook());
+			_filledPolygonItem->setNameMap(&_nameMap);
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
             int i, n = dbLineItems.size();

@@ -1,12 +1,7 @@
 #include "Potential.h"
 
-#include <limits>
-
 namespace map_server
 {
-    Potential Potential::MaxValue(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-    Potential Potential::MinValue(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max());
-
     void Potential::addExculdingTerm(double p)
     {
         _exlcudingTerm += p;

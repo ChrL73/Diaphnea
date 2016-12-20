@@ -12,7 +12,7 @@ namespace map_server
 
         IMap * const _iMap;
         bool _loaded;
-        std::map<std::string, std::string> _nameMap;
+        std::map<std::string, std::pair<std::string, std::string> > _nameMap;
         std::string _infoJson;
 
         void loadCommon(mongo::BSONObj dbElement);

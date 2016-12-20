@@ -115,6 +115,7 @@
 		<Unit filename="Requests/Request.h" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.cpp" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.h" />
+		<Unit filename="TextDisplayer/IDisplayerConstants.h" />
 		<Unit filename="TextDisplayer/ItemCopy.cpp" />
 		<Unit filename="TextDisplayer/ItemCopy.h" />
 		<Unit filename="TextDisplayer/ItemCopyBuilder.cpp" />

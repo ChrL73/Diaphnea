@@ -315,13 +315,15 @@ namespace map_server
         if (!text1.empty())
         {
             TextInfo *textInfo1 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text1);
-            itemCopy->setTextInfo1(textInfo1);
+            if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
+			else delete textInfo1;
 
             const std::string& text2 = item->getText2(_languageId);
             if (!text2.empty())
             {
                 TextInfo *textInfo2 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text2);
-                itemCopy->setTextInfo2(textInfo2);
+				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
+				else delete textInfo2;
             }
         }
     }

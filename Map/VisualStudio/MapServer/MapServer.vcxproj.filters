@@ -263,5 +263,8 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\IDisplayerConstants.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -117,6 +117,8 @@
 		<Unit filename="Requests/RenderRequest.h" />
 		<Unit filename="Requests/Request.cpp" />
 		<Unit filename="Requests/Request.h" />
+		<Unit filename="TextDisplayer/ClientInfo.cpp" />
+		<Unit filename="TextDisplayer/ClientInfo.h" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.cpp" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.h" />
 		<Unit filename="TextDisplayer/IDisplayerConstants.h" />

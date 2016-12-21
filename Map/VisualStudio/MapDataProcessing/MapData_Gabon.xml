@@ -84,16 +84,6 @@
           <name language="en" text="3"/>
         </shortName>
       </polygonElement>
-      <polygonElement id="e_OgooueMaritime" look="pl_Province">
-        <name>
-          <name language="fr" text="Ogooué-Maritime (8)"/>
-          <name language="en" text="Ogooué-Maritime (8)"/>
-        </name>
-        <shortName>
-          <name language="fr" text="1"/>
-          <name language="en" text="1"/>
-        </shortName>
-      </polygonElement>
       <polygonElement id="e_Ngounie" look="pl_Province">
         <name>
           <name language="fr" text="Ngounié (4)"/>
@@ -102,6 +92,26 @@
         <shortName>
           <name language="fr" text="4"/>
           <name language="en" text="4"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_Nyanga" look="pl_Province">
+        <name>
+          <name language="fr" text="Nyanga (5)"/>
+          <name language="en" text="Nyanga (5)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="5"/>
+          <name language="en" text="5"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_OgooueMaritime" look="pl_Province">
+        <name>
+          <name language="fr" text="Ogooué-Maritime (8)"/>
+          <name language="en" text="Ogooué-Maritime (8)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="8"/>
+          <name language="en" text="8"/>
         </shortName>
       </polygonElement>
       <polygonElement id="e_WoleuNtem" look="pl_Province">
@@ -230,6 +240,24 @@
         <name>
           <name language="fr" text="Basse-Banio"/>
           <name language="en" text="Basse-Banio"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_HauteBanio" look="pl_Departement">
+        <name>
+          <name language="fr" text="Haute-Banio"/>
+          <name language="en" text="Haute-Banio"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Mongo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Mongo"/>
+          <name language="en" text="Mongo"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Doutsila" look="pl_Departement">
+        <name>
+          <name language="fr" text="Doutsila"/>
+          <name language="en" text="Doutsila"/>
         </name>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->

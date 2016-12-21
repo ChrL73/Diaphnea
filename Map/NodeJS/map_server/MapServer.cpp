@@ -2,6 +2,7 @@
 #include "ThreadInfo.h"
 #include "Request.h"
 #include "MapData.h"
+#include "TextDisplayer.h"
 
 #include <iostream>
 #include <vector>
@@ -45,6 +46,8 @@ namespace map_server
 			std::cerr << "Error in MapData::destroyInstance()" << std::endl;
 			return -1;
 		}
+
+		TextDisplayer::clearClientMap();
 
 		return 0;
     }

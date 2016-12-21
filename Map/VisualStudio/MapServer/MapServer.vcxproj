@@ -179,6 +179,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\IDisplayerConstants.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h" />

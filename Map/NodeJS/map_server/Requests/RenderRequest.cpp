@@ -241,7 +241,7 @@ namespace map_server
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
 
-        TextDisplayer textDisplayer(xMin, xMax, yMin, yMax);
+        TextDisplayer textDisplayer(_socketId, xMin, xMax, yMin, yMax);
 
         MapData::lock();
 

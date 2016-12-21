@@ -3,14 +3,22 @@
 #include "IDisplayerConstants.h"
 
 #include <vector>
+#include <map>
+#include <string>
+#include <mutex>
 
 namespace map_server
 {
     class ItemCopy;
+	class ClientInfo;
 
     class TextDisplayer : public IDisplayerConstants
     {
     private:
+		static std::mutex _mutex;
+		static std::map<std::string, ClientInfo *> _clientMap;
+		ClientInfo *_clientInfo;
+
         const double _xMin;
         const double _xMax;
         const double _yMin;
@@ -20,6 +28,7 @@ namespace map_server
 
         const double _maxRepulsionRatio;
         const int _potentialTableSize;
+		const int _maxVisibleTextCount;
         const Potential * const _maxPotential;
         const Potential * const _minPotential;
 
@@ -29,7 +38,9 @@ namespace map_server
         const Potential *getMinPotential(void) const { return _maxPotential; }
 
     public:
-        TextDisplayer(double xMin, double xMax, double yMin, double yMax);
+		static void clearClientMap(void);
+
+        TextDisplayer(const std::string& socketId, double xMin, double xMax, double yMin, double yMax);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

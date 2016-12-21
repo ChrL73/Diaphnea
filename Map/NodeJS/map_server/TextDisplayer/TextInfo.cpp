@@ -7,8 +7,10 @@ namespace map_server
 {
     TextInfo::TextInfo(double size, double scale, const std::string& text, FT_Face face) : _text(text), _ok(false)
     {
+		const double minFontSize = 5.0;
+		const double maxFontSize = 100.0;
 		_fontSize = size * scale;
-		if (_fontSize < 1.0 || _fontSize > 999.0) return;
+		if (_fontSize < minFontSize || _fontSize > maxFontSize) return;
 
 		int error = FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(_fontSize));
 		if (error) return;

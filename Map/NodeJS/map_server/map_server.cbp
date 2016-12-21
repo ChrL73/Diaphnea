@@ -19,6 +19,7 @@
 					<Add directory="Data" />
 					<Add directory="Requests" />
 					<Add directory="TextDisplayer" />
+					<Add directory="../../../../freetype-2.7/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-pthread" />
@@ -26,6 +27,7 @@
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
 					<Add library="boost_thread" />
+					<Add library="freetype" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -41,6 +43,7 @@
 					<Add directory="Data" />
 					<Add directory="Requests" />
 					<Add directory="TextDisplayer" />
+					<Add directory="../../../../freetype-2.7/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -49,6 +52,7 @@
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
 					<Add library="boost_thread" />
+					<Add library="freetype" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp ./bin/Release/map_server ./../map_server.exe" />

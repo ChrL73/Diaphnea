@@ -19,6 +19,9 @@
 #include "Point.h"
 #include "TextInfo.h"
 
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
 #include <map>
 #include <sstream>
 #include <limits>
@@ -213,7 +216,25 @@ namespace map_server
 
     void RenderRequest::displayText()
     {
-        double dx = 0.5 * _widthInPixels / _scale;
+#ifdef _WIN32
+		const std::string fontFile = "arial.ttf";
+#else
+		const std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/arial.ttf";
+#endif
+
+		FT_Library  library;
+		int error = FT_Init_FreeType(&library);
+		if (error) return;
+
+		FT_Face face;
+		error = FT_New_Face(library, fontFile.c_str(), 0, &face);
+		if (error)
+        {
+            FT_Done_FreeType(library);
+            return;
+        }
+
+		double dx = 0.5 * _widthInPixels / _scale;
         double xMin = _xFocus - dx;
         double xMax = _xFocus + dx;
         double dy = 0.5 * _heightInPixels / _scale;
@@ -247,7 +268,7 @@ namespace map_server
                     RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
                                                                            1.0, 0.0, radius, radius, u0, true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
-                    setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor);
+                    setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
                 }
 				else
@@ -283,7 +304,7 @@ namespace map_server
 							}
 						}
 
-                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor);
+                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
 						textDisplayer.addItem(lineItemCopy);
 					}
 					else
@@ -292,7 +313,7 @@ namespace map_server
 						if (filledPolygonItem != 0)
 						{
 							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy();
-                            setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor);
+                            setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
 							textDisplayer.addItem(filledPolygonItemCopy);
 						}
 					}
@@ -304,24 +325,26 @@ namespace map_server
 
         MapData::unlock();
 
+		FT_Done_FreeType(library);
+
         textDisplayer.start();
     }
 
-    void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor)
+    void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face)
     {
         const MapItem *item = itemCopyBuilder->getItem();
 
         const std::string& text1 = item->getText1(_languageId);
         if (!text1.empty())
         {
-            TextInfo *textInfo1 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text1);
+            TextInfo *textInfo1 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text1, face);
             if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
 			else delete textInfo1;
 
             const std::string& text2 = item->getText2(_languageId);
             if (!text2.empty())
             {
-                TextInfo *textInfo2 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text2);
+                TextInfo *textInfo2 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text2, face);
 				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
 				else delete textInfo2;
             }

@@ -2,12 +2,12 @@
 
 namespace map_server
 {
-    void Potential::addExculdingTerm(double p)
+    void Potential::addExcludingTerm(double p)
     {
         _exlcudingTerm += p;
     }
 
-    void Potential::addNotExculdingTerm (double p)
+    void Potential::addNotExcludingTerm (double p)
     {
         _notExlcudingTerm += p;
     }

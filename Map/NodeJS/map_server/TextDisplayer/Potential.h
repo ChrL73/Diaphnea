@@ -13,8 +13,8 @@ namespace map_server
         Potential(double exlcudingTerm, double notExlcudingTerm) :
             _exlcudingTerm(exlcudingTerm), _notExlcudingTerm(notExlcudingTerm) { }
 
-        void addExculdingTerm(double p);
-        void addNotExculdingTerm (double p);
+        void addExcludingTerm(double p);
+        void addNotExcludingTerm (double p);
 
         const Potential operator+(const Potential& p);
         double compareTo(const Potential& p);

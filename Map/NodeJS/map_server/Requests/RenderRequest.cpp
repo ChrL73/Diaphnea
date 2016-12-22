@@ -18,6 +18,7 @@
 #include "RepulsiveCenter.h"
 #include "Point.h"
 #include "TextInfo.h"
+#include "TextDisplayerParameters.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -241,9 +242,10 @@ namespace map_server
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
 
-        TextDisplayer textDisplayer(_socketId, _widthInPixels, _heightInPixels);
-
         MapData::lock();
+
+		TextDisplayerParameters parameters;
+		TextDisplayer textDisplayer(&parameters, _socketId, _widthInPixels, _heightInPixels);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() * _scale);
 
@@ -262,12 +264,10 @@ namespace map_server
                 {
                     PointItemCopy *pointItemCopy = new PointItemCopy();
 
-                    const double coeff = 2.0;
-                    double radius = coeff * size * sizeFactor * _scale;
-                    const double u0 = 2.0;
+                    double radius = parameters.getPointRadiusCoeff() * size * sizeFactor * _scale;
                     double x = (pointItem->getPoint()->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                     double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, x, y, 1.0, 0.0, radius, radius, u0, true);
+                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
                     setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
@@ -293,14 +293,11 @@ namespace map_server
 							{
 								double x = 0.5 * (x1 + x2);
 								double y = 0.5 * (y1 + y2);
-								const double coeff1 = 0.9;
-								double radius1 = coeff1 * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-								const double coeff2 = 2.5;
-								double radius2 = coeff2 * size * sizeFactor * _scale;
+								double radius1 = parameters.getSegmentRadius1Coeff() * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+								double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
 								double axisDx = x2 - x1;
 								double axisDy = y2 - y1;
-								const double u0 = 1.5;
-								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, x, y, axisDx, axisDy, radius1, radius2, u0, false);
+								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false);
 								lineItemCopy->addRepulsiveCenter(repulsiveCenter);
 							}
 						}

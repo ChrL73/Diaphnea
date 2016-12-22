@@ -3,6 +3,7 @@
 #include "Potential.h"
 #include "ClientInfo.h"
 #include "RepulsiveCenter.h"
+#include "TextDisplayerParameters.h"
 
 #include <limits>
 
@@ -25,9 +26,12 @@ namespace map_server
 		_mutex.unlock();
 	}
 
-    TextDisplayer::TextDisplayer(const std::string& socketId, double width, double height) : _width(width), _height(height),
+    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, double width, double height) :
+		_parameters(parameters), _width(width), _height(height),
         _maxPotential(new Potential(std::numeric_limits<double>::max(), std::numeric_limits<double>::max())),
-        _minPotential(new Potential(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max()))
+        _minPotential(new Potential(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max())),
+		_softThreshold(new Potential(parameters->getSoftThresholdExcludingTerm(), parameters->getSoftThresholdNotExcludingTerm())),
+		_hardThreshold(new Potential(parameters->getHardThresholdExcludingTerm(), parameters->getHardThresholdNotExcludingTerm()))
     {
 		_mutex.lock();
 
@@ -49,6 +53,8 @@ namespace map_server
 
 		delete _maxPotential;
 		delete _minPotential;
+		delete _softThreshold;
+		delete _hardThreshold;
 	}
 
     void TextDisplayer::start(void)
@@ -56,7 +62,7 @@ namespace map_server
 		int visibleTextCount = 0;
 
 		int i, n = _itemVector.size();
-		for (i = 0; i < n && visibleTextCount < _maxVisibleTextCount; ++i)
+		for (i = 0; i < n && visibleTextCount < _parameters->getMaxVisibleTextCount(); ++i)
 		{
 			ItemCopy *item = _itemVector[i];
 			TextInfo *textInfo = 0;
@@ -83,13 +89,13 @@ namespace map_server
 
             double R1 = center->getV11() * dx + center->getV12() * dy;
             double R2 = center->getV21() * dx + center->getV22() * dy;
-            double R = R1 * R1 + R2 * R2;
-            if (R < (double)_potentialTableSize)
+            int R = static_cast<int>(R1 * R1 + R2 * R2);
+            if (R < _parameters->getPotentialTableSize())
             {
-                //if (center->getExcluding()) potential.addExculdingTerm(center->getU0() * _exculdingPotentiaTable[(int)R]);
-                //else potential.addNotExculdingTerm(center->getU0() * _notExculdingPotentiaTable[(int)R]);
+                if (center->getExcluding()) potential.addExcludingTerm(center->getU0() * _parameters->getExcludingPotential(R));
+                else potential.addNotExcludingTerm(center->getU0() * _parameters->getNotExcludingPotential(R));
 
-                //if (!potential.isAcceptable(_softThreshold)) break;
+                if (!potential.isAcceptable(*_softThreshold)) break;
             }
         }
 

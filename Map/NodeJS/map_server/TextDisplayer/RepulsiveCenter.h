@@ -2,7 +2,7 @@
 
 namespace map_server
 {
-    class IDisplayerConstants;
+    class TextDisplayerParameters;
 
     class RepulsiveCenter
     {
@@ -19,7 +19,7 @@ namespace map_server
         double _sinAlpha;
 
     public:
-        RepulsiveCenter(const IDisplayerConstants *constants, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);
+        RepulsiveCenter(const TextDisplayerParameters *parameters, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);
 
         double getX(void) const { return _x; }
         double getY(void) const { return _y; }

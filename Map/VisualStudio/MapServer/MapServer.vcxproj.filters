@@ -150,6 +150,9 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -266,10 +269,10 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\IDisplayerConstants.h">
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h">
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
   </ItemGroup>

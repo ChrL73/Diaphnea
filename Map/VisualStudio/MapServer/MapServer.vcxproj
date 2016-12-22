@@ -188,6 +188,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Potential.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\ThreadInfo.cpp" />
     <ClCompile Include="vld.cpp" />
@@ -223,7 +224,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\IDisplayerConstants.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.h" />

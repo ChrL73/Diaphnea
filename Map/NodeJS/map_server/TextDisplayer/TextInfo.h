@@ -11,14 +11,14 @@ namespace map_server
     private:
 		const std::string _text;
 		double _fontSize;
-		double _geoWidth;
-		double _geoHeight;
-		double _leftInPixels;
-		double _bottomInPixels;
+		double _width;
+		double _height;
+		double _left;
+		double _bottom;
 		bool _ok;
 
     public:
-        TextInfo(double size, double scale, const std::string& text, FT_Face face);
+        TextInfo(const std::string& text, double fontSize, FT_Face face);
 		bool ok(void) const { return _ok; }
     };
 }

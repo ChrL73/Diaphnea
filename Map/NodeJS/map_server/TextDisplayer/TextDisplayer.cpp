@@ -2,6 +2,7 @@
 #include "ItemCopy.h"
 #include "Potential.h"
 #include "ClientInfo.h"
+#include "RepulsiveCenter.h"
 
 #include <limits>
 
@@ -24,8 +25,7 @@ namespace map_server
 		_mutex.unlock();
 	}
 
-    TextDisplayer::TextDisplayer(const std::string& socketId, double xMin, double xMax, double yMin, double yMax) : _xMin(xMin), _xMax(xMax), _yMin(yMin), _yMax(yMax),
-        _maxRepulsionRatio(5.0), _potentialTableSize(10000), _maxVisibleTextCount(100),
+    TextDisplayer::TextDisplayer(const std::string& socketId, double width, double height) : _width(width), _height(height),
         _maxPotential(new Potential(std::numeric_limits<double>::max(), std::numeric_limits<double>::max())),
         _minPotential(new Potential(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max()))
     {
@@ -65,8 +65,34 @@ namespace map_server
 
 			if (textInfo != 0)
 			{
-				
+
 			}
 		}
+    }
+
+    Potential TextDisplayer::getElementaryPotential(ItemCopy *item, double x, double y)
+    {
+        Potential potential;
+
+        int i, n = item->getRepulsiveCenterVector().size();
+        for (i = 0; i < n; ++i)
+        {
+            const RepulsiveCenter *center = item->getRepulsiveCenterVector()[i];
+            double dx = center->getX() - x;
+            double dy = center->getY() - y;
+
+            double R1 = center->getV11() * dx + center->getV12() * dy;
+            double R2 = center->getV21() * dx + center->getV22() * dy;
+            double R = R1 * R1 + R2 * R2;
+            if (R < (double)_potentialTableSize)
+            {
+                //if (center->getExcluding()) potential.addExculdingTerm(center->getU0() * _exculdingPotentiaTable[(int)R]);
+                //else potential.addNotExculdingTerm(center->getU0() * _notExculdingPotentiaTable[(int)R]);
+
+                //if (!potential.isAcceptable(_softThreshold)) break;
+            }
+        }
+
+        return std::move(potential);
     }
 }

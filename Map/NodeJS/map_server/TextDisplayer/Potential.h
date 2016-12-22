@@ -9,6 +9,7 @@ namespace map_server
         double _notExlcudingTerm;
 
     public:
+        Potential(void) : _exlcudingTerm(0.0), _notExlcudingTerm(0.0) {}
         Potential(double exlcudingTerm, double notExlcudingTerm) :
             _exlcudingTerm(exlcudingTerm), _notExlcudingTerm(notExlcudingTerm) { }
 

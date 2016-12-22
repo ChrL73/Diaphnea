@@ -19,16 +19,14 @@ namespace map_server
 		static std::map<std::string, ClientInfo *> _clientMap;
 		ClientInfo *_clientInfo;
 
-        const double _xMin;
-        const double _xMax;
-        const double _yMin;
-        const double _yMax;
+        const double _width;
+        const double _height;
 
         std::vector<ItemCopy *> _itemVector;
 
-        const double _maxRepulsionRatio;
-        const int _potentialTableSize;
-		const int _maxVisibleTextCount;
+        static constexpr double _maxRepulsionRatio = 5.0;
+        static constexpr int _potentialTableSize = 1000;
+		static constexpr int _maxVisibleTextCount = 100;
         const Potential * const _maxPotential;
         const Potential * const _minPotential;
 
@@ -37,10 +35,12 @@ namespace map_server
         const Potential *getMaxPotential(void) const { return _minPotential; }
         const Potential *getMinPotential(void) const { return _maxPotential; }
 
+        Potential getElementaryPotential(ItemCopy *item, double x, double y);
+
     public:
 		static void clearClientMap(void);
 
-        TextDisplayer(const std::string& socketId, double xMin, double xMax, double yMin, double yMax);
+        TextDisplayer(const std::string& socketId, double width, double height);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

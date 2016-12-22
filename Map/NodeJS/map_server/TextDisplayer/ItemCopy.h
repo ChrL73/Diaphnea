@@ -21,6 +21,7 @@ namespace map_server
 		virtual ~ItemCopy();
 
         void addRepulsiveCenter(RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
+        const std::vector<const RepulsiveCenter *>& getRepulsiveCenterVector(void) const { return _repulsiveCenterVector; }
 
         void setTextInfo1(TextInfo *textInfo1) { _textInfo1 = textInfo1; }
         void setTextInfo2(TextInfo *textInfo2) { _textInfo2 = textInfo2; }

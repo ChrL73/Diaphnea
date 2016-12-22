@@ -5,11 +5,10 @@
 
 namespace map_server
 {
-    TextInfo::TextInfo(double size, double scale, const std::string& text, FT_Face face) : _text(text), _ok(false)
+    TextInfo::TextInfo(const std::string& text, double fontSize, FT_Face face) : _text(text), _fontSize(fontSize), _ok(false)
     {
 		const double minFontSize = 5.0;
 		const double maxFontSize = 100.0;
-		_fontSize = size * scale;
 		if (_fontSize < minFontSize || _fontSize > maxFontSize) return;
 
 		int error = FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(_fontSize));
@@ -57,10 +56,10 @@ namespace map_server
 			if (yMin < yMinMin) yMinMin = yMin;
 		}
 
-		_geoWidth = static_cast<double>(width) / (64.0 * scale);
-		_geoHeight = static_cast<double>(yMaxMax - yMinMin) / (64.0 * scale);
-		_leftInPixels = static_cast<double>(left) / 64.0;
-		_bottomInPixels = static_cast<double>(yMinMin) / 64.0;
+		_width = static_cast<double>(width) / 64.0;
+		_height = static_cast<double>(yMaxMax - yMinMin) / 64.0;
+		_left = static_cast<double>(left) / 64.0;
+		_bottom = static_cast<double>(yMinMin) / 64.0;
 
 		_ok = true;
     }

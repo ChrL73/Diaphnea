@@ -241,7 +241,7 @@ namespace map_server
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
 
-        TextDisplayer textDisplayer(_socketId, xMin, xMax, yMin, yMax);
+        TextDisplayer textDisplayer(_socketId, _widthInPixels, _heightInPixels);
 
         MapData::lock();
 
@@ -263,10 +263,11 @@ namespace map_server
                     PointItemCopy *pointItemCopy = new PointItemCopy();
 
                     const double coeff = 2.0;
-                    double radius = coeff * size * sizeFactor;
+                    double radius = coeff * size * sizeFactor * _scale;
                     const double u0 = 2.0;
-                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, pointItem->getPoint()->getX(), pointItem->getPoint()->getY(),
-                                                                           1.0, 0.0, radius, radius, u0, true);
+                    double x = (pointItem->getPoint()->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                    double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&textDisplayer, x, y, 1.0, 0.0, radius, radius, u0, true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
                     setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
@@ -283,19 +284,19 @@ namespace map_server
 						{
 							const Point *point1 = lineItem->getPointVector(resolutionIndex)[j];
 							const Point *point2 = lineItem->getPointVector(resolutionIndex)[j + 1];
-							double x1 = point1->getX();
-							double y1 = point1->getY();
-							double x2 = point2->getX();
-							double y2 = point2->getY();
+							double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+							double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+							double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+							double y2 = (point2->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-							if ((x1 >= xMin && x1 <= xMax && y1 >= yMin && y1 <= yMax) || (x2 >= xMin && x2 <= xMax && y2 >= yMin && y2 <= yMax))
+							if ((x1 >= 0 && x1 <= _widthInPixels && y1 >= 0 && y1 <= _heightInPixels) || (x2 >= 0 && x2 <= _widthInPixels && y2 >= 0 && y2 <= _heightInPixels))
 							{
 								double x = 0.5 * (x1 + x2);
 								double y = 0.5 * (y1 + y2);
 								const double coeff1 = 0.9;
 								double radius1 = coeff1 * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 								const double coeff2 = 2.5;
-								double radius2 = coeff2 * size * sizeFactor;
+								double radius2 = coeff2 * size * sizeFactor * _scale;
 								double axisDx = x2 - x1;
 								double axisDy = y2 - y1;
 								const double u0 = 1.5;
@@ -337,14 +338,14 @@ namespace map_server
         const std::string& text1 = item->getText1(_languageId);
         if (!text1.empty())
         {
-            TextInfo *textInfo1 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text1, face);
+            TextInfo *textInfo1 = new TextInfo(text1, itemCopyBuilder->getTextSize() * sizeFactor * _scale, face);
             if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
 			else delete textInfo1;
 
             const std::string& text2 = item->getText2(_languageId);
             if (!text2.empty())
             {
-                TextInfo *textInfo2 = new TextInfo(itemCopyBuilder->getTextSize() * sizeFactor, _scale, text2, face);
+                TextInfo *textInfo2 = new TextInfo(text2, itemCopyBuilder->getTextSize() * sizeFactor * _scale, face);
 				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
 				else delete textInfo2;
             }

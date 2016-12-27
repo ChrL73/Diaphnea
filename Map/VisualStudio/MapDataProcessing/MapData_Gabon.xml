@@ -260,6 +260,19 @@
           <name language="en" text="Doutsila"/>
         </name>
       </polygonElement>
+      <!--Départements Ogooué-Ivindo-->
+      <polygonElement id="e_Lope" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lopé"/>
+          <name language="en" text="Lopé"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Mvoung" look="pl_Departement">
+        <name>
+          <name language="fr" text="Mvoung"/>
+          <name language="en" text="Mvoung"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>

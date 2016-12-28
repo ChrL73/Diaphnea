@@ -104,6 +104,16 @@
           <name language="en" text="5"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_OgooueIvindo" look="pl_Province">
+        <name>
+          <name language="fr" text="Ogooue-Ivindo (6)"/>
+          <name language="en" text="Ogooue-Ivindo (6)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="6"/>
+          <name language="en" text="6"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_OgooueMaritime" look="pl_Province">
         <name>
           <name language="fr" text="Ogooué-Maritime (8)"/>
@@ -271,6 +281,19 @@
         <name>
           <name language="fr" text="Mvoung"/>
           <name language="en" text="Mvoung"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Ivindo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ivindo"/>
+          <name language="en" text="Ivindo"/>
+        </name>
+      </polygonElement>
+      
+      <polygonElement id="e_Zadie" look="pl_Departement">
+        <name>
+          <name language="fr" text="Zadie"/>
+          <name language="en" text="Zadie"/>
         </name>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->

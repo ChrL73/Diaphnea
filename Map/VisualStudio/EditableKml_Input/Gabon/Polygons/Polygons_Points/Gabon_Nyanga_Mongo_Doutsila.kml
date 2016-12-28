@@ -1,40 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>Gabon_Nyanga_Mongo_Doutsila.kml</name>
-	<Style id="hl">
-		<IconStyle>
-			<scale>1.2</scale>
-		</IconStyle>
-	</Style>
-	<StyleMap id="default">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#default0</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#hl</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="default0">
-	</Style>
-	<Placemark>
-		<name>Gabon_Nyanga_Mongo_Doutsila</name>
-		<LookAt>
-			<longitude>11.98101044767006</longitude>
-			<latitude>-3.339058973291845</latitude>
-			<altitude>0</altitude>
-			<heading>-0.04716830785724092</heading>
-			<tilt>0</tilt>
-			<range>28410.23165745703</range>
-			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-		</LookAt>
-		<styleUrl>#default</styleUrl>
-		<Point>
-			<gx:drawOrder>1</gx:drawOrder>
-			<coordinates>11.98398892350129,-3.317419423380542,0</coordinates>
-		</Point>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Point>	
+         <coordinates>
+            11.983989,-3.317419
+         </coordinates>
+      </Point>
+   </Placemark>
 </kml>

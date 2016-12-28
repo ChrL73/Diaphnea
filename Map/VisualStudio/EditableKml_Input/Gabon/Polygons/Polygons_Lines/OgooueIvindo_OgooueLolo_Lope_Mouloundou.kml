@@ -1,52 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>OgooueIvindo_OgooueLolo_Lope_Mouloundou.kml</name>
-	<StyleMap id="m_ylw-pushpin">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#s_ylw-pushpin</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="s_ylw-pushpin_hl">
-		<IconStyle>
-			<scale>1.3</scale>
-			<Icon>
-				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
-			</Icon>
-			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
-		</IconStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-	</Style>
-	<Style id="s_ylw-pushpin">
-		<IconStyle>
-			<scale>1.1</scale>
-			<Icon>
-				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
-			</Icon>
-			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
-		</IconStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-	</Style>
-	<Placemark>
-		<name>OgooueIvindo_OgooueLolo_Lope_Mouloundou</name>
-		<styleUrl>#m_ylw-pushpin</styleUrl>
-		<LineString>
-			<tessellate>1</tessellate>
-			<coordinates>
-				12.29422776985898,-0.5061489140640088,0 12.32666316315447,-0.4915076650584169,0 12.36456208065137,-0.4768938094471975,0 12.38426965569275,-0.468224686410758,0 12.43119488053841,-0.4500751301039963,0 12.47849491896148,-0.4311998371633166,0 12.48259379959375,-0.4287637894929801,0 12.48474522015352,-0.4218793160790487,0 12.49585230596227,-0.3483804465021438,0 12.50789814089869,-0.2859059603101199,0 12.51581646844325,-0.2373479981496329,0 12.52652175921498,-0.1652826508398143,0 12.53332113244547,-0.1381734704434029,0 12.54287034591447,-0.08673738784679176,0 12.55577535659435,-0.006981453327826052,0 12.56036062747603,0.02704844277761236,0 12.57000711316525,0.08136331533362669,0 12.59115998778137,0.2041390292341444,0 12.59942849746314,0.2536277226055514,0 12.60306967554524,0.2749391141708652,0 12.60434416667274,0.2809348319181396,0 
-			</coordinates>
-		</LineString>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            12.294228,-.506149
+            12.326663,-.491508
+            12.364562,-.476894
+            12.38427,-.468225
+            12.431195,-.450075
+            12.478495,-.4312
+            12.482594,-.428764
+            12.484745,-.421879
+            12.495852,-.34838
+            12.507898,-.285906
+            12.515816,-.237348
+            12.526522,-.165283
+            12.533321,-.138173
+            12.54287,-.086737
+            12.555775,-.006981
+            12.560361,.027048
+            12.570007,.081363
+            12.59116,.204139
+            12.599428,.253628
+            12.60307,.274939
+            12.604344,.280935
+         </coordinates>
+      </LineString>
+   </Placemark>
 </kml>

@@ -1,30 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>WoleuNtem_OgooueIvindo_Okano_Lope_Mvoung.kml</name>
-	<Style id="sh_ylw-pushpin">
-		<IconStyle>
-			<scale>1.2</scale>
-		</IconStyle>
-	</Style>
-	<StyleMap id="msn_ylw-pushpin">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#sn_ylw-pushpin</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#sh_ylw-pushpin</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="sn_ylw-pushpin">
-	</Style>
-	<Placemark>
-		<name>WoleuNtem_OgooueIvindo_Okano_Lope_Mvoung.kml</name>
-		<styleUrl>#msn_ylw-pushpin</styleUrl>
-		<Point>
-			<coordinates>11.87629063015912,0.630122851913253,0</coordinates>
-		</Point>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Point>	
+         <coordinates>
+            11.876291,.630123
+         </coordinates>
+      </Point>
+   </Placemark>
 </kml>

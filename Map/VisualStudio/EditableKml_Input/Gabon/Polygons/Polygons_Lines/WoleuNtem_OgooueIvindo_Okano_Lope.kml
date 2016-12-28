@@ -1,46 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>WoleuNtem_OgooueIvindo_Okano_Lope.kml</name>
-	<Style id="s">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-		<gx:IconStackStyle>
-		</gx:IconStackStyle>
-	</Style>
-	<StyleMap id="s0">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#s1</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#s</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Style id="s1">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-		<gx:IconStackStyle>
-		</gx:IconStackStyle>
-	</Style>
-	<Placemark>
-		<name>WoleuNtem_OgooueIvindo_Okano_Lope.kml</name>
-		<styleUrl>#s0</styleUrl>
-		<LineString>
-			<tessellate>1</tessellate>
-			<coordinates>
-				11.87324097009902,0.6282588462787924,0 11.86467772117982,0.6236950739374817,0 11.770197,0.559094,0 11.577341,0.430566,0 11.525252,0.395832,0 11.498854,0.378456,0 11.487321,0.370915,0 11.481231,0.3687090000000001,0 11.477774,0.366093,0 11.477098,0.361286,0 11.472795,0.358658,0 11.471575,0.355917,0 11.472937,0.352883,0 11.472648,0.349986,0 11.469467,0.349839,0 11.465758,0.350396,0 11.461477,0.346811,0 11.456643,0.341711,0 11.455937,0.335228,0 11.455466,0.328229,0 11.456142,0.324324,0 11.454543,0.319747,0 11.454628,0.315571,0 11.455877,0.312344,0 11.461024,0.310199,0 11.474017,0.304512,0 11.496537,0.289546,0 11.510796,0.280626,0 11.536703,0.265226,0 11.54756,0.259215,0 11.568379,0.247427,0 11.576291,0.241181,0 11.580956,0.235846,0 11.583968,0.2283,0 
-			</coordinates>
-		</LineString>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            11.873241,.628259
+            11.864678,.623695
+            11.770197,.559094
+            11.577341,.430566
+            11.525252,.395832
+            11.498854,.378456
+            11.487321,.370915
+            11.481231,.368709
+            11.477774,.366093
+            11.477098,.361286
+            11.472795,.358658
+            11.471575,.355917
+            11.472937,.352883
+            11.472648,.349986
+            11.469467,.349839
+            11.465758,.350396
+            11.461477,.346811
+            11.456643,.341711
+            11.455937,.335228
+            11.455466,.328229
+            11.456142,.324324
+            11.454543,.319747
+            11.454628,.315571
+            11.455877,.312344
+            11.461024,.310199
+            11.474017,.304512
+            11.496537,.289546
+            11.510796,.280626
+            11.536703,.265226
+            11.54756,.259215
+            11.568379,.247427
+            11.576291,.241181
+            11.580956,.235846
+            11.583968,.2283
+         </coordinates>
+      </LineString>
+   </Placemark>
 </kml>

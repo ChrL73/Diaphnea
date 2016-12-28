@@ -1,46 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-	<name>HauteBanio_Mongo.kml</name>
-	<Style id="s">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-		<gx:IconStackStyle>
-		</gx:IconStackStyle>
-	</Style>
-	<Style id="s0">
-		<ListStyle>
-		</ListStyle>
-		<LineStyle>
-			<color>ffff0000</color>
-			<width>2</width>
-		</LineStyle>
-		<gx:IconStackStyle>
-		</gx:IconStackStyle>
-	</Style>
-	<StyleMap id="s1">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#s</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#s0</styleUrl>
-		</Pair>
-	</StyleMap>
-	<Placemark>
-		<name>HauteBanio_Mongo</name>
-		<styleUrl>#s1</styleUrl>
-		<LineString>
-			<tessellate>1</tessellate>
-			<coordinates>
-				11.14103182612664,-3.378691098734898,0 11.17534130670429,-3.417079909824905,0 11.2039740610657,-3.449543745935898,0 11.22197941933219,-3.468454993544381,0 11.24470267527996,-3.495872715998867,0 11.26785088487989,-3.52524528406339,0 11.28883865710413,-3.549950410986793,0 11.31457410790014,-3.576878849848585,0 11.33637782464484,-3.599892593463931,0 
-			</coordinates>
-		</LineString>
-	</Placemark>
-</Document>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            11.141032,-3.378691
+            11.175341,-3.41708
+            11.203974,-3.449544
+            11.221979,-3.468455
+            11.244703,-3.495873
+            11.267851,-3.525245
+            11.288839,-3.54995
+            11.314574,-3.576879
+            11.336378,-3.599893
+         </coordinates>
+      </LineString>
+   </Placemark>
 </kml>

@@ -296,6 +296,19 @@
           <name language="en" text="Zadie"/>
         </name>
       </polygonElement>
+      <!--Départements Ogooué-Lolo-->
+      <polygonElement id="e_OffoueOnoye" look="pl_Departement">
+        <name>
+          <name language="fr" text="Offoué-Onoyé"/>
+          <name language="en" text="Offoué-Onoyé"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LoloBouenguidi" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lolo-Bouenguidi"/>
+          <name language="en" text="Lolo-Bouenguidi"/>
+        </name>
+      </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
         <name>
@@ -354,6 +367,13 @@
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
+        </name>
+      </pointElement>
+      <!--Villes Ogooué-Lolo-->
+      <pointElement id="e_Koulamoutou" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Koulamoutou"/>
+          <name language="en" text="Koulamoutou"/>
         </name>
       </pointElement>
       <!--Villes Ogooué-Maritime-->

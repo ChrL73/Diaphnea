@@ -48,6 +48,12 @@ namespace MapDataProcessing
 
         internal override int formParts1()
         {
+            if (_kmlFile == null)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("No KML file associated to element '{0}'", Id));
+                return -1;
+            }
+
             return 0;
         }
 

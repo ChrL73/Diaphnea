@@ -114,6 +114,16 @@
           <name language="en" text="6"/>
         </shortName>
       </polygonElement>
+      <polygonElement id="e_OgooueLolo" look="pl_Province">
+        <name>
+          <name language="fr" text="Ogooue-Lolo (7)"/>
+          <name language="en" text="Ogooue-Lolo (7)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="7"/>
+          <name language="en" text="7"/>
+        </shortName>
+      </polygonElement>
       <polygonElement id="e_OgooueMaritime" look="pl_Province">
         <name>
           <name language="fr" text="Ogooué-Maritime (8)"/>
@@ -307,6 +317,18 @@
         <name>
           <name language="fr" text="Lolo-Bouenguidi"/>
           <name language="en" text="Lolo-Bouenguidi"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LomboBouenguidi" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lombo-Bouenguidi"/>
+          <name language="en" text="Lombo-Bouenguidi"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Mouloundou" look="pl_Departement">
+        <name>
+          <name language="fr" text="Mouloundou"/>
+          <name language="en" text="Mouloundou"/>
         </name>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->

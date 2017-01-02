@@ -88,19 +88,24 @@ namespace map_server
                 {
                     Potential p = getPotential(i, j, 0);
 
-                    double value = 20.0 * p.getExcludingTerm();
+                    double c = 50.0;
+
+                    double value = c * p.getExcludingTerm();
                     if (value < 0) value = 0.0;
                     else if (value > 255.0) value = 255.0;
+                    value = 255.0 - value;
                     image1.setPixel(i, j, value, value, value);
 
-                    value = 20.0 * p.getNotExcludingTerm();
+                    value = c * p.getNotExcludingTerm();
                     if (value < 0) value = 0.0;
                     else if (value > 255.0) value = 255.0;
+                    value = 255.0 - value;
                     image2.setPixel(i, j, value, value, value);
 
-                    value = 20.0 * p.getExcludingTerm() + 20.0 * p.getNotExcludingTerm();
+                    value = c * p.getExcludingTerm() + c * p.getNotExcludingTerm();
                     if (value < 0) value = 0.0;
                     else if (value > 255.0) value = 255.0;
+                    value = 255.0 - value;
                     image3.setPixel(i, j, value, value, value);
                 }
             }

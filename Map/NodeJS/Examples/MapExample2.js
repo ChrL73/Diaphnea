@@ -6,7 +6,7 @@ $(function()
    function onConnected(mapServerConnection)
    {
       var canvasId = 'canvas';
-      var mapId = '_Gabon';   
+      var mapId = '_Test';   
       mapServerConnection.loadMap(mapId, canvasId, onMapLoaded);
       
       function onMapLoaded(map)

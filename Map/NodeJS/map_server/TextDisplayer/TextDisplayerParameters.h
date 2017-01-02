@@ -2,8 +2,6 @@
 
 namespace map_server
 {
-    class Potential;
-
     class TextDisplayerParameters
     {
 	private:
@@ -22,6 +20,9 @@ namespace map_server
 		static constexpr double _segmentRefPotential = 1.5;
 		static constexpr double _segmentRadius1Coeff = 0.9;
 		static constexpr double _segmentRadius2Coeff = 2.5;
+
+		static constexpr double _edgeRefPotential = 2.0;
+		static constexpr double _edgeRangeRatio = 0.05;
 
 		static double _excludingPotentialTable[_potentialTableSize];
 		static double _notExcludingPotentialTable[_potentialTableSize];
@@ -50,6 +51,9 @@ namespace map_server
 		double getSegmentRefPotential(void) const { return _segmentRefPotential; }
 		double getSegmentRadius1Coeff(void) const { return _segmentRadius1Coeff; }
 		double getSegmentRadius2Coeff(void) const { return _segmentRadius2Coeff; }
+
+		double getEdgeRefPotential(void) const { return _edgeRefPotential; }
+		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }
 
 		double getExcludingPotential(int i) const { return _excludingPotentialTableCopy[i]; }
 		double getNotExcludingPotential(int i) const { return _notExcludingPotentialTableCopy[i]; }

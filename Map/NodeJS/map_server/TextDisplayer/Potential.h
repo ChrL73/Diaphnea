@@ -16,8 +16,12 @@ namespace map_server
         void addExcludingTerm(double p);
         void addNotExcludingTerm (double p);
 
-        const Potential operator+(const Potential& p);
+        Potential& operator+=(const Potential& p);
+        const Potential operator+(const Potential& p) const;
         double compareTo(const Potential& p);
         bool isAcceptable(const Potential& threshold);
+
+        double getExcludingTerm(void) const { return _exlcudingTerm; }
+        double getNotExcludingTerm(void) const { return _notExlcudingTerm; }
     };
 }

@@ -46,8 +46,10 @@ namespace map_server
             unsigned int i, n = _elementIds.size();
             for (i = 0; i < n; ++i)
             {
-                MapElement *element = _map->getElement(_elementIds[i]);
+                std::string elementId = _elementIds[i];
+                MapElement *element = _map->getElement(elementId);
                 if (element != 0) elementVector.push_back(element);
+                else if (elementId == "#img") _createPotentialImage = true;
             }
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
@@ -245,7 +247,7 @@ namespace map_server
         MapData::lock();
 
 		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _widthInPixels, _heightInPixels);
+		TextDisplayer textDisplayer(&parameters, _socketId, _widthInPixels, _heightInPixels, _createPotentialImage);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() * _scale);
 

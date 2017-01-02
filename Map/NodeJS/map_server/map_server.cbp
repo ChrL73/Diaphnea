@@ -22,7 +22,7 @@
 					<Add directory="../../../../freetype-2.7/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-pthread" />
+					<Add option="-pthread `libpng-config --ldflags`" />
 					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
@@ -47,7 +47,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-pthread" />
+					<Add option="-pthread `libpng-config --ldflags`" />
 					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
@@ -121,13 +121,14 @@
 		<Unit filename="TextDisplayer/ClientInfo.h" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.cpp" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.h" />
-		<Unit filename="TextDisplayer/IDisplayerConstants.h" />
 		<Unit filename="TextDisplayer/ItemCopy.cpp" />
 		<Unit filename="TextDisplayer/ItemCopy.h" />
 		<Unit filename="TextDisplayer/ItemCopyBuilder.cpp" />
 		<Unit filename="TextDisplayer/ItemCopyBuilder.h" />
 		<Unit filename="TextDisplayer/LineItemCopy.cpp" />
 		<Unit filename="TextDisplayer/LineItemCopy.h" />
+		<Unit filename="TextDisplayer/PngImage.cpp" />
+		<Unit filename="TextDisplayer/PngImage.h" />
 		<Unit filename="TextDisplayer/PointItemCopy.cpp" />
 		<Unit filename="TextDisplayer/PointItemCopy.h" />
 		<Unit filename="TextDisplayer/Potential.cpp" />
@@ -136,6 +137,8 @@
 		<Unit filename="TextDisplayer/RepulsiveCenter.h" />
 		<Unit filename="TextDisplayer/TextDisplayer.cpp" />
 		<Unit filename="TextDisplayer/TextDisplayer.h" />
+		<Unit filename="TextDisplayer/TextDisplayerParameters.cpp" />
+		<Unit filename="TextDisplayer/TextDisplayerParameters.h" />
 		<Unit filename="TextDisplayer/TextInfo.cpp" />
 		<Unit filename="TextDisplayer/TextInfo.h" />
 		<Unit filename="ThreadInfo.cpp" />

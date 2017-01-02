@@ -27,3 +27,5 @@
 *.exe
 *InfoKml_Output
 *.ttf
+Map/NodeJS/map_server/*.png
+Experiments/png++/PngExperiment/*.png

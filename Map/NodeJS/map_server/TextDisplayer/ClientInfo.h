@@ -15,5 +15,7 @@ namespace map_server
 		void decrementThreadCount() { ++_threadCount; }
 		void setStopRequested(bool stopRequested) { _stopRequested = stopRequested; }
 
+		bool isStopRequested(void) const { return _stopRequested; }
+
 	};
 }

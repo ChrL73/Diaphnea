@@ -7,12 +7,19 @@ namespace map_server
         _exlcudingTerm += p;
     }
 
-    void Potential::addNotExcludingTerm (double p)
+    void Potential::addNotExcludingTerm(double p)
     {
         _notExlcudingTerm += p;
     }
 
-    const Potential Potential::operator+(const Potential& p)
+    Potential& Potential::operator+=(const Potential& p)
+    {
+        _exlcudingTerm += p._exlcudingTerm;
+        _notExlcudingTerm += p._notExlcudingTerm;
+        return *this;
+    }
+
+    const Potential Potential::operator+(const Potential& p) const
     {
         Potential result = *this;
         result._exlcudingTerm += p._exlcudingTerm;

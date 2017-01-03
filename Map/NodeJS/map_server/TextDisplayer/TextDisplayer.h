@@ -35,6 +35,8 @@ namespace map_server
         Potential getPotential(double x, double y, ItemCopy *selfItem);
         Potential getElementaryPotential(ItemCopy *item, double x, double y);
 
+        void hsvToRgb(double h, double s, double v, double& r, double& g, double& b);
+
     public:
 		static void clearClientMap(void);
 

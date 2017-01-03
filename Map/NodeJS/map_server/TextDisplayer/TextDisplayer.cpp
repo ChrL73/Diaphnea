@@ -31,7 +31,7 @@ namespace map_server
 		_parameters(parameters), _width(width), _height(height), _createPotentialImage(createPotentialImage),
         _maxPotential(new Potential(std::numeric_limits<double>::max(), std::numeric_limits<double>::max())),
         _minPotential(new Potential(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max())),
-		_softThreshold(new Potential(parameters->getSoftThresholdExcludingTerm(), parameters->getSoftThresholdNotExcludingTerm())),
+		_softThreshold(new Potential(parameters->getSoftThreshold(), parameters->getSoftThreshold())),
 		_hardThreshold(new Potential(parameters->getHardThresholdExcludingTerm(), parameters->getHardThresholdNotExcludingTerm()))
     {
 		_mutex.lock();
@@ -88,25 +88,45 @@ namespace map_server
                 {
                     Potential p = getPotential(i, j, 0);
 
-                    double c = 50.0;
+                    double value1 = p.getExcludingTerm() / _parameters->getSoftThreshold();
+                    if (value1 >= 1.0)
+                    {
+                        image1.setPixel(i, j, 0, 0, 0);
+                    }
+                    else
+                    {
+                        if (value1 < 0.0) value1 = 0.0;
+                        double r, g, b;
+                        hsvToRgb(240.0 * (1.0 - value1), value1, 1.0, r, g, b);
+                        image1.setPixel(i, j, 255 * r, 255 * g, 255 * b);
+                    }
 
-                    double value = c * p.getExcludingTerm();
-                    if (value < 0) value = 0.0;
-                    else if (value > 255.0) value = 255.0;
-                    value = 255.0 - value;
-                    image1.setPixel(i, j, value, value, value);
 
-                    value = c * p.getNotExcludingTerm();
-                    if (value < 0) value = 0.0;
-                    else if (value > 255.0) value = 255.0;
-                    value = 255.0 - value;
-                    image2.setPixel(i, j, value, value, value);
+                    double value2 = p.getNotExcludingTerm() / _parameters->getSoftThreshold();
+                    if (value2 >= 1.0)
+                    {
+                        image2.setPixel(i, j, 0, 0, 0);
+                    }
+                    else
+                    {
+                        if (value2 < 0.0) value2 = 0.0;
+                        double r, g, b;
+                        hsvToRgb(240.0 * (1.0 - value2), value2, 1.0, r, g, b);
+                        image2.setPixel(i, j, 255 * r, 255 * g, 255 * b);
+                    }
 
-                    value = c * p.getExcludingTerm() + c * p.getNotExcludingTerm();
-                    if (value < 0) value = 0.0;
-                    else if (value > 255.0) value = 255.0;
-                    value = 255.0 - value;
-                    image3.setPixel(i, j, value, value, value);
+                    double value3 = value1 > value2 ? value1 : value2;
+                    if (value3 >= 1.0)
+                    {
+                        image3.setPixel(i, j, 0, 0, 0);
+                    }
+                    else
+                    {
+                        if (value3 < 0.0) value3 = 0.0;
+                        double r, g, b;
+                        hsvToRgb(240.0 * (1.0 - value3), value3, 1.0, r, g, b);
+                        image3.setPixel(i, j, 255 * r, 255 * g, 255 * b);
+                    }
                 }
             }
 
@@ -166,16 +186,107 @@ namespace map_server
 
             double R1 = center->getV11() * dx + center->getV12() * dy;
             double R2 = center->getV21() * dx + center->getV22() * dy;
-            int R = static_cast<int>(R1 * R1 + R2 * R2);
-            if (R < _parameters->getPotentialTableSize())
+
+            if (center->getExcluding())
             {
-                if (center->getExcluding()) potential.addExcludingTerm(center->getU0() * _parameters->getExcludingPotential(R));
-                else potential.addNotExcludingTerm(center->getU0() * _parameters->getNotExcludingPotential(R));
+                int R = static_cast<int>(R1 * R1 + R2 * R2);
+                if (R < _parameters->getPotentialTableSize())
+                {
+                    potential.addExcludingTerm(center->getU0() * _parameters->getExcludingPotential(R));
+
+                    if (!potential.isAcceptable(*_softThreshold)) break;
+                }
+            }
+            else
+            {
+                double p = 0.0;
+
+                int R = static_cast<int>(R1 * R1);
+                if (R < _parameters->getPotentialTableSize())
+                {
+                    p = _parameters->getNotExcludingPotential1(R);
+
+                    R = static_cast<int>(R2 * R2);
+                    if (R < _parameters->getPotentialTableSize())
+                    {
+                        p *= _parameters->getNotExcludingPotential2(R);
+                    }
+                    else
+                    {
+                        p = 0.0;
+                    }
+                }
+
+                potential.addNotExcludingTerm(center->getU0() * p);
 
                 if (!potential.isAcceptable(*_softThreshold)) break;
             }
         }
 
         return std::move(potential);
+    }
+
+    void TextDisplayer::hsvToRgb(double h, double s, double v, double& r, double& g, double& b)
+    {
+        double hh, p, q, t, ff;
+        long i;
+
+        if(s <= 0.0)
+        {
+            r = v;
+            g = v;
+            b = v;
+            return;
+        }
+
+        hh = h;
+        if (hh >= 360.0) hh = 0.0;
+        hh /= 60.0;
+        i = (long)hh;
+        ff = hh - i;
+        p = v * (1.0 - s);
+        q = v * (1.0 - (s * ff));
+        t = v * (1.0 - (s * (1.0 - ff)));
+
+        switch(i) {
+        case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+
+        case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+
+        case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+
+        case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+
+        case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+
+        case 5:
+        default:
+            r = v;
+            g = p;
+            b = q;
+            break;
+        }
+
+        return;
     }
 }

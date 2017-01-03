@@ -15,8 +15,8 @@ namespace map_server
         double _v12;
         double _v21;
         double _v22;
-        double _cosAlpha;
-        double _sinAlpha;
+        /*double _cosAlpha;
+        double _sinAlpha;*/
 
     public:
         RepulsiveCenter(const TextDisplayerParameters *parameters, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);

@@ -5,31 +5,32 @@ namespace map_server
     class TextDisplayerParameters
     {
 	private:
-		static constexpr double _maxRepulsionRatio = 5.0;
+		static constexpr double _maxRepulsionRatio = 4.0;
 		static constexpr int _potentialTableSize = 1000;
 		static constexpr int _maxVisibleTextCount = 100;
 		static constexpr double _potentialTableSizeD = static_cast<double>(_potentialTableSize);
 
-		static constexpr double _softThresholdExcludingTerm = 1.0;
-		static constexpr double _softThresholdNotExcludingTerm = 8.0;
-		static constexpr double _hardThresholdExcludingTerm = 1.0;
-		static constexpr double _hardThresholdNotExcludingTerm = 0.75;
+		static constexpr double _softThreshold = 8.0;
+		static constexpr double _hardThresholdExcludingTerm = 5.0;
+		static constexpr double _hardThresholdNotExcludingTerm = 1.5;
 
-		static constexpr double _pointRefPotential = 2.0;
-		static constexpr double _pointRadiusCoeff = 2.0;
+		static constexpr double _pointRefPotential = 3.0;
+		static constexpr double _pointRadiusCoeff = 0.5;
 		static constexpr double _segmentRefPotential = 1.5;
-		static constexpr double _segmentRadius1Coeff = 0.9;
-		static constexpr double _segmentRadius2Coeff = 2.5;
+		static constexpr double _segmentRadius1Coeff = 1.0;
+		static constexpr double _segmentRadius2Coeff = 2.0;
 
 		static constexpr double _edgeRefPotential = 2.0;
 		static constexpr double _edgeRangeRatio = 0.05;
 
 		static double _excludingPotentialTable[_potentialTableSize];
-		static double _notExcludingPotentialTable[_potentialTableSize];
+		static double _notExcludingPotentialTable1[_potentialTableSize];
+		static double _notExcludingPotentialTable2[_potentialTableSize];
 		static bool _tablesFilled;
 
 		double _excludingPotentialTableCopy[_potentialTableSize];
-		double _notExcludingPotentialTableCopy[_potentialTableSize];
+		double _notExcludingPotentialTable1Copy[_potentialTableSize];
+		double _notExcludingPotentialTable2Copy[_potentialTableSize];
 
 		void fillTables(void);
 
@@ -41,8 +42,7 @@ namespace map_server
 		int getPotentialTableSizeD(void) const { return _potentialTableSizeD; }
 		int getMaxVisibleTextCount(void) const { return _maxVisibleTextCount; }
 
-		double getSoftThresholdExcludingTerm(void) const { return _softThresholdExcludingTerm; }
-		double getSoftThresholdNotExcludingTerm(void) const { return _softThresholdNotExcludingTerm; }
+		double getSoftThreshold(void) const { return _softThreshold; }
 		double getHardThresholdExcludingTerm(void) const { return _hardThresholdExcludingTerm; }
 		double getHardThresholdNotExcludingTerm(void) const { return _hardThresholdNotExcludingTerm; }
 
@@ -56,6 +56,7 @@ namespace map_server
 		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }
 
 		double getExcludingPotential(int i) const { return _excludingPotentialTableCopy[i]; }
-		double getNotExcludingPotential(int i) const { return _notExcludingPotentialTableCopy[i]; }
+		double getNotExcludingPotential1(int i) const { return _notExcludingPotentialTable1Copy[i]; }
+		double getNotExcludingPotential2(int i) const { return _notExcludingPotentialTable2Copy[i]; }
     };
 }

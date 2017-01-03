@@ -4,36 +4,45 @@ namespace map_server
 {
     void Potential::addExcludingTerm(double p)
     {
-        _exlcudingTerm += p;
+        if (p > _excludingTerm) _excludingTerm = p;
+        //_excludingTerm += p;
     }
 
     void Potential::addNotExcludingTerm(double p)
     {
-        _notExlcudingTerm += p;
+        if (p > _notExcludingTerm) _notExcludingTerm = p;
+        //_notExcludingTerm += p;
     }
 
     Potential& Potential::operator+=(const Potential& p)
     {
-        _exlcudingTerm += p._exlcudingTerm;
-        _notExlcudingTerm += p._notExlcudingTerm;
+        if (p._excludingTerm > _excludingTerm) _excludingTerm = p._excludingTerm;
+        if (p._notExcludingTerm > _notExcludingTerm) _notExcludingTerm = p._notExcludingTerm;
+        /*_excludingTerm += p._excludingTerm;
+        _notExcludingTerm += p._notExcludingTerm;*/
         return *this;
     }
 
     const Potential Potential::operator+(const Potential& p) const
     {
         Potential result = *this;
-        result._exlcudingTerm += p._exlcudingTerm;
-        result._notExlcudingTerm += p._notExlcudingTerm;
+        if (p._excludingTerm > result._excludingTerm) result._excludingTerm = p._excludingTerm;
+        if (p._notExcludingTerm > result._notExcludingTerm) result._notExcludingTerm = p._notExcludingTerm;
+        /*result._excludingTerm += p._excludingTerm;
+        result._notExcludingTerm += p._notExcludingTerm;*/
         return result;
     }
 
-    double Potential::compareTo(const Potential& p)
+    double Potential::compareTo(const Potential& p) const
     {
-        return _exlcudingTerm + _notExlcudingTerm - p._exlcudingTerm - p._notExlcudingTerm;
+        double p1 = _excludingTerm > _notExcludingTerm ? _excludingTerm : _notExcludingTerm;
+        double p2 = p._excludingTerm > p._notExcludingTerm ? p._excludingTerm : p._notExcludingTerm;
+        //return _excludingTerm + _notExcludingTerm - p._excludingTerm - p._notExcludingTerm;
+        return p1 - p2;
     }
 
-    bool Potential::isAcceptable(const Potential& threshold)
+    bool Potential::isAcceptable(const Potential& threshold) const
     {
-        return _exlcudingTerm < threshold._exlcudingTerm && _notExlcudingTerm < threshold._notExlcudingTerm;
+        return _excludingTerm < threshold._excludingTerm && _notExcludingTerm < threshold._notExcludingTerm;
     }
 }

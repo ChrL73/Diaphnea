@@ -8,6 +8,8 @@ namespace map_server
         double _excludingTerm;
         double _notExcludingTerm;
 
+        static constexpr double _alpha = 0.2;
+
     public:
         Potential(void) : _excludingTerm(0.0), _notExcludingTerm(0.0) {}
         Potential(double excludingTerm, double notExcludingTerm) :

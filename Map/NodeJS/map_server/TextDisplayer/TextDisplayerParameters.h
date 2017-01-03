@@ -18,7 +18,7 @@ namespace map_server
 		static constexpr double _pointRadiusCoeff = 0.5;
 		static constexpr double _segmentRefPotential = 1.5;
 		static constexpr double _segmentRadius1Coeff = 1.0;
-		static constexpr double _segmentRadius2Coeff = 2.0;
+		static constexpr double _segmentRadius2Coeff = 5.0;
 
 		static constexpr double _edgeRefPotential = 2.0;
 		static constexpr double _edgeRangeRatio = 0.05;

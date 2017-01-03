@@ -1,6 +1,6 @@
 $(function()
 {            
-   var url = 'http://albertine:3001';
+   var url = 'http://192.168.50.194:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -35,6 +35,11 @@ $(function()
                {
                   $(this).prop('checked', checked).change();
                });
+            });
+            
+            $('#potential').click(function()
+            {
+               map.requestPotentialImage();
             });
          });
       }

@@ -131,6 +131,13 @@ var mapServerInterface =
                }
             }
             
+            var potentialImageRequested = false;
+            this.requestPotentialImage = function()
+            {
+               potentialImageRequested = true;
+               scheduleRenderRequest();
+            }
+            
             var renderRequestTimeout;
             function scheduleRenderRequest()
             {
@@ -146,6 +153,12 @@ var mapServerInterface =
                {
                   if (visibleElements[elementId]) elementIds.push(elementId);
                });
+               
+               if (potentialImageRequested)
+               {
+                  elementIds.push('#img');
+                  potentialImageRequested = false;
+               }
                
                if (elementIds.length)
                {

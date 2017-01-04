@@ -27,11 +27,6 @@ namespace map_server
 
         std::vector<ItemCopy *> _itemVector;
 
-        const Potential * const _maxPotential;
-        const Potential * const _minPotential;
-		const Potential * const _softThreshold;
-		const Potential * const _hardThreshold;
-
         Potential getPotential(double x, double y, ItemCopy *selfItem);
         Potential getElementaryPotential(ItemCopy *item, double x, double y);
 

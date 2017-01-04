@@ -2,65 +2,49 @@
 
 namespace map_server
 {
-    void Potential::addExcludingTerm(double p)
+    Potential::Potential(double value)
     {
-        if (p > _excludingTerm) _excludingTerm = p + _alpha * _excludingTerm;
-        else _excludingTerm += _alpha * p;
-        //if (p > _excludingTerm) _excludingTerm = p;
-        //_excludingTerm += p;
+        if (value > 0.0)
+        {
+            _value = value;
+            _sum = value;
+            _max = value;
+        }
+        else
+        {
+            _value = 0.0;
+            _sum = 0.0;
+            _max = 0.0;
+        }
     }
 
-    void Potential::addNotExcludingTerm(double p)
+    void Potential::add(double value)
     {
-        if (p > _notExcludingTerm) _notExcludingTerm = p + _alpha * _notExcludingTerm;
-        else _notExcludingTerm += _alpha * p;
-        //if (p > _notExcludingTerm) _notExcludingTerm = p;
-        //_notExcludingTerm += p;
+        if (value > 0.0)
+        {
+            _sum += value;
+            if (value > _max) _max = value;
+            _value = (1.0 - _alpha) * _max + _alpha * _sum;
+        }
     }
 
     Potential& Potential::operator+=(const Potential& p)
     {
-        if (p._excludingTerm > _excludingTerm) _excludingTerm = p._excludingTerm + _alpha * _excludingTerm;
-        else _excludingTerm += _alpha * p._excludingTerm;
+        _sum += p._sum;
+        if (p._max > _max) _max = p._max;
+        _value = (1.0 - _alpha) * _max + _alpha * _sum;
 
-        if (p._notExcludingTerm > _notExcludingTerm) _notExcludingTerm = p._notExcludingTerm + _alpha * _notExcludingTerm;
-        else _notExcludingTerm += _alpha * p._notExcludingTerm;
-
-        /*if (p._excludingTerm > _excludingTerm) _excludingTerm = p._excludingTerm;
-        if (p._notExcludingTerm > _notExcludingTerm) _notExcludingTerm = p._notExcludingTerm;*/
-        /*_excludingTerm += p._excludingTerm;
-        _notExcludingTerm += p._notExcludingTerm;*/
         return *this;
     }
 
-    const Potential Potential::operator+(const Potential& p) const
+    /*const Potential Potential::operator+(const Potential& p) const
     {
         Potential result = *this;
 
-        if (p._excludingTerm > result._excludingTerm) result._excludingTerm = p._excludingTerm + _alpha * result._excludingTerm;
-        else result._excludingTerm += _alpha * p._excludingTerm;
+        result._sum += p._sum;
+        if (p._max > result._max) result._max = p._max;
+        result._value = (1.0 - _alpha) * result._max + _alpha * result._sum;
 
-        if (p._notExcludingTerm > result._notExcludingTerm) result._notExcludingTerm = p._notExcludingTerm + _alpha * result._notExcludingTerm;
-        else result._notExcludingTerm += _alpha * p._notExcludingTerm;
-
-        /*if (p._excludingTerm > result._excludingTerm) result._excludingTerm = p._excludingTerm;
-        if (p._notExcludingTerm > result._notExcludingTerm) result._notExcludingTerm = p._notExcludingTerm;*/
-        /*result._excludingTerm += p._excludingTerm;
-        result._notExcludingTerm += p._notExcludingTerm;*/
         return result;
-    }
-
-    double Potential::compareTo(const Potential& p) const
-    {
-        // Todo: use _alpha...
-        double p1 = _excludingTerm > _notExcludingTerm ? _excludingTerm : _notExcludingTerm;
-        double p2 = p._excludingTerm > p._notExcludingTerm ? p._excludingTerm : p._notExcludingTerm;
-        //return _excludingTerm + _notExcludingTerm - p._excludingTerm - p._notExcludingTerm;
-        return p1 - p2;
-    }
-
-    bool Potential::isAcceptable(const Potential& threshold) const
-    {
-        return _excludingTerm < threshold._excludingTerm && _notExcludingTerm < threshold._notExcludingTerm;
-    }
+    }*/
 }

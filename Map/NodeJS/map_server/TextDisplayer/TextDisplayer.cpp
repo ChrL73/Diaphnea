@@ -28,11 +28,7 @@ namespace map_server
 	}
 
     TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, double width, double height, bool createPotentialImage) :
-		_parameters(parameters), _width(width), _height(height), _createPotentialImage(createPotentialImage),
-        _maxPotential(new Potential(std::numeric_limits<double>::max(), std::numeric_limits<double>::max())),
-        _minPotential(new Potential(-std::numeric_limits<double>::max(), -std::numeric_limits<double>::max())),
-		_softThreshold(new Potential(parameters->getSoftThreshold(), parameters->getSoftThreshold())),
-		_hardThreshold(new Potential(parameters->getHardThresholdExcludingTerm(), parameters->getHardThresholdNotExcludingTerm()))
+		_parameters(parameters), _width(width), _height(height), _createPotentialImage(createPotentialImage)
     {
 		_mutex.lock();
 
@@ -51,11 +47,6 @@ namespace map_server
 	{
 		int i, n = _itemVector.size();
 		for (i = 0; i < n; ++i) delete _itemVector[i];
-
-		delete _maxPotential;
-		delete _minPotential;
-		delete _softThreshold;
-		delete _hardThreshold;
 	}
 
     void TextDisplayer::start(void)
@@ -78,61 +69,30 @@ namespace map_server
 
         if (_createPotentialImage)
         {
-            PngImage image1(_width, _height);
-            PngImage image2(_width, _height);
-            PngImage image3(_width, _height);
+            PngImage image(_width, _height);
             int j;
             for (i = 0; i < _width; ++i)
             {
                 for (j = 0; j < _height; ++j)
                 {
-                    Potential p = getPotential(i, j, 0);
+                    Potential p = std::move(getPotential(i, j, 0));
 
-                    double value1 = p.getExcludingTerm() / _parameters->getSoftThreshold();
+                    double value1 = p.getValue() / _parameters->getPotentialThreshold();
                     if (value1 >= 1.0)
                     {
-                        image1.setPixel(i, j, 0, 0, 0);
+                        image.setPixel(i, j, 0, 0, 0);
                     }
                     else
                     {
                         if (value1 < 0.0) value1 = 0.0;
                         double r, g, b;
                         hsvToRgb(240.0 * (1.0 - value1), value1, 1.0, r, g, b);
-                        image1.setPixel(i, j, 255 * r, 255 * g, 255 * b);
-                    }
-
-
-                    double value2 = p.getNotExcludingTerm() / _parameters->getSoftThreshold();
-                    if (value2 >= 1.0)
-                    {
-                        image2.setPixel(i, j, 0, 0, 0);
-                    }
-                    else
-                    {
-                        if (value2 < 0.0) value2 = 0.0;
-                        double r, g, b;
-                        hsvToRgb(240.0 * (1.0 - value2), value2, 1.0, r, g, b);
-                        image2.setPixel(i, j, 255 * r, 255 * g, 255 * b);
-                    }
-
-                    double value3 = value1 > value2 ? value1 : value2;
-                    if (value3 >= 1.0)
-                    {
-                        image3.setPixel(i, j, 0, 0, 0);
-                    }
-                    else
-                    {
-                        if (value3 < 0.0) value3 = 0.0;
-                        double r, g, b;
-                        hsvToRgb(240.0 * (1.0 - value3), value3, 1.0, r, g, b);
-                        image3.setPixel(i, j, 255 * r, 255 * g, 255 * b);
+                        image.setPixel(i, j, 255 * r, 255 * g, 255 * b);
                     }
                 }
             }
 
-            image1.save("potential1.png");
-            image2.save("potential2.png");
-            image3.save("potential3.png");
+            image.save("potential.png");
         }
     }
 
@@ -145,16 +105,16 @@ namespace map_server
         double a;
 
         a = x / (epsilon * _width) - 1;
-        if (a < 0) potential.addExcludingTerm(u0 * a * a);
+        if (a < 0) potential.add(u0 * a * a);
 
         a = y / (epsilon * _height) - 1;
-        if (a < 0) potential.addExcludingTerm(u0 * a * a);
+        if (a < 0) potential.add(u0 * a * a);
 
         a = (x - _width) / (epsilon * _width) + 1;
-        if (a > 0) potential.addExcludingTerm(u0 * a * a);
+        if (a > 0) potential.add(u0 * a * a);
 
         a = (y - _height) / (epsilon * _height) + 1;
-        if (a > 0) potential.addExcludingTerm(u0 * a * a);
+        if (a > 0) potential.add(u0 * a * a);
 
         int i, n = _itemVector.size();
         for (i = 0; i < n; ++i)
@@ -164,7 +124,7 @@ namespace map_server
             {
                 Potential elementaryPotential = std::move(getElementaryPotential(item, x, y));
                 potential += elementaryPotential;
-                if (_clientInfo->isStopRequested() || !potential.isAcceptable(*_softThreshold)) return std::move(potential);
+                if (_clientInfo->isStopRequested() || potential.getValue() > _parameters->getPotentialThreshold()) return std::move(potential);
 
                 // Todo: If a text is displayed for this item, add the potential generated by this text
             }
@@ -192,9 +152,9 @@ namespace map_server
                 int R = static_cast<int>(R1 * R1 + R2 * R2);
                 if (R < _parameters->getPotentialTableSize())
                 {
-                    potential.addExcludingTerm(center->getU0() * _parameters->getExcludingPotential(R));
+                    potential.add(center->getU0() * _parameters->getExcludingPotential(R));
 
-                    if (!potential.isAcceptable(*_softThreshold)) break;
+                    if (potential.getValue() > _parameters->getPotentialThreshold()) break;
                 }
             }
             else
@@ -217,9 +177,9 @@ namespace map_server
                     }
                 }
 
-                potential.addNotExcludingTerm(center->getU0() * p);
+                potential.add(center->getU0() * p);
 
-                if (!potential.isAcceptable(*_softThreshold)) break;
+                if (potential.getValue() > _parameters->getPotentialThreshold()) break;
             }
         }
 
@@ -231,7 +191,7 @@ namespace map_server
         double hh, p, q, t, ff;
         long i;
 
-        if(s <= 0.0)
+        if (s <= 0.0)
         {
             r = v;
             g = v;
@@ -248,7 +208,8 @@ namespace map_server
         q = v * (1.0 - (s * ff));
         t = v * (1.0 - (s * (1.0 - ff)));
 
-        switch(i) {
+        switch(i)
+        {
         case 0:
             r = v;
             g = t;
@@ -279,14 +240,11 @@ namespace map_server
             b = v;
             break;
 
-        case 5:
         default:
             r = v;
             g = p;
             b = q;
             break;
         }
-
-        return;
     }
 }

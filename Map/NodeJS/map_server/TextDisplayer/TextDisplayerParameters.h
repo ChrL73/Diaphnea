@@ -10,12 +10,9 @@ namespace map_server
 		static constexpr int _maxVisibleTextCount = 100;
 		static constexpr double _potentialTableSizeD = static_cast<double>(_potentialTableSize);
 
-		static constexpr double _softThreshold = 8.0;
-		static constexpr double _hardThresholdExcludingTerm = 5.0;
-		static constexpr double _hardThresholdNotExcludingTerm = 1.5;
-
+		static constexpr double _potentialThreshold = 8.0;
 		static constexpr double _pointRefPotential = 3.0;
-		static constexpr double _pointRadiusCoeff = 0.5;
+		static constexpr double _pointRadiusCoeff = 1.0;
 		static constexpr double _segmentRefPotential = 1.5;
 		static constexpr double _segmentRadius1Coeff = 1.0;
 		static constexpr double _segmentRadius2Coeff = 5.0;
@@ -42,10 +39,7 @@ namespace map_server
 		int getPotentialTableSizeD(void) const { return _potentialTableSizeD; }
 		int getMaxVisibleTextCount(void) const { return _maxVisibleTextCount; }
 
-		double getSoftThreshold(void) const { return _softThreshold; }
-		double getHardThresholdExcludingTerm(void) const { return _hardThresholdExcludingTerm; }
-		double getHardThresholdNotExcludingTerm(void) const { return _hardThresholdNotExcludingTerm; }
-
+		double getPotentialThreshold(void) const { return _potentialThreshold; }
 		double getPointRefPotential(void) const { return _pointRefPotential; }
 		double getPointRadiusCoeff(void) const { return _pointRadiusCoeff; }
 		double getSegmentRefPotential(void) const { return _segmentRefPotential; }

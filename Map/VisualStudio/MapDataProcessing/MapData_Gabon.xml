@@ -175,6 +175,13 @@
           <name language="en" text="Komo"/>
         </name>
       </polygonElement>
+      <!--Départements Haut-Ogooué-->
+      <polygonElement id="e_SebeBrikolo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Sébé-Brikolo"/>
+          <name language="en" text="Sébé-Brikolo"/>
+        </name>
+      </polygonElement>
       <!--Départements Moyen-Ogooué-->
       <polygonElement id="e_OgooueLacs" look="pl_Departement">
         <name>
@@ -389,6 +396,27 @@
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
+        </name>
+      </pointElement>
+      <!--Villes Moyen-Ogooué-->
+      <pointElement id="e_Lambarene" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Lambaréné"/>
+          <name language="en" text="Lambaréné"/>
+        </name>
+      </pointElement>
+      <!--Villes Nyanga-->
+      <pointElement id="e_Tchibanga" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Tchibanga"/>
+          <name language="en" text="Tchibanga"/>
+        </name>
+      </pointElement>
+      <!--Villes Ogooué-Ivindo-->
+      <pointElement id="e_Makokou" look="tl_ChefLieuProvince">
+        <name>
+          <name language="fr" text="Makokou"/>
+          <name language="en" text="Makokou"/>
         </name>
       </pointElement>
       <!--Villes Ogooué-Lolo-->

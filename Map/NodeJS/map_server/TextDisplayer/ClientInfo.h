@@ -11,10 +11,11 @@ namespace map_server
 	public:
 		ClientInfo() : _stopRequested(false), _threadCount(0) {}
 
-		void incrementThreadCount() { ++_threadCount; }
-		void decrementThreadCount() { ++_threadCount; }
-		void setStopRequested(bool stopRequested) { _stopRequested = stopRequested; }
+		void incrementThreadCount(void) { ++_threadCount; }
+		void decrementThreadCount(void) { --_threadCount; }
+		bool getThreadCount(void) { return _threadCount; }
 
+		void setStopRequested(bool stopRequested) { _stopRequested = stopRequested; }
 		bool isStopRequested(void) const { return _stopRequested; }
 
 	};

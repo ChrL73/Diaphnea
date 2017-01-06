@@ -10,8 +10,12 @@
 namespace map_server
 {
     class ItemCopy;
+    class PointItemCopy;
+    class LineItemCopy;
+    class FilledPolygonItemCopy;
 	class ClientInfo;
 	class TextDisplayerParameters;
+	class TextInfo;
 
     class TextDisplayer
     {
@@ -19,6 +23,7 @@ namespace map_server
 		static std::mutex _mutex;
 		static std::map<std::string, ClientInfo *> _clientMap;
 		ClientInfo *_clientInfo;
+		bool isStopRequested(void);
 
 		const TextDisplayerParameters * const _parameters;
         const double _width;
@@ -26,6 +31,11 @@ namespace map_server
         const bool _createPotentialImage;
 
         std::vector<ItemCopy *> _itemVector;
+
+        bool displayText(ItemCopy *item, TextInfo *textInfo);
+        bool displayPointText(PointItemCopy *item, TextInfo *textInfo);
+        bool displayLineText(LineItemCopy *item, TextInfo *textInfo);
+        bool displayFilledPolygonText(FilledPolygonItemCopy *item, TextInfo *textInfo);
 
         Potential getPotential(double x, double y, ItemCopy *selfItem);
         Potential getElementaryPotential(ItemCopy *item, double x, double y);

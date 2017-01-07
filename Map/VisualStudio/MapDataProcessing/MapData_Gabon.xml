@@ -182,6 +182,24 @@
           <name language="en" text="Sébé-Brikolo"/>
         </name>
       </polygonElement>
+      <polygonElement id="e_BayiBrikolo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Bayi-Brikolo"/>
+          <name language="en" text="Bayi-Brikolo"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LebombiLeyou" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lebombi-Leyou"/>
+          <name language="en" text="Lebombi-Leyou"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Lekoko" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lekoko"/>
+          <name language="en" text="Lekoko"/>
+        </name>
+      </polygonElement>
       <!--Départements Moyen-Ogooué-->
       <polygonElement id="e_OgooueLacs" look="pl_Departement">
         <name>

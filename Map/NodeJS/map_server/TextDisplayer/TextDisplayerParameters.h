@@ -36,7 +36,7 @@ namespace map_server
 
 		double getMaxRepulsionRatio(void) const { return _maxRepulsionRatio; }
 		int getPotentialTableSize(void) const { return _potentialTableSize; }
-		int getPotentialTableSizeD(void) const { return _potentialTableSizeD; }
+		double getPotentialTableSizeD(void) const { return _potentialTableSizeD; }
 		int getMaxVisibleTextCount(void) const { return _maxVisibleTextCount; }
 
 		double getPotentialThreshold(void) const { return _potentialThreshold; }

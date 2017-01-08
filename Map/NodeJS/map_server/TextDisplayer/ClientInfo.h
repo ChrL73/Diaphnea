@@ -13,7 +13,7 @@ namespace map_server
 
 		void incrementThreadCount(void) { ++_threadCount; }
 		void decrementThreadCount(void) { --_threadCount; }
-		bool getThreadCount(void) { return _threadCount; }
+		int getThreadCount(void) { return _threadCount; }
 
 		void setStopRequested(bool stopRequested) { _stopRequested = stopRequested; }
 		bool isStopRequested(void) const { return _stopRequested; }

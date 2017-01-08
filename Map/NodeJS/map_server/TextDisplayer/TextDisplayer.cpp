@@ -84,7 +84,7 @@ namespace map_server
 
         if (_createPotentialImage && !isStopRequested())
         {
-            PngImage image(_width, _height);
+            PngImage image(static_cast<int>(_width), static_cast<int>(_height));
             int j;
             for (i = 0; i < _width && !isStopRequested(); ++i)
             {

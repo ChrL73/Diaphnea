@@ -16,6 +16,7 @@ namespace map_server
     int MapServer::run(void)
     {
         Request::setCoutMutex(&_coutMutex);
+        TextDisplayer::setCoutMutex(&_coutMutex);
 
         MapData *mapData = MapData::instance();
         if (mapData == 0)

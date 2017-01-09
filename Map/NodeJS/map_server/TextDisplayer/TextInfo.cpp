@@ -15,7 +15,7 @@ namespace map_server
 		if (error) return;
 
 		int i, n = text.size();
-		int width = 0, yMaxMax = 0, yMinMin = 0, left = 0;
+		int width = 0, yMaxMax = 0, yMinMin = 0, xOffset = 0;
 
 		for (i = 0; i < n; ++i)
 		{
@@ -30,7 +30,7 @@ namespace map_server
 
 			if (i == 0)
 			{
-				left = face->glyph->metrics.horiBearingX;
+				xOffset = face->glyph->metrics.horiBearingX;
 
 				if (n == 1)
 				{
@@ -58,8 +58,8 @@ namespace map_server
 
 		_width = static_cast<double>(width) / 64.0;
 		_height = static_cast<double>(yMaxMax - yMinMin) / 64.0;
-		_left = static_cast<double>(left) / 64.0;
-		_bottom = static_cast<double>(yMinMin) / 64.0;
+		_xOffset = static_cast<double>(xOffset) / 64.0;
+		_yOffset = static_cast<double>(yMinMin) / 64.0;
 
 		_ok = true;
     }

@@ -13,8 +13,6 @@ namespace map_server
         std::vector<const RepulsiveCenter *> _repulsiveCenterVector;
 		TextInfo *_textInfo1;
 		TextInfo *_textInfo2;
-		double _x;
-		double _y;
 
     public:
 		ItemCopy(void) : _textInfo1(0), _textInfo2(0) {}
@@ -29,4 +27,3 @@ namespace map_server
 		TextInfo *getTextInfo2(void) const { return _textInfo2; }
     };
 }
-

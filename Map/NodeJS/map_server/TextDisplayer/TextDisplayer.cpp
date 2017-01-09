@@ -8,14 +8,20 @@
 #include "PointItemCopy.h"
 #include "LineItemCopy.h"
 #include "FilledPolygonItemCopy.h"
+#include "TextInfo.h"
+#include "MessageTypeEnum.h"
 
 #include <chrono>
 #include <thread>
+#include <limits>
+#include <cmath>
+#include <iostream>
 
 namespace map_server
 {
 	std::mutex TextDisplayer::_mutex;
 	std::map<std::string, ClientInfo *> TextDisplayer::_clientMap;
+	std::mutex *TextDisplayer::_coutMutexPtr = 0;
 
 	void TextDisplayer::clearClientMap(void)
 	{
@@ -31,8 +37,8 @@ namespace map_server
 		_mutex.unlock();
 	}
 
-    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, double width, double height, bool createPotentialImage) :
-		_parameters(parameters), _width(width), _height(height), _createPotentialImage(createPotentialImage)
+    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId, double width, double height, bool createPotentialImage) :
+		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height), _createPotentialImage(createPotentialImage)
     {
 		_mutex.lock();
 
@@ -134,7 +140,38 @@ namespace map_server
 
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
-        return false;
+        Potential pMin(std::numeric_limits<double>::max());
+        double alphaMin = 0.0;
+        int i, n = 12;
+        for (i = 0; i < n; ++i)
+        {
+            /*double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
+            Potential potential = getPotential(pointItem, item.CurrentWidth, item.CurrentHeight, Math.Cos(alpha), Math.Sin(alpha), false);
+            if (potential.compareTo(pMin) < 0.0 && potential.isAcceptable(_softThreshold))
+            {
+                alphaMin = alpha;
+                pMin = potential;
+            }
+            if (_stopRequested) return false;*/
+        }
+
+        //if (!pMin.isAcceptable(_softThreshold)) return false;
+
+        double s = sin(alphaMin);
+        if (s > 0.8) s = 0.8;
+        else if (s < -0.8) s = -0.8;
+        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()) - 0.5 * textInfo->getWidth());
+        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()) - 0.5 * textInfo->getHeight());
+
+        _coutMutexPtr->lock();
+        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT << " " << "{\"text\":\"" << textInfo->getText() << "\"}" << std::endl;
+        _coutMutexPtr->unlock();
+
+        /*RepulsiveCenter center = new RepulsiveCenter(item.X + 0.5 * item.CurrentWidth, item.Y + 0.5 * item.CurrentHeight,
+                                                     1.0, 0.0, 0.8 * item.CurrentWidth, 0.8 * item.CurrentHeight, 1.0, false, false, true);
+        item.RepulsiveCenterList.Add(center);*/
+
+        return true;
     }
 
     bool TextDisplayer::displayLineText(LineItemCopy *item, TextInfo *textInfo)

@@ -247,7 +247,7 @@ namespace map_server
         MapData::lock();
 
 		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _widthInPixels, _heightInPixels, _createPotentialImage);
+		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _createPotentialImage);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() * _scale);
 
@@ -264,11 +264,11 @@ namespace map_server
                 const PointItem *pointItem = dynamic_cast<const PointItem *>(item);
                 if (pointItem != 0)
                 {
-                    PointItemCopy *pointItemCopy = new PointItemCopy();
-
-                    double radius = parameters.getPointRadiusCoeff() * size * sizeFactor * _scale;
+                    double diameter = size * sizeFactor * _scale;
                     double x = (pointItem->getPoint()->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                     double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                    PointItemCopy *pointItemCopy = new PointItemCopy(x, y, diameter);
+                    double radius = parameters.getPointRadiusCoeff() * diameter;
                     RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
                     setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);

@@ -10,6 +10,7 @@ namespace map_server
         ELEMENTS_INFO = 3,
         ITEM_DATA = 4,
         LOOK = 5,
-        RENDER = 6
+        RENDER = 6,
+        TEXT = 7
     };
 }

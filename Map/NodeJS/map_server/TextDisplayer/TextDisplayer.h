@@ -24,8 +24,12 @@ namespace map_server
 		static std::map<std::string, ClientInfo *> _clientMap;
 		ClientInfo *_clientInfo;
 		bool isStopRequested(void);
+		static std::mutex *_coutMutexPtr;
 
-		const TextDisplayerParameters * const _parameters;
+        const TextDisplayerParameters * const _parameters;
+		const char * const _socketId;
+        const char * const _requestId;
+
         const double _width;
         const double _height;
         const bool _createPotentialImage;
@@ -43,9 +47,10 @@ namespace map_server
         void hsvToRgb(double h, double s, double v, double& r, double& g, double& b);
 
     public:
+        static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
 		static void clearClientMap(void);
 
-        TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, double width, double height, bool createPotentialImage);
+        TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId, double width, double height, bool createPotentialImage);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

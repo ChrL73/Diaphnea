@@ -14,7 +14,8 @@ var messageNames =
    'elementsInfo', // 3
    'itemData', // 4
    'look', // 5
-   'render' // 6
+   'render', // 6
+   'text' // 7
 ];
 
 var messageTypes = {};

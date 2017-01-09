@@ -4,6 +4,8 @@ namespace map_server
 {
     void MapElement::loadCommon(mongo::BSONObj dbElement)
     {
+        _numericalId = dbElement.getIntField("num_id");
+
         std::string namesJson;
 
         mongo::BSONObj dbName = dbElement.getField("name").Obj();

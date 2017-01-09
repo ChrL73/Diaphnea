@@ -27,7 +27,8 @@ namespace map_server
 				lineItem->setCurrentLook(_look->getLineLook());
 				lineItem->setCurrentTextLook(_look->getTextLook());
 				lineItem->setNameMap(&_nameMap);
-                _itemVector.push_back(lineItem);
+                lineItem->setElementIdForText(_numericalId);
+				_itemVector.push_back(lineItem);
             }
         }
     }

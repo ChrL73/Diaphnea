@@ -5,7 +5,7 @@
 namespace map_server
 {
     MapItem::MapItem(int id, int resolutionCount) :
-        _id(id), _currentLook(0), _currentTextLook(0), _nameMapPtr(0),
+        _id(id), _currentLook(0), _currentTextLook(0), _nameMapPtr(0), _elementIdForText(-1),
         _xMin(std::numeric_limits<double>::max()),
         _xMax(std::numeric_limits<double>::lowest()),
         _yMin(std::numeric_limits<double>::max()),

@@ -164,7 +164,13 @@ namespace map_server
         textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()) - 0.5 * textInfo->getHeight());
 
         _coutMutexPtr->lock();
-        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT << " " << "{\"text\":\"" << textInfo->getText() << "\"}" << std::endl;
+        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
+            << " {\"i\":" << item->getElementId()
+            << ",\"t\":\"" << textInfo->getText()
+            << "\",\"x\":" << textInfo->getX()
+            << ",\"y\":" << textInfo->getY()
+            << ",\"s\":" << textInfo->getFontSize()
+            << "}" << std::endl;
         _coutMutexPtr->unlock();
 
         /*RepulsiveCenter center = new RepulsiveCenter(item.X + 0.5 * item.CurrentWidth, item.Y + 0.5 * item.CurrentHeight,

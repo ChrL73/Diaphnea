@@ -15,6 +15,7 @@
         const ItemLook *_currentLook;
 		const ItemLook *_currentTextLook;
         std::map<std::string, std::pair<std::string, std::string> > *_nameMapPtr;
+        int _elementIdForText;
         const std::string _emptyString;
 
     protected:
@@ -30,8 +31,10 @@
 		void setCurrentTextLook(const ItemLook *look) { _currentTextLook = look; }
 
 		void setNameMap(std::map<std::string, std::pair<std::string, std::string> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
+		void setElementIdForText(int elementNumericalId) { _elementIdForText = elementNumericalId; }
 		const std::string& getText1(const std::string& languageId) const;
 		const std::string& getText2(const std::string& languageId) const;
+		int getElementIdForText(void) const { return _elementIdForText; }
 
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(void) const { return _currentLook; }

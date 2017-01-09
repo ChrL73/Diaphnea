@@ -27,6 +27,7 @@ namespace map_server
 		void setY(double y) { _y = y; }
 
         const std::string& getText(void) const { return _text; }
+		double getFontSize(void) const { return _fontSize; }
 		double getWidth(void) const { return _width; }
 		double getHeight(void) const { return _height; }
 		double getXOffset(void) const { return _xOffset; }

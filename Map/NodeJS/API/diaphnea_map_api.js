@@ -273,6 +273,15 @@ var mapServerInterface =
                   addItem(ids.itemKey, ids.lookId);
                });
             });
+            
+            socket.on('textRes', function(response)
+            {
+               var context = getContext(response);
+               console.log(response.content);
+               if (response.requestId != lastRenderRequestId) return;
+               
+               
+            });
 
             socket.on('itemDataRes', function(response)
             {

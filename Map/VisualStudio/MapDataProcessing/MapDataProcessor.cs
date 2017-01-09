@@ -33,6 +33,7 @@ namespace MapDataProcessing
             PolygonLinePart.clearAll();
             PolygonPolygonPart.clearAll();
             LineLinePart.clearAll();
+            MapElement.reset();
             GeoPoint.reset();
             ElementName.reset();
             ItemId.reset();

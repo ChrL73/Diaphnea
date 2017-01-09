@@ -10,6 +10,10 @@ namespace MapDataProcessing
 {
     abstract class MapElement
     {
+        private static int _counter = -1;
+        internal static void reset() { _counter = -1; }
+
+        private readonly int _numericalId;
         private readonly String _id;
         private readonly MapData _mapData;
         private readonly ElementName _name;
@@ -18,6 +22,7 @@ namespace MapDataProcessing
 
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId)
         {
+            _numericalId = ++_counter;
             _id = id;
             _mapData = mapData;
             _name = new ElementName(name);
@@ -39,6 +44,7 @@ namespace MapDataProcessing
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
                 { "id", _id},
+                { "num_id", _numericalId},
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "look_id", _lookId }

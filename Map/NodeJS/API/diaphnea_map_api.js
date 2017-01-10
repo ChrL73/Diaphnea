@@ -127,6 +127,13 @@ var mapServerInterface =
                this.hide = function()
                {
                   visibleElements[elementId] = false;
+                  var textItemKey = '_' + elementId;
+                  var textItem = items[textItemKey];
+                  if (textItem)
+                  {
+                     delete addedItems[textItemKey];
+                     delete addedItemsByZIndex[textItem.zI][textItemKey];
+                  }
                   scheduleRenderRequest();
                }
             }
@@ -280,18 +287,20 @@ var mapServerInterface =
                if (response.requestId != lastRenderRequestId) return;
                
                var textInfo = response.content;
-               console.log(textInfo);
+               //console.log(textInfo);
                var itemKey = '_' + textInfo.e;
                
                items[itemKey] =
                {
+                  key: itemKey,
                   type: 'text',
                   text: textInfo.t,
                   x: textInfo.x,
                   y: textInfo.y,
                   zI: textInfo.z,
                   size: textInfo.s,
-                  color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')'
+                  color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
+                  scale: scale
                }
                
                addItem(itemKey);
@@ -379,6 +388,7 @@ var mapServerInterface =
             function removeItem(item)
             {
                var itemKey = item.key;
+               if (itemKey.charAt(0) == '_') return; // If the item is a text item, do nothing (text items are removed in another way)
                
                if (addedItems[itemKey])
                {
@@ -459,9 +469,20 @@ var mapServerInterface =
                      }
                      else if (item.type = 'text')
                      {
-                        ctx.fillStyle = item.color;
-                        ctx.font = item.size + 'px arial';
-                        ctx.fillText(item.text, item.x, item.y);
+                        if (item.scale == scale)
+                        {
+                           var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
+                           var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
+
+                           ctx.fillStyle = item.color;
+                           ctx.font = item.size + 'px arial';
+                           ctx.fillText(item.text, x, y);
+                        }
+                        else
+                        {
+                           delete addedItems[itemKey];
+                           delete addedItemsByZIndex[item.zI][itemKey];
+                        }
                      }
                   });
                }

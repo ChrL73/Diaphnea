@@ -4,7 +4,7 @@ namespace map_server
 {
     void MapElement::loadCommon(mongo::BSONObj dbElement)
     {
-        _numericalId = dbElement.getIntField("num_id");
+        //_numericalId = dbElement.getIntField("num_id");
 
         std::string namesJson;
 

@@ -190,9 +190,7 @@ namespace map_server
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
 
-                    double textSize = 1.0;
-                    if (item->getCurrentTextLook() != 0) textSize = item->getCurrentTextLook()->getSize();
-                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), textSize, resolutionIndex);
+                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
                     _itemCopyBuilderVector.push_back(itemCopyBuilder);
                 }
 
@@ -332,19 +330,20 @@ namespace map_server
 
     void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face)
     {
+        if (itemCopyBuilder->getTextLook() == 0) return;
         const MapItem *item = itemCopyBuilder->getItem();
 
         const std::string& text1 = item->getText1(_languageId);
         if (!text1.empty())
         {
-            TextInfo *textInfo1 = new TextInfo(text1, itemCopyBuilder->getTextSize() * sizeFactor * _scale, face);
+            TextInfo *textInfo1 = new TextInfo(text1, itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale, itemCopyBuilder->getTextLook(), face);
             if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
 			else delete textInfo1;
 
             const std::string& text2 = item->getText2(_languageId);
             if (!text2.empty())
             {
-                TextInfo *textInfo2 = new TextInfo(text2, itemCopyBuilder->getTextSize() * sizeFactor * _scale, face);
+                TextInfo *textInfo2 = new TextInfo(text2, itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale, itemCopyBuilder->getTextLook(), face);
 				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
 				else delete textInfo2;
             }

@@ -12,7 +12,7 @@ namespace map_server
         const double _diameter;
 
     public:
-        PointItemCopy(int elementId, double x, double y, double diameter) :
+        PointItemCopy(const std::string& elementId, double x, double y, double diameter) :
             ItemCopy(elementId), _x(x), _y(y), _diameter(diameter) {}
 
         double getX(void) const { return _x; }

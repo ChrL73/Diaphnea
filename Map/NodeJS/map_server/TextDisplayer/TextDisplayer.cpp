@@ -137,7 +137,6 @@ namespace map_server
         return false;
     }
 
-
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
         Potential pMin(std::numeric_limits<double>::max());
@@ -145,8 +144,8 @@ namespace map_server
         int i, n = 12;
         for (i = 0; i < n; ++i)
         {
-            /*double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
-            Potential potential = getPotential(pointItem, item.CurrentWidth, item.CurrentHeight, Math.Cos(alpha), Math.Sin(alpha), false);
+            double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
+            /*Potential potential = getPotential(pointItem, item.CurrentWidth, item.CurrentHeight, Math.Cos(alpha), Math.Sin(alpha), false);
             if (potential.compareTo(pMin) < 0.0 && potential.isAcceptable(_softThreshold))
             {
                 alphaMin = alpha;
@@ -160,16 +159,21 @@ namespace map_server
         double s = sin(alphaMin);
         if (s > 0.8) s = 0.8;
         else if (s < -0.8) s = -0.8;
-        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()) - 0.5 * textInfo->getWidth());
-        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()) - 0.5 * textInfo->getHeight());
+        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + 0.5 * item->getDiameter()) - 0.5 * textInfo->getWidth());
+        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + 0.5 * item->getDiameter()) - 0.5 * textInfo->getHeight());
 
         _coutMutexPtr->lock();
         std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
-            << " {\"i\":" << item->getElementId()
-            << ",\"t\":\"" << textInfo->getText()
-            << "\",\"x\":" << textInfo->getX()
-            << ",\"y\":" << textInfo->getY()
+            << " {\"t\":\"" << textInfo->getText()
+            << "\",\"e\":\"" << item->getElementId()
+            << "\",\"x\":" << textInfo->getX() - textInfo->getXOffset()
+            << ",\"y\":" << textInfo->getY() + textInfo->getYOffset() + textInfo->getHeight()
             << ",\"s\":" << textInfo->getFontSize()
+            << ",\"z\":" << textInfo->getZIndex()
+            << ",\"a\":" << textInfo->getAlpha()
+            << ",\"r\":" << textInfo->getRed()
+            << ",\"g\":" << textInfo->getGreen()
+            << ",\"b\":" << textInfo->getBlue()
             << "}" << std::endl;
         _coutMutexPtr->unlock();
 

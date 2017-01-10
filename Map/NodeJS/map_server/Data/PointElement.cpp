@@ -30,7 +30,7 @@ namespace map_server
             _item->setCurrentLook(_look->getPointLook());
 			_item->setCurrentTextLook(_look->getTextLook());
             _item->setNameMap(&_nameMap);
-            _item->setElementIdForText(_numericalId);
+            _item->setElementIdForText(_id);
             _iMap->addPointItem(_item);
         }
     }

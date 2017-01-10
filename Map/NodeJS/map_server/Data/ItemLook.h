@@ -9,10 +9,10 @@ namespace map_server
     private:
         const int _id;
         const int _zIndex;
-        /*const int _alpha;
+        const int _alpha;
         const int _red;
         const int _green;
-        const int _blue;*/
+        const int _blue;
         const double _size;
         char _json[128];
 
@@ -21,10 +21,10 @@ namespace map_server
 
         int getId(void) const { return _id; }
         int getZIndex(void) const { return _zIndex; }
-        /*int getAlpha(void) const { return _alpha; }
+        int getAlpha(void) const { return _alpha; }
         int getRed(void) const { return _red; }
         int getGreen(void) const { return _green; }
-        int getBlue(void) const { return _blue; }*/
+        int getBlue(void) const { return _blue; }
         double getSize(void) const { return _size; }
 
         const char *getJson(void) const { return _json; }

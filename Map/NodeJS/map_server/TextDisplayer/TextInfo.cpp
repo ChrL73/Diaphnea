@@ -1,11 +1,17 @@
 #include "TextInfo.h"
+#include "ItemLook.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
+#include <locale>
+#include <codecvt>
+
 namespace map_server
 {
-    TextInfo::TextInfo(const std::string& text, double fontSize, FT_Face face) : _text(text), _fontSize(fontSize), _ok(false)
+    TextInfo::TextInfo(const std::string& text, double fontSize, const ItemLook *textLook, FT_Face face) :
+        _text(text), _zIndex(textLook->getZIndex()), _alpha(textLook->getAlpha()), _red(textLook->getRed()),
+        _green(textLook->getGreen()), _blue(textLook->getBlue()), _fontSize(fontSize), _ok(false)
     {
 		const double minFontSize = 5.0;
 		const double maxFontSize = 100.0;
@@ -14,13 +20,16 @@ namespace map_server
 		int error = FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(_fontSize));
 		if (error) return;
 
-		int i, n = text.size();
+        std::wstring_convert<std::codecvt_utf8<wchar_t> > converter;
+		std::wstring wtext = converter.from_bytes(text);
+
+		int i, n = wtext.size();
 		int width = 0, yMaxMax = 0, yMinMin = 0, xOffset = 0;
 
 		for (i = 0; i < n; ++i)
 		{
 			FT_UInt glyph_index;
-			glyph_index = FT_Get_Char_Index(face, text[i]);
+			glyph_index = FT_Get_Char_Index(face, wtext[i]);
 
 			error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
 			if (error) return;

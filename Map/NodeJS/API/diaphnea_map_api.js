@@ -277,10 +277,24 @@ var mapServerInterface =
             socket.on('textRes', function(response)
             {
                var context = getContext(response);
-               console.log(response.content);
                if (response.requestId != lastRenderRequestId) return;
                
+               var textInfo = response.content;
+               console.log(textInfo);
+               var itemKey = '_' + textInfo.e;
                
+               items[itemKey] =
+               {
+                  type: 'text',
+                  text: textInfo.t,
+                  x: textInfo.x,
+                  y: textInfo.y,
+                  zI: textInfo.z,
+                  size: textInfo.s,
+                  color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')'
+               }
+               
+               addItem(itemKey);
             });
 
             socket.on('itemDataRes', function(response)
@@ -337,7 +351,9 @@ var mapServerInterface =
                   item.lookId = lookId;
                }
                
-               var look = looks[lookId];
+               var look;
+               if (lookId) look = looks[lookId];
+               else look = item; // Case of a text item: Item has no 'lookId', look parameters are in the 'item' object
                   
                if (item.type && look)
                {
@@ -378,9 +394,6 @@ var mapServerInterface =
             function renderCanvas()
             {
                ctx.clearRect(0, 0, canvas.width, canvas.height);
-               ctx.save();
-               ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
-               ctx.scale(scale, scale);
                var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
                
                var i;
@@ -394,6 +407,10 @@ var mapServerInterface =
 
                      if (item.type == 'line')
                      {
+                        ctx.save();
+                        ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
+                        ctx.scale(scale, scale);
+                        
                         ctx.beginPath();
                         item.points.forEach(function(p, i)
                         {
@@ -404,9 +421,15 @@ var mapServerInterface =
                         ctx.strokeStyle = look.color;
                         ctx.lineWidth = look.size * sizeFactor;
                         ctx.stroke();
+                        
+                        ctx.restore();
                      }
                      else if (item.type == 'polygon')
                      {
+                        ctx.save();
+                        ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
+                        ctx.scale(scale, scale);
+                        
                         ctx.beginPath();
                         item.points.forEach(function(p, i)
                         {
@@ -416,23 +439,32 @@ var mapServerInterface =
 
                         ctx.fillStyle = look.color;
                         ctx.fill();
+                        
+                        ctx.restore();
                      }
                      else if (item.type == 'point')
                      {
+                        var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
+                        var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
+                        
                         ctx.beginPath();
-                        ctx.arc(item.x, item.y, 0.5 * look.size * sizeFactor, 0, 2 * Math.PI);
+                        ctx.arc(x, y, 0.5 * look.size * scale * sizeFactor, 0, 2 * Math.PI);
 
                         ctx.fillStyle = look.color;
                         ctx.fill();
 
                         ctx.strokeStyle = 'black';
-                        ctx.lineWidth = sizeFactor;
+                        ctx.lineWidth = scale * sizeFactor;
                         ctx.stroke();
+                     }
+                     else if (item.type = 'text')
+                     {
+                        ctx.fillStyle = item.color;
+                        ctx.font = item.size + 'px arial';
+                        ctx.fillText(item.text, item.x, item.y);
                      }
                   });
                }
-                                                              
-               ctx.restore();
             }
             
             var mustTranslate = false;

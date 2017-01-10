@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-int main(int argc, char *argv[])
+int wmain(int argc, wchar_t *argv[])
 {
 	if (argc < 4)
 	{
@@ -12,18 +12,21 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-    std::string text;
+    std::wstring text;
     int i, wordCount = argc - 3;
     for (i = 0; i < wordCount; ++i)
     {
-        if (i != 0) text += " ";
+        if (i != 0) text += L" ";
         text += argv[i + 1];
     }
 
-    std::string fontFamily(argv[wordCount + 2]);
+    std::wstring fontFamily0(argv[wordCount + 2]);
+    std::string fontFamily;
+    int n = fontFamily0.size();
+    for (i = 0; i < n; ++i) fontFamily += fontFamily0[i];
 
 #ifdef _WIN32
-	std::string fontFile = fontFamily + ".ttf";
+    std::string fontFile = fontFamily + ".ttf";
 #else
 	std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/" + fontFamily + ".ttf";
 #endif
@@ -77,7 +80,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-	int n = text.size();
+	n = text.size();
     int width = 0, yMaxMax = 0, yMinMin = 0, left = 0;
 
     for (i = 0; i < n; ++i)

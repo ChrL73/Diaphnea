@@ -44,7 +44,7 @@ namespace MapDataProcessing
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
                 { "id", _id},
-                { "num_id", _numericalId},
+                //{ "num_id", _numericalId}, // No longer used
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "look_id", _lookId }

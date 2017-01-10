@@ -37,8 +37,10 @@ namespace map_server
 		_mutex.unlock();
 	}
 
-    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId, double width, double height, bool createPotentialImage) :
-		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height), _createPotentialImage(createPotentialImage)
+    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId,
+                                 double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage) :
+		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height),
+		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage)
     {
 		_mutex.lock();
 
@@ -140,7 +142,7 @@ namespace map_server
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
         Potential pMin(std::numeric_limits<double>::max());
-        double alphaMin = 0.0;
+        double alphaMin = 0.5 * M_PI; //0.0;
         int i, n = 12;
         for (i = 0; i < n; ++i)
         {
@@ -159,15 +161,20 @@ namespace map_server
         double s = sin(alphaMin);
         if (s > 0.8) s = 0.8;
         else if (s < -0.8) s = -0.8;
-        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + 0.5 * item->getDiameter()) - 0.5 * textInfo->getWidth());
-        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + 0.5 * item->getDiameter()) - 0.5 * textInfo->getHeight());
+        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()));
+        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()));
+
+        double x = textInfo->getX() - 0.5 * textInfo->getWidth() - textInfo->getXOffset();
+        double y = textInfo->getY() + 0.5 * textInfo->getHeight() + textInfo->getYOffset();
+        x = _xFocus + (x - 0.5 * _width) / _scale;
+        y = _yFocus + (y - 0.5 * _height) / _scale;
 
         _coutMutexPtr->lock();
         std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
             << " {\"t\":\"" << textInfo->getText()
             << "\",\"e\":\"" << item->getElementId()
-            << "\",\"x\":" << textInfo->getX() - textInfo->getXOffset()
-            << ",\"y\":" << textInfo->getY() + textInfo->getYOffset() + textInfo->getHeight()
+            << "\",\"x\":" << x
+            << ",\"y\":" << y
             << ",\"s\":" << textInfo->getFontSize()
             << ",\"z\":" << textInfo->getZIndex()
             << ",\"a\":" << textInfo->getAlpha()

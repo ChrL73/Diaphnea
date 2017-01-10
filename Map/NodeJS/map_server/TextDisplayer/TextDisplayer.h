@@ -32,6 +32,9 @@ namespace map_server
 
         const double _width;
         const double _height;
+        const double _xFocus;
+        const double _yFocus;
+        const double _scale;
         const bool _createPotentialImage;
 
         std::vector<ItemCopy *> _itemVector;
@@ -50,7 +53,8 @@ namespace map_server
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
 		static void clearClientMap(void);
 
-        TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId, double width, double height, bool createPotentialImage);
+        TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId,
+            double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

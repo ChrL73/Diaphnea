@@ -245,9 +245,9 @@ namespace map_server
         MapData::lock();
 
 		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _createPotentialImage);
+		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage);
 
-        double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() * _scale);
+        double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
 
         int i, n = _itemCopyBuilderVector.size();
         for (i = 0; i < n; ++i)
@@ -336,14 +336,14 @@ namespace map_server
         const std::string& text1 = item->getText1(_languageId);
         if (!text1.empty())
         {
-            TextInfo *textInfo1 = new TextInfo(text1, itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale, itemCopyBuilder->getTextLook(), face);
+            TextInfo *textInfo1 = new TextInfo(text1, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
             if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
 			else delete textInfo1;
 
             const std::string& text2 = item->getText2(_languageId);
             if (!text2.empty())
             {
-                TextInfo *textInfo2 = new TextInfo(text2, itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale, itemCopyBuilder->getTextLook(), face);
+                TextInfo *textInfo2 = new TextInfo(text2, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
 				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
 				else delete textInfo2;
             }

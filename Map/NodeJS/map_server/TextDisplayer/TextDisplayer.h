@@ -13,7 +13,6 @@ namespace map_server
     class PointItemCopy;
     class LineItemCopy;
     class FilledPolygonItemCopy;
-	class ClientInfo;
 	class TextDisplayerParameters;
 	class TextInfo;
 
@@ -21,9 +20,12 @@ namespace map_server
     {
     private:
 		static std::mutex _mutex;
-		static std::map<std::string, ClientInfo *> _clientMap;
-		ClientInfo *_clientInfo;
-		bool isStopRequested(void);
+		static int _counter;
+		static std::map<std::string, int *> _clientActiveDisplayerMap;
+		int _id;
+		int *_clientActiveDisplayerId;
+		bool isDisplayerActive(void);
+
 		static std::mutex *_coutMutexPtr;
 
         const TextDisplayerParameters * const _parameters;

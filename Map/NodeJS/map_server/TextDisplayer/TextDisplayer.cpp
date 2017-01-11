@@ -1,7 +1,6 @@
 #include "TextDisplayer.h"
 #include "ItemCopy.h"
 #include "Potential.h"
-#include "ClientInfo.h"
 #include "RepulsiveCenter.h"
 #include "TextDisplayerParameters.h"
 #include "PngImage.h"
@@ -20,15 +19,16 @@
 namespace map_server
 {
 	std::mutex TextDisplayer::_mutex;
-	std::map<std::string, ClientInfo *> TextDisplayer::_clientMap;
+	int TextDisplayer::_counter = 0;
+	std::map<std::string, int *> TextDisplayer::_clientActiveDisplayerMap;
 	std::mutex *TextDisplayer::_coutMutexPtr = 0;
 
 	void TextDisplayer::clearClientMap(void)
 	{
 		_mutex.lock();
 
-		std::map<std::string, ClientInfo *>::iterator it = _clientMap.begin();
-		for (; it != _clientMap.end(); ++it)
+		std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.begin();
+		for (; it != _clientActiveDisplayerMap.end(); ++it)
 		{
 			delete (*it).second;
 			(*it).second = 0;
@@ -44,14 +44,18 @@ namespace map_server
     {
 		_mutex.lock();
 
-		std::map<std::string, ClientInfo *>::iterator it = _clientMap.find(socketId);
-		if (it == _clientMap.end())
+        // Todo: Test if the 'client active displayer' mechanism works correctly
+        _id = _counter;
+        ++_counter;
+
+		std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.find(socketId);
+		if (it == _clientActiveDisplayerMap.end())
 		{
-			it = _clientMap.insert(std::pair<std::string, ClientInfo *>(socketId, new ClientInfo())).first;
+			it = _clientActiveDisplayerMap.insert(std::pair<std::string, int *>(socketId, new int)).first;
 		}
 
-		_clientInfo = (*it).second;
-		_clientInfo->setStopRequested(true);
+		_clientActiveDisplayerId = (*it).second;
+		*_clientActiveDisplayerId = _id;
 
 		_mutex.unlock();
     }
@@ -62,31 +66,17 @@ namespace map_server
 		for (i = 0; i < n; ++i) delete _itemVector[i];
 	}
 
-	bool TextDisplayer::isStopRequested(void)
+	bool TextDisplayer::isDisplayerActive(void)
 	{
         _mutex.lock();
-        bool b = _clientInfo->isStopRequested();
+        bool b = (*_clientActiveDisplayerId == _id);
         _mutex.unlock();
         return b;
 	}
 
     void TextDisplayer::start(void)
     {
-        while(true)
-        {
-            _mutex.lock();
-            if (_clientInfo->getThreadCount() == 0)
-            {
-                _clientInfo->setStopRequested(false);
-                _clientInfo->incrementThreadCount();
-                _mutex.unlock();
-                break;
-            }
-            _mutex.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-
-		int visibleTextCount = 0;
+        int visibleTextCount = 0;
 
 		int i, n = _itemVector.size();
 		for (i = 0; i < n && visibleTextCount < _parameters->getMaxVisibleTextCount(); ++i)
@@ -96,11 +86,11 @@ namespace map_server
 			else if (displayText(item, item->getTextInfo2())) ++visibleTextCount;
 		}
 
-        if (_createPotentialImage && !isStopRequested())
+        if (_createPotentialImage && isDisplayerActive())
         {
             PngImage image(static_cast<int>(_width), static_cast<int>(_height));
             int j;
-            for (i = 0; i < _width && !isStopRequested(); ++i)
+            for (i = 0; i < _width && isDisplayerActive(); ++i)
             {
                 for (j = 0; j < _height; ++j)
                 {
@@ -121,12 +111,8 @@ namespace map_server
                 }
             }
 
-            if (!isStopRequested()) image.save("potential.png");
+            if (isDisplayerActive()) image.save("potential.png");
         }
-
-        _mutex.lock();
-        _clientInfo->decrementThreadCount();
-        _mutex.unlock();
     }
 
     bool TextDisplayer::displayText(ItemCopy *item, TextInfo *textInfo)
@@ -159,7 +145,7 @@ namespace map_server
                 alphaMin = alpha;
                 pMin = potential;
             }
-            if (isStopRequested()) return false;
+            if (!isDisplayerActive()) return false;
         }
 
         if (pMin.getValue() > _parameters->getPotentialThreshold()) return false;

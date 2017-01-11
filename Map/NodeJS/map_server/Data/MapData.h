@@ -4,7 +4,10 @@
 #include <WinSock2.h>
 #endif
 
+// Avoid this warning: ‘template<class> class std::auto_ptr’ is deprecated
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #include "mongo/client/dbclient.h"
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 
 #include <map>
 #include <string>

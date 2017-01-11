@@ -142,21 +142,21 @@ namespace map_server
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
         Potential pMin(std::numeric_limits<double>::max());
-        double alphaMin = 0.5 * M_PI; //0.0;
+        double alphaMin = 0.0;
         int i, n = 12;
         for (i = 0; i < n; ++i)
         {
             double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
-            /*Potential potential = getPotential(pointItem, item.CurrentWidth, item.CurrentHeight, Math.Cos(alpha), Math.Sin(alpha), false);
-            if (potential.compareTo(pMin) < 0.0 && potential.isAcceptable(_softThreshold))
+            Potential potential = std::move(getPotential(item, textInfo, cos(alpha), sin(alpha), false));
+            if (potential.getValue() < pMin.getValue() && potential.getValue() < _parameters->getPotentialThreshold())
             {
                 alphaMin = alpha;
                 pMin = potential;
             }
-            if (_stopRequested) return false;*/
+            if (isStopRequested()) return false;
         }
 
-        //if (!pMin.isAcceptable(_softThreshold)) return false;
+        if (pMin.getValue() > _parameters->getPotentialThreshold()) return false;
 
         double s = sin(alphaMin);
         if (s > 0.8) s = 0.8;
@@ -165,16 +165,29 @@ namespace map_server
         textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()));
 
         double x = textInfo->getX() - 0.5 * textInfo->getWidth() - textInfo->getXOffset();
+        double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
+        double xMax = textInfo->getX()  + 0.5 * textInfo->getWidth();
         double y = textInfo->getY() + 0.5 * textInfo->getHeight() + textInfo->getYOffset();
+        double yMin = textInfo->getY()  - 0.5 * textInfo->getHeight();
+        double yMax = textInfo->getY()  + 0.5 * textInfo->getHeight();
+
         x = _xFocus + (x - 0.5 * _width) / _scale;
+        xMin = _xFocus + (xMin - 0.5 * _width) / _scale;
+        xMax = _xFocus + (xMax - 0.5 * _width) / _scale;
         y = _yFocus + (y - 0.5 * _height) / _scale;
+        yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
+        yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
 
         _coutMutexPtr->lock();
         std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
             << " {\"t\":\"" << textInfo->getText()
             << "\",\"e\":\"" << item->getElementId()
             << "\",\"x\":" << x
+            << ",\"x1\":" << xMin
+            << ",\"x2\":" << xMax
             << ",\"y\":" << y
+            << ",\"y1\":" << yMin
+            << ",\"y2\":" << yMax
             << ",\"s\":" << textInfo->getFontSize()
             << ",\"z\":" << textInfo->getZIndex()
             << ",\"a\":" << textInfo->getAlpha()
@@ -184,11 +197,37 @@ namespace map_server
             << "}" << std::endl;
         _coutMutexPtr->unlock();
 
-        /*RepulsiveCenter center = new RepulsiveCenter(item.X + 0.5 * item.CurrentWidth, item.Y + 0.5 * item.CurrentHeight,
-                                                     1.0, 0.0, 0.8 * item.CurrentWidth, 0.8 * item.CurrentHeight, 1.0, false, false, true);
-        item.RepulsiveCenterList.Add(center);*/
+        RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
+            _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);
+        item->addRepulsiveCenter(center);
 
         return true;
+    }
+
+    Potential TextDisplayer::getPotential(PointItemCopy *item, TextInfo *textInfo, double cosAlpha, double sinAlpha, bool selfRepulsion)
+    {
+        Potential potential;
+
+        double s = sinAlpha;
+        if (s > 0.8) s = 0.8;
+        else if (s < -0.8) s = -0.8;
+        double x0 = item->getX() + cosAlpha * (0.5 * textInfo->getWidth() + item->getDiameter()) - 0.5 * textInfo->getWidth();
+        double y0 = item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter());
+
+        double centereCountD = ceil(4.0 * textInfo->getWidth() / textInfo->getHeight());
+        if (centereCountD < 2.0) centereCountD = 2.0;
+        double dx = textInfo->getWidth() / (centereCountD - 1.0);
+        int centerCount = (int)centereCountD;
+
+        int i;
+        for (i = 0; i < centerCount; ++i)
+        {
+            Potential p = std::move(getPotential(x0 + (double)i * dx, y0, selfRepulsion ? 0 : item));
+            if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
+            if (p.getValue() > potential.getValue()) potential = std::move(p);
+        }
+
+        return std::move(potential);
     }
 
     bool TextDisplayer::displayLineText(LineItemCopy *item, TextInfo *textInfo)
@@ -230,8 +269,6 @@ namespace map_server
                 Potential elementaryPotential = std::move(getElementaryPotential(item, x, y));
                 potential += elementaryPotential;
                 if (potential.getValue() > _parameters->getPotentialThreshold()) return std::move(potential);
-
-                // Todo: If a text is displayed for this item, add the potential generated by this text
             }
         }
 
@@ -254,7 +291,18 @@ namespace map_server
 
             if (center->getExcluding())
             {
-                int R = static_cast<int>(R1 * R1 + R2 * R2);
+                int R;
+                if (center->getRectangle())
+                {
+                    R1 *= R1;
+                    R2 *= R2;
+                    R = static_cast<int>(R1 > R2 ? R1 : R2);
+                }
+                else
+                {
+                    R = static_cast<int>(R1 * R1 + R2 * R2);
+                }
+
                 if (R < _parameters->getPotentialTableSize())
                 {
                     potential.add(center->getU0() * _parameters->getExcludingPotential(R));

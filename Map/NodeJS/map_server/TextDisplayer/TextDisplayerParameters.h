@@ -16,9 +16,11 @@ namespace map_server
 		static constexpr double _segmentRefPotential = 1.5;
 		static constexpr double _segmentRadius1Coeff = 1.0;
 		static constexpr double _segmentRadius2Coeff = 5.0;
+		static constexpr double _textRadiusCoeff = 0.75;
+		static constexpr double _textRefPotential = 3.5;
 
-		static constexpr double _edgeRefPotential = 2.0;
-		static constexpr double _edgeRangeRatio = 0.05;
+		static constexpr double _edgeRefPotential = 7.0;
+		static constexpr double _edgeRangeRatio = 0.02;
 
 		static double _excludingPotentialTable[_potentialTableSize];
 		static double _notExcludingPotentialTable1[_potentialTableSize];
@@ -45,6 +47,8 @@ namespace map_server
 		double getSegmentRefPotential(void) const { return _segmentRefPotential; }
 		double getSegmentRadius1Coeff(void) const { return _segmentRadius1Coeff; }
 		double getSegmentRadius2Coeff(void) const { return _segmentRadius2Coeff; }
+		double getTextRadiusCoeff(void) const { return _textRadiusCoeff; }
+		double getTextRefPotential(void) const { return _textRefPotential; }
 
 		double getEdgeRefPotential(void) const { return _edgeRefPotential; }
 		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }

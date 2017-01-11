@@ -267,7 +267,7 @@ namespace map_server
                     double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                     PointItemCopy *pointItemCopy = new PointItemCopy(pointItem->getElementIdForText(), x, y, diameter);
                     double radius = parameters.getPointRadiusCoeff() * diameter;
-                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true);
+                    RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
                     setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
@@ -297,7 +297,7 @@ namespace map_server
 								double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
 								double axisDx = x2 - x1;
 								double axisDy = y2 - y1;
-								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false);
+								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false, false);
 								lineItemCopy->addRepulsiveCenter(repulsiveCenter);
 							}
 						}

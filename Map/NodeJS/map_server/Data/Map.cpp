@@ -41,7 +41,7 @@ namespace map_server
 
         if (itemIt == _lineItemMap.end())
         {
-			std::auto_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();

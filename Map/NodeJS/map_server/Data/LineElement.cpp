@@ -8,7 +8,7 @@ namespace map_server
     {
         _loaded = true;
 
-		std::auto_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.line_elements", MONGO_QUERY("_id" << _mongoId), 1);
+		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.line_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();

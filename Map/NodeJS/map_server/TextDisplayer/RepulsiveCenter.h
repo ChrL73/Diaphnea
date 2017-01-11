@@ -11,6 +11,7 @@ namespace map_server
         const double _y;
         const double _u0;
         const bool _excluding;
+        const bool _rectangle;
         double _v11;
         double _v12;
         double _v21;
@@ -19,12 +20,13 @@ namespace map_server
         double _sinAlpha;*/
 
     public:
-        RepulsiveCenter(const TextDisplayerParameters *parameters, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding);
+        RepulsiveCenter(const TextDisplayerParameters *parameters, double x, double y, double axisDx, double axisDy, double radius1, double radius2, double u0, bool excluding, bool rectangle);
 
         double getX(void) const { return _x; }
         double getY(void) const { return _y; }
         double getU0(void) const { return _u0; }
         bool getExcluding(void) const { return _excluding; }
+        bool getRectangle(void) const { return _rectangle; }
         double getV11(void) const { return _v11; }
         double getV12(void) const { return _v12; }
         double getV21(void) const { return _v21; }

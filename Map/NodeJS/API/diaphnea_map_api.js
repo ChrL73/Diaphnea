@@ -296,7 +296,11 @@ var mapServerInterface =
                   type: 'text',
                   text: textInfo.t,
                   x: textInfo.x,
+                  xMin: textInfo.x1,
+                  xMax: textInfo.x2,
                   y: textInfo.y,
+                  yMin: textInfo.y1,
+                  yMax: textInfo.y2,
                   zI: textInfo.z,
                   size: textInfo.s,
                   color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
@@ -304,6 +308,8 @@ var mapServerInterface =
                }
                
                addItem(itemKey);
+               cancelAnimationFrame(reqAnimFrameId);
+               reqAnimFrameId = requestAnimationFrame(renderCanvas);
             });
 
             socket.on('itemDataRes', function(response)
@@ -469,7 +475,11 @@ var mapServerInterface =
                      }
                      else if (item.type = 'text')
                      {
-                        if (item.scale == scale)
+                        if (item.scale == scale
+                              && (item.xMin - xFocus) * scale + 0.5 * canvas.width >= 0
+                              && (item.xMax - xFocus) * scale - 0.5 * canvas.width <= 0
+                              && (item.yMin - yFocus) * scale + 0.5 * canvas.height >= 0
+                              && (item.yMax - yFocus) * scale - 0.5 * canvas.height <= 0)
                         {
                            var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
                            var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
@@ -480,6 +490,7 @@ var mapServerInterface =
                         }
                         else
                         {
+                           // If the scale has changed or if the text overflows the map frame, the text item is obsolete, remove it
                            delete addedItems[itemKey];
                            delete addedItemsByZIndex[item.zI][itemKey];
                         }

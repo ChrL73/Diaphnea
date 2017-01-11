@@ -436,6 +436,36 @@
           <name language="en" text="Tchibanga"/>
         </name>
       </pointElement>
+      <pointElement id="e_Moabi" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Moabi"/>
+          <name language="en" text="Moabi"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mayumba" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Mayumba"/>
+          <name language="en" text="Mayumba"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Ndindi" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Ndindi"/>
+          <name language="en" text="Ndindi"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mabanda" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Mabanda"/>
+          <name language="en" text="Mabanda"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_MoulenguiBinza" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Moulengui Binza"/>
+          <name language="en" text="Moulengui Binza"/>
+        </name>
+      </pointElement>
       <!--Villes Ogooué-Ivindo-->
       <pointElement id="e_Makokou" look="tl_ChefLieuProvince">
         <name>

@@ -1,6 +1,6 @@
 $(function()
 {            
-   var url = 'http://albertine:3001';
+   var url = 'http://192.168.1.25:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)

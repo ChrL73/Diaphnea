@@ -72,13 +72,19 @@ namespace map_server
 
     void TextDisplayer::start(void)
     {
-        _mutex.lock();
-
-        while(_clientInfo->getThreadCount() != 0) std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        _clientInfo->setStopRequested(false);
-        _clientInfo->incrementThreadCount();
-
-        _mutex.unlock();
+        while(true)
+        {
+            _mutex.lock();
+            if (_clientInfo->getThreadCount() == 0)
+            {
+                _clientInfo->setStopRequested(false);
+                _clientInfo->incrementThreadCount();
+                _mutex.unlock();
+                break;
+            }
+            _mutex.unlock();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
 
 		int visibleTextCount = 0;
 

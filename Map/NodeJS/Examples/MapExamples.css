@@ -16,7 +16,6 @@ button
 
 #elementList
 {
-   height: 600px;
    width: 200px; 
    overflow: auto;
 }

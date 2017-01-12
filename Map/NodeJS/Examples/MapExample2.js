@@ -1,5 +1,7 @@
 $(function()
 {            
+   document.addEventListener('wheel', function(e) { e.preventDefault(); });
+   
    var url = 'http://192.168.1.25:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
@@ -11,6 +13,19 @@ $(function()
       
       function onMapLoaded(map)
       {
+         resizeCanvas();
+         window.onresize = resizeCanvas;
+
+         function resizeCanvas()
+         {
+            var w = window.innerWidth - $('#elementList').width() - $('#potential').width() - 100;
+            if (w < 100) w = 100;
+            $('#canvas').attr('width', w);
+            $('#canvas').attr('height', window.innerHeight * 0.95);
+            $('#elementList').height((window.innerHeight * 0.95).toString() + 'px');
+            map.redraw();
+         }
+         
          var elementIds = map.getElementIds();
          map.loadElements(elementIds, function(elementArray)
          {

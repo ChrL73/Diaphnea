@@ -145,6 +145,12 @@ var mapServerInterface =
                scheduleRenderRequest();
             }
             
+            this.redraw = function()
+            {
+               scheduleRenderRequest();
+               renderCanvas();
+            }
+            
             var renderRequestTimeout;
             function scheduleRenderRequest()
             {

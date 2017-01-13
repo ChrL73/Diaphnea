@@ -229,6 +229,8 @@ namespace map_server
 
     bool TextDisplayer::displayFilledPolygonText(FilledPolygonItemCopy *item, TextInfo *textInfo)
     {
+        item->setIntersections(_height);
+
         return false;
     }
 

@@ -311,6 +311,16 @@ namespace map_server
 						if (filledPolygonItem != 0)
 						{
 							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText());
+
+							int j, m = filledPolygonItem->getPointVector(resolutionIndex).size();
+                            for (j = 0; j < m; ++j)
+                            {
+                                const Point *point = filledPolygonItem->getPointVector(resolutionIndex)[j];
+                                double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                                filledPolygonItemCopy->addPoint(x, y);
+							}
+
                             setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
 							textDisplayer.addItem(filledPolygonItemCopy);
 						}

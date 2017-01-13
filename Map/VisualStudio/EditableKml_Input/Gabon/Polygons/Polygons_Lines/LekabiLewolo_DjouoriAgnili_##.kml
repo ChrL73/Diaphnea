@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Style id="s">
+         <LineStyle>
+            <color>ffff0000</color>
+            <width>2</width>
+         </LineStyle>
+      </Style>
+      <styleUrl>#s</styleUrl>
+      <LineString>
+         <tessellate>1</tessellate>
+         <coordinates>
+            13.864883,-1.263671
+            13.866855,-1.36799
+            13.864497,-1.382881
+            13.864218,-1.403787
+            13.802623,-1.568332
+            13.753968,-1.568425
+         </coordinates>
+      </LineString>
+   </Placemark>
+</kml>

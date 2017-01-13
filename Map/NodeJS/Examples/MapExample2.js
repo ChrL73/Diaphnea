@@ -2,7 +2,7 @@ $(function()
 {            
    document.addEventListener('wheel', function(e) { e.preventDefault(); });
    
-   var url = 'http://192.168.1.25:3001';
+   var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)
@@ -14,7 +14,12 @@ $(function()
       function onMapLoaded(map)
       {
          resizeCanvas();
-         window.onresize = resizeCanvas;
+         
+         window.onresize = function()
+         {
+            resizeCanvas();
+            map.redraw();
+         }
 
          function resizeCanvas()
          {
@@ -23,7 +28,6 @@ $(function()
             $('#canvas').attr('width', w);
             $('#canvas').attr('height', window.innerHeight * 0.95);
             $('#elementList').height((window.innerHeight * 0.95).toString() + 'px');
-            map.redraw();
          }
          
          var elementIds = map.getElementIds();

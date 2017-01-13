@@ -190,20 +190,38 @@
       </polygonElement>
       <polygonElement id="e_LebombiLeyou" look="pl_Departement">
         <name>
-          <name language="fr" text="Lebombi-Leyou"/>
-          <name language="en" text="Lebombi-Leyou"/>
+          <name language="fr" text="Lébombi-Leyou"/>
+          <name language="en" text="Lébombi-Leyou"/>
         </name>
       </polygonElement>
       <polygonElement id="e_Lekoko" look="pl_Departement">
         <name>
-          <name language="fr" text="Lekoko"/>
-          <name language="en" text="Lekoko"/>
+          <name language="fr" text="Lékoko"/>
+          <name language="en" text="Lékoko"/>
         </name>
       </polygonElement>
       <polygonElement id="e_Mpassa" look="pl_Departement">
         <name>
           <name language="fr" text="Mpassa"/>
           <name language="en" text="Mpassa"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_OgooueLetili" look="pl_Departement">
+        <name>
+          <name language="fr" text="Ogooué-Letili"/>
+          <name language="en" text="Ogooué-Letili"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LekoniLekori" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lékoni-Lékori"/>
+          <name language="en" text="Lékoni-Lékori"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_LekabiLewolo" look="pl_Departement">
+        <name>
+          <name language="fr" text="Lékabi-Léwolo"/>
+          <name language="en" text="Lékabi-Léwolo"/>
         </name>
       </polygonElement>
       <!--Départements Moyen-Ogooué-->

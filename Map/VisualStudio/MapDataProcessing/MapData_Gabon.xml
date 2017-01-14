@@ -57,12 +57,12 @@
 
   <elementList>
     <polygonElementList>
-      <!--<polygonElement id="e_Gabon" look="pl_Gabon">
+      <polygonElement id="e_Gabon" look="pl_Gabon">
         <name>
           <name language="fr" text=""/>
           <name language="en" text=""/>
         </name>
-      </polygonElement>-->
+      </polygonElement>
       <!--Province-->
       <polygonElement id="e_Estuaire" look="pl_Province">
         <name>
@@ -72,6 +72,16 @@
         <shortName>
           <name language="fr" text="1"/>
           <name language="en" text="1"/>
+        </shortName>
+      </polygonElement>
+      <polygonElement id="e_HautOgooue" look="pl_Province">
+        <name>
+          <name language="fr" text="Haut-Ogooué (2)"/>
+          <name language="en" text="Haut-Ogooué (2)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="2"/>
+          <name language="en" text="2"/>
         </shortName>
       </polygonElement>
       <polygonElement id="e_MoyenOgooue" look="pl_Province">
@@ -222,6 +232,24 @@
         <name>
           <name language="fr" text="Lékabi-Léwolo"/>
           <name language="en" text="Lékabi-Léwolo"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Djoue" look="pl_Departement">
+        <name>
+          <name language="fr" text="Djoué"/>
+          <name language="en" text="Djoué"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_DjouoriAgnili" look="pl_Departement">
+        <name>
+          <name language="fr" text="Djouori-Agnili"/>
+          <name language="en" text="Djouori-Agnili"/>
+        </name>
+      </polygonElement>
+      <polygonElement id="e_Plateaux" look="pl_Departement">
+        <name>
+          <name language="fr" text="Plateaux"/>
+          <name language="en" text="Plateaux"/>
         </name>
       </polygonElement>
       <!--Départements Moyen-Ogooué-->

@@ -468,6 +468,30 @@
           <name language="en" text="Libreville"/>
         </name>
       </pointElement>
+      <pointElement id="e_Ntoum" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Ntoum"/>
+          <name language="en" text="Ntoum"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Ndzomoe" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Ndzomoé"/>
+          <name language="en" text="Ndzomoé"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Cocobeach" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Cocobeach"/>
+          <name language="en" text="Cocobeach"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Kango" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Kango"/>
+          <name language="en" text="Kango"/>
+        </name>
+      </pointElement>
       <!--Villes Moyen-Ogooué-->
       <pointElement id="e_Lambarene" look="tl_ChefLieuProvince">
         <name>
@@ -531,6 +555,18 @@
         <name>
           <name language="fr" text="Port-Gentil"/>
           <name language="en" text="Port-Gentil"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Omboue" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Omboué"/>
+          <name language="en" text="Omboué"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Gamba" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Gamba"/>
+          <name language="en" text="Gamba"/>
         </name>
       </pointElement>
     </pointElementList>

@@ -4,10 +4,14 @@
 #include <WinSock2.h>
 #endif
 
+#ifdef __GNUC__
 // Avoid this warning: ‘template<class> class std::auto_ptr’ is deprecated
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
 #include "mongo/client/dbclient.h"
+#ifdef __GNUC__
 #pragma GCC diagnostic warning "-Wdeprecated-declarations"
+#endif
 
 #include <map>
 #include <string>
@@ -25,8 +29,6 @@ namespace map_server
         MapData(void);
         ~MapData();
 
-        int initialize(void);
-        int terminate(void);
         bool _initOk;
         static bool _deleteOk;
         mongo::DBClientConnection _connection;

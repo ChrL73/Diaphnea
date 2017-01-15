@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+
 #include "TextDisplayer.h"
 #include "ItemCopy.h"
 #include "Potential.h"
@@ -10,10 +12,10 @@
 #include "TextInfo.h"
 #include "MessageTypeEnum.h"
 
+#include <cmath>
 #include <chrono>
 #include <thread>
 #include <limits>
-#include <cmath>
 #include <iostream>
 
 namespace map_server

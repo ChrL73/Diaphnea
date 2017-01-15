@@ -147,10 +147,10 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.cpp">
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp">
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PngImage.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,10 +269,10 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h">
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h">
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\PngImage.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
     </ClInclude>
   </ItemGroup>

@@ -89,13 +89,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests;..\..\..\..\freetype-2.7\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests;..\..\..\..\freetype-2.7\include;..\..\..\..\png++-0.2.9;..\..\..\..\lpng1626\lpng1626</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\mongo-cxx-driver_vc14\lib;C:\local\boost_1_62_0\lib32-msvc-14.0;..\..\..\..\freetype-2.7\objs\vc2015\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype27MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\mongo-cxx-driver_vc14\lib;C:\local\boost_1_62_0\lib32-msvc-14.0;..\..\..\..\freetype-2.7\objs\vc2015\Win32\;..\..\..\..\lpng1626\lpng1626\projects\vstudio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype27MT.lib;libpng16.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,15 +122,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests;..\..\..\..\freetype-2.7\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_62_0;..\mongo-cxx-driver_vc14\include;..\..\NodeJS\map_server;..\..\NodeJS\map_server\TextDisplayer;..\..\NodeJS\map_server\Data;..\..\NodeJS\map_server\Requests;..\..\..\..\freetype-2.7\include;..\..\..\..\png++-0.2.9;..\..\..\..\lpng1626\lpng1626</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\mongo-cxx-driver_vc14\lib;C:\local\boost_1_62_0\lib32-msvc-14.0;..\..\..\..\freetype-2.7\objs\vc2015\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freetype27MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\mongo-cxx-driver_vc14\lib;C:\local\boost_1_62_0\lib32-msvc-14.0;..\..\..\..\freetype-2.7\objs\vc2015\Win32\;..\..\..\..\lpng1626\lpng1626\projects\vstudio\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype27MT.lib;libpng16.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -179,11 +179,11 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
-    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PngImage.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\PointItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Potential.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.cpp" />
@@ -222,8 +222,8 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\MapInfoRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
-    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ClientInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\PngImage.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.h" />

@@ -39,7 +39,7 @@ namespace map_server
         for (i = 0; i < n - 1; ++i)
         {
             const Point *point1 = _pointVector[i];
-            const Point *point2 = _pointVector[i];
+            const Point *point2 = _pointVector[i + 1];
             double x1 = point1->getX();
             double y1 = point1->getY();
             double x2 = point2->getX();
@@ -51,13 +51,13 @@ namespace map_server
             double yMin, yMax;
             if (y1 > y2)
             {
-                yMin = ceil(y1);
-                yMax = floor(y2);
+                yMin = ceil(y2);
+                yMax = floor(y1);
             }
             else
             {
-                yMin = ceil(y2);
-                yMax = floor(y1);
+                yMin = ceil(y1);
+                yMax = floor(y2);
             }
 
             if (yMin <= yMax && yMax >= 0.0 && yMin <= height - 1.0)

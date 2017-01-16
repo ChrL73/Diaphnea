@@ -25,5 +25,9 @@ namespace map_server
 
         void addPoint(double x, double y);
         void setIntersections(double height);
+
+        double getYMin(void) const { return _yMin; }
+        double getYMax(void) const { return _yMax; }
+        std::multiset<double> *getIntersections(int y) { return _intersections[y]; }
     };
 }

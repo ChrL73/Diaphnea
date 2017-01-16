@@ -28,19 +28,42 @@ var io = require('socket.io').listen(server);
 
 io.on('connection', function(socket)
 {
+   var received = 0, lastSent = 0, lastReceived = 0;
+   socket.sent = 0;
+   if (config.displayStat)
+   {
+      displayStat();
+      setTimeout(displayStat, 1000);
+   }
+   
+   function displayStat()
+   {
+      if (socket.sent != lastSent || received != lastReceived)
+      {
+         console.log(socket.id + ' Received: ' + received + ' sent: ' + socket.sent);
+         lastSent = socket.sent;
+         lastReceived = received;
+      }
+      
+      setTimeout(displayStat, 1000);
+   }
+   
    socket.on('mapIdsReq', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.mapIds);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('mapInfoReq', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('elementInfoReq', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('elementsInfoReq', function(request)
@@ -51,16 +74,19 @@ io.on('connection', function(socket)
          req += ' ' + elementId;
       });
       cppServer.sendRequest(req);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('itemDataReq', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('lookReq', function(request)
    {
       cppServer.sendRequest(socket.id + ' ' + request.id + ' ' + messageTypes.look + ' ' + request.mapId + ' ' + request.lookId);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
    
    socket.on('renderReq', function(request)
@@ -72,6 +98,7 @@ io.on('connection', function(socket)
          req += ' ' + elementId;
       });
       cppServer.sendRequest(req);
+      if (config.displayStat) received += JSON.stringify(request).length;
    });
 });
 
@@ -83,7 +110,12 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    if (socket && messageName)
    {
       var response = { requestId: requestId, content: responseContent };
-      setTimeout(function() { socket.emit(messageName + 'Res', response); }, debugDelay);
+      setTimeout(function()
+      {
+         socket.emit(messageName + 'Res', response);
+         if (config.displayStat) socket.sent += JSON.stringify(response).length;
+      },
+         debugDelay);
    }
 });
 

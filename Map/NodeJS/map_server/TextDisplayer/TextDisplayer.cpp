@@ -216,7 +216,7 @@ namespace map_server
         int i;
         for (i = 0; i < centerCount; ++i)
         {
-            Potential p = std::move(getPotential(x0 + (double)i * dx, y0, selfRepulsion ? 0 : item));
+            Potential p = std::move(getPotential(x0 + static_cast<double>(i) * dx, y0, selfRepulsion ? 0 : item));
             if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
             if (p.getValue() > potential.getValue()) potential = std::move(p);
         }
@@ -232,6 +232,24 @@ namespace map_server
     bool TextDisplayer::displayFilledPolygonText(FilledPolygonItemCopy *item, TextInfo *textInfo)
     {
         item->setIntersections(_height);
+
+        double yD = 0.5 * (item->getYMax() - item->getYMin());
+        int yI = static_cast<int>(floor(yD));
+
+        double hD = textInfo->getHeight();
+        int hI = static_cast<int>(floor(hD));
+
+        int y0 = yI - hI / 2;
+        int y1 = y0 + hI;
+        int y;
+        for (y = y0; y <= y1; ++y)
+        {
+            std::multiset<double> *intersections = item->getIntersections(y);
+
+
+        }
+
+
 
         return false;
     }

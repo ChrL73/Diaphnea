@@ -46,6 +46,8 @@ namespace map_server
         bool displayLineText(LineItemCopy *item, TextInfo *textInfo);
         bool displayFilledPolygonText(FilledPolygonItemCopy *item, TextInfo *textInfo);
 
+        void sendResponse(ItemCopy *item, TextInfo *textInfo);
+
         Potential getPotential(PointItemCopy *item, TextInfo *textInfo, double cosAlpha, double sinAlpha, bool selfRepulsion);
         Potential getPotential(double x, double y, ItemCopy *selfItem);
         Potential getElementaryPotential(ItemCopy *item, double x, double y);

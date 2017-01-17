@@ -4,17 +4,17 @@
 
 namespace map_server
 {
-    const Interval Interval::getIntersection(const Interval& s) const
+    const Interval Interval::getIntersection(const Interval& i) const
     {
-        if (_emptySet || s._emptySet) return std::move(Interval());
+        if (_emptySet || i._emptySet) return std::move(Interval());
 
-        if (s._a < _a)
+        if (i._a < _a)
         {
-            if (s._b < _b) return std::move(Interval(_a, s._b));
+            if (i._b < _b) return std::move(Interval(_a, i._b));
             return std::move(Interval(_a, _b));
         }
 
-        if (_b < s._b) return std::move(Interval(s._a, _b));
-        return std::move(Interval(s._a, s._b));
+        if (_b < i._b) return std::move(Interval(i._a, _b));
+        return std::move(Interval(i._a, i._b));
     }
 }

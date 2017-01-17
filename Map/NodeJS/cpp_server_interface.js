@@ -3,6 +3,12 @@ var readLine = require('readline');
 
 var cppProcess;
 var sendResponse;
+var config;
+
+function setConfig(config_)
+{
+   config = config_;
+}
 
 function setResponseHandler(responseHandler)
 {
@@ -11,7 +17,7 @@ function setResponseHandler(responseHandler)
 
 function sendRequest(request, recursiveCall)
 {
-   if (!recursiveCall) console.log('Request: ' + request);
+   if (!recursiveCall && config.displayRequests) console.log('Request: ' + request);
    
    try
    {
@@ -23,7 +29,7 @@ function sendRequest(request, recursiveCall)
       
       readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)
       {
-         console.log('Response: ' + response);
+         if (config.displayReponses) console.log('Response: ' + response);
 
          var i = response.indexOf(' ');
          var socketId = response.substring(0, i);
@@ -43,5 +49,6 @@ function sendRequest(request, recursiveCall)
    }
 }
 
+module.exports.setConfig = setConfig;
 module.exports.setResponseHandler = setResponseHandler;
 module.exports.sendRequest = sendRequest;

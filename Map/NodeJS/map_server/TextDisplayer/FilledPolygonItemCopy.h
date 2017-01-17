@@ -13,7 +13,7 @@ namespace map_server
     {
     private:
         std::vector<const Point *> _pointVector;
-        std::multiset<double> **_intersections;
+        std::set<double> **_intersections;
         int _height;
         double _yMin;
         double _yMax;
@@ -24,10 +24,10 @@ namespace map_server
         ~FilledPolygonItemCopy();
 
         void addPoint(double x, double y);
-        void setIntersections(double height);
+        void setIntersections(double height, double width);
 
         double getYMin(void) const { return _yMin; }
         double getYMax(void) const { return _yMax; }
-        std::multiset<double> *getIntersections(int y) { return _intersections[y]; }
+        std::set<double> *getIntersections(int y);
     };
 }

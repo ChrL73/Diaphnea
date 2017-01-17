@@ -11,6 +11,7 @@
 #include "FilledPolygonItemCopy.h"
 #include "TextInfo.h"
 #include "MessageTypeEnum.h"
+#include "Interval.h"
 
 #include <cmath>
 #include <chrono>
@@ -158,38 +159,7 @@ namespace map_server
         textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()));
         textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()));
 
-        double x = textInfo->getX() - 0.5 * textInfo->getWidth() - textInfo->getXOffset();
-        double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
-        double xMax = textInfo->getX()  + 0.5 * textInfo->getWidth();
-        double y = textInfo->getY() + 0.5 * textInfo->getHeight() + textInfo->getYOffset();
-        double yMin = textInfo->getY()  - 0.5 * textInfo->getHeight();
-        double yMax = textInfo->getY()  + 0.5 * textInfo->getHeight();
-
-        x = _xFocus + (x - 0.5 * _width) / _scale;
-        xMin = _xFocus + (xMin - 0.5 * _width) / _scale;
-        xMax = _xFocus + (xMax - 0.5 * _width) / _scale;
-        y = _yFocus + (y - 0.5 * _height) / _scale;
-        yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
-        yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
-
-        _coutMutexPtr->lock();
-        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
-            << " {\"t\":\"" << textInfo->getText()
-            << "\",\"e\":\"" << item->getElementId()
-            << "\",\"x\":" << x
-            << ",\"x1\":" << xMin
-            << ",\"x2\":" << xMax
-            << ",\"y\":" << y
-            << ",\"y1\":" << yMin
-            << ",\"y2\":" << yMax
-            << ",\"s\":" << textInfo->getFontSize()
-            << ",\"z\":" << textInfo->getZIndex()
-            << ",\"a\":" << textInfo->getAlpha()
-            << ",\"r\":" << textInfo->getRed()
-            << ",\"g\":" << textInfo->getGreen()
-            << ",\"b\":" << textInfo->getBlue()
-            << "}" << std::endl;
-        _coutMutexPtr->unlock();
+        sendResponse(item, textInfo);
 
         RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
             _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);
@@ -231,27 +201,102 @@ namespace map_server
 
     bool TextDisplayer::displayFilledPolygonText(FilledPolygonItemCopy *item, TextInfo *textInfo)
     {
-        item->setIntersections(_height);
+        item->setIntersections(_height, _width);
 
-        double yD = 0.5 * (item->getYMax() - item->getYMin());
+        double yD = 0.5 * (item->getYMax() + item->getYMin());
         int yI = static_cast<int>(floor(yD));
 
         double hD = textInfo->getHeight();
         int hI = static_cast<int>(floor(hD));
 
+        std::vector<Interval> intervals;
+        int i1 = 0;
+        intervals.push_back(std::move(Interval(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max())));
         int y0 = yI - hI / 2;
         int y1 = y0 + hI;
         int y;
         for (y = y0; y <= y1; ++y)
         {
-            std::multiset<double> *intersections = item->getIntersections(y);
+            int i0 = i1;
+            i1 = intervals.size();
 
+            std::set<double> *intersections = item->getIntersections(y);
 
+            if (intersections != 0)
+            {
+                std::set<double>::iterator it = intersections->begin();
+                for (; it != intersections->end(); ++it)
+                {
+                    double a = *it;
+                    if (a < 1.0) a = 1.0;
+                    ++it;
+                    double b = *it;
+                    if (b > _width - 1.0) b = _width - 1.0;
+
+                    if (a < _width - 1.0 && b > 1.0)
+                    {
+                        Interval interval1(a, b);
+                        int i;
+                        for (i = i0; i < i1; ++i)
+                        {
+                            Interval interval2 = std::move(intervals[i].getIntersection(interval1));
+                            if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
+                            {
+                                intervals.push_back(std::move(interval2));
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (i1 == static_cast<int>(intervals.size())) break;
         }
 
+        if (i1 == static_cast<int>(intervals.size())) return false;
 
+        textInfo->setX(0.5 * (intervals[i1].getA() + intervals[i1].getB()));
+        //textInfo->setX(intervals[i1].getA() + 0.5 * textInfo->getWidth());
+        //textInfo->setX(intervals[i1].getB() - 0.5 * textInfo->getWidth());
+        textInfo->setY(yD);
+        sendResponse(item, textInfo);
 
-        return false;
+        return true;
+    }
+
+    void TextDisplayer::sendResponse(ItemCopy *item, TextInfo *textInfo)
+    {
+        double x = textInfo->getX() - 0.5 * textInfo->getWidth() - textInfo->getXOffset();
+        double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
+        double xMax = textInfo->getX()  + 0.5 * textInfo->getWidth();
+        double y = textInfo->getY() + 0.5 * textInfo->getHeight() + textInfo->getYOffset();
+        double yMin = textInfo->getY()  - 0.5 * textInfo->getHeight();
+        double yMax = textInfo->getY()  + 0.5 * textInfo->getHeight();
+
+        x = _xFocus + (x - 0.5 * _width) / _scale;
+        xMin = _xFocus + (xMin - 0.5 * _width) / _scale;
+        xMax = _xFocus + (xMax - 0.5 * _width) / _scale;
+        y = _yFocus + (y - 0.5 * _height) / _scale;
+        yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
+        yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
+
+        _coutMutexPtr->lock();
+        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
+            << " {\"t\":\"" << textInfo->getText()
+            << "\",\"e\":\"" << item->getElementId()
+            << "\",\"x\":" << x
+            << ",\"x1\":" << xMin
+            << ",\"x2\":" << xMax
+            << ",\"y\":" << y
+            << ",\"y1\":" << yMin
+            << ",\"y2\":" << yMax
+            << ",\"s\":" << textInfo->getFontSize()
+            << ",\"z\":" << textInfo->getZIndex()
+            << ",\"a\":" << textInfo->getAlpha()
+            << ",\"r\":" << textInfo->getRed()
+            << ",\"g\":" << textInfo->getGreen()
+            << ",\"b\":" << textInfo->getBlue()
+            << "}" << std::endl;
+        _coutMutexPtr->unlock();
     }
 
     Potential TextDisplayer::getPotential(double x, double y, ItemCopy *selfItem)

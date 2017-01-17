@@ -3,6 +3,7 @@ var server = http.createServer(function(req, res) { res.end(); });
 
 var cppServer = require('./cpp_server_interface');
 var config = require('./config');
+cppServer.setConfig(config);
 
 var debugDelay = config.debugDelay ? config.debugDelay : 0;
 

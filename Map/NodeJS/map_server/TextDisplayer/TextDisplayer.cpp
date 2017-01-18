@@ -137,7 +137,7 @@ namespace map_server
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
         Potential pMin(std::numeric_limits<double>::max());
-        double alphaMin = 0.0;
+        double optimalAlphaMin = 0.0;
         int i, n = 12;
         for (i = 0; i < n; ++i)
         {
@@ -145,7 +145,7 @@ namespace map_server
             Potential potential = std::move(getPotential(item, textInfo, cos(alpha), sin(alpha), false));
             if (potential.getValue() < pMin.getValue() && potential.getValue() < _parameters->getPotentialThreshold())
             {
-                alphaMin = alpha;
+                optimalAlphaMin = alpha;
                 pMin = potential;
             }
             if (!isDisplayerActive()) return false;
@@ -153,17 +153,13 @@ namespace map_server
 
         if (pMin.getValue() > _parameters->getPotentialThreshold()) return false;
 
-        double s = sin(alphaMin);
+        double s = sin(optimalAlphaMin);
         if (s > 0.8) s = 0.8;
         else if (s < -0.8) s = -0.8;
-        textInfo->setX(item->getX() + cos(alphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()));
+        textInfo->setX(item->getX() + cos(optimalAlphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()));
         textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()));
 
         sendResponse(item, textInfo);
-
-        RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
-            _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);
-        item->addRepulsiveCenter(center);
 
         return true;
     }
@@ -203,7 +199,22 @@ namespace map_server
     {
         item->setIntersections(_height, _width);
 
+        /*double optimalYD;
+        double optimalX;
+        Potential pMin(std::numeric_limits<double>::max());*/
+
         double yD = 0.5 * (item->getYMax() + item->getYMin());
+        /*double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+        double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+        if (yDmax < yDmin) return false;
+
+        int yCount = 8;
+        double dy = (yDmax -yDmin) / static_cast<double>(yCount - 1);
+        if (dy < 2.0)
+        {
+
+        }*/
+
         int yI = static_cast<int>(floor(yD));
 
         double hD = textInfo->getHeight();
@@ -297,6 +308,10 @@ namespace map_server
             << ",\"b\":" << textInfo->getBlue()
             << "}" << std::endl;
         _coutMutexPtr->unlock();
+
+        RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
+            _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);
+        item->addRepulsiveCenter(center);
     }
 
     Potential TextDisplayer::getPotential(double x, double y, ItemCopy *selfItem)

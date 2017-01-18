@@ -499,6 +499,12 @@
           <name language="en" text="Lambaréné"/>
         </name>
       </pointElement>
+      <pointElement id="e_Ndjole" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Ndjolé"/>
+          <name language="en" text="Ndjolé"/>
+        </name>
+      </pointElement>
       <!--Villes Nyanga-->
       <pointElement id="e_Tchibanga" look="tl_ChefLieuProvince">
         <name>
@@ -543,11 +549,47 @@
           <name language="en" text="Makokou"/>
         </name>
       </pointElement>
+      <pointElement id="e_Booue" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Booué"/>
+          <name language="en" text="Booué"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Ovan" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Ovan"/>
+          <name language="en" text="Ovan"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mekambo" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Mékambo"/>
+          <name language="en" text="Mékambo"/>
+        </name>
+      </pointElement>
       <!--Villes Ogooué-Lolo-->
       <pointElement id="e_Koulamoutou" look="tl_ChefLieuProvince">
         <name>
           <name language="fr" text="Koulamoutou"/>
           <name language="en" text="Koulamoutou"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Iboundji" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Iboundji"/>
+          <name language="en" text="Iboundji"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Lastourville" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Lastourville"/>
+          <name language="en" text="Lastourville"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Pana" look="tl_ChefLieuDepartement">
+        <name>
+          <name language="fr" text="Pana"/>
+          <name language="en" text="Pana"/>
         </name>
       </pointElement>
       <!--Villes Ogooué-Maritime-->

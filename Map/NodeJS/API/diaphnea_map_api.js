@@ -16,11 +16,17 @@ var mapServerInterface =
          var requestCounter = -1;
             
          var contexts = {};
-         function getContext(response)
+         function setContext(id, context)
+         {
+            contexts[id.toString()] = context;
+            setTimeout(function() { delete contexts[id.toString()]; }, 20000);
+         }
+         
+         function getContext(response, dontDelete)
          {
             var requestId = response.requestId.toString();
             var context = contexts[requestId];
-            delete contexts[requestId];
+            if (context && !dontDelete) delete contexts[requestId];
             return context;
          }
 
@@ -44,7 +50,7 @@ var mapServerInterface =
             socket.on('mapInfoRes', function(response)
             {
                var context = getContext(response);
-               context.onMapLoaded(new Map(context.mapId, context.canvasId, response.content));
+               if (context) context.onMapLoaded(new Map(context.mapId, context.canvasId, response.content));
             });
          });  
          
@@ -52,7 +58,7 @@ var mapServerInterface =
          {
             var id = ++requestCounter;
             var request = { id: id, mapId: mapId };
-            contexts[id.toString()] = { mapId: mapId, canvasId: canvasId, onMapLoaded: onMapLoaded };
+            setContext(id, { mapId: mapId, canvasId: canvasId, onMapLoaded: onMapLoaded });
             socket.emit('mapInfoReq', request);
          }
          
@@ -84,27 +90,28 @@ var mapServerInterface =
             {
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementId: elementId };
-               contexts[id.toString()] = { elementId: elementId, onElementLoaded: onElementLoaded };
+               setContext(id, { elementId: elementId, onElementLoaded: onElementLoaded });
                socket.emit('elementInfoReq', request);
             }
             
             socket.on('elementInfoRes', function(response)
             {
                var context = getContext(response);
-               context.onElementLoaded(new Element(context.elementId, response.content));
+               if (context) context.onElementLoaded(new Element(context.elementId, response.content));
             });
             
             this.loadElements = function(elementIds, onElementsLoaded)
             {
                var id = ++requestCounter;
                var request = { id: id, mapId: mapId, elementIds: elementIds };
-               contexts[id.toString()] = { elementIds: elementIds, onElementsLoaded: onElementsLoaded };
+               setContext(id, { elementIds: elementIds, onElementsLoaded: onElementsLoaded });
                socket.emit('elementsInfoReq', request);
             }
             
             socket.on('elementsInfoRes', function(response)
             {
                var context = getContext(response);
+               if (!context) return;
                var elements = [];
                response.content.forEach(function(elementInfo, i)
                {
@@ -178,7 +185,7 @@ var mapServerInterface =
                   var id = ++requestCounter;
                   // Todo: Add API method to choose language
                   var request = { id: id, mapId: mapId, language: 'fr', elementIds: elementIds, width: canvas.width, height: canvas.height };
-                  var context = {}
+                  var context = { scale: scale };
                   if (scale && xFocus && yFocus)
                   {
                      request.scale = scale;
@@ -186,7 +193,7 @@ var mapServerInterface =
                      request.yFocus = yFocus;
                      context.ignoreServerScale = true;
                   }
-                  contexts[id.toString()] = context;
+                  setContext(id, context);
                   lastRenderRequestId = id;
                   socket.emit('renderReq', request);
                }
@@ -201,8 +208,8 @@ var mapServerInterface =
                
             socket.on('renderRes', function(response)
             {
-               var context = getContext(response);
-               if (response.requestId != lastRenderRequestId) return;
+               var context = getContext(response, true);
+               if (!context || response.requestId != lastRenderRequestId) return;
                
                var renderInfo = response.content;
                //console.log(renderInfo);      
@@ -211,7 +218,8 @@ var mapServerInterface =
                {
                   xFocus = renderInfo.xFocus;
                   yFocus = renderInfo.yFocus;
-                  scale = renderInfo.scale;
+                  scale = renderInfo.scale; 
+                  if (!context.scale) context.scale = scale;
                }
                
                var lookToItems = {};
@@ -233,7 +241,7 @@ var mapServerInterface =
                   {                           
                      var id = ++requestCounter;
                      var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
-                     contexts[id.toString()] = { itemKey: itemKey, itemId: itemInfo[0], resolution: resolution, lookId: lookId };
+                     setContext(id.toString(), { itemKey: itemKey, itemId: itemInfo[0], resolution: resolution, lookId: lookId });
                      socket.emit('itemDataReq', request);
                      
                      items[itemKey] =
@@ -260,7 +268,7 @@ var mapServerInterface =
                {
                   var id = ++requestCounter;
                   var request = { id: id, mapId: mapId, lookId: lookId };
-                  contexts[id.toString()] = { lookId: lookId, itemKeyArray: lookToItems[lookId] };
+                  setContext(id, { lookId: lookId, itemKeyArray: lookToItems[lookId] });
                   socket.emit('lookReq', request);
                });
                
@@ -289,8 +297,8 @@ var mapServerInterface =
             
             socket.on('textRes', function(response)
             {
-               var context = getContext(response);
-               if (response.requestId != lastRenderRequestId) return;
+               var context = getContext(response, true);
+               if (!context || response.requestId != lastRenderRequestId) return;
                
                var textInfo = response.content;
                //console.log(textInfo);
@@ -310,7 +318,7 @@ var mapServerInterface =
                   zI: textInfo.z,
                   size: textInfo.s,
                   color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
-                  scale: scale
+                  scale: context.scale
                }
                
                addItem(itemKey);
@@ -321,6 +329,8 @@ var mapServerInterface =
             socket.on('itemDataRes', function(response)
             {
                var context = getContext(response);
+               if (!context) return;
+               
                var itemData = response.content;
                //console.log(itemData);
 
@@ -346,6 +356,8 @@ var mapServerInterface =
             socket.on('lookRes', function(response)
             {
                var context = getContext(response);
+               if (!context) return;
+               
                var lookData = response.content;
                
                looks[context.lookId] =

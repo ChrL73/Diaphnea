@@ -33,6 +33,14 @@ namespace map_server
                 LineItem *lineItem = _iMap->getLineItem(itemId);
                 _lineItemVector.push_back(lineItem);
             }
+
+            std::vector<mongo::BSONElement> dbCoveredElements = dbElement.getField("covered_elements").Array();
+            n = dbCoveredElements.size();
+            for (i = 0; i < n; ++i)
+            {
+                std::string coveredElement = dbCoveredElements[i].String();
+                _coveredElementVector.push_back(coveredElement);
+            }
         }
     }
 }

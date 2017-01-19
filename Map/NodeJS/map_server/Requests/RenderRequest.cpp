@@ -54,6 +54,7 @@ namespace map_server
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
             std::vector<MapItem *> itemVector;
+            std::set<std::string> coveredElementSet;
 
             n = elementVector.size();
             for (i = 0; i < n; ++i)
@@ -97,6 +98,9 @@ namespace map_server
                         int zIndex = polygonElement->getLook()->getContourLook()->getZIndex();
                         (*lineItemIt).second.insert(std::pair<int, PolygonElement *>(zIndex, polygonElement));
                     }
+
+                    m = polygonElement->getCoveredElementVector().size();
+                    for (j = 0; j < m; ++j) coveredElementSet.insert(polygonElement->getCoveredElementVector()[j]);
                 }
             }
 
@@ -190,8 +194,11 @@ namespace map_server
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
 
-                    ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
-                    _itemCopyBuilderVector.push_back(itemCopyBuilder);
+                    if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
+                    {
+                        ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
+                        _itemCopyBuilderVector.push_back(itemCopyBuilder);
+                    }
                 }
 
                 response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus

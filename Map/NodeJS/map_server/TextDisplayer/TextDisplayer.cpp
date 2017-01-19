@@ -177,14 +177,18 @@ namespace map_server
         double centereCountD = ceil(4.0 * textInfo->getWidth() / textInfo->getHeight());
         if (centereCountD < 2.0) centereCountD = 2.0;
         double dx = textInfo->getWidth() / (centereCountD - 1.0);
-        int centerCount = (int)centereCountD;
+        int centerCount = static_cast<int>(centereCountD);
 
-        int i;
+        int i, j;
         for (i = 0; i < centerCount; ++i)
         {
-            Potential p = std::move(getPotential(x0 + static_cast<double>(i) * dx, y0, selfRepulsion ? 0 : item));
-            if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
-            if (p.getValue() > potential.getValue()) potential = std::move(p);
+            for (j = 0; j < 2; ++j)
+            {
+                double m = (j == 0 ? -0.5 : 0.5);
+                Potential p = std::move(getPotential(x0 + static_cast<double>(i) * dx, y0 + m * textInfo->getHeight(), selfRepulsion ? 0 : item));
+                if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
+                if (p.getValue() > potential.getValue()) potential = std::move(p);
+            }
         }
 
         return std::move(potential);
@@ -199,79 +203,166 @@ namespace map_server
     {
         item->setIntersections(_height, _width);
 
-        /*double optimalYD;
-        double optimalX;
-        Potential pMin(std::numeric_limits<double>::max());*/
+        double optimalYD = 0.0;
+        double optimalX = 0.0;
+        Potential pMin(std::numeric_limits<double>::max());
 
-        double yD = 0.5 * (item->getYMax() + item->getYMin());
-        /*double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+        double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
         double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
         if (yDmax < yDmin) return false;
 
-        int yCount = 8;
-        double dy = (yDmax -yDmin) / static_cast<double>(yCount - 1);
+        int yCount = 9;
+        double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
         if (dy < 2.0)
         {
+            yCount = 1 + static_cast<int>(0.5 * (yDmax - yDmin));
 
-        }*/
-
-        int yI = static_cast<int>(floor(yD));
+            if (yCount < 2)
+            {
+                yCount = 1;
+                yDmin = 0.5 * (yDmax + yDmin);
+                yDmax = yDmin;
+            }
+            else
+            {
+                dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
+            }
+        }
 
         double hD = textInfo->getHeight();
         int hI = static_cast<int>(floor(hD));
 
-        std::vector<Interval> intervals;
-        int i1 = 0;
-        intervals.push_back(std::move(Interval(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max())));
-        int y0 = yI - hI / 2;
-        int y1 = y0 + hI;
-        int y;
-        for (y = y0; y <= y1; ++y)
+        double yD = yDmin;
+        int j;
+        for (j = 0; j < yCount; ++j)
         {
-            int i0 = i1;
-            i1 = intervals.size();
+            int yI = static_cast<int>(floor(yD));
 
-            std::set<double> *intersections = item->getIntersections(y);
-
-            if (intersections != 0)
+            std::vector<Interval> intervals;
+            int i1 = 0;
+            intervals.push_back(std::move(Interval(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max())));
+            int y0 = yI - hI / 2;
+            int y1 = y0 + hI;
+            int y;
+            for (y = y0; y <= y1; ++y)
             {
-                std::set<double>::iterator it = intersections->begin();
-                for (; it != intersections->end(); ++it)
-                {
-                    double a = *it;
-                    if (a < 1.0) a = 1.0;
-                    ++it;
-                    double b = *it;
-                    if (b > _width - 1.0) b = _width - 1.0;
+                int i0 = i1;
+                i1 = intervals.size();
 
-                    if (a < _width - 1.0 && b > 1.0)
+                std::set<double> *intersections = item->getIntersections(y);
+
+                if (intersections != 0)
+                {
+                    std::set<double>::iterator it = intersections->begin();
+                    for (; it != intersections->end(); ++it)
                     {
-                        Interval interval1(a, b);
-                        int i;
-                        for (i = i0; i < i1; ++i)
+                        double a = *it;
+                        if (a < 1.0) a = 1.0;
+                        ++it;
+                        double b = *it;
+                        if (b > _width - 1.0) b = _width - 1.0;
+
+                        if (a < _width - 1.0 && b > 1.0)
                         {
-                            Interval interval2 = std::move(intervals[i].getIntersection(interval1));
-                            if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
+                            Interval interval1(a, b);
+                            int i;
+                            for (i = i0; i < i1; ++i)
                             {
-                                intervals.push_back(std::move(interval2));
+                                Interval interval2 = std::move(intervals[i].getIntersection(interval1));
+                                if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
+                                {
+                                    intervals.push_back(std::move(interval2));
+                                }
                             }
                         }
                     }
                 }
             }
 
-            if (i1 == static_cast<int>(intervals.size())) break;
+            int i, n = intervals.size();
+            for (i = i1; i < n; ++i)
+            {
+                double x0 = intervals[i].getA() + 0.5 * textInfo->getWidth();
+                double x1 = intervals[i].getB() - 0.5 * textInfo->getWidth();
+
+                int xCount = 5;
+                double dx = (x1 - x0) / static_cast<double>(xCount - 1);
+                if (dx < 2.0)
+                {
+                    xCount = 1 + static_cast<int>(0.5 * (x1 - x0));
+
+                    if (xCount < 2)
+                    {
+                        xCount = 1;
+                        x0 = 0.5 * (x0 + x1);
+                        x1 = x0;
+                    }
+                    else
+                    {
+                        dx = (x1 - x0) / static_cast<double>(xCount - 1);
+                    }
+                }
+
+                double x = x0;
+                int k;
+                for (k = 0; k < xCount; ++k)
+                {
+                    Potential potential = std::move(getPotential(item, textInfo, x, yD));
+
+                    double xc = 2.0 * (x - x0) / (x1 - x0) - 1.0;
+                    if (xc < 0) xc = -xc;
+                    double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
+                    if (yc < 0) yc = -yc;
+                    potential.add(_parameters->getCenteringPotential() * (xc + yc));
+
+                    if (potential.getValue() < pMin.getValue() && potential.getValue() < _parameters->getPotentialThreshold())
+                    {
+                        optimalX = x;
+                        optimalYD = yD;
+                        pMin = potential;
+                    }
+
+                    if (!isDisplayerActive()) return false;
+                    x += dx;
+                }
+
+            }
+
+            yD += dy;
         }
 
-        if (i1 == static_cast<int>(intervals.size())) return false;
+        if (pMin.getValue() > _parameters->getPotentialThreshold()) return false;
 
-        textInfo->setX(0.5 * (intervals[i1].getA() + intervals[i1].getB()));
-        //textInfo->setX(intervals[i1].getA() + 0.5 * textInfo->getWidth());
-        //textInfo->setX(intervals[i1].getB() - 0.5 * textInfo->getWidth());
-        textInfo->setY(yD);
+        textInfo->setX(optimalX);
+        textInfo->setY(optimalYD);
         sendResponse(item, textInfo);
 
         return true;
+    }
+
+    Potential TextDisplayer::getPotential(FilledPolygonItemCopy *item, TextInfo *textInfo, double x, double y)
+    {
+        Potential potential;
+
+        double centereCountD = ceil(4.0 * textInfo->getWidth() / textInfo->getHeight());
+        if (centereCountD < 2.0) centereCountD = 2.0;
+        double dx = textInfo->getWidth() / (centereCountD - 1.0);
+        int centerCount = static_cast<int>(centereCountD);
+
+        x -= 0.5 * textInfo->getWidth();
+        int i, j;
+        for (i = 0; i < centerCount; ++i)
+        {
+            for (j = 0; j < 2; ++j)
+            {
+                double m = (j == 0 ? -0.5 : 0.5);
+                Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y + m * textInfo->getHeight(), 0));
+                if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
+                if (p.getValue() > potential.getValue()) potential = std::move(p);
+            }
+        }
+
+        return std::move(potential);
     }
 
     void TextDisplayer::sendResponse(ItemCopy *item, TextInfo *textInfo)

@@ -10,17 +10,18 @@ namespace map_server
 		static constexpr int _maxVisibleTextCount = 100;
 		static constexpr double _potentialTableSizeD = static_cast<double>(_potentialTableSize);
 
-		static constexpr double _potentialThreshold = 8.0;
+		static constexpr double _potentialThreshold = 6.0;
 		static constexpr double _pointRefPotential = 3.0;
 		static constexpr double _pointRadiusCoeff = 1.0;
 		static constexpr double _segmentRefPotential = 1.5;
 		static constexpr double _segmentRadius1Coeff = 1.0;
-		static constexpr double _segmentRadius2Coeff = 5.0;
+		static constexpr double _segmentRadius2Coeff = 7.0;
 		static constexpr double _textRadiusCoeff = 0.75;
 		static constexpr double _textRefPotential = 3.5;
 
 		static constexpr double _edgeRefPotential = 7.0;
 		static constexpr double _edgeRangeRatio = 0.02;
+		static constexpr double _centeringPotential = 0.2;
 
 		static double _excludingPotentialTable[_potentialTableSize];
 		static double _notExcludingPotentialTable1[_potentialTableSize];
@@ -52,6 +53,7 @@ namespace map_server
 
 		double getEdgeRefPotential(void) const { return _edgeRefPotential; }
 		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }
+		double getCenteringPotential(void) const { return _centeringPotential; }
 
 		double getExcludingPotential(int i) const { return _excludingPotentialTableCopy[i]; }
 		double getNotExcludingPotential1(int i) const { return _notExcludingPotentialTable1Copy[i]; }

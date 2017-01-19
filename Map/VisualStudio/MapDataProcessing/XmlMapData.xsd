@@ -187,9 +187,19 @@
     <xsd:sequence>
       <xsd:element name="name" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="shortName" type="XmlElementName" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="coveredElementList" type="XmlCoveredElementList" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
     <xsd:attribute name="look" type="XmlPolygonLookIdRef" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlCoveredElementList">
+    <xsd:sequence>
+      <xsd:element name="element" type="XmlCoveredElement" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlCoveredElement">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlElementIdRef" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlLineElement">
     <xsd:sequence>

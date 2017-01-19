@@ -10,6 +10,8 @@ namespace MapDataProcessing
 {
     class PolygonMapElement : MapElement
     {
+        private readonly List<string> _coveredElementList;
+
         private readonly List<KmlFileData> _pointKmlFileList = new List<KmlFileData>();
         private readonly List<KmlFileData> _lineKmlFileList = new List<KmlFileData>();
         private readonly List<KmlFileData> _polygonKmlFileList = new List<KmlFileData>();
@@ -19,8 +21,11 @@ namespace MapDataProcessing
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
         private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
 
-        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId) :
-            base(id, mapData, name, shortName, lookId) { }
+        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId, List<string> coveredElementList) :
+            base(id, mapData, name, shortName, lookId)
+        {
+            _coveredElementList = coveredElementList;
+        }
 
         internal override int addKmlFile(String path)
         {
@@ -253,12 +258,16 @@ namespace MapDataProcessing
                 itemArray.Add(part.MapItemId);
             }
 
+            BsonArray coveredElementArray = new BsonArray();
+            foreach (string coveredElement in _coveredElementList) coveredElementArray.Add(coveredElement);
+
             BsonDocument elementDocument = new BsonDocument();
             elementDocument.AddRange(getBsonDocument());
             elementDocument.AddRange(new BsonDocument()
             {
                 { "contour", _contourMapItem.Id },
-                { "items", itemArray}
+                { "items", itemArray},
+                { "covered_elements", coveredElementArray }
             });
 
             polygonElementCollection.InsertOne(elementDocument);

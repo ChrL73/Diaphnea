@@ -62,6 +62,7 @@
           <name language="fr" text=""/>
           <name language="en" text=""/>
         </name>
+        <coveredElementList/>
       </polygonElement>
       <!--Province-->
       <polygonElement id="e_Estuaire" look="pl_Province">
@@ -73,6 +74,7 @@
           <name language="fr" text="1"/>
           <name language="en" text="1"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_HautOgooue" look="pl_Province">
         <name>
@@ -83,6 +85,7 @@
           <name language="fr" text="2"/>
           <name language="en" text="2"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_MoyenOgooue" look="pl_Province">
         <name>
@@ -93,6 +96,7 @@
           <name language="fr" text="3"/>
           <name language="en" text="3"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_Ngounie" look="pl_Province">
         <name>
@@ -103,6 +107,7 @@
           <name language="fr" text="4"/>
           <name language="en" text="4"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_Nyanga" look="pl_Province">
         <name>
@@ -113,6 +118,7 @@
           <name language="fr" text="5"/>
           <name language="en" text="5"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_OgooueIvindo" look="pl_Province">
         <name>
@@ -123,6 +129,7 @@
           <name language="fr" text="6"/>
           <name language="en" text="6"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_OgooueLolo" look="pl_Province">
         <name>
@@ -133,6 +140,7 @@
           <name language="fr" text="7"/>
           <name language="en" text="7"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_OgooueMaritime" look="pl_Province">
         <name>
@@ -143,6 +151,7 @@
           <name language="fr" text="8"/>
           <name language="en" text="8"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_WoleuNtem" look="pl_Province">
         <name>
@@ -153,6 +162,7 @@
           <name language="fr" text="9"/>
           <name language="en" text="9"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <!--Départements Estuaire-->
       <polygonElement id="e_Noya" look="pl_Departement">
@@ -160,30 +170,45 @@
           <name language="fr" text="Noya"/>
           <name language="en" text="Noya"/>
         </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_KomoMondah" look="pl_Departement">
         <name>
           <name language="fr" text="Komo-Mondah"/>
           <name language="en" text="Komo-Mondah"/>
         </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_KomoOcean" look="pl_Departement">
         <name>
           <name language="fr" text="Komo-Océan"/>
           <name language="en" text="Komo-Océan"/>
         </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LibrevilleDepartement" look="pl_Departement">
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
         </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Komo" look="pl_Departement">
         <name>
           <name language="fr" text="Komo"/>
           <name language="en" text="Komo"/>
         </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Haut-Ogooué-->
       <polygonElement id="e_SebeBrikolo" look="pl_Departement">
@@ -191,66 +216,99 @@
           <name language="fr" text="Sébé-Brikolo"/>
           <name language="en" text="Sébé-Brikolo"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BayiBrikolo" look="pl_Departement">
         <name>
           <name language="fr" text="Bayi-Brikolo"/>
           <name language="en" text="Bayi-Brikolo"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LebombiLeyou" look="pl_Departement">
         <name>
           <name language="fr" text="Lébombi-Leyou"/>
           <name language="en" text="Lébombi-Leyou"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Lekoko" look="pl_Departement">
         <name>
           <name language="fr" text="Lékoko"/>
           <name language="en" text="Lékoko"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mpassa" look="pl_Departement">
         <name>
           <name language="fr" text="Mpassa"/>
           <name language="en" text="Mpassa"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OgooueLetili" look="pl_Departement">
         <name>
           <name language="fr" text="Ogooué-Letili"/>
           <name language="en" text="Ogooué-Letili"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LekoniLekori" look="pl_Departement">
         <name>
           <name language="fr" text="Lékoni-Lékori"/>
           <name language="en" text="Lékoni-Lékori"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LekabiLewolo" look="pl_Departement">
         <name>
           <name language="fr" text="Lékabi-Léwolo"/>
           <name language="en" text="Lékabi-Léwolo"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Djoue" look="pl_Departement">
         <name>
           <name language="fr" text="Djoué"/>
           <name language="en" text="Djoué"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_DjouoriAgnili" look="pl_Departement">
         <name>
           <name language="fr" text="Djouori-Agnili"/>
           <name language="en" text="Djouori-Agnili"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Plateaux" look="pl_Departement">
         <name>
           <name language="fr" text="Plateaux"/>
           <name language="en" text="Plateaux"/>
         </name>
+        <coveredElementList>
+          <element id="e_HautOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Moyen-Ogooué-->
       <polygonElement id="e_OgooueLacs" look="pl_Departement">
@@ -258,12 +316,18 @@
           <name language="fr" text="Ogooué et Lacs"/>
           <name language="en" text="Ogooué et Lacs"/>
         </name>
+        <coveredElementList>
+          <element id="e_MoyenOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_AbangaBigne" look="pl_Departement">
         <name>
           <name language="fr" text="Abanga-Bigné"/>
           <name language="en" text="Abanga-Bigné"/>
         </name>
+        <coveredElementList>
+          <element id="e_MoyenOgooue"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Ngounié-->
       <polygonElement id="e_Ndolou" look="pl_Departement">
@@ -271,54 +335,81 @@
           <name language="fr" text="Ndolou"/>
           <name language="en" text="Ndolou"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_TsambaMagotsi" look="pl_Departement">
         <name>
           <name language="fr" text="Tsamba-Magotsi"/>
           <name language="en" text="Tsamba-Magotsi"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mougalaba" look="pl_Departement">
         <name>
           <name language="fr" text="Mougalaba"/>
           <name language="en" text="Mougalaba"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_DouyaOnoye" look="pl_Departement">
         <name>
           <name language="fr" text="Douya-Onoyé"/>
           <name language="en" text="Douya-Onoyé"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ogoulou" look="pl_Departement">
         <name>
           <name language="fr" text="Ogoulou"/>
           <name language="en" text="Ogoulou"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Dola" look="pl_Departement">
         <name>
           <name language="fr" text="Dola"/>
           <name language="en" text="Dola"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LouetsiWano" look="pl_Departement">
         <name>
           <name language="fr" text="Louetsi-Wano"/>
           <name language="en" text="Louetsi-Wano"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BoumiLouetsi" look="pl_Departement">
         <name>
           <name language="fr" text="Boumi-Louetsi"/>
           <name language="en" text="Boumi-Louetsi"/>
         </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LouetsiBibaka" look="pl_Departement">
           <name>
             <name language="fr" text="Louetsi-Bibaka"/>
             <name language="en" text="Louetsi-Bibaka"/>
           </name>
+        <coveredElementList>
+          <element id="e_Ngounie"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Nyanga-->
       <polygonElement id="e_Douigni" look="pl_Departement">
@@ -326,36 +417,54 @@
           <name language="fr" text="Douigni"/>
           <name language="en" text="Douigni"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mougoutsi" look="pl_Departement">
         <name>
           <name language="fr" text="Mougoutsi"/>
           <name language="en" text="Mougoutsi"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BasseBanio" look="pl_Departement">
         <name>
           <name language="fr" text="Basse-Banio"/>
           <name language="en" text="Basse-Banio"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_HauteBanio" look="pl_Departement">
         <name>
           <name language="fr" text="Haute-Banio"/>
           <name language="en" text="Haute-Banio"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mongo" look="pl_Departement">
         <name>
           <name language="fr" text="Mongo"/>
           <name language="en" text="Mongo"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Doutsila" look="pl_Departement">
         <name>
           <name language="fr" text="Doutsila"/>
           <name language="en" text="Doutsila"/>
         </name>
+        <coveredElementList>
+          <element id="e_Nyanga"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Ivindo-->
       <polygonElement id="e_Lope" look="pl_Departement">
@@ -363,25 +472,36 @@
           <name language="fr" text="Lopé"/>
           <name language="en" text="Lopé"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueIvindo"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mvoung" look="pl_Departement">
         <name>
           <name language="fr" text="Mvoung"/>
           <name language="en" text="Mvoung"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueIvindo"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ivindo" look="pl_Departement">
         <name>
           <name language="fr" text="Ivindo"/>
           <name language="en" text="Ivindo"/>
         </name>
-      </polygonElement>
-      
+        <coveredElementList>
+          <element id="e_OgooueIvindo"/>
+        </coveredElementList>
+      </polygonElement> 
       <polygonElement id="e_Zadie" look="pl_Departement">
         <name>
           <name language="fr" text="Zadie"/>
           <name language="en" text="Zadie"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueIvindo"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Lolo-->
       <polygonElement id="e_OffoueOnoye" look="pl_Departement">
@@ -389,24 +509,36 @@
           <name language="fr" text="Offoué-Onoyé"/>
           <name language="en" text="Offoué-Onoyé"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueLolo"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LoloBouenguidi" look="pl_Departement">
         <name>
           <name language="fr" text="Lolo-Bouenguidi"/>
           <name language="en" text="Lolo-Bouenguidi"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueLolo"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LomboBouenguidi" look="pl_Departement">
         <name>
           <name language="fr" text="Lombo-Bouenguidi"/>
           <name language="en" text="Lombo-Bouenguidi"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueLolo"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mouloundou" look="pl_Departement">
         <name>
           <name language="fr" text="Mouloundou"/>
           <name language="en" text="Mouloundou"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueLolo"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->
       <polygonElement id="e_Bendje" look="pl_Departement">
@@ -414,18 +546,27 @@
           <name language="fr" text="Bendjé"/>
           <name language="en" text="Bendjé"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueMaritime"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Etimboue" look="pl_Departement">
         <name>
           <name language="fr" text="Etimboué"/>
           <name language="en" text="Etimboué"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueMaritime"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ndougou" look="pl_Departement">
         <name>
           <name language="fr" text="Ndougou"/>
           <name language="en" text="Ndougou"/>
         </name>
+        <coveredElementList>
+          <element id="e_OgooueMaritime"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Woleu-Ntem-->
       <polygonElement id="e_HautKomo" look="pl_Departement">
@@ -433,30 +574,45 @@
           <name language="fr" text="Haut-Komo"/>
           <name language="en" text="Haut-Komo"/>
         </name>
+        <coveredElementList>
+          <element id="e_WoleuNtem"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Okano" look="pl_Departement">
         <name>
           <name language="fr" text="Okano"/>
           <name language="en" text="Okano"/>
         </name>
+        <coveredElementList>
+          <element id="e_WoleuNtem"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Woleu" look="pl_Departement">
         <name>
           <name language="fr" text="Woleu"/>
           <name language="en" text="Woleu"/>
         </name>
+        <coveredElementList>
+          <element id="e_WoleuNtem"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ntem" look="pl_Departement">
         <name>
           <name language="fr" text="Ntem"/>
           <name language="en" text="Ntem"/>
         </name>
+        <coveredElementList>
+          <element id="e_WoleuNtem"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_HautNtem" look="pl_Departement">
         <name>
           <name language="fr" text="Haut-Ntem"/>
           <name language="en" text="Haut-Ntem"/>
         </name>
+        <coveredElementList>
+          <element id="e_WoleuNtem"/>
+        </coveredElementList>
       </polygonElement>
     </polygonElementList>
     <lineElementList/>

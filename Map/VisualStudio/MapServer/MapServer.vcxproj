@@ -180,6 +180,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Interval.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopyBuilder.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\LineItemCopy.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\FilledPolygonItemCopy.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\Interval.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\PngImage.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\ItemCopy.h" />

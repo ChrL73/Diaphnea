@@ -152,6 +152,7 @@
           <name language="fr" text="01"/>
           <name language="en" text="01"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_02" look="pl_Departement">
         <name>
@@ -162,6 +163,7 @@
           <name language="fr" text="02"/>
           <name language="en" text="02"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_08" look="pl_Departement">
         <name>
@@ -172,6 +174,7 @@
           <name language="fr" text="08"/>
           <name language="en" text="08"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_13" look="pl_Departement">
         <name>
@@ -182,6 +185,7 @@
           <name language="fr" text="13"/>
           <name language="en" text="13"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
       <polygonElement id="e_60" look="pl_Departement">
         <name>
@@ -192,6 +196,7 @@
           <name language="fr" text="60"/>
           <name language="en" text="60"/>
         </shortName>
+        <coveredElementList/>
       </polygonElement>
     </polygonElementList>
     <lineElementList>

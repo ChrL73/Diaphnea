@@ -106,7 +106,9 @@ namespace MapDataProcessing
             foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList)
             {
                 String id = xmlPolygonElement.id.Substring(2);
-                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName, xmlPolygonElement.look);
+                List<string> coveredElementList = new List<string>();
+                foreach (XmlCoveredElement coveredElement in xmlPolygonElement.coveredElementList) coveredElementList.Add(coveredElement.id.Substring(2));
+                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName, xmlPolygonElement.look, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 

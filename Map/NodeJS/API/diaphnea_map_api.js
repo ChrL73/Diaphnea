@@ -325,6 +325,21 @@ var mapServerInterface =
                cancelAnimationFrame(reqAnimFrameId);
                reqAnimFrameId = requestAnimationFrame(renderCanvas);
             });
+            
+            socket.on('removeTextRes', function(response)
+            {
+               var context = getContext(response, true);
+               if (!context || response.requestId != lastRenderRequestId) return;
+               
+               var itemKey = '_' + response.content.e;
+               var item = items[itemKey];
+               
+               if (item)
+               {
+                  delete addedItems[itemKey];
+                  delete addedItemsByZIndex[item.zI][itemKey];
+               }
+            });
 
             socket.on('itemDataRes', function(response)
             {

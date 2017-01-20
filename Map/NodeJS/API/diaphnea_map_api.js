@@ -302,17 +302,16 @@ var mapServerInterface =
                
                var textInfo = response.content;
                //console.log(textInfo);
+               if (!visibleElements[textInfo.e]) return;
                var itemKey = '_' + textInfo.e;
                
                items[itemKey] =
                {
                   key: itemKey,
                   type: 'text',
-                  text: textInfo.t,
-                  x: textInfo.x,
+                  textLines: textInfo.t,
                   xMin: textInfo.x1,
                   xMax: textInfo.x2,
-                  y: textInfo.y,
                   yMin: textInfo.y1,
                   yMax: textInfo.y2,
                   zI: textInfo.z,
@@ -514,12 +513,15 @@ var mapServerInterface =
                               && (item.yMin - yFocus) * scale + 0.5 * canvas.height >= 0
                               && (item.yMax - yFocus) * scale - 0.5 * canvas.height <= 0)
                         {
-                           var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
-                           var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
-
                            ctx.fillStyle = item.color;
                            ctx.font = item.size + 'px arial';
-                           ctx.fillText(item.text, x, y);
+                           
+                           item.textLines.forEach(function(line)
+                           {
+                              var x = (line[1] - xFocus) * scale + 0.5 * canvas.width;
+                              var y = (line[2] - yFocus) * scale + 0.5 * canvas.height;
+                              ctx.fillText(line[0], x, y);
+                           });
                         }
                         else
                         {

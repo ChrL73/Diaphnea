@@ -26,16 +26,24 @@ namespace map_server
         for (i = 0; i < n; ++i)
         {
             const char *languageId = (*_iMap->getLanguageIdVectorPtr())[i].c_str();
-            const char *name = dbName.getStringField(languageId);
-            const char *shortName = dbShortName.getStringField(languageId);
+            std::string name = dbName.getStringField(languageId);
+            std::string shortName = dbShortName.getStringField(languageId);
 
             std::vector<ElementName *> nameVector;
             std::vector<std::string> lineVector;
-            lineVector.push_back(name);
-            nameVector.push_back(new ElementName(lineVector));
-            lineVector.clear();
-            lineVector.push_back(shortName);
-            nameVector.push_back(new ElementName(lineVector));
+
+            if (!name.empty())
+            {
+                lineVector.push_back(name);
+                nameVector.push_back(new ElementName(lineVector));
+                lineVector.clear();
+            }
+
+            if (!shortName.empty())
+            {
+                lineVector.push_back(shortName);
+                nameVector.push_back(new ElementName(lineVector));
+            }
 
             _nameMap.insert(std::pair<std::string, std::vector<ElementName *> >(languageId, nameVector));
 

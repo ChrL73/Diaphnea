@@ -370,37 +370,21 @@ namespace map_server
 
             if (text != 0)
             {
+                std::vector<TextInfoLine *> lineVector;
                 int j, m = text->getLineCount();
-
-                if (m > 0)
+                for (j = 0; j < m; ++j)
                 {
-                    std::vector<TextInfoLine *> lineVector;
-                    for (j = 0; j < m; ++j) lineVector.push_back(new TextInfoLine(text->getLine(j)));
+                    std::string line = text->getLine(j);
+                    if (!line.empty()) lineVector.push_back(new TextInfoLine(line));
+                }
+
+                if (!lineVector.empty())
+                {
                     TextInfo *textInfo = new TextInfo(lineVector, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
                     if (textInfo->ok()) itemCopy->addTextInfo(textInfo);
                     else delete textInfo;
                 }
             }
         }
-
-        /*const std::string& text1 = item->getText1(_languageId);
-        if (!text1.empty())
-        {
-            std::vector<TextInfoLine *> lineVector;
-            lineVector.push_back(new TextInfoLine(text1));
-            TextInfo *textInfo1 = new TextInfo(lineVector, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
-            if (textInfo1->ok()) itemCopy->setTextInfo1(textInfo1);
-			else delete textInfo1;
-
-            const std::string& text2 = item->getText2(_languageId);
-            if (!text2.empty())
-            {
-                lineVector.clear();
-                lineVector.push_back(new TextInfoLine(text2));
-                TextInfo *textInfo2 = new TextInfo(lineVector, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
-				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
-				else delete textInfo2;
-            }
-        }*/
     }
 }

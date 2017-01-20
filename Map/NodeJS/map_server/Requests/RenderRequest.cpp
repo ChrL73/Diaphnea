@@ -199,6 +199,17 @@ namespace map_server
                         ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
                         _itemCopyBuilderVector.push_back(itemCopyBuilder);
                     }
+                    else
+                    {
+                        std::stringstream delResponse;
+                        delResponse << _socketId << " " << _requestId << " " << map_server::REMOVE_TEXT
+                            << " {\"e\":\"" << item->getElementIdForText() << "\"}";
+                        MapData::unlock();
+                        _coutMutexPtr->lock();
+                        std::cout << delResponse.str() << std::endl;
+                        _coutMutexPtr->unlock();
+                        MapData::lock();
+                    }
                 }
 
                 response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus

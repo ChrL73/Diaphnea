@@ -11,6 +11,7 @@ namespace map_server
         ITEM_DATA = 4,
         LOOK = 5,
         RENDER = 6,
-        TEXT = 7
+        TEXT = 7,
+        REMOVE_TEXT = 8
     };
 }

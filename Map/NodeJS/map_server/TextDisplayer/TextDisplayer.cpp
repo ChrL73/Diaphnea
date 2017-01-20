@@ -86,8 +86,15 @@ namespace map_server
 		for (i = 0; i < n && visibleTextCount < _parameters->getMaxVisibleTextCount(); ++i)
 		{
 			ItemCopy *item = _itemVector[i];
-			if (displayText(item, item->getTextInfo1())) ++visibleTextCount;
-			else if (displayText(item, item->getTextInfo2())) ++visibleTextCount;
+			int j, m = item->getTextInfoCount();
+			for (j = 0; j < m; ++j)
+			{
+                if (displayText(item, item->getTextInfo(j)))
+                {
+                    ++visibleTextCount;
+                    break;
+                }
+            }
 		}
 
         if (_createPotentialImage && isDisplayerActive())
@@ -319,7 +326,7 @@ namespace map_server
     {
         Potential potential;
 
-        double centereCountXD = ceil(0.1 * textInfo->getWidth());
+        double centereCountXD = ceil(0.15 * textInfo->getWidth());
         if (centereCountXD < 2.0) centereCountXD = 2.0;
         double dx = textInfo->getWidth() / (centereCountXD - 1.0);
         int centerCountX = static_cast<int>(centereCountXD);

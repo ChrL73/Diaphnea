@@ -4,6 +4,8 @@
 
 namespace map_server
 {
+    class ElementName;
+
     class MapElement
     {
     protected:
@@ -13,7 +15,7 @@ namespace map_server
 
         IMap * const _iMap;
         bool _loaded;
-        std::map<std::string, std::pair<std::string, std::string> > _nameMap;
+        std::map<std::string, std::vector<ElementName *> > _nameMap;
         std::string _infoJson;
 
         void loadCommon(mongo::BSONObj dbElement);
@@ -21,7 +23,7 @@ namespace map_server
     public:
         MapElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
             _mongoId(mongoId), _id(id)/*, _numericalId(-1)*/, _iMap(iMap), _loaded(false) {}
-        virtual ~MapElement() {}
+        virtual ~MapElement();
 
         bool isLoaded(void) const { return _loaded; }
         virtual void load(void) = 0;

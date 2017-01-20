@@ -9,7 +9,7 @@ namespace map_server
 		int i, n = _repulsiveCenterVector.size();
 		for (i = 0; i < n; ++i) delete _repulsiveCenterVector[i];
 
-		delete _textInfo1;
-		delete _textInfo2;
+		n = _textInfoVector.size();
+		for (i = 0; i < n; ++i) delete _textInfoVector[i];
 	}
 }

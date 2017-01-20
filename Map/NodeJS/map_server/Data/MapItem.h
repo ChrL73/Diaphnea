@@ -7,6 +7,7 @@
  namespace map_server
  {
     class ItemLook;
+    class ElementName;
 
     class MapItem
     {
@@ -14,7 +15,7 @@
         const int _id;
         const ItemLook *_currentLook;
 		const ItemLook *_currentTextLook;
-        std::map<std::string, std::pair<std::string, std::string> > *_nameMapPtr;
+        std::map<std::string, std::vector<ElementName *> > *_nameMapPtr;
         std::string _elementIdForText;
         const std::string _emptyString;
 
@@ -30,10 +31,10 @@
         void setCurrentLook(const ItemLook *look) { _currentLook = look; }
 		void setCurrentTextLook(const ItemLook *look) { _currentTextLook = look; }
 
-		void setNameMap(std::map<std::string, std::pair<std::string, std::string> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
+		void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
 		void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
-		const std::string& getText1(const std::string& languageId) const;
-		const std::string& getText2(const std::string& languageId) const;
+		int getTextCount(const std::string& languageId) const;
+		const ElementName *getText(const std::string& languageId, int i) const;
 		const std::string& getElementIdForText(void) const { return _elementIdForText; }
 
         int getId(void) const { return _id; }

@@ -20,19 +20,19 @@ namespace map_server
         return _infoJsonVector[0];
     }
 
-    const std::string& MapItem::getText1(const std::string& languageId) const
+    int MapItem::getTextCount(const std::string& languageId) const
     {
-        if (_nameMapPtr == 0) return _emptyString;
-        std::map<std::string, std::pair<std::string, std::string> >::iterator it = _nameMapPtr->find(languageId);
-        if (it == _nameMapPtr->end()) return _emptyString;
-        return (*it).second.first;
+        if (_nameMapPtr == 0) return 0;
+        std::map<std::string, std::vector<ElementName *> >::iterator it = _nameMapPtr->find(languageId);
+        if (it == _nameMapPtr->end()) return 0;
+        return (*it).second.size();
     }
 
-    const std::string& MapItem::getText2(const std::string& languageId) const
+    const ElementName *MapItem::getText(const std::string& languageId, int i) const
     {
-        if (_nameMapPtr == 0) return _emptyString;
-        std::map<std::string, std::pair<std::string, std::string> >::iterator it = _nameMapPtr->find(languageId);
-        if (it == _nameMapPtr->end()) return _emptyString;
-        return (*it).second.second;
+        if (_nameMapPtr == 0) return 0;
+        std::map<std::string, std::vector<ElementName *> >::iterator it = _nameMapPtr->find(languageId);
+        if (it == _nameMapPtr->end()) return 0;
+        return (*it).second[i];
     }
 }

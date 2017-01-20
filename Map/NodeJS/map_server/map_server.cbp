@@ -63,6 +63,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Data/ElementName.cpp" />
+		<Unit filename="Data/ElementName.h" />
 		<Unit filename="Data/FilledPolygonItem.cpp" />
 		<Unit filename="Data/FilledPolygonItem.h" />
 		<Unit filename="Data/IMap.h" />

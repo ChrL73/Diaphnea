@@ -20,6 +20,7 @@
 #include "TextInfo.h"
 #include "TextInfoLine.h"
 #include "TextDisplayerParameters.h"
+#include "ElementName.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -288,7 +289,7 @@ namespace map_server
                     double radius = parameters.getPointRadiusCoeff() * diameter;
                     RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
-                    setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face, false);
+                    setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
                 }
 				else
@@ -321,7 +322,7 @@ namespace map_server
 							}
 						}
 
-                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face, false);
+                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
 						textDisplayer.addItem(lineItemCopy);
 					}
 					else
@@ -340,7 +341,7 @@ namespace map_server
                                 filledPolygonItemCopy->addPoint(x, y);
 							}
 
-                            setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face, true);
+                            setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
 							textDisplayer.addItem(filledPolygonItemCopy);
 						}
 					}
@@ -357,12 +358,32 @@ namespace map_server
         textDisplayer.start();
     }
 
-    void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face, bool allowMultiline)
+    void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face)
     {
         if (itemCopyBuilder->getTextLook() == 0) return;
         const MapItem *item = itemCopyBuilder->getItem();
 
-        const std::string& text1 = item->getText1(_languageId);
+        int i, n = item->getTextCount(_languageId);
+        for (i = 0; i < n; ++i)
+        {
+            const ElementName *text = item->getText(_languageId, i);
+
+            if (text != 0)
+            {
+                int j, m = text->getLineCount();
+
+                if (m > 0)
+                {
+                    std::vector<TextInfoLine *> lineVector;
+                    for (j = 0; j < m; ++j) lineVector.push_back(new TextInfoLine(text->getLine(j)));
+                    TextInfo *textInfo = new TextInfo(lineVector, floor(itemCopyBuilder->getTextLook()->getSize() * sizeFactor * _scale), itemCopyBuilder->getTextLook(), face);
+                    if (textInfo->ok()) itemCopy->addTextInfo(textInfo);
+                    else delete textInfo;
+                }
+            }
+        }
+
+        /*const std::string& text1 = item->getText1(_languageId);
         if (!text1.empty())
         {
             std::vector<TextInfoLine *> lineVector;
@@ -380,6 +401,6 @@ namespace map_server
 				if (textInfo2->ok()) itemCopy->setTextInfo2(textInfo2);
 				else delete textInfo2;
             }
-        }
+        }*/
     }
 }

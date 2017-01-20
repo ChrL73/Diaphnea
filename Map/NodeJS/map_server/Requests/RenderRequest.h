@@ -31,7 +31,7 @@ namespace map_server
 
         void execute(void);
         void displayText(void);
-        void setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face);
+        void setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face, bool allowMultiline);
 
     public:
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, const char *languageId, double widthInPixels, double heightInPixels,

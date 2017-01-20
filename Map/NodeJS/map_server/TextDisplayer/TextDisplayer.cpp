@@ -10,6 +10,7 @@
 #include "LineItemCopy.h"
 #include "FilledPolygonItemCopy.h"
 #include "TextInfo.h"
+#include "TextInfoLine.h"
 #include "MessageTypeEnum.h"
 #include "Interval.h"
 
@@ -137,15 +138,24 @@ namespace map_server
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
         Potential pMin(std::numeric_limits<double>::max());
-        double optimalAlphaMin = 0.0;
+        double optimalX = 0.0;
+        double optimalY = 0.0;
+
         int i, n = 12;
         for (i = 0; i < n; ++i)
         {
             double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
-            Potential potential = std::move(getPotential(item, textInfo, cos(alpha), sin(alpha), false));
+            double s = sin(alpha);
+            if (s > 0.8) s = 0.8;
+            else if (s < -0.8) s = -0.8;
+            double x = item->getX() + cos(alpha) * (0.5 * textInfo->getWidth() + item->getDiameter());
+            double y = item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter());
+            Potential potential = std::move(getPotential(item, textInfo, x, y, false));
+
             if (potential.getValue() < pMin.getValue() && potential.getValue() < _parameters->getPotentialThreshold())
             {
-                optimalAlphaMin = alpha;
+                optimalX = x;
+                optimalY = y;
                 pMin = potential;
             }
             if (!isDisplayerActive()) return false;
@@ -153,45 +163,11 @@ namespace map_server
 
         if (pMin.getValue() > _parameters->getPotentialThreshold()) return false;
 
-        double s = sin(optimalAlphaMin);
-        if (s > 0.8) s = 0.8;
-        else if (s < -0.8) s = -0.8;
-        textInfo->setX(item->getX() + cos(optimalAlphaMin) * (0.5 * textInfo->getWidth() + item->getDiameter()));
-        textInfo->setY(item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter()));
-
+        textInfo->setX(optimalX);
+        textInfo->setY(optimalY);
         sendResponse(item, textInfo);
 
         return true;
-    }
-
-    Potential TextDisplayer::getPotential(PointItemCopy *item, TextInfo *textInfo, double cosAlpha, double sinAlpha, bool selfRepulsion)
-    {
-        Potential potential;
-
-        double s = sinAlpha;
-        if (s > 0.8) s = 0.8;
-        else if (s < -0.8) s = -0.8;
-        double x0 = item->getX() + cosAlpha * (0.5 * textInfo->getWidth() + item->getDiameter()) - 0.5 * textInfo->getWidth();
-        double y0 = item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter());
-
-        double centereCountD = ceil(4.0 * textInfo->getWidth() / textInfo->getHeight());
-        if (centereCountD < 2.0) centereCountD = 2.0;
-        double dx = textInfo->getWidth() / (centereCountD - 1.0);
-        int centerCount = static_cast<int>(centereCountD);
-
-        int i, j;
-        for (i = 0; i < centerCount; ++i)
-        {
-            for (j = 0; j < 2; ++j)
-            {
-                double m = (j == 0 ? -0.5 : 0.5);
-                Potential p = std::move(getPotential(x0 + static_cast<double>(i) * dx, y0 + m * textInfo->getHeight(), selfRepulsion ? 0 : item));
-                if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
-                if (p.getValue() > potential.getValue()) potential = std::move(p);
-            }
-        }
-
-        return std::move(potential);
     }
 
     bool TextDisplayer::displayLineText(LineItemCopy *item, TextInfo *textInfo)
@@ -307,7 +283,7 @@ namespace map_server
                 int k;
                 for (k = 0; k < xCount; ++k)
                 {
-                    Potential potential = std::move(getPotential(item, textInfo, x, yD));
+                    Potential potential = std::move(getPotential(item, textInfo, x, yD, true));
 
                     double xc = 2.0 * (x - x0) / (x1 - x0) - 1.0;
                     if (xc < 0) xc = -xc;
@@ -325,7 +301,6 @@ namespace map_server
                     if (!isDisplayerActive()) return false;
                     x += dx;
                 }
-
             }
 
             yD += dy;
@@ -340,23 +315,28 @@ namespace map_server
         return true;
     }
 
-    Potential TextDisplayer::getPotential(FilledPolygonItemCopy *item, TextInfo *textInfo, double x, double y)
+    Potential TextDisplayer::getPotential(ItemCopy *item, TextInfo *textInfo, double x, double y, bool selfRepulsion)
     {
         Potential potential;
 
-        double centereCountD = ceil(4.0 * textInfo->getWidth() / textInfo->getHeight());
-        if (centereCountD < 2.0) centereCountD = 2.0;
-        double dx = textInfo->getWidth() / (centereCountD - 1.0);
-        int centerCount = static_cast<int>(centereCountD);
+        double centereCountXD = ceil(0.1 * textInfo->getWidth());
+        if (centereCountXD < 2.0) centereCountXD = 2.0;
+        double dx = textInfo->getWidth() / (centereCountXD - 1.0);
+        int centerCountX = static_cast<int>(centereCountXD);
+
+        double centereCountYD = ceil(0.1 * textInfo->getHeight());
+        if (centereCountYD < 2.0) centereCountYD = 2.0;
+        double dy = textInfo->getHeight() / (centereCountYD - 1.0);
+        int centerCountY = static_cast<int>(centereCountYD);
 
         x -= 0.5 * textInfo->getWidth();
+        y -= 0.5 * textInfo->getHeight();
         int i, j;
-        for (i = 0; i < centerCount; ++i)
+        for (i = 0; i < centerCountX; ++i)
         {
-            for (j = 0; j < 2; ++j)
+            for (j = 0; j < centerCountY; ++j)
             {
-                double m = (j == 0 ? -0.5 : 0.5);
-                Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y + m * textInfo->getHeight(), 0));
+                Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y +  + static_cast<double>(j) * dy, selfRepulsion ? 0 : item));
                 if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
                 if (p.getValue() > potential.getValue()) potential = std::move(p);
             }
@@ -367,28 +347,36 @@ namespace map_server
 
     void TextDisplayer::sendResponse(ItemCopy *item, TextInfo *textInfo)
     {
-        double x = textInfo->getX() - 0.5 * textInfo->getWidth() - textInfo->getXOffset();
         double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
         double xMax = textInfo->getX()  + 0.5 * textInfo->getWidth();
-        double y = textInfo->getY() + 0.5 * textInfo->getHeight() + textInfo->getYOffset();
         double yMin = textInfo->getY()  - 0.5 * textInfo->getHeight();
         double yMax = textInfo->getY()  + 0.5 * textInfo->getHeight();
 
-        x = _xFocus + (x - 0.5 * _width) / _scale;
         xMin = _xFocus + (xMin - 0.5 * _width) / _scale;
         xMax = _xFocus + (xMax - 0.5 * _width) / _scale;
-        y = _yFocus + (y - 0.5 * _height) / _scale;
         yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
         yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
 
         _coutMutexPtr->lock();
         std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
-            << " {\"t\":\"" << textInfo->getText()
-            << "\",\"e\":\"" << item->getElementId()
-            << "\",\"x\":" << x
-            << ",\"x1\":" << xMin
+            << " {\"t\":[";
+
+        int i, n = textInfo->getLineVector().size();
+        for (i = 0; i < n; ++i)
+        {
+            const TextInfoLine *line = textInfo->getLineVector()[i];
+            double x = textInfo->getX() - 0.5 * textInfo->getWidth() - line->getXOffset();
+            double y = textInfo->getY() + 0.5 * textInfo->getHeight() + line->getYOffset();
+            x = _xFocus + (x - 0.5 * _width) / _scale;
+            y = _yFocus + (y - 0.5 * _height) / _scale;
+            std::cout << "[\"" << line->getText() << "\","
+                << x << "," << y << "]";
+            if (i != n - 1) std::cout << ",";
+        }
+
+        std::cout  << "],\"e\":\"" << item->getElementId()
+            << "\",\"x1\":" << xMin
             << ",\"x2\":" << xMax
-            << ",\"y\":" << y
             << ",\"y1\":" << yMin
             << ",\"y2\":" << yMax
             << ",\"s\":" << textInfo->getFontSize()

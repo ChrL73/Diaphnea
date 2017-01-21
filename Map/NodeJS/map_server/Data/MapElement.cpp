@@ -30,20 +30,8 @@ namespace map_server
             std::string shortName = dbShortName.getStringField(languageId);
 
             std::vector<ElementName *> nameVector;
-            std::vector<std::string> lineVector;
-
-            if (!name.empty())
-            {
-                lineVector.push_back(name);
-                nameVector.push_back(new ElementName(lineVector));
-                lineVector.clear();
-            }
-
-            if (!shortName.empty())
-            {
-                lineVector.push_back(shortName);
-                nameVector.push_back(new ElementName(lineVector));
-            }
+            addNames(name, nameVector);
+            addNames(shortName, nameVector);
 
             _nameMap.insert(std::pair<std::string, std::vector<ElementName *> >(languageId, nameVector));
 
@@ -55,5 +43,33 @@ namespace map_server
 
         if (namesJson.empty()) namesJson = "undefined";
         _infoJson = "{\"names\":" + namesJson + "}";
+    }
+
+    void MapElement::addNames(const std::string& name, std::vector<ElementName *>& nameVector)
+    {
+        if (!name.empty())
+        {
+            bool firstCharFound = false;
+            int startIndex = 0;
+            std::vector<std::string> fragmentVector;
+
+            int i, n = name.size();
+            for (i = 0; i < n; ++i)
+            {
+                if (i == n - 1 || (firstCharFound && (name[i] == '-' || name[i] == ' ') && name[i + 1] != '-' && name[i + 1] != ' '))
+                {
+                    fragmentVector.push_back(name.substr(startIndex, i + 1 - startIndex));
+                    startIndex = i + 1;
+                }
+                else
+                {
+                    firstCharFound = true;
+                }
+            }
+
+            std::vector<std::string> lineVector;
+            /*lineVector.push_back(name);
+            nameVector.push_back(new ElementName(lineVector));*/
+        }
     }
 }

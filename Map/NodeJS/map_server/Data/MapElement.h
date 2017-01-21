@@ -8,6 +8,9 @@ namespace map_server
 
     class MapElement
     {
+    private:
+        void addNames(const std::string& name, std::vector<ElementName *>& nameVector);
+
     protected:
         const mongo::OID _mongoId;
         const std::string _id;

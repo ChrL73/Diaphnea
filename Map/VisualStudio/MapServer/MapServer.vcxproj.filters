@@ -156,6 +156,15 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\Interval.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\ElementName.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Combinations.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -280,6 +289,15 @@
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\Interval.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\ElementName.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Combinations.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

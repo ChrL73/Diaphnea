@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Combinations.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\ElementName.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\ItemLook.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\LineElement.cpp" />
@@ -191,10 +193,13 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\ThreadInfo.cpp" />
     <ClCompile Include="vld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Combinations.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\ElementName.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\IMap.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\ItemLook.h" />
@@ -235,6 +240,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\RepulsiveCenter.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.h" />
     <ClInclude Include="..\..\NodeJS\map_server\ThreadInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

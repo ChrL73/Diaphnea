@@ -1,5 +1,6 @@
 #include "MapElement.h"
 #include "ElementName.h"
+#include "Combinations.h"
 
 namespace map_server
 {
@@ -30,6 +31,7 @@ namespace map_server
             std::string shortName = dbShortName.getStringField(languageId);
 
             std::vector<ElementName *> nameVector;
+			addNames("-  -abc--- -jud--", nameVector);
             addNames(name, nameVector);
             addNames(shortName, nameVector);
 
@@ -51,21 +53,32 @@ namespace map_server
         {
             bool firstCharFound = false;
             int startIndex = 0;
-            std::vector<std::string> fragmentVector;
+            std::vector<std::string> wordVector;
 
             int i, n = name.size();
             for (i = 0; i < n; ++i)
             {
                 if (i == n - 1 || (firstCharFound && (name[i] == '-' || name[i] == ' ') && name[i + 1] != '-' && name[i + 1] != ' '))
                 {
-                    fragmentVector.push_back(name.substr(startIndex, i + 1 - startIndex));
+					wordVector.push_back(name.substr(startIndex, i + 1 - startIndex));
                     startIndex = i + 1;
                 }
-                else
+                else if (name[i] != '-' && name[i] != ' ')
                 {
                     firstCharFound = true;
                 }
             }
+
+			n = wordVector.size() - 1;
+			int k;
+			for (k = 0; k <= n; ++k) 
+			{
+				int combinationCount = Combinations::getCount(n, k);
+				for (i = 0; i < combinationCount; ++i)
+				{
+
+				}
+			}
 
             std::vector<std::string> lineVector;
             /*lineVector.push_back(name);

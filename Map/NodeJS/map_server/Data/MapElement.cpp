@@ -110,12 +110,12 @@ namespace map_server
 						{
 							line += wordVector[p];
 							w += wordSizeVector[p];
+						}
 
-							while (line.back() == ' ')
-							{
-								line.pop_back();
-								--w;
-							}
+						while (line.back() == ' ')
+						{
+							line.pop_back();
+							--w;
 						}
 
 						lineVector.push_back(line);

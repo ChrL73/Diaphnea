@@ -108,21 +108,22 @@ namespace MapDataProcessing
                 String id = xmlPolygonElement.id.Substring(2);
                 List<string> coveredElementList = new List<string>();
                 foreach (XmlCoveredElement coveredElement in xmlPolygonElement.coveredElementList) coveredElementList.Add(coveredElement.id.Substring(2));
-                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName, xmlPolygonElement.look, coveredElementList);
+                PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName,
+                                                                            xmlPolygonElement.importance, xmlPolygonElement.look, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
             {
                 String id = xmlLineElement.id.Substring(2);
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.look);
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, xmlLineElement.look);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
             {
                 String id = xmlPointElement.id.Substring(2);
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.look);
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, xmlPointElement.look);
                 _elementDictionary.Add(id, pointMapElement);
             }
 

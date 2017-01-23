@@ -18,15 +18,17 @@ namespace MapDataProcessing
         private readonly MapData _mapData;
         private readonly ElementName _name;
         private readonly ElementName _shortName;
+        private readonly double _importance;
         private readonly int _lookId;
 
-        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, string lookId)
+        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, string lookId)
         {
             _numericalId = ++_counter;
             _id = id;
             _mapData = mapData;
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
+            _importance = importance;
             _lookId = _mapData.getLook(lookId).Id;
         }
 
@@ -47,6 +49,7 @@ namespace MapDataProcessing
                 //{ "num_id", _numericalId}, // No longer used
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
+                { "importance", _importance },
                 { "look_id", _lookId }
             };
 

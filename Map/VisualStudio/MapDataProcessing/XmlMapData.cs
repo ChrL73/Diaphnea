@@ -337,6 +337,8 @@ public partial class XmlPointElement {
     
     private string lookField;
     
+    private double importanceField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
     public XmlName[] name {
@@ -378,6 +380,17 @@ public partial class XmlPointElement {
         }
         set {
             this.lookField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double importance {
+        get {
+            return this.importanceField;
+        }
+        set {
+            this.importanceField = value;
         }
     }
 }
@@ -466,6 +479,8 @@ public partial class XmlLineElement {
     
     private string lookField;
     
+    private double importanceField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
     public XmlName[] name {
@@ -520,6 +535,17 @@ public partial class XmlLineElement {
             this.lookField = value;
         }
     }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double importance {
+        get {
+            return this.importanceField;
+        }
+        set {
+            this.importanceField = value;
+        }
+    }
 }
 
 /// <remarks/>
@@ -559,6 +585,8 @@ public partial class XmlPolygonElement {
     private string idField;
     
     private string lookField;
+    
+    private double importanceField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
@@ -612,6 +640,17 @@ public partial class XmlPolygonElement {
         }
         set {
             this.lookField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double importance {
+        get {
+            return this.importanceField;
+        }
+        set {
+            this.importanceField = value;
         }
     }
 }

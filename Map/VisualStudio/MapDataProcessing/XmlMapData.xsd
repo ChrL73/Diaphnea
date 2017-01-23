@@ -191,6 +191,7 @@
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
     <xsd:attribute name="look" type="XmlPolygonLookIdRef" use="required"/>
+    <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlCoveredElementList">
     <xsd:sequence>
@@ -209,6 +210,7 @@
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
     <xsd:attribute name="look" type="XmlLineLookIdRef" use="required"/>
+    <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlPointElement">
     <xsd:sequence>
@@ -217,6 +219,7 @@
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
     <xsd:attribute name="look" type="XmlPointLookIdRef" use="required"/>
+    <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlAttachmentList">
     <xsd:sequence>

@@ -143,7 +143,7 @@
         </name>
       </polygonElement>-->
       <!--Départements-->
-      <polygonElement id="e_01" look="pl_Departement">
+      <polygonElement id="e_01" look="pl_Departement" importance="0">
         <name>
           <name language="fr" text="Ain (01)"/>
           <name language="en" text="Ain (01)"/>
@@ -154,7 +154,7 @@
         </shortName>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_02" look="pl_Departement">
+      <polygonElement id="e_02" look="pl_Departement" importance="0">
         <name>
           <name language="fr" text="Aisne (02)"/>
           <name language="en" text="Aisne (02)"/>
@@ -165,7 +165,7 @@
         </shortName>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_08" look="pl_Departement">
+      <polygonElement id="e_08" look="pl_Departement" importance="0">
         <name>
           <name language="fr" text="Ardennes (08)"/>
           <name language="en" text="Ardennes (08)"/>
@@ -176,7 +176,7 @@
         </shortName>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_13" look="pl_Departement">
+      <polygonElement id="e_13" look="pl_Departement" importance="0">
         <name>
           <name language="fr" text="Bouches-du-Rhône (13)"/>
           <name language="en" text="Bouches-du-Rhône (13)"/>
@@ -187,7 +187,7 @@
         </shortName>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_60" look="pl_Departement">
+      <polygonElement id="e_60" look="pl_Departement" importance="0">
         <name>
           <name language="fr" text="Oise (60)"/>
           <name language="en" text="Oise (60)"/>
@@ -201,14 +201,14 @@
     </polygonElementList>
     <lineElementList>
       <!--Fleuves et rivières-->
-      <lineElement id="e_Rhin" look="ll_FleuveRiviere">
+      <lineElement id="e_Rhin" look="ll_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Rhin"/>
           <name language="en" text="Rhin"/>
         </name>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Rhone" look="ll_FleuveRiviere">
+      <lineElement id="e_Rhone" look="ll_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Rhône"/>
           <name language="en" text="Rhône"/>
@@ -217,7 +217,7 @@
           <element id="e_13"/>
         </attachmentList>
       </lineElement>
-    <lineElement id="e_Saone" look="ll_FleuveRiviere">
+    <lineElement id="e_Saone" look="ll_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Saône"/>
           <name language="en" text="Saône"/>
@@ -229,13 +229,13 @@
     </lineElementList>
     <pointElementList>
       <!--Villes-->
-      <pointElement id="e_BourgEnBresse" look="tl_Prefecture">
+      <pointElement id="e_BourgEnBresse" look="tl_Prefecture" importance="0">
         <name>
           <name language="fr" text="Bourg-en-Bresse"/>
           <name language="en" text="Bourg-en-Bresse"/>
         </name>
       </pointElement>
-      <pointElement id="e_Laon" look="tl_Prefecture">
+      <pointElement id="e_Laon" look="tl_Prefecture" importance="0">
         <name>
           <name language="fr" text="Laon"/>
           <name language="en" text="Laon"/>

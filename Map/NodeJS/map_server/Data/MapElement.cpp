@@ -80,11 +80,11 @@ namespace map_server
 
 			n = wordVector.size() - 1;
 			int k;
-			for (k = 0; k <= n; ++k) 
+			for (k = 0; k <= n; ++k)
 			{
 				// The goal of this algorithm is:
 				// Find the best way to split a (n+1)-word string into k+1 lines.
-				// (The best split is the one that minimize the text width.
+				// (The best split is the one that minimizes the text width.
 				// The text width is the width of the longest line)
 				// There are C(n, k) ways to split a (n+1)-word string into k+1 lines
 				// (where C(n, k) is the number of k-combinations from a set of n elements)
@@ -129,11 +129,9 @@ namespace map_server
 						bestLineVector = lineVector;
 					}
 				}
-			}
 
-            std::vector<std::string> lineVector;
-            /*lineVector.push_back(name);
-            nameVector.push_back(new ElementName(lineVector));*/
+				nameVector.push_back(new ElementName(bestLineVector));
+			}
         }
     }
 }

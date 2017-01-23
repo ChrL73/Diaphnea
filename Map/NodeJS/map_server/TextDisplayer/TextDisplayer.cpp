@@ -148,7 +148,7 @@ namespace map_server
         double optimalX = 0.0;
         double optimalY = 0.0;
 
-        int i, n = 12;
+        int i, n = _parameters->getPointTryCount();;
         for (i = 0; i < n; ++i)
         {
             double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
@@ -194,7 +194,7 @@ namespace map_server
         double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
         if (yDmax < yDmin) return false;
 
-        int yCount = 9;
+        int yCount = _parameters->getPolygonYTryCount();;
         double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
         if (dy < 2.0)
         {
@@ -268,7 +268,7 @@ namespace map_server
                 double x0 = intervals[i].getA() + 0.5 * textInfo->getWidth();
                 double x1 = intervals[i].getB() - 0.5 * textInfo->getWidth();
 
-                int xCount = 5;
+                int xCount = _parameters->getPolygonXTryCount();
                 double dx = (x1 - x0) / static_cast<double>(xCount - 1);
                 if (dx < 2.0)
                 {
@@ -326,15 +326,17 @@ namespace map_server
     {
         Potential potential;
 
-        double centereCountXD = ceil(0.15 * textInfo->getWidth());
-        if (centereCountXD < 2.0) centereCountXD = 2.0;
+        double centereCountXD = ceil(_parameters->getComputationDensityFactor() * textInfo->getWidth());
+        if (centereCountXD < 1.0) centereCountXD = 1.0;
+        centereCountXD = centereCountXD * 2 + 1;
         double dx = textInfo->getWidth() / (centereCountXD - 1.0);
-        int centerCountX = static_cast<int>(centereCountXD);
+        int centerCountX = static_cast<int>(floor(centereCountXD + 0.1));
 
-        double centereCountYD = ceil(0.1 * textInfo->getHeight());
-        if (centereCountYD < 2.0) centereCountYD = 2.0;
+        double centereCountYD = ceil(_parameters->getComputationDensityFactor() * textInfo->getHeight());
+        if (centereCountYD < 1.0) centereCountYD = 1.0;
+        centereCountYD = centereCountYD * 2 + 1;
         double dy = textInfo->getHeight() / (centereCountYD - 1.0);
-        int centerCountY = static_cast<int>(centereCountYD);
+        int centerCountY = static_cast<int>(floor(centereCountYD + 0.1));
 
         x -= 0.5 * textInfo->getWidth();
         y -= 0.5 * textInfo->getHeight();
@@ -343,9 +345,12 @@ namespace map_server
         {
             for (j = 0; j < centerCountY; ++j)
             {
-                Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y +  + static_cast<double>(j) * dy, selfRepulsion ? 0 : item));
-                if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
-                if (p.getValue() > potential.getValue()) potential = std::move(p);
+                if ((i + j) % 2 == 0)
+                {
+                    Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y +  + static_cast<double>(j) * dy, selfRepulsion ? 0 : item));
+                    if (p.getValue() > _parameters->getPotentialThreshold()) return std::move(p);
+                    if (p.getValue() > potential.getValue()) potential = std::move(p);
+                }
             }
         }
 

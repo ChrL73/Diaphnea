@@ -88,7 +88,7 @@ namespace map_server
         {
             TextInfoLine *line = _lineVector[k];
             line->setXOffset(line->getXOffset() - 0.5 * (_width - line->getWidth()));
-            line->setYOffset(line->getYOffset() - static_cast<double>((lineCount - 1 - k) * lineDistance) / 64.0);
+            line->setYOffset(_lineVector[lineCount - 1]->getYOffset() - static_cast<double>((lineCount - 1 - k) * lineDistance) / 64.0);
         }
 
 		_ok = true;

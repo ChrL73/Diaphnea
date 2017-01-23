@@ -38,8 +38,8 @@ namespace map_server
 			else
 			{
 				std::map<std::pair<int, int>, std::vector<std::vector<int> > >::iterator it = getIterator(n - 1, k - 1);
-				int p;
-				for (p = 0; p < (*it).second.size(); ++p)
+				int p, q = (*it).second.size();
+				for (p = 0; p < q; ++p)
 				{
 					std::vector<int> combination = (*it).second[p];
 					combination.push_back(n - 1);
@@ -47,7 +47,8 @@ namespace map_server
 				}
 
 				it = getIterator(n - 1, k);
-				for (p = 0; p < (*it).second.size(); ++p)
+				q = (*it).second.size();
+				for (p = 0; p < q; ++p)
 				{
 					combinations.push_back((*it).second[p]);
 				}

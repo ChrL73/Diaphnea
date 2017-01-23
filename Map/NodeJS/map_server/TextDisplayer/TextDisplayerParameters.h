@@ -19,9 +19,14 @@ namespace map_server
 		static constexpr double _textRadiusCoeff = 0.75;
 		static constexpr double _textRefPotential = 3.5;
 
+		static constexpr int _pointTryCount = 12;
+		static constexpr int _polygonXTryCount = 5; // Must be odd
+		static constexpr int _polygonYTryCount = 9; // Must be odd
+
 		static constexpr double _edgeRefPotential = 7.0;
 		static constexpr double _edgeRangeRatio = 0.02;
 		static constexpr double _centeringPotential = 0.2;
+		static constexpr double _computationDensityFactor = 0.1;
 
 		static double _excludingPotentialTable[_potentialTableSize];
 		static double _notExcludingPotentialTable1[_potentialTableSize];
@@ -51,9 +56,14 @@ namespace map_server
 		double getTextRadiusCoeff(void) const { return _textRadiusCoeff; }
 		double getTextRefPotential(void) const { return _textRefPotential; }
 
+		double getPointTryCount(void) const { return _pointTryCount; }
+		double getPolygonXTryCount(void) const { return _polygonXTryCount; }
+		double getPolygonYTryCount(void) const { return _polygonYTryCount; }
+
 		double getEdgeRefPotential(void) const { return _edgeRefPotential; }
 		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }
 		double getCenteringPotential(void) const { return _centeringPotential; }
+		double getComputationDensityFactor(void) const { return _computationDensityFactor; }
 
 		double getExcludingPotential(int i) const { return _excludingPotentialTableCopy[i]; }
 		double getNotExcludingPotential1(int i) const { return _notExcludingPotentialTable1Copy[i]; }

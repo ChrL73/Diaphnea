@@ -24,6 +24,7 @@ namespace map_server
 			_filledPolygonItem->setCurrentTextLook(_look->getTextLook());
 			_filledPolygonItem->setNameMap(&_nameMap);
             _filledPolygonItem->setElementIdForText(_id);
+            _filledPolygonItem->setImportance(_importance);
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
             int i, n = dbLineItems.size();

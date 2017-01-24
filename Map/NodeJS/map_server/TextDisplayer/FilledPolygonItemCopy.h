@@ -19,8 +19,8 @@ namespace map_server
         double _yMax;
 
     public:
-        FilledPolygonItemCopy(const std::string& elementId) :
-            ItemCopy(elementId), _intersections(0), _height(0), _yMin(0.0), _yMax(0.0) {}
+        FilledPolygonItemCopy(const std::string& elementId, double importance) :
+            ItemCopy(elementId, importance), _intersections(0), _height(0), _yMin(0.0), _yMax(0.0) {}
         ~FilledPolygonItemCopy();
 
         void addPoint(double x, double y);

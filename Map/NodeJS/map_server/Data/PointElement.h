@@ -14,6 +14,7 @@ namespace map_server
         PointItem *_item;
 
         void load(void);
+        bool allowMultiline(void) { return false; }
 
     public:
         PointElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :

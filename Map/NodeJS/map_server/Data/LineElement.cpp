@@ -29,6 +29,7 @@ namespace map_server
 				lineItem->setNameMap(&_nameMap);
                 //lineItem->setElementIdForText(_numericalId);
                 lineItem->setElementIdForText(_id);
+                lineItem->setImportance(_importance);
 				_itemVector.push_back(lineItem);
             }
         }

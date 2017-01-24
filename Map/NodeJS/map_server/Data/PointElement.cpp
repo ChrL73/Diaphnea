@@ -31,6 +31,7 @@ namespace map_server
 			_item->setCurrentTextLook(_look->getTextLook());
             _item->setNameMap(&_nameMap);
             _item->setElementIdForText(_id);
+            _item->setImportance(_importance);
             _iMap->addPointItem(_item);
         }
     }

@@ -11,9 +11,12 @@ namespace map_server
     private:
         void addNames(const std::string& name, std::vector<ElementName *>& nameVector);
 
+        virtual bool allowMultiline(void) = 0;
+
     protected:
         const mongo::OID _mongoId;
         const std::string _id;
+        double _importance;
         //int _numericalId;
 
         IMap * const _iMap;

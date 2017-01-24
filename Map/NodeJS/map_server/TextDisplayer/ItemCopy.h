@@ -13,10 +13,11 @@ namespace map_server
     private:
         std::vector<const RepulsiveCenter *> _repulsiveCenterVector;
 		std::vector<TextInfo *> _textInfoVector;
-		std::string _elementId;
+		const std::string _elementId;
+		const double _importance;
 
     public:
-		ItemCopy(const std::string& elementId) : _elementId(elementId) {}
+		ItemCopy(const std::string& elementId, double importance) : _elementId(elementId), _importance(importance) {}
 		virtual ~ItemCopy();
 
         void addRepulsiveCenter(RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
@@ -26,5 +27,6 @@ namespace map_server
 		int getTextInfoCount(void) const { return _textInfoVector.size(); }
 		TextInfo *getTextInfo(int i) const { return _textInfoVector[i]; }
 		const std::string& getElementId(void) const { return _elementId; }
+		double getImportance(void) const { return _importance; }
     };
 }

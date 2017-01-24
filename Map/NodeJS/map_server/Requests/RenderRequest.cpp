@@ -285,7 +285,7 @@ namespace map_server
                     double diameter = size * sizeFactor * _scale;
                     double x = (pointItem->getPoint()->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                     double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                    PointItemCopy *pointItemCopy = new PointItemCopy(pointItem->getElementIdForText(), x, y, diameter);
+                    PointItemCopy *pointItemCopy = new PointItemCopy(pointItem->getElementIdForText(), pointItem->getImportance(), x, y, diameter);
                     double radius = parameters.getPointRadiusCoeff() * diameter;
                     RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
                     pointItemCopy->addRepulsiveCenter(repulsiveCenter);
@@ -297,7 +297,7 @@ namespace map_server
 					const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
 					if (lineItem != 0)
 					{
-                        LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText());
+                        LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText(), lineItem->getImportance());
 
 						int j, m = lineItem->getPointVector(resolutionIndex).size();
 						for (j = 0; j < m - 1; ++j)
@@ -330,7 +330,7 @@ namespace map_server
 						const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
 						if (filledPolygonItem != 0)
 						{
-							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText());
+							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
 
 							int j, m = filledPolygonItem->getPointVector(resolutionIndex).size();
                             for (j = 0; j < m; ++j)

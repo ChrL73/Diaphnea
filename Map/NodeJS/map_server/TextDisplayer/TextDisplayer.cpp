@@ -82,10 +82,18 @@ namespace map_server
     {
         int visibleTextCount = 0;
 
+        std::map<double, ItemCopy *> itemMap;
 		int i, n = _itemVector.size();
-		for (i = 0; i < n && visibleTextCount < _parameters->getMaxVisibleTextCount(); ++i)
+		for (i = 0; i < n; ++i)
 		{
-			ItemCopy *item = _itemVector[i];
+            ItemCopy *item = _itemVector[i];
+            if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, ItemCopy *>(-item->getImportance(), item));
+        }
+
+		std::map<double, ItemCopy *>::iterator it = itemMap.begin();
+		while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
+		{
+			ItemCopy *item = (*it).second;
 			int j, m = item->getTextInfoCount();
 			for (j = 0; j < m; ++j)
 			{
@@ -95,6 +103,8 @@ namespace map_server
                     break;
                 }
             }
+
+            ++it;
 		}
 
         if (_createPotentialImage && isDisplayerActive())

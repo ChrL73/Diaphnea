@@ -13,6 +13,7 @@ namespace map_server
         std::vector<LineItem *> _itemVector;
 
         void load(void);
+        bool allowMultiline(void) { return false; }
 
     public:
         LineElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :

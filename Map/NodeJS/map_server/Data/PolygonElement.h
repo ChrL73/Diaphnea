@@ -19,6 +19,7 @@ namespace map_server
         std::vector<std::string> _coveredElementVector;
 
         void load(void);
+        bool allowMultiline(void) { return true; }
 
     public:
         PolygonElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :

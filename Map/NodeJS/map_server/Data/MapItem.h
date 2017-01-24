@@ -17,6 +17,7 @@
 		const ItemLook *_currentTextLook;
         std::map<std::string, std::vector<ElementName *> > *_nameMapPtr;
         std::string _elementIdForText;
+        double _importance;
         const std::string _emptyString;
 
     protected:
@@ -33,9 +34,11 @@
 
 		void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
 		void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
+		void setImportance(double importance) { _importance = importance; }
 		int getTextCount(const std::string& languageId) const;
 		const ElementName *getText(const std::string& languageId, int i) const;
 		const std::string& getElementIdForText(void) const { return _elementIdForText; }
+		double getImportance(void) const { return _importance; }
 
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(void) const { return _currentLook; }

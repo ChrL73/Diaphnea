@@ -7,6 +7,6 @@ namespace map_server
     class LineItemCopy : public ItemCopy
     {
     public:
-        LineItemCopy(const std::string& elementId) : ItemCopy(elementId) {}
+        LineItemCopy(const std::string& elementId, double importance) : ItemCopy(elementId, importance) {}
     };
 }

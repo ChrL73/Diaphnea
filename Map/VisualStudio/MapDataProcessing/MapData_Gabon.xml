@@ -496,8 +496,8 @@
       </polygonElement> 
       <polygonElement id="e_Zadie" look="pl_Departement" importance="333">
         <name>
-          <name language="fr" text="Zadie"/>
-          <name language="en" text="Zadie"/>
+          <name language="fr" text="Zadié"/>
+          <name language="en" text="Zadié"/>
         </name>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
@@ -728,6 +728,61 @@
           <name language="en" text="Ndjolé"/>
         </name>
       </pointElement>
+      <!--Villes Ngounié-->
+      <pointElement id="e_Mouila" look="tl_ChefLieuProvince" importance="405">
+        <name>
+          <name language="fr" text="Mouila"/>
+          <name language="en" text="Mouila"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Fougamou" look="tl_ChefLieuDepartement" importance="231">
+        <name>
+          <name language="fr" text="Fougamou"/>
+          <name language="en" text="Fougamou"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mandji" look="tl_ChefLieuDepartement" importance="220">
+        <name>
+          <name language="fr" text="Mandji"/>
+          <name language="en" text="Mandji"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mimongo" look="tl_ChefLieuDepartement" importance="223">
+        <name>
+          <name language="fr" text="Mimongo"/>
+          <name language="en" text="Mimongo"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Guietsou" look="tl_ChefLieuDepartement" importance="203">
+        <name>
+          <name language="fr" text="Guiétsou"/>
+          <name language="en" text="Guiétsou"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Ndende" look="tl_ChefLieuDepartement" importance="221">
+        <name>
+          <name language="fr" text="Ndendé"/>
+          <name language="en" text="Ndendé"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Lebamba" look="tl_ChefLieuDepartement" importance="225">
+        <name>
+          <name language="fr" text="Lébamba"/>
+          <name language="en" text="Lébamba"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mbigou" look="tl_ChefLieuDepartement" importance="230">
+        <name>
+          <name language="fr" text="Mbigou"/>
+          <name language="en" text="Mbigou"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Malinga" look="tl_ChefLieuDepartement" importance="207">
+        <name>
+          <name language="fr" text="Malinga"/>
+          <name language="en" text="Malinga"/>
+        </name>
+      </pointElement>
       <!--Villes Nyanga-->
       <pointElement id="e_Tchibanga" look="tl_ChefLieuProvince" importance="401">
         <name>
@@ -832,6 +887,37 @@
         <name>
           <name language="fr" text="Gamba"/>
           <name language="en" text="Gamba"/>
+        </name>
+      </pointElement>
+      <!--Villes Woleu-Ntem-->
+      <pointElement id="e_Oyem" look="tl_ChefLieuProvince" importance="406">
+        <name>
+          <name language="fr" text="Oyem"/>
+          <name language="en" text="Oyem"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Minvoul" look="tl_ChefLieuDepartement" importance="227">
+        <name>
+          <name language="fr" text="Minvoul"/>
+          <name language="en" text="Minvoul"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Bitam" look="tl_ChefLieuDepartement" importance="242">
+        <name>
+          <name language="fr" text="Bitam"/>
+          <name language="en" text="Bitam"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Mitzic" look="tl_ChefLieuDepartement" importance="235">
+        <name>
+          <name language="fr" text="Mitzic"/>
+          <name language="en" text="Mitzic"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Medouneu" look="tl_ChefLieuDepartement" importance="210">
+        <name>
+          <name language="fr" text="Médouneu"/>
+          <name language="en" text="Médouneu"/>
         </name>
       </pointElement>
     </pointElementList>

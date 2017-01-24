@@ -48,7 +48,7 @@ namespace map_server
 
         void sendResponse(ItemCopy *item, TextInfo *textInfo);
 
-        Potential getPotential(ItemCopy *item, TextInfo *textInfo, double x, double y, bool selfRepulsion);
+        double getTextPotential(ItemCopy *item, TextInfo *textInfo, double x, double y, bool selfRepulsion);
         Potential getPotential(double x, double y, ItemCopy *selfItem);
         Potential getElementaryPotential(ItemCopy *item, double x, double y);
 

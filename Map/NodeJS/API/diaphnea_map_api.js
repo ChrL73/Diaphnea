@@ -75,6 +75,7 @@ var mapServerInterface =
             var items = {};
             var addedItems = {};
             var itemsToRemove = {};
+            var removableTexts = {};
             var looks = {};
             var xFocus, yFocus, scale;
             
@@ -140,6 +141,7 @@ var mapServerInterface =
                   {
                      delete addedItems[textItemKey];
                      delete addedItemsByZIndex[textItem.zI][textItemKey];
+                     delete removableTexts[textItemKey];
                   }
                   scheduleRenderRequest();
                }
@@ -182,6 +184,12 @@ var mapServerInterface =
                
                if (elementIds.length)
                {
+                  Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
+                  { 
+                     var item = items[itemKey];
+                     if (item.type == 'text') removableTexts[itemKey] = true;
+                  });
+                  
                   var id = ++requestCounter;
                   // Todo: Add API method to choose language
                   var request = { id: id, mapId: mapId, language: 'fr', elementIds: elementIds, width: canvas.width, height: canvas.height };
@@ -319,6 +327,18 @@ var mapServerInterface =
                   color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
                   scale: context.scale
                }
+                          
+               delete removableTexts[itemKey];
+               Object.getOwnPropertyNames(removableTexts).forEach(function(itemKey2)
+               {
+                  var item2 = items[itemKey2];
+                  if (textInfo.x1 <= item2.xMax && textInfo.x2 >= item2.xMin && textInfo.y1 <= item2.yMax && textInfo.y2 >= item2.yMin)
+                  {
+                     delete addedItems[itemKey2];
+                     delete addedItemsByZIndex[item2.zI][itemKey2];
+                     delete removableTexts[itemKey2];
+                  }
+               });
                
                addItem(itemKey);
                cancelAnimationFrame(reqAnimFrameId);
@@ -337,6 +357,7 @@ var mapServerInterface =
                {
                   delete addedItems[itemKey];
                   delete addedItemsByZIndex[item.zI][itemKey];
+                  delete removableTexts[itemKey];
                }
             });
 
@@ -528,6 +549,7 @@ var mapServerInterface =
                            // If the scale has changed or if the text overflows the map frame, the text item is obsolete, remove it
                            delete addedItems[itemKey];
                            delete addedItemsByZIndex[item.zI][itemKey];
+                           delete removableTexts[itemKey];
                         }
                      }
                   });

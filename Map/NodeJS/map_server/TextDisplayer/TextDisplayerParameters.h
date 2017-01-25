@@ -22,6 +22,8 @@ namespace map_server
 		static constexpr int _pointTryCount = 12;
 		static constexpr int _polygonXTryCount = 5; // Must be odd
 		static constexpr int _polygonYTryCount = 9; // Must be odd
+		static constexpr int _lineXTryCount = 10;
+		static constexpr int _lineYTryCount = 10;
 
 		static constexpr double _edgeRefPotential = 7.0;
 		static constexpr double _edgeRangeRatio = 0.02;
@@ -56,9 +58,11 @@ namespace map_server
 		double getTextRadiusCoeff(void) const { return _textRadiusCoeff; }
 		double getTextRefPotential(void) const { return _textRefPotential; }
 
-		double getPointTryCount(void) const { return _pointTryCount; }
-		double getPolygonXTryCount(void) const { return _polygonXTryCount; }
-		double getPolygonYTryCount(void) const { return _polygonYTryCount; }
+		int getPointTryCount(void) const { return _pointTryCount; }
+		int getPolygonXTryCount(void) const { return _polygonXTryCount; }
+		int getPolygonYTryCount(void) const { return _polygonYTryCount; }
+		int getLineXTryCount(void) const { return _lineXTryCount; }
+		int getLineYTryCount(void) const { return _lineYTryCount; }
 
 		double getEdgeRefPotential(void) const { return _edgeRefPotential; }
 		double getEdgeRangeRatio(void) const { return _edgeRangeRatio; }

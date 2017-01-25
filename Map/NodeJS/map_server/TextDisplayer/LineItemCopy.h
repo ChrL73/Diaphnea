@@ -24,7 +24,9 @@ namespace map_server
         double _xMax;
 
     public:
-        LineItemCopy(const std::string& elementId, double importance) : ItemCopy(elementId, importance) {}
+        LineItemCopy(const std::string& elementId, double importance) :
+			ItemCopy(elementId, importance), _hIntersections(0), _height(0), _yMin(0.0), _yMax(0.0), _vIntersections(0), _width(0), _xMin(0.0), _xMax(0.0) {}
+		~LineItemCopy();
 
         void addPoint(double x, double y, bool newLine);
         void setIntersections(double height, double width);

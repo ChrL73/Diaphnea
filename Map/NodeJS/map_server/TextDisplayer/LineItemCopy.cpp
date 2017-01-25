@@ -5,6 +5,22 @@
 
 namespace map_server
 {
+	LineItemCopy::~LineItemCopy()
+	{
+		int i, n = _pointVector.size();
+		for (i = 0; i < n; ++i)
+		{	
+			int j, m = _pointVector[i].size();
+			for (j = 0; j < m; ++j)	delete _pointVector[i][j];
+		}
+
+		for (i = 0; i < _height; ++i) delete _hIntersections[i];
+		delete[] _hIntersections;
+
+		for (i = 0; i < _width; ++i) delete _vIntersections[i];
+		delete[] _vIntersections;
+	}
+
     void LineItemCopy::addPoint(double x, double y, bool newLine)
     {
         // Avoid the case where x or y is an integer (adding 0.01 pixel to x or y will not have any visible impact)

@@ -127,7 +127,7 @@ namespace map_server
                         if (value1 < 0.0) value1 = 0.0;
                         double r, g, b;
                         hsvToRgb(240.0 * (1.0 - value1), value1, 1.0, r, g, b);
-                        image.setPixel(i, j, 255 * r, 255 * g, 255 * b);
+                        image.setPixel(i, j, static_cast<unsigned char>(255.0 * r), static_cast<unsigned char>(255.0 * g), static_cast<unsigned char>(255.0 * b));
                     }
                 }
             }
@@ -158,7 +158,7 @@ namespace map_server
         double optimalX = 0.0;
         double optimalY = 0.0;
 
-        int i, n = _parameters->getPointTryCount();;
+        int i, n = _parameters->getPointTryCount();
         for (i = 0; i < n; ++i)
         {
             double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
@@ -190,6 +190,124 @@ namespace map_server
     bool TextDisplayer::displayLineText(LineItemCopy *item, TextInfo *textInfo)
     {
         item->setIntersections(_height, _width);
+
+		double optimalYD = 0.0;
+		double optimalX = 0.0;
+		double pMin = std::numeric_limits<double>::max();
+
+		double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+		double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+		if (yDmax < yDmin) return false;
+
+		int yCount = _parameters->getLineYTryCount();
+		double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
+		if (dy < 2.0)
+		{
+			yCount = 1 + static_cast<int>(0.5 * (yDmax - yDmin));
+
+			if (yCount < 2)
+			{
+				yCount = 1;
+				yDmin = 0.5 * (yDmax + yDmin);
+				yDmax = yDmin;
+			}
+			else
+			{
+				dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
+			}
+		}
+
+		double hD = textInfo->getHeight();
+		int hI = static_cast<int>(floor(hD));
+
+		double yD = yDmin;
+		int j;
+		for (j = 0; j < yCount; ++j)
+		{
+			int yI = static_cast<int>(floor(yD));
+
+			std::vector<Interval> intervals;
+			int i1 = 0;
+			intervals.push_back(std::move(Interval(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max())));
+			int y0 = yI - hI / 2;
+			int y1 = y0 + hI;
+			int y;
+			for (y = y0; y <= y1; ++y)
+			{
+				int i0 = i1;
+				i1 = intervals.size();
+
+				std::set<double> *intersections = item->getHIntersections(y);
+
+				if (intersections != 0)
+				{
+					std::set<double>::iterator it = intersections->begin();
+					double a = std::numeric_limits<double>::lowest();
+					while (true)
+					{
+						double b;
+						if (it != intersections->end()) b = *it;
+						else b = std::numeric_limits<double>::max();
+
+						if (a < _width - 1.0 && b > 1.0 && a < b)
+						{
+							Interval interval1(a, b);
+							int i;
+							for (i = i0; i < i1; ++i)
+							{
+								Interval interval2 = std::move(intervals[i].getIntersection(interval1));
+								if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
+								{
+									intervals.push_back(std::move(interval2));
+								}
+							}
+						}
+
+						a = b;
+						if (it == intersections->end()) break;
+						++it;
+					}
+				}
+			}
+
+			int i, n = intervals.size();
+			for (i = i1; i < n; ++i)
+			{
+				double x0 = intervals[i].getA() + 0.5 * textInfo->getWidth();
+				double x1 = intervals[i].getB() - 0.5 * textInfo->getWidth();
+
+				double x = x0;
+				int k;
+				for (k = 0; k < 2; ++k)
+				{
+					double textPotential = getTextPotential(item, textInfo, x, yD, true);
+
+					double xc = 2.0 * (x - x0) / (x1 - x0) - 1.0;
+					if (xc < 0) xc = -xc;
+					double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
+					if (yc < 0) yc = -yc;
+					textPotential += _parameters->getCenteringPotential() * (xc + yc);
+
+					if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+					{
+						optimalX = x;
+						optimalYD = yD;
+						pMin = textPotential;
+					}
+
+					if (!isDisplayerActive()) return false;
+					x = x1;
+				}
+			}
+
+			yD += dy;
+		}
+
+		if (pMin > _parameters->getPotentialThreshold()) return false;
+
+		textInfo->setX(optimalX);
+		textInfo->setY(optimalYD);
+		sendResponse(item, textInfo);
 
         return false;
     }

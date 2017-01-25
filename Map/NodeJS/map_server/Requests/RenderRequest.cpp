@@ -187,6 +187,12 @@ namespace map_server
                 int resolutionIndex = _map->getResolutionIndex(_scale);
 
                 std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
+                double dx = 0.5 * _widthInPixels / _scale;
+                double xMin = _xFocus - dx;
+                double xMax = _xFocus + dx;
+                double dy = 0.5 * _heightInPixels / _scale;
+                double yMin = _yFocus - dy;
+                double yMax = _yFocus + dy;
 
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 n = itemVector2.size();
@@ -204,7 +210,7 @@ namespace map_server
                         _itemCopyBuilderVector.push_back(itemCopyBuilder);
 
                         LineItem *lineItem = dynamic_cast<LineItem *>(item);
-                        if (lineItem != 0)
+                        if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
                         {
                             std::string elementId = lineItem->getElementIdForText();
                             if (!elementId.empty())
@@ -285,7 +291,6 @@ namespace map_server
         double dy = 0.5 * _heightInPixels / _scale;
         double yMin = _yFocus - dy;
         double yMax = _yFocus + dy;
-
         MapData::lock();
 
 		TextDisplayerParameters parameters;
@@ -301,6 +306,7 @@ namespace map_server
 			double size = itemCopyBuilder->getSize();
 			int resolutionIndex = itemCopyBuilder->getResolutionIndex();
 
+            // Todo: make this test before creating 'ItemCopyBuilder' objects
             if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
             {
                 const PointItem *pointItem = dynamic_cast<const PointItem *>(item);

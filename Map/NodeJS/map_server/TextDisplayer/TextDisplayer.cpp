@@ -242,14 +242,16 @@ namespace map_server
 				if (intersections != 0)
 				{
 					std::set<double>::iterator it = intersections->begin();
-					double a = std::numeric_limits<double>::lowest();
+					double a = 1.0;
 					while (true)
 					{
+                        if (a < 1.0) a = 1.0;
 						double b;
 						if (it != intersections->end()) b = *it;
-						else b = std::numeric_limits<double>::max();
+						else b = _width - 1.0;
+						if (b > _width - 1.0) b = _width - 1.0;
 
-						if (a < _width - 1.0 && b > 1.0 && a < b)
+						if (a < _width - 1.0 && b > 1.0)
 						{
 							Interval interval1(a, b);
 							int i;
@@ -273,31 +275,25 @@ namespace map_server
 			int i, n = intervals.size();
 			for (i = i1; i < n; ++i)
 			{
-				double x0 = intervals[i].getA() + 0.5 * textInfo->getWidth();
-				double x1 = intervals[i].getB() - 0.5 * textInfo->getWidth();
+                double x = intervals[i].getA() + 0.5 * textInfo->getWidth();
+                double textPotential = getTextPotential(item, textInfo, x, yD, false);
 
-				double x = x0;
-				int k;
-				for (k = 0; k < 2; ++k)
-				{
-					double textPotential = getTextPotential(item, textInfo, x, yD, true);
+                if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+                {
+                    optimalX = x;
+                    optimalYD = yD;
+                    pMin = textPotential;
+                }
 
-					double xc = 2.0 * (x - x0) / (x1 - x0) - 1.0;
-					if (xc < 0) xc = -xc;
-					double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
-					if (yc < 0) yc = -yc;
-					textPotential += _parameters->getCenteringPotential() * (xc + yc);
+                x = intervals[i].getB() - 0.5 * textInfo->getWidth();
+                textPotential = getTextPotential(item, textInfo, x, yD, false);
 
-					if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
-					{
-						optimalX = x;
-						optimalYD = yD;
-						pMin = textPotential;
-					}
-
-					if (!isDisplayerActive()) return false;
-					x = x1;
-				}
+                if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+                {
+                    optimalX = x;
+                    optimalYD = yD;
+                    pMin = textPotential;
+                }
 			}
 
 			yD += dy;

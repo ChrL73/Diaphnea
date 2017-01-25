@@ -2,7 +2,6 @@
 
 #include "ItemCopy.h"
 
-#include <vector>
 #include <set>
 
 namespace map_server

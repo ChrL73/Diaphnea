@@ -82,7 +82,7 @@ namespace map_server
     {
         int visibleTextCount = 0;
 
-        std::map<double, ItemCopy *> itemMap;
+        std::multimap<double, ItemCopy *> itemMap;
 		int i, n = _itemVector.size();
 		for (i = 0; i < n; ++i)
 		{
@@ -90,7 +90,7 @@ namespace map_server
             if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, ItemCopy *>(-item->getImportance(), item));
         }
 
-		std::map<double, ItemCopy *>::iterator it = itemMap.begin();
+		std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
 		while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
 		{
 			ItemCopy *item = (*it).second;
@@ -189,6 +189,8 @@ namespace map_server
 
     bool TextDisplayer::displayLineText(LineItemCopy *item, TextInfo *textInfo)
     {
+        item->setIntersections(_height, _width);
+
         return false;
     }
 
@@ -233,7 +235,7 @@ namespace map_server
 
             std::vector<Interval> intervals;
             int i1 = 0;
-            intervals.push_back(std::move(Interval(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max())));
+            intervals.push_back(std::move(Interval(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max())));
             int y0 = yI - hI / 2;
             int y1 = y0 + hI;
             int y;

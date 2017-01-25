@@ -186,6 +186,8 @@ namespace map_server
 
                 int resolutionIndex = _map->getResolutionIndex(_scale);
 
+                std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
+
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 n = itemVector2.size();
                 for (i = 0; i < n; ++i)
@@ -200,6 +202,22 @@ namespace map_server
                     {
                         ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
                         _itemCopyBuilderVector.push_back(itemCopyBuilder);
+
+                        LineItem *lineItem = dynamic_cast<LineItem *>(item);
+                        if (lineItem != 0)
+                        {
+                            std::string elementId = lineItem->getElementIdForText();
+                            if (!elementId.empty())
+                            {
+                                std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
+                                if (elementIt == lineItemAssociationMap.end())
+                                {
+                                    elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
+                                }
+
+                                (*elementIt).second.push_back(itemCopyBuilder);
+                            }
+                        }
                     }
                     else
                     {
@@ -216,6 +234,12 @@ namespace map_server
 
                 response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus
                          << ",\"scale\":" << _scale << "}";
+
+                std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.begin();
+                for (; elementIt != lineItemAssociationMap.end(); ++elementIt)
+                {
+                    (*elementIt).second[0]->setLineBuilderVector((*elementIt).second);
+                }
             }
 
             MapData::unlock();
@@ -322,7 +346,28 @@ namespace map_server
 							}
 						}
 
-                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
+                        int lineBuilderCount = itemCopyBuilder->getLineBuilderCount();
+                        if (lineBuilderCount != 0)
+                        {
+                            setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
+
+                            int k;
+                            for (k = 0; k < lineBuilderCount; ++k)
+                            {
+                                ItemCopyBuilder *lineBuilder = itemCopyBuilder->getLineBuilder(k);
+                                const LineItem *lineItem2 = dynamic_cast<const LineItem *>(lineBuilder->getItem());
+
+                                int j, m = lineItem2->getPointVector(resolutionIndex).size();
+                                for (j = 0; j < m; ++j)
+                                {
+                                    const Point *point = lineItem2->getPointVector(resolutionIndex)[j];
+                                    double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                    double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                                    lineItemCopy->addPoint(x, y, j == 0);
+                                }
+                            }
+                        }
+
 						textDisplayer.addItem(lineItemCopy);
 					}
 					else

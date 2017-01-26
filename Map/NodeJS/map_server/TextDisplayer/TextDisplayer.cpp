@@ -154,7 +154,7 @@ namespace map_server
 
     bool TextDisplayer::displayPointText(PointItemCopy *item, TextInfo *textInfo)
     {
-        double pMin = std::numeric_limits<double>::max();
+        TextPotential pMin(true);
         double optimalX = 0.0;
         double optimalY = 0.0;
 
@@ -167,9 +167,9 @@ namespace map_server
             else if (s < -0.8) s = -0.8;
             double x = item->getX() + cos(alpha) * (0.5 * textInfo->getWidth() + item->getDiameter());
             double y = item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter());
-            double textPotential = getTextPotential(item, textInfo, x, y, false);
+            TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, y, false));
 
-            if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+            if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
             {
                 optimalX = x;
                 optimalY = y;
@@ -178,7 +178,7 @@ namespace map_server
             if (!isDisplayerActive()) return false;
         }
 
-        if (pMin > _parameters->getPotentialThreshold()) return false;
+        if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;
 
         textInfo->setX(optimalX);
         textInfo->setY(optimalY);
@@ -191,9 +191,9 @@ namespace map_server
     {
         item->setIntersections(_height, _width);
 
-		double optimalYD = 0.0;
+		double optimalY = 0.0;
 		double optimalX = 0.0;
-		double pMin = std::numeric_limits<double>::max();
+		TextPotential pMin(true);
 
 		double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
 		double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
@@ -275,34 +275,34 @@ namespace map_server
 			int i, n = intervals.size();
 			for (i = i1; i < n; ++i)
 			{
-                double x = intervals[i].getA() + 0.5 * textInfo->getWidth();
-                double textPotential = getTextPotential(item, textInfo, x, yD, false);
-
-                if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+                int k;
+                for (k = 0; k < 2; ++k)
                 {
-                    optimalX = x;
-                    optimalYD = yD;
-                    pMin = textPotential;
-                }
+                    double x;
+                    if (k == 0) x = intervals[i].getA() + 0.5 * textInfo->getWidth();
+                    else x = intervals[i].getB() - 0.5 * textInfo->getWidth();
 
-                x = intervals[i].getB() - 0.5 * textInfo->getWidth();
-                textPotential = getTextPotential(item, textInfo, x, yD, false);
+                    TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, yD, false));
+                    double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
+                    if (yc < 0) yc = -yc;
+                    textPotential.add(_parameters->getCenteringPotential() * yc);
 
-                if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
-                {
-                    optimalX = x;
-                    optimalYD = yD;
-                    pMin = textPotential;
+                    if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
+                    {
+                        optimalX = x;
+                        optimalY = yD;
+                        pMin = textPotential;
+                    }
                 }
 			}
 
 			yD += dy;
 		}
 
-		if (pMin > _parameters->getPotentialThreshold()) return false;
+		if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;
 
 		textInfo->setX(optimalX);
-		textInfo->setY(optimalYD);
+		textInfo->setY(optimalY);
 		sendResponse(item, textInfo);
 
         return false;
@@ -314,7 +314,7 @@ namespace map_server
 
         double optimalYD = 0.0;
         double optimalX = 0.0;
-        double pMin = std::numeric_limits<double>::max();
+        TextPotential pMin(true);
 
         double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
         double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
@@ -416,15 +416,15 @@ namespace map_server
                 int k;
                 for (k = 0; k < xCount; ++k)
                 {
-                    double textPotential = getTextPotential(item, textInfo, x, yD, true);
+                    TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, yD, true));
 
                     double xc = 2.0 * (x - x0) / (x1 - x0) - 1.0;
                     if (xc < 0) xc = -xc;
                     double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
                     if (yc < 0) yc = -yc;
-                    textPotential += _parameters->getCenteringPotential() * (xc + yc);
+                    textPotential.add(_parameters->getCenteringPotential() * (xc + yc));
 
-                    if (textPotential < pMin && textPotential < _parameters->getPotentialThreshold())
+                    if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
                     {
                         optimalX = x;
                         optimalYD = yD;
@@ -439,7 +439,7 @@ namespace map_server
             yD += dy;
         }
 
-        if (pMin > _parameters->getPotentialThreshold()) return false;
+        if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;
 
         textInfo->setX(optimalX);
         textInfo->setY(optimalYD);
@@ -448,9 +448,9 @@ namespace map_server
         return true;
     }
 
-    double TextDisplayer::getTextPotential(ItemCopy *item, TextInfo *textInfo, double x, double y, bool selfRepulsion)
+    TextPotential TextDisplayer::getTextPotential(ItemCopy *item, TextInfo *textInfo, double x, double y, bool selfRepulsion)
     {
-        double textPotential = 0.0;
+        TextPotential textPotential;
 
         double centereCountXD = ceil(_parameters->getComputationDensityFactor() * textInfo->getWidth());
         if (centereCountXD < 1.0) centereCountXD = 1.0;
@@ -473,14 +473,14 @@ namespace map_server
             {
                 if ((i + j) % 2 == 0)
                 {
-                    Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y +  + static_cast<double>(j) * dy, selfRepulsion ? 0 : item));
-                    if (p.getValue() > _parameters->getPotentialThreshold()) return p.getValue();
-                    if (p.getValue() > textPotential) textPotential = p.getValue();
+                    Potential p = std::move(getPotential(x + static_cast<double>(i) * dx, y + static_cast<double>(j) * dy, selfRepulsion ? 0 : item));
+                    textPotential.add(p.getValue());
+                    if (textPotential.getMax() > _parameters->getPotentialThreshold()) return std::move(textPotential);
                 }
             }
         }
 
-        return textPotential;
+        return std::move(textPotential);
     }
 
     void TextDisplayer::sendResponse(ItemCopy *item, TextInfo *textInfo)

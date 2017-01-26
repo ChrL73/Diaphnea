@@ -13,10 +13,5 @@ namespace map_server
         _v12 = axisDy * r / radius1;
         _v21 = -axisDy * r / radius2;
         _v22 = axisDx * r / radius2;
-
-        /*axisDy *= 2.0;
-        r = 1.0 / sqrt(axisDx * axisDx + axisDy * axisDy);
-        _cosAlpha = -r * axisDy;
-        _sinAlpha = r * axisDx;*/
     }
 }

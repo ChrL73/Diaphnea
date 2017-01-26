@@ -147,6 +147,8 @@
 		<Unit filename="TextDisplayer/TextInfo.h" />
 		<Unit filename="TextDisplayer/TextInfoLine.cpp" />
 		<Unit filename="TextDisplayer/TextInfoLine.h" />
+		<Unit filename="TextDisplayer/TextPotential.cpp" />
+		<Unit filename="TextDisplayer/TextPotential.h" />
 		<Unit filename="ThreadInfo.cpp" />
 		<Unit filename="ThreadInfo.h" />
 		<Unit filename="map_server.cpp" />

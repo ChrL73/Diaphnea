@@ -19,7 +19,7 @@ namespace map_server
 		static constexpr double _textRadiusCoeff = 0.75;
 		static constexpr double _textRefPotential = 3.5;
 
-		static constexpr int _pointTryCount = 12;
+		static constexpr int _pointTryCount = 18;
 		static constexpr int _polygonXTryCount = 5; // Must be odd
 		static constexpr int _polygonYTryCount = 9; // Must be odd
 		static constexpr int _lineXTryCount = 10;

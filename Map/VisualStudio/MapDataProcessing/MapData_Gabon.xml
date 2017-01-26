@@ -615,7 +615,17 @@
         </coveredElementList>
       </polygonElement>
     </polygonElementList>
-    <lineElementList/>
+    <lineElementList>
+      <lineElement id="e_Ogooue" look="ll_FleuveRiviere" importance="150">
+        <name>
+          <name language="fr" text="Ogooué"/>
+          <name language="en" text="Ogooué"/>
+        </name>
+        <attachmentList>
+          <element id="e_Bendje"/>
+        </attachmentList>
+      </lineElement>
+    </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->
       <pointElement id="e_Libreville" look="tl_ChefLieuProvince" importance="409">

@@ -194,6 +194,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayerParameters.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextPotential.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\ThreadInfo.cpp" />
     <ClCompile Include="vld.cpp" />
   </ItemGroup>
@@ -241,6 +242,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextDisplayer.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextInfoLine.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextPotential.h" />
     <ClInclude Include="..\..\NodeJS\map_server\ThreadInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

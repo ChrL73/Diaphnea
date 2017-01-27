@@ -24,7 +24,7 @@
 
   <lookList>
     <polygonLookList>
-      <polygonLook id="pl_France" contourZIndex="4"
+      <polygonLook id="pl_France" contourZIndex="5"
                    contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.7"
                    fillLightRatio="0.07" fillZIndex="16"
                    textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="19"/>
@@ -38,7 +38,7 @@
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
     </polygonLookList>
     <lineLookList>
-      <lineLook id="ll_FleuveRiviere" lineZIndex="5"
+      <lineLook id="ll_FleuveRiviere" lineZIndex="4"
                 lineAlpha="255" lineRed="0" lineGreen="0" lineBlue="255" lineSize="1.4"
                 textAlpha="255" textRed="0" textGreen="0" textBlue="192" textSize="17"/>
     </lineLookList>

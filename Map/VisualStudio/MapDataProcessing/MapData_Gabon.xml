@@ -201,6 +201,15 @@
           <element id="e_Estuaire"/>
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_OwendoDepartement" look="pl_Departement" importance="346">
+        <name>
+          <name language="fr" text="Owendo"/>
+          <name language="en" text="Owendo"/>
+        </name>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_Komo" look="pl_Departement" importance="336">
         <name>
           <name language="fr" text="Komo"/>
@@ -634,6 +643,15 @@
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_NyangaRiver" look="ll_FleuveRiviere" importance="150">
+        <name>
+          <name language="fr" text="Nyanga"/>
+          <name language="en" text="Nyanga"/>
+        </name>
+        <attachmentList>
+          <element id="e_BasseBanio"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->
@@ -641,6 +659,12 @@
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
+        </name>
+      </pointElement>
+      <pointElement id="e_Owendo" look="tl_ChefLieuDepartement" importance="246">
+        <name>
+          <name language="fr" text="Owendo"/>
+          <name language="en" text="Owendo"/>
         </name>
       </pointElement>
       <pointElement id="e_Ntoum" look="tl_ChefLieuDepartement" importance="247">

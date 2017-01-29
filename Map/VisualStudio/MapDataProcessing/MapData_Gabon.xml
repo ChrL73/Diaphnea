@@ -634,7 +634,7 @@
           <element id="e_Bendje"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_NgounieRiver" look="ll_FleuveRiviere" importance="150">
+      <lineElement id="e_NgounieRiver" look="ll_FleuveRiviere" importance="149">
         <name>
           <name language="fr" text="Ngounié"/>
           <name language="en" text="Ngounié"/>
@@ -643,13 +643,31 @@
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_NyangaRiver" look="ll_FleuveRiviere" importance="150">
+      <lineElement id="e_NyangaRiver" look="ll_FleuveRiviere" importance="148">
         <name>
           <name language="fr" text="Nyanga"/>
           <name language="en" text="Nyanga"/>
         </name>
         <attachmentList>
           <element id="e_BasseBanio"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_IvindoRiver" look="ll_FleuveRiviere" importance="147">
+        <name>
+          <name language="fr" text="Ivindo"/>
+          <name language="en" text="Ivindo"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_KomoRiver" look="ll_FleuveRiviere" importance="146">
+        <name>
+          <name language="fr" text="Komo"/>
+          <name language="en" text="Komo"/>
+        </name>
+        <attachmentList>
+          <element id="e_Komo"/>
         </attachmentList>
       </lineElement>
     </lineElementList>

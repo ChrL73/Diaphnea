@@ -59,8 +59,8 @@
     <polygonElementList>
       <polygonElement id="e_Gabon" look="pl_Gabon" importance="601">
         <name>
-          <name language="fr" text=""/>
-          <name language="en" text=""/>
+          <name language="fr" text="Gabon"/>
+          <name language="en" text="Gabon"/>
         </name>
         <coveredElementList/>
       </polygonElement>
@@ -74,7 +74,9 @@
           <name language="fr" text="1"/>
           <name language="en" text="1"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_HautOgooue" look="pl_Province" importance="508">
         <name>
@@ -85,7 +87,9 @@
           <name language="fr" text="2"/>
           <name language="en" text="2"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_MoyenOgooue" look="pl_Province" importance="504">
         <name>
@@ -96,7 +100,9 @@
           <name language="fr" text="3"/>
           <name language="en" text="3"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ngounie" look="pl_Province" importance="505">
         <name>
@@ -107,7 +113,9 @@
           <name language="fr" text="4"/>
           <name language="en" text="4"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Nyanga" look="pl_Province" importance="501">
         <name>
@@ -118,7 +126,9 @@
           <name language="fr" text="5"/>
           <name language="en" text="5"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OgooueIvindo" look="pl_Province" importance="502">
         <name>
@@ -129,7 +139,9 @@
           <name language="fr" text="6"/>
           <name language="en" text="6"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OgooueLolo" look="pl_Province" importance="503">
         <name>
@@ -140,7 +152,9 @@
           <name language="fr" text="7"/>
           <name language="en" text="7"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OgooueMaritime" look="pl_Province" importance="507">
         <name>
@@ -151,7 +165,9 @@
           <name language="fr" text="8"/>
           <name language="en" text="8"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_WoleuNtem" look="pl_Province" importance="506">
         <name>
@@ -162,7 +178,9 @@
           <name language="fr" text="9"/>
           <name language="en" text="9"/>
         </shortName>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Gabon"/>
+        </coveredElementList>
       </polygonElement>
       <!--Départements Estuaire-->
       <polygonElement id="e_Noya" look="pl_Departement" importance="313">
@@ -172,6 +190,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_KomoMondah" look="pl_Departement" importance="347">
@@ -181,6 +200,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_KomoOcean" look="pl_Departement" importance="301">
@@ -190,6 +210,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LibrevilleDepartement" look="pl_Departement" importance="350">
@@ -199,6 +220,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OwendoDepartement" look="pl_Departement" importance="346">
@@ -208,6 +230,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Komo" look="pl_Departement" importance="336">
@@ -217,6 +240,7 @@
         </name>
         <coveredElementList>
           <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Haut-Ogooué-->
@@ -227,6 +251,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BayiBrikolo" look="pl_Departement" importance="304">
@@ -236,6 +261,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LebombiLeyou" look="pl_Departement" importance="344">
@@ -245,6 +271,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Lekoko" look="pl_Departement" importance="317">
@@ -254,6 +281,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mpassa" look="pl_Departement" importance="348">
@@ -263,6 +291,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_OgooueLetili" look="pl_Departement" importance="309">
@@ -272,6 +301,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LekoniLekori" look="pl_Departement" importance="326">
@@ -281,6 +311,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LekabiLewolo" look="pl_Departement" importance="316">
@@ -290,6 +321,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Djoue" look="pl_Departement" importance="305">
@@ -299,6 +331,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_DjouoriAgnili" look="pl_Departement" importance="312">
@@ -308,6 +341,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Plateaux" look="pl_Departement" importance="324">
@@ -317,6 +351,7 @@
         </name>
         <coveredElementList>
           <element id="e_HautOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Moyen-Ogooué-->
@@ -327,6 +362,7 @@
         </name>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_AbangaBigne" look="pl_Departement" importance="332">
@@ -336,6 +372,7 @@
         </name>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ngounié-->
@@ -346,6 +383,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_TsambaMagotsi" look="pl_Departement" importance="331">
@@ -355,6 +393,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mougalaba" look="pl_Departement" importance="303">
@@ -364,6 +403,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_DouyaOnoye" look="pl_Departement" importance="341">
@@ -373,6 +413,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ogoulou" look="pl_Departement" importance="323">
@@ -382,6 +423,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Dola" look="pl_Departement" importance="321">
@@ -391,6 +433,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LouetsiWano" look="pl_Departement" importance="325">
@@ -400,6 +443,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BoumiLouetsi" look="pl_Departement" importance="330">
@@ -409,6 +453,7 @@
         </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LouetsiBibaka" look="pl_Departement" importance="307">
@@ -418,6 +463,7 @@
           </name>
         <coveredElementList>
           <element id="e_Ngounie"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Nyanga-->
@@ -428,6 +474,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mougoutsi" look="pl_Departement" importance="340">
@@ -437,6 +484,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_BasseBanio" look="pl_Departement" importance="322">
@@ -446,6 +494,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_HauteBanio" look="pl_Departement" importance="302">
@@ -455,6 +504,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mongo" look="pl_Departement" importance="306">
@@ -464,6 +514,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Doutsila" look="pl_Departement" importance="314">
@@ -473,6 +524,7 @@
         </name>
         <coveredElementList>
           <element id="e_Nyanga"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Ivindo-->
@@ -483,6 +535,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mvoung" look="pl_Departement" importance="311">
@@ -492,6 +545,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ivindo" look="pl_Departement" importance="339">
@@ -501,6 +555,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement> 
       <polygonElement id="e_Zadie" look="pl_Departement" importance="333">
@@ -510,6 +565,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Lolo-->
@@ -520,6 +576,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LoloBouenguidi" look="pl_Departement" importance="338">
@@ -529,6 +586,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_LomboBouenguidi" look="pl_Departement" importance="315">
@@ -538,6 +596,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Mouloundou" look="pl_Departement" importance="337">
@@ -547,6 +606,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->
@@ -557,6 +617,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Etimboue" look="pl_Departement" importance="319">
@@ -566,6 +627,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ndougou" look="pl_Departement" importance="328">
@@ -575,6 +637,7 @@
         </name>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Woleu-Ntem-->
@@ -585,6 +648,7 @@
         </name>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Okano" look="pl_Departement" importance="335">
@@ -594,6 +658,7 @@
         </name>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Woleu" look="pl_Departement" importance="345">
@@ -603,6 +668,7 @@
         </name>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_Ntem" look="pl_Departement" importance="342">
@@ -612,6 +678,7 @@
         </name>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <polygonElement id="e_HautNtem" look="pl_Departement" importance="327">
@@ -621,6 +688,7 @@
         </name>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
+          <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
     </polygonElementList>
@@ -668,6 +736,24 @@
         </name>
         <attachmentList>
           <element id="e_Komo"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Lolo" look="ll_FleuveRiviere" importance="145">
+        <name>
+          <name language="fr" text="Lolo"/>
+          <name language="en" text="Lolo"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_OkanoRiver" look="ll_FleuveRiviere" importance="144">
+        <name>
+          <name language="fr" text="Okano"/>
+          <name language="en" text="Okano"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
     </lineElementList>

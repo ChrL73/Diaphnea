@@ -3,7 +3,12 @@ canvas
   border: 1px solid black;
 }
 
-canvas, div
+svg
+{
+  border: 1px solid blue;
+}
+
+canvas, svg, div
 {
    display: inline-block;
    vertical-align: top;

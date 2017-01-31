@@ -324,7 +324,8 @@ var mapServerInterface =
                   yMax: textInfo.y2,
                   zI: textInfo.z,
                   size: textInfo.s,
-                  color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
+                  //color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
+                  color: '#' + (256 + textInfo.r).toString(16).substr(1) + ((1 << 24) + (textInfo.g << 16) | (textInfo.b << 8) | textInfo.a).toString(16).substr(1),
                   scale: context.scale
                }
                           
@@ -399,7 +400,8 @@ var mapServerInterface =
                {
                   zI: lookData.zI,
                   size: lookData.size,
-                  color: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')'
+                  //color: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')'
+                  color: '#' + (256 + lookData.r).toString(16).substr(1) + ((1 << 24) + (lookData.g << 16) | (lookData.b << 8) | lookData.a).toString(16).substr(1)
                };
                
                context.itemKeyArray.forEach(function(itemKey)
@@ -555,6 +557,89 @@ var mapServerInterface =
                   });
                }
             }
+            
+            this.testSvg = function(svgId)
+            {
+               var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
+               var html = "";
+               
+               var i;
+               for (i = 31; i >= 0; --i)
+               {
+                  var itemList = addedItemsByZIndex[i];
+                  Object.getOwnPropertyNames(itemList).forEach(function(itemKey)
+                  {
+                     var item = items[itemKey];
+                     var look = looks[item.lookId];
+
+                     if (item.type == 'line')
+                     {
+                        var color = look.color.substr(0, look.color.length - 2);                      
+                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
+                        html += '<path style="fill:none;stroke:' + color + ';stroke-opacity:' + opacity + ';stroke-width:'
+                           + look.size * scale * sizeFactor + ';stroke-linecap:round;stroke-linejoin:round" d="';
+                        
+                        item.points.forEach(function(p, i)
+                        {
+                           var x = (p.x - xFocus) * scale + 0.5 * canvas.width;
+                           var y = (p.y - yFocus) * scale + 0.5 * canvas.height;
+                           
+                           if (i === 0) html += 'M ';
+                           else html += 'L ';
+                           
+                           html += x + ',' + y + ' ';
+                        });
+                        
+                        html += '"></path>\n';
+                     }
+                     else if (item.type == 'polygon')
+                     {
+                        var color = look.color.substr(0, look.color.length - 2);                       
+                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
+                        html += '<path style="fill:' + color + ';fill-opacity:' + opacity + ';stroke:none" d="';
+                        
+                        item.points.forEach(function(p, i)
+                        {
+                           var x = (p.x - xFocus) * scale + 0.5 * canvas.width;
+                           var y = (p.y - yFocus) * scale + 0.5 * canvas.height;
+                           
+                           if (i === 0) html += 'M ';
+                           else html += 'L ';
+                           
+                           html += x + ',' + y + ' ';
+                        });
+                        
+                        html += '"></path>\n';
+                     }
+                     else if (item.type == 'point')
+                     {
+                        var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
+                        var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
+                        var color = look.color.substr(0, look.color.length - 2);                      
+                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
+                        
+                        html += '<circle cx="' + x + '" cy="' + y + '" r="' + 0.5 * look.size * scale * sizeFactor
+                           + '" stroke="black" stroke-width="' + scale * sizeFactor + '" fill="' + color + '" fill-opacity="' + opacity + '"></circle>\n';
+                     }
+                     else if (item.type = 'text')
+                     {        
+                        var color = item.color.substr(0, item.color.length - 2);
+                        var opacity = parseInt(item.color.substr(-2, 2), 16) / 255;
+                        
+                        item.textLines.forEach(function(line)
+                        {
+                           var x = (line[1] - xFocus) * scale + 0.5 * canvas.width;
+                           var y = (line[2] - yFocus) * scale + 0.5 * canvas.height;
+                           
+                           html += '<text x="' + x + '" y="' + y + '" font-size="' + item.size + '" font-family="arial" fill="'
+                              + color + '" fill-opacity="' + opacity + '">' + line[0] + '</text>\n'
+                        });
+                     }
+                  });
+               }
+               
+               $('#' + svgId).html(html);
+            };
             
             var mustTranslate = false;
             var xRef, yRef;

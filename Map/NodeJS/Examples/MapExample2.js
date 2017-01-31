@@ -1,6 +1,7 @@
 $(function()
 {            
    document.addEventListener('wheel', function(e) { e.preventDefault(); });
+   $('#svg').hide();
    
    var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected);
@@ -27,6 +28,8 @@ $(function()
             if (w < 100) w = 100;
             $('#canvas').attr('width', w);
             $('#canvas').attr('height', window.innerHeight * 0.95);
+            $('#svg').attr('width', w);
+            $('#svg').attr('height', window.innerHeight * 0.95);
             $('#elementList').height((window.innerHeight * 0.95).toString() + 'px');
          }
          
@@ -59,6 +62,23 @@ $(function()
             $('#potential').click(function()
             {
                map.requestPotentialImage();
+            });
+            
+            $('#testSvg').click(function()
+            {
+               if ($('#testSvg').text() == 'Test SVG')
+               {
+                  $('#testSvg').text('View canvas');
+                  $('#svg').show();
+                  $('#canvas').hide();
+                  map.testSvg('svg');
+               }
+               else
+               {
+                  $('#testSvg').text('Test SVG');
+                  $('#svg').hide();
+                  $('#canvas').show();
+               }
             });
          });
       }

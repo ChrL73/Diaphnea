@@ -147,6 +147,7 @@ var mapServerInterface =
                }
             }
             
+            var svgRequested = false;
             var potentialImageRequested = false;
             this.requestPotentialImage = function()
             {
@@ -180,6 +181,12 @@ var mapServerInterface =
                {
                   elementIds.push('#img');
                   potentialImageRequested = false;
+               }
+               
+               if (svgRequested)
+               {
+                  elementIds.push('#svg');
+                  svgRequested = false;
                }
                
                if (elementIds.length)
@@ -639,6 +646,9 @@ var mapServerInterface =
                }
                
                $('#' + svgId).html(html);
+               
+               svgRequested = true;
+               scheduleRenderRequest();
             };
             
             var mustTranslate = false;

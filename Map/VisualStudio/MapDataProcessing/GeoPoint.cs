@@ -66,21 +66,112 @@ namespace MapDataProcessing
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
 
-        internal BsonDocument getBsonDocument(XmlProjectionEnum projection)
+        internal BsonDocument getBsonDocument(GeoPoint previous2Point, GeoPoint previous1Point, GeoPoint nextPoint, XmlProjectionEnum projection)
         {
             double x, y;
-            if (getProjection(projection, out x, out y))
+            if (!getProjection(projection, out x, out y)) return null;
+
+            BsonDocument pointDocument = null;
+
+            if (previous1Point == null)
             {
-                BsonDocument pointDocument = new BsonDocument()
+                pointDocument = new BsonDocument()
                 {
                     { "x", x },
                     { "y", y }
                 };
+            }
+            else
+            {
+                double xP1, yP1;
+                if (!previous1Point.getProjection(projection, out xP1, out yP1)) return null;
 
-                return pointDocument;
+                double x1 = xP1;
+                double y1 = yP1;
+                double x2 = x;
+                double y2 = y;
+
+                double dx = x - xP1;
+                double dy = y - yP1;
+                double d = Math.Sqrt(dx * dx + dy * dy);
+
+                if (previous2Point != null)
+                {
+                    double xP2, yP2;
+                    if (!previous2Point.getProjection(projection, out xP2, out yP2)) return null;
+
+                    double ux = x - xP2;
+                    double uy = y - yP2;
+                    double r = Math.Sqrt(ux * ux + uy * uy);
+                    ux /= r;
+                    uy /= r;
+
+                    dx = xP1 - xP2;
+                    dy = yP1 - yP2;
+                    double d2 = Math.Sqrt(dx * dx + dy * dy);
+                    if (d2 < d) d = d2;
+
+                    double cos = getCos(xP1, yP1, xP2, yP2, x, y);
+                    const double c = 0.1;
+                    double q = d * c * (1.0 - cos);
+
+                    x1 = xP1 + q * ux;
+                    y1 = yP1 + q * uy;
+                }
+
+                if (nextPoint != null)
+                {
+                    double xN, yN;
+                    if (!nextPoint.getProjection(projection, out xN, out yN)) return null;
+
+                    double ux = xP1 - xN;
+                    double uy = yP1 - yN;
+                    double r = Math.Sqrt(ux * ux + uy * uy);
+                    ux /= r;
+                    uy /= r;
+
+                    dx = x - xN;
+                    dy = y - yN;
+                    double d2 = Math.Sqrt(dx * dx + dy * dy);
+                    if (d2 < d) d = d2;
+
+                    double cos = getCos(x, y, xP1, yP1, xN, yN);
+                    const double c = 0.1;
+                    double q = d * c * (1.0 - cos);
+
+                    x2 = x + q * ux;
+                    y2 = y + q * uy;
+                }
+
+                pointDocument = new BsonDocument()
+                {
+                    { "x1", x1 },
+                    { "y1", y1 },
+                    { "x2", x2 },
+                    { "y2", y2 },
+                    { "x", x },
+                    { "y", y }
+                };
             }
 
-            return null;
+            return pointDocument;
+        }
+
+        private double getCos(double xO, double yO, double xA, double yA, double xB, double yB)
+        {
+            double ux = xA - xO;
+            double uy = yA - yO;
+            double r = Math.Sqrt(ux * ux + uy * uy);
+            ux /= r;
+            uy /= r;
+
+            double vx = xB - xO;
+            double vy = yB - yO;
+            r = Math.Sqrt(vx * vx + vy * vy);
+            vx /= r;
+            vy /= r;
+
+            return ux * vx + uy * vy;
         }
 
         private class Pair

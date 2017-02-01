@@ -71,7 +71,7 @@ namespace MapDataProcessing
             elementDocument.AddRange(new BsonDocument()
             {
                 { "item_id", _itemId.Value },
-                { "point", _kmlFile.PointList[0].getBsonDocument(MapData.XmlMapData.parameters.projection) }
+                { "point", _kmlFile.PointList[0].getBsonDocument(null, null, null, MapData.XmlMapData.parameters.projection) }
             });
 
             pointElementCollection.InsertOne(elementDocument);

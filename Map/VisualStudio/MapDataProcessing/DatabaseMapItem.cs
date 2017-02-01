@@ -12,7 +12,7 @@ namespace MapDataProcessing
     class DatabaseMapItem
     {
         private readonly ItemId _itemId = new ItemId();
-        private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution,List<GeoPoint>>();
+        private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
         {
@@ -38,11 +38,33 @@ namespace MapDataProcessing
             {
                 List<GeoPoint> list = pair.Value;
                 double resolution = pair.Key.sampleLength1 * Double.Parse(pair.Key.sampleRatio);
-
+                
+                int i, n = list.Count;
+                bool closedLine = (list[0] == list[n - 1]);
                 BsonArray pointArray = new BsonArray();
-                foreach (GeoPoint point in list)
+                for (i = 0; i < n; ++i)
                 {
-                    pointArray.Add(point.getBsonDocument(mapData.XmlMapData.parameters.projection));
+                    GeoPoint previous2Point = null;
+                    GeoPoint previous1Point = null;
+                    GeoPoint nextPoint = null;
+
+                    if (i != 0)
+                    {
+                        if (closedLine)
+                        {
+                            previous2Point = list[(n + i - 3) % (n - 1)];
+                            previous1Point = list[(n + i - 2) % (n - 1)];
+                            nextPoint = list[(n + i) % (n - 1)];
+                        }
+                        else
+                        {
+                            if (i != 1) previous2Point = list[i - 2];
+                            previous1Point = list[i - 1];
+                            if (i != n - 1) nextPoint = list[i + 1];
+                        }
+                    }
+
+                    pointArray.Add(list[i].getBsonDocument(previous2Point, previous1Point, nextPoint, mapData.XmlMapData.parameters.projection));
                 }
 
                 BsonDocument pointListDocument = new BsonDocument()

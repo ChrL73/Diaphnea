@@ -18,7 +18,7 @@ namespace map_server
         (*_image)[y][x] = png::rgb_pixel(r, g, b);
     }
 
-    void PngImage::save(const char *fileName)
+    void PngImage::save(std::string fileName)
     {
         _image->write(fileName);
     }

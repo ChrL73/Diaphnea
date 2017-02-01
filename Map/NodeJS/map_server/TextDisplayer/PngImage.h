@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace png
 {
     typedef unsigned char png_byte;
@@ -22,6 +24,6 @@ namespace map_server
         ~PngImage();
 
         void setPixel(int x, int y, unsigned char r, unsigned char g, unsigned char b);
-        void save(const char *fileName);
+        void save(std::string fileName);
     };
 }

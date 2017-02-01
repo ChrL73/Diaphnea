@@ -21,6 +21,7 @@
 #include "TextInfoLine.h"
 #include "TextDisplayerParameters.h"
 #include "ElementName.h"
+#include "SvgCreator.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -52,6 +53,7 @@ namespace map_server
                 MapElement *element = _map->getElement(elementId);
                 if (element != 0) elementVector.push_back(element);
                 else if (elementId == "#img") _createPotentialImage = true;
+                else if (elementId == "#svg" && _svgCreator == 0) _svgCreator = new SvgCreator();
             }
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
@@ -263,6 +265,8 @@ namespace map_server
         {
             MapData::unlock();
         }
+
+        delete _svgCreator;
     }
 
     void RenderRequest::displayText()
@@ -294,7 +298,7 @@ namespace map_server
         MapData::lock();
 
 		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage);
+		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
 

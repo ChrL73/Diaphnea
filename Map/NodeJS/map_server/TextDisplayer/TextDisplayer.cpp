@@ -41,10 +41,10 @@ namespace map_server
 		_mutex.unlock();
 	}
 
-    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId,
-                                 double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage) :
+    TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
+                                 double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator) :
 		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height),
-		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage)
+		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage), _svgCreator(svgCreator)
     {
 		_mutex.lock();
 
@@ -132,7 +132,8 @@ namespace map_server
                 }
             }
 
-            if (isDisplayerActive()) image.save("potential.png");
+            std::string fileName = "Potential_" + _socketId.substr(2, _socketId.size() - 2) + ".png";
+            if (isDisplayerActive()) image.save(fileName);
         }
     }
 

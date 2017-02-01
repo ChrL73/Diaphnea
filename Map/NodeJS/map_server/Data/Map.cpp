@@ -104,9 +104,24 @@ namespace map_server
                 for (j = 0; j < m; ++j)
                 {
                     mongo::BSONObj dbPoint = pointVector[j].Obj();
+
                     double x = dbPoint.getField("x").Double();
                     double y = dbPoint.getField("y").Double();
-                    Point *point = new Point(x, -y);
+                    Point *point;
+
+                    if (j == 0)
+                    {
+                        point = new Point(x, -y);
+                    }
+                    else
+                    {
+                        double x1 = dbPoint.getField("x1").Double();
+                        double y1 = dbPoint.getField("y1").Double();
+                        double x2 = dbPoint.getField("x2").Double();
+                        double y2 = dbPoint.getField("y2").Double();
+                        point = new Point(x1, -y1, x2, -y2, x, -y);
+                    }
+
                     item->addPoint(i, _sampleLengthVector[i], point);
                 }
             }

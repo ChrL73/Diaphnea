@@ -63,6 +63,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Data/BezierInfo.cpp" />
+		<Unit filename="Data/BezierInfo.h" />
 		<Unit filename="Data/Combinations.cpp" />
 		<Unit filename="Data/Combinations.h" />
 		<Unit filename="Data/ElementName.cpp" />
@@ -121,6 +123,8 @@
 		<Unit filename="Requests/RenderRequest.h" />
 		<Unit filename="Requests/Request.cpp" />
 		<Unit filename="Requests/Request.h" />
+		<Unit filename="Requests/SvgCreator.cpp" />
+		<Unit filename="Requests/SvgCreator.h" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.cpp" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.h" />
 		<Unit filename="TextDisplayer/Interval.cpp" />

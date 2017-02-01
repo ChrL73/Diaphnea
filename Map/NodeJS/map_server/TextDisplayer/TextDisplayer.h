@@ -16,6 +16,7 @@ namespace map_server
     class FilledPolygonItemCopy;
 	class TextDisplayerParameters;
 	class TextInfo;
+	class SvgCreator;
 
     class TextDisplayer
     {
@@ -30,7 +31,7 @@ namespace map_server
 		static std::mutex *_coutMutexPtr;
 
         const TextDisplayerParameters * const _parameters;
-		const char * const _socketId;
+		const std::string _socketId;
         const char * const _requestId;
 
         const double _width;
@@ -39,6 +40,8 @@ namespace map_server
         const double _yFocus;
         const double _scale;
         const bool _createPotentialImage;
+        SvgCreator * const _svgCreator;
+
 
         std::vector<ItemCopy *> _itemVector;
 
@@ -59,8 +62,8 @@ namespace map_server
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
 		static void clearClientMap(void);
 
-        TextDisplayer(const TextDisplayerParameters *parameters, const char *socketId, const char *requestId,
-            double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage);
+        TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
+            double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

@@ -9,7 +9,7 @@ namespace map_server
 	{
 		int i, n = _pointVector.size();
 		for (i = 0; i < n; ++i)
-		{	
+		{
 			int j, m = _pointVector[i].size();
 			for (j = 0; j < m; ++j)	delete _pointVector[i][j];
 		}

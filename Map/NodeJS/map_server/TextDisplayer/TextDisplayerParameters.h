@@ -10,7 +10,7 @@ namespace map_server
 		static constexpr int _maxVisibleTextCount = 100;
 		static constexpr double _potentialTableSizeD = static_cast<double>(_potentialTableSize);
 
-		static constexpr double _potentialThreshold = 5.5;
+		static constexpr double _potentialThreshold = 4.5;
 		static constexpr double _pointRefPotential = 3.0;
 		static constexpr double _pointRadiusCoeff = 1.0;
 		static constexpr double _segmentRefPotential = 1.5;

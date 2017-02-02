@@ -13,6 +13,12 @@ namespace MapDataProcessing
     {
         private readonly ItemId _itemId = new ItemId();
         private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
+        private readonly bool _useBezierSucessors;
+
+        internal DatabaseMapItem(bool useBezierSucessors)
+        {
+            _useBezierSucessors = useBezierSucessors;
+        }
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
         {
@@ -52,9 +58,25 @@ namespace MapDataProcessing
                     {
                         if (closedLine)
                         {
-                            previous2Point = list[(n + i - 3) % (n - 1)];
                             previous1Point = list[(n + i - 2) % (n - 1)];
-                            nextPoint = list[(n + i) % (n - 1)];
+
+                            if (_useBezierSucessors)
+                            {
+                                // 'previous1Point' is the previous point in the contour. 'BezierPredecessor' is the previous point in the current polygon of the contour.
+                                // If 'previous1Point' is not the 'BezierPredecessor', this means theat the current segment links 2 distincts polygons of the contour.
+                                // In this case, we set 'previous2Point' and 'nextPoint' to 'null', so that the segment is a straight line (and not a Bezier curve) in the SVG path.
+                                // This straight line will not be visible when the contour will be filled, because it will be identical to another straight line of the contour.
+                                if (previous1Point == list[i].BezierPredecessor)
+                                {
+                                    previous2Point = previous1Point.BezierPredecessor;
+                                    nextPoint = list[i].BezierSuccessor;
+                                }
+                            }
+                            else
+                            {
+                                previous2Point = list[(n + i - 3) % (n - 1)];
+                                nextPoint = list[(n + i) % (n - 1)];
+                            }
                         }
                         else
                         {

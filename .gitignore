@@ -31,3 +31,5 @@ Map/NodeJS/map_server/*.png
 Experiments/png++/PngExperiment/*.png
 Map/NodeJS/*.png
 Map/VisualStudio/MapServer/*.png
+Map/NodeJS/*.svg
+Map/VisualStudio/MapServer/*.svg

@@ -135,7 +135,10 @@ namespace map_server
         content << "</svg>";
 
         // Todo: Prevent different threads to write simultaneously the same file
-        std::string fileName = "map_" + _socketId.substr(2, _socketId.size() - 2) + ".svg";
+		std::string fileName;
+		if (_socketId.size() > 2) fileName = "map_" + _socketId.substr(2, _socketId.size() - 2) + ".svg";
+		else fileName = "map_" + _socketId + ".svg";
+
         std::ofstream file(fileName);
         file << content.str();
     }

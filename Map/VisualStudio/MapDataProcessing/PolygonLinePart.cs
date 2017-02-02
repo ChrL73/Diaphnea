@@ -68,7 +68,7 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly KmlFileData _pointData1;
         private readonly KmlFileData _pointData2;
-        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem();
+        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem(false);
 
         private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
         {

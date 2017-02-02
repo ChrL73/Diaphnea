@@ -168,6 +168,21 @@
     <ClCompile Include="..\..\NodeJS\map_server\TextDisplayer\TextPotential.cpp">
       <Filter>Fichiers sources\TextDisplayer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgItemInfo.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgTextInfo.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgCreator.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgInfo.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\BezierInfo.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -304,6 +319,21 @@
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\TextDisplayer\TextPotential.h">
       <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgTextInfo.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgCreator.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgInfo.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgItemInfo.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\BezierInfo.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

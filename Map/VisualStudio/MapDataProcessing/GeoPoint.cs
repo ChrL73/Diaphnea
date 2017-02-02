@@ -51,11 +51,23 @@ namespace MapDataProcessing
             if (!_mapCenterSet) updateMinAndMax();
         }
 
+        internal GeoPoint(GeoPoint point)
+        {
+            _x = point._x;
+            _y = point._y;
+            _z = point._z;
+            _latitude = point._latitude;
+            _longitude = point._longitude;
+        }
+
         internal double Longitude { get { return _longitude; } }
         internal double Latitude { get { return _latitude; } }
         internal double X { get { return _x; } }
         internal double Y { get { return _y; } }
         internal double Z { get { return _z; } }
+
+        internal GeoPoint BezierSuccessor { get; set; }
+        internal GeoPoint BezierPredecessor { get; set; }
 
         static internal double distance(GeoPoint p1, GeoPoint p2)
         {

@@ -42,7 +42,7 @@ namespace MapDataProcessing
         }
 
         private readonly KmlFileData _lineData;
-        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem();
+        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem(false);
         private bool _smoothed = false;
         internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
 

@@ -19,7 +19,7 @@ namespace MapDataProcessing
         private readonly Dictionary<KmlFileData, List<OrientedPolygonLinePart>> _linePartDictionary = new Dictionary<KmlFileData, List<OrientedPolygonLinePart>>();
         private readonly List<OrientedLineList> _compoundPolygonList = new List<OrientedLineList>();
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
-        private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem();
+        private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem(true);
 
         internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, string lookId, List<string> coveredElementList) :
             base(id, mapData, name, shortName, importance, lookId)
@@ -212,15 +212,51 @@ namespace MapDataProcessing
                     polygonList.Add(list);
                 }
 
-                List<GeoPoint> contour = polygonList[0];
-                GeoPoint p = contour[contour.Count - 1];
+                GeoPoint newPoint;
+                List<GeoPoint> contour = new List<GeoPoint>();
+                bool first = true;
+                foreach (GeoPoint point in polygonList[0])
+                {
+                    newPoint = new GeoPoint(point);
+                    if (!first)
+                    {
+                        newPoint.BezierPredecessor = contour.Last();
+                        contour.Last().BezierSuccessor = newPoint; 
+                    }
+                    contour.Add(newPoint);
+                    first = false;
+                }
+                contour.Last().BezierSuccessor = contour.First();
+                contour.First().BezierPredecessor = contour.Last();
+
+                GeoPoint p = contour.Last();
                 int i, n = polygonList.Count;
                 for (i = 1; i < n; ++i)
                 {
-                    contour.AddRange(polygonList[i]);
-                    contour.Add(polygonList[i][0]);
+                    first = true;
+                    GeoPoint firstPoint = null;
+                    foreach (GeoPoint point in polygonList[i])
+                    {
+                        newPoint = new GeoPoint(point);
+                        if (!first)
+                        {
+                            newPoint.BezierPredecessor = contour.Last();
+                            contour.Last().BezierSuccessor = newPoint;
+                        }
+                        else
+                        {
+                            firstPoint = newPoint;
+                            first = false;
+                        }
+                        contour.Add(newPoint);
+                    }
+                    contour.Last().BezierSuccessor = firstPoint;
+                    firstPoint.BezierPredecessor = contour.Last();
+
+                    contour.Add(firstPoint);
                     contour.Add(p);
                 }
+
                 contour.Add(contour[0]);
 
                 _contourMapItem.addLine(resolution, contour);

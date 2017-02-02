@@ -40,7 +40,7 @@ namespace MapDataProcessing
                 double resolution = pair.Key.sampleLength1 * Double.Parse(pair.Key.sampleRatio);
                 
                 int i, n = list.Count;
-                bool closedLine = (list[0] == list[n - 1]);
+                bool closedLine = (DistanceCalculator.getDistance(list[0], list[n - 1]) < 0.0001);
                 BsonArray pointArray = new BsonArray();
                 for (i = 0; i < n; ++i)
                 {

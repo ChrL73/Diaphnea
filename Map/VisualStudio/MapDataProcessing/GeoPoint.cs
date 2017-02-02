@@ -112,8 +112,7 @@ namespace MapDataProcessing
                     if (d2 < d) d = d2;
 
                     double cos = getCos(xP1, yP1, xP2, yP2, x, y);
-                    const double c = 0.1;
-                    double q = d * c * (1.0 - cos);
+                    double q = d * 0.1 * (3.0 - cos);
 
                     x1 = xP1 + q * ux;
                     y1 = yP1 + q * uy;

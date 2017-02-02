@@ -78,7 +78,7 @@ namespace map_server
         return b;
 	}
 
-    void TextDisplayer::start(void)
+    bool TextDisplayer::start(void)
     {
         int visibleTextCount = 0;
 
@@ -135,6 +135,8 @@ namespace map_server
             std::string fileName = "Potential_" + _socketId.substr(2, _socketId.size() - 2) + ".png";
             if (isDisplayerActive()) image.save(fileName);
         }
+
+        return isDisplayerActive();
     }
 
     bool TextDisplayer::displayText(ItemCopy *item, TextInfo *textInfo)

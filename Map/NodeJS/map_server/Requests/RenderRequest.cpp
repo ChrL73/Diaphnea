@@ -22,6 +22,7 @@
 #include "TextDisplayerParameters.h"
 #include "ElementName.h"
 #include "SvgCreator.h"
+#include "SvgItemInfo.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -45,6 +46,8 @@ namespace map_server
         _map = mapData->getMap(_mapId);
         if (_map != 0 && _sendResponse)
         {
+            bool createSvg = false;
+
             std::vector<MapElement *> elementVector;
             unsigned int i, n = _elementIds.size();
             for (i = 0; i < n; ++i)
@@ -53,7 +56,7 @@ namespace map_server
                 MapElement *element = _map->getElement(elementId);
                 if (element != 0) elementVector.push_back(element);
                 else if (elementId == "#img") _createPotentialImage = true;
-                else if (elementId == "#svg" && _svgCreator == 0) _svgCreator = new SvgCreator();
+                else if (elementId == "#svg" && _svgCreator == 0) createSvg = true;
             }
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
@@ -196,6 +199,9 @@ namespace map_server
                 double yMin = _yFocus - dy;
                 double yMax = _yFocus + dy;
 
+                double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
+                if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId);
+
                 response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
                 n = itemVector2.size();
                 for (i = 0; i < n; ++i)
@@ -205,6 +211,12 @@ namespace map_server
                     response << "[" << item->getId() << "," << item->getCurrentLook()->getId();
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
+
+                    if (_svgCreator != 0)
+                    {
+                        SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(), resolutionIndex);
+                        _svgCreator->addInfo(item->getCurrentLook()->getZIndex(), svgItemInfo);
+                    }
 
                     if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
                     {
@@ -259,17 +271,19 @@ namespace map_server
                 _coutMutexPtr->unlock();
 
                 displayText();
+
+                if (_svgCreator != 0) _svgCreator->execute();
             }
+
+            delete _svgCreator;
         }
         else
         {
             MapData::unlock();
         }
-
-        delete _svgCreator;
     }
 
-    void RenderRequest::displayText()
+    bool RenderRequest::displayText()
     {
 #ifdef _WIN32
 		const std::string fontFile = "arial.ttf";
@@ -279,14 +293,14 @@ namespace map_server
 
 		FT_Library  library;
 		int error = FT_Init_FreeType(&library);
-		if (error) return;
+		if (error) return false;
 
 		FT_Face face;
 		error = FT_New_Face(library, fontFile.c_str(), 0, &face);
 		if (error)
         {
             FT_Done_FreeType(library);
-            return;
+            return false;
         }
 
 		double dx = 0.5 * _widthInPixels / _scale;
@@ -410,7 +424,7 @@ namespace map_server
 
 		FT_Done_FreeType(library);
 
-        textDisplayer.start();
+        return textDisplayer.start();
     }
 
     void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face)

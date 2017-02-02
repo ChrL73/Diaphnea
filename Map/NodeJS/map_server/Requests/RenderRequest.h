@@ -32,7 +32,7 @@ namespace map_server
         std::vector<ItemCopyBuilder *> _itemCopyBuilderVector;
 
         void execute(void);
-        void displayText(void);
+        bool displayText(void);
         void setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face);
 
     public:

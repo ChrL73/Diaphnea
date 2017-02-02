@@ -15,6 +15,7 @@ namespace map_server
         const int _blue;
         const double _size;
         char _json[128];
+        char _hexColor[8];
 
     public:
         ItemLook(int id, int zIndex, int alpha, int red, int green, int blue, double size, IMap *iMap);
@@ -28,5 +29,6 @@ namespace map_server
         double getSize(void) const { return _size; }
 
         const char *getJson(void) const { return _json; }
+        const char *getHexColor(void) const { return _hexColor; }
     };
 }

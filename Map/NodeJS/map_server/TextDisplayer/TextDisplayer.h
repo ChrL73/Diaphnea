@@ -67,6 +67,6 @@ namespace map_server
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }
-        void start(void);
+        bool start(void);
     };
 }

@@ -271,8 +271,6 @@ namespace map_server
                 _coutMutexPtr->unlock();
 
                 displayText();
-
-                if (_svgCreator != 0) _svgCreator->execute();
             }
 
             delete _svgCreator;
@@ -424,7 +422,9 @@ namespace map_server
 
 		FT_Done_FreeType(library);
 
-        return textDisplayer.start();
+        bool result = textDisplayer.start();
+        if (_svgCreator != 0) _svgCreator->execute();
+        return result;
     }
 
     void RenderRequest::setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face)

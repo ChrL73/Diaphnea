@@ -18,6 +18,8 @@ namespace map_server
         const int _red;
         const int _green;
         const int _blue;
+        const char * const _hexColor;
+
 		const double _fontSize;
 		double _width;
 		double _height;
@@ -40,6 +42,7 @@ namespace map_server
 		int getRed(void) const { return _red; }
 		int getGreen(void) const { return _green; }
 		int getBlue(void) const { return _blue; }
+		const char *getHexColor(void) const { return _hexColor; }
 		double getWidth(void) const { return _width; }
 		double getHeight(void) const { return _height; }
 		double getX(void) const { return _x; }

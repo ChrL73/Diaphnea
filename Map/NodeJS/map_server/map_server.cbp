@@ -129,6 +129,8 @@
 		<Unit filename="Requests/SvgInfo.h" />
 		<Unit filename="Requests/SvgItemInfo.cpp" />
 		<Unit filename="Requests/SvgItemInfo.h" />
+		<Unit filename="Requests/SvgLineInfo.cpp" />
+		<Unit filename="Requests/SvgLineInfo.h" />
 		<Unit filename="Requests/SvgTextInfo.cpp" />
 		<Unit filename="Requests/SvgTextInfo.h" />
 		<Unit filename="TextDisplayer/FilledPolygonItemCopy.cpp" />

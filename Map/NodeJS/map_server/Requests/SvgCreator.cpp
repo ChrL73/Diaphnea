@@ -1,6 +1,7 @@
 #include "SvgCreator.h"
 #include "SvgItemInfo.h"
 #include "SvgTextInfo.h"
+#include "SvgLineInfo.h"
 #include "MapData.h"
 #include "FilledPolygonItem.h"
 #include "LineItem.h"
@@ -8,6 +9,7 @@
 #include "ItemLook.h"
 #include "Point.h"
 #include "BezierInfo.h"
+#include "TextInfo.h"
 
 #include <sstream>
 #include <fstream>
@@ -27,7 +29,6 @@ namespace map_server
         content << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl
                 << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" << _widthInPixels
                 << "\" height=\"" << _heightInPixels << "\">" <<std::endl;
-
 
         MapData::lock();
 
@@ -77,20 +78,24 @@ namespace map_server
                     if (lineItem != 0)
                     {
                         content << "<path style=\"fill:none;stroke:" << look->getHexColor()
-                            << ";stroke-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
-                            << ";stroke-width:" << look->getSize() * _scale * _sizeFactor
-                            << ";stroke-linecap:round;stroke-linejoin:round\" d=\"";
+                                << ";stroke-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
+                                << ";stroke-width:" << look->getSize() * _scale * _sizeFactor
+                                << ";stroke-linecap:round;stroke-linejoin:round\" d=\"";
 
+                        bool lastIn = false;
+                        std::stringstream lastMove;
                         int i, n = lineItem->getPointVector(resolutionIndex).size();
                         for (i = 0; i < n; ++i)
                         {
                             const Point *point = lineItem->getPointVector(resolutionIndex)[i];
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            bool in = (x > -10.0 && x < _widthInPixels + 10.0 && y > -10.0 && y < _heightInPixels + 10.0);
 
-                            if (i == 0)
+                            if (i == 0 || (!in && !lastIn))
                             {
-                                content << "M " << x << "," << y << " ";
+                                lastMove.str("");
+                                lastMove << "M " << x << "," << y << " ";
                             }
                             else
                             {
@@ -98,8 +103,11 @@ namespace map_server
                                 double y1 = (point->getBezierInfo()->getY1() - _yFocus) * _scale + 0.5 * _heightInPixels;
                                 double x2 = (point->getBezierInfo()->getX2() - _xFocus) * _scale + 0.5 * _widthInPixels;
                                 double y2 = (point->getBezierInfo()->getY2() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                                content << "C " << x1 << " " << y1 << "," << x2 << " " << y2 << "," << x << " " << y << " ";
+                                content << lastMove.str() << "C " << x1 << " " << y1 << "," << x2 << " " << y2 << "," << x << " " << y << " ";
+                                lastMove.str("");
                             }
+
+                            lastIn = in;
                         }
 
                         content << "\"></path>" << std::endl;
@@ -115,7 +123,7 @@ namespace map_server
                             content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
                                     << "\" stroke=\"black\" stroke-width=\"" << _scale * _sizeFactor
                                     << "\" fill=\"" << look->getHexColor()
-                                    << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                                    << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
                         }
                     }
                 }
@@ -125,7 +133,19 @@ namespace map_server
                 SvgTextInfo *svgTextInfo = dynamic_cast<SvgTextInfo *>((*it).second);
                 if (svgTextInfo != 0)
                 {
+                    int i, n = svgTextInfo->getLineVector().size();
+                    for (i = 0; i < n; ++i)
+                    {
+                        const SvgLineInfo *lineInfo = svgTextInfo->getLineVector()[i];
 
+                        double x = (lineInfo->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                        double y = (lineInfo->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+
+                        content << "<text x=\"" << x << "\" y=\"" << y << "\" font-size=\"" << svgTextInfo->getTextInfo()->getFontSize()
+                                << "\" font-family=\"arial\" fill=\"" << svgTextInfo->getTextInfo()->getHexColor()
+                                << "\" fill-opacity=\"" << static_cast<double>(svgTextInfo->getTextInfo()->getAlpha()) / 255.0
+                                << "\">" << lineInfo->getText() << "</text>" << std::endl;
+                    }
                 }
             }
         }

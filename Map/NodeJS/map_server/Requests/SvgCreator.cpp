@@ -97,9 +97,21 @@ namespace map_server
                         }
                         else
                         {
-                            content << "C " << curveInfo->getX1() << " " << curveInfo->getY1() << ","
-                                    << curveInfo->getX2() << " " << curveInfo->getY2() << ","
-                                    << curveInfo->getX() << " " << curveInfo->getY() << " ";
+                            bool ok = true;
+                            double x = curveInfo->getX();
+                            double y = curveInfo->getY();
+
+                            if (i != n - 1)
+                            {
+                                SvgCurveInfo *pCurveInfo = curveInfoVector[i - 1];
+                                SvgCurveInfo *nCurveInfo = curveInfoVector[i + 1];
+
+                                if ((y < -1.0 || y > _widthInPixels + 1.0) && pCurveInfo->getX() == x && nCurveInfo->getX() == x) ok = false;
+                                if ((x < -1.0 || x > _heightInPixels + 1.0) && pCurveInfo->getY() == y && nCurveInfo->getY() == y) ok = false;
+                            }
+
+                            if (ok) content << "C " << curveInfo->getX1() << " " << curveInfo->getY1() << ","
+                                            << curveInfo->getX2() << " " << curveInfo->getY2() << "," << x << " " << y << " ";
                         }
 
                         delete curveInfo;

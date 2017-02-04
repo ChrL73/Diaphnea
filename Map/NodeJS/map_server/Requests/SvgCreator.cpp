@@ -2,6 +2,7 @@
 #include "SvgItemInfo.h"
 #include "SvgTextInfo.h"
 #include "SvgLineInfo.h"
+#include "SvgCurveInfo.h"
 #include "MapData.h"
 #include "FilledPolygonItem.h"
 #include "LineItem.h"
@@ -45,9 +46,8 @@ namespace map_server
                 const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
                 if (filledPolygonItem != 0)
                 {
-                    content << "<path style=\"fill:" << look->getHexColor()
-                            << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
-                            << ";stroke:none\" d=\"";
+                    std::vector<SvgCurveInfo *> curveInfoVector;
+                    bool lastIn = false;
 
                     int i, n = filledPolygonItem->getPointVector(resolutionIndex).size();
                     for (i = 0; i < n; ++i)
@@ -55,19 +55,54 @@ namespace map_server
                         const Point *point = filledPolygonItem->getPointVector(resolutionIndex)[i];
                         double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                         double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                        bool in = (x > -2.0 && x < _widthInPixels + 2.0 && y > -2.0 && y < _heightInPixels + 2.0);
+
+                        if (!lastIn && x < -2.0) x = -2.0;
+                        if (!lastIn && x > _widthInPixels + 2.0) x = _widthInPixels + 2.0;
+                        if (!lastIn && y < -2.0) y = -2.0;
+                        if (!lastIn && y > _heightInPixels + 2.0) y = _heightInPixels + 2.0;
 
                         if (i == 0)
                         {
-                            content << "M " << x << "," << y << " ";
+                            curveInfoVector.push_back(new SvgCurveInfo(0.0, 0.0, 0.0, 0.0, x, y));
                         }
                         else
                         {
-                            double x1 = (point->getBezierInfo()->getX1() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                            double y1 = (point->getBezierInfo()->getY1() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                            double x2 = (point->getBezierInfo()->getX2() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                            double y2 = (point->getBezierInfo()->getY2() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                            content << "C " << x1 << " " << y1 << "," << x2 << " " << y2 << "," << x << " " << y << " ";
+                            double x1 = x, y1 = y, x2 = x, y2 = y;
+                            if (in || lastIn)
+                            {
+                                x1 = (point->getBezierInfo()->getX1() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                y1 = (point->getBezierInfo()->getY1() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                                x2 = (point->getBezierInfo()->getX2() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                y2 = (point->getBezierInfo()->getY2() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            }
+
+                            curveInfoVector.push_back(new SvgCurveInfo(x1, y1, x2, y2, x, y));
                         }
+
+                        lastIn = in;
+                    }
+
+                    content << "<path style=\"fill:" << look->getHexColor()
+                            << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
+                            << ";stroke:none\" d=\"";
+
+                    for (i = 0; i < n; ++i)
+                    {
+                        SvgCurveInfo *curveInfo = curveInfoVector[i];
+
+                        if (i == 0)
+                        {
+                            content << "M " << curveInfo->getX() << "," << curveInfo->getY() << " ";
+                        }
+                        else
+                        {
+                            content << "C " << curveInfo->getX1() << " " << curveInfo->getY1() << ","
+                                    << curveInfo->getX2() << " " << curveInfo->getY2() << ","
+                                    << curveInfo->getX() << " " << curveInfo->getY() << " ";
+                        }
+
+                        delete curveInfo;
                     }
 
                     content << "\"></path>" << std::endl;
@@ -120,10 +155,13 @@ namespace map_server
                             double x = (pointItem->getPoint()->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (pointItem->getPoint()->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-                            content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                    << "\" stroke=\"black\" stroke-width=\"" << _scale * _sizeFactor
-                                    << "\" fill=\"" << look->getHexColor()
-                                    << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                            if (x > -10.0 && x < _widthInPixels + 10.0 && y > -10.0 && y < _heightInPixels + 10.0)
+                            {
+                                content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                        << "\" stroke=\"black\" stroke-width=\"" << _scale * _sizeFactor
+                                        << "\" fill=\"" << look->getHexColor()
+                                        << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                            }
                         }
                     }
                 }

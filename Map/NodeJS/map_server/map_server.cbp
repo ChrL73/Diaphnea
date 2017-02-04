@@ -125,6 +125,8 @@
 		<Unit filename="Requests/Request.h" />
 		<Unit filename="Requests/SvgCreator.cpp" />
 		<Unit filename="Requests/SvgCreator.h" />
+		<Unit filename="Requests/SvgCurveInfo.cpp" />
+		<Unit filename="Requests/SvgCurveInfo.h" />
 		<Unit filename="Requests/SvgInfo.cpp" />
 		<Unit filename="Requests/SvgInfo.h" />
 		<Unit filename="Requests/SvgItemInfo.cpp" />

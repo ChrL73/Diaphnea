@@ -18,6 +18,7 @@ namespace CleanKml
         static String _polygonTemplatePath;
         static List<String> fileList = new List<String>();
         static List<String> _cleanedFiles = new List<String>();
+        static List<String> _reversedFiles = new List<String>();
         static CultureInfo _cultureInfo = new CultureInfo("en-US");
         static bool _recleanAll = false;
 
@@ -64,11 +65,18 @@ namespace CleanKml
 
                 Console.WriteLine();
                 logMessage("");
+
                 int n = _cleanedFiles.Count;
                 String msg = String.Format("{0} file{1} cleaned{2}", n, n > 1 ? "s" : "", n > 0 ? ":" : "");
                 logMessage(msg);
                 Console.WriteLine(msg + " (See detail in " + _logFileName + ")");
                 foreach (String file in _cleanedFiles) logMessage(file);
+
+                n = _reversedFiles.Count;
+                msg = String.Format("{0} file{1} reversed{2}", n, n > 1 ? "s" : "", n > 0 ? ":" : "");
+                logMessage(msg);
+                Console.WriteLine(msg + " (See detail in " + _logFileName + ")");
+                foreach (String file in _reversedFiles) logMessage(file);
             }
 
             Console.WriteLine("Press any key to continue...");
@@ -218,12 +226,22 @@ namespace CleanKml
                 Console.WriteLine("More than one 'coordinates' tags in file " + path + ". Only the first one is taken into account");
             }
 
+            bool reverse = false;
+            XmlNodeList colorList = inputDocument.GetElementsByTagName("color");
+            if (colorList.Count > 0)
+            {
+                // We set color to red in Google Earth to request a reversal of the point list
+                if (colorList[0].FirstChild.Value == "ff0000ff") reverse = true;
+            }
+
             XmlNode outputCoordinatesNode = outputCoordinatesList.Item(0);
             String indentationPattern = outputCoordinatesNode.InnerText;
             if (!indentationPattern.Contains("\n")) indentationPattern = "\n";
 
             String coordinates = inputCoordinatesNode.FirstChild.Value;
             String[] pointArray = coordinates.Split(' ', '\n', '\t');
+
+            if (reverse) Array.Reverse(pointArray);
 
             StringBuilder newCoordinates = new StringBuilder();
             foreach (String pointStr in pointArray)
@@ -259,7 +277,17 @@ namespace CleanKml
             outputCoordinatesNode.AppendChild(xmlText);
             outputDocument.Save(path);
             _cleanedFiles.Add(path);
-            Console.WriteLine(path + " cleaned");
+            if (reverse)
+            {
+                Console.WriteLine(path + " cleaned and reversed");
+                logMessage(path + " cleaned and reversed");
+                _reversedFiles.Add(path);
+            }
+            else
+            {
+                Console.WriteLine(path + " cleaned");
+                logMessage(path + " cleaned");
+            }
         }
 
         static void logMessage(String message)

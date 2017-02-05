@@ -770,6 +770,33 @@
         </name>
         <attachmentList/>
       </lineElement>
+      <lineElement id="e_Sebe" look="ll_FleuveRiviere" importance="141">
+        <name>
+          <name language="fr" text="Sébé"/>
+          <name language="en" text="Sébé"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Offoue" look="ll_FleuveRiviere" importance="140">
+        <name>
+          <name language="fr" text="Offoué"/>
+          <name language="en" text="Offoué"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
+    <lineElement id="e_MvoungRiver" look="ll_FleuveRiviere" importance="139">
+        <name>
+          <name language="fr" text="Mvoung"/>
+          <name language="en" text="Mvoung"/>
+        </name>
+        <attachmentList>
+          <element id="e_IvindoRiver"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->

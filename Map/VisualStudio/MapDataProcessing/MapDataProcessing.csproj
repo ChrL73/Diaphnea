@@ -66,6 +66,7 @@
     <Compile Include="LineLinePart.cs" />
     <Compile Include="LineLook.cs" />
     <Compile Include="LineMapElement.cs" />
+    <Compile Include="LineSuperposer.cs" />
     <Compile Include="Look.cs" />
     <Compile Include="MapData.cs" />
     <Compile Include="MapDataProcessingMain.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="PolygonPolygonPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Smoother.cs" />
+    <Compile Include="SuperposerArea.cs" />
+    <Compile Include="SuperposerSegment.cs" />
     <Compile Include="XmlMapData.cs">
       <DependentUpon>XmlMapData.xsd</DependentUpon>
     </Compile>

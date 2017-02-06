@@ -21,6 +21,7 @@
     <xsd:attribute name="databaseName" type="xsd:string" use="required" />
     <xsd:attribute name="kmlDir" type="xsd:string" use="required" />
     <xsd:attribute name="maxConnectionDistanceInKm" type="xsd:double" use="required"/>
+    <xsd:attribute name="superposingThreshold" type="xsd:double" use="required"/>
     <xsd:attribute name="projection" type="XmlProjectionEnum" use="required"/>
     <xsd:attribute name="zoomMinDistance" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="zoomMaxDistance" type="XmlPositiveDouble" use="required" />

@@ -12,6 +12,7 @@ namespace MapDataProcessing
         private readonly XmlMapData _xmlMapData;
         private readonly Dictionary<string, Look> _lookDictionary = new Dictionary<string, Look>();
         private readonly List<Look> _lookList = new List<Look>();
+        private readonly LineSuperposer _lineSuperposer = new LineSuperposer();
 
         internal MapData(string dataFileName, XmlMapData xmlMapData)
         {
@@ -57,5 +58,7 @@ namespace MapDataProcessing
         }
 
         internal List<Look> LookList { get { return _lookList; } }
+
+        internal LineSuperposer LineSuperposer { get { return _lineSuperposer;  } }
     }
 }

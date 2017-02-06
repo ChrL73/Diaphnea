@@ -8,10 +8,12 @@ namespace MapDataProcessing
 {
     class Smoother
     {
-        static internal List<GeoPoint> smoothLine(List<GeoPoint> originalLine, XmlResolution resolution, String originalLinePath)
+        static internal List<GeoPoint> smoothLine(List<GeoPoint> originalLine, XmlResolution resolution, String originalLinePath, LineSuperposer superposer)
         {
             List<GeoPoint> sampledLine = getSampledLine(originalLine, resolution, 1, originalLinePath);
             if (sampledLine == null) return null;
+
+            if (superposer != null) superposer.addLine(sampledLine);
 
             List<GeoPoint> smoothedLine = getSmoothedLine(sampledLine, resolution, originalLinePath);
             if (smoothedLine == null) return null;

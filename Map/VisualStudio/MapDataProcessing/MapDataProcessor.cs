@@ -46,6 +46,7 @@ namespace MapDataProcessing
             if (result == 0) result = formParts();
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
             if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
+            _mapData.LineSuperposer.classifySegments(_mapData.XmlMapData.parameters.superposingThreshold);
             if (result == 0) result = LineLinePart.smoothAll(_mapData);
             if (result == 0) result = formContours();
             if (result == 0) result = fillDatabase();

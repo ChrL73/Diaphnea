@@ -208,6 +208,13 @@ namespace MapDataProcessing
         static private double _uX1, _uX2, _uX3;
         static private double _uY1, _uY2, _uY3;
 
+        static internal double? XMin { get { return _xMin; } }
+        static internal double? XMax { get { return _xMax; } }
+        static internal double? YMin { get { return _yMin; } }
+        static internal double? YMax { get { return _yMax; } }
+        static internal double? ZMin { get { return _zMin; } }
+        static internal double? ZMax { get { return _zMax; } }
+
         static internal void reset()
         {
             _xMin = null;

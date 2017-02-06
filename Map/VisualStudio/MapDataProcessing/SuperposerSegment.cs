@@ -46,5 +46,11 @@ namespace MapDataProcessing
             GeoPoint C = new GeoPoint(_A1.X + a * _ux, _A1.Y + a * _uy, _A1.Z + a * _uz);
             return DistanceCalculator.getDistance(C, B);
         }
+
+        internal GeoPoint getNearestExtremity(GeoPoint B)
+        {
+            if (DistanceCalculator.getDistance(_A1, B) > DistanceCalculator.getDistance(_A2, B)) return _A2;
+            return _A1;
+        }
     }
 }

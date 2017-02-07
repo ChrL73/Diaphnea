@@ -516,7 +516,9 @@ var mapServerInterface =
                         });
 
                         ctx.fillStyle = look.color;
-                        ctx.fill();
+                        
+                        // Canvas fill rule 'evenodd' is necessary to see the openings inside the polygon 
+                        ctx.fill('evenodd');
                         
                         ctx.restore();
                      }
@@ -603,7 +605,7 @@ var mapServerInterface =
                      {
                         var color = look.color.substr(0, look.color.length - 2);                       
                         var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
-                        html += '<path style="fill:' + color + ';fill-opacity:' + opacity + ';stroke:none" d="';
+                        html += '<path style="fill:' + color + ';fill-opacity:' + opacity + ';fill-rule:evenodd;stroke:none" d="';
                         
                         item.points.forEach(function(p, i)
                         {

@@ -50,7 +50,26 @@
   </lookList>
 
   <elementList>
-    <polygonElementList/>
+    <polygonElementList>
+      <polygonElement id="e_pl1" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl1"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+      <polygonElement id="e_pl2" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl2"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+      <polygonElement id="e_pl3" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl3"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+    </polygonElementList>
     <lineElementList>
       <lineElement id="e_ln1" look="ll_FleuveRiviere" importance="0">
         <name>

@@ -815,6 +815,15 @@
           <element id="e_IvindoRiver"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_MpassaRiver" look="ll_FleuveRiviere" importance="136">
+        <name>
+          <name language="fr" text="Mpassa"/>
+          <name language="en" text="Mpassa"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->

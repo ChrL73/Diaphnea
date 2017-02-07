@@ -12,7 +12,7 @@ namespace MapDataProcessing
 
         internal void addSegment(SuperposerSegment segment) { _segmentList.Add(segment); }
 
-        internal GeoPoint getNearestPoint(GeoPoint point, double threshold)
+        internal SuperposerPoint getNearestPoint(GeoPoint point, double threshold)
         {
             double dMin = threshold;
             int bestI = -1;

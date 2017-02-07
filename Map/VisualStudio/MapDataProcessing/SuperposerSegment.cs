@@ -8,6 +8,8 @@ namespace MapDataProcessing
 {
     class SuperposerSegment
     {
+        private readonly List<GeoPoint> _line;
+        private readonly int _i1;
         private readonly GeoPoint _A1;
         private readonly GeoPoint _A2;
         private readonly double _ux;
@@ -18,14 +20,16 @@ namespace MapDataProcessing
         internal GeoPoint A1 { get { return _A1; } }
         internal GeoPoint A2 { get { return _A2; } }
 
-        internal SuperposerSegment(GeoPoint A1, GeoPoint A2)
+        internal SuperposerSegment(List<GeoPoint> line, int i1)
         {
-            _A1 = A1;
-            _A2 = A2;
+            _line = line;
+            _i1 = i1;
+            _A1 = line[i1];
+            _A2 = line[i1 + 1];
 
-            _ux = A2.X - A1.X;
-            _uy = A2.Y - A1.Y;
-            _uz = A2.Z - A1.Z;
+            _ux = _A2.X - _A1.X;
+            _uy = _A2.Y - _A1.Y;
+            _uz = _A2.Z - _A1.Z;
             _r = Math.Sqrt(_ux * _ux + _uy * _uy + _uz * _uz);
 
             _ux /= _r;
@@ -47,10 +51,10 @@ namespace MapDataProcessing
             return DistanceCalculator.getDistance(C, B);
         }
 
-        internal GeoPoint getNearestExtremity(GeoPoint B)
+        internal SuperposerPoint getNearestExtremity(GeoPoint B)
         {
-            if (DistanceCalculator.getDistance(_A1, B) > DistanceCalculator.getDistance(_A2, B)) return _A2;
-            return _A1;
+            if (DistanceCalculator.getDistance(_A1, B) > DistanceCalculator.getDistance(_A2, B)) return new SuperposerPoint(_line, _i1 + 1);
+            return new SuperposerPoint(_line, _i1);
         }
     }
 }

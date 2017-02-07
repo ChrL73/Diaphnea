@@ -28,7 +28,7 @@ namespace MapDataProcessing
         internal void addReferenceLine(List<GeoPoint> pointList)
         {
             int i, n = pointList.Count;
-            for (i = 0; i < n - 1; ++i) _segmentList.Add(new SuperposerSegment(pointList[i], pointList[i + 1]));
+            for (i = 0; i < n - 1; ++i) _segmentList.Add(new SuperposerSegment(pointList, i));
         }
 
         internal void classifySegments(double threshold)
@@ -66,18 +66,83 @@ namespace MapDataProcessing
 
         internal void superposeLine(List<GeoPoint> pointList)
         {
-            int i, n = pointList.Count;
-            for (i = 1; i < n - 1; ++i)
+            List<GeoPoint> currentLine = null;
+            int i1 = -1;
+            int i2 = -1;
+            int j1 = -1;
+            int j2 = -1;
+
+            int j, n = pointList.Count;
+            for (j = 1; j < n - 1; ++j)
             {
-                GeoPoint nearestPoint = getNearestPoint(pointList[i]);
-                if (nearestPoint != null) pointList[i] = nearestPoint;
-                if (DistanceCalculator.getDistance(pointList[i - 1], pointList[i]) < 0.0001)
+                SuperposerPoint nearestPoint = getNearestPoint(pointList[j]);
+
+                if (nearestPoint != null)
                 {
-                    pointList.RemoveAt(i);
-                    --i;
+                    if (currentLine == null)
+                    {
+                        currentLine = nearestPoint.Line;
+                        i1 = nearestPoint.I;
+                        i2 = nearestPoint.I;
+                        j1 = j;
+                        j2 = j;
+                    }
+                    else
+                    {
+                        if (nearestPoint.Line == currentLine)
+                        {
+                            i2 = nearestPoint.I;
+                            j2 = j;
+                        }
+                        else
+                        {
+                            replaceLine(pointList, j1, j2, currentLine, i1, i2);
+                            j += pointList.Count - n;
+                            n = pointList.Count;
+
+                            currentLine = nearestPoint.Line;
+                            i1 = nearestPoint.I;
+                            i2 = nearestPoint.I;
+                            j1 = j;
+                            j2 = j;
+                        }
+                    }
+                }
+                else
+                {
+                    if (currentLine != null && j2 > j - 1)
+                    {
+                        replaceLine(pointList, j1, j2, currentLine, i1, i2);
+                        j += pointList.Count - n;
+                        n = pointList.Count;
+                        currentLine = null;
+                    }
+                }
+            }
+
+            n = pointList.Count;
+            for (j = 0; j < n - 1; ++j)
+            {
+                if (DistanceCalculator.getDistance(pointList[j], pointList[j + 1]) < 0.00001)
+                {
+                    pointList.RemoveAt(j);
+                    --j;
                     --n;
                 }
             }
+        }
+
+        void replaceLine(List<GeoPoint> lineJ, int j1, int j2, List<GeoPoint> lineI, int i1, int i2)
+        {
+            if (i1 == i2) return;
+
+            List<GeoPoint> line = new List<GeoPoint>();
+            int i;
+            if (i2 > i1) for (i = i1; i <= i2; ++i) line.Add(lineI[i]);
+            else for (i = i1; i >= i2; --i) line.Add(lineI[i]);
+
+            lineJ.RemoveRange(j1, j2 - j1 + 1);
+            lineJ.InsertRange(j1, line);
         }
 
         private void getArea(GeoPoint point, Dictionary<int, SuperposerArea> areaDictionary)
@@ -124,7 +189,7 @@ namespace MapDataProcessing
             return _nZ * (iX * _nY + iY) + iZ;
         }
 
-        private GeoPoint getNearestPoint(GeoPoint point)
+        private SuperposerPoint getNearestPoint(GeoPoint point)
         {
             int index = getIndex(point.X, point.Y, point.Z);
 

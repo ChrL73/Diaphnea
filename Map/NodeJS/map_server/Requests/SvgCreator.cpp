@@ -29,7 +29,7 @@ namespace map_server
 
         content << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl
                 << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" << _widthInPixels
-                << "\" height=\"" << _heightInPixels << "\">" <<std::endl;
+                << "\" height=\"" << _heightInPixels << "\">" << std::endl;
 
         MapData::lock();
 
@@ -48,6 +48,7 @@ namespace map_server
                 {
                     std::vector<SvgCurveInfo *> curveInfoVector;
                     bool lastIn = false;
+                    const double d = 2.0;
 
                     int i, n = filledPolygonItem->getPointVector(resolutionIndex).size();
                     for (i = 0; i < n; ++i)
@@ -55,12 +56,21 @@ namespace map_server
                         const Point *point = filledPolygonItem->getPointVector(resolutionIndex)[i];
                         double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                         double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                        bool in = (x > -2.0 && x < _widthInPixels + 2.0 && y > -2.0 && y < _heightInPixels + 2.0);
+                        bool in = (x > -d && x < _widthInPixels + d && y > -d && y < _heightInPixels + d);
 
-                        if (!lastIn && x < -2.0) x = -2.0;
-                        if (!lastIn && x > _widthInPixels + 2.0) x = _widthInPixels + 2.0;
-                        if (!lastIn && y < -2.0) y = -2.0;
-                        if (!lastIn && y > _heightInPixels + 2.0) y = _heightInPixels + 2.0;
+                        bool nextIn = false;
+                        if (i < n - 1)
+                        {
+                            const Point *np = filledPolygonItem->getPointVector(resolutionIndex)[i + 1];
+                            double nx = (np->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double ny = (np->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            nextIn = (nx > -d && nx < _widthInPixels + d && ny > -d && ny < _heightInPixels + d);
+                        }
+
+                        if (!lastIn && !nextIn && x < -d) x = -d;
+                        if (!lastIn && !nextIn && x > _widthInPixels + d) x = _widthInPixels + d;
+                        if (!lastIn && !nextIn && y < -d) y = -d;
+                        if (!lastIn && !nextIn && y > _heightInPixels + d) y = _heightInPixels + d;
 
                         if (i == 0)
                         {
@@ -85,7 +95,7 @@ namespace map_server
 
                     content << "<path style=\"fill:" << look->getHexColor()
                             << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
-                            << ";stroke:none\" d=\"";
+                            << ";fill-rule:evenodd;stroke:none\" d=\"";
 
                     for (i = 0; i < n; ++i)
                     {
@@ -106,8 +116,8 @@ namespace map_server
                                 SvgCurveInfo *pCurveInfo = curveInfoVector[i - 1];
                                 SvgCurveInfo *nCurveInfo = curveInfoVector[i + 1];
 
-                                if ((y < -1.0 || y > _widthInPixels + 1.0) && pCurveInfo->getX() == x && nCurveInfo->getX() == x) ok = false;
-                                if ((x < -1.0 || x > _heightInPixels + 1.0) && pCurveInfo->getY() == y && nCurveInfo->getY() == y) ok = false;
+                                if ((y < -(d - 1.0) || y > _widthInPixels + (d - 1.0)) && pCurveInfo->getX() == x && nCurveInfo->getX() == x) ok = false;
+                                if ((x < -(d - 1.0) || x > _heightInPixels + (d - 1.0)) && pCurveInfo->getY() == y && nCurveInfo->getY() == y) ok = false;
                             }
 
                             if (ok) content << "C " << curveInfo->getX1() << " " << curveInfo->getY1() << ","
@@ -202,7 +212,8 @@ namespace map_server
 
         MapData::unlock();
 
-        content << "</svg>";
+        content << "<rect x=\"0.5\" y=\"0.5\" width=\"" << _widthInPixels - 1.0 << "\" height=\"" << _heightInPixels - 1.0
+                << "\" style=\"fill:none;stroke-width:1;stroke:black\"/>" << std::endl << "</svg>";
 
         // Todo: Prevent different threads to write simultaneously the same file
 		std::string fileName;

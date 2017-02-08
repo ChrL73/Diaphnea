@@ -98,7 +98,7 @@ namespace MapDataProcessing
 
                 foreach (XmlResolution resolution in mapData.XmlMapData.resolutionList)
                 {
-                    List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, part.Line.Path);
+                    List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, part.Line.Path, mapData.LineSuperposerDictionary[resolution], true);
                     if (smoothedLine == null) return -1;
                     part._smoothedLineMapItem.addLine(resolution, smoothedLine);
                     if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution) != 0) return -1;

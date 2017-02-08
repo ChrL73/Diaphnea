@@ -2,7 +2,7 @@
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
   <parameters mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="2.0" projection="ORTHOGRAPHIC"
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="2.0" superposingThreshold="0.4" projection="ORTHOGRAPHIC"
               zoomMinDistance="35" zoomMaxDistance="3000" resolutionThreshold="7.0" sizeParameter1="1.25" sizeParameter2="0.5">
     <languageList>
       <language id="fr" name="Français"/>
@@ -788,13 +788,40 @@
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-    <lineElement id="e_MvoungRiver" look="ll_FleuveRiviere" importance="139">
+      <lineElement id="e_MvoungRiver" look="ll_FleuveRiviere" importance="139">
         <name>
           <name language="fr" text="Mvoung"/>
           <name language="en" text="Mvoung"/>
         </name>
         <attachmentList>
           <element id="e_IvindoRiver"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_OgoulouRiver" look="ll_FleuveRiviere" importance="138">
+        <name>
+          <name language="fr" text="Ogoulou"/>
+          <name language="en" text="Ogoulou"/>
+        </name>
+        <attachmentList>
+          <element id="e_NgounieRiver"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Liboumba" look="ll_FleuveRiviere" importance="137">
+        <name>
+          <name language="fr" text="Liboumba"/>
+          <name language="en" text="Liboumba"/>
+        </name>
+        <attachmentList>
+          <element id="e_IvindoRiver"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_MpassaRiver" look="ll_FleuveRiviere" importance="136">
+        <name>
+          <name language="fr" text="Mpassa"/>
+          <name language="en" text="Mpassa"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
     </lineElementList>

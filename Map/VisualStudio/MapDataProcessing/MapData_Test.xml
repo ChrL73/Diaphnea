@@ -2,7 +2,7 @@
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
   <parameters mapId="_Test" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="5.0" projection="ORTHOGRAPHIC"
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="5.0" superposingThreshold="0.2" projection="ORTHOGRAPHIC"
               zoomMinDistance="1" zoomMaxDistance="300" resolutionThreshold="7.0" sizeParameter1="1.25" sizeParameter2="0.5">
     <languageList>
       <language id="fr" name="Français"/>
@@ -50,7 +50,26 @@
   </lookList>
 
   <elementList>
-    <polygonElementList/>
+    <polygonElementList>
+      <polygonElement id="e_pl1" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl1"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+      <polygonElement id="e_pl2" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl2"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+      <polygonElement id="e_pl3" look="pl_Departement" importance="0">
+        <name>
+          <name language="fr" text="Pl3"/>
+        </name>
+        <coveredElementList/>
+      </polygonElement>
+    </polygonElementList>
     <lineElementList>
       <lineElement id="e_ln1" look="ll_FleuveRiviere" importance="0">
         <name>

@@ -67,13 +67,13 @@ namespace CleanKml
                 logMessage("");
 
                 int n = _cleanedFiles.Count;
-                String msg = String.Format("{0} file{1} cleaned{2}", n, n > 1 ? "s" : "", n > 0 ? ":" : "");
+                String msg = String.Format("{0} file{1} cleaned", n, n > 1 ? "s" : "");
                 logMessage(msg);
                 Console.WriteLine(msg + " (See detail in " + _logFileName + ")");
                 foreach (String file in _cleanedFiles) logMessage(file);
 
                 n = _reversedFiles.Count;
-                msg = String.Format("{0} file{1} reversed{2}", n, n > 1 ? "s" : "", n > 0 ? ":" : "");
+                msg = String.Format("{0} file{1} reversed", n, n > 1 ? "s" : "");
                 logMessage(msg);
                 Console.WriteLine(msg + " (See detail in " + _logFileName + ")");
                 foreach (String file in _reversedFiles) logMessage(file);

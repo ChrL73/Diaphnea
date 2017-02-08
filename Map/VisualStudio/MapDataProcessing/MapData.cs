@@ -13,6 +13,8 @@ namespace MapDataProcessing
         private readonly Dictionary<string, Look> _lookDictionary = new Dictionary<string, Look>();
         private readonly List<Look> _lookList = new List<Look>();
 
+        private readonly Dictionary<XmlResolution, LineSuperposer> _lineSuperposerDictionary = new Dictionary<XmlResolution, LineSuperposer>();
+
         internal MapData(string dataFileName, XmlMapData xmlMapData)
         {
             _dataFileName = dataFileName;
@@ -37,6 +39,8 @@ namespace MapDataProcessing
                 _lookDictionary.Add(pointLook.id.ToString(), look);
                 _lookList.Add(look);
             }
+
+            foreach (XmlResolution xmlResolution in _xmlMapData.resolutionList) _lineSuperposerDictionary.Add(xmlResolution, new LineSuperposer());
         }
 
         internal XmlMapData XmlMapData
@@ -57,5 +61,7 @@ namespace MapDataProcessing
         }
 
         internal List<Look> LookList { get { return _lookList; } }
+
+        internal  Dictionary<XmlResolution, LineSuperposer> LineSuperposerDictionary { get { return _lineSuperposerDictionary; } }
     }
 }

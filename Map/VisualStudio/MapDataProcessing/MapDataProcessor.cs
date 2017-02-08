@@ -47,9 +47,12 @@ namespace MapDataProcessing
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
             if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
 
-            foreach (XmlResolution xmlResolution in _mapData.XmlMapData.resolutionList)
+            if (result == 0)
             {
-                _mapData.LineSuperposerDictionary[xmlResolution].classifySegments(_mapData.XmlMapData.parameters.superposingThreshold);
+                foreach (XmlResolution xmlResolution in _mapData.XmlMapData.resolutionList)
+                {
+                    _mapData.LineSuperposerDictionary[xmlResolution].classifySegments(_mapData.XmlMapData.parameters.superposingThreshold);
+                }
             }
 
             if (result == 0) result = LineLinePart.smoothAll(_mapData);

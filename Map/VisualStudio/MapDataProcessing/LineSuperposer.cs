@@ -134,12 +134,16 @@ namespace MapDataProcessing
 
         void replaceLine(List<GeoPoint> lineJ, int j1, int j2, List<GeoPoint> lineI, int i1, int i2)
         {
-            if (i1 == i2) return;
+            if (i1 == i2 || i1 == i2 - 1 || i1 == i2 + 1 || j1 == j2 || j1 == j2 - 1) return;
 
             List<GeoPoint> line = new List<GeoPoint>();
+            line.Add(new GeoPoint(0.5 * (lineI[i1].X + lineJ[j1].X), 0.5 * (lineI[i1].Y + lineJ[j1].Y), 0.5 * (lineI[i1].Z + lineJ[j1].Z)));
+
             int i;
-            if (i2 > i1) for (i = i1; i <= i2; ++i) line.Add(lineI[i]);
-            else for (i = i1; i >= i2; --i) line.Add(lineI[i]);
+            if (i2 > i1) for (i = i1 + 1; i <= i2 - 1; ++i) line.Add(lineI[i]);
+            for (i = i1 - 1; i >= i2 + 1; --i) line.Add(lineI[i]);
+
+            line.Add(new GeoPoint(0.5 * (lineI[i2].X + lineJ[j2].X), 0.5 * (lineI[i2].Y + lineJ[j2].Y), 0.5 * (lineI[i2].Z + lineJ[j2].Z)));
 
             lineJ.RemoveRange(j1, j2 - j1 + 1);
             lineJ.InsertRange(j1, line);

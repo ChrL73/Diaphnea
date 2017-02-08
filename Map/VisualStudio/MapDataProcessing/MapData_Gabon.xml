@@ -824,6 +824,24 @@
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_Abanga" look="ll_FleuveRiviere" importance="135">
+        <name>
+          <name language="fr" text="Abanga"/>
+          <name language="en" text="Abanga"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_LekoniRiver" look="ll_FleuveRiviere" importance="134">
+        <name>
+          <name language="fr" text="Lékoni"/>
+          <name language="en" text="Lékoni"/>
+        </name>
+        <attachmentList>
+          <element id="e_Ogooue"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->

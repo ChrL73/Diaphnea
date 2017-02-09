@@ -121,10 +121,10 @@ namespace MapDataProcessing
                     dx = xP1 - xP2;
                     dy = yP1 - yP2;
                     double d2 = Math.Sqrt(dx * dx + dy * dy);
-                    if (d2 < d) d = d2;
+                    if (d < d2) d2 = d;
 
                     double cos = getCos(xP1, yP1, xP2, yP2, x, y);
-                    double q = d * 0.1 * (3.0 - cos);
+                    double q = d2 * 0.1 * (3.0 - cos);
 
                     x1 = xP1 + q * ux;
                     y1 = yP1 + q * uy;
@@ -144,11 +144,10 @@ namespace MapDataProcessing
                     dx = x - xN;
                     dy = y - yN;
                     double d2 = Math.Sqrt(dx * dx + dy * dy);
-                    if (d2 < d) d = d2;
+                    if (d < d2) d2 = d;
 
                     double cos = getCos(x, y, xP1, yP1, xN, yN);
-                    const double c = 0.1;
-                    double q = d * c * (1.0 - cos);
+                    double q = d2 * 0.1 * (3.0 - cos);
 
                     x2 = x + q * ux;
                     y2 = y + q * uy;

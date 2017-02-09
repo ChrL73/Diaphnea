@@ -115,24 +115,37 @@ namespace MapDataProcessing
             foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList)
             {
                 String id = xmlPolygonElement.id.Substring(2);
+
                 List<string> coveredElementList = new List<string>();
                 foreach (XmlCoveredElement coveredElement in xmlPolygonElement.coveredElementList) coveredElementList.Add(coveredElement.id.Substring(2));
+
+                List<string> lookIds = new List<string>();
+                foreach (XmlPolygonLookRef lookRef in xmlPolygonElement.looks) lookIds.Add(lookRef.id);
+
                 PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName,
-                                                                            xmlPolygonElement.importance, xmlPolygonElement.look, coveredElementList);
+                                                                            xmlPolygonElement.importance, lookIds, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
             {
                 String id = xmlLineElement.id.Substring(2);
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, xmlLineElement.look);
+
+                List<string> lookIds = new List<string>();
+                foreach (XmlLineLookRef lookRef in xmlLineElement.looks) lookIds.Add(lookRef.id);
+
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, lookIds);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
             {
                 String id = xmlPointElement.id.Substring(2);
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, xmlPointElement.look);
+
+                List<string> lookIds = new List<string>();
+                foreach (XmlPointLookRef lookRef in xmlPointElement.looks) lookIds.Add(lookRef.id);
+
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, lookIds);
                 _elementDictionary.Add(id, pointMapElement);
             }
 

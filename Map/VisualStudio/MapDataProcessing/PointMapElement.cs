@@ -13,8 +13,8 @@ namespace MapDataProcessing
         private KmlFileData _kmlFile = null;
         private readonly ItemId _itemId = new ItemId();
 
-        internal PointMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, string lookId) :
-            base(id, mapData, name, shortName, importance, lookId) { }
+        internal PointMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds) :
+            base(id, mapData, name, shortName, importance, lookIds) { }
 
         internal override int addKmlFile(String path)
         {

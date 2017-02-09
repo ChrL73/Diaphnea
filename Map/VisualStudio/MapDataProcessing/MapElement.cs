@@ -19,9 +19,9 @@ namespace MapDataProcessing
         private readonly ElementName _name;
         private readonly ElementName _shortName;
         private readonly double _importance;
-        private readonly int _lookId;
+        private readonly List<int> _lookIds = new List<int>();
 
-        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, string lookId)
+        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds)
         {
             _numericalId = ++_counter;
             _id = id;
@@ -29,7 +29,8 @@ namespace MapDataProcessing
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
             _importance = importance;
-            _lookId = _mapData.getLook(lookId).Id;
+
+            foreach (string lookId in lookIds) _lookIds.Add(mapData.getLook(lookId).Id);
         }
 
         abstract internal int addKmlFile(String path);
@@ -42,6 +43,9 @@ namespace MapDataProcessing
 
         protected BsonDocument getBsonDocument()
         {
+            BsonArray lookIdArray = new BsonArray();
+            foreach (int lookId in _lookIds) lookIdArray.Add(lookId);
+
             BsonDocument elementDocument = new BsonDocument()
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
@@ -50,7 +54,7 @@ namespace MapDataProcessing
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "importance", _importance },
-                { "look_id", _lookId }
+                { "look_ids", lookIdArray }
             };
 
             return elementDocument;

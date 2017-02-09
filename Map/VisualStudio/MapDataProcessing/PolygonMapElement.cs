@@ -21,8 +21,8 @@ namespace MapDataProcessing
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
         private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem(true);
 
-        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, string lookId, List<string> coveredElementList) :
-            base(id, mapData, name, shortName, importance, lookId)
+        internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, List<string> coveredElementList) :
+            base(id, mapData, name, shortName, importance, lookIds)
         {
             _coveredElementList = coveredElementList;
         }

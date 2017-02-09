@@ -188,11 +188,20 @@
     <xsd:sequence>
       <xsd:element name="name" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="shortName" type="XmlElementName" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="looks" type="XmlPolygonLooks" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="coveredElementList" type="XmlCoveredElementList" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
-    <xsd:attribute name="look" type="XmlPolygonLookIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonLooks">
+    <xsd:sequence>
+      <xsd:element name="look" type="XmlPolygonLookRef" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonLookRef">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlPolygonLookIdRef"/>
   </xsd:complexType>
   <xsd:complexType name="XmlCoveredElementList">
     <xsd:sequence>
@@ -207,20 +216,38 @@
     <xsd:sequence>
       <xsd:element name="name" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="shortName" type="XmlElementName" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="looks" type="XmlLineLooks" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="attachmentList" type="XmlAttachmentList" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
-    <xsd:attribute name="look" type="XmlLineLookIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineLooks">
+    <xsd:sequence>
+      <xsd:element name="look" type="XmlLineLookRef" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlLineLookRef">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlLineLookIdRef"/>
   </xsd:complexType>
   <xsd:complexType name="XmlPointElement">
     <xsd:sequence>
       <xsd:element name="name" type="XmlElementName" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="shortName" type="XmlElementName" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="looks" type="XmlPointLooks" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
-    <xsd:attribute name="look" type="XmlPointLookIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointLooks">
+    <xsd:sequence>
+      <xsd:element name="look" type="XmlPointLookRef" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPointLookRef">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlPointLookIdRef"/>
   </xsd:complexType>
   <xsd:complexType name="XmlAttachmentList">
     <xsd:sequence>

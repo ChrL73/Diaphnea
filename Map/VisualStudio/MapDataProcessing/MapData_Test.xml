@@ -51,44 +51,62 @@
 
   <elementList>
     <polygonElementList>
-      <polygonElement id="e_pl1" look="pl_Departement" importance="0">
+      <polygonElement id="e_pl1" importance="0">
         <name>
           <name language="fr" text="Pl1"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_pl2" look="pl_Departement" importance="0">
+      <polygonElement id="e_pl2" importance="0">
         <name>
           <name language="fr" text="Pl2"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_pl3" look="pl_Departement" importance="0">
+      <polygonElement id="e_pl3" importance="0">
         <name>
           <name language="fr" text="Pl3"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList/>
       </polygonElement>
     </polygonElementList>
     <lineElementList>
-      <lineElement id="e_ln1" look="ll_FleuveRiviere" importance="0">
+      <lineElement id="e_ln1" importance="0">
         <name>
           <name language="fr" text="Ln1"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_ln2" look="ll_FleuveRiviere" importance="0">
+      <lineElement id="e_ln2" importance="0">
         <name>
           <name language="fr" text="Ln2"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList/>
       </lineElement>
     </lineElementList>
     <pointElementList>
-      <pointElement id="e_pt1" look="tl_ChefLieuRegion" importance="0">
+      <pointElement id="e_pt1" importance="0">
         <name>
           <name language="fr" text="Pt1"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuRegion"/>
+        </looks>
       </pointElement>
     </pointElementList>
   </elementList>

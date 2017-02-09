@@ -57,15 +57,18 @@
 
   <elementList>
     <polygonElementList>
-      <polygonElement id="e_Gabon" look="pl_Gabon" importance="601">
+      <polygonElement id="e_Gabon" importance="601">
         <name>
           <name language="fr" text="Gabon"/>
           <name language="en" text="Gabon"/>
         </name>
+        <looks>
+          <look id="pl_Gabon"/>
+        </looks>
         <coveredElementList/>
       </polygonElement>
       <!--Province-->
-      <polygonElement id="e_Estuaire" look="pl_Province" importance="509">
+      <polygonElement id="e_Estuaire" importance="509">
         <name>
           <name language="fr" text="Estuaire (1)"/>
           <name language="en" text="Estuaire (1)"/>
@@ -74,11 +77,14 @@
           <name language="fr" text="1"/>
           <name language="en" text="1"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_HautOgooue" look="pl_Province" importance="508">
+      <polygonElement id="e_HautOgooue" importance="508">
         <name>
           <name language="fr" text="Haut-Ogooué (2)"/>
           <name language="en" text="Haut-Ogooué (2)"/>
@@ -87,11 +93,14 @@
           <name language="fr" text="2"/>
           <name language="en" text="2"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_MoyenOgooue" look="pl_Province" importance="504">
+      <polygonElement id="e_MoyenOgooue" importance="504">
         <name>
           <name language="fr" text="Moyen-Ogooué (3)"/>
           <name language="en" text="Moyen-Ogooué (3)"/>
@@ -100,11 +109,14 @@
           <name language="fr" text="3"/>
           <name language="en" text="3"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Ngounie" look="pl_Province" importance="505">
+      <polygonElement id="e_Ngounie" importance="505">
         <name>
           <name language="fr" text="Ngounié (4)"/>
           <name language="en" text="Ngounié (4)"/>
@@ -113,11 +125,14 @@
           <name language="fr" text="4"/>
           <name language="en" text="4"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Nyanga" look="pl_Province" importance="501">
+      <polygonElement id="e_Nyanga" importance="501">
         <name>
           <name language="fr" text="Nyanga (5)"/>
           <name language="en" text="Nyanga (5)"/>
@@ -126,11 +141,14 @@
           <name language="fr" text="5"/>
           <name language="en" text="5"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_OgooueIvindo" look="pl_Province" importance="502">
+      <polygonElement id="e_OgooueIvindo" importance="502">
         <name>
           <name language="fr" text="Ogooue-Ivindo (6)"/>
           <name language="en" text="Ogooue-Ivindo (6)"/>
@@ -139,11 +157,14 @@
           <name language="fr" text="6"/>
           <name language="en" text="6"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_OgooueLolo" look="pl_Province" importance="503">
+      <polygonElement id="e_OgooueLolo" importance="503">
         <name>
           <name language="fr" text="Ogooue-Lolo (7)"/>
           <name language="en" text="Ogooue-Lolo (7)"/>
@@ -152,11 +173,14 @@
           <name language="fr" text="7"/>
           <name language="en" text="7"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_OgooueMaritime" look="pl_Province" importance="507">
+      <polygonElement id="e_OgooueMaritime" importance="507">
         <name>
           <name language="fr" text="Ogooué-Maritime (8)"/>
           <name language="en" text="Ogooué-Maritime (8)"/>
@@ -165,11 +189,14 @@
           <name language="fr" text="8"/>
           <name language="en" text="8"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_WoleuNtem" look="pl_Province" importance="506">
+      <polygonElement id="e_WoleuNtem" importance="506">
         <name>
           <name language="fr" text="Woleu-Ntem (9)"/>
           <name language="en" text="Woleu-Ntem (9)"/>
@@ -178,514 +205,667 @@
           <name language="fr" text="9"/>
           <name language="en" text="9"/>
         </shortName>
+        <looks>
+          <look id="pl_Province"/>
+        </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Estuaire-->
-      <polygonElement id="e_Noya" look="pl_Departement" importance="313">
+      <polygonElement id="e_Noya" importance="313">
         <name>
           <name language="fr" text="Noya"/>
           <name language="en" text="Noya"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_KomoMondah" look="pl_Departement" importance="347">
+      <polygonElement id="e_KomoMondah" importance="347">
         <name>
           <name language="fr" text="Komo-Mondah"/>
           <name language="en" text="Komo-Mondah"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_KomoOcean" look="pl_Departement" importance="301">
+      <polygonElement id="e_KomoOcean" importance="301">
         <name>
           <name language="fr" text="Komo-Océan"/>
           <name language="en" text="Komo-Océan"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LibrevilleDepartement" look="pl_Departement" importance="350">
+      <polygonElement id="e_LibrevilleDepartement" importance="350">
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_OwendoDepartement" look="pl_Departement" importance="346">
+      <polygonElement id="e_OwendoDepartement" importance="346">
         <name>
           <name language="fr" text="Owendo"/>
           <name language="en" text="Owendo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Komo" look="pl_Departement" importance="336">
+      <polygonElement id="e_Komo" importance="336">
         <name>
           <name language="fr" text="Komo"/>
           <name language="en" text="Komo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Haut-Ogooué-->
-      <polygonElement id="e_SebeBrikolo" look="pl_Departement" importance="334">
+      <polygonElement id="e_SebeBrikolo" importance="334">
         <name>
           <name language="fr" text="Sébé-Brikolo"/>
           <name language="en" text="Sébé-Brikolo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_BayiBrikolo" look="pl_Departement" importance="304">
+      <polygonElement id="e_BayiBrikolo" importance="304">
         <name>
           <name language="fr" text="Bayi-Brikolo"/>
           <name language="en" text="Bayi-Brikolo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LebombiLeyou" look="pl_Departement" importance="344">
+      <polygonElement id="e_LebombiLeyou" importance="344">
         <name>
           <name language="fr" text="Lébombi-Leyou"/>
           <name language="en" text="Lébombi-Leyou"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Lekoko" look="pl_Departement" importance="317">
+      <polygonElement id="e_Lekoko" importance="317">
         <name>
           <name language="fr" text="Lékoko"/>
           <name language="en" text="Lékoko"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mpassa" look="pl_Departement" importance="348">
+      <polygonElement id="e_Mpassa" importance="348">
         <name>
           <name language="fr" text="Mpassa"/>
           <name language="en" text="Mpassa"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_OgooueLetili" look="pl_Departement" importance="309">
+      <polygonElement id="e_OgooueLetili" importance="309">
         <name>
           <name language="fr" text="Ogooué-Letili"/>
           <name language="en" text="Ogooué-Letili"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LekoniLekori" look="pl_Departement" importance="326">
+      <polygonElement id="e_LekoniLekori" importance="326">
         <name>
           <name language="fr" text="Lékoni-Lékori"/>
           <name language="en" text="Lékoni-Lékori"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LekabiLewolo" look="pl_Departement" importance="316">
+      <polygonElement id="e_LekabiLewolo" importance="316">
         <name>
           <name language="fr" text="Lékabi-Léwolo"/>
           <name language="en" text="Lékabi-Léwolo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Djoue" look="pl_Departement" importance="305">
+      <polygonElement id="e_Djoue" importance="305">
         <name>
           <name language="fr" text="Djoué"/>
           <name language="en" text="Djoué"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_DjouoriAgnili" look="pl_Departement" importance="312">
+      <polygonElement id="e_DjouoriAgnili" importance="312">
         <name>
           <name language="fr" text="Djouori-Agnili"/>
           <name language="en" text="Djouori-Agnili"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Plateaux" look="pl_Departement" importance="324">
+      <polygonElement id="e_Plateaux" importance="324">
         <name>
           <name language="fr" text="Plateaux"/>
           <name language="en" text="Plateaux"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Moyen-Ogooué-->
-      <polygonElement id="e_OgooueLacs" look="pl_Departement" importance="343">
+      <polygonElement id="e_OgooueLacs" importance="343">
         <name>
           <name language="fr" text="Ogooué et Lacs"/>
           <name language="en" text="Ogooué et Lacs"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_AbangaBigne" look="pl_Departement" importance="332">
+      <polygonElement id="e_AbangaBigne" importance="332">
         <name>
           <name language="fr" text="Abanga-Bigné"/>
           <name language="en" text="Abanga-Bigné"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ngounié-->
-      <polygonElement id="e_Ndolou" look="pl_Departement" importance="320">
+      <polygonElement id="e_Ndolou" importance="320">
         <name>
           <name language="fr" text="Ndolou"/>
           <name language="en" text="Ndolou"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_TsambaMagotsi" look="pl_Departement" importance="331">
+      <polygonElement id="e_TsambaMagotsi" importance="331">
         <name>
           <name language="fr" text="Tsamba-Magotsi"/>
           <name language="en" text="Tsamba-Magotsi"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mougalaba" look="pl_Departement" importance="303">
+      <polygonElement id="e_Mougalaba" importance="303">
         <name>
           <name language="fr" text="Mougalaba"/>
           <name language="en" text="Mougalaba"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_DouyaOnoye" look="pl_Departement" importance="341">
+      <polygonElement id="e_DouyaOnoye" importance="341">
         <name>
           <name language="fr" text="Douya-Onoyé"/>
           <name language="en" text="Douya-Onoyé"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Ogoulou" look="pl_Departement" importance="323">
+      <polygonElement id="e_Ogoulou" importance="323">
         <name>
           <name language="fr" text="Ogoulou"/>
           <name language="en" text="Ogoulou"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Dola" look="pl_Departement" importance="321">
+      <polygonElement id="e_Dola" importance="321">
         <name>
           <name language="fr" text="Dola"/>
           <name language="en" text="Dola"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LouetsiWano" look="pl_Departement" importance="325">
+      <polygonElement id="e_LouetsiWano" importance="325">
         <name>
           <name language="fr" text="Louetsi-Wano"/>
           <name language="en" text="Louetsi-Wano"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_BoumiLouetsi" look="pl_Departement" importance="330">
+      <polygonElement id="e_BoumiLouetsi" importance="330">
         <name>
           <name language="fr" text="Boumi-Louetsi"/>
           <name language="en" text="Boumi-Louetsi"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LouetsiBibaka" look="pl_Departement" importance="307">
-          <name>
-            <name language="fr" text="Louetsi-Bibaka"/>
-            <name language="en" text="Louetsi-Bibaka"/>
-          </name>
+      <polygonElement id="e_LouetsiBibaka" importance="307">
+        <name>
+          <name language="fr" text="Louetsi-Bibaka"/>
+          <name language="en" text="Louetsi-Bibaka"/>
+        </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Nyanga-->
-      <polygonElement id="e_Douigni" look="pl_Departement" importance="318">
+      <polygonElement id="e_Douigni" importance="318">
         <name>
           <name language="fr" text="Douigni"/>
           <name language="en" text="Douigni"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mougoutsi" look="pl_Departement" importance="340">
+      <polygonElement id="e_Mougoutsi" importance="340">
         <name>
           <name language="fr" text="Mougoutsi"/>
           <name language="en" text="Mougoutsi"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_BasseBanio" look="pl_Departement" importance="322">
+      <polygonElement id="e_BasseBanio" importance="322">
         <name>
           <name language="fr" text="Basse-Banio"/>
           <name language="en" text="Basse-Banio"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_HauteBanio" look="pl_Departement" importance="302">
+      <polygonElement id="e_HauteBanio" importance="302">
         <name>
           <name language="fr" text="Haute-Banio"/>
           <name language="en" text="Haute-Banio"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mongo" look="pl_Departement" importance="306">
+      <polygonElement id="e_Mongo" importance="306">
         <name>
           <name language="fr" text="Mongo"/>
           <name language="en" text="Mongo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Doutsila" look="pl_Departement" importance="314">
+      <polygonElement id="e_Doutsila" importance="314">
         <name>
           <name language="fr" text="Doutsila"/>
           <name language="en" text="Doutsila"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Ivindo-->
-      <polygonElement id="e_Lope" look="pl_Departement" importance="329">
+      <polygonElement id="e_Lope" importance="329">
         <name>
           <name language="fr" text="Lopé"/>
           <name language="en" text="Lopé"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mvoung" look="pl_Departement" importance="311">
+      <polygonElement id="e_Mvoung" importance="311">
         <name>
           <name language="fr" text="Mvoung"/>
           <name language="en" text="Mvoung"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Ivindo" look="pl_Departement" importance="339">
+      <polygonElement id="e_Ivindo" importance="339">
         <name>
           <name language="fr" text="Ivindo"/>
           <name language="en" text="Ivindo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement> 
-      <polygonElement id="e_Zadie" look="pl_Departement" importance="333">
+      <polygonElement id="e_Zadie" importance="333">
         <name>
           <name language="fr" text="Zadié"/>
           <name language="en" text="Zadié"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Lolo-->
-      <polygonElement id="e_OffoueOnoye" look="pl_Departement" importance="308">
+      <polygonElement id="e_OffoueOnoye" importance="308">
         <name>
           <name language="fr" text="Offoué-Onoyé"/>
           <name language="en" text="Offoué-Onoyé"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LoloBouenguidi" look="pl_Departement" importance="338">
+      <polygonElement id="e_LoloBouenguidi" importance="338">
         <name>
           <name language="fr" text="Lolo-Bouenguidi"/>
           <name language="en" text="Lolo-Bouenguidi"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_LomboBouenguidi" look="pl_Departement" importance="315">
+      <polygonElement id="e_LomboBouenguidi" importance="315">
         <name>
           <name language="fr" text="Lombo-Bouenguidi"/>
           <name language="en" text="Lombo-Bouenguidi"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Mouloundou" look="pl_Departement" importance="337">
+      <polygonElement id="e_Mouloundou" importance="337">
         <name>
           <name language="fr" text="Mouloundou"/>
           <name language="en" text="Mouloundou"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Ogooué-Maritime-->
-      <polygonElement id="e_Bendje" look="pl_Departement" importance="349">
+      <polygonElement id="e_Bendje" importance="349">
         <name>
           <name language="fr" text="Bendjé"/>
           <name language="en" text="Bendjé"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Etimboue" look="pl_Departement" importance="319">
+      <polygonElement id="e_Etimboue" importance="319">
         <name>
           <name language="fr" text="Etimboué"/>
           <name language="en" text="Etimboué"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Ndougou" look="pl_Departement" importance="328">
+      <polygonElement id="e_Ndougou" importance="328">
         <name>
           <name language="fr" text="Ndougou"/>
           <name language="en" text="Ndougou"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
       <!--Départements Woleu-Ntem-->
-      <polygonElement id="e_HautKomo" look="pl_Departement" importance="310">
+      <polygonElement id="e_HautKomo" importance="310">
         <name>
           <name language="fr" text="Haut-Komo"/>
           <name language="en" text="Haut-Komo"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Okano" look="pl_Departement" importance="335">
+      <polygonElement id="e_Okano" importance="335">
         <name>
           <name language="fr" text="Okano"/>
           <name language="en" text="Okano"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Woleu" look="pl_Departement" importance="345">
+      <polygonElement id="e_Woleu" importance="345">
         <name>
           <name language="fr" text="Woleu"/>
           <name language="en" text="Woleu"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Ntem" look="pl_Departement" importance="342">
+      <polygonElement id="e_Ntem" importance="342">
         <name>
           <name language="fr" text="Ntem"/>
           <name language="en" text="Ntem"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
           <element id="e_Gabon"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_HautNtem" look="pl_Departement" importance="327">
+      <polygonElement id="e_HautNtem" importance="327">
         <name>
           <name language="fr" text="Haut-Ntem"/>
           <name language="en" text="Haut-Ntem"/>
         </name>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
           <element id="e_Gabon"/>
@@ -693,151 +873,202 @@
       </polygonElement>
     </polygonElementList>
     <lineElementList>
-      <lineElement id="e_Ogooue" look="ll_FleuveRiviere" importance="150">
+      <lineElement id="e_Ogooue" importance="150">
         <name>
           <name language="fr" text="Ogooué"/>
           <name language="en" text="Ogooué"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Bendje"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_NgounieRiver" look="ll_FleuveRiviere" importance="149">
+      <lineElement id="e_NgounieRiver" importance="149">
         <name>
           <name language="fr" text="Ngounié"/>
           <name language="en" text="Ngounié"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_NyangaRiver" look="ll_FleuveRiviere" importance="148">
+      <lineElement id="e_NyangaRiver" importance="148">
         <name>
           <name language="fr" text="Nyanga"/>
           <name language="en" text="Nyanga"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_BasseBanio"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_IvindoRiver" look="ll_FleuveRiviere" importance="147">
+      <lineElement id="e_IvindoRiver" importance="147">
         <name>
           <name language="fr" text="Ivindo"/>
           <name language="en" text="Ivindo"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_KomoRiver" look="ll_FleuveRiviere" importance="146">
+      <lineElement id="e_KomoRiver" importance="146">
         <name>
           <name language="fr" text="Komo"/>
           <name language="en" text="Komo"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Komo"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Lolo" look="ll_FleuveRiviere" importance="145">
+      <lineElement id="e_Lolo" importance="145">
         <name>
           <name language="fr" text="Lolo"/>
           <name language="en" text="Lolo"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_OkanoRiver" look="ll_FleuveRiviere" importance="144">
+      <lineElement id="e_OkanoRiver" importance="144">
         <name>
           <name language="fr" text="Okano"/>
           <name language="en" text="Okano"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_WoleuRiver" look="ll_FleuveRiviere" importance="143">
+      <lineElement id="e_WoleuRiver" importance="143">
         <name>
           <name language="fr" text="Woleu"/>
           <name language="en" text="Woleu"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_NtemRiver" look="ll_FleuveRiviere" importance="142">
+      <lineElement id="e_NtemRiver" importance="142">
         <name>
           <name language="fr" text="Ntem"/>
           <name language="en" text="Ntem"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Sebe" look="ll_FleuveRiviere" importance="141">
+      <lineElement id="e_Sebe" importance="141">
         <name>
           <name language="fr" text="Sébé"/>
           <name language="en" text="Sébé"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Offoue" look="ll_FleuveRiviere" importance="140">
+      <lineElement id="e_Offoue" importance="140">
         <name>
           <name language="fr" text="Offoué"/>
           <name language="en" text="Offoué"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_MvoungRiver" look="ll_FleuveRiviere" importance="139">
+      <lineElement id="e_MvoungRiver" importance="139">
         <name>
           <name language="fr" text="Mvoung"/>
           <name language="en" text="Mvoung"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_IvindoRiver"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_OgoulouRiver" look="ll_FleuveRiviere" importance="138">
+      <lineElement id="e_OgoulouRiver" importance="138">
         <name>
           <name language="fr" text="Ogoulou"/>
           <name language="en" text="Ogoulou"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_NgounieRiver"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Liboumba" look="ll_FleuveRiviere" importance="137">
+      <lineElement id="e_Liboumba" importance="137">
         <name>
           <name language="fr" text="Liboumba"/>
           <name language="en" text="Liboumba"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_IvindoRiver"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_MpassaRiver" look="ll_FleuveRiviere" importance="136">
+      <lineElement id="e_MpassaRiver" importance="136">
         <name>
           <name language="fr" text="Mpassa"/>
           <name language="en" text="Mpassa"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Abanga" look="ll_FleuveRiviere" importance="135">
+      <lineElement id="e_Abanga" importance="135">
         <name>
           <name language="fr" text="Abanga"/>
           <name language="en" text="Abanga"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_LekoniRiver" look="ll_FleuveRiviere" importance="134">
+      <lineElement id="e_LekoniRiver" importance="134">
         <name>
           <name language="fr" text="Lékoni"/>
           <name language="en" text="Lékoni"/>
         </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
         <attachmentList>
           <element id="e_Ogooue"/>
         </attachmentList>
@@ -845,313 +1076,463 @@
     </lineElementList>
     <pointElementList>
       <!--Villes Estuaire-->
-      <pointElement id="e_Libreville" look="tl_ChefLieuProvince" importance="409">
+      <pointElement id="e_Libreville" importance="409">
         <name>
           <name language="fr" text="Libreville"/>
           <name language="en" text="Libreville"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Owendo" look="tl_ChefLieuDepartement" importance="246">
+      <pointElement id="e_Owendo" importance="246">
         <name>
           <name language="fr" text="Owendo"/>
           <name language="en" text="Owendo"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ntoum" look="tl_ChefLieuDepartement" importance="247">
+      <pointElement id="e_Ntoum" importance="247">
         <name>
           <name language="fr" text="Ntoum"/>
           <name language="en" text="Ntoum"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ndzomoe" look="tl_ChefLieuDepartement" importance="201">
+      <pointElement id="e_Ndzomoe" importance="201">
         <name>
           <name language="fr" text="Ndzomoé"/>
           <name language="en" text="Ndzomoé"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Cocobeach" look="tl_ChefLieuDepartement" importance="213">
+      <pointElement id="e_Cocobeach" importance="213">
         <name>
           <name language="fr" text="Cocobeach"/>
           <name language="en" text="Cocobeach"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Kango" look="tl_ChefLieuDepartement" importance="236">
+      <pointElement id="e_Kango" importance="236">
         <name>
           <name language="fr" text="Kango"/>
           <name language="en" text="Kango"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Haut-Ogooué-->
-      <pointElement id="e_Franceville" look="tl_ChefLieuProvince" importance="408">
+      <pointElement id="e_Franceville" importance="408">
         <name>
           <name language="fr" text="Franceville"/>
           <name language="en" text="Franceville"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Moanda" look="tl_ChefLieuDepartement" importance="244">
+      <pointElement id="e_Moanda" importance="244">
         <name>
           <name language="fr" text="Moanda"/>
           <name language="en" text="Moanda"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Bakoumba" look="tl_ChefLieuDepartement" importance="217">
+      <pointElement id="e_Bakoumba" importance="217">
         <name>
           <name language="fr" text="Bakoumba"/>
           <name language="en" text="Bakoumba"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Boumango" look="tl_ChefLieuDepartement" importance="209">
+      <pointElement id="e_Boumango" importance="209">
         <name>
           <name language="fr" text="Boumango"/>
           <name language="en" text="Boumango"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Bongoville" look="tl_ChefLieuDepartement" importance="212">
+      <pointElement id="e_Bongoville" importance="212">
         <name>
           <name language="fr" text="Bongoville"/>
           <name language="en" text="Bongoville"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Lekoni" look="tl_ChefLieuDepartement" importance="224">
+      <pointElement id="e_Lekoni" importance="224">
         <name>
           <name language="fr" text="Lékoni"/>
           <name language="en" text="Lékoni"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Onga" look="tl_ChefLieuDepartement" importance="205">
+      <pointElement id="e_Onga" importance="205">
         <name>
           <name language="fr" text="Onga"/>
           <name language="en" text="Onga"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Akieni" look="tl_ChefLieuDepartement" importance="226">
+      <pointElement id="e_Akieni" importance="226">
         <name>
           <name language="fr" text="Akiéni"/>
           <name language="en" text="Akiéni"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Okondja" look="tl_ChefLieuDepartement" importance="234">
+      <pointElement id="e_Okondja" importance="234">
         <name>
           <name language="fr" text="Okondja"/>
           <name language="en" text="Okondja"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ngouoni" look="tl_ChefLieuDepartement" importance="216">
+      <pointElement id="e_Ngouoni" importance="216">
         <name>
           <name language="fr" text="Ngouoni"/>
           <name language="en" text="Ngouoni"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Aboumi" look="tl_ChefLieuDepartement" importance="204">
+      <pointElement id="e_Aboumi" importance="204">
         <name>
           <name language="fr" text="Aboumi"/>
           <name language="en" text="Aboumi"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Moyen-Ogooué-->
-      <pointElement id="e_Lambarene" look="tl_ChefLieuProvince" importance="404">
+      <pointElement id="e_Lambarene" importance="404">
         <name>
           <name language="fr" text="Lambaréné"/>
           <name language="en" text="Lambaréné"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ndjole" look="tl_ChefLieuDepartement" importance="232">
+      <pointElement id="e_Ndjole" importance="232">
         <name>
           <name language="fr" text="Ndjolé"/>
           <name language="en" text="Ndjolé"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Ngounié-->
-      <pointElement id="e_Mouila" look="tl_ChefLieuProvince" importance="405">
+      <pointElement id="e_Mouila" importance="405">
         <name>
           <name language="fr" text="Mouila"/>
           <name language="en" text="Mouila"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Fougamou" look="tl_ChefLieuDepartement" importance="231">
+      <pointElement id="e_Fougamou" importance="231">
         <name>
           <name language="fr" text="Fougamou"/>
           <name language="en" text="Fougamou"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mandji" look="tl_ChefLieuDepartement" importance="220">
+      <pointElement id="e_Mandji" importance="220">
         <name>
           <name language="fr" text="Mandji"/>
           <name language="en" text="Mandji"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mimongo" look="tl_ChefLieuDepartement" importance="223">
+      <pointElement id="e_Mimongo" importance="223">
         <name>
           <name language="fr" text="Mimongo"/>
           <name language="en" text="Mimongo"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Guietsou" look="tl_ChefLieuDepartement" importance="203">
+      <pointElement id="e_Guietsou" importance="203">
         <name>
           <name language="fr" text="Guiétsou"/>
           <name language="en" text="Guiétsou"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ndende" look="tl_ChefLieuDepartement" importance="221">
+      <pointElement id="e_Ndende" importance="221">
         <name>
           <name language="fr" text="Ndendé"/>
           <name language="en" text="Ndendé"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Lebamba" look="tl_ChefLieuDepartement" importance="225">
+      <pointElement id="e_Lebamba" importance="225">
         <name>
           <name language="fr" text="Lébamba"/>
           <name language="en" text="Lébamba"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mbigou" look="tl_ChefLieuDepartement" importance="230">
+      <pointElement id="e_Mbigou" importance="230">
         <name>
           <name language="fr" text="Mbigou"/>
           <name language="en" text="Mbigou"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Malinga" look="tl_ChefLieuDepartement" importance="207">
+      <pointElement id="e_Malinga" importance="207">
         <name>
           <name language="fr" text="Malinga"/>
           <name language="en" text="Malinga"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Nyanga-->
-      <pointElement id="e_Tchibanga" look="tl_ChefLieuProvince" importance="401">
+      <pointElement id="e_Tchibanga" importance="401">
         <name>
           <name language="fr" text="Tchibanga"/>
           <name language="en" text="Tchibanga"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Moabi" look="tl_ChefLieuDepartement" importance="218">
+      <pointElement id="e_Moabi" importance="218">
         <name>
           <name language="fr" text="Moabi"/>
           <name language="en" text="Moabi"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mayumba" look="tl_ChefLieuDepartement" importance="222">
+      <pointElement id="e_Mayumba" importance="222">
         <name>
           <name language="fr" text="Mayumba"/>
           <name language="en" text="Mayumba"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ndindi" look="tl_ChefLieuDepartement" importance="202">
+      <pointElement id="e_Ndindi" importance="202">
         <name>
           <name language="fr" text="Ndindi"/>
           <name language="en" text="Ndindi"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mabanda" look="tl_ChefLieuDepartement" importance="214">
+      <pointElement id="e_Mabanda" importance="214">
         <name>
           <name language="fr" text="Mabanda"/>
           <name language="en" text="Mabanda"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_MoulenguiBinza" look="tl_ChefLieuDepartement" importance="206">
+      <pointElement id="e_MoulenguiBinza" importance="206">
         <name>
           <name language="fr" text="Moulengui Binza"/>
           <name language="en" text="Moulengui Binza"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Ogooué-Ivindo-->
-      <pointElement id="e_Makokou" look="tl_ChefLieuProvince" importance="402">
+      <pointElement id="e_Makokou" importance="402">
         <name>
           <name language="fr" text="Makokou"/>
           <name language="en" text="Makokou"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Booue" look="tl_ChefLieuDepartement" importance="229">
+      <pointElement id="e_Booue" importance="229">
         <name>
           <name language="fr" text="Booué"/>
           <name language="en" text="Booué"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Ovan" look="tl_ChefLieuDepartement" importance="211">
+      <pointElement id="e_Ovan" importance="211">
         <name>
           <name language="fr" text="Ovan"/>
           <name language="en" text="Ovan"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mekambo" look="tl_ChefLieuDepartement" importance="233">
+      <pointElement id="e_Mekambo" importance="233">
         <name>
           <name language="fr" text="Mékambo"/>
           <name language="en" text="Mékambo"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Ogooué-Lolo-->
-      <pointElement id="e_Koulamoutou" look="tl_ChefLieuProvince" importance="403">
+      <pointElement id="e_Koulamoutou" importance="403">
         <name>
           <name language="fr" text="Koulamoutou"/>
           <name language="en" text="Koulamoutou"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Iboundji" look="tl_ChefLieuDepartement" importance="208">
+      <pointElement id="e_Iboundji" importance="208">
         <name>
           <name language="fr" text="Iboundji"/>
           <name language="en" text="Iboundji"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Lastourville" look="tl_ChefLieuDepartement" importance="237">
+      <pointElement id="e_Lastourville" importance="237">
         <name>
           <name language="fr" text="Lastourville"/>
           <name language="en" text="Lastourville"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Pana" look="tl_ChefLieuDepartement" importance="215">
+      <pointElement id="e_Pana" importance="215">
         <name>
           <name language="fr" text="Pana"/>
           <name language="en" text="Pana"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Ogooué-Maritime-->
-      <pointElement id="e_PortGentil" look="tl_ChefLieuProvince" importance="407">
+      <pointElement id="e_PortGentil" importance="407">
         <name>
           <name language="fr" text="Port-Gentil"/>
           <name language="en" text="Port-Gentil"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Omboue" look="tl_ChefLieuDepartement" importance="219">
+      <pointElement id="e_Omboue" importance="219">
         <name>
           <name language="fr" text="Omboué"/>
           <name language="en" text="Omboué"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Gamba" look="tl_ChefLieuDepartement" importance="228">
+      <pointElement id="e_Gamba" importance="228">
         <name>
           <name language="fr" text="Gamba"/>
           <name language="en" text="Gamba"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
       <!--Villes Woleu-Ntem-->
-      <pointElement id="e_Oyem" look="tl_ChefLieuProvince" importance="406">
+      <pointElement id="e_Oyem" importance="406">
         <name>
           <name language="fr" text="Oyem"/>
           <name language="en" text="Oyem"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuProvince"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Minvoul" look="tl_ChefLieuDepartement" importance="227">
+      <pointElement id="e_Minvoul" importance="227">
         <name>
           <name language="fr" text="Minvoul"/>
           <name language="en" text="Minvoul"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Bitam" look="tl_ChefLieuDepartement" importance="242">
+      <pointElement id="e_Bitam" importance="242">
         <name>
           <name language="fr" text="Bitam"/>
           <name language="en" text="Bitam"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Mitzic" look="tl_ChefLieuDepartement" importance="235">
+      <pointElement id="e_Mitzic" importance="235">
         <name>
           <name language="fr" text="Mitzic"/>
           <name language="en" text="Mitzic"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
-      <pointElement id="e_Medouneu" look="tl_ChefLieuDepartement" importance="210">
+      <pointElement id="e_Medouneu" importance="210">
         <name>
           <name language="fr" text="Médouneu"/>
           <name language="en" text="Médouneu"/>
         </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+        </looks>
       </pointElement>
     </pointElementList>
   </elementList>

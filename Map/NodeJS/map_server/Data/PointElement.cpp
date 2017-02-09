@@ -16,8 +16,13 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            int lookId = dbElement.getIntField("look_id");
-            _look = dynamic_cast<const PointLook *>(_iMap->getLook(lookId));
+            std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            int i, n = dbLookIds.size();
+            for (i = 0; i < n; ++i)
+            {
+                int lookId = dbLookIds[i].Int();
+                _lookVector.push_back(dynamic_cast<const PointLook *>(_iMap->getLook(lookId)));
+            }
 
             int id = dbElement.getIntField("item_id");
 
@@ -27,8 +32,8 @@ namespace map_server
             Point *point = new Point(x, -y);
 
             _item = new PointItem(id, point);
-            _item->setCurrentLook(_look->getPointLook());
-			_item->setCurrentTextLook(_look->getTextLook());
+            _item->setCurrentLook(_lookVector[0]->getPointLook());
+			_item->setCurrentTextLook(_lookVector[0]->getTextLook());
             _item->setNameMap(&_nameMap);
             _item->setElementIdForText(_id);
             _item->setImportance(_importance);

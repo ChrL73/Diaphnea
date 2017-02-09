@@ -2,6 +2,8 @@
 
 #include "MapElement.h"
 
+#include <vector>
+
 namespace map_server
 {
     class PointLook;
@@ -10,7 +12,7 @@ namespace map_server
     class PointElement : public MapElement
     {
     private:
-        const PointLook *_look;
+        std::vector<const PointLook *> _lookVector;
         PointItem *_item;
 
         void load(void);
@@ -18,9 +20,9 @@ namespace map_server
 
     public:
         PointElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            MapElement(mongoId, id, iMap), _look(0) {}
+            MapElement(mongoId, id, iMap) {}
 
-        const PointLook *getLook(void) const { return _look; }
+        const PointLook *getLook(int i) const { return _lookVector[i]; }
 		PointItem *getItem(void) const { return _item; }
     };
 }

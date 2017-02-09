@@ -9,7 +9,7 @@ namespace map_server
     class LineElement : public MapElement
     {
     private:
-        const LineLook *_look;
+        std::vector<const LineLook *> _lookVector;
         std::vector<LineItem *> _itemVector;
 
         void load(void);
@@ -17,7 +17,7 @@ namespace map_server
 
     public:
         LineElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            MapElement(mongoId, id, iMap), _look(0) {}
+            MapElement(mongoId, id, iMap) {}
 
         const std::vector<LineItem *>& getItemVector(void) const { return _itemVector; }
     };

@@ -13,7 +13,7 @@ namespace map_server
     class PolygonElement : public MapElement
     {
     private:
-        const PolygonLook *_look;
+        std::vector<const PolygonLook *> _lookVector;
         FilledPolygonItem *_filledPolygonItem;
         std::vector<LineItem *> _lineItemVector;
         std::vector<std::string> _coveredElementVector;
@@ -23,9 +23,9 @@ namespace map_server
 
     public:
         PolygonElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            MapElement(mongoId, id, iMap), _look(0) {}
+            MapElement(mongoId, id, iMap) {}
 
-        const PolygonLook *getLook(void) const { return _look; }
+        const PolygonLook *getLook(int i) const { return _lookVector[i]; }
         FilledPolygonItem *getFilledPolygonItem(void) const { return _filledPolygonItem; }
         const std::vector<LineItem *>& getLineItemVector(void) const { return _lineItemVector; }
         const std::vector<std::string>& getCoveredElementVector(void) const { return _coveredElementVector; }

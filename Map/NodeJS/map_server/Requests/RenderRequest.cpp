@@ -102,7 +102,7 @@ namespace map_server
                             lineItemIt = lineItemMap.insert(std::pair<LineItem *, std::map<int, PolygonElement *> >(lineItem, std::map<int, PolygonElement *>())).first;
                         }
 
-                        int zIndex = polygonElement->getLook()->getContourLook()->getZIndex();
+                        int zIndex = polygonElement->getLook(0)->getContourLook()->getZIndex();
                         (*lineItemIt).second.insert(std::pair<int, PolygonElement *>(zIndex, polygonElement));
                     }
 
@@ -116,7 +116,7 @@ namespace map_server
             {
                 PolygonElement *element = (*(*lineItemIt).second.begin()).second;
                 LineItem *item = (*lineItemIt).first;
-                item->setCurrentLook(element->getLook()->getContourLook());
+                item->setCurrentLook(element->getLook(0)->getContourLook());
                 itemVector.push_back(item);
             }
 

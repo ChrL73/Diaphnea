@@ -15,19 +15,24 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            int lookId = dbElement.getIntField("look_id");
-            _look = dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId));
+            std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            int i, n = dbLookIds.size();
+            for (i = 0; i < n; ++i)
+            {
+                int lookId = dbLookIds[i].Int();
+                _lookVector.push_back(dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId)));
+            }
 
             std::string contourId = dbElement.getField("contour").OID().toString();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
-            _filledPolygonItem->setCurrentLook(_look->getFillLook());
-			_filledPolygonItem->setCurrentTextLook(_look->getTextLook());
+            _filledPolygonItem->setCurrentLook(_lookVector[0]->getFillLook());
+			_filledPolygonItem->setCurrentTextLook(_lookVector[0]->getTextLook());
 			_filledPolygonItem->setNameMap(&_nameMap);
             _filledPolygonItem->setElementIdForText(_id);
             _filledPolygonItem->setImportance(_importance);
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
-            int i, n = dbLineItems.size();
+            n = dbLineItems.size();
             for (i = 0; i < n; ++i)
             {
                 std::string itemId = dbLineItems[i].OID().toString();

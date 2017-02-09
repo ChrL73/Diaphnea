@@ -15,17 +15,22 @@ namespace map_server
 
             loadCommon(dbElement);
 
-            int lookId = dbElement.getIntField("look_id");
-            _look = dynamic_cast<const LineLook *>(_iMap->getLook(lookId));
+            std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            int i, n = dbLookIds.size();
+            for (i = 0; i < n; ++i)
+            {
+                int lookId = dbLookIds[i].Int();
+                _lookVector.push_back(dynamic_cast<const LineLook *>(_iMap->getLook(lookId)));
+            }
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
-            int i, n = dbLineItems.size();
+            n = dbLineItems.size();
             for (i = 0; i < n; ++i)
             {
                 std::string itemId = dbLineItems[i].OID().toString();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
-				lineItem->setCurrentLook(_look->getLineLook());
-				lineItem->setCurrentTextLook(_look->getTextLook());
+				lineItem->setCurrentLook(_lookVector[0]->getLineLook());
+				lineItem->setCurrentTextLook(_lookVector[0]->getTextLook());
 				lineItem->setNameMap(&_nameMap);
                 //lineItem->setElementIdForText(_numericalId);
                 lineItem->setElementIdForText(_id);

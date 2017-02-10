@@ -82,13 +82,16 @@ namespace map_server
         else if (requestType == map_server::RENDER)
         {
             int i, n = tokenVector.size();
-            if (n < 11) return 0;
+            if (n < 12) return 0;
 
             double widthInPixels, heightInPixels;
+            int lookIndex;
             try
             {
                 widthInPixels = std::stod(tokenVector[5]);
                 heightInPixels = std::stod(tokenVector[6]);
+                lookIndex = std::stoi(tokenVector[7]);
+                if (lookIndex < 0) return 0;
             }
             catch (...)
             {
@@ -96,21 +99,21 @@ namespace map_server
             }
 
             std::vector<const char *> elementIds;
-            for (i = 10; i < n; ++i) elementIds.push_back(tokenVector[i]);
+            for (i = 11; i < n; ++i) elementIds.push_back(tokenVector[i]);
 
             double scale, xFocus, yFocus;
             try
             {
-                scale = std::stod(tokenVector[7]);
-                xFocus = std::stod(tokenVector[8]);
-                yFocus = std::stod(tokenVector[9]);
+                scale = std::stod(tokenVector[8]);
+                xFocus = std::stod(tokenVector[9]);
+                yFocus = std::stod(tokenVector[10]);
             }
             catch (...)
             {
-                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, elementIds, sendResponse);
+                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, sendResponse);
             }
 
-            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, elementIds, scale, xFocus, yFocus, sendResponse);
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, scale, xFocus, yFocus, sendResponse);
         }
 
         return 0;

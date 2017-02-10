@@ -5,13 +5,29 @@
 namespace map_server
 {
     MapItem::MapItem(int id, int resolutionCount) :
-        _id(id), _currentLook(0), _currentTextLook(0), _nameMapPtr(0), _importance(0.0),
+        _id(id), _nameMapPtr(0), _importance(0.0),
         _xMin(std::numeric_limits<double>::max()),
         _xMax(std::numeric_limits<double>::lowest()),
         _yMin(std::numeric_limits<double>::max()),
         _yMax(std::numeric_limits<double>::lowest())
     {
         _infoJsonVector.resize(resolutionCount);
+    }
+
+    const ItemLook *MapItem::getCurrentLook(int i) const
+    {
+        int n = _currentLooks.size() - 1;
+        if (n < 0) return 0;
+        if (i <= n) return _currentLooks[i];
+        return _currentLooks[n];
+    }
+
+    const ItemLook *MapItem::getCurrentTextLook(int i) const
+    {
+        int n = _currentTextLooks.size() - 1;
+        if (n < 0) return 0;
+        if (i <= n) return _currentTextLooks[i];
+        return _currentTextLooks[n];
     }
 
     const std::string& MapItem::getInfoJson(unsigned int resolutionIndex) const

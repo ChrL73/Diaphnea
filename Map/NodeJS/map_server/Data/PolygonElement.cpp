@@ -16,17 +16,23 @@ namespace map_server
             loadCommon(dbElement);
 
             std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            std::vector<const ItemLook *> fillLookVector;
+            std::vector<const ItemLook *> textLookVector;
+
             int i, n = dbLookIds.size();
             for (i = 0; i < n; ++i)
             {
                 int lookId = dbLookIds[i].Int();
-                _lookVector.push_back(dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId)));
+                const PolygonLook *polygonLook = dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId));
+                _lookVector.push_back(polygonLook);
+                fillLookVector.push_back(polygonLook->getFillLook());
+                textLookVector.push_back(polygonLook->getTextLook());
             }
 
             std::string contourId = dbElement.getField("contour").OID().toString();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
-            _filledPolygonItem->setCurrentLook(_lookVector[0]->getFillLook());
-			_filledPolygonItem->setCurrentTextLook(_lookVector[0]->getTextLook());
+            _filledPolygonItem->setCurrentLooks(fillLookVector);
+			_filledPolygonItem->setCurrentTextLooks(textLookVector);
 			_filledPolygonItem->setNameMap(&_nameMap);
             _filledPolygonItem->setElementIdForText(_id);
             _filledPolygonItem->setImportance(_importance);
@@ -48,5 +54,12 @@ namespace map_server
                 _coveredElementVector.push_back(coveredElement);
             }
         }
+    }
+
+    const PolygonLook *PolygonElement::getLook(int i) const
+    {
+        int n = _lookVector.size() - 1;
+        if (i <= n) return _lookVector[i];
+        return _lookVector[n];
     }
 }

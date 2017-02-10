@@ -13,8 +13,8 @@
     {
     private:
         const int _id;
-        const ItemLook *_currentLook;
-		const ItemLook *_currentTextLook;
+        std::vector<const ItemLook *> _currentLooks;
+		std::vector<const ItemLook *> _currentTextLooks;
         std::map<std::string, std::vector<ElementName *> > *_nameMapPtr;
         std::string _elementIdForText;
         double _importance;
@@ -29,8 +29,8 @@
     public:
 		virtual ~MapItem() {}
 
-        void setCurrentLook(const ItemLook *look) { _currentLook = look; }
-		void setCurrentTextLook(const ItemLook *look) { _currentTextLook = look; }
+        void setCurrentLooks(const std::vector<const ItemLook *>& looks) { _currentLooks = looks; }
+		void setCurrentTextLooks(const std::vector<const ItemLook *>& looks) { _currentTextLooks = looks; }
 
 		void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
 		void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
@@ -41,8 +41,8 @@
 		double getImportance(void) const { return _importance; }
 
         int getId(void) const { return _id; }
-        const ItemLook *getCurrentLook(void) const { return _currentLook; }
-		const ItemLook *getCurrentTextLook(void) const { return _currentTextLook; }
+        const ItemLook *getCurrentLook(int i) const;
+		const ItemLook *getCurrentTextLook(int i) const;
         const std::string& getInfoJson(unsigned int resolutionIndex) const;
         virtual bool hasResolution(void) const = 0;
 

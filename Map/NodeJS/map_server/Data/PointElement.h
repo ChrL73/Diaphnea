@@ -22,7 +22,7 @@ namespace map_server
         PointElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
             MapElement(mongoId, id, iMap) {}
 
-        const PointLook *getLook(int i) const { return _lookVector[i]; }
+        const PointLook *getLook(int i) const;
 		PointItem *getItem(void) const { return _item; }
     };
 }

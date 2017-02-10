@@ -25,7 +25,7 @@ namespace map_server
         PolygonElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
             MapElement(mongoId, id, iMap) {}
 
-        const PolygonLook *getLook(int i) const { return _lookVector[i]; }
+        const PolygonLook *getLook(int i) const;
         FilledPolygonItem *getFilledPolygonItem(void) const { return _filledPolygonItem; }
         const std::vector<LineItem *>& getLineItemVector(void) const { return _lineItemVector; }
         const std::vector<std::string>& getCoveredElementVector(void) const { return _coveredElementVector; }

@@ -116,7 +116,9 @@ namespace map_server
             {
                 PolygonElement *element = (*(*lineItemIt).second.begin()).second;
                 LineItem *item = (*lineItemIt).first;
-                item->setCurrentLook(element->getLook(0)->getContourLook());
+                std::vector<const ItemLook *> contourLook;
+                contourLook.push_back(element->getLook(_lookIndex)->getContourLook());
+                item->setCurrentLooks(contourLook);
                 itemVector.push_back(item);
             }
 
@@ -208,19 +210,19 @@ namespace map_server
                 {
                     MapItem *item = itemVector2[i];
                     if (i != 0) response << ",";
-                    response << "[" << item->getId() << "," << item->getCurrentLook()->getId();
+                    response << "[" << item->getId() << "," << item->getCurrentLook(_lookIndex)->getId();
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
 
                     if (_svgCreator != 0)
                     {
-                        SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(), resolutionIndex);
-                        _svgCreator->addInfo(item->getCurrentLook()->getZIndex(), svgItemInfo);
+                        SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(_lookIndex), resolutionIndex);
+                        _svgCreator->addInfo(item->getCurrentLook(_lookIndex)->getZIndex(), svgItemInfo);
                     }
 
                     if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
                     {
-                        ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook()->getSize(), item->getCurrentTextLook(), resolutionIndex);
+                        ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
                         _itemCopyBuilderVector.push_back(itemCopyBuilder);
 
                         LineItem *lineItem = dynamic_cast<LineItem *>(item);

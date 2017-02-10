@@ -16,11 +16,17 @@ namespace map_server
             loadCommon(dbElement);
 
             std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            std::vector<const ItemLook *> lineLookVector;
+            std::vector<const ItemLook *> textLookVector;
+
             int i, n = dbLookIds.size();
             for (i = 0; i < n; ++i)
             {
                 int lookId = dbLookIds[i].Int();
-                _lookVector.push_back(dynamic_cast<const LineLook *>(_iMap->getLook(lookId)));
+                const LineLook *lineLook = dynamic_cast<const LineLook *>(_iMap->getLook(lookId));
+                _lookVector.push_back(lineLook);
+                lineLookVector.push_back(lineLook->getLineLook());
+                textLookVector.push_back(lineLook->getTextLook());
             }
 
             std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
@@ -29,8 +35,8 @@ namespace map_server
             {
                 std::string itemId = dbLineItems[i].OID().toString();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
-				lineItem->setCurrentLook(_lookVector[0]->getLineLook());
-				lineItem->setCurrentTextLook(_lookVector[0]->getTextLook());
+				lineItem->setCurrentLooks(lineLookVector);
+				lineItem->setCurrentTextLooks(textLookVector);
 				lineItem->setNameMap(&_nameMap);
                 //lineItem->setElementIdForText(_numericalId);
                 lineItem->setElementIdForText(_id);

@@ -199,7 +199,7 @@ var mapServerInterface =
                   
                   var id = ++requestCounter;
                   // Todo: Add API method to choose language
-                  var request = { id: id, mapId: mapId, language: 'fr', elementIds: elementIds, width: canvas.width, height: canvas.height };
+                  var request = { id: id, mapId: mapId, language: 'fr', elementIds: elementIds, width: canvas.width, height: canvas.height, lookIndex: 0 };
                   var context = { scale: scale };
                   if (scale && xFocus && yFocus)
                   {

@@ -84,14 +84,20 @@
   </xsd:complexType>
   <xsd:complexType name="XmlLookList">
     <xsd:sequence>
-      <xsd:element name="polygonLookList" type="XmlPolygonLookList" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="polygonLookList1" type="XmlPolygonLookList1" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="polygonLookList2" type="XmlPolygonLookList2" minOccurs="1" maxOccurs="1" />
       <xsd:element name="lineLookList" type="XmlLineLookList" minOccurs="1" maxOccurs="1" />
       <xsd:element name="pointLookList" type="XmlPointLookList" minOccurs="1" maxOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
-  <xsd:complexType name="XmlPolygonLookList">
+  <xsd:complexType name="XmlPolygonLookList1">
     <xsd:sequence>
-      <xsd:element name="polygonLook" type="XmlPolygonLook" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="polygonLook" type="XmlPolygonLook1" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonLookList2">
+    <xsd:sequence>
+      <xsd:element name="polygonLook" type="XmlPolygonLook2" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlLineLookList">
@@ -104,7 +110,7 @@
       <xsd:element name="pointLook" type="XmlPointLook" minOccurs="1" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
-  <xsd:complexType name="XmlPolygonLook">
+  <xsd:complexType name="XmlPolygonLook1">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
     <xsd:attribute name="contourZIndex" type="XmlZIndex" use="required"/>
@@ -114,6 +120,26 @@
     <xsd:attribute name="contourBlue" type="xsd:unsignedByte" use="required"/>
     <xsd:attribute name="contourSize" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="fillLightRatio" type="XmlRatio" use="required" />
+    <xsd:attribute name="fillZIndex" type="XmlZIndex" use="required" />
+    <xsd:attribute name="textAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="textSize" type="XmlPositiveDouble" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="XmlPolygonLook2">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
+    <xsd:attribute name="contourZIndex" type="XmlZIndex" use="required"/>
+    <xsd:attribute name="contourAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourBlue" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="contourSize" type="XmlPositiveDouble" use="required" />
+    <xsd:attribute name="fillAlpha" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="fillRed" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="fillGreen" type="xsd:unsignedByte" use="required"/>
+    <xsd:attribute name="fillBlue" type="xsd:unsignedByte" use="required"/>
     <xsd:attribute name="fillZIndex" type="XmlZIndex" use="required" />
     <xsd:attribute name="textAlpha" type="xsd:unsignedByte" use="required"/>
     <xsd:attribute name="textRed" type="xsd:unsignedByte" use="required"/>

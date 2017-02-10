@@ -19,10 +19,17 @@ namespace MapDataProcessing
         {
             _dataFileName = dataFileName;
             _xmlMapData = xmlMapData;
-            foreach (XmlPolygonLook polygonLook in _xmlMapData.lookList.polygonLookList)
+            foreach (XmlPolygonLook1 polygonLook1 in _xmlMapData.lookList.polygonLookList1)
             {
-                Look look = new PolygonLook(polygonLook);
-                _lookDictionary.Add(polygonLook.id.ToString(), look);
+                Look look = new PolygonLook(polygonLook1);
+                _lookDictionary.Add(polygonLook1.id.ToString(), look);
+                _lookList.Add(look);
+            }
+
+            foreach (XmlPolygonLook2 polygonLook2 in _xmlMapData.lookList.polygonLookList2)
+            {
+                Look look = new PolygonLook(polygonLook2);
+                _lookDictionary.Add(polygonLook2.id.ToString(), look);
                 _lookList.Add(look);
             }
 

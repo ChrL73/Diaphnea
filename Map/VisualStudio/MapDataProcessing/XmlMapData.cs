@@ -1111,7 +1111,236 @@ public partial class XmlLineLook {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlPolygonLook {
+public partial class XmlPolygonLook2 {
+    
+    private string idField;
+    
+    private int contourZIndexField;
+    
+    private byte contourAlphaField;
+    
+    private byte contourRedField;
+    
+    private byte contourGreenField;
+    
+    private byte contourBlueField;
+    
+    private double contourSizeField;
+    
+    private byte fillAlphaField;
+    
+    private byte fillRedField;
+    
+    private byte fillGreenField;
+    
+    private byte fillBlueField;
+    
+    private int fillZIndexField;
+    
+    private byte textAlphaField;
+    
+    private byte textRedField;
+    
+    private byte textGreenField;
+    
+    private byte textBlueField;
+    
+    private double textSizeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+    public string id {
+        get {
+            return this.idField;
+        }
+        set {
+            this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public int contourZIndex {
+        get {
+            return this.contourZIndexField;
+        }
+        set {
+            this.contourZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourAlpha {
+        get {
+            return this.contourAlphaField;
+        }
+        set {
+            this.contourAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourRed {
+        get {
+            return this.contourRedField;
+        }
+        set {
+            this.contourRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourGreen {
+        get {
+            return this.contourGreenField;
+        }
+        set {
+            this.contourGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte contourBlue {
+        get {
+            return this.contourBlueField;
+        }
+        set {
+            this.contourBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double contourSize {
+        get {
+            return this.contourSizeField;
+        }
+        set {
+            this.contourSizeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte fillAlpha {
+        get {
+            return this.fillAlphaField;
+        }
+        set {
+            this.fillAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte fillRed {
+        get {
+            return this.fillRedField;
+        }
+        set {
+            this.fillRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte fillGreen {
+        get {
+            return this.fillGreenField;
+        }
+        set {
+            this.fillGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte fillBlue {
+        get {
+            return this.fillBlueField;
+        }
+        set {
+            this.fillBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public int fillZIndex {
+        get {
+            return this.fillZIndexField;
+        }
+        set {
+            this.fillZIndexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textAlpha {
+        get {
+            return this.textAlphaField;
+        }
+        set {
+            this.textAlphaField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textRed {
+        get {
+            return this.textRedField;
+        }
+        set {
+            this.textRedField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textGreen {
+        get {
+            return this.textGreenField;
+        }
+        set {
+            this.textGreenField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public byte textBlue {
+        get {
+            return this.textBlueField;
+        }
+        set {
+            this.textBlueField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double textSize {
+        get {
+            return this.textSizeField;
+        }
+        set {
+            this.textSizeField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlPolygonLook1 {
     
     private string idField;
     
@@ -1303,7 +1532,9 @@ public partial class XmlPolygonLook {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlLookList {
     
-    private XmlPolygonLook[] polygonLookListField;
+    private XmlPolygonLook1[] polygonLookList1Field;
+    
+    private XmlPolygonLook2[] polygonLookList2Field;
     
     private XmlLineLook[] lineLookListField;
     
@@ -1311,12 +1542,23 @@ public partial class XmlLookList {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("polygonLook", IsNullable=false)]
-    public XmlPolygonLook[] polygonLookList {
+    public XmlPolygonLook1[] polygonLookList1 {
         get {
-            return this.polygonLookListField;
+            return this.polygonLookList1Field;
         }
         set {
-            this.polygonLookListField = value;
+            this.polygonLookList1Field = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("polygonLook", IsNullable=false)]
+    public XmlPolygonLook2[] polygonLookList2 {
+        get {
+            return this.polygonLookList2Field;
+        }
+        set {
+            this.polygonLookList2Field = value;
         }
     }
     

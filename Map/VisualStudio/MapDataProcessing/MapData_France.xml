@@ -23,7 +23,7 @@
   </resolutionList>
 
   <lookList>
-    <polygonLookList>
+    <polygonLookList1>
       <polygonLook id="pl_France" contourZIndex="5"
                    contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.7"
                    fillLightRatio="0.07" fillZIndex="16"
@@ -36,7 +36,8 @@
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
                    fillLightRatio="0.15" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
-    </polygonLookList>
+    </polygonLookList1>
+    <polygonLookList2/>
     <lineLookList>
       <lineLook id="ll_FleuveRiviere" lineZIndex="4"
                 lineAlpha="255" lineRed="0" lineGreen="0" lineBlue="255" lineSize="1.4"

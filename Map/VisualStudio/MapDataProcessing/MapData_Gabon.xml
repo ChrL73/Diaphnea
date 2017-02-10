@@ -23,20 +23,46 @@
   </resolutionList>
 
   <lookList>
-    <polygonLookList>
+    <polygonLookList1>
       <polygonLook id="pl_Gabon" contourZIndex="5"
                    contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.7"
                    fillLightRatio="0.07" fillZIndex="16"
-                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="19"/>
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20"/>
+      <polygonLook id="pl_Gabon2" contourZIndex="5"
+                   contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="2.7"
+                   fillLightRatio="0.15" fillZIndex="16"
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="20"/>
       <polygonLook id="pl_Province" contourZIndex="6"
                    contourAlpha="255" contourRed="0" contourGreen="128" contourBlue="32" contourSize="2.4"
                    fillLightRatio="0.1" fillZIndex="15"
                    textAlpha="255" textRed="0" textGreen="128" textBlue="32" textSize="20"/>
+      <polygonLook id="pl_Province2" contourZIndex="6"
+                   contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.4"
+                   fillLightRatio="0.07" fillZIndex="15"
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20"/>
       <polygonLook id="pl_Departement" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
                    fillLightRatio="0.15" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
-    </polygonLookList>
+    </polygonLookList1>
+    <polygonLookList2>
+      <polygonLook id="pl_Departement1" contourZIndex="7"
+                   contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
+                   fillAlpha="255" fillRed="239" fillGreen="167" fillBlue="167" fillZIndex="14"
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
+      <polygonLook id="pl_Departement2" contourZIndex="7"
+                   contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
+                   fillAlpha="255" fillRed="203" fillGreen="239" fillBlue="167" fillZIndex="14"
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
+      <polygonLook id="pl_Departement3" contourZIndex="7"
+                   contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
+                   fillAlpha="255" fillRed="167" fillGreen="239" fillBlue="239" fillZIndex="14"
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
+      <polygonLook id="pl_Departement4" contourZIndex="7"
+                   contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
+                   fillAlpha="255" fillRed="205" fillGreen="169" fillBlue="242" fillZIndex="14"
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
+    </polygonLookList2>
     <lineLookList>
       <lineLook id="ll_FleuveRiviere" lineZIndex="4"
                 lineAlpha="255" lineRed="0" lineGreen="0" lineBlue="255" lineSize="1.4"
@@ -49,6 +75,9 @@
       <pointLook id="tl_ChefLieuDepartement" pointZIndex="2"
                  pointAlpha="255" pointRed="128" pointGreen="200" pointBlue="0" pointSize="8"
                  textAlpha="255" textRed="48" textGreen="128" textBlue="0" textSize="17"/>
+      <pointLook id="tl_ChefLieuDepartement2" pointZIndex="2"
+                 pointAlpha="255" pointRed="128" pointGreen="200" pointBlue="0" pointSize="8"
+                 textAlpha="255" textRed="0" textGreen="89" textBlue="22" textSize="17"/>
       <pointLook id="tl_Ville" pointZIndex="3"
                  pointAlpha="255" pointRed="192" pointGreen="128" pointBlue="255" pointSize="7.2"
                  textAlpha="255" textRed="64" textGreen="0" textBlue="128" textSize="16"/>
@@ -64,6 +93,7 @@
         </name>
         <looks>
           <look id="pl_Gabon"/>
+          <look id="pl_Gabon2"/>
         </looks>
         <coveredElementList/>
       </polygonElement>
@@ -79,6 +109,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -95,6 +126,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -111,6 +143,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -127,6 +160,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -143,6 +177,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -159,6 +194,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -175,6 +211,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -191,6 +228,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -207,6 +245,7 @@
         </shortName>
         <looks>
           <look id="pl_Province"/>
+          <look id="pl_Province2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -220,6 +259,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -233,6 +273,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -246,6 +287,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -259,6 +301,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -272,6 +315,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -285,6 +329,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -299,6 +344,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -312,6 +358,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -325,6 +372,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -338,6 +386,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -351,6 +400,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -364,6 +414,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -377,6 +428,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -390,6 +442,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -403,6 +456,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -416,6 +470,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -429,6 +484,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_HautOgooue"/>
@@ -443,6 +499,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
@@ -456,6 +513,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_MoyenOgooue"/>
@@ -470,6 +528,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -483,6 +542,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -496,6 +556,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -509,6 +570,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -522,6 +584,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -535,6 +598,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -548,6 +612,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -561,6 +626,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -574,6 +640,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Ngounie"/>
@@ -588,6 +655,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -601,6 +669,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -614,6 +683,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -627,6 +697,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -640,6 +711,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -653,6 +725,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_Nyanga"/>
@@ -667,6 +740,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
@@ -680,6 +754,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
@@ -693,6 +768,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
@@ -706,6 +782,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueIvindo"/>
@@ -720,6 +797,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
@@ -733,6 +811,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
@@ -746,6 +825,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
@@ -759,6 +839,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueLolo"/>
@@ -773,6 +854,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
@@ -786,6 +868,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
@@ -799,6 +882,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_OgooueMaritime"/>
@@ -813,6 +897,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
@@ -826,6 +911,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement2"/>
         </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
@@ -839,6 +925,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement3"/>
         </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
@@ -852,6 +939,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
@@ -865,6 +953,7 @@
         </name>
         <looks>
           <look id="pl_Departement"/>
+          <look id="pl_Departement4"/>
         </looks>
         <coveredElementList>
           <element id="e_WoleuNtem"/>
@@ -1092,6 +1181,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ntoum" importance="247">
@@ -1101,6 +1191,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ndzomoe" importance="201">
@@ -1110,6 +1201,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Cocobeach" importance="213">
@@ -1119,6 +1211,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Kango" importance="236">
@@ -1128,6 +1221,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Haut-Ogooué-->
@@ -1147,6 +1241,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Bakoumba" importance="217">
@@ -1156,6 +1251,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Boumango" importance="209">
@@ -1165,6 +1261,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Bongoville" importance="212">
@@ -1174,6 +1271,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Lekoni" importance="224">
@@ -1183,6 +1281,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Onga" importance="205">
@@ -1192,6 +1291,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Akieni" importance="226">
@@ -1201,6 +1301,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Okondja" importance="234">
@@ -1210,6 +1311,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ngouoni" importance="216">
@@ -1219,6 +1321,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Aboumi" importance="204">
@@ -1228,6 +1331,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Moyen-Ogooué-->
@@ -1247,6 +1351,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Ngounié-->
@@ -1266,6 +1371,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mandji" importance="220">
@@ -1275,6 +1381,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mimongo" importance="223">
@@ -1284,6 +1391,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Guietsou" importance="203">
@@ -1293,6 +1401,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ndende" importance="221">
@@ -1302,6 +1411,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Lebamba" importance="225">
@@ -1311,6 +1421,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mbigou" importance="230">
@@ -1320,6 +1431,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Malinga" importance="207">
@@ -1329,6 +1441,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Nyanga-->
@@ -1348,6 +1461,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mayumba" importance="222">
@@ -1357,6 +1471,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ndindi" importance="202">
@@ -1366,6 +1481,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mabanda" importance="214">
@@ -1375,6 +1491,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_MoulenguiBinza" importance="206">
@@ -1384,6 +1501,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Ogooué-Ivindo-->
@@ -1403,6 +1521,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ovan" importance="211">
@@ -1412,6 +1531,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mekambo" importance="233">
@@ -1421,6 +1541,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Ogooué-Lolo-->
@@ -1440,6 +1561,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Lastourville" importance="237">
@@ -1449,6 +1571,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Pana" importance="215">
@@ -1458,6 +1581,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Ogooué-Maritime-->
@@ -1477,6 +1601,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Gamba" importance="228">
@@ -1486,6 +1611,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <!--Villes Woleu-Ntem-->
@@ -1505,6 +1631,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Bitam" importance="242">
@@ -1514,6 +1641,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Mitzic" importance="235">
@@ -1523,6 +1651,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Medouneu" importance="210">
@@ -1532,6 +1661,7 @@
         </name>
         <looks>
           <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
     </pointElementList>

@@ -311,11 +311,15 @@ namespace map_server
                     int contourGreen = dbLook.getIntField("contour_green");
                     int contourBlue = dbLook.getIntField("contour_blue");
                     double contourSize = dbLook.getField("contour_size").Double();
-                    double fillLightRatio = dbLook.getField("fill_light_ratio").Double();
                     int fillZIndex = dbLook.getIntField("fill_z_index");
+                    int fillAlpha = dbLook.getIntField("fill_alpha");
+                    int fillRed = dbLook.getIntField("fill_red");
+                    int fillGreen = dbLook.getIntField("fill_green");
+                    int fillBlue = dbLook.getIntField("fill_blue");
 
-                    PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize, contourZIndex, contourAlpha,
-                                                               contourRed, contourGreen, contourBlue, contourSize, fillLightRatio, fillZIndex, this);
+                    PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize,
+                                                        contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSize,
+                                                        fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
                     _lookMap.insert(std::pair<int, const Look *> (id, look));
                   }
             }

@@ -14,7 +14,8 @@ namespace map_server
 
     public:
         PolygonLook(int id, int textAlpha, int textRed, int textGreen, int textBlue, double textSize,
-                    int contourZIndex, int contourAlpha, int contourRed, int contourGreen, int contourBlue, double contourSize, double fillLightRatio, int fillZIndex, IMap *iMap);
+                    int contourZIndex, int contourAlpha, int contourRed, int contourGreen, int contourBlue, double contourSize,
+                    int fillZIndex, int fillAlpha, int fillRed, int fillGreen, int fillBlue, IMap *iMap);
         ~PolygonLook();
 
         const ItemLook *getContourLook(void) const { return _contourLook; }

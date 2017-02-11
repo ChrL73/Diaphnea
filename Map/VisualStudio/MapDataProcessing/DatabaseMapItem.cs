@@ -18,6 +18,8 @@ namespace MapDataProcessing
         internal DatabaseMapItem(bool useBezierSucessors)
         {
             _useBezierSucessors = useBezierSucessors;
+            Cap1Round = true;
+            Cap2Round = true;
         }
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
@@ -26,6 +28,8 @@ namespace MapDataProcessing
         }
 
         internal BsonValue Id { get; set; }
+        internal bool Cap1Round { private get; set; }
+        internal bool Cap2Round { private get; set; }
 
         internal List<GeoPoint> getPointList(XmlResolution resolution)
         {
@@ -62,6 +66,7 @@ namespace MapDataProcessing
 
                             if (_useBezierSucessors)
                             {
+                                // (This concerns polygon elements and not line elements) 
                                 // 'previous1Point' is the previous point in the contour. 'BezierPredecessor' is the previous point in the current polygon of the contour.
                                 // If 'previous1Point' is not the 'BezierPredecessor', this means theat the current segment links 2 distincts polygons of the contour.
                                 // In this case, we set 'previous2Point' and 'nextPoint' to 'null', so that the segment is a straight line (and not a Bezier curve) in the SVG path.
@@ -110,6 +115,8 @@ namespace MapDataProcessing
                 { "item_id", _itemId.Value },
                 { "map", mapData.XmlMapData.parameters.mapId },
                 { "item", itemName },
+                { "cap1_round", Cap1Round },
+                { "cap2_round", Cap2Round },
                 { "point_lists", lineArray }
             };
 

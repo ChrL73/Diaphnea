@@ -73,8 +73,17 @@ namespace MapDataProcessing
         private int smooth(MapData mapData)
         {
             if (_smoothed) return 0;
-            if (Attachment1 is LineLinePart) ((LineLinePart)Attachment1).smooth(mapData);
-            if (Attachment2 is LineLinePart) ((LineLinePart)Attachment2).smooth(mapData);
+            if (Attachment1 is LineLinePart)
+            {
+                _smoothedLineMapItem.Cap1Round = false;
+                ((LineLinePart)Attachment1).smooth(mapData);
+            }
+
+            if (Attachment2 is LineLinePart)
+            {
+                _smoothedLineMapItem.Cap2Round = false;
+                ((LineLinePart)Attachment2).smooth(mapData);
+            }
 
             foreach (XmlResolution resolution in mapData.XmlMapData.resolutionList)
             {

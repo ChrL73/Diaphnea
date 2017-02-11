@@ -134,10 +134,22 @@ namespace map_server
                     const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
                     if (lineItem != 0)
                     {
+                        std::string strokeLineCap = "butt";
+                        bool addCircle1 = false, addCircle2 = false;
+                        if (lineItem->cap1Round())
+                        {
+                            if (lineItem->cap2Round()) strokeLineCap = "round";
+                            else addCircle1 = true;
+                        }
+                        else
+                        {
+                            if (lineItem->cap2Round()) addCircle2 = true;
+                        }
+
                         content << "<path style=\"fill:none;stroke:" << look->getHexColor()
                                 << ";stroke-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
                                 << ";stroke-width:" << look->getSize() * _scale * _sizeFactor
-                                << ";stroke-linecap:round;stroke-linejoin:round\" d=\"";
+                                << ";stroke-linecap:" << strokeLineCap << ";stroke-linejoin:round\" d=\"";
 
                         bool lastIn = false;
                         std::stringstream lastMove;
@@ -168,6 +180,28 @@ namespace map_server
                         }
 
                         content << "\"></path>" << std::endl;
+
+                        if (addCircle1)
+                        {
+                            const Point *point = lineItem->getPointVector(resolutionIndex)[0];
+                            double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+
+                            content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                << "\" stroke=\"none\" fill=\"" << look->getHexColor()
+                                << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                        }
+
+                        if (addCircle2)
+                        {
+                            const Point *point = lineItem->getPointVector(resolutionIndex)[n - 1];
+                            double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+
+                            content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                << "\" stroke=\"none\" fill=\"" << look->getHexColor()
+                                << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                        }
                     }
                     else
                     {

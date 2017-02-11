@@ -47,7 +47,9 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-                LineItem *item = new LineItem(itemId, _sampleLengthVector.size());
+                bool cap1Round = dbItem.getBoolField("cap1_round");
+                bool cap2Round = dbItem.getBoolField("cap2_round");
+                LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), cap1Round, cap2Round);
                 addPointLists(item, dbItem);
 
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;

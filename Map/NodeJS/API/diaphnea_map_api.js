@@ -331,8 +331,9 @@ var mapServerInterface =
                   yMax: textInfo.y2,
                   zI: textInfo.z,
                   size: textInfo.s,
-                  //color: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
-                  color: '#' + (256 + textInfo.r).toString(16).substr(1) + ((1 << 24) + (textInfo.g << 16) | (textInfo.b << 8) | textInfo.a).toString(16).substr(1),
+                  canvasColor: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
+                  svgColor: '#' + (0x1000000 | textInfo.b | (textInfo.g << 8) | (textInfo.r << 16)).toString(16).substr(1),        
+                  svgOpacity: (textInfo.a / 255.0),
                   scale: context.scale
                }
                           
@@ -407,8 +408,9 @@ var mapServerInterface =
                {
                   zI: lookData.zI,
                   size: lookData.size,
-                  //color: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')'
-                  color: '#' + (256 + lookData.r).toString(16).substr(1) + ((1 << 24) + (lookData.g << 16) | (lookData.b << 8) | lookData.a).toString(16).substr(1)
+                  canvasColor: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')',
+                  svgColor: '#' + (0x1000000 | lookData.b | (lookData.g << 8) | (lookData.r << 16)).toString(16).substr(1),
+                  svgOpacity: (lookData.a / 255.0),
                };
                
                context.itemKeyArray.forEach(function(itemKey)
@@ -496,7 +498,7 @@ var mapServerInterface =
                            else ctx.lineTo(p.x, p.y);
                         });
 
-                        ctx.strokeStyle = look.color;
+                        ctx.strokeStyle = look.canvasColor;
                         ctx.lineWidth = look.size * sizeFactor;
                         ctx.stroke();
                         
@@ -515,7 +517,7 @@ var mapServerInterface =
                            else ctx.lineTo(p.x, p.y);
                         });
 
-                        ctx.fillStyle = look.color;
+                        ctx.fillStyle = look.canvasColor;
                         
                         // Canvas fill rule 'evenodd' is necessary to see the openings inside the polygon 
                         ctx.fill('evenodd');
@@ -530,7 +532,7 @@ var mapServerInterface =
                         ctx.beginPath();
                         ctx.arc(x, y, 0.5 * look.size * scale * sizeFactor, 0, 2 * Math.PI);
 
-                        ctx.fillStyle = look.color;
+                        ctx.fillStyle = look.canvasColor;
                         ctx.fill();
 
                         ctx.strokeStyle = 'black';
@@ -545,7 +547,7 @@ var mapServerInterface =
                               && (item.yMin - yFocus) * scale + 0.5 * canvas.height >= 0
                               && (item.yMax - yFocus) * scale - 0.5 * canvas.height <= 0)
                         {
-                           ctx.fillStyle = item.color;
+                           ctx.fillStyle = item.canvasColor;
                            ctx.font = item.size + 'px arial';
                            
                            item.textLines.forEach(function(line)
@@ -583,9 +585,7 @@ var mapServerInterface =
 
                      if (item.type == 'line')
                      {
-                        var color = look.color.substr(0, look.color.length - 2);                      
-                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
-                        html += '<path style="fill:none;stroke:' + color + ';stroke-opacity:' + opacity + ';stroke-width:'
+                        html += '<path style="fill:none;stroke:' + look.svgColor + ';stroke-opacity:' + look.svgOpacity + ';stroke-width:'
                            + look.size * scale * sizeFactor + ';stroke-linecap:round;stroke-linejoin:round" d="';
                         
                         item.points.forEach(function(p, i)
@@ -603,9 +603,7 @@ var mapServerInterface =
                      }
                      else if (item.type == 'polygon')
                      {
-                        var color = look.color.substr(0, look.color.length - 2);                       
-                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
-                        html += '<path style="fill:' + color + ';fill-opacity:' + opacity + ';fill-rule:evenodd;stroke:none" d="';
+                        html += '<path style="fill:' + look.svgColor + ';fill-opacity:' + look.svgOpacity + ';fill-rule:evenodd;stroke:none" d="';
                         
                         item.points.forEach(function(p, i)
                         {
@@ -624,24 +622,19 @@ var mapServerInterface =
                      {
                         var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
                         var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
-                        var color = look.color.substr(0, look.color.length - 2);                      
-                        var opacity = parseInt(look.color.substr(-2, 2), 16) / 255;
                         
                         html += '<circle cx="' + x + '" cy="' + y + '" r="' + 0.5 * look.size * scale * sizeFactor
-                           + '" stroke="black" stroke-width="' + scale * sizeFactor + '" fill="' + color + '" fill-opacity="' + opacity + '"></circle>\n';
+                           + '" stroke="black" stroke-width="' + scale * sizeFactor + '" fill="' + look.svgColor + '" fill-opacity="' + look.svgOpacity + '"></circle>\n';
                      }
                      else if (item.type = 'text')
                      {        
-                        var color = item.color.substr(0, item.color.length - 2);
-                        var opacity = parseInt(item.color.substr(-2, 2), 16) / 255;
-                        
                         item.textLines.forEach(function(line)
                         {
                            var x = (line[1] - xFocus) * scale + 0.5 * canvas.width;
                            var y = (line[2] - yFocus) * scale + 0.5 * canvas.height;
                            
                            html += '<text x="' + x + '" y="' + y + '" font-size="' + item.size + '" font-family="arial" fill="'
-                              + color + '" fill-opacity="' + opacity + '">' + line[0] + '</text>\n'
+                              + item.svgColor + '" fill-opacity="' + item.svgOpacity + '">' + line[0] + '</text>\n'
                         });
                      }
                   });

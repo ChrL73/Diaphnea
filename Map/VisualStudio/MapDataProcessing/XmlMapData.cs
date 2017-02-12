@@ -102,6 +102,8 @@ public partial class XmlParameters {
     
     private XmlProjectionEnum projectionField;
     
+    private string exclusionTagField;
+    
     private double zoomMinDistanceField;
     
     private double zoomMaxDistanceField;
@@ -230,6 +232,17 @@ public partial class XmlParameters {
         }
         set {
             this.projectionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string exclusionTag {
+        get {
+            return this.exclusionTagField;
+        }
+        set {
+            this.exclusionTagField = value;
         }
     }
     

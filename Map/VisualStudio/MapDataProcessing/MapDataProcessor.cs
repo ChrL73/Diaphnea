@@ -219,9 +219,9 @@ namespace MapDataProcessing
             return 0;
         }
 
-        private int addKmlFile(String path)
+        private int addKmlFile(string path)
         {
-            String name = Path.GetFileNameWithoutExtension(path);
+            string name = Path.GetFileNameWithoutExtension(path);
             if (_fileNameDictionary.ContainsKey(name))
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Several KMl files have the same name '{0}'", name));
@@ -229,29 +229,34 @@ namespace MapDataProcessing
             }
 
             _fileNameDictionary.Add(name, 0);
-            String[] idList = name.Split('_');
-            foreach (String id in idList)
+            string[] idList = name.Split('_');
+            string exclusionTag = _mapData.XmlMapData.parameters.exclusionTag;
+
+            if (exclusionTag == null || !idList.Contains(exclusionTag))
             {
-                MapElement element;
-                if (_elementDictionary.TryGetValue(id, out element))
+                foreach (String id in idList)
                 {
-                    if (element.addKmlFile(path) != 0) return -1;
-                }
-
-                List<LineMapElement> lineElementList;
-                if (_attachedLineElementDictionary.TryGetValue(id, out lineElementList))
-                {
-                    foreach (LineMapElement lineElement in lineElementList)
+                    MapElement element;
+                    if (_elementDictionary.TryGetValue(id, out element))
                     {
-                        if (lineElement.attachLineLineKmlFile(path) != 0) return -1;
+                        if (element.addKmlFile(path) != 0) return -1;
                     }
-                }
 
-                if (_attachedPolygonElementDictionary.TryGetValue(id, out lineElementList))
-                {
-                    foreach (LineMapElement lineElement in lineElementList)
+                    List<LineMapElement> lineElementList;
+                    if (_attachedLineElementDictionary.TryGetValue(id, out lineElementList))
                     {
-                        if (lineElement.attachPolygonLineKmlFile(path) != 0) return -1;
+                        foreach (LineMapElement lineElement in lineElementList)
+                        {
+                            if (lineElement.attachLineLineKmlFile(path) != 0) return -1;
+                        }
+                    }
+
+                    if (_attachedPolygonElementDictionary.TryGetValue(id, out lineElementList))
+                    {
+                        foreach (LineMapElement lineElement in lineElementList)
+                        {
+                            if (lineElement.attachPolygonLineKmlFile(path) != 0) return -1;
+                        }
                     }
                 }
             }

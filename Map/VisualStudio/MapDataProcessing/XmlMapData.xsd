@@ -23,12 +23,18 @@
     <xsd:attribute name="maxConnectionDistanceInKm" type="xsd:double" use="required"/>
     <xsd:attribute name="superposingThreshold" type="xsd:double" use="required"/>
     <xsd:attribute name="projection" type="XmlProjectionEnum" use="required"/>
+    <xsd:attribute name="exclusionTag" type="XmlExclusionTag" use="optional"/>
     <xsd:attribute name="zoomMinDistance" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="zoomMaxDistance" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="resolutionThreshold" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="sizeParameter1" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="sizeParameter2" type="XmlPositiveDouble" use="required" />
   </xsd:complexType>
+  <xsd:simpleType name="XmlExclusionTag">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="~(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:simpleType name="XmlProjectionEnum">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="ORTHOGRAPHIC" />

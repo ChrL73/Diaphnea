@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlMapData.xsd">
 
-  <parameters mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
-              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="2.0" superposingThreshold="0.4" projection="ORTHOGRAPHIC" exclusionTag="~Gabon"
+  <parameters mapId="_Gabon2" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
+              kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="2.0" superposingThreshold="0.4" projection="ORTHOGRAPHIC" exclusionTag="~Gabon2"
               zoomMinDistance="35" zoomMaxDistance="3000" resolutionThreshold="7.0" sizeParameter1="1.25" sizeParameter2="0.5" >
     <languageList>
       <language id="fr" name="Français"/>
@@ -302,6 +302,20 @@
         <looks>
           <look id="pl_Departement"/>
           <look id="pl_Departement3"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Estuaire"/>
+          <element id="e_Gabon"/>
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_OwendoDepartement" importance="346">
+        <name>
+          <name language="fr" text="Owendo"/>
+          <name language="en" text="Owendo"/>
+        </name>
+        <looks>
+          <look id="pl_Departement"/>
+          <look id="pl_Departement1"/>
         </looks>
         <coveredElementList>
           <element id="e_Estuaire"/>
@@ -1158,6 +1172,16 @@
         </name>
         <looks>
           <look id="tl_ChefLieuProvince"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Owendo" importance="246">
+        <name>
+          <name language="fr" text="Owendo"/>
+          <name language="en" text="Owendo"/>
+        </name>
+        <looks>
+          <look id="tl_ChefLieuDepartement"/>
+          <look id="tl_ChefLieuDepartement2"/>
         </looks>
       </pointElement>
       <pointElement id="e_Ntoum" importance="247">

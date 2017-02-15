@@ -100,6 +100,9 @@
     <None Include="XmlMapData.xsd" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MapData_DepGabon.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="MapData_France.xml">
       <SubType>Designer</SubType>
     </Content>

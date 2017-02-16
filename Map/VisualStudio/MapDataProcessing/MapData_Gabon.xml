@@ -421,8 +421,8 @@
       </polygonElement>
       <polygonElement id="e_OgooueLetili" importance="309">
         <name>
-          <name language="fr" text="Ogooué-Letili"/>
-          <name language="en" text="Ogooué-Letili"/>
+          <name language="fr" text="Ogooué-Létili"/>
+          <name language="en" text="Ogooué-Létili"/>
         </name>
         <looks>
           <look id="pl_Departement"/>

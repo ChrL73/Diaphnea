@@ -9,6 +9,7 @@
 #include "RenderRequest.h"
 
 #include <string>
+#include <iostream>
 
 namespace map_server
 {
@@ -16,7 +17,11 @@ namespace map_server
 
     Request *Request::createRequest(std::vector<const char *> tokenVector)
     {
-        if (tokenVector.size() < 3) return 0;
+        if (tokenVector.size() < 3)
+        {
+
+            return 0;
+        }
 
         MessageTypeEnum requestType;
         try

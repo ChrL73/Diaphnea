@@ -4,7 +4,6 @@
 int main(int argc, char *argv[])
 {
 	bool softExit = false;
-	bool mutexTest = false;
 
 	int i;
 	for (i = 1; i < argc; ++i)

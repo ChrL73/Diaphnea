@@ -164,12 +164,12 @@ namespace map_server
         {
             request->execute();
         }
-        else
+        /*else
         {
             _coutMutex.lock();
             std::cerr << "Incorrect request" << std::endl; // Todo: Handle this error in Node JS
             _coutMutex.unlock();
-        }
+        }*/
 
         delete[] req;
         delete request;

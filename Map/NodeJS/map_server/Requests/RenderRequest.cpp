@@ -44,7 +44,7 @@ namespace map_server
         MapData *mapData = MapData::instance();
 
         _map = mapData->getMap(_mapId);
-        if (_map != 0 && _sendResponse)
+        if (_map != 0)
         {
             bool createSvg = false;
 

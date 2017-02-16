@@ -13,7 +13,7 @@ namespace map_server
         void execute(void);
 
     public:
-        ElementInfoRequest(const char *socketId, const char *requestId, const char *mapId, const char *elementId, bool sendResponse) :
-            Request(socketId, requestId, sendResponse), _mapId(mapId), _elementId(elementId) {}
+        ElementInfoRequest(const char *socketId, const char *requestId, const char *mapId, const char *elementId) :
+            Request(socketId, requestId), _mapId(mapId), _elementId(elementId) {}
     };
 }

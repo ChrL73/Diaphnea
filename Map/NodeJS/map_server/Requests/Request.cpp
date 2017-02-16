@@ -14,7 +14,7 @@ namespace map_server
 {
     std::mutex *Request::_coutMutexPtr = 0;
 
-    Request *Request::createRequest(std::vector<const char *> tokenVector, bool sendResponse)
+    Request *Request::createRequest(std::vector<const char *> tokenVector)
     {
         if (tokenVector.size() < 3) return 0;
 
@@ -30,17 +30,17 @@ namespace map_server
 
         if (requestType == map_server::MAP_IDS)
         {
-            return new MapIdsRequest(tokenVector[0], tokenVector[1], sendResponse);
+            return new MapIdsRequest(tokenVector[0], tokenVector[1]);
         }
         else if (requestType == map_server::MAP_INFO)
         {
             if (tokenVector.size() < 4) return 0;
-            return new MapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], sendResponse);
+            return new MapInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3]);
         }
         else if (requestType == map_server::ELEMENT_INFO)
         {
             if (tokenVector.size() < 5) return 0;
-            return new ElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], sendResponse);
+            return new ElementInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4]);
         }
         else if (requestType == map_server::ELEMENTS_INFO)
         {
@@ -48,7 +48,7 @@ namespace map_server
             if (n < 5) return 0;
             std::vector<const char *> elementIds;
             for (i = 4; i < n; ++i) elementIds.push_back(tokenVector[i]);
-            return new ElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds, sendResponse);
+            return new ElementsInfoRequest(tokenVector[0], tokenVector[1], tokenVector[3], elementIds);
         }
         else if (requestType == map_server::ITEM_DATA)
         {
@@ -63,7 +63,7 @@ namespace map_server
             {
                 return 0;
             }
-            return new ItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex, sendResponse);
+            return new ItemDataRequest(tokenVector[0], tokenVector[1], tokenVector[3], itemId, resolutionIndex);
         }
         else if (requestType == map_server::LOOK)
         {
@@ -77,7 +77,7 @@ namespace map_server
             {
                 return 0;
             }
-            return new LookRequest(tokenVector[0], tokenVector[1], tokenVector[3], lookId, sendResponse);
+            return new LookRequest(tokenVector[0], tokenVector[1], tokenVector[3], lookId);
         }
         else if (requestType == map_server::RENDER)
         {
@@ -110,10 +110,10 @@ namespace map_server
             }
             catch (...)
             {
-                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, sendResponse);
+                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds);
             }
 
-            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, scale, xFocus, yFocus, sendResponse);
+            return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, scale, xFocus, yFocus);
         }
 
         return 0;

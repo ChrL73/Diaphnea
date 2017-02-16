@@ -29,17 +29,15 @@ namespace map_server
         void checkTimeout(bool immediateReturn);
 
         void inputLoop(void);
-        void testInputLoop(void);
         void processRequest(std::string requestString);
 
 		const bool _softExit;
 		bool _stopRequested;
-		const bool _mutexTest;
 
     public:
-        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit, bool mutexTest) :
+        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
             _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs), _checkTimeoutSleepMs(checkTimeoutSleepMs),
-            _softExit(softExit), _stopRequested(false), _mutexTest(mutexTest) {}
+            _softExit(softExit), _stopRequested(false) {}
 
         int run(void);
     };

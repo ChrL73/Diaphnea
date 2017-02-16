@@ -14,8 +14,8 @@ namespace map_server
         void execute(void);
 
     public:
-        ItemDataRequest(const char *socketId, const char *requestId, const char *mapId, int itemId, int resolutionIndex, bool sendResponse) :
-            Request(socketId, requestId, sendResponse), _mapId(mapId), _itemId(itemId), _resolutionIndex(resolutionIndex) {}
+        ItemDataRequest(const char *socketId, const char *requestId, const char *mapId, int itemId, int resolutionIndex) :
+            Request(socketId, requestId), _mapId(mapId), _itemId(itemId), _resolutionIndex(resolutionIndex) {}
     };
 }
 

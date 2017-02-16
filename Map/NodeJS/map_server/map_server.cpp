@@ -10,14 +10,13 @@ int main(int argc, char *argv[])
 	for (i = 1; i < argc; ++i)
 	{
         if (strcmp(argv[i], "softExit") == 0) softExit = true;
-        if (strcmp(argv[i], "mutexTest") == 0) mutexTest = true;
 	}
 
     int cleanThreadSleepMs = 5;
     int checkTimeoutSleepMs = 200;
     time_t timeoutInSeconds = 90;
 
-    map_server::MapServer mapServer(timeoutInSeconds, cleanThreadSleepMs, checkTimeoutSleepMs, softExit, mutexTest);
+    map_server::MapServer mapServer(timeoutInSeconds, cleanThreadSleepMs, checkTimeoutSleepMs, softExit);
 
     int result = mapServer.run();
 

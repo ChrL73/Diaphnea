@@ -12,7 +12,7 @@ namespace map_server
         MapData *mapData = MapData::instance();
 
         Map *map = mapData->getMap(_mapId);
-        if (map != 0 && _sendResponse)
+        if (map != 0)
         {
             std::vector<std::string> infoVector;
             unsigned int i, n = _elementIds.size();

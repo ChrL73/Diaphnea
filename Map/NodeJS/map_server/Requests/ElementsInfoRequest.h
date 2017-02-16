@@ -15,8 +15,8 @@ namespace map_server
         void execute(void);
 
     public:
-        ElementsInfoRequest(const char *socketId, const char *requestId, const char *mapId, const std::vector<const char *>& elementIds, bool sendResponse) :
-            Request(socketId, requestId, sendResponse), _mapId(mapId), _elementIds(elementIds) {}
+        ElementsInfoRequest(const char *socketId, const char *requestId, const char *mapId, const std::vector<const char *>& elementIds) :
+            Request(socketId, requestId), _mapId(mapId), _elementIds(elementIds) {}
     };
 }
 

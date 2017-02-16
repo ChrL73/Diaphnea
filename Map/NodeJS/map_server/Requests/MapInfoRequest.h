@@ -12,7 +12,7 @@ namespace map_server
         void execute(void);
 
     public:
-        MapInfoRequest(const char *socketId, const char *requestId, const char *mapId, bool sendResponse) :
-            Request(socketId, requestId, sendResponse), _mapId(mapId) {}
+        MapInfoRequest(const char *socketId, const char *requestId, const char *mapId) :
+            Request(socketId, requestId), _mapId(mapId) {}
     };
 }

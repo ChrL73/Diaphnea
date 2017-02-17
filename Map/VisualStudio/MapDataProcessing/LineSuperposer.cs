@@ -115,8 +115,9 @@ namespace MapDataProcessing
                         replaceLine(pointList, j1, j2, currentLine, i1, i2);
                         j += pointList.Count - n;
                         n = pointList.Count;
-                        currentLine = null;
                     }
+
+                    currentLine = null;
                 }
             }
 

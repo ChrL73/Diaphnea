@@ -104,6 +104,7 @@
 		<Unit filename="Data/PolygonElement.h" />
 		<Unit filename="Data/PolygonLook.cpp" />
 		<Unit filename="Data/PolygonLook.h" />
+		<Unit filename="ErrorEnum.h" />
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />
 		<Unit filename="MessageTypeEnum.h" />

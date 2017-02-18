@@ -112,13 +112,19 @@
           <name language="fr" text="Hauts-de-France"/>
           <name language="en" text="Hauts-de-France"/>
         </name>
-      </polygonElement>
-      <polygonElement id="e_IDF" look="pl_Region">
+      </polygonElement>-->
+      <polygonElement id="e_IDF" importance="0">
         <name>
           <name language="fr" text="Île-de-France"/>
           <name language="en" text="Île-de-France"/>
         </name>
-      </polygonElement>-->
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_Normandie" importance="0">
         <name>
           <name language="fr" text="Normandie"/>
@@ -612,6 +618,57 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_75" importance="0">
+        <name>
+          <name language="fr" text="Paris (75)"/>
+          <name language="en" text="Paris (75)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="75"/>
+          <name language="en" text="75"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_77" importance="0">
+        <name>
+          <name language="fr" text="Seine-et-Marne (77)"/>
+          <name language="en" text="Seine-et-Marne (77)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="77"/>
+          <name language="en" text="77"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_78" importance="0">
+        <name>
+          <name language="fr" text="Yvelines (78)"/>
+          <name language="en" text="Yvelines (78)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="78"/>
+          <name language="en" text="78"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_79" importance="0">
         <name>
           <name language="fr" text="Deux-Sèvres (79)"/>
@@ -677,6 +734,91 @@
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_91" importance="0">
+        <name>
+          <name language="fr" text="Essonne (91)"/>
+          <name language="en" text="Essonne (91)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="91"/>
+          <name language="en" text="91"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_92" importance="0">
+        <name>
+          <name language="fr" text="Hauts-de-Seine (92)"/>
+          <name language="en" text="Hauts-de-Seine (92)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="92"/>
+          <name language="en" text="92"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_93" importance="0">
+        <name>
+          <name language="fr" text="Seine-Saint-Denis (93)"/>
+          <name language="en" text="Seine-Saint-Denis (93)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="93"/>
+          <name language="en" text="93"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_94" importance="0">
+        <name>
+          <name language="fr" text="Val-de-Marne (94)"/>
+          <name language="en" text="Val-de-Marne (94)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="94"/>
+          <name language="en" text="94"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_95" importance="0">
+        <name>
+          <name language="fr" text="Val-d'Oise (95)"/>
+          <name language="en" text="Val-d'Oise (95)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="95"/>
+          <name language="en" text="95"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_IDF"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>

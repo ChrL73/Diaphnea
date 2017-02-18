@@ -89,13 +89,19 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_CVL" look="pl_Region">
+      <polygonElement id="e_CVL" importance="0">
         <name>
           <name language="fr" text="Centre-Val de Loire"/>
           <name language="en" text="Centre-Val de Loire"/>
         </name>
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Corse" look="pl_Region">
+      <!--<polygonElement id="e_Corse" look="pl_Region">
         <name>
           <name language="fr" text="Corse"/>
           <name language="en" text="Corse"/>
@@ -106,13 +112,19 @@
           <name language="fr" text="Grand-Est"/>
           <name language="en" text="Grand-Est"/>
         </name>
-      </polygonElement>
-      <polygonElement id="e_HDF" look="pl_Region">
+      </polygonElement>-->
+      <polygonElement id="e_HDF" importance="0">
         <name>
           <name language="fr" text="Hauts-de-France"/>
           <name language="en" text="Hauts-de-France"/>
         </name>
-      </polygonElement>-->
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_IDF" importance="0">
         <name>
           <name language="fr" text="Île-de-France"/>
@@ -200,7 +212,10 @@
         <looks>
           <look id="pl_Departement"/>
         </looks>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_HDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_08" importance="0">
         <name>
@@ -278,6 +293,23 @@
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_18" importance="0">
+        <name>
+          <name language="fr" text="Cher (18)"/>
+          <name language="en" text="Cher (18)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="18"/>
+          <name language="en" text="18"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -366,6 +398,23 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_28" importance="0">
+        <name>
+          <name language="fr" text="Eure-et-Loire (28)"/>
+          <name language="en" text="Eure-et-Loire (28)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="28"/>
+          <name language="en" text="28"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_29" importance="0">
         <name>
           <name language="fr" text="Finistère (29)"/>
@@ -417,6 +466,40 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_36" importance="0">
+        <name>
+          <name language="fr" text="Indre (36)"/>
+          <name language="en" text="Indre (36)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="36"/>
+          <name language="en" text="36"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_37" importance="0">
+        <name>
+          <name language="fr" text="Indre-et-Loire (37)"/>
+          <name language="en" text="Indre-et-Loire (37)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="37"/>
+          <name language="en" text="37"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_40" importance="0">
         <name>
           <name language="fr" text="Landes (40)"/>
@@ -434,6 +517,23 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_41" importance="0">
+        <name>
+          <name language="fr" text="Loir-et-Cher (41)"/>
+          <name language="en" text="Loir-et-Cher (41)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="41"/>
+          <name language="en" text="41"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_44" importance="0">
         <name>
           <name language="fr" text="Loire-Atlantique (44)"/>
@@ -448,6 +548,23 @@
         </looks>
         <coveredElementList>
           <element id="e_PDLL"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_45" importance="0">
+        <name>
+          <name language="fr" text="Loiret (45)"/>
+          <name language="en" text="Loiret (45)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="45"/>
+          <name language="en" text="45"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_CVL"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -536,6 +653,23 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_59" importance="0">
+        <name>
+          <name language="fr" text="Nord (59)"/>
+          <name language="en" text="Nord (59)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="59"/>
+          <name language="en" text="59"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_HDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_60" importance="0">
         <name>
           <name language="fr" text="Oise (60)"/>
@@ -548,7 +682,10 @@
         <looks>
           <look id="pl_Departement"/>
         </looks>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_HDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_61" importance="0">
         <name>
@@ -564,6 +701,23 @@
         </looks>
         <coveredElementList>
           <element id="e_Normandie"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_62" importance="0">
+        <name>
+          <name language="fr" text="Pas-de-Calais (62)"/>
+          <name language="en" text="Pas-de-Calais (62)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="62"/>
+          <name language="en" text="62"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_HDF"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -683,6 +837,23 @@
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_80" importance="0">
+        <name>
+          <name language="fr" text="Somme (80)"/>
+          <name language="en" text="Somme (80)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="80"/>
+          <name language="en" text="80"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_HDF"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -1033,6 +1204,126 @@
         </looks>
         <attachmentList>
           <element id="e_64"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Durance" importance="0">
+        <name>
+          <name language="fr" text="Durance"/>
+          <name language="en" text="Durance"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Rhone"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Charente" importance="0">
+        <name>
+          <name language="fr" text="Charente"/>
+          <name language="en" text="Charente"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_17"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Cher" importance="0">
+        <name>
+          <name language="fr" text="Cher"/>
+          <name language="en" text="Cher"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Loire"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Oise" importance="0">
+        <name>
+          <name language="fr" text="Oise"/>
+          <name language="en" text="Oise"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Seine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Aisne" importance="0">
+        <name>
+          <name language="fr" text="Aisne"/>
+          <name language="en" text="Aisne"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Oise"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Maine" importance="0">
+        <name>
+          <name language="fr" text="Maine"/>
+          <name language="en" text="Maine"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Loire"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Sarthe" importance="0">
+        <name>
+          <name language="fr" text="Sarthe"/>
+          <name language="en" text="Sarthe"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Maine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Yonne" importance="0">
+        <name>
+          <name language="fr" text="Yonne"/>
+          <name language="en" text="Yonne"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Seine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Loir" importance="0">
+        <name>
+          <name language="fr" text="Loir"/>
+          <name language="en" text="Loir"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Sarthe"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Creuse" importance="0">
+        <name>
+          <name language="fr" text="Creuse"/>
+          <name language="en" text="Creuse"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Vienne"/>
         </attachmentList>
       </lineElement>
     </lineElementList>

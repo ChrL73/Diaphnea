@@ -42,6 +42,7 @@ namespace MapDataProcessing
         }
 
         private readonly KmlFileData _lineData;
+        private readonly bool _superposable;
         private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem(false);
         private bool _smoothed = false;
         internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
@@ -49,6 +50,7 @@ namespace MapDataProcessing
         private LineLinePart(KmlFileData lineData)
         {
             _lineData = lineData;
+            _superposable = (!Path.GetFileName(_lineData.Path).Contains("!"));
         }
 
         internal GeoPoint Point1 { get { return _lineData.PointList[0]; } }
@@ -91,7 +93,8 @@ namespace MapDataProcessing
                 if (Attachment1 != null) line[0] = DistanceCalculator.getNearestPoint(Attachment1.SmoothedAttachmentLine.getPointList(resolution), Point1);
                 if (Attachment2 != null) line[line.Count - 1] = DistanceCalculator.getNearestPoint(Attachment2.SmoothedAttachmentLine.getPointList(resolution), Point2);
 
-                List<GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, _lineData.Path, mapData.LineSuperposerDictionary[resolution], false);
+                LineSuperposer superposer = _superposable ? mapData.LineSuperposerDictionary[resolution] : null;
+                List <GeoPoint> smoothedLine = Smoother.smoothLine(line, resolution, _lineData.Path, superposer, false);
                 if (smoothedLine == null) return -1;
                 _smoothedLineMapItem.addLine(resolution, smoothedLine);
                 if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Lines", Path.GetFileName(_lineData.Path), resolution) != 0) return -1;

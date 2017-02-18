@@ -225,6 +225,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Data\PointLook.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonElement.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\ErrorEnum.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h" />
     <ClInclude Include="..\..\NodeJS\map_server\MessageTypeEnum.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\ElementInfoRequest.h" />

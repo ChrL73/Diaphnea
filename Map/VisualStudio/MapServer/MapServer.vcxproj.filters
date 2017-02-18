@@ -335,5 +335,8 @@
     <ClInclude Include="..\..\NodeJS\map_server\Data\BezierInfo.h">
       <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\ErrorEnum.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

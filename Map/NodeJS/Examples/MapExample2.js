@@ -9,7 +9,7 @@ $(function()
    function onConnected(mapServerConnection)
    {
       var canvasId = 'canvas';
-      var mapId = '_Gabon2';   
+      var mapId = '_France';   
       mapServerConnection.loadMap(mapId, canvasId, onMapLoaded);
       
       function onMapLoaded(map)

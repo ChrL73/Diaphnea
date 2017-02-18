@@ -12,6 +12,7 @@ namespace map_server
         LOOK = 5,
         RENDER = 6,
         TEXT = 7,
-        REMOVE_TEXT = 8
+        REMOVE_TEXT = 8,
+		ERROR_ = 9
     };
 }

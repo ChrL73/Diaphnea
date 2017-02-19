@@ -14,10 +14,12 @@ namespace MapDataProcessing
         private readonly ItemId _itemId = new ItemId();
         private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
         private readonly bool _useBezierSucessors;
+        private readonly string _element0Id;
 
-        internal DatabaseMapItem(bool useBezierSucessors)
+        internal DatabaseMapItem(bool useBezierSucessors, string element0Id)
         {
             _useBezierSucessors = useBezierSucessors;
+            _element0Id = element0Id;
             Cap1Round = true;
             Cap2Round = true;
         }
@@ -114,6 +116,7 @@ namespace MapDataProcessing
             {
                 { "item_id", _itemId.Value },
                 { "map", mapData.XmlMapData.parameters.mapId },
+                { "element0", _element0Id },
                 { "item", itemName },
                 { "cap1_round", Cap1Round },
                 { "cap2_round", Cap2Round },

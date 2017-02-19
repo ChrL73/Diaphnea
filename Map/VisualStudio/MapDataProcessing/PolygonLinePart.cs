@@ -23,7 +23,7 @@ namespace MapDataProcessing
             return _partDictionary.ContainsKey(lineData);
         }
 
-        internal static PolygonLinePart getPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
+        internal static PolygonLinePart getPart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2, string elementId)
         {
             if (LineLinePart.exists(lineData))
             {
@@ -34,7 +34,7 @@ namespace MapDataProcessing
             PolygonLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
-                part = new PolygonLinePart(lineData, pointData1, pointData2);
+                part = new PolygonLinePart(lineData, pointData1, pointData2, elementId);
                 _partDictionary.Add(lineData, part);
             }
             else
@@ -68,13 +68,14 @@ namespace MapDataProcessing
         private readonly KmlFileData _lineData;
         private readonly KmlFileData _pointData1;
         private readonly KmlFileData _pointData2;
-        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem(false);
+        private readonly DatabaseMapItem _smoothedLineMapItem;
 
-        private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2)
+        private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2, string element0Id)
         {
             _lineData = lineData;
             _pointData1 = pointData1;
             _pointData2 = pointData2;
+            _smoothedLineMapItem = new DatabaseMapItem(false, element0Id);
         }
 
         internal KmlFileData Line { get { return _lineData; } }

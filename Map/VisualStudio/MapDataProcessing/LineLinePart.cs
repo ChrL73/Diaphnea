@@ -23,7 +23,7 @@ namespace MapDataProcessing
             return _partDictionary.ContainsKey(lineData);
         }
 
-        internal static LineLinePart getPart(KmlFileData lineData)
+        internal static LineLinePart getPart(KmlFileData lineData, string elementId)
         {
             if (PolygonLinePart.exists(lineData))
             {
@@ -34,7 +34,7 @@ namespace MapDataProcessing
             LineLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
-                part = new LineLinePart(lineData);
+                part = new LineLinePart(lineData, elementId);
                 _partDictionary.Add(lineData, part);
             }
 
@@ -43,14 +43,15 @@ namespace MapDataProcessing
 
         private readonly KmlFileData _lineData;
         private readonly bool _superposable;
-        private readonly DatabaseMapItem _smoothedLineMapItem = new DatabaseMapItem(false);
+        private readonly DatabaseMapItem _smoothedLineMapItem;
         private bool _smoothed = false;
         internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
 
-        private LineLinePart(KmlFileData lineData)
+        private LineLinePart(KmlFileData lineData, string element0Id)
         {
             _lineData = lineData;
             _superposable = (!Path.GetFileName(_lineData.Path).Contains("!"));
+            _smoothedLineMapItem = new DatabaseMapItem(false, element0Id);
         }
 
         internal GeoPoint Point1 { get { return _lineData.PointList[0]; } }

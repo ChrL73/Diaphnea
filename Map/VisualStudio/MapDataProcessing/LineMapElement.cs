@@ -92,7 +92,7 @@ namespace MapDataProcessing
 
             foreach (KmlFileData linePath in _kmlFileList)
             {
-                LineLinePart part = LineLinePart.getPart(linePath);
+                LineLinePart part = LineLinePart.getPart(linePath, Id);
                 if (part == null) return -1;
 
                 List<IAttachment> attachCandidates = new List<IAttachment>();
@@ -101,7 +101,7 @@ namespace MapDataProcessing
                 {
                     if (path != linePath)
                     {
-                        LineLinePart part2 = LineLinePart.getPart(path);
+                        LineLinePart part2 = LineLinePart.getPart(path, Id);
                         if (part2 == null) return -1;
                         attachCandidates.Add(part2);
                     }
@@ -111,7 +111,7 @@ namespace MapDataProcessing
                 {
                     if (path != linePath)
                     {
-                        LineLinePart part2 = LineLinePart.getPart(path);
+                        LineLinePart part2 = LineLinePart.getPart(path, Id);
                         if (part2 == null) return -1;
                         attachCandidates.Add(part2);
                     }
@@ -126,7 +126,7 @@ namespace MapDataProcessing
 
                 foreach (KmlFileData path in _attachedPolygonPolygonKmlFileList)
                 {
-                    PolygonPolygonPart part2 = PolygonPolygonPart.getPart(path);
+                    PolygonPolygonPart part2 = PolygonPolygonPart.getPart(path, Id);
                     if (part2 == null) return -1;
                     attachCandidates.Add(part2);
                 }

@@ -18,12 +18,12 @@ namespace MapDataProcessing
             _partDictionary.Clear();
         }
 
-        internal static PolygonPolygonPart getPart(KmlFileData polygonData)
+        internal static PolygonPolygonPart getPart(KmlFileData polygonData, string elementId)
         {
             PolygonPolygonPart part;
             if (!_partDictionary.TryGetValue(polygonData, out part))
             {
-                part = new PolygonPolygonPart(polygonData);
+                part = new PolygonPolygonPart(polygonData, elementId);
                 _partDictionary.Add(polygonData, part);
             }
 
@@ -31,12 +31,13 @@ namespace MapDataProcessing
         }
 
         private readonly KmlFileData _polygonData;
-        private readonly DatabaseMapItem _smoothedPolygonMapItem = new DatabaseMapItem(false);
+        private readonly DatabaseMapItem _smoothedPolygonMapItem;
         internal BsonValue MapItemId { get { return _smoothedPolygonMapItem.Id; } }
 
-        private PolygonPolygonPart(KmlFileData polygonData)
+        private PolygonPolygonPart(KmlFileData polygonData, string element0Id)
         {
             _polygonData = polygonData;
+            _smoothedPolygonMapItem = new DatabaseMapItem(false, element0Id);
         }
 
         internal KmlFileData Polygon { get { return _polygonData; } }

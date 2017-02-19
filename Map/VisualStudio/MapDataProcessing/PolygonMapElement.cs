@@ -19,12 +19,13 @@ namespace MapDataProcessing
         private readonly Dictionary<KmlFileData, List<OrientedPolygonLinePart>> _linePartDictionary = new Dictionary<KmlFileData, List<OrientedPolygonLinePart>>();
         private readonly List<OrientedLineList> _compoundPolygonList = new List<OrientedLineList>();
         private readonly List<PolygonPolygonPart> _polygonPartList = new List<PolygonPolygonPart>();
-        private readonly DatabaseMapItem _contourMapItem = new DatabaseMapItem(true);
+        private readonly DatabaseMapItem _contourMapItem;
 
         internal PolygonMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, List<string> coveredElementList) :
             base(id, mapData, name, shortName, importance, lookIds)
         {
             _coveredElementList = coveredElementList;
+            _contourMapItem = new DatabaseMapItem(true, Id);
         }
 
         internal override int addKmlFile(String path)
@@ -79,7 +80,7 @@ namespace MapDataProcessing
                     return -1;
                 }
 
-                PolygonLinePart part = PolygonLinePart.getPart(line, point1, point2);
+                PolygonLinePart part = PolygonLinePart.getPart(line, point1, point2, Id);
                 if (part == null) return -1;
 
                 OrientedPolygonLinePart directPart = new OrientedPolygonLinePart(part, OrientationEnum.DIRECT);
@@ -138,7 +139,7 @@ namespace MapDataProcessing
 
             foreach (KmlFileData polygon in _polygonKmlFileList)
             {
-                PolygonPolygonPart part = PolygonPolygonPart.getPart(polygon);
+                PolygonPolygonPart part = PolygonPolygonPart.getPart(polygon, Id);
                 _polygonPartList.Add(part);
             }
 

@@ -160,16 +160,7 @@ namespace map_server
 
         Request *request = Request::createRequest(tokenVector);
 
-        if (request != 0)
-        {
-            request->execute();
-        }
-        /*else
-        {
-            _coutMutex.lock();
-            std::cerr << "Incorrect request" << std::endl; // Todo: Handle this error in Node JS
-            _coutMutex.unlock();
-        }*/
+        if (request != 0) request->execute();
 
         delete[] req;
         delete request;

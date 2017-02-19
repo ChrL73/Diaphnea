@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "MessageTypeEnum.h"
 #include "MapElement.h"
+#include "ErrorEnum.h"
 
 namespace map_server
 {
@@ -42,11 +43,21 @@ namespace map_server
             else
             {
                 MapData::unlock();
+
+				_coutMutexPtr->lock();
+				std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+					<< ",\"message\":\"Unknown element Id ('" << _elementIds[i] << "') in ELEMENTS_INFO request\"}" << std::endl;
+				_coutMutexPtr->unlock();
             }
         }
         else
         {
             MapData::unlock();
+
+			_coutMutexPtr->lock();
+			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+				<< ",\"message\":\"Unknown map Id ('" << _mapId << "') in ELEMENTS_INFO request\"}" << std::endl;
+			_coutMutexPtr->unlock();
         }
     }
 }

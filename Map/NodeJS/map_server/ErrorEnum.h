@@ -9,6 +9,7 @@ namespace map_server
 		NO_REQUEST_TYPE = 2,
 		BAD_REQUEST_TYPE = 3,
 		NOT_ENOUGH_TOKENS = 4,
-		BAD_PARAMETER = 5
+		BAD_PARAMETER = 5,
+		UNKNOWN_ID = 6
 	};
 }

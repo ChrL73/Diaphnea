@@ -33,7 +33,7 @@ namespace map_server
     const std::string& MapItem::getInfoJson(unsigned int resolutionIndex) const
     {
         if (resolutionIndex < _infoJsonVector.size()) return _infoJsonVector[resolutionIndex];
-        return _infoJsonVector[0];
+        return _infoJsonVector[_infoJsonVector.size() - 1];
     }
 
     int MapItem::getTextCount(const std::string& languageId) const

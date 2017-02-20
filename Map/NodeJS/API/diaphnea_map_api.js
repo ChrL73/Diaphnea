@@ -1,13 +1,14 @@
 var mapServerInterface =
 {
-   createNewConnection: function(url, onConnected)
+   createNewConnection: function(url, onConnected, onError)
    {
       var connection = new Connection(function()
       {
          onConnected(connection);
-      });
+      },
+      onError);
 
-      function Connection(onConnected)
+      function Connection(onConnected, onError)
       {   
          var mapIds;
          this.getMapIds = function() { return mapIds; }
@@ -30,7 +31,7 @@ var mapServerInterface =
             return context;
          }
 
-         $.getScript(url + '/socket.io/socket.io.js', function()
+         $.getScript(url + '/socket.io/socket.io.js').done(function()
          {         
             socket = io(url);
             
@@ -52,7 +53,17 @@ var mapServerInterface =
                var context = getContext(response);
                if (context) context.onMapLoaded(new Map(context.mapId, context.canvasId, response.content));
             });
-         });  
+            
+            socket.on('errorRes', function(response)
+            {
+               var context = getContext(response);
+               onError({ error: response.content.error, message: response.content.message, requestId: response.requestId, context: context });
+            });
+         })
+         .fail(function()
+         {
+            onError({ error: -1, message: 'Failed to load ' + url + '/socket.io/socket.io.js' });
+         });
          
          this.loadMap = function(mapId, canvasId, onMapLoaded)
          {

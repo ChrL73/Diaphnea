@@ -5,6 +5,8 @@
 
 namespace map_server
 {
+	class Map;
+
     class Request
     {
     protected:
@@ -13,6 +15,7 @@ namespace map_server
         static std::mutex *_coutMutexPtr;
         const char * const _socketId;
         const char * const _requestId;
+		void flushErrors(Map *map);
 
     public:
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }

@@ -43,6 +43,13 @@ namespace map_server
             {
                 mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
+
+				if (lineItem == 0)
+				{
+					_error = true;
+					return;
+				}
+
                 _lineItemVector.push_back(lineItem);
             }
 

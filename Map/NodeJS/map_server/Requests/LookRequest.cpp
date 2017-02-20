@@ -34,6 +34,8 @@ namespace map_server
                     << ",\"message\":\"Unknown look id ('" << _lookId << "') in LOOK request\"}" << std::endl;
                 _coutMutexPtr->unlock();
             }
+
+			flushErrors(map);
         }
         else
         {

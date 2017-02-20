@@ -118,8 +118,8 @@ namespace MapDataProcessing
                 { "map", mapData.XmlMapData.parameters.mapId },
                 { "element0", _element0Id },
                 { "item", itemName },
-                { "cap1_round", Cap1Round },
-                { "cap2_round", Cap2Round },
+                { "cap1_round", Cap1Round ? 1 : 0 },
+                { "cap2_round", Cap2Round ? 1 : 0 },
                 { "point_lists", lineArray }
             };
 

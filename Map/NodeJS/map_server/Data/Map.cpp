@@ -10,6 +10,7 @@
 #include "PointItem.h"
 #include "Point.h"
 #include "ItemLook.h"
+#include "DatabaseError.h"
 
 namespace map_server
 {
@@ -31,7 +32,12 @@ namespace map_server
         if (elementIt == _elementMap.end()) return 0;
 
         MapElement *element = (*elementIt).second;
-        if (!element->isLoaded()) element->load();
+		if (element->error()) return 0;
+		if (!element->isLoaded())
+		{
+			element->load();
+			if (element->error()) return 0;
+		}
         return element;
     }
 
@@ -42,23 +48,31 @@ namespace map_server
 
         if (itemIt == _lineItemMap.end())
         {
+			bool lineOk = false;
 			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-                bool cap1Round = dbItem.getBoolField("cap1_round");
-                bool cap2Round = dbItem.getBoolField("cap2_round");
-                LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), cap1Round, cap2Round);
-                addPointLists(item, dbItem);
+                int cap1Round = dbItem.getIntField("cap1_round");
+                int cap2Round = dbItem.getIntField("cap2_round");
 
-                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, item)).first;
-                _itemMap.insert(std::pair<int, MapItem *>(itemId, item));
+				if (itemId >= 0 && itemId <= _maxId && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1))
+				{
+					lineOk = true;
+					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), cap1Round != 0, cap2Round != 0);
+					addPointLists(item, dbItem);
+
+					itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, item)).first;
+					_itemMap.insert(std::pair<int, MapItem *>(itemId, item));
+				}
             }
-            else
+
+            if (!lineOk)
             {
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, 0)).first;
+				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
             }
         }
 

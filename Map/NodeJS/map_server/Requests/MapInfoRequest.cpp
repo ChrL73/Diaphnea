@@ -11,7 +11,7 @@ namespace map_server
         MapData::lock();
         MapData *mapData = MapData::instance();
 
-        const Map *map = mapData->getMap(_mapId);
+        Map *map = mapData->getMap(_mapId);
         if (map != 0)
         {
             std::string info = map->getInfoJson();
@@ -20,6 +20,8 @@ namespace map_server
             _coutMutexPtr->lock();
             std::cout << _socketId << " " << _requestId << " " << map_server::MAP_INFO << " " << info << std::endl;
             _coutMutexPtr->unlock();
+
+			flushErrors(map);
         }
         else
         {

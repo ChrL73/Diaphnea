@@ -8,9 +8,13 @@
 #include "LookRequest.h"
 #include "RenderRequest.h"
 #include "ErrorEnum.h"
+#include "MapData.h"
+#include "Map.h"
+#include "DatabaseError.h"
 
 #include <string>
 #include <iostream>
+#include <sstream>
 
 namespace map_server
 {
@@ -272,4 +276,25 @@ namespace map_server
 
         return 0;
     }
+
+	void Request::flushErrors(Map *map)
+	{
+		MapData::lock();
+		std::stringstream stream;
+		int i, n = map->getErrorVector().size();
+		for (i = 0; i < n; ++i)
+		{
+			DatabaseError *error = map->getErrorVector()[i];
+			stream << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_DATABASE_CONTENT
+				<< ",\"message\":\"Unexpected database content, file " << error->getFile() << ", function "
+				<< error->getFunction() << ", line " << error->getLine() << "\"}" << std::endl;
+			delete error;
+		}
+		map->getErrorVector().clear();
+		MapData::unlock();
+
+		_coutMutexPtr->lock();
+		std::cout << stream.str();
+		_coutMutexPtr->unlock();
+	}
 }

@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\NodeJS\map_server\Data\BezierInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\Combinations.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\DatabaseError.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\ElementName.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\ItemLook.cpp" />
@@ -206,6 +207,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\Data\BezierInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\Combinations.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\DatabaseError.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\ElementName.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\FilledPolygonItem.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\IMap.h" />

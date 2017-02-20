@@ -45,7 +45,7 @@ namespace map_server
         {
             _connection.connect("localhost");
         }
-        catch(const mongo::DBException& e)
+        catch (const mongo::DBException& e)
         {
             std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::DATABASE_SERVER_CONNECTION_FAILED << ",\"message\":\"Failed to connect to the Mongo database server\"}" << std::endl;
             _initOk = false;

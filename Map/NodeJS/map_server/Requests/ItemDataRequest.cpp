@@ -65,6 +65,8 @@ namespace map_server
                     }
                 }
             }
+
+			flushErrors(map);
         }
         else
         {

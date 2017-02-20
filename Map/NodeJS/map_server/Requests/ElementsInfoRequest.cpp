@@ -49,6 +49,8 @@ namespace map_server
 					<< ",\"message\":\"Unknown element id ('" << _elementIds[i] << "') in ELEMENTS_INFO request\"}" << std::endl;
 				_coutMutexPtr->unlock();
             }
+
+			flushErrors(map);
         }
         else
         {

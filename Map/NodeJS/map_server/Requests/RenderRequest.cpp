@@ -126,6 +126,7 @@ namespace map_server
                 itemVector.push_back(item);
             }
 
+			bool languageOk = _map->knownLanguage(_languageId);
             std::stringstream response;
             n = itemVector.size();
 
@@ -226,24 +227,27 @@ namespace map_server
 
                     if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
                     {
-                        ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
-                        _itemCopyBuilderVector.push_back(itemCopyBuilder);
+						if (languageOk)
+						{
+							ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
+							_itemCopyBuilderVector.push_back(itemCopyBuilder);
 
-                        LineItem *lineItem = dynamic_cast<LineItem *>(item);
-                        if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
-                        {
-                            std::string elementId = lineItem->getElementIdForText();
-                            if (!elementId.empty())
-                            {
-                                std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
-                                if (elementIt == lineItemAssociationMap.end())
-                                {
-                                    elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
-                                }
+							LineItem *lineItem = dynamic_cast<LineItem *>(item);
+							if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
+							{
+								std::string elementId = lineItem->getElementIdForText();
+								if (!elementId.empty())
+								{
+									std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
+									if (elementIt == lineItemAssociationMap.end())
+									{
+										elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
+									}
 
-                                (*elementIt).second.push_back(itemCopyBuilder);
-                            }
-                        }
+									(*elementIt).second.push_back(itemCopyBuilder);
+								}
+							}
+						}
                     }
                     else
                     {
@@ -276,7 +280,7 @@ namespace map_server
                 std::cout << response.str() << std::endl;
                 _coutMutexPtr->unlock();
 
-                if (_map->knownLanguage(_languageId))
+                if (languageOk)
                 {
                     displayText();
                 }
@@ -306,6 +310,8 @@ namespace map_server
             }
 
             delete _svgCreator;
+
+			flushErrors(_map);
         }
         else
         {

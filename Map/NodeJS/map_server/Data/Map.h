@@ -9,10 +9,13 @@ namespace map_server
     class MapElement;
     class MultipointsItem;
     class MapItem;
+	class DatabaseError;
 
     class Map : public IMap
     {
     private:
+		static constexpr int _maxId = 0xfffff;
+
         const mongo::OID _mongoId;
         const std::string _id;
 
@@ -53,6 +56,8 @@ namespace map_server
 
         std::string _infoJson;
 
+		std::vector<DatabaseError *> _errorVector;
+
     public:
         Map(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
             _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false), _itemToElement0MapLoaded(false) {}
@@ -77,5 +82,6 @@ namespace map_server
         const ItemLook *getItemLook(int lookId) const;
         int getResolutionIndex(double scale);
         bool knownLanguage(const std::string& languageId) const { return _languageIdSet.find(languageId) != _languageIdSet.end(); }
+		std::vector<DatabaseError *>& getErrorVector(void) { return _errorVector; }
     };
 }

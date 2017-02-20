@@ -183,6 +183,9 @@
     <ClCompile Include="..\..\NodeJS\map_server\Data\BezierInfo.cpp">
       <Filter>Fichiers sources\Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\DatabaseError.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -337,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\ErrorEnum.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\DatabaseError.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

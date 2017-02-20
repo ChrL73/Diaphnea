@@ -67,6 +67,8 @@
 		<Unit filename="Data/BezierInfo.h" />
 		<Unit filename="Data/Combinations.cpp" />
 		<Unit filename="Data/Combinations.h" />
+		<Unit filename="Data/DatabaseError.cpp" />
+		<Unit filename="Data/DatabaseError.h" />
 		<Unit filename="Data/ElementName.cpp" />
 		<Unit filename="Data/ElementName.h" />
 		<Unit filename="Data/FilledPolygonItem.cpp" />

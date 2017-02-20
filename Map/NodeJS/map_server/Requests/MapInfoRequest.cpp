@@ -27,7 +27,7 @@ namespace map_server
 
 			_coutMutexPtr->lock();
 			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
-				<< ",\"message\":\"Unknown map Id ('" << _mapId << "') in MAP_INFO request\"}" << std::endl;
+				<< ",\"message\":\"Unknown map id ('" << _mapId << "') in MAP_INFO request\"}" << std::endl;
 			_coutMutexPtr->unlock();
         }
     }

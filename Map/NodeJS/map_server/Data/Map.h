@@ -2,6 +2,8 @@
 
 #include "IMap.h"
 
+#include <set>
+
 namespace map_server
 {
     class MapElement;
@@ -26,16 +28,21 @@ namespace map_server
 
         mongo::DBClientConnection *getConnectionPtr(void) { return _connectionPtr; }
         std::vector<std::string> *getLanguageIdVectorPtr(void) { return &_languageIdVector; }
-        const Look *getLook(int lookId);
+        const Look *getLook(int lookId) const;
         void addItemLook(const ItemLook *look);
 
         std::map<std::string, std::string> _languageNameMap;
         std::vector<std::string> _languageIdVector;
+        std::set<std::string> _languageIdSet;
         std::map<std::string, std::string> _nameMap;
         std::vector<double> _sampleLengthVector;
 
         std::map<int, const Look *> _lookMap;
         std::map<int, const ItemLook *> _itemLookMap;
+
+        std::map<int, std::string> _itemToElement0Map;
+        bool _itemToElement0MapLoaded;
+        void loadItemToElement0Map(void);
 
         std::map<std::string, MapElement *> _elementMap;
         std::map<std::string, LineItem *> _lineItemMap;
@@ -48,7 +55,7 @@ namespace map_server
 
     public:
         Map(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
-            _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false) {}
+            _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false), _itemToElement0MapLoaded(false) {}
 		~Map();
 
         const std::string& getId(void) const { return _id; }
@@ -64,10 +71,11 @@ namespace map_server
 
         const std::string& getInfoJson(void) const { return _infoJson; }
         MapElement *getElement(const std::string& id);
-        LineItem *getLineItem(const std::string& mongoId);
+        LineItem *getLineItem(const mongo::OID& mongoId);
         FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
         MapItem *getItem(int itemId);
-        const ItemLook *getItemLook(int lookId);
+        const ItemLook *getItemLook(int lookId) const;
         int getResolutionIndex(double scale);
+        bool knownLanguage(const std::string& languageId) const { return _languageIdSet.find(languageId) != _languageIdSet.end(); }
     };
 }

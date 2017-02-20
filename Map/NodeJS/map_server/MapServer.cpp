@@ -19,11 +19,7 @@ namespace map_server
         TextDisplayer::setCoutMutex(&_coutMutex);
 
         MapData *mapData = MapData::instance();
-        if (mapData == 0)
-        {
-            std::cerr << "Error in MapData::instance()" << std::endl;
-            return -1;
-        }
+        if (mapData == 0) return -1;
 
         _timeoutReference = time(0);
 
@@ -41,15 +37,11 @@ namespace map_server
 
 		deleteThread.join();
 
-		if (MapData::destroyInstance() != 0)
-		{
-			std::cerr << "Error in MapData::destroyInstance()" << std::endl;
-			return -1;
-		}
+		int result = MapData::destroyInstance();
 
 		TextDisplayer::clearClientMap();
 
-		return 0;
+		return result;
     }
 
     void MapServer::inputLoop(void)

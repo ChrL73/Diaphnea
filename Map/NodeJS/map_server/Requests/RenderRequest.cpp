@@ -23,6 +23,7 @@
 #include "ElementName.h"
 #include "SvgCreator.h"
 #include "SvgItemInfo.h"
+#include "ErrorEnum.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -55,8 +56,11 @@ namespace map_server
                 std::string elementId = _elementIds[i];
                 MapElement *element = _map->getElement(elementId);
                 if (element != 0) elementVector.push_back(element);
-                else if (elementId == "#img") _createPotentialImage = true;
                 else if (elementId == "#svg" && _svgCreator == 0) createSvg = true;
+
+                // Disable potential image creation, because it's only a developement/debug/test feature.
+                // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.
+                //else if (elementId == "#img") _createPotentialImage = true;
             }
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
@@ -272,7 +276,33 @@ namespace map_server
                 std::cout << response.str() << std::endl;
                 _coutMutexPtr->unlock();
 
-                displayText();
+                if (_map->knownLanguage(_languageId))
+                {
+                    displayText();
+                }
+                else
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+                        << ",\"message\":\"Unknown language id ('" << _languageId << "') in RENDER request\"}" << std::endl;
+                    _coutMutexPtr->unlock();
+                }
+            }
+            else
+            {
+                _coutMutexPtr->lock();
+                std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+                    << ",\"message\":\"All element ids are unknown ('";
+
+                n = _elementIds.size();
+                for (i = 0; i < n; ++i)
+                {
+                    std::cout << _elementIds[i];
+                    if (i != n - 1) std::cout << " ";
+                }
+
+                std::cout << "') in RENDER request\"}" << std::endl;
+                _coutMutexPtr->unlock();
             }
 
             delete _svgCreator;
@@ -280,6 +310,11 @@ namespace map_server
         else
         {
             MapData::unlock();
+
+            _coutMutexPtr->lock();
+			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+				<< ",\"message\":\"Unknown map id ('" << _mapId << "') in RENDER request\"}" << std::endl;
+			_coutMutexPtr->unlock();
         }
     }
 

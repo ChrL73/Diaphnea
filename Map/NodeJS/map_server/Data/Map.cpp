@@ -35,13 +35,14 @@ namespace map_server
         return element;
     }
 
-    LineItem *Map::getLineItem(const std::string& mongoId)
+    LineItem *Map::getLineItem(const mongo::OID& mongoId)
     {
-        std::map<std::string, LineItem *>::iterator itemIt = _lineItemMap.find(mongoId);
+        std::string mongoIdStr = mongoId.toString();
+        std::map<std::string, LineItem *>::iterator itemIt = _lineItemMap.find(mongoIdStr);
 
         if (itemIt == _lineItemMap.end())
         {
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongo::OID(mongoId)), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -52,12 +53,12 @@ namespace map_server
                 LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), cap1Round, cap2Round);
                 addPointLists(item, dbItem);
 
-                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, item)).first;
+                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, item)).first;
                 _itemMap.insert(std::pair<int, MapItem *>(itemId, item));
             }
             else
             {
-                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoId, 0)).first;
+                itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, 0)).first;
             }
         }
 
@@ -139,14 +140,46 @@ namespace map_server
 
     MapItem *Map::getItem(int itemId)
     {
-        std::map<int, MapItem *>::iterator it = _itemMap.find(itemId);
-        if (it != _itemMap.end()) return (*it).second;
+        std::map<int, MapItem *>::iterator it1 = _itemMap.find(itemId);
+        if (it1 != _itemMap.end()) return (*it1).second;
+
+        if (!_itemToElement0MapLoaded) loadItemToElement0Map();
+
+        std::map<int, std::string>::iterator it2 = _itemToElement0Map.find(itemId);
+        if (it2 != _itemToElement0Map.end())
+        {
+            MapElement *element0 = getElement((*it2).second);
+            if (element0 != 0)
+            {
+                it1 = _itemMap.find(itemId);
+                if (it1 != _itemMap.end()) return (*it1).second;
+            }
+        }
+
         return 0;
     }
 
-    const Look *Map::getLook(int lookId)
+    void Map::loadItemToElement0Map(void)
     {
-        std::map<int, const Look *>::iterator it = _lookMap.find(lookId);
+        _itemToElement0MapLoaded = true;
+
+        mongo::BSONObj projection = BSON("item_id" << 1 << "element0" << 1);
+
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbItem = cursor->next();
+            const char *element0 = dbItem.getStringField("element0");
+            int id = dbItem.getIntField("item_id");
+
+            _itemToElement0Map.insert(std::pair<int, std::string>(id, element0));
+        }
+
+    }
+
+    const Look *Map::getLook(int lookId) const
+    {
+        std::map<int, const Look *>::const_iterator it = _lookMap.find(lookId);
         if (it != _lookMap.end()) return (*it).second;
         return 0;
     }
@@ -156,9 +189,9 @@ namespace map_server
         _itemLookMap.insert(std::pair<int, const ItemLook *>(look->getId(), look));
     }
 
-    const ItemLook *Map::getItemLook(int lookId)
+    const ItemLook *Map::getItemLook(int lookId) const
     {
-        std::map<int, const ItemLook *>::iterator it = _itemLookMap.find(lookId);
+        std::map<int, const ItemLook *>::const_iterator it = _itemLookMap.find(lookId);
         if (it != _itemLookMap.end()) return (*it).second;
         return 0;
     }
@@ -180,18 +213,22 @@ namespace map_server
         _loaded = true;
         std::string elementIdsJson, languagesJson, namesJson;
 
-        mongo::BSONObj projection = BSON("id" << 1);
+        mongo::BSONObj projection = BSON("id" << 1 << "item_id" << 1);
 
 		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
-            PointElement *element = new PointElement(dbElement.getField("_id").OID(), dbElement.getStringField("id"), this);
+            const char *id = dbElement.getStringField("id");
+            int itemId = dbElement.getIntField("item_id");
+            PointElement *element = new PointElement(dbElement.getField("_id").OID(), id, this);
             _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
             if (elementIdsJson.empty()) elementIdsJson = "[\"";
             else elementIdsJson += "\",\"";
             elementIdsJson += element->getId();
+
+            _itemToElement0Map.insert(std::pair<int, std::string>(itemId, id));
         }
 
         cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
@@ -240,6 +277,7 @@ namespace map_server
                 const char *languageName = dbLanguage.getStringField("name");
                 _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
                 _languageIdVector.push_back(languageId);
+                _languageIdSet.insert(languageId);
 
                 const char *mapName = dbName.getStringField(languageId);
                 _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));

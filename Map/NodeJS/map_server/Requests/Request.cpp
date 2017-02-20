@@ -18,11 +18,10 @@ namespace map_server
 
     Request *Request::createRequest(std::vector<const char *> tokenVector)
     {
-		MessageTypeEnum requestType = MessageTypeEnum::ERROR_;
 		int tokenCount = tokenVector.size();
 
         if (tokenCount < 3)
-        {	
+        {
 			_coutMutexPtr->lock();
 			if (tokenCount == 0)
 			{
@@ -42,6 +41,8 @@ namespace map_server
         }
 
 		bool requestTypeOk = false;
+		MessageTypeEnum requestType = MessageTypeEnum::ERROR_;
+
         try
         {
             requestType = static_cast<MessageTypeEnum>(std::stoi(tokenVector[2]));
@@ -190,6 +191,15 @@ namespace map_server
 					return 0;
 				}
 
+				if (widthInPixels < 1.0 || widthInPixels >= 10000.0)
+				{
+                    _coutMutexPtr->lock();
+					std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
+						<< ",\"message\":\"Incorrect 'widthInPixels' parameter ('" << tokenVector[5] << "') in RENDER request (1 <= widthInPixels < 10000 expected)\"}" << std::endl;
+					_coutMutexPtr->unlock();
+					return 0;
+				}
+
 				double heightInPixels;
 				try
 				{
@@ -204,19 +214,19 @@ namespace map_server
 					return 0;
 				}
 
+				if (heightInPixels < 1.0 || heightInPixels >= 10000.0)
+				{
+                    _coutMutexPtr->lock();
+					std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
+						<< ",\"message\":\"Incorrect 'heightInPixels' parameter ('" << tokenVector[6] << "') in RENDER request (1 <= heightInPixels < 10000 expected)\"}" << std::endl;
+					_coutMutexPtr->unlock();
+					return 0;
+				}
+
 				int lookIndex;
 				try
 				{
 					lookIndex = std::stoi(tokenVector[7]);
-
-					if (lookIndex < 0)
-					{
-						_coutMutexPtr->lock();
-						std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
-							<< ",\"message\":\"Incorrect 'lookIndex' parameter ('" << tokenVector[7] << "') in RENDER request (index must be positive or zero)\"}" << std::endl;
-						_coutMutexPtr->unlock();
-						return 0;
-					}
 				}
 				catch (...)
 				{
@@ -226,6 +236,15 @@ namespace map_server
 					_coutMutexPtr->unlock();
 					return 0;
 				}
+
+                if (lookIndex < 0)
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
+                        << ",\"message\":\"Incorrect 'lookIndex' parameter ('" << tokenVector[7] << "') in RENDER request (index must be positive or zero)\"}" << std::endl;
+                    _coutMutexPtr->unlock();
+                    return 0;
+                }
 
 				std::vector<const char *> elementIds;
 				for (i = 11; i < tokenCount; ++i) elementIds.push_back(tokenVector[i]);

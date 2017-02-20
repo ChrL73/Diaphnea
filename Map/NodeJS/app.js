@@ -1,5 +1,5 @@
 var http = require('http');
-var server = http.createServer(function(req, res) { res.end(); });
+var server = http.createServer(function(req, res) { res.statusCode = 404; res.end(); });
 
 var cppServer = require('./cpp_server_interface');
 var config = require('./config');
@@ -17,7 +17,8 @@ var messageNames =
    'look', // 5
    'render', // 6
    'text', // 7
-   'removeText' //8
+   'removeText', //8
+   'error' //9
 ];
 
 var messageTypes = {};

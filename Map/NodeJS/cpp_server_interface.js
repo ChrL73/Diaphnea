@@ -25,27 +25,35 @@ function sendRequest(request, recursiveCall)
    }
    catch (err)
    {
-      cppProcess = childProcess.spawn('./map_server.exe');
-      
-      readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)
+      if (!recursiveCall)
       {
-         if (config.displayReponses) console.log('Response: ' + response);
-
-         var i = response.indexOf(' ');
-         var socketId = response.substring(0, i);
-         response = response.substring(i + 1);
-         i = response.indexOf(' ');
-         var requestId = Number(response.substring(0, i));
-         response = response.substring(i + 1);
-         i = response.indexOf(' ');
-         var requestType = response.substring(0, i);
-         var responseContent = JSON.parse(response.substring(i + 1));
+         cppProcess = childProcess.spawn('./map_server.exe');
          
-         sendResponse(socketId, requestId, requestType, responseContent);
-      });
-      
-      if (recursiveCall) throw new Error(err); // Todo: handle error
-      sendRequest(request, true);
+         // Ignore 'Connection reset' errors
+         cppProcess.stdin.on('error', function(err)
+         {
+            if (err.code != 'ECONNRESET') throw err; 
+         });
+
+         readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)
+         {
+            if (config.displayReponses) console.log('Response: ' + response);
+
+            var i = response.indexOf(' ');
+            var socketId = response.substring(0, i);
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestId = Number(response.substring(0, i));
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestType = response.substring(0, i);
+            var responseContent = JSON.parse(response.substring(i + 1));
+
+            sendResponse(socketId, requestId, requestType, responseContent);
+         });
+
+         sendRequest(request, true);
+      }
    }
 }
 

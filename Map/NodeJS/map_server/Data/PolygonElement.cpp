@@ -41,7 +41,7 @@ namespace map_server
             n = dbLineItems.size();
             for (i = 0; i < n; ++i)
             {
-                std::string itemId = dbLineItems[i].OID().toString();
+                mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
                 _lineItemVector.push_back(lineItem);
             }

@@ -107,7 +107,8 @@ namespace map_server
         if (mapIt == _mapMap.end()) return 0;
 
         Map *map = (*mapIt).second;
-        if (!map->isLoaded()) map->load();
+        if (map->error()) return 0;
+		if (!map->isLoaded()) map->load(); // if (map->error()), return 'map' and not '0' so that 'flushErrors(map)' can be called
         return map;
     }
 }

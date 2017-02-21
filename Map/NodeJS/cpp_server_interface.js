@@ -29,10 +29,11 @@ function sendRequest(request, recursiveCall)
       {
          cppProcess = childProcess.spawn('./map_server.exe');
          
-         // Ignore 'Connection reset' errors
+         // Don't crash on 'Connection reset' error
          cppProcess.stdin.on('error', function(err)
          {
             if (err.code != 'ECONNRESET') throw err; 
+            else console.log("Warning: 'cppProcess.stdin' sent 'Connection reset' error");
          });
 
          readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)

@@ -326,6 +326,7 @@ namespace map_server
             }
             else
             {
+                _error = true;
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
             }
         }
@@ -348,6 +349,7 @@ namespace map_server
             }
             else
             {
+                _error = true;
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
             }
         }
@@ -370,6 +372,7 @@ namespace map_server
             }
             else
             {
+                _error = true;
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
             }
         }
@@ -380,7 +383,7 @@ namespace map_server
         }
         else
         {
-            elementIdsJson = "[\"\"]";
+            _error = true;
             _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
         }
 
@@ -398,74 +401,25 @@ namespace map_server
             if (zoomMinDistanceElt.type() != mongo::NumberDouble || zoomMaxDistanceElt.type() != mongo::NumberDouble ||
                 resolutionThresholdElt.type() != mongo::NumberDouble || sizeParameter1Elt.type() != mongo::NumberDouble || sizeParameter2Elt.type() != mongo::NumberDouble)
             {
+                _error = true;
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
 				return;
             }
-            
+
             _zoomMinDistance = zoomMinDistanceElt.Double();
             _zoomMaxDistance = zoomMaxDistanceElt.Double();
             _resolutionThreshold = resolutionThresholdElt.Double();
             _sizeParameter1 = sizeParameter1Elt.Double();
             _sizeParameter2 = sizeParameter2Elt.Double();
 
-            mongo::BSONElement nameElt = dbMap.getField("name");
-			if (nameElt.type() != mongo::Object)
-			{
-				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-				return;
-			}
-			mongo::BSONObj dbName = nameElt.Obj();
-
-            mongo::BSONElement languagesElt = dbMap.getField("languages");
-			if (languagesElt.type() != mongo::Array)
-			{
-				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-				return;
-			}
-			std::vector<mongo::BSONElement> dbLanguageVector = languagesElt.Array();
-			if (dbLanguageVector.empty())
-			{
-				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-				return;
-			}
-
-            int i, n = dbLanguageVector.size();
-            for (i = 0; i < n; ++i)
+            if (!loadNameAndLanguages(dbMap, languagesJson, namesJson))
             {
-                mongo::BSONObj dbLanguage = dbLanguageVector[i].Obj();
-                const char *languageId = dbLanguage.getStringField("id");
-                const char *languageName = dbLanguage.getStringField("name");
-                _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
-                _languageIdVector.push_back(languageId);
-                _languageIdSet.insert(languageId);
-
-                const char *mapName = dbName.getStringField(languageId);
-                _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
-
-                if (languagesJson.empty()) languagesJson = "[{\"id\":\"";
-                else languagesJson += "\"},{\"id\":\"";
-                languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
-
-                if (namesJson.empty()) namesJson = "{\"";
-                else namesJson += "\",\"";
-                namesJson += std::string(languageId) + "\":\"" + mapName;
-            }
-            if (!languagesJson.empty()) languagesJson += "\"}]";
-            if (!namesJson.empty()) namesJson += "\"}";
-
-            std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
-            _sampleLengthVector.resize(dbResolutionVector.size());
-            n = dbResolutionVector.size();
-            for (i = 0; i < n; ++i)
-            {
-                mongo::BSONObj dbResolution = dbResolutionVector[i].Obj();
-                int index = dbResolution.getIntField("index");
-                double sampleLength = dbResolution.getField("sample_length").Double();
-                _sampleLengthVector[index] = sampleLength;
+                _error = true;
+                return;
             }
 
             std::vector<mongo::BSONElement> dbLookVector = dbMap.getField("looks").Array();
-            n = dbLookVector.size();
+            int i, n = dbLookVector.size();
             for (i = 0; i < n; ++i)
             {
                 mongo::BSONObj dbLook = dbLookVector[i].Obj();
@@ -534,5 +488,66 @@ namespace map_server
                         << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
             _infoJson = jsonStream.str();
         }
+    }
+
+    bool Map::loadNameAndLanguages(mongo::BSONObj dbMap, std::string& languagesJson, std::string& namesJson)
+    {
+        mongo::BSONElement nameElt = dbMap.getField("name");
+        if (nameElt.type() != mongo::Object)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        mongo::BSONObj dbName = nameElt.Obj();
+
+        mongo::BSONElement languagesElt = dbMap.getField("languages");
+        if (languagesElt.type() != mongo::Array)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        std::vector<mongo::BSONElement> dbLanguageVector = languagesElt.Array();
+        if (dbLanguageVector.empty())
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+
+        int i, n = dbLanguageVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONObj dbLanguage = dbLanguageVector[i].Obj();
+            const char *languageId = dbLanguage.getStringField("id");
+            const char *languageName = dbLanguage.getStringField("name");
+            _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
+            _languageIdVector.push_back(languageId);
+            _languageIdSet.insert(languageId);
+
+            const char *mapName = dbName.getStringField(languageId);
+            _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
+
+            if (languagesJson.empty()) languagesJson = "[{\"id\":\"";
+            else languagesJson += "\"},{\"id\":\"";
+            languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
+
+            if (namesJson.empty()) namesJson = "{\"";
+            else namesJson += "\",\"";
+            namesJson += std::string(languageId) + "\":\"" + mapName;
+        }
+        if (!languagesJson.empty()) languagesJson += "\"}]";
+        if (!namesJson.empty()) namesJson += "\"}";
+
+        std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
+        _sampleLengthVector.resize(dbResolutionVector.size());
+        n = dbResolutionVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONObj dbResolution = dbResolutionVector[i].Obj();
+            int index = dbResolution.getIntField("index");
+            double sampleLength = dbResolution.getField("sample_length").Double();
+            _sampleLengthVector[index] = sampleLength;
+        }
+
+        return true;
     }
 }

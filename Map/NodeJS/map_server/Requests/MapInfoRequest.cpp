@@ -14,12 +14,19 @@ namespace map_server
         Map *map = mapData->getMap(_mapId);
         if (map != 0)
         {
-            std::string info = map->getInfoJson();
-            MapData::unlock();
+            if (!map->error())
+            {
+                std::string info = map->getInfoJson();
+                MapData::unlock();
 
-            _coutMutexPtr->lock();
-            std::cout << _socketId << " " << _requestId << " " << map_server::MAP_INFO << " " << info << std::endl;
-            _coutMutexPtr->unlock();
+                _coutMutexPtr->lock();
+                std::cout << _socketId << " " << _requestId << " " << map_server::MAP_INFO << " " << info << std::endl;
+                _coutMutexPtr->unlock();
+            }
+            else
+            {
+                MapData::unlock();
+            }
 
 			flushErrors(map);
         }

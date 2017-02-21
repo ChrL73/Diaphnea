@@ -27,12 +27,14 @@ namespace map_server
 
         mongo::DBClientConnection * const _connectionPtr;
         bool _loaded;
+		bool _error;
         std::string _emptyString;
 
         mongo::DBClientConnection *getConnectionPtr(void) { return _connectionPtr; }
         std::vector<std::string> *getLanguageIdVectorPtr(void) { return &_languageIdVector; }
         const Look *getLook(int lookId) const;
         void addItemLook(const ItemLook *look);
+        bool loadNameAndLanguages(mongo::BSONObj dbMap, std::string& languagesJson, std::string& namesJson);
 
         std::map<std::string, std::string> _languageNameMap;
         std::vector<std::string> _languageIdVector;
@@ -60,11 +62,12 @@ namespace map_server
 
     public:
         Map(const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
-            _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false), _itemToElement0MapLoaded(false) {}
+            _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false), _error(false), _itemToElement0MapLoaded(false) {}
 		~Map();
 
         const std::string& getId(void) const { return _id; }
         bool isLoaded(void) const { return _loaded; }
+        bool error(void) const { return _error; }
         void load(void);
         void addPointItem(PointItem *pointItem);
 

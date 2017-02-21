@@ -29,8 +29,15 @@ namespace map_server
                 textLookVector.push_back(polygonLook->getTextLook());
             }
 
-            std::string contourId = dbElement.getField("contour").OID().toString();
+            mongo::OID contourId = dbElement.getField("contour").OID();
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
+
+            if (_filledPolygonItem == 0)
+            {
+                _error = true;
+                return;
+            }
+
             _filledPolygonItem->setCurrentLooks(fillLookVector);
 			_filledPolygonItem->setCurrentTextLooks(textLookVector);
 			_filledPolygonItem->setNameMap(&_nameMap);

@@ -33,7 +33,7 @@ namespace map_server
         virtual mongo::DBClientConnection *getConnectionPtr(void) = 0;
         virtual std::vector<std::string> *getLanguageIdVectorPtr(void) = 0;
         virtual LineItem *getLineItem(const mongo::OID& mongoId) = 0;
-        virtual FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId) = 0;
+        virtual FilledPolygonItem *getFilledPolygonItem(const mongo::OID& mongoId) = 0;
         virtual const Look *getLook(int lookId) const = 0;
         virtual void addItemLook(const ItemLook *look) = 0;
         virtual void addPointItem(PointItem *pointItem) = 0;

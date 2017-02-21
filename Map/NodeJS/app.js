@@ -1,12 +1,6 @@
 var http = require('http');
 var server = http.createServer(function(req, res) { res.statusCode = 404; res.end(); });
 
-var cppServer = require('./cpp_server_interface');
-var config = require('./config');
-cppServer.setConfig(config);
-
-var debugDelay = config.debugDelay ? config.debugDelay : 0;
-
 var messageNames =
 [
    'mapIds', // 0
@@ -20,6 +14,13 @@ var messageNames =
    'removeText', //8
    'error' //9
 ];
+
+var cppServer = require('./cpp_server_interface');
+var config = require('./config');
+config.errorMessageIndex = 9;
+cppServer.setConfig(config);
+
+var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
 var messageTypes = {};
 messageNames.forEach(function(name, i)

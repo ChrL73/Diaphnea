@@ -37,8 +37,6 @@ function sendRequest(request, recursiveCall)
 
          readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)
          {
-            if (config.displayReponses) console.log('Response: ' + response);
-
             var i = response.indexOf(' ');
             var socketId = response.substring(0, i);
             response = response.substring(i + 1);
@@ -48,6 +46,8 @@ function sendRequest(request, recursiveCall)
             i = response.indexOf(' ');
             var requestType = response.substring(0, i);
             var responseContent = JSON.parse(response.substring(i + 1));
+            
+            if (config.displayReponses || requestType == config.errorMessageIndex) console.log('Response: ' + response);
 
             sendResponse(socketId, requestId, requestType, responseContent);
          });

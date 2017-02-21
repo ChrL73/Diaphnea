@@ -14,7 +14,7 @@ namespace map_server
     class Map : public IMap
     {
     private:
-		static constexpr int _maxId = 0xfffff;
+		static constexpr int _maxIntDbValue = 0xfffff;
 
         const mongo::OID _mongoId;
         const std::string _id;
@@ -52,7 +52,7 @@ namespace map_server
         std::map<std::string, FilledPolygonItem *> _filledPolygonItemMap;
         std::map<int, MapItem *> _itemMap;
 
-        void addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
+        bool addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
 
         std::string _infoJson;
 
@@ -77,7 +77,7 @@ namespace map_server
         const std::string& getInfoJson(void) const { return _infoJson; }
         MapElement *getElement(const std::string& id);
         LineItem *getLineItem(const mongo::OID& mongoId);
-        FilledPolygonItem *getFilledPolygonItem(const std::string& mongoId);
+        FilledPolygonItem *getFilledPolygonItem(const mongo::OID& mongoId);
         MapItem *getItem(int itemId);
         const ItemLook *getItemLook(int lookId) const;
         int getResolutionIndex(double scale);

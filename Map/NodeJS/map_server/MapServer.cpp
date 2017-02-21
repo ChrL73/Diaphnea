@@ -3,6 +3,8 @@
 #include "Request.h"
 #include "MapData.h"
 #include "TextDisplayer.h"
+#include "MessageTypeEnum.h"
+#include "ErrorEnum.h"
 
 #include <iostream>
 #include <vector>
@@ -127,34 +129,45 @@ namespace map_server
         }
     }
 
-    void MapServer::processRequest(std::string requestString)
-    {
-        std::vector<const char *> tokenVector;
-		int i, n = requestString.size() + 1;
-        char *req = new char[n];
+	void MapServer::processRequest(std::string requestString)
+	{
+		try
+		{
+			std::vector<const char *> tokenVector;
+			int i, n = requestString.size() + 1;
+			char *req = new char[n];
 
 #if _WIN32
-        strcpy_s(req, n, requestString.c_str());
+			strcpy_s(req, n, requestString.c_str());
 #else
-        strcpy(req, requestString.c_str());
+			strcpy(req, requestString.c_str());
 #endif
 
-        char *tokenStart = req;
-        for (i = 0; i < n; ++i)
-        {
-            if (req[i] == ' ' || req[i] == 0)
-            {
-                req[i] = 0;
-                if (i != 0 && req[i - 1] != 0) tokenVector.push_back(tokenStart);
-                tokenStart = req + i + 1;
-            }
-        }
+			char *tokenStart = req;
+			for (i = 0; i < n; ++i)
+			{
+				if (req[i] == ' ' || req[i] == 0)
+				{
+					req[i] = 0;
+					if (i != 0 && req[i - 1] != 0) tokenVector.push_back(tokenStart);
+					tokenStart = req + i + 1;
+				}
+			}
 
-        Request *request = Request::createRequest(tokenVector);
+			Request *request = Request::createRequest(tokenVector);
 
-        if (request != 0) request->execute();
+			if (request != 0) request->execute();
 
-        delete[] req;
-        delete request;
-    }
+			delete[] req;
+			delete request;
+		}
+		catch (...)
+		{
+			_coutMutex.lock();
+			std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::UNHANDLED_EXCEPTION
+				<< ",\"message\":\"Unhandled exception while processing this request: " << requestString << "\"}" << std::endl;
+			_coutMutex.unlock();
+			exit(0);
+		}
+	}
 }

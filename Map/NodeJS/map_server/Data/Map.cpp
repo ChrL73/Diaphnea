@@ -399,122 +399,140 @@ namespace map_server
                 resolutionThresholdElt.type() != mongo::NumberDouble || sizeParameter1Elt.type() != mongo::NumberDouble || sizeParameter2Elt.type() != mongo::NumberDouble)
             {
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+				return;
             }
-            else
+            
+            _zoomMinDistance = zoomMinDistanceElt.Double();
+            _zoomMaxDistance = zoomMaxDistanceElt.Double();
+            _resolutionThreshold = resolutionThresholdElt.Double();
+            _sizeParameter1 = sizeParameter1Elt.Double();
+            _sizeParameter2 = sizeParameter2Elt.Double();
+
+            mongo::BSONElement nameElt = dbMap.getField("name");
+			if (nameElt.type() != mongo::Object)
+			{
+				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+				return;
+			}
+			mongo::BSONObj dbName = nameElt.Obj();
+
+            mongo::BSONElement languagesElt = dbMap.getField("languages");
+			if (languagesElt.type() != mongo::Array)
+			{
+				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+				return;
+			}
+			std::vector<mongo::BSONElement> dbLanguageVector = languagesElt.Array();
+			if (dbLanguageVector.empty())
+			{
+				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+				return;
+			}
+
+            int i, n = dbLanguageVector.size();
+            for (i = 0; i < n; ++i)
             {
-                _zoomMinDistance = zoomMinDistanceElt.Double();
-                _zoomMaxDistance = zoomMaxDistanceElt.Double();
-                _resolutionThreshold = resolutionThresholdElt.Double();
-                _sizeParameter1 = sizeParameter1Elt.Double();
-                _sizeParameter2 = sizeParameter2Elt.Double();
+                mongo::BSONObj dbLanguage = dbLanguageVector[i].Obj();
+                const char *languageId = dbLanguage.getStringField("id");
+                const char *languageName = dbLanguage.getStringField("name");
+                _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
+                _languageIdVector.push_back(languageId);
+                _languageIdSet.insert(languageId);
 
-                mongo::BSONObj dbName = dbMap.getField("name").Obj();
-                std::vector<mongo::BSONElement> dbLanguageVector = dbMap.getField("languages").Array();
-                int i, n = dbLanguageVector.size();
-                for (i = 0; i < n; ++i)
-                {
-                    mongo::BSONObj dbLanguage = dbLanguageVector[i].Obj();
-                    const char *languageId = dbLanguage.getStringField("id");
-                    const char *languageName = dbLanguage.getStringField("name");
-                    _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
-                    _languageIdVector.push_back(languageId);
-                    _languageIdSet.insert(languageId);
+                const char *mapName = dbName.getStringField(languageId);
+                _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
 
-                    const char *mapName = dbName.getStringField(languageId);
-                    _nameMap.insert(std::pair<std::string, std::string>(languageId, mapName));
+                if (languagesJson.empty()) languagesJson = "[{\"id\":\"";
+                else languagesJson += "\"},{\"id\":\"";
+                languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
 
-                    if (languagesJson.empty()) languagesJson = "[{\"id\":\"";
-                    else languagesJson += "\"},{\"id\":\"";
-                    languagesJson += std::string(languageId) + "\",\"name\":\"" + languageName;
-
-                    if (namesJson.empty()) namesJson = "{\"";
-                    else namesJson += "\",\"";
-                    namesJson += std::string(languageId) + "\":\"" + mapName;
-                }
-                if (!languagesJson.empty()) languagesJson += "\"}]";
-                if (!namesJson.empty()) namesJson += "\"}";
-
-                std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
-                _sampleLengthVector.resize(dbResolutionVector.size());
-                n = dbResolutionVector.size();
-                for (i = 0; i < n; ++i)
-                {
-                    mongo::BSONObj dbResolution = dbResolutionVector[i].Obj();
-                    int index = dbResolution.getIntField("index");
-                    double sampleLength = dbResolution.getField("sample_length").Double();
-                    _sampleLengthVector[index] = sampleLength;
-                }
-
-                std::vector<mongo::BSONElement> dbLookVector = dbMap.getField("looks").Array();
-                n = dbLookVector.size();
-                for (i = 0; i < n; ++i)
-                {
-                    mongo::BSONObj dbLook = dbLookVector[i].Obj();
-                    int id = dbLook.getIntField("id");
-                    const char *type = dbLook.getStringField("type");
-                    int textAlpha = dbLook.getIntField("text_alpha");
-                    int textRed = dbLook.getIntField("text_red");
-                    int textGreen = dbLook.getIntField("text_green");
-                    int textBlue = dbLook.getIntField("text_blue");
-                    double textSize = dbLook.getField("text_size").Double();
-
-                    if (strcmp(type, "point") == 0)
-                    {
-                        int pointZIndex = dbLook.getIntField("point_z_index");
-                        int pointAlpha = dbLook.getIntField("point_alpha");
-                        int pointRed = dbLook.getIntField("point_red");
-                        int pointGreen = dbLook.getIntField("point_green");
-                        int pointBlue = dbLook.getIntField("point_blue");
-                        double pointSize = dbLook.getField("point_size").Double();
-
-                        PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSize, pointZIndex, pointAlpha,
-                                                        pointRed, pointGreen, pointBlue, pointSize, this);
-                        _lookMap.insert(std::pair<int, const Look *> (id, look));
-                    }
-                    else if (strcmp(type, "line") == 0)
-                    {
-                        int lineZIndex = dbLook.getIntField("line_z_index");
-                        int lineAlpha = dbLook.getIntField("line_alpha");
-                        int lineRed = dbLook.getIntField("line_red");
-                        int lineGreen = dbLook.getIntField("line_green");
-                        int lineBlue = dbLook.getIntField("line_blue");
-                        double lineSize = dbLook.getField("line_size").Double();
-
-                        LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSize, lineZIndex, lineAlpha,
-                                                       lineRed, lineGreen, lineBlue, lineSize, this);
-                        _lookMap.insert(std::pair<int, const Look *> (id, look));
-                    }
-                    else if (strcmp(type, "polygon") == 0)
-                    {
-                        int contourZIndex = dbLook.getIntField("contour_z_index");
-                        int contourAlpha = dbLook.getIntField("contour_alpha");
-                        int contourRed = dbLook.getIntField("contour_red");
-                        int contourGreen = dbLook.getIntField("contour_green");
-                        int contourBlue = dbLook.getIntField("contour_blue");
-                        double contourSize = dbLook.getField("contour_size").Double();
-                        int fillZIndex = dbLook.getIntField("fill_z_index");
-                        int fillAlpha = dbLook.getIntField("fill_alpha");
-                        int fillRed = dbLook.getIntField("fill_red");
-                        int fillGreen = dbLook.getIntField("fill_green");
-                        int fillBlue = dbLook.getIntField("fill_blue");
-
-                        PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize,
-                                                            contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSize,
-                                                            fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
-                        _lookMap.insert(std::pair<int, const Look *> (id, look));
-                      }
-                }
-
-                if (elementIdsJson.empty()) elementIdsJson = "undefined";
-                if (languagesJson.empty()) languagesJson = "undefined";
-                if (namesJson.empty()) namesJson = "undefined";
-
-                std::stringstream jsonStream;
-                jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson << ",\"names\":" << namesJson
-                           << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
-                           << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
-                _infoJson = jsonStream.str();
+                if (namesJson.empty()) namesJson = "{\"";
+                else namesJson += "\",\"";
+                namesJson += std::string(languageId) + "\":\"" + mapName;
             }
+            if (!languagesJson.empty()) languagesJson += "\"}]";
+            if (!namesJson.empty()) namesJson += "\"}";
+
+            std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
+            _sampleLengthVector.resize(dbResolutionVector.size());
+            n = dbResolutionVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                mongo::BSONObj dbResolution = dbResolutionVector[i].Obj();
+                int index = dbResolution.getIntField("index");
+                double sampleLength = dbResolution.getField("sample_length").Double();
+                _sampleLengthVector[index] = sampleLength;
+            }
+
+            std::vector<mongo::BSONElement> dbLookVector = dbMap.getField("looks").Array();
+            n = dbLookVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                mongo::BSONObj dbLook = dbLookVector[i].Obj();
+                int id = dbLook.getIntField("id");
+                const char *type = dbLook.getStringField("type");
+                int textAlpha = dbLook.getIntField("text_alpha");
+                int textRed = dbLook.getIntField("text_red");
+                int textGreen = dbLook.getIntField("text_green");
+                int textBlue = dbLook.getIntField("text_blue");
+                double textSize = dbLook.getField("text_size").Double();
+
+                if (strcmp(type, "point") == 0)
+                {
+                    int pointZIndex = dbLook.getIntField("point_z_index");
+                    int pointAlpha = dbLook.getIntField("point_alpha");
+                    int pointRed = dbLook.getIntField("point_red");
+                    int pointGreen = dbLook.getIntField("point_green");
+                    int pointBlue = dbLook.getIntField("point_blue");
+                    double pointSize = dbLook.getField("point_size").Double();
+
+                    PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSize, pointZIndex, pointAlpha,
+                                                    pointRed, pointGreen, pointBlue, pointSize, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
+                }
+                else if (strcmp(type, "line") == 0)
+                {
+                    int lineZIndex = dbLook.getIntField("line_z_index");
+                    int lineAlpha = dbLook.getIntField("line_alpha");
+                    int lineRed = dbLook.getIntField("line_red");
+                    int lineGreen = dbLook.getIntField("line_green");
+                    int lineBlue = dbLook.getIntField("line_blue");
+                    double lineSize = dbLook.getField("line_size").Double();
+
+                    LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSize, lineZIndex, lineAlpha,
+                                                    lineRed, lineGreen, lineBlue, lineSize, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
+                }
+                else if (strcmp(type, "polygon") == 0)
+                {
+                    int contourZIndex = dbLook.getIntField("contour_z_index");
+                    int contourAlpha = dbLook.getIntField("contour_alpha");
+                    int contourRed = dbLook.getIntField("contour_red");
+                    int contourGreen = dbLook.getIntField("contour_green");
+                    int contourBlue = dbLook.getIntField("contour_blue");
+                    double contourSize = dbLook.getField("contour_size").Double();
+                    int fillZIndex = dbLook.getIntField("fill_z_index");
+                    int fillAlpha = dbLook.getIntField("fill_alpha");
+                    int fillRed = dbLook.getIntField("fill_red");
+                    int fillGreen = dbLook.getIntField("fill_green");
+                    int fillBlue = dbLook.getIntField("fill_blue");
+
+                    PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize,
+                                                        contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSize,
+                                                        fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
+                    _lookMap.insert(std::pair<int, const Look *> (id, look));
+                }
+            }
+
+            if (elementIdsJson.empty()) elementIdsJson = "undefined";
+            if (languagesJson.empty()) languagesJson = "undefined";
+            if (namesJson.empty()) namesJson = "undefined";
+
+            std::stringstream jsonStream;
+            jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson << ",\"names\":" << namesJson
+                        << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
+                        << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
+            _infoJson = jsonStream.str();
         }
     }
 }

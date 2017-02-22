@@ -17,7 +17,6 @@ namespace map_server
         const mongo::OID _mongoId;
         const std::string _id;
         double _importance;
-        //int _numericalId;
 
         IMap * const _iMap;
         bool _loaded;
@@ -25,11 +24,11 @@ namespace map_server
         std::map<std::string, std::vector<ElementName *> > _nameMap;
         std::string _infoJson;
 
-        void loadCommon(mongo::BSONObj dbElement);
+        bool loadCommon(mongo::BSONObj dbElement);
 
     public:
         MapElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            _mongoId(mongoId), _id(id)/*, _numericalId(-1)*/, _iMap(iMap), _loaded(false), _error(false) {}
+            _mongoId(mongoId), _id(id), _iMap(iMap), _loaded(false), _error(false) {}
         virtual ~MapElement();
 
         bool isLoaded(void) const { return _loaded; }

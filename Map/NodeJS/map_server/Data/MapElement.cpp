@@ -19,15 +19,22 @@ namespace map_server
         }
     }
 
-    void MapElement::loadCommon(mongo::BSONObj dbElement)
+    bool MapElement::loadCommon(mongo::BSONObj dbElement)
     {
-        //_numericalId = dbElement.getIntField("num_id");
-        _importance = dbElement.getField("importance").Double();
+        mongo::BSONElement importanceElt = dbElement.getField("importance");
+        mongo::BSONElement nameElt = dbElement.getField("name");
+        mongo::BSONElement shortNameElt = dbElement.getField("short_name");
+
+        if (importanceElt.type() != mongo::NumberDouble || nameElt.type() != mongo::Object || shortNameElt.type() != mongo::Object)
+        {
+            return false;
+        }
+
+        _importance = importanceElt.Double();
+        mongo::BSONObj dbName = nameElt.Obj();
+        mongo::BSONObj dbShortName = shortNameElt.Obj();
 
         std::string namesJson;
-
-        mongo::BSONObj dbName = dbElement.getField("name").Obj();
-        mongo::BSONObj dbShortName = dbElement.getField("short_name").Obj();
 
         int i, n = _iMap->getLanguageIdVectorPtr()->size();
         for (i = 0; i < n; ++i)
@@ -35,6 +42,7 @@ namespace map_server
             const char *languageId = (*_iMap->getLanguageIdVectorPtr())[i].c_str();
             std::string name = dbName.getStringField(languageId);
             std::string shortName = dbShortName.getStringField(languageId);
+            // Empty 'name' and/or 'shortName' is not an error
 
             std::vector<ElementName *> nameVector;
             addNames(name, nameVector);
@@ -50,6 +58,8 @@ namespace map_server
 
         if (namesJson.empty()) namesJson = "undefined";
         _infoJson = "{\"names\":" + namesJson + "}";
+
+        return true;
     }
 
     void MapElement::addNames(const std::string& name, std::vector<ElementName *>& nameVector)

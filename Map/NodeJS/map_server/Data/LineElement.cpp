@@ -13,26 +13,55 @@ namespace map_server
         {
             mongo::BSONObj dbElement = cursor->next();
 
-            loadCommon(dbElement);
+            if (!loadCommon(dbElement))
+            {
+                _error = true;
+                return;
+            }
 
-            std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            mongo::BSONElement lookIdsElt = dbElement.getField("look_ids");
+            if (lookIdsElt.type() != mongo::Array)
+            {
+                _error = true;
+                return;
+            }
+            std::vector<mongo::BSONElement> dbLookIds = lookIdsElt.Array();
+
             std::vector<const ItemLook *> lineLookVector;
             std::vector<const ItemLook *> textLookVector;
 
             int i, n = dbLookIds.size();
             for (i = 0; i < n; ++i)
             {
+                if (dbLookIds[i].type() != mongo::NumberInt)
+                {
+                    _error = true;
+                    return;
+                }
                 int lookId = dbLookIds[i].Int();
+
                 const LineLook *lineLook = dynamic_cast<const LineLook *>(_iMap->getLook(lookId));
                 _lookVector.push_back(lineLook);
                 lineLookVector.push_back(lineLook->getLineLook());
                 textLookVector.push_back(lineLook->getTextLook());
             }
 
-            std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
+            mongo::BSONElement itemsElt = dbElement.getField("items");
+            if (itemsElt.type() != mongo::Array)
+            {
+                _error = true;
+                return;
+            }
+            std::vector<mongo::BSONElement> dbLineItems = itemsElt.Array();
+
             n = dbLineItems.size();
             for (i = 0; i < n; ++i)
             {
+                if (dbLineItems[i].type() != mongo::jstOID)
+                {
+                    _error = true;
+                    return;
+                }
                 mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 
@@ -45,11 +74,14 @@ namespace map_server
 				lineItem->setCurrentLooks(lineLookVector);
 				lineItem->setCurrentTextLooks(textLookVector);
 				lineItem->setNameMap(&_nameMap);
-                //lineItem->setElementIdForText(_numericalId);
                 lineItem->setElementIdForText(_id);
                 lineItem->setImportance(_importance);
 				_itemVector.push_back(lineItem);
             }
+        }
+        else
+        {
+            _error = true;
         }
     }
 }

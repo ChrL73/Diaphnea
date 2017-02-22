@@ -303,91 +303,13 @@ namespace map_server
         _loaded = true;
         std::string elementIdsJson, languagesJson, namesJson;
 
-        mongo::BSONObj projection = BSON("id" << 1 << "item_id" << 1);
-
-		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
-        while (cursor->more())
-        {
-            mongo::BSONObj dbElement = cursor->next();
-            std::string id = dbElement.getStringField("id");
-            int itemId = dbElement.getIntField("item_id");
-            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
-
-            if (itemId >= 0 && itemId <= _maxIntDbValue && !id.empty() && mongoIdElt.type() == mongo::jstOID)
-            {
-                PointElement *element = new PointElement(mongoIdElt.OID(), id, this);
-                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
-
-                if (elementIdsJson.empty()) elementIdsJson = "[\"";
-                else elementIdsJson += "\",\"";
-                elementIdsJson += element->getId();
-
-                _itemToElement0Map.insert(std::pair<int, std::string>(itemId, id));
-            }
-            else
-            {
-                _error = true;
-                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-            }
-        }
-
-        cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
-        while (cursor->more())
-        {
-            mongo::BSONObj dbElement = cursor->next();
-            std::string id = dbElement.getStringField("id");
-            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
-
-            if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
-            {
-                PolygonElement *element = new PolygonElement(mongoIdElt.OID(), id, this);
-                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
-
-                if (elementIdsJson.empty()) elementIdsJson = "[\"";
-                else elementIdsJson += "\",\"";
-                elementIdsJson += element->getId();
-            }
-            else
-            {
-                _error = true;
-                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-            }
-        }
-
-        cursor = _connectionPtr->query("diaphnea.line_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
-        while (cursor->more())
-        {
-            mongo::BSONObj dbElement = cursor->next();
-            std::string id = dbElement.getStringField("id");
-            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
-
-            if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
-            {
-                LineElement *element = new LineElement(mongoIdElt.OID(), id, this);
-                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
-
-                if (elementIdsJson.empty()) elementIdsJson = "[\"";
-                else elementIdsJson += "\",\"";
-                elementIdsJson += element->getId();
-            }
-            else
-            {
-                _error = true;
-                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-            }
-        }
-
-        if (!elementIdsJson.empty())
-        {
-            elementIdsJson += "\"]";
-        }
-        else
+        if (!loadElements(elementIdsJson))
         {
             _error = true;
-            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return;
         }
 
-        cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbMap = cursor->next();
@@ -418,64 +340,16 @@ namespace map_server
                 return;
             }
 
-            std::vector<mongo::BSONElement> dbLookVector = dbMap.getField("looks").Array();
-            int i, n = dbLookVector.size();
-            for (i = 0; i < n; ++i)
+            if (!loadResolutions(dbMap))
             {
-                mongo::BSONObj dbLook = dbLookVector[i].Obj();
-                int id = dbLook.getIntField("id");
-                const char *type = dbLook.getStringField("type");
-                int textAlpha = dbLook.getIntField("text_alpha");
-                int textRed = dbLook.getIntField("text_red");
-                int textGreen = dbLook.getIntField("text_green");
-                int textBlue = dbLook.getIntField("text_blue");
-                double textSize = dbLook.getField("text_size").Double();
+                _error = true;
+                return;
+            }
 
-                if (strcmp(type, "point") == 0)
-                {
-                    int pointZIndex = dbLook.getIntField("point_z_index");
-                    int pointAlpha = dbLook.getIntField("point_alpha");
-                    int pointRed = dbLook.getIntField("point_red");
-                    int pointGreen = dbLook.getIntField("point_green");
-                    int pointBlue = dbLook.getIntField("point_blue");
-                    double pointSize = dbLook.getField("point_size").Double();
-
-                    PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSize, pointZIndex, pointAlpha,
-                                                    pointRed, pointGreen, pointBlue, pointSize, this);
-                    _lookMap.insert(std::pair<int, const Look *> (id, look));
-                }
-                else if (strcmp(type, "line") == 0)
-                {
-                    int lineZIndex = dbLook.getIntField("line_z_index");
-                    int lineAlpha = dbLook.getIntField("line_alpha");
-                    int lineRed = dbLook.getIntField("line_red");
-                    int lineGreen = dbLook.getIntField("line_green");
-                    int lineBlue = dbLook.getIntField("line_blue");
-                    double lineSize = dbLook.getField("line_size").Double();
-
-                    LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSize, lineZIndex, lineAlpha,
-                                                    lineRed, lineGreen, lineBlue, lineSize, this);
-                    _lookMap.insert(std::pair<int, const Look *> (id, look));
-                }
-                else if (strcmp(type, "polygon") == 0)
-                {
-                    int contourZIndex = dbLook.getIntField("contour_z_index");
-                    int contourAlpha = dbLook.getIntField("contour_alpha");
-                    int contourRed = dbLook.getIntField("contour_red");
-                    int contourGreen = dbLook.getIntField("contour_green");
-                    int contourBlue = dbLook.getIntField("contour_blue");
-                    double contourSize = dbLook.getField("contour_size").Double();
-                    int fillZIndex = dbLook.getIntField("fill_z_index");
-                    int fillAlpha = dbLook.getIntField("fill_alpha");
-                    int fillRed = dbLook.getIntField("fill_red");
-                    int fillGreen = dbLook.getIntField("fill_green");
-                    int fillBlue = dbLook.getIntField("fill_blue");
-
-                    PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSize,
-                                                        contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSize,
-                                                        fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
-                    _lookMap.insert(std::pair<int, const Look *> (id, look));
-                }
+            if (!loadLooks(dbMap))
+            {
+                _error = true;
+                return;
             }
 
             if (elementIdsJson.empty()) elementIdsJson = "undefined";
@@ -488,6 +362,95 @@ namespace map_server
                         << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
             _infoJson = jsonStream.str();
         }
+    }
+
+    bool Map::loadElements(std::string& elementIdsJson)
+    {
+        mongo::BSONObj projection = BSON("id" << 1 << "item_id" << 1);
+
+		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbElement = cursor->next();
+            std::string id = dbElement.getStringField("id");
+            int itemId = dbElement.getIntField("item_id");
+            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
+
+            if (itemId >= 0 && itemId <= _maxIntDbValue && !id.empty() && mongoIdElt.type() == mongo::jstOID)
+            {
+                PointElement *element = new PointElement(mongoIdElt.OID(), id, this);
+                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+                if (elementIdsJson.empty()) elementIdsJson = "[\"";
+                else elementIdsJson += "\",\"";
+                elementIdsJson += element->getId();
+
+                _itemToElement0Map.insert(std::pair<int, std::string>(itemId, id));
+            }
+            else
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+        }
+
+        cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbElement = cursor->next();
+            std::string id = dbElement.getStringField("id");
+            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
+
+            if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
+            {
+                PolygonElement *element = new PolygonElement(mongoIdElt.OID(), id, this);
+                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+                if (elementIdsJson.empty()) elementIdsJson = "[\"";
+                else elementIdsJson += "\",\"";
+                elementIdsJson += element->getId();
+            }
+            else
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+        }
+
+        cursor = _connectionPtr->query("diaphnea.line_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        while (cursor->more())
+        {
+            mongo::BSONObj dbElement = cursor->next();
+            std::string id = dbElement.getStringField("id");
+            mongo::BSONElement mongoIdElt = dbElement.getField("_id");
+
+            if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
+            {
+                LineElement *element = new LineElement(mongoIdElt.OID(), id, this);
+                _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
+
+                if (elementIdsJson.empty()) elementIdsJson = "[\"";
+                else elementIdsJson += "\",\"";
+                elementIdsJson += element->getId();
+            }
+            else
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+        }
+
+        if (!elementIdsJson.empty())
+        {
+            elementIdsJson += "\"]";
+        }
+        else
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+
+        return true;
     }
 
     bool Map::loadNameAndLanguages(mongo::BSONObj dbMap, std::string& languagesJson, std::string& namesJson)
@@ -516,9 +479,22 @@ namespace map_server
         int i, n = dbLanguageVector.size();
         for (i = 0; i < n; ++i)
         {
-            mongo::BSONObj dbLanguage = dbLanguageVector[i].Obj();
-            const char *languageId = dbLanguage.getStringField("id");
-            const char *languageName = dbLanguage.getStringField("name");
+            mongo::BSONElement languageElt = dbLanguageVector[i];
+            if (languageElt.type() != mongo::Object)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            mongo::BSONObj dbLanguage = languageElt.Obj();
+
+            std::string languageId = dbLanguage.getStringField("id");
+            std::string languageName = dbLanguage.getStringField("name");
+            if (languageId.empty() || languageName.empty())
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+
             _languageNameMap.insert(std::pair<std::string, std::string>(languageId, languageName));
             _languageIdVector.push_back(languageId);
             _languageIdSet.insert(languageId);
@@ -537,15 +513,149 @@ namespace map_server
         if (!languagesJson.empty()) languagesJson += "\"}]";
         if (!namesJson.empty()) namesJson += "\"}";
 
-        std::vector<mongo::BSONElement> dbResolutionVector = dbMap.getField("resolutions").Array();
+        return true;
+    }
+
+    bool Map::loadResolutions(mongo::BSONObj dbMap)
+    {
+        mongo::BSONElement resolutionsElt = dbMap.getField("resolutions");
+        if (resolutionsElt.type() != mongo::Array)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        std::vector<mongo::BSONElement> dbResolutionVector = resolutionsElt.Array();
+
         _sampleLengthVector.resize(dbResolutionVector.size());
-        n = dbResolutionVector.size();
+        int i, n = dbResolutionVector.size();
         for (i = 0; i < n; ++i)
         {
-            mongo::BSONObj dbResolution = dbResolutionVector[i].Obj();
-            int index = dbResolution.getIntField("index");
-            double sampleLength = dbResolution.getField("sample_length").Double();
-            _sampleLengthVector[index] = sampleLength;
+            mongo::BSONElement resolutionElt = dbResolutionVector[i];
+            if (resolutionElt.type() != mongo::Object)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            mongo::BSONObj dbResolution = resolutionElt.Obj();
+
+            unsigned int index = dbResolution.getIntField("index");
+            mongo::BSONElement sampleLengthElt = dbResolution.getField("sample_length");
+            if (sampleLengthElt.type() != mongo::NumberDouble || index >= _sampleLengthVector.size())
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+
+            _sampleLengthVector[index] = sampleLengthElt.Double();
+        }
+
+        return true;
+    }
+
+    bool Map::loadLooks(mongo::BSONObj dbMap)
+    {
+        mongo::BSONElement looksElt = dbMap.getField("looks");
+        if (looksElt.type() != mongo::Array)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        std::vector<mongo::BSONElement> dbLookVector = looksElt.Array();
+
+        int i, n = dbLookVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONElement lookElt = dbLookVector[i];
+            if (lookElt.type() != mongo::Object)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            mongo::BSONObj dbLook = lookElt.Obj();
+
+            int id = dbLook.getIntField("id");
+            std::string type = dbLook.getStringField("type");
+            int textAlpha = dbLook.getIntField("text_alpha");
+            int textRed = dbLook.getIntField("text_red");
+            int textGreen = dbLook.getIntField("text_green");
+            int textBlue = dbLook.getIntField("text_blue");
+            mongo::BSONElement textSizeElt = dbLook.getField("text_size");
+
+            if (id < 0 || id > _maxIntDbValue || type.empty() || textAlpha < 0 || textAlpha > 255 || textRed < 0 || textRed > 255 ||
+                textGreen < 0 || textGreen > 255 || textBlue < 0 || textBlue > 255 || textSizeElt.type() != mongo::NumberDouble)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+
+            if (type == "point")
+            {
+                int pointZIndex = dbLook.getIntField("point_z_index");
+                int pointAlpha = dbLook.getIntField("point_alpha");
+                int pointRed = dbLook.getIntField("point_red");
+                int pointGreen = dbLook.getIntField("point_green");
+                int pointBlue = dbLook.getIntField("point_blue");
+                mongo::BSONElement pointSizeElt = dbLook.getField("point_size");
+
+                if (pointZIndex < -_maxIntDbValue || pointZIndex > _maxIntDbValue || pointAlpha < 0 || pointAlpha > 255 || pointRed < 0 || pointRed > 255 ||
+                    pointGreen < 0 || pointGreen > 255 || pointBlue < 0 || pointBlue > 255 || pointSizeElt.type() != mongo::NumberDouble)
+                {
+                    _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                    return false;
+                }
+
+                PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), pointZIndex, pointAlpha,
+                                                pointRed, pointGreen, pointBlue, pointSizeElt.Double(), this);
+                _lookMap.insert(std::pair<int, const Look *> (id, look));
+            }
+            else if (type == "line")
+            {
+                int lineZIndex = dbLook.getIntField("line_z_index");
+                int lineAlpha = dbLook.getIntField("line_alpha");
+                int lineRed = dbLook.getIntField("line_red");
+                int lineGreen = dbLook.getIntField("line_green");
+                int lineBlue = dbLook.getIntField("line_blue");
+                mongo::BSONElement lineSizeElt = dbLook.getField("line_size");
+
+                if (lineZIndex < -_maxIntDbValue || lineZIndex > _maxIntDbValue || lineAlpha < 0 || lineAlpha > 255 || lineRed < 0 || lineRed > 255 ||
+                    lineGreen < 0 || lineGreen > 255 || lineBlue < 0 || lineBlue > 255 || lineSizeElt.type() != mongo::NumberDouble)
+                {
+                    _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                    return false;
+                }
+
+                LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), lineZIndex, lineAlpha,
+                                                lineRed, lineGreen, lineBlue, lineSizeElt.Double(), this);
+                _lookMap.insert(std::pair<int, const Look *> (id, look));
+            }
+            else if (type == "polygon")
+            {
+                int contourZIndex = dbLook.getIntField("contour_z_index");
+                int contourAlpha = dbLook.getIntField("contour_alpha");
+                int contourRed = dbLook.getIntField("contour_red");
+                int contourGreen = dbLook.getIntField("contour_green");
+                int contourBlue = dbLook.getIntField("contour_blue");
+                mongo::BSONElement contourSizeElt = dbLook.getField("contour_size");
+                int fillZIndex = dbLook.getIntField("fill_z_index");
+                int fillAlpha = dbLook.getIntField("fill_alpha");
+                int fillRed = dbLook.getIntField("fill_red");
+                int fillGreen = dbLook.getIntField("fill_green");
+                int fillBlue = dbLook.getIntField("fill_blue");
+
+                if (contourZIndex < -_maxIntDbValue || contourZIndex > _maxIntDbValue || contourAlpha < 0 || contourAlpha > 255 || contourRed < 0 || contourRed > 255 ||
+                    contourGreen < 0 || contourGreen > 255 || contourBlue < 0 || contourBlue > 255 || contourSizeElt.type() != mongo::NumberDouble ||
+                    fillZIndex < -_maxIntDbValue || fillZIndex > _maxIntDbValue || fillAlpha < 0 || fillAlpha > 255 || fillRed < 0 || fillRed > 255 ||
+                    fillGreen < 0 || fillGreen > 255 || fillBlue < 0 || fillBlue > 255)
+                {
+                    _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                    return false;
+                }
+
+                PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(),
+                                                    contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(),
+                                                    fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
+                _lookMap.insert(std::pair<int, const Look *> (id, look));
+            }
         }
 
         return true;

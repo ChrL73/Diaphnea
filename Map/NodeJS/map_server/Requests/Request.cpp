@@ -294,7 +294,7 @@ namespace map_server
 		MapData::unlock();
 
 		_coutMutexPtr->lock();
-		std::cout << stream.str();
+		std::cout << stream.str() << std::flush;
 		_coutMutexPtr->unlock();
 	}
 }

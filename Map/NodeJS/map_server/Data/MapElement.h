@@ -14,6 +14,8 @@ namespace map_server
         virtual bool allowMultiline(void) = 0;
 
     protected:
+        static constexpr int _maxIntDbValue = 0xfffff;
+
         const mongo::OID _mongoId;
         const std::string _id;
         double _importance;

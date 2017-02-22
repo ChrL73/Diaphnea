@@ -13,23 +13,47 @@ namespace map_server
         {
             mongo::BSONObj dbElement = cursor->next();
 
-            loadCommon(dbElement);
+            if (!loadCommon(dbElement))
+            {
+                _error = true;
+                return;
+            }
 
-            std::vector<mongo::BSONElement> dbLookIds = dbElement.getField("look_ids").Array();
+            mongo::BSONElement lookIdsElt = dbElement.getField("look_ids");
+            if (lookIdsElt.type() != mongo::Array)
+            {
+                _error = true;
+                return;
+            }
+            std::vector<mongo::BSONElement> dbLookIds = lookIdsElt.Array();
+
             std::vector<const ItemLook *> fillLookVector;
             std::vector<const ItemLook *> textLookVector;
 
             int i, n = dbLookIds.size();
             for (i = 0; i < n; ++i)
             {
+                if (dbLookIds[i].type() != mongo::NumberInt)
+                {
+                    _error = true;
+                    return;
+                }
                 int lookId = dbLookIds[i].Int();
+
                 const PolygonLook *polygonLook = dynamic_cast<const PolygonLook *>(_iMap->getLook(lookId));
                 _lookVector.push_back(polygonLook);
                 fillLookVector.push_back(polygonLook->getFillLook());
                 textLookVector.push_back(polygonLook->getTextLook());
             }
 
-            mongo::OID contourId = dbElement.getField("contour").OID();
+            mongo::BSONElement contourElt = dbElement.getField("contour");
+            if (contourElt.type() != mongo::jstOID)
+            {
+                _error = true;
+                return;
+            }
+            mongo::OID contourId = contourElt.OID();
+
             _filledPolygonItem = _iMap->getFilledPolygonItem(contourId);
 
             if (_filledPolygonItem == 0)
@@ -44,10 +68,22 @@ namespace map_server
             _filledPolygonItem->setElementIdForText(_id);
             _filledPolygonItem->setImportance(_importance);
 
-            std::vector<mongo::BSONElement> dbLineItems = dbElement.getField("items").Array();
+            mongo::BSONElement itemsElt = dbElement.getField("items");
+            if (itemsElt.type() != mongo::Array)
+            {
+                _error = true;
+                return;
+            }
+            std::vector<mongo::BSONElement> dbLineItems = itemsElt.Array();
+
             n = dbLineItems.size();
             for (i = 0; i < n; ++i)
             {
+                if (dbLineItems[i].type() != mongo::jstOID)
+                {
+                    _error = true;
+                    return;
+                }
                 mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 
@@ -60,10 +96,22 @@ namespace map_server
                 _lineItemVector.push_back(lineItem);
             }
 
-            std::vector<mongo::BSONElement> dbCoveredElements = dbElement.getField("covered_elements").Array();
+            mongo::BSONElement coveredElementsElt = dbElement.getField("covered_elements");
+            if (coveredElementsElt.type() != mongo::Array)
+            {
+                _error = true;
+                return;
+            }
+            std::vector<mongo::BSONElement> dbCoveredElements = coveredElementsElt.Array();
+
             n = dbCoveredElements.size();
             for (i = 0; i < n; ++i)
             {
+                if (dbCoveredElements[i].type() != mongo::String)
+                {
+                    _error = true;
+                    return;
+                }
                 std::string coveredElement = dbCoveredElements[i].String();
                 _coveredElementVector.push_back(coveredElement);
             }

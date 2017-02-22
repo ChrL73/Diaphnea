@@ -404,7 +404,7 @@ var mapServerInterface =
                      item.y = itemData.y;
                   }
                   
-                  addItem(context.itemKey, context.lookId);
+                  if (!itemsToRemove[context.itemKey]) addItem(context.itemKey, context.lookId);
                }
             });
 
@@ -426,7 +426,7 @@ var mapServerInterface =
                
                context.itemKeyArray.forEach(function(itemKey)
                {
-                  addItem(itemKey, context.lookId);
+                  if (!itemsToRemove[itemKey]) addItem(itemKey, context.lookId);
                });
             });
             

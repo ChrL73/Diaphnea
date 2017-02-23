@@ -185,12 +185,18 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_PACA" look="pl_Region">
+      <polygonElement id="e_PACA" importance="0">
         <name>
           <name language="fr" text="Provence-Alpes-Côte d'Azur"/>
           <name language="en" text="Provence-Alpes-Côte d'Azur"/>
         </name>
-      </polygonElement>-->
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <!--Départements-->
       <polygonElement id="e_01" importance="0">
         <name>
@@ -243,6 +249,57 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_04" importance="0">
+        <name>
+          <name language="fr" text="Alpes-de_Haute-Provence (04)"/>
+          <name language="en" text="Alpes-de_Haute-Provence (04)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="04"/>
+          <name language="en" text="04"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_PACA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_05" importance="0">
+        <name>
+          <name language="fr" text="Hautes-Alpes (05)"/>
+          <name language="en" text="Hautes-Alpes (05)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="05"/>
+          <name language="en" text="05"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_PACA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_06" importance="0">
+        <name>
+          <name language="fr" text="Alpes-Maritimes (06)"/>
+          <name language="en" text="Alpes-Maritimes (06)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="06"/>
+          <name language="en" text="06"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_PACA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_07" importance="0">
         <name>
           <name language="fr" text="Ardèche (07)"/>
@@ -286,7 +343,10 @@
         <looks>
           <look id="pl_Departement"/>
         </looks>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_PACA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_14" importance="0">
         <name>
@@ -1050,6 +1110,40 @@
         </looks>
         <coveredElementList>
           <element id="e_HDF"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_83" importance="0">
+        <name>
+          <name language="fr" text="Var (83)"/>
+          <name language="en" text="Var (83)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="83"/>
+          <name language="en" text="83"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_PACA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_84" importance="0">
+        <name>
+          <name language="fr" text="Vaucluse (84)"/>
+          <name language="en" text="Vaucluse (84)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="84"/>
+          <name language="en" text="84"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_PACA"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>

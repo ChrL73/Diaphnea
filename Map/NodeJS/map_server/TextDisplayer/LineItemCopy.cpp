@@ -54,7 +54,7 @@ namespace map_server
         _height = static_cast<int>(floor(height));
         _hIntersections = new std::set<double> *[_height];
         int i;
-        for (i = 0; i < _height; ++i) _hIntersections[i] = 0;
+        /*for (i = 0; i < _height; ++i) _hIntersections[i] = 0;
 
         int j, m = _pointVector.size();
         for (j = 0; j < m; ++j)
@@ -108,6 +108,68 @@ namespace map_server
         }
 
         if (_yMin < 0.0) _yMin = 0.0;
-        if (_yMax > height - 1.0) _yMax = height - 1.0;
+        if (_yMax > height - 1.0) _yMax = height - 1.0;*/
+
+        _xMin = width - 1.0;
+        _xMax = 0.0;
+
+        _width = static_cast<int>(floor(width));
+        _vIntersections = new std::set<double> *[_width];
+
+        for (i = 0; i < _width; ++i) _vIntersections[i] = 0;
+
+        int j, m = _pointVector.size();
+        for (j = 0; j < m; ++j)
+        {
+            int n = _pointVector[j].size();
+            for (i = 0; i < n - 1; ++i)
+            {
+                const Point *point1 = _pointVector[j][i];
+                double x1 = point1->getX();
+                double y1 = point1->getY();
+
+                if (y1 > 0.0 && y1 < height)
+                {
+                    if (x1 < _xMin) _xMin = x1;
+                    if (x1 > _xMax) _xMax = x1;
+                }
+
+                const Point *point2;
+                point2 = _pointVector[j][i + 1];
+                double x2 = point2->getX();
+                double y2 = point2->getY();
+
+                double xMin, xMax;
+                if (x1 > x2)
+                {
+                    xMin = ceil(x2);
+                    xMax = floor(x1);
+                }
+                else
+                {
+                    xMin = ceil(x1);
+                    xMax = floor(x2);
+                }
+
+                if (xMin <= xMax && xMax >= 0.0 && xMin <= width - 1.0)
+                {
+                    if (xMin < 0.0 ) xMin = 0.0;
+                    if (xMax > _width - 1.0) xMax = _width - 1.0;
+
+                    double x;
+                    double a = (y2 - y1) / (x2- x1);
+                    for (x = xMin; x <= xMax; ++x)
+                    {
+                        double y = y1 + a * (x - x1);
+                        int xI = static_cast<int>(floor(x));
+                        if (_vIntersections[xI] == 0) _vIntersections[xI] = new std::set<double>;
+                        _vIntersections[xI]->insert(y);
+                    }
+                }
+            }
+        }
+
+        if (_xMin < 0.0) _xMin = 0.0;
+        if (_xMax > width - 1.0) _xMax = width - 1.0;
     }
 }

@@ -81,6 +81,10 @@ namespace map_server
             _item->setImportance(_importance);
             _iMap->addPointItem(_item);
         }
+        else
+        {
+            _error = true;
+        }
     }
 
     const PointLook *PointElement::getLook(int i) const

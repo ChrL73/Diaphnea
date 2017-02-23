@@ -116,6 +116,10 @@ namespace map_server
                 _coveredElementVector.push_back(coveredElement);
             }
         }
+        else
+        {
+            _error = true;
+        }
     }
 
     const PolygonLook *PolygonElement::getLook(int i) const

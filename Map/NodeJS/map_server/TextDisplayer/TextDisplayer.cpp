@@ -201,108 +201,215 @@ namespace map_server
 		double optimalX = 0.0;
 		TextPotential pMin(true);
 
-		double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
-		double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
-		if (yDmax < yDmin) return false;
+		//double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+		//double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+		double xDmin = item->getXMin() + 0.5 * textInfo->getWidth() + 3.0;
+		double xDmax = item->getXMax() - 0.5 * textInfo->getWidth() - 3.0;
 
-		int yCount = _parameters->getLineYTryCount();
-		double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
-		if (dy < 2.0)
-		{
-			yCount = 1 + static_cast<int>(0.5 * (yDmax - yDmin));
+        /*if (yDmax >= yDmin)
+        {
+            int yCount = _parameters->getLineYTryCount();
+            double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
+            if (dy < 2.0)
+            {
+                yCount = 1 + static_cast<int>(0.5 * (yDmax - yDmin));
 
-			if (yCount < 2)
-			{
-				yCount = 1;
-				yDmin = 0.5 * (yDmax + yDmin);
-				yDmax = yDmin;
-			}
-			else
-			{
-				dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
-			}
-		}
-
-		double hD = textInfo->getHeight();
-		int hI = static_cast<int>(floor(hD));
-
-		double yD = yDmin;
-		int j;
-		for (j = 0; j < yCount; ++j)
-		{
-			int yI = static_cast<int>(floor(yD));
-
-			std::vector<Interval> intervals;
-			int i1 = 0;
-			intervals.push_back(std::move(Interval(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max())));
-			int y0 = yI - hI / 2;
-			int y1 = y0 + hI;
-			int y;
-			for (y = y0; y <= y1; ++y)
-			{
-				int i0 = i1;
-				i1 = intervals.size();
-
-				std::set<double> *intersections = item->getHIntersections(y);
-
-				if (intersections != 0)
-				{
-					std::set<double>::iterator it = intersections->begin();
-					double a = 1.0;
-					while (true)
-					{
-                        if (a < 1.0) a = 1.0;
-						double b;
-						if (it != intersections->end()) b = *it;
-						else b = _width - 1.0;
-						if (b > _width - 1.0) b = _width - 1.0;
-
-						if (a < _width - 1.0 && b > 1.0)
-						{
-							Interval interval1(a, b);
-							int i;
-							for (i = i0; i < i1; ++i)
-							{
-								Interval interval2 = std::move(intervals[i].getIntersection(interval1));
-								if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
-								{
-									intervals.push_back(std::move(interval2));
-								}
-							}
-						}
-
-						a = b;
-						if (it == intersections->end()) break;
-						++it;
-					}
-				}
-			}
-
-			int i, n = intervals.size();
-			for (i = i1; i < n; ++i)
-			{
-                int k;
-                for (k = 0; k < 2; ++k)
+                if (yCount < 2)
                 {
-                    double x;
-                    if (k == 0) x = intervals[i].getA() + 0.5 * textInfo->getWidth();
-                    else x = intervals[i].getB() - 0.5 * textInfo->getWidth();
+                    yCount = 1;
+                    yDmin = 0.5 * (yDmax + yDmin);
+                    yDmax = yDmin;
+                }
+                else
+                {
+                    dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
+                }
+            }
 
-                    TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, yD, false));
-                    double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
-                    if (yc < 0) yc = -yc;
-                    textPotential.add(_parameters->getCenteringPotential() * yc);
+            double hD = textInfo->getHeight();
+            int hI = static_cast<int>(floor(hD));
 
-                    if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
+            double yD = yDmin;
+            int j;
+            for (j = 0; j < yCount; ++j)
+            {
+                int yI = static_cast<int>(floor(yD));
+
+                std::vector<Interval> intervals;
+                int i1 = 0;
+                intervals.push_back(std::move(Interval(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max())));
+                int y0 = yI - hI / 2;
+                int y1 = y0 + hI;
+                int y;
+                for (y = y0; y <= y1; ++y)
+                {
+                    int i0 = i1;
+                    i1 = intervals.size();
+
+                    std::set<double> *intersections = item->getHIntersections(y);
+
+                    if (intersections != 0)
                     {
-                        optimalX = x;
-                        optimalY = yD;
-                        pMin = textPotential;
+                        std::set<double>::iterator it = intersections->begin();
+                        double a = 1.0;
+                        while (true)
+                        {
+                            if (a < 1.0) a = 1.0;
+                            double b;
+                            if (it != intersections->end()) b = *it;
+                            else b = _width - 1.0;
+                            if (b > _width - 1.0) b = _width - 1.0;
+
+                            if (a < _width - 1.0 && b > 1.0)
+                            {
+                                Interval interval1(a, b);
+                                int i;
+                                for (i = i0; i < i1; ++i)
+                                {
+                                    Interval interval2 = std::move(intervals[i].getIntersection(interval1));
+                                    if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getWidth())
+                                    {
+                                        intervals.push_back(std::move(interval2));
+                                    }
+                                }
+                            }
+
+                            a = b;
+                            if (it == intersections->end()) break;
+                            ++it;
+                        }
                     }
                 }
-			}
 
-			yD += dy;
+                int i, n = intervals.size();
+                for (i = i1; i < n; ++i)
+                {
+                    int k;
+                    for (k = 0; k < 2; ++k)
+                    {
+                        double x;
+                        if (k == 0) x = intervals[i].getA() + 0.5 * textInfo->getWidth();
+                        else x = intervals[i].getB() - 0.5 * textInfo->getWidth();
+
+                        TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, yD, false));
+                        double yc = 2.0 * (yD - yDmin) / (yDmax - yDmin) - 1.0;
+                        if (yc < 0) yc = -yc;
+                        textPotential.add(_parameters->getCenteringPotential() * yc);
+
+                        if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
+                        {
+                            optimalX = x;
+                            optimalY = yD;
+                            pMin = textPotential;
+                        }
+                    }
+                }
+
+                yD += dy;
+            }
+		}*/
+
+		if (xDmax >= xDmin)
+        {
+            int xCount = _parameters->getLineXTryCount();
+            double dx = (xDmax - xDmin) / static_cast<double>(xCount - 1);
+            if (dx < 2.0)
+            {
+                xCount = 1 + static_cast<int>(0.5 * (xDmax - xDmin));
+
+                if (xCount < 2)
+                {
+                    xCount = 1;
+                    xDmin = 0.5 * (xDmax + xDmin);
+                    xDmax = xDmin;
+                }
+                else
+                {
+                    dx = (xDmax - xDmin) / static_cast<double>(xCount - 1);
+                }
+            }
+
+            double wD = textInfo->getWidth();
+            int wI = static_cast<int>(floor(wD));
+
+            double xD = xDmin;
+            int j;
+            for (j = 0; j < xCount; ++j)
+            {
+                int xI = static_cast<int>(floor(xD));
+
+                std::vector<Interval> intervals;
+                int i1 = 0;
+                intervals.push_back(std::move(Interval(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max())));
+                int x0 = xI - wI / 2;
+                int x1 = x0 + wI;
+                int x;
+                for (x = x0; x <= x1; ++x)
+                {
+                    int i0 = i1;
+                    i1 = intervals.size();
+
+                    std::set<double> *intersections = item->getVIntersections(x);
+
+                    if (intersections != 0)
+                    {
+                        std::set<double>::iterator it = intersections->begin();
+                        double a = 1.0;
+                        while (true)
+                        {
+                            if (a < 1.0) a = 1.0;
+                            double b;
+                            if (it != intersections->end()) b = *it;
+                            else b = _height - 1.0;
+                            if (b > _height - 1.0) b = _height - 1.0;
+
+                            if (a < _height - 1.0 && b > 1.0)
+                            {
+                                Interval interval1(a, b);
+                                int i;
+                                for (i = i0; i < i1; ++i)
+                                {
+                                    Interval interval2 = std::move(intervals[i].getIntersection(interval1));
+                                    if (!interval2.isEmpty() && interval2.getB() - interval2.getA() > textInfo->getHeight())
+                                    {
+                                        intervals.push_back(std::move(interval2));
+                                    }
+                                }
+                            }
+
+                            a = b;
+                            if (it == intersections->end()) break;
+                            ++it;
+                        }
+                    }
+                }
+
+                int i, n = intervals.size();
+                for (i = i1; i < n; ++i)
+                {
+                    int k;
+                    for (k = 0; k < 2; ++k)
+                    {
+                        double y;
+                        if (k == 0) y = intervals[i].getA() + 0.5 * textInfo->getHeight();
+                        else y = intervals[i].getB() - 0.5 * textInfo->getHeight();
+
+                        TextPotential textPotential = std::move(getTextPotential(item, textInfo, xD, y, false));
+                        double xc = 2.0 * (xD - xDmin) / (xDmax - xDmin) - 1.0;
+                        if (xc < 0) xc = -xc;
+                        textPotential.add(_parameters->getCenteringPotential() * xc);
+
+                        if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())
+                        {
+                            optimalX = xD;
+                            optimalY = y;
+                            pMin = textPotential;
+                        }
+                    }
+                }
+
+                xD += dx;
+            }
 		}
 
 		if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;

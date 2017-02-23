@@ -32,13 +32,13 @@ namespace map_server
         _pointVector.back().push_back(new Point(x, y));
     }
 
-    std::set<double> *LineItemCopy::getHIntersections(int y)
+    std::map<double, double> *LineItemCopy::getHIntersections(int y)
     {
         if (y < 0 || y >= _height) return 0;
         return _hIntersections[y];
     }
 
-    std::set<double> *LineItemCopy::getVIntersections(int x)
+    std::map<double, double> *LineItemCopy::getVIntersections(int x)
     {
         if (x < 0 || x >= _width) return 0;
         return _vIntersections[x];
@@ -52,13 +52,15 @@ namespace map_server
         _yMax = 0.0;
 
         _height = static_cast<int>(floor(height));
-        _hIntersections = new std::set<double> *[_height];
+        _hIntersections = new std::map<double, double> *[_height];
         int i;
-        /*for (i = 0; i < _height; ++i) _hIntersections[i] = 0;
+        for (i = 0; i < _height; ++i) _hIntersections[i] = 0;
 
         int j, m = _pointVector.size();
         for (j = 0; j < m; ++j)
         {
+            std::vector<std::pair<int, double> > intersectionVector;
+
             int n = _pointVector[j].size();
             for (i = 0; i < n - 1; ++i)
             {
@@ -95,32 +97,51 @@ namespace map_server
                     if (yMax > _height - 1.0) yMax = _height - 1.0;
 
                     double y;
-                    double a = (x2 - x1) / (y2- y1);
+                    double a = (x2 - x1) / (y2 - y1);
                     for (y = yMin; y <= yMax; ++y)
                     {
                         double x = x1 + a * (y - y1);
                         int yI = static_cast<int>(floor(y));
-                        if (_hIntersections[yI] == 0) _hIntersections[yI] = new std::set<double>;
-                        _hIntersections[yI]->insert(x);
+                        intersectionVector.push_back(std::pair<int, double>(yI, x));
                     }
                 }
+            }
+
+            n = intersectionVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                int yI = intersectionVector[i].first;
+                double x = intersectionVector[i].second;
+
+                double slope1 = 0.0;
+                double slope2 = 0.0;
+                if (i != 0) slope1 = (x - intersectionVector[i - 1].second) / static_cast<double>(yI - intersectionVector[i - 1].first);
+                if (i != n - 1) slope2 = (intersectionVector[i + 1].second - x) / static_cast<double>(intersectionVector[i + 1].first - yI);
+                if (slope1 < 0) slope1 = -slope1;
+                if (slope2 < 0) slope2 = -slope2;
+                double slope = slope1 > slope2 ? slope1 : slope2;
+
+                if (_hIntersections[yI] == 0) _hIntersections[yI] = new std::map<double, double>;
+                _hIntersections[yI]->insert(std::pair<double, double>(x, 0.5 * slope));
             }
         }
 
         if (_yMin < 0.0) _yMin = 0.0;
-        if (_yMax > height - 1.0) _yMax = height - 1.0;*/
+        if (_yMax > height - 1.0) _yMax = height - 1.0;
 
         _xMin = width - 1.0;
         _xMax = 0.0;
 
         _width = static_cast<int>(floor(width));
-        _vIntersections = new std::set<double> *[_width];
+        _vIntersections = new std::map<double, double> *[_width];
 
         for (i = 0; i < _width; ++i) _vIntersections[i] = 0;
 
-        int j, m = _pointVector.size();
+        m = _pointVector.size();
         for (j = 0; j < m; ++j)
         {
+            std::vector<std::pair<int, double> > intersectionVector;
+
             int n = _pointVector[j].size();
             for (i = 0; i < n - 1; ++i)
             {
@@ -162,10 +183,27 @@ namespace map_server
                     {
                         double y = y1 + a * (x - x1);
                         int xI = static_cast<int>(floor(x));
-                        if (_vIntersections[xI] == 0) _vIntersections[xI] = new std::set<double>;
-                        _vIntersections[xI]->insert(y);
+                        intersectionVector.push_back(std::pair<int, double>(xI, y));
                     }
                 }
+            }
+
+            n = intersectionVector.size();
+            for (i = 0; i < n; ++i)
+            {
+                int xI = intersectionVector[i].first;
+                double y = intersectionVector[i].second;
+
+                double slope1 = 0.0;
+                double slope2 = 0.0;
+                if (i != 0) slope1 = (y - intersectionVector[i - 1].second) / static_cast<double>(xI - intersectionVector[i - 1].first);
+                if (i != n - 1) slope2 = (intersectionVector[i + 1].second - y) / static_cast<double>(intersectionVector[i + 1].first - xI);
+                if (slope1 < 0) slope1 = -slope1;
+                if (slope2 < 0) slope2 = -slope2;
+                double slope = slope1 > slope2 ? slope1 : slope2;
+
+                if (_vIntersections[xI] == 0) _vIntersections[xI] = new std::map<double, double>;
+                _vIntersections[xI]->insert(std::pair<double, double>(y, 0.5 * slope));
             }
         }
 

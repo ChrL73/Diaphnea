@@ -2,7 +2,7 @@
 
 #include "ItemCopy.h"
 
-#include <set>
+#include <map>
 
 namespace map_server
 {
@@ -13,12 +13,12 @@ namespace map_server
     private:
         std::vector<std::vector<const Point *> > _pointVector;
 
-        std::set<double> **_hIntersections;
+        std::map<double, double> **_hIntersections;
         int _height;
         double _yMin;
         double _yMax;
 
-        std::set<double> **_vIntersections;
+        std::map<double, double> **_vIntersections;
         int _width;
         double _xMin;
         double _xMax;
@@ -33,10 +33,10 @@ namespace map_server
 
         double getYMin(void) const { return _yMin; }
         double getYMax(void) const { return _yMax; }
-        std::set<double> *getHIntersections(int y);
+        std::map<double, double> *getHIntersections(int y);
 
         double getXMin(void) const { return _xMin; }
         double getXMax(void) const { return _xMax; }
-        std::set<double> *getVIntersections(int x);
+        std::map<double, double> *getVIntersections(int x);
     };
 }

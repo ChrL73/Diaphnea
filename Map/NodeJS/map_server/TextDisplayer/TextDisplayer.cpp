@@ -201,12 +201,12 @@ namespace map_server
 		double optimalX = 0.0;
 		TextPotential pMin(true);
 
-		//double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
-		//double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+		double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+		double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
 		double xDmin = item->getXMin() + 0.5 * textInfo->getWidth() + 3.0;
 		double xDmax = item->getXMax() - 0.5 * textInfo->getWidth() - 3.0;
 
-        /*if (yDmax >= yDmin)
+        if (yDmax >= yDmin)
         {
             int yCount = _parameters->getLineYTryCount();
             double dy = (yDmax - yDmin) / static_cast<double>(yCount - 1);
@@ -246,23 +246,31 @@ namespace map_server
                     int i0 = i1;
                     i1 = intervals.size();
 
-                    std::set<double> *intersections = item->getHIntersections(y);
+                    std::map<double, double> *intersections = item->getHIntersections(y);
 
                     if (intersections != 0)
                     {
-                        std::set<double>::iterator it = intersections->begin();
-                        double a = 1.0;
+                        std::map<double, double>::iterator it = intersections->begin();
+                        double a = 1.0, dA = 0.0;
                         while (true)
                         {
                             if (a < 1.0) a = 1.0;
-                            double b;
-                            if (it != intersections->end()) b = *it;
-                            else b = _width - 1.0;
+                            double b, dB;
+                            if (it != intersections->end())
+                            {
+                                b = (*it).first;
+                                dB = (*it).second;
+                            }
+                            else
+                            {
+                                b = _width - 1.0;
+                                dB = 0.0;
+                            }
                             if (b > _width - 1.0) b = _width - 1.0;
 
                             if (a < _width - 1.0 && b > 1.0)
                             {
-                                Interval interval1(a, b);
+                                Interval interval1(a + dA, b - dB);
                                 int i;
                                 for (i = i0; i < i1; ++i)
                                 {
@@ -275,6 +283,7 @@ namespace map_server
                             }
 
                             a = b;
+                            dA = dB;
                             if (it == intersections->end()) break;
                             ++it;
                         }
@@ -307,7 +316,7 @@ namespace map_server
 
                 yD += dy;
             }
-		}*/
+		}
 
 		if (xDmax >= xDmin)
         {
@@ -349,23 +358,32 @@ namespace map_server
                     int i0 = i1;
                     i1 = intervals.size();
 
-                    std::set<double> *intersections = item->getVIntersections(x);
+                    std::map<double, double> *intersections = item->getVIntersections(x);
 
                     if (intersections != 0)
                     {
-                        std::set<double>::iterator it = intersections->begin();
+                        std::map<double, double>::iterator it = intersections->begin();
                         double a = 1.0;
+                        double dA = 0.0;
                         while (true)
                         {
                             if (a < 1.0) a = 1.0;
-                            double b;
-                            if (it != intersections->end()) b = *it;
-                            else b = _height - 1.0;
+                            double b, dB;
+                            if (it != intersections->end())
+                            {
+                                b = (*it).first;
+                                dB = (*it).second;
+                            }
+                            else
+                            {
+                                b = _height - 1.0;
+                                dB = 0.0;
+                            }
                             if (b > _height - 1.0) b = _height - 1.0;
 
                             if (a < _height - 1.0 && b > 1.0)
                             {
-                                Interval interval1(a, b);
+                                Interval interval1(a + dA, b - dB);
                                 int i;
                                 for (i = i0; i < i1; ++i)
                                 {
@@ -378,6 +396,7 @@ namespace map_server
                             }
 
                             a = b;
+                            dA = dB;
                             if (it == intersections->end()) break;
                             ++it;
                         }

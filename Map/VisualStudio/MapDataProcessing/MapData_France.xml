@@ -1616,9 +1616,33 @@
           <element id="e_Vienne"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_Sarre" importance="0">
+        <name>
+          <name language="fr" text="Sarre"/>
+          <name language="en" text="Sarre"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Moselle"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Isle" importance="0">
+        <name>
+          <name language="fr" text="Isle"/>
+          <name language="en" text="Isle"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Dordogne"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
-      <!--Villes-->
+      <!--Villes 01-->
       <pointElement id="e_BourgEnBresse" importance="0">
         <name>
           <name language="fr" text="Bourg-en-Bresse"/>
@@ -1628,6 +1652,34 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
+      <pointElement id="e_Gex" importance="0">
+        <name>
+          <name language="fr" text="Gex"/>
+          <name language="en" text="Gex"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Belley" importance="0">
+        <name>
+          <name language="fr" text="Belley"/>
+          <name language="en" text="Belley"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Nantua" importance="0">
+        <name>
+          <name language="fr" text="Nantua"/>
+          <name language="en" text="Nantua"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 02-->
       <pointElement id="e_Laon" importance="0">
         <name>
           <name language="fr" text="Laon"/>
@@ -1635,6 +1687,200 @@
         </name>
         <looks>
           <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintQuentin" importance="0">
+        <name>
+          <name language="fr" text="Saint-Quentin"/>
+          <name language="en" text="Saint-Quentin"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Soissons" importance="0">
+        <name>
+          <name language="fr" text="Soissons"/>
+          <name language="en" text="Soissons"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_ChateauThierry" importance="0">
+        <name>
+          <name language="fr" text="Château-Thierry"/>
+          <name language="en" text="Château-Thierry"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vervins" importance="0">
+        <name>
+          <name language="fr" text="Vervins"/>
+          <name language="en" text="Vervins"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 03-->
+      <pointElement id="e_Moulins" importance="0">
+        <name>
+          <name language="fr" text="Moulins"/>
+          <name language="en" text="Moulins"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Montlucon" importance="0">
+        <name>
+          <name language="fr" text="Montluçon"/>
+          <name language="en" text="Montluçon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vichy" importance="0">
+        <name>
+          <name language="fr" text="Vichy"/>
+          <name language="en" text="Vichy"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 04-->
+      <pointElement id="e_DigneLesBains" importance="0">
+        <name>
+          <name language="fr" text="Digne-les-Bains"/>
+          <name language="en" text="Digne-les-Bains"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Forcalquier" importance="0">
+        <name>
+          <name language="fr" text="Forcalquier"/>
+          <name language="en" text="Forcalquier"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Barcelonnette" importance="0">
+        <name>
+          <name language="fr" text="Barcelonnette"/>
+          <name language="en" text="Barcelonnette"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Castellane" importance="0">
+        <name>
+          <name language="fr" text="Castellane"/>
+          <name language="en" text="Castellane"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 05-->
+      <pointElement id="e_Gap" importance="0">
+        <name>
+          <name language="fr" text="Gap"/>
+          <name language="en" text="Gap"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Briancon" importance="0">
+        <name>
+          <name language="fr" text="Briançon"/>
+          <name language="en" text="Briançon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 06-->
+      <pointElement id="e_Nice" importance="0">
+        <name>
+          <name language="fr" text="Nice"/>
+          <name language="en" text="Nice"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Grasse" importance="0">
+        <name>
+          <name language="fr" text="Grasse"/>
+          <name language="en" text="Grasse"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Antibes" importance="0">
+        <name>
+          <name language="fr" text="Antibes"/>
+          <name language="en" text="Antibes"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Cannes" importance="0">
+        <name>
+          <name language="fr" text="Cannes"/>
+          <name language="en" text="Cannes"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_CagnesSurMer" importance="0">
+        <name>
+          <name language="fr" text="Cagnes-sur-Mer"/>
+          <name language="en" text="Cagnes-sur-Mer"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 07-->
+      <pointElement id="e_Privas" importance="0">
+        <name>
+          <name language="fr" text="Privas"/>
+          <name language="en" text="Privas"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_TournonSurRhone" importance="0">
+        <name>
+          <name language="fr" text="Tournon-sur-Rhône"/>
+          <name language="en" text="Tournon-sur-Rhône"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Largentiere" importance="0">
+        <name>
+          <name language="fr" text="Largentière"/>
+          <name language="en" text="Largentière"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
     </pointElementList>

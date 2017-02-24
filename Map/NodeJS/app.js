@@ -185,7 +185,27 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    }
    else
    {
+      var key = socketId + '_' + requestId;
       
+      if (!log[key])
+      {
+         console.log('Error: Unexpected response id');
+      }
+      else
+      {
+         var ok = false;
+         log[key].responses.forEach(function(response)
+         {
+            if (JSON.stringify(response) == JSON.stringify({ type: requestType, content: responseContent })) ok = true;
+         });
+         
+         if (!ok)
+         {
+            console.log('Error: Unexpected response content: ' + JSON.stringify({ type: requestType, content: responseContent }));
+            console.log('Expected one of: ' + JSON.stringify(log[key].responses));
+            process.exit();
+         }
+      }
    }
 });
 
@@ -197,6 +217,8 @@ if (!replay)
 }
 else
 {
+   console.log('Replay mode...');
+   
    var fs = require('fs');
    fs.readFile('log.txt', 'utf-8', function(err, data)
    {
@@ -208,9 +230,31 @@ else
       {
          try
          {
-            var log = JSON.parse(data);
+            log = JSON.parse(data);
+            var logArray = [];
             
+            Object.getOwnPropertyNames(log).forEach(function(key)
+            {
+               logArray.push(log[key].requests[0]);
+            });
             
+            var n = logArray.length;
+            console.log('n=' + n);
+            
+            var i;
+            for (i = 0; i < 1000; ++i)
+            {
+               var draw = (Math.floor(Math.random() * 1000000 + (new Date()).getMilliseconds())) % n;
+               var request = logArray[draw];
+
+               if (request.type == '0') onMapIdsReq(request.socketId, request.request);
+               if (request.type == '1') onMapInfoReq(request.socketId, request.request);
+               if (request.type == '2') onElementInfoReq(request.socketId, request.request);
+               if (request.type == '3') onElementsInfoReq(request.socketId, request.request);
+               if (request.type == '4') onItemDataReq(request.socketId, request.request);
+               if (request.type == '5') onLookReq(request.socketId, request.request);
+               if (request.type == '6') onRenderReq(request.socketId, request.request);
+            }
          }
          catch (e)
          {
@@ -221,10 +265,9 @@ else
 }
 
 var logRequest, logResponse;
+var log = {};
 if (record)
 {
-   var log = {};
-   
    console.log("Replay data recorder on, enter 's' to stop recording and save data file...");
    var stdin = process.openStdin();
    stdin.on('data', onData);
@@ -252,7 +295,7 @@ if (record)
       if (!log[key]) log[key] = { requests: [], responses: [] };
       else console.log('Warning: Several requests with socketId=' + socketId + ' and requestId=' + request.id);
       
-      log[key].requests.push({ type: requestType, request: request });
+      log[key].requests.push({ socketId: socketId, requestId: request.id, type: requestType, request: request });
    }
    
    logResponse = function(socketId, requestId, requestType, responseContent)

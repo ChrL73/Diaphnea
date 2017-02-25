@@ -28,6 +28,7 @@ namespace map_server
         double _yFocus;
         bool _createPotentialImage;
         SvgCreator *_svgCreator;
+        bool _testMode;
 
         Map *_map;
         std::vector<ItemCopyBuilder *> _itemCopyBuilderVector;
@@ -40,12 +41,12 @@ namespace map_server
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, const char *languageId, double widthInPixels, double heightInPixels,
                       int lookIndex, const std::vector<const char *>& elementIds) :
             Request(socketId, requestId), _mapId(mapId), _languageId(languageId), _widthInPixels(widthInPixels), _heightInPixels(heightInPixels), _lookIndex(lookIndex),
-            _elementIds(elementIds), _focusSetByClient(false), _scale(1.0), _xFocus(0.0), _yFocus(0.0), _createPotentialImage(false), _svgCreator(0), _map(0) {}
+            _elementIds(elementIds), _focusSetByClient(false), _scale(1.0), _xFocus(0.0), _yFocus(0.0), _createPotentialImage(false), _svgCreator(0), _testMode(false), _map(0) {}
 
         RenderRequest(const char *socketId, const char *requestId, const char *mapId, const char *languageId, double widthInPixels, double heightInPixels,
                       int lookIndex, const std::vector<const char *>& elementIds, double scale, double xFocus, double yFocus) :
             Request(socketId, requestId), _mapId(mapId), _languageId(languageId), _widthInPixels(widthInPixels), _heightInPixels(heightInPixels), _lookIndex(lookIndex),
-            _elementIds(elementIds), _focusSetByClient(true), _scale(scale), _xFocus(xFocus), _yFocus(yFocus), _createPotentialImage(false), _svgCreator(0), _map(0) {}
+            _elementIds(elementIds), _focusSetByClient(true), _scale(scale), _xFocus(xFocus), _yFocus(yFocus), _createPotentialImage(false), _svgCreator(0), _testMode(false), _map(0) {}
     };
 }
 

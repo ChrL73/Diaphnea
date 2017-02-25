@@ -153,7 +153,12 @@ function onLookReq(socketId, request)
 
 function onRenderReq(socketId, request)
 {
-   if (record) logRequest(socketId, messageTypes.render, request);
+   if (record)
+   {
+      request.elementIds.push('#test');
+      logRequest(socketId, messageTypes.render, request);
+   }
+   
    var req = socketId + ' ' + request.id + ' ' + messageTypes.render + ' ' + request.mapId + ' ' + request.language + ' ' + request.width + ' ' + request.height + ' '
              + request.lookIndex + ' ' + (request.scale ? request.scale : 'N') + ' ' + (request.xFocus ? request.xFocus : 'N') + ' ' + (request.yFocus ? request.yFocus : 'N');
    request.elementIds.forEach(function(elementId)
@@ -163,6 +168,8 @@ function onRenderReq(socketId, request)
    cppServer.sendRequest(req);
 }
 
+var receivedReplayRes = 0;
+var expectedReplayRes;
 cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
 {
    if (record) logResponse(socketId, requestId, requestType, responseContent);
@@ -190,13 +197,23 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
       if (!log[key])
       {
          console.log('Error: Unexpected response id');
+         process.exit();
       }
       else
       {
          var ok = false;
          log[key].responses.forEach(function(response)
          {
-            if (JSON.stringify(response) == JSON.stringify({ type: requestType, content: responseContent })) ok = true;
+            if (requestType == '6' && response.content.items)
+            {
+               response.content.items.sort();
+               responseContent.items.sort();
+            }
+            if (JSON.stringify(response) == JSON.stringify({ type: requestType, content: responseContent }))
+            {
+               ok = true;
+               ++receivedReplayRes;
+            }
          });
          
          if (!ok)
@@ -204,6 +221,15 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
             console.log('Error: Unexpected response content: ' + JSON.stringify({ type: requestType, content: responseContent }));
             console.log('Expected one of: ' + JSON.stringify(log[key].responses));
             process.exit();
+         }
+         
+         if (receivedReplayRes == expectedReplayRes)
+         {
+            console.log('All expected responses have been received...');
+         }
+         else if (receivedReplayRes > expectedReplayRes)
+         {
+            console.log('Error: Too much responses have been received...');
          }
       }
    }
@@ -228,37 +254,42 @@ else
       }
       else
       {
-         try
-         {
-            log = JSON.parse(data);
-            var logArray = [];
-            
-            Object.getOwnPropertyNames(log).forEach(function(key)
-            {
-               logArray.push(log[key].requests[0]);
-            });
-            
-            var n = logArray.length;
-            console.log('n=' + n);
-            
-            var i;
-            for (i = 0; i < 1000; ++i)
-            {
-               var draw = (Math.floor(Math.random() * 1000000 + (new Date()).getMilliseconds())) % n;
-               var request = logArray[draw];
+         log = JSON.parse(data);
+         var logArray = [];
+         expectedReplayRes = 0;
 
-               if (request.type == '0') onMapIdsReq(request.socketId, request.request);
-               if (request.type == '1') onMapInfoReq(request.socketId, request.request);
-               if (request.type == '2') onElementInfoReq(request.socketId, request.request);
-               if (request.type == '3') onElementsInfoReq(request.socketId, request.request);
-               if (request.type == '4') onItemDataReq(request.socketId, request.request);
-               if (request.type == '5') onLookReq(request.socketId, request.request);
-               if (request.type == '6') onRenderReq(request.socketId, request.request);
-            }
-         }
-         catch (e)
+         Object.getOwnPropertyNames(log).forEach(function(key)
          {
-            console.log(e);
+            logArray.push(log[key].requests[0]);
+            expectedReplayRes += log[key].responses.length;
+         });
+
+         var n = logArray.length;
+         console.log(n + ' requests, ' + expectedReplayRes + ' expected responses');
+         
+         var date = new Date();
+         var offset = date.getSeconds() * 1000 + date.getMilliseconds();
+         
+         var i;
+         for (i = 0; i < n; ++i)
+         {
+            var j = (Math.floor(Math.random() * 1000000) + offset) % n;
+            var tmp = logArray[i];
+            logArray[i] = logArray[j];
+            logArray[j] = tmp;
+         }
+         
+         for (i = 0; i < n; ++i)
+         {
+            var request = logArray[i];
+
+            if (request.type == '0') onMapIdsReq(request.socketId, request.request);
+            if (request.type == '1') onMapInfoReq(request.socketId, request.request);
+            if (request.type == '2') onElementInfoReq(request.socketId, request.request);
+            if (request.type == '3') onElementsInfoReq(request.socketId, request.request);
+            if (request.type == '4') onItemDataReq(request.socketId, request.request);
+            if (request.type == '5') onLookReq(request.socketId, request.request);
+            if (request.type == '6') onRenderReq(request.socketId, request.request);
          }
       }
    });
@@ -293,7 +324,7 @@ if (record)
       var key = socketId + '_' + request.id;
       
       if (!log[key]) log[key] = { requests: [], responses: [] };
-      else console.log('Warning: Several requests with socketId=' + socketId + ' and requestId=' + request.id);
+      else console.log('Error: Several requests with socketId=' + socketId + ' and requestId=' + request.id);
       
       log[key].requests.push({ socketId: socketId, requestId: request.id, type: requestType, request: request });
    }
@@ -305,7 +336,7 @@ if (record)
       if (!log[key])
       {
          log[key] = { requests: [], responses: [] };
-         console.log('Warning: No request associated to the response with socketId=' + socketId + ' and requestId=' + request.id);
+         console.log('Error: No request associated to the response with socketId=' + socketId + ' and requestId=' + request.id);
       }
       
       log[key].responses.push({ type: requestType, content: responseContent });

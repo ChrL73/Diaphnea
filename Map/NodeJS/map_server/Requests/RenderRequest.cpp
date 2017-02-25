@@ -61,6 +61,8 @@ namespace map_server
                 // Disable potential image creation, because it's only a developement/debug/test feature.
                 // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.
                 //else if (elementId == "#img") _createPotentialImage = true;
+
+                else if (elementId == "#test") _testMode = true;
             }
 
             std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
@@ -353,7 +355,7 @@ namespace map_server
         MapData::lock();
 
 		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator);
+		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator, _testMode);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
 

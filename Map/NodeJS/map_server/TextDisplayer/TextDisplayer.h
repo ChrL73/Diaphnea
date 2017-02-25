@@ -41,7 +41,7 @@ namespace map_server
         const double _scale;
         const bool _createPotentialImage;
         SvgCreator * const _svgCreator;
-
+        const bool _testMode;
 
         std::vector<ItemCopy *> _itemVector;
 
@@ -63,7 +63,7 @@ namespace map_server
 		static void clearClientMap(void);
 
         TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
-            double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator);
+            double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator, bool testMode);
 		~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }

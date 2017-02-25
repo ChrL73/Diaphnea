@@ -45,13 +45,12 @@ namespace map_server
 	}
 
     TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
-                                 double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator) :
+                                 double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator, bool testMode) :
 		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height),
-		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage), _svgCreator(svgCreator)
+		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage), _svgCreator(svgCreator), _testMode(testMode)
     {
 		_mutex.lock();
 
-        // Todo: Test if the 'client active displayer' mechanism works correctly
         _id = _counter;
         ++_counter;
 
@@ -75,6 +74,8 @@ namespace map_server
 
 	bool TextDisplayer::isDisplayerActive(void)
 	{
+        if (_testMode) return true;
+
         _mutex.lock();
         bool b = (*_clientActiveDisplayerId == _id);
         _mutex.unlock();

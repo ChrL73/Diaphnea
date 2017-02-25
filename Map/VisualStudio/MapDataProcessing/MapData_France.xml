@@ -1640,6 +1640,30 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_Ain" importance="0">
+        <name>
+          <name language="fr" text="Ain"/>
+          <name language="en" text="Ain"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Rhone"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Aveyron" importance="0">
+        <name>
+          <name language="fr" text="Aveyron"/>
+          <name language="en" text="Aveyron"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Tarn"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes 01-->
@@ -1878,6 +1902,99 @@
         <name>
           <name language="fr" text="Largentière"/>
           <name language="en" text="Largentière"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 08-->
+      <pointElement id="e_CharlevilleMezieres" importance="0">
+        <name>
+          <name language="fr" text="Charleville-Mézières"/>
+          <name language="en" text="Charleville-Mézières"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Sedan" importance="0">
+        <name>
+          <name language="fr" text="Sedan"/>
+          <name language="en" text="Sedan"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Rethel" importance="0">
+        <name>
+          <name language="fr" text="Rethel"/>
+          <name language="en" text="Rethel"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vouziers" importance="0">
+        <name>
+          <name language="fr" text="Vouziers"/>
+          <name language="en" text="Vouziers"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 09-->
+      <pointElement id="e_Foix" importance="0">
+        <name>
+          <name language="fr" text="Foix"/>
+          <name language="en" text="Foix"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Pamiers" importance="0">
+        <name>
+          <name language="fr" text="Pamiers"/>
+          <name language="en" text="Pamiers"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintGirons" importance="0">
+        <name>
+          <name language="fr" text="Saint-Girons"/>
+          <name language="en" text="Saint-Girons"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 10-->
+      <pointElement id="e_Troyes" importance="0">
+        <name>
+          <name language="fr" text="Troyes"/>
+          <name language="en" text="Troyes"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_NogentSurSeine" importance="0">
+        <name>
+          <name language="fr" text="Nogent-sur-Seine"/>
+          <name language="en" text="Nogent-sur-Seine"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_BarSurAube" importance="0">
+        <name>
+          <name language="fr" text="Bar-sur-Aube"/>
+          <name language="en" text="Bar-sur-Aube"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture"/>

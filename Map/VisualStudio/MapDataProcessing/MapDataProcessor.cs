@@ -82,6 +82,18 @@ namespace MapDataProcessing
                 return -1;
             }
 
+            /*try
+            {
+                while (reader.Read());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error in file {0}", _configFile);
+                Console.WriteLine(e.Message);
+                if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
+                return -1;
+            }*/
+
             Console.WriteLine("Reading configuration file " + _configFile + " ...");
 
             XmlSerializer serializer = new XmlSerializer(typeof(XmlMapData));

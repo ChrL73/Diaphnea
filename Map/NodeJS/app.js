@@ -8,10 +8,13 @@ var replay;
 if (config.mode == 'replay') replay = true;
 
 var server;
+var responses = {};
+
 if (!replay)
 {
    var http = require('http');
    var querystring = require('querystring');
+   var svgReqCounter = -1;
    
    server = http.createServer(function(req, res)
    {
@@ -27,13 +30,33 @@ if (!replay)
          req.on('end', function()
          {
             var body = querystring.parse(reqData);
+            var data;
+            
+            try
+            {
+               data = JSON.parse(body.data);
+            }
+            catch (err)
+            {
+               data = undefined;
+            }
 
-            console.log(body);
-            res.end();
+            if (data)
+            {
+               data.id = ++svgReqCounter;
+               responses[data.id] = res;
+               onRenderReq('svg', data);
+            }
+            else
+            {
+               res.statusCode = 400;
+               res.end();
+            }
          });
       }
       else
       {
+         res.statusCode = 404;
          res.end();
       }
    });
@@ -50,11 +73,13 @@ var messageNames =
    'render', // 6
    'text', // 7
    'removeText', //8
-   'error' //9
+   'svg', //9
+   'error', //10
 ];
 
 var cppServer = require('./cpp_server_interface');
-config.errorMessageIndex = 9;
+var svgMessageType = '9';
+config.errorMessageIndex = 10;
 cppServer.setConfig(config);
 
 var debugDelay = config.debugDelay ? config.debugDelay : 0;
@@ -200,18 +225,30 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    
    if (!replay)
    {
-      var socket = io.sockets.connected[socketId];
-      var messageName = messageNames[requestType];
-
-      if (socket && messageName)
+      if (requestType == svgMessageType)
       {
-         var response = { requestId: requestId, content: responseContent };
-         setTimeout(function()
+         res = responses[requestId];
+         delete responses[requestId];
+         if (res)
          {
-            socket.emit(messageName + 'Res', response);
-            if (config.displayStat) socket.sent += JSON.stringify(response).length;
-         },
-            debugDelay);
+            res.end(responseContent);
+         }
+      }
+      else
+      {
+         var socket = io.sockets.connected[socketId];
+         var messageName = messageNames[requestType];
+
+         if (socket && messageName)
+         {
+            var response = { requestId: requestId, content: responseContent };
+            setTimeout(function()
+            {
+               socket.emit(messageName + 'Res', response);
+               if (config.displayStat) socket.sent += JSON.stringify(response).length;
+            },
+               debugDelay);
+         }
       }
    }
    else

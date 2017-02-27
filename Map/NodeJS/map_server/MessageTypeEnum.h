@@ -13,6 +13,7 @@ namespace map_server
         RENDER = 6,
         TEXT = 7,
         REMOVE_TEXT = 8,
-		ERROR_ = 9
+        SVG = 9,
+		ERROR_ = 10
     };
 }

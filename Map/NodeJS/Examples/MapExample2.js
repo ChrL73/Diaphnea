@@ -29,7 +29,7 @@ $(function()
 
          function resizeCanvas()
          {
-            var w = window.innerWidth - $('#elementList').width() - $('#potential').width() - 100;
+            var w = window.innerWidth - $('#elementList').width() - $('#svgExport').width() - 100;
             if (w < 100) w = 100;
             $('#canvas').attr('width', w);
             $('#canvas').attr('height', window.innerHeight * 0.95);
@@ -69,21 +69,9 @@ $(function()
                map.requestPotentialImage();
             });
             
-            $('#testSvg').click(function()
+            $('#svgExport').click(function()
             {
-               if ($('#testSvg').text() == 'Test SVG')
-               {
-                  $('#testSvg').text('View canvas');
-                  $('#svg').show();
-                  $('#canvas').hide();
-                  map.testSvg('svg');
-               }
-               else
-               {
-                  $('#testSvg').text('Test SVG');
-                  $('#svg').hide();
-                  $('#canvas').show();
-               }
+               map.requestSvg();
             });
          });
       }

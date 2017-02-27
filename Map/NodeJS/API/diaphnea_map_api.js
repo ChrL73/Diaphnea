@@ -159,6 +159,12 @@ var mapServerInterface =
             }
             
             var svgRequested = false;
+            this.requestSvg = function()
+            {
+               svgRequested = true;
+               scheduleRenderRequest();
+            };
+                     
             var potentialImageRequested = false;
             this.requestPotentialImage = function()
             {
@@ -579,83 +585,6 @@ var mapServerInterface =
                   });
                }
             }
-            
-            this.testSvg = function(svgId)
-            {
-               var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
-               var html = "";
-               
-               var i;
-               for (i = 31; i >= 0; --i)
-               {
-                  var itemList = addedItemsByZIndex[i];
-                  Object.getOwnPropertyNames(itemList).forEach(function(itemKey)
-                  {
-                     var item = items[itemKey];
-                     var look = looks[item.lookId];
-
-                     if (item.type == 'line')
-                     {
-                        html += '<path style="fill:none;stroke:' + look.svgColor + ';stroke-opacity:' + look.svgOpacity + ';stroke-width:'
-                           + look.size * scale * sizeFactor + ';stroke-linecap:round;stroke-linejoin:round" d="';
-                        
-                        item.points.forEach(function(p, i)
-                        {
-                           var x = (p.x - xFocus) * scale + 0.5 * canvas.width;
-                           var y = (p.y - yFocus) * scale + 0.5 * canvas.height;
-                           
-                           if (i === 0) html += 'M ';
-                           else html += 'L ';
-                           
-                           html += x + ',' + y + ' ';
-                        });
-                        
-                        html += '"></path>\n';
-                     }
-                     else if (item.type == 'polygon')
-                     {
-                        html += '<path style="fill:' + look.svgColor + ';fill-opacity:' + look.svgOpacity + ';fill-rule:evenodd;stroke:none" d="';
-                        
-                        item.points.forEach(function(p, i)
-                        {
-                           var x = (p.x - xFocus) * scale + 0.5 * canvas.width;
-                           var y = (p.y - yFocus) * scale + 0.5 * canvas.height;
-                           
-                           if (i === 0) html += 'M ';
-                           else html += 'L ';
-                           
-                           html += x + ',' + y + ' ';
-                        });
-                        
-                        html += '"></path>\n';
-                     }
-                     else if (item.type == 'point')
-                     {
-                        var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
-                        var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
-                        
-                        html += '<circle cx="' + x + '" cy="' + y + '" r="' + 0.5 * look.size * scale * sizeFactor
-                           + '" stroke="black" stroke-width="' + scale * sizeFactor + '" fill="' + look.svgColor + '" fill-opacity="' + look.svgOpacity + '"></circle>\n';
-                     }
-                     else if (item.type = 'text')
-                     {        
-                        item.textLines.forEach(function(line)
-                        {
-                           var x = (line[1] - xFocus) * scale + 0.5 * canvas.width;
-                           var y = (line[2] - yFocus) * scale + 0.5 * canvas.height;
-                           
-                           html += '<text x="' + x + '" y="' + y + '" font-size="' + item.size + '" font-family="arial" fill="'
-                              + item.svgColor + '" fill-opacity="' + item.svgOpacity + '">' + line[0] + '</text>\n'
-                        });
-                     }
-                  });
-               }
-               
-               $('#' + svgId).html(html);
-               
-               svgRequested = true;
-               scheduleRenderRequest();
-            };
             
             var mustTranslate = false;
             var xRef, yRef;

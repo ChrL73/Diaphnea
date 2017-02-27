@@ -31,8 +31,10 @@ var mapServerInterface =
             return context;
          }
 
+         var _url;
          $.getScript(url + '/socket.io/socket.io.js').done(function()
          {         
+            _url = url;
             socket = io(url);
             
             var id = ++requestCounter;
@@ -64,6 +66,23 @@ var mapServerInterface =
          {
             onError({ error: -1, message: 'Failed to load ' + url + '/socket.io/socket.io.js' });
          });
+         
+         function postHttpRequest(data)
+         {
+            var form = document.createElement("form");
+            form.action = _url;
+            form.method = 'post';
+            form.target = '_blank';
+
+            var input = document.createElement("textarea");
+            input.name = 'data';
+            input.value = JSON.stringify(data);
+            form.appendChild(input);           
+
+            form.style.display = 'none';
+            document.body.appendChild(form);
+            form.submit();
+         }
          
          this.loadMap = function(mapId, canvasId, onMapLoaded)
          {
@@ -200,11 +219,7 @@ var mapServerInterface =
                   potentialImageRequested = false;
                }
                
-               if (svgRequested)
-               {
-                  elementIds.push('#svg');
-                  svgRequested = false;
-               }
+               if (svgRequested) elementIds.push('#svg');
                
                if (elementIds.length)
                {
@@ -217,17 +232,29 @@ var mapServerInterface =
                   var id = ++requestCounter;
                   // Todo: Add API method to choose language
                   var request = { id: id, mapId: mapId, language: 'fr', elementIds: elementIds, width: canvas.width, height: canvas.height, lookIndex: 2 };
-                  var context = { scale: scale };
+                  
+                  var context;
+                  if (!svgRequested) context = { scale: scale };
+                  
                   if (scale && xFocus && yFocus)
                   {
                      request.scale = scale;
                      request.xFocus = xFocus;
                      request.yFocus = yFocus;
-                     context.ignoreServerScale = true;
+                     if (!svgRequested) context.ignoreServerScale = true;
                   }
-                  setContext(id, context);
-                  lastRenderRequestId = id;
-                  socket.emit('renderReq', request);
+                  
+                  if (svgRequested)
+                  {
+                     postHttpRequest(request);
+                     svgRequested = false;
+                  }
+                  else
+                  {
+                     setContext(id, context);
+                     lastRenderRequestId = id;
+                     socket.emit('renderReq', request);
+                  }
                }
                else
                {

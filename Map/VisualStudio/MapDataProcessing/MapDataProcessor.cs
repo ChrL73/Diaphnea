@@ -82,7 +82,7 @@ namespace MapDataProcessing
                 return -1;
             }
 
-            /*try
+            try
             {
                 while (reader.Read());
             }
@@ -92,7 +92,18 @@ namespace MapDataProcessing
                 Console.WriteLine(e.Message);
                 if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
                 return -1;
-            }*/
+            }
+
+            try
+            {
+                reader = XmlReader.Create(_configFile, settings);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Fail to open file {0}", _configFile);
+                Console.WriteLine(e.Message);
+                return -1;
+            }
 
             Console.WriteLine("Reading configuration file " + _configFile + " ...");
 

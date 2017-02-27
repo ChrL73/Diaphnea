@@ -74,7 +74,7 @@ namespace map_server
 
 	bool TextDisplayer::isDisplayerActive(void)
 	{
-        if (_testMode) return true;
+        if (_testMode || _svgCreator) return true;
 
         _mutex.lock();
         bool b = (*_clientActiveDisplayerId == _id);

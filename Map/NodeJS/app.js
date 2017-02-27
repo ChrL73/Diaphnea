@@ -11,7 +11,32 @@ var server;
 if (!replay)
 {
    var http = require('http');
-   server = http.createServer(function(req, res) { res.statusCode = 404; res.end(); });
+   var querystring = require('querystring');
+   
+   server = http.createServer(function(req, res)
+   {
+      if (req.method == 'POST')
+      {
+         var reqData = '';
+
+         req.on('data', function(data)
+         {
+            reqData += data;
+         });
+
+         req.on('end', function()
+         {
+            var body = querystring.parse(reqData);
+
+            console.log(body);
+            res.end();
+         });
+      }
+      else
+      {
+         res.end();
+      }
+   });
 }
 
 var messageNames =

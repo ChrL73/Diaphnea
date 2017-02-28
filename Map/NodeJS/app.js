@@ -13,12 +13,15 @@ var responses = {};
 if (!replay)
 {
    var http = require('http');
+   var url = require('url');
    var querystring = require('querystring');
    var svgReqCounter = -1;
    
    server = http.createServer(function(req, res)
    {
-      if (req.method == 'POST')
+      var route = url.parse(req.url).pathname;
+      
+      if (req.method == 'POST' && route == '/map.svg')
       {
          var reqData = '';
 

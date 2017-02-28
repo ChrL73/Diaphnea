@@ -32,6 +32,10 @@
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="2.7"
                    fillLightRatio="0.15" fillZIndex="16"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="20"/>
+      <polygonLook id="pl_Gabon3" contourZIndex="5"
+                   contourAlpha="255" contourRed="0" contourGreen="65" contourBlue="0" contourSize="2.7"
+                   fillLightRatio="0.15" fillZIndex="16"
+                   textAlpha="255" textRed="0" textGreen="40" textBlue="0" textSize="20"/>
       <polygonLook id="pl_Province" contourZIndex="6"
                    contourAlpha="255" contourRed="0" contourGreen="128" contourBlue="32" contourSize="2.4"
                    fillLightRatio="0.1" fillZIndex="15"
@@ -110,6 +114,7 @@
         <looks>
           <look id="pl_Gabon"/>
           <look id="pl_Gabon2"/>
+          <look id="pl_Gabon3"/>
         </looks>
         <coveredElementList/>
       </polygonElement>

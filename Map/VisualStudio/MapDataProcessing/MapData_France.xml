@@ -2515,6 +2515,126 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
+      <!--Villes 11-->
+      <pointElement id="e_Carcassonne" importance="0">
+        <name>
+          <name language="fr" text="Carcassonne"/>
+          <name language="en" text="Carcassonne"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Narbonne" importance="0">
+        <name>
+          <name language="fr" text="Narbonne"/>
+          <name language="en" text="Narbonne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Limoux" importance="0">
+        <name>
+          <name language="fr" text="Limoux"/>
+          <name language="en" text="Limoux"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 12-->
+      <pointElement id="e_Rodez" importance="0">
+        <name>
+          <name language="fr" text="Rodez"/>
+          <name language="en" text="Rodez"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Millau" importance="0">
+        <name>
+          <name language="fr" text="Millau"/>
+          <name language="en" text="Millau"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_VillefrancheDeRouergue" importance="0">
+        <name>
+          <name language="fr" text="Villefranche-de-Rouergue"/>
+          <name language="en" text="Villefranche-de-Rouergue"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 13-->
+      <pointElement id="e_Marseille" importance="0">
+        <name>
+          <name language="fr" text="Marseille"/>
+          <name language="en" text="Marseille"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_AixEnProvence" importance="0">
+        <name>
+          <name language="fr" text="Aix-en-Provence"/>
+          <name language="en" text="Aix-en-Provence"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Arles" importance="0">
+        <name>
+          <name language="fr" text="Arles"/>
+          <name language="en" text="Arles"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Istres" importance="0">
+        <name>
+          <name language="fr" text="Istres"/>
+          <name language="en" text="Istres"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Martigues" importance="0">
+        <name>
+          <name language="fr" text="Martigues"/>
+          <name language="en" text="Martigues"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Aubagne" importance="0">
+        <name>
+          <name language="fr" text="Aubagne"/>
+          <name language="en" text="Aubagne"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SalonDeProvence" importance="0">
+        <name>
+          <name language="fr" text="Salon-de-Provence"/>
+          <name language="en" text="Salon-de-Provence"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
     </pointElementList>
   </elementList>
   

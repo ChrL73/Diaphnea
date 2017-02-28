@@ -67,14 +67,16 @@ var mapServerInterface =
             onError({ error: -1, message: 'Failed to load ' + url + '/socket.io/socket.io.js' });
          });
          
-         function postHttpRequest(data)
+         function postHttpRequest(route, data)
          {
             var form = document.createElement("form");
-            form.action = _url;
+            form.action = _url + '/' + route;
             form.method = 'post';
             form.target = '_blank';
 
-            var input = document.createElement("textarea");
+            var input = document.createElement('textarea');
+            //var input = document.createElement('input');
+            //input.setAttribute('type', 'text');
             input.name = 'data';
             input.value = JSON.stringify(data);
             form.appendChild(input);           
@@ -219,10 +221,10 @@ var mapServerInterface =
                   potentialImageRequested = false;
                }
                
-               if (svgRequested) elementIds.push('#svg');
-               
                if (elementIds.length)
                {
+                  if (svgRequested) elementIds.push('#svg');
+                  
                   Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
                   { 
                      var item = items[itemKey];
@@ -246,8 +248,7 @@ var mapServerInterface =
                   
                   if (svgRequested)
                   {
-                     postHttpRequest(request);
-                     svgRequested = false;
+                     postHttpRequest('map.svg', request);
                   }
                   else
                   {
@@ -263,6 +264,8 @@ var mapServerInterface =
                      removeItem(items[itemKey]);
                   });
                }
+               
+               svgRequested = false;
             }
                
             socket.on('renderRes', function(response)

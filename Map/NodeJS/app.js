@@ -231,7 +231,9 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
          delete responses[requestId];
          if (res)
          {
-            res.end(responseContent);
+            res.setHeader('content-type', 'image/svg+xml');
+            res.setHeader('content-disposition', 'inline; filename=map.svg');
+            res.end(responseContent.svg);
          }
       }
       else

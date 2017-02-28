@@ -11,12 +11,15 @@
 #include "Point.h"
 #include "BezierInfo.h"
 #include "TextInfo.h"
+#include "MessageTypeEnum.h"
 
 #include <sstream>
 #include <fstream>
 
 namespace map_server
 {
+    std::mutex *SvgCreator::_coutMutexPtr = 0;
+
     SvgCreator::~SvgCreator()
     {
         std::multimap<int, SvgInfo *>::iterator it = _infoMap.begin();
@@ -27,9 +30,9 @@ namespace map_server
     {
         std::stringstream content;
 
-        content << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl
-                << "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" << _widthInPixels
-                << "\" height=\"" << _heightInPixels << "\">" << std::endl;
+        content << "<?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\"?>" << "\\n"
+                << "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" version=\\\"1.1\\\" width=\\\"" << _widthInPixels
+                << "\\\" height=\\\"" << _heightInPixels << "\\\">" << "\\n";
 
         MapData::lock();
 
@@ -93,9 +96,9 @@ namespace map_server
                         lastIn = in;
                     }
 
-                    content << "<path style=\"fill:" << look->getHexColor()
+                    content << "<path style=\\\"fill:" << look->getHexColor()
                             << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
-                            << ";fill-rule:evenodd;stroke:none\" d=\"";
+                            << ";fill-rule:evenodd;stroke:none\\\" d=\\\"";
 
                     for (i = 0; i < n; ++i)
                     {
@@ -127,7 +130,7 @@ namespace map_server
                         delete curveInfo;
                     }
 
-                    content << "\"></path>" << std::endl;
+                    content << "\\\"></path>" << "\\n";
                 }
                 else
                 {
@@ -146,10 +149,10 @@ namespace map_server
                             if (lineItem->cap2Round()) addCircle2 = true;
                         }
 
-                        content << "<path style=\"fill:none;stroke:" << look->getHexColor()
+                        content << "<path style=\\\"fill:none;stroke:" << look->getHexColor()
                                 << ";stroke-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
                                 << ";stroke-width:" << look->getSize() * _scale * _sizeFactor
-                                << ";stroke-linecap:" << strokeLineCap << ";stroke-linejoin:round\" d=\"";
+                                << ";stroke-linecap:" << strokeLineCap << ";stroke-linejoin:round\\\" d=\\\"";
 
                         bool lastIn = false;
                         std::stringstream lastMove;
@@ -179,7 +182,7 @@ namespace map_server
                             lastIn = in;
                         }
 
-                        content << "\"></path>" << std::endl;
+                        content << "\\\"></path>" << "\\n";
 
                         if (addCircle1)
                         {
@@ -187,9 +190,9 @@ namespace map_server
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-                            content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                << "\" stroke=\"none\" fill=\"" << look->getHexColor()
-                                << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                            content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << look->getHexColor()
+                                << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
                         }
 
                         if (addCircle2)
@@ -198,9 +201,9 @@ namespace map_server
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-                            content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                << "\" stroke=\"none\" fill=\"" << look->getHexColor()
-                                << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                            content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << look->getHexColor()
+                                << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
                         }
                     }
                     else
@@ -213,10 +216,10 @@ namespace map_server
 
                             if (x > -10.0 && x < _widthInPixels + 10.0 && y > -10.0 && y < _heightInPixels + 10.0)
                             {
-                                content << "<circle cx=\"" << x << "\" cy=\"" << y << "\" r=\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                        << "\" stroke=\"black\" stroke-width=\"" << _scale * _sizeFactor
-                                        << "\" fill=\"" << look->getHexColor()
-                                        << "\" fill-opacity=\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\"></circle>" << std::endl;
+                                content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
+                                        << "\\\" stroke=\\\"black\\\" stroke-width=\\\"" << _scale * _sizeFactor
+                                        << "\\\" fill=\\\"" << look->getHexColor()
+                                        << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
                             }
                         }
                     }
@@ -235,10 +238,10 @@ namespace map_server
                         double x = (lineInfo->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                         double y = (lineInfo->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-                        content << "<text x=\"" << x << "\" y=\"" << y << "\" font-size=\"" << svgTextInfo->getTextInfo()->getFontSize()
-                                << "\" font-family=\"arial\" fill=\"" << svgTextInfo->getTextInfo()->getHexColor()
-                                << "\" fill-opacity=\"" << static_cast<double>(svgTextInfo->getTextInfo()->getAlpha()) / 255.0
-                                << "\">" << lineInfo->getText() << "</text>" << std::endl;
+                        content << "<text x=\\\"" << x << "\\\" y=\\\"" << y << "\\\" font-size=\\\"" << svgTextInfo->getTextInfo()->getFontSize()
+                                << "\\\" font-family=\\\"arial\\\" fill=\\\"" << svgTextInfo->getTextInfo()->getHexColor()
+                                << "\\\" fill-opacity=\\\"" << static_cast<double>(svgTextInfo->getTextInfo()->getAlpha()) / 255.0
+                                << "\\\">" << lineInfo->getText() << "</text>" << "\\n";
                     }
                 }
             }
@@ -246,15 +249,19 @@ namespace map_server
 
         MapData::unlock();
 
-        content << "<rect x=\"0.5\" y=\"0.5\" width=\"" << _widthInPixels - 1.0 << "\" height=\"" << _heightInPixels - 1.0
-                << "\" style=\"fill:none;stroke-width:1;stroke:black\"/>" << std::endl << "</svg>";
+        content << "<rect x=\\\"0.5\\\" y=\\\"0.5\\\" width=\\\"" << _widthInPixels - 1.0 << "\\\" height=\\\"" << _heightInPixels - 1.0
+                << "\\\" style=\\\"fill:none;stroke-width:1;stroke:black\\\"/>" << "\\n" << "</svg>";
 
-        // Todo: Prevent different threads to write simultaneously the same file
-		std::string fileName;
+        /*std::string fileName;
 		if (_socketId.size() > 2) fileName = "map_" + _socketId.substr(2, _socketId.size() - 2) + ".svg";
 		else fileName = "map_" + _socketId + ".svg";
 
         std::ofstream file(fileName);
-        file << content.str();
+        file << content.str();*/
+
+        _coutMutexPtr->lock();
+        std::cout << _socketId << " " << _requestId << " " << map_server::SVG
+            << " {\"svg\":\"" << content.str() << "\"}" << std::endl;
+        _coutMutexPtr->unlock();
     }
 }

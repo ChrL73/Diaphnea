@@ -629,11 +629,17 @@ namespace map_server
         yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
 
         SvgTextInfo *svgTextInfo = 0;
-        if (_svgCreator != 0) svgTextInfo = new SvgTextInfo(textInfo);
 
-        _coutMutexPtr->lock();
-        std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
-            << " {\"t\":[";
+        if (_svgCreator == 0)
+        {
+            _coutMutexPtr->lock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
+                << " {\"t\":[";
+        }
+        else
+        {
+            svgTextInfo = new SvgTextInfo(textInfo);
+        }
 
         int i, n = textInfo->getLineVector().size();
         for (i = 0; i < n; ++i)
@@ -644,28 +650,38 @@ namespace map_server
             x = _xFocus + (x - 0.5 * _width) / _scale;
             y = _yFocus + (y - 0.5 * _height) / _scale;
 
-            std::cout << "[\"" << line->getText() << "\","
-                << x << "," << y << "]";
-            if (i != n - 1) std::cout << ",";
-
-            if (_svgCreator != 0) svgTextInfo->addLine(new SvgLineInfo(line->getText(), x, y));
+            if (_svgCreator == 0)
+            {
+                std::cout << "[\"" << line->getText() << "\","
+                    << x << "," << y << "]";
+                if (i != n - 1) std::cout << ",";
+            }
+            else
+            {
+                svgTextInfo->addLine(new SvgLineInfo(line->getText(), x, y));
+            }
         }
 
-        std::cout  << "],\"e\":\"" << item->getElementId()
-            << "\",\"x1\":" << xMin
-            << ",\"x2\":" << xMax
-            << ",\"y1\":" << yMin
-            << ",\"y2\":" << yMax
-            << ",\"s\":" << textInfo->getFontSize()
-            << ",\"z\":" << textInfo->getZIndex()
-            << ",\"a\":" << textInfo->getAlpha()
-            << ",\"r\":" << textInfo->getRed()
-            << ",\"g\":" << textInfo->getGreen()
-            << ",\"b\":" << textInfo->getBlue()
-            << "}" << std::endl;
-        _coutMutexPtr->unlock();
-
-        if (_svgCreator != 0) _svgCreator->addInfo(textInfo->getZIndex(), svgTextInfo);
+        if (_svgCreator == 0)
+        {
+            std::cout  << "],\"e\":\"" << item->getElementId()
+                << "\",\"x1\":" << xMin
+                << ",\"x2\":" << xMax
+                << ",\"y1\":" << yMin
+                << ",\"y2\":" << yMax
+                << ",\"s\":" << textInfo->getFontSize()
+                << ",\"z\":" << textInfo->getZIndex()
+                << ",\"a\":" << textInfo->getAlpha()
+                << ",\"r\":" << textInfo->getRed()
+                << ",\"g\":" << textInfo->getGreen()
+                << ",\"b\":" << textInfo->getBlue()
+                << "}" << std::endl;
+            _coutMutexPtr->unlock();
+        }
+        else
+        {
+            _svgCreator->addInfo(textInfo->getZIndex(), svgTextInfo);
+        }
 
         RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
             _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);

@@ -3,6 +3,7 @@
 #include "Request.h"
 #include "MapData.h"
 #include "TextDisplayer.h"
+#include "SvgCreator.h"
 #include "MessageTypeEnum.h"
 #include "ErrorEnum.h"
 
@@ -19,6 +20,7 @@ namespace map_server
     {
         Request::setCoutMutex(&_coutMutex);
         TextDisplayer::setCoutMutex(&_coutMutex);
+        SvgCreator::setCoutMutex(&_coutMutex);
 
         MapData *mapData = MapData::instance();
         if (mapData == 0) return -1;

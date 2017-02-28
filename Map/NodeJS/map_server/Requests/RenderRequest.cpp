@@ -209,19 +209,23 @@ namespace map_server
                 double yMax = _yFocus + dy;
 
                 double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
-                if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId);
 
-                response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
+                if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId);
+                else response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
+
                 n = itemVector2.size();
                 for (i = 0; i < n; ++i)
                 {
                     MapItem *item = itemVector2[i];
-                    if (i != 0) response << ",";
-                    response << "[" << item->getId() << "," << item->getCurrentLook(_lookIndex)->getId();
-                    if (item->hasResolution()) response << "," << resolutionIndex;
-                    response << "]";
 
-                    if (_svgCreator != 0)
+                    if (_svgCreator == 0)
+                    {
+                        if (i != 0) response << ",";
+                        response << "[" << item->getId() << "," << item->getCurrentLook(_lookIndex)->getId();
+                        if (item->hasResolution()) response << "," << resolutionIndex;
+                        response << "]";
+                    }
+                    else
                     {
                         SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(_lookIndex), resolutionIndex);
                         _svgCreator->addInfo(item->getCurrentLook(_lookIndex)->getZIndex(), svgItemInfo);
@@ -253,19 +257,25 @@ namespace map_server
                     }
                     else
                     {
-                        std::stringstream delResponse;
-                        delResponse << _socketId << " " << _requestId << " " << map_server::REMOVE_TEXT
-                            << " {\"e\":\"" << item->getElementIdForText() << "\"}";
-                        MapData::unlock();
-                        _coutMutexPtr->lock();
-                        std::cout << delResponse.str() << std::endl;
-                        _coutMutexPtr->unlock();
-                        MapData::lock();
+                        if (_svgCreator == 0)
+                        {
+                            std::stringstream delResponse;
+                            delResponse << _socketId << " " << _requestId << " " << map_server::REMOVE_TEXT
+                                << " {\"e\":\"" << item->getElementIdForText() << "\"}";
+                            MapData::unlock();
+                            _coutMutexPtr->lock();
+                            std::cout << delResponse.str() << std::endl;
+                            _coutMutexPtr->unlock();
+                            MapData::lock();
+                        }
                     }
                 }
 
-                response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus
-                         << ",\"scale\":" << _scale << "}";
+                if (_svgCreator == 0)
+                {
+                    response << "],\"xFocus\":" << _xFocus << ",\"yFocus\":" << _yFocus
+                             << ",\"scale\":" << _scale << "}";
+                }
 
                 std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.begin();
                 for (; elementIt != lineItemAssociationMap.end(); ++elementIt)
@@ -278,9 +288,12 @@ namespace map_server
 
             if (n > 0)
             {
-                _coutMutexPtr->lock();
-                std::cout << response.str() << std::endl;
-                _coutMutexPtr->unlock();
+                if (_svgCreator == 0)
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << response.str() << std::endl;
+                    _coutMutexPtr->unlock();
+                }
 
                 if (languageOk)
                 {

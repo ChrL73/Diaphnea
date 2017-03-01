@@ -84,6 +84,51 @@
     </pointLookList>
   </lookList>
 
+  <categoryList>
+    <category id="ca_Gabon">
+      <name>
+        <name language="fr" text="Gabon"/>
+        <name language="en" text="Gabon"/>
+      </name>
+    </category>
+    <category id="ca_Province">
+      <name>
+        <name language="fr" text="Provinces"/>
+        <name language="en" text="Provinces"/>
+      </name>
+    </category>
+    <category id="ca_Departement">
+      <name>
+        <name language="fr" text="Départements"/>
+        <name language="en" text="Departments"/>
+      </name>
+    </category>
+    <category id="ca_FleuveRiviere">
+      <name>
+        <name language="fr" text="Cours d'eau"/>
+        <name language="en" text="Rivers"/>
+      </name>
+    </category>
+    <category id="ca_ChefLieuProvince">
+      <name>
+        <name language="fr" text="Chefs-lieux de province"/>
+        <name language="en" text="Province capitals"/>
+      </name>
+    </category>
+    <category id="ca_ChefLieuDepartement">
+      <name>
+        <name language="fr" text="Chefs-lieux de département"/>
+        <name language="en" text="Department capitals"/>
+      </name>
+    </category>
+    <category id="ca_Ville">
+      <name>
+        <name language="fr" text="Autres villes"/>
+        <name language="en" text="Other cities"/>
+      </name>
+    </category>
+  </categoryList>
+
   <elementList>
     <polygonElementList>
       <polygonElement id="e_Gabon" importance="601">

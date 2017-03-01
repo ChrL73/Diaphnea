@@ -223,8 +223,6 @@ var mapServerInterface =
                
                if (elementIds.length)
                {
-                  if (svgRequested) elementIds.push('#svg');
-                  
                   Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
                   { 
                      var item = items[itemKey];

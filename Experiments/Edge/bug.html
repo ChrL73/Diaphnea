@@ -5,19 +5,19 @@
       <title>Edge issue</title>
    </head>
 
-   <body></body>
-   
-   <script>
-      var form = document.createElement('form');
-      form.action = 'http://localhost:3000';
-      form.method = 'post';
-      form.target = '_blank';
-      var input = document.createElement('textarea');
-      input.name = 'data';
-      input.value = 'Hello!';
-      form.appendChild(input);  
-      document.body.appendChild(form);
-      form.submit();
-   </script>
+   <body>
+      <script>
+         var form = document.createElement('form');
+         form.action = 'http://localhost:3000';
+         form.method = 'post';
+         form.target = '_blank';
+         var input = document.createElement('textarea');
+         input.name = 'data';
+         input.value = 'Hello!';
+         form.appendChild(input);  
+         document.body.appendChild(form);
+         form.submit();
+      </script>
+   </body>
    
 </html>

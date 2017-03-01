@@ -6,6 +6,7 @@
       <xsd:element name="parameters" type="XmlParameters" maxOccurs="1" minOccurs="1" />
       <xsd:element name="resolutionList" type="XmlResolutionList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="lookList" type="XmlLookList" maxOccurs="1" minOccurs="1" />
+      <xsd:element name="categoryList" type="XmlCategoryList" maxOccurs="1" minOccurs="1" />
       <xsd:element name="elementList" type="XmlElementList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
@@ -194,6 +195,27 @@
       <xsd:minExclusive value="0" />
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:complexType name="XmlCategoryList">
+    <xsd:sequence>
+      <xsd:element name="category" type="XmlCategory" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="XmlCategory">
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlElementName"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="XmlCategoryId" use="required"/>
+  </xsd:complexType>
+  <xsd:simpleType name="XmlCategoryId">
+    <xsd:restriction base="xsd:ID">
+      <xsd:pattern value="ca_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlCategoryIdRef">
+    <xsd:restriction base="xsd:IDREF">
+      <xsd:pattern value="ca_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlElementList">
     <xsd:sequence>
       <xsd:element name="polygonElementList" type="XmlPolygonElementList" minOccurs="1" maxOccurs="1" />
@@ -224,6 +246,7 @@
       <xsd:element name="coveredElementList" type="XmlCoveredElementList" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="category" type="XmlCategoryIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlPolygonLooks">
@@ -252,6 +275,7 @@
       <xsd:element name="attachmentList" type="XmlAttachmentList" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="category" type="XmlCategoryIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlLineLooks">
@@ -270,6 +294,7 @@
       <xsd:element name="looks" type="XmlPointLooks" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="id" type="XmlElementId" use="required" />
+    <xsd:attribute name="category" type="XmlCategoryIdRef" use="required"/>
     <xsd:attribute name="importance" type="xsd:double" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlPointLooks">

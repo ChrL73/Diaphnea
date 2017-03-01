@@ -50,9 +50,17 @@
     </pointLookList>
   </lookList>
 
+  <categoryList>
+    <category id="ca_categorie1">
+      <name>
+        <name language="fr" text="Catégorie 1"/>
+      </name>
+    </category>
+  </categoryList>
+
   <elementList>
     <polygonElementList>
-      <polygonElement id="e_pl1" importance="0">
+      <polygonElement id="e_pl1" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Pl1"/>
         </name>
@@ -61,7 +69,7 @@
         </looks>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_pl2" importance="0">
+      <polygonElement id="e_pl2" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Pl2"/>
         </name>
@@ -70,7 +78,7 @@
         </looks>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_pl3" importance="0">
+      <polygonElement id="e_pl3" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Pl3"/>
         </name>
@@ -81,7 +89,7 @@
       </polygonElement>
     </polygonElementList>
     <lineElementList>
-      <lineElement id="e_ln1" importance="0">
+      <lineElement id="e_ln1" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Ln1"/>
         </name>
@@ -90,7 +98,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_ln2" importance="0">
+      <lineElement id="e_ln2" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Ln2"/>
         </name>
@@ -101,7 +109,7 @@
       </lineElement>
     </lineElementList>
     <pointElementList>
-      <pointElement id="e_pt1" importance="0">
+      <pointElement id="e_pt1" category="ca_categorie1" importance="0">
         <name>
           <name language="fr" text="Pt1"/>
         </name>

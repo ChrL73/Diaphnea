@@ -55,7 +55,52 @@
                  textAlpha="255" textRed="64" textGreen="0" textBlue="128" textSize="16"/>
     </pointLookList>
   </lookList>
-  
+
+  <categoryList>
+    <category id="ca_France">
+      <name>
+        <name language="fr" text="France"/>
+        <name language="en" text="France"/>
+      </name>
+    </category>
+    <category id="ca_Region">
+      <name>
+        <name language="fr" text="Régions"/>
+        <name language="en" text="Regions"/>
+      </name>
+    </category>
+    <category id="ca_Departement">
+      <name>
+        <name language="fr" text="Départements"/>
+        <name language="en" text="Departments"/>
+      </name>
+    </category>
+    <category id="ca_FleuveRiviere">
+      <name>
+        <name language="fr" text="Cours d'eau"/>
+        <name language="en" text="Rivers"/>
+      </name>
+    </category>
+    <category id="ca_Prefecture">
+      <name>
+        <name language="fr" text="Chefs-lieux de département"/>
+        <name language="en" text="Department capitals"/>
+      </name>
+    </category>
+    <category id="ca_SousPrefecture">
+      <name>
+        <name language="fr" text="Chefs-lieux d'arrondissement"/>
+        <name language="en" text="Arrondissement capitals"/>
+      </name>
+    </category>
+    <category id="ca_Ville">
+      <name>
+        <name language="fr" text="Autres villes"/>
+        <name language="en" text="Other cities"/>
+      </name>
+    </category>
+  </categoryList>
+    
   <elementList>
     <polygonElementList>
       <!--<polygonElement id="e_France" look="pl_France">
@@ -65,7 +110,7 @@
         </name>
       </polygonElement>-->
       <!--Régions-->
-      <polygonElement id="e_ARA" importance="0">
+      <polygonElement id="e_ARA" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Auvergne-Rhône-Alpes"/>
           <name language="en" text="Auvergne-Rhône-Alpes"/>
@@ -77,13 +122,13 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_BFC" look="pl_Region">
+      <!--<polygonElement id="e_BFC" category="ca_Region" look="pl_Region">
         <name>
           <name language="fr" text="Bourgogne-Franche-Comté"/>
           <name language="en" text="Bourgogne-Franche-Comté"/>
         </name>
       </polygonElement>-->
-      <polygonElement id="e_Bretagne" importance="0">
+      <polygonElement id="e_Bretagne" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Bretagne"/>
           <name language="en" text="Bretagne"/>
@@ -95,7 +140,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_CVL" importance="0">
+      <polygonElement id="e_CVL" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Centre-Val de Loire"/>
           <name language="en" text="Centre-Val de Loire"/>
@@ -107,19 +152,19 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_Corse" look="pl_Region">
+      <!--<polygonElement id="e_Corse" category="ca_Region" look="pl_Region">
         <name>
           <name language="fr" text="Corse"/>
           <name language="en" text="Corse"/>
         </name>
       </polygonElement>
-      <polygonElement id="e_Est" look="pl_Region">
+      <polygonElement id="e_Est" category="ca_Region" look="pl_Region">
         <name>
           <name language="fr" text="Grand-Est"/>
           <name language="en" text="Grand-Est"/>
         </name>
       </polygonElement>-->
-      <polygonElement id="e_HDF" importance="0">
+      <polygonElement id="e_HDF" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Hauts-de-France"/>
           <name language="en" text="Hauts-de-France"/>
@@ -131,7 +176,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_IDF" importance="0">
+      <polygonElement id="e_IDF" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Île-de-France"/>
           <name language="en" text="Île-de-France"/>
@@ -143,7 +188,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Normandie" importance="0">
+      <polygonElement id="e_Normandie" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Normandie"/>
           <name language="en" text="Normandie"/>
@@ -155,7 +200,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Aquitaine" importance="0">
+      <polygonElement id="e_Aquitaine" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Nouvelle-Aquitaine"/>
           <name language="en" text="Nouvelle-Aquitaine"/>
@@ -167,7 +212,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Occitanie" importance="0">
+      <polygonElement id="e_Occitanie" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Occitanie"/>
           <name language="en" text="Occitanie"/>
@@ -179,7 +224,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_PDLL" importance="0">
+      <polygonElement id="e_PDLL" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Pays de la Loire"/>
           <name language="en" text="Pays de la Loire"/>
@@ -191,7 +236,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_PACA" importance="0">
+      <polygonElement id="e_PACA" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Provence-Alpes-Côte d'Azur"/>
           <name language="en" text="Provence-Alpes-Côte d'Azur"/>
@@ -204,7 +249,7 @@
         </coveredElementList>
       </polygonElement>
       <!--Départements-->
-      <polygonElement id="e_01" importance="0">
+      <polygonElement id="e_01" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Ain (01)"/>
           <name language="en" text="Ain (01)"/>
@@ -221,7 +266,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_02" importance="0">
+      <polygonElement id="e_02" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Aisne (02)"/>
           <name language="en" text="Aisne (02)"/>
@@ -238,7 +283,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_03" importance="0">
+      <polygonElement id="e_03" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Allier (03)"/>
           <name language="en" text="Allier (03)"/>
@@ -255,7 +300,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_04" importance="0">
+      <polygonElement id="e_04" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Alpes-de_Haute-Provence (04)"/>
           <name language="en" text="Alpes-de_Haute-Provence (04)"/>
@@ -272,7 +317,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_05" importance="0">
+      <polygonElement id="e_05" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Hautes-Alpes (05)"/>
           <name language="en" text="Hautes-Alpes (05)"/>
@@ -289,7 +334,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_06" importance="0">
+      <polygonElement id="e_06" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Alpes-Maritimes (06)"/>
           <name language="en" text="Alpes-Maritimes (06)"/>
@@ -306,7 +351,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_07" importance="0">
+      <polygonElement id="e_07" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Ardèche (07)"/>
           <name language="en" text="Ardèche (07)"/>
@@ -323,7 +368,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_08" importance="0">
+      <polygonElement id="e_08" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Ardennes (08)"/>
           <name language="en" text="Ardennes (08)"/>
@@ -337,7 +382,7 @@
         </looks>
         <coveredElementList/>
       </polygonElement>
-      <polygonElement id="e_09" importance="0">
+      <polygonElement id="e_09" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Ariège (09)"/>
           <name language="en" text="Ariège (09)"/>
@@ -354,7 +399,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_11" importance="0">
+      <polygonElement id="e_11" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Aude (11)"/>
           <name language="en" text="Aude (11)"/>
@@ -371,7 +416,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_12" importance="0">
+      <polygonElement id="e_12" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Aveyron (12)"/>
           <name language="en" text="Aveyron (12)"/>
@@ -388,7 +433,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_13" importance="0">
+      <polygonElement id="e_13" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Bouches-du-Rhône (13)"/>
           <name language="en" text="Bouches-du-Rhône (13)"/>
@@ -405,7 +450,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_14" importance="0">
+      <polygonElement id="e_14" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Calvados (14)"/>
           <name language="en" text="Calvados (14)"/>
@@ -422,7 +467,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_15" importance="0">
+      <polygonElement id="e_15" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Cantal (15)"/>
           <name language="en" text="Cantal (15)"/>
@@ -439,7 +484,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_16" importance="0">
+      <polygonElement id="e_16" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Charente (16)"/>
           <name language="en" text="Charente (16)"/>
@@ -456,7 +501,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_17" importance="0">
+      <polygonElement id="e_17" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Charente-Maritime (17)"/>
           <name language="en" text="Charente-Maritime (17)"/>
@@ -473,7 +518,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_18" importance="0">
+      <polygonElement id="e_18" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Cher (18)"/>
           <name language="en" text="Cher (18)"/>
@@ -490,7 +535,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_19" importance="0">
+      <polygonElement id="e_19" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Corrèze (19)"/>
           <name language="en" text="Corrèze (19)"/>
@@ -507,7 +552,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_22" importance="0">
+      <polygonElement id="e_22" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Côtes-d'Armor (22)"/>
           <name language="en" text="Côtes-d'Armor (22)"/>
@@ -524,7 +569,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_23" importance="0">
+      <polygonElement id="e_23" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Creuse (23)"/>
           <name language="en" text="Creuse (23)"/>
@@ -541,7 +586,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_24" importance="0">
+      <polygonElement id="e_24" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Dordogne (24)"/>
           <name language="en" text="Dordogne (24)"/>
@@ -558,7 +603,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_26" importance="0">
+      <polygonElement id="e_26" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Drôme (26)"/>
           <name language="en" text="Drôme (26)"/>
@@ -575,7 +620,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_27" importance="0">
+      <polygonElement id="e_27" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Eure (27)"/>
           <name language="en" text="Eure (27)"/>
@@ -592,7 +637,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_28" importance="0">
+      <polygonElement id="e_28" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Eure-et-Loire (28)"/>
           <name language="en" text="Eure-et-Loire (28)"/>
@@ -609,7 +654,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_29" importance="0">
+      <polygonElement id="e_29" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Finistère (29)"/>
           <name language="en" text="Finistère (29)"/>
@@ -626,7 +671,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_30" importance="0">
+      <polygonElement id="e_30" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Gard (30)"/>
           <name language="en" text="Gard (30)"/>
@@ -643,7 +688,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_31" importance="0">
+      <polygonElement id="e_31" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Haute-Garonne (31)"/>
           <name language="en" text="Haute-Garonne (31)"/>
@@ -660,7 +705,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_32" importance="0">
+      <polygonElement id="e_32" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Gers (32)"/>
           <name language="en" text="Gers (32)"/>
@@ -677,7 +722,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_33" importance="0">
+      <polygonElement id="e_33" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Gironde (33)"/>
           <name language="en" text="Gironde (33)"/>
@@ -694,7 +739,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_34" importance="0">
+      <polygonElement id="e_34" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Hérault (34)"/>
           <name language="en" text="Hérault (34)"/>
@@ -711,7 +756,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_35" importance="0">
+      <polygonElement id="e_35" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Ille-et-Vilaine (35)"/>
           <name language="en" text="Ille-et-Vilaine (35)"/>
@@ -728,7 +773,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_36" importance="0">
+      <polygonElement id="e_36" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Indre (36)"/>
           <name language="en" text="Indre (36)"/>
@@ -745,7 +790,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_37" importance="0">
+      <polygonElement id="e_37" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Indre-et-Loire (37)"/>
           <name language="en" text="Indre-et-Loire (37)"/>
@@ -762,7 +807,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_38" importance="0">
+      <polygonElement id="e_38" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Isère (38)"/>
           <name language="en" text="Isère (38)"/>
@@ -779,7 +824,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_40" importance="0">
+      <polygonElement id="e_40" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Landes (40)"/>
           <name language="en" text="Landes (40)"/>
@@ -796,7 +841,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_41" importance="0">
+      <polygonElement id="e_41" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Loir-et-Cher (41)"/>
           <name language="en" text="Loir-et-Cher (41)"/>
@@ -813,7 +858,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_42" importance="0">
+      <polygonElement id="e_42" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Loire (42)"/>
           <name language="en" text="Loire (42)"/>
@@ -830,7 +875,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_43" importance="0">
+      <polygonElement id="e_43" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Haute-Loire (43)"/>
           <name language="en" text="Haute-Loire (43)"/>
@@ -847,7 +892,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_44" importance="0">
+      <polygonElement id="e_44" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Loire-Atlantique (44)"/>
           <name language="en" text="Loire-Atlantique (44)"/>
@@ -864,7 +909,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_45" importance="0">
+      <polygonElement id="e_45" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Loiret (45)"/>
           <name language="en" text="Loiret (45)"/>
@@ -881,7 +926,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_46" importance="0">
+      <polygonElement id="e_46" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Lot (46)"/>
           <name language="en" text="Lot (46)"/>
@@ -898,7 +943,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_47" importance="0">
+      <polygonElement id="e_47" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Lot-et-Garonne (47)"/>
           <name language="en" text="Lot-et-Garonne (47)"/>
@@ -915,7 +960,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_48" importance="0">
+      <polygonElement id="e_48" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Lozère (48)"/>
           <name language="en" text="Lozère (48)"/>
@@ -932,7 +977,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_49" importance="0">
+      <polygonElement id="e_49" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Maine-et-Loire (49)"/>
           <name language="en" text="Maine-et-Loire (49)"/>
@@ -949,7 +994,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_50" importance="0">
+      <polygonElement id="e_50" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Manche (50)"/>
           <name language="en" text="Manche (50)"/>
@@ -966,7 +1011,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_53" importance="0">
+      <polygonElement id="e_53" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Mayenne (53)"/>
           <name language="en" text="Mayenne (53)"/>
@@ -983,7 +1028,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-       <polygonElement id="e_56" importance="0">
+       <polygonElement id="e_56" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Morbihan (56)"/>
           <name language="en" text="Morbihan (56)"/>
@@ -1000,7 +1045,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_59" importance="0">
+      <polygonElement id="e_59" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Nord (59)"/>
           <name language="en" text="Nord (59)"/>
@@ -1017,7 +1062,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_60" importance="0">
+      <polygonElement id="e_60" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Oise (60)"/>
           <name language="en" text="Oise (60)"/>
@@ -1034,7 +1079,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_61" importance="0">
+      <polygonElement id="e_61" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Orne (61)"/>
           <name language="en" text="Orne (61)"/>
@@ -1051,7 +1096,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_62" importance="0">
+      <polygonElement id="e_62" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Pas-de-Calais (62)"/>
           <name language="en" text="Pas-de-Calais (62)"/>
@@ -1068,7 +1113,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_63" importance="0">
+      <polygonElement id="e_63" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Puy-de-Dôme (63)"/>
           <name language="en" text="Puy-de-Dôme (63)"/>
@@ -1085,7 +1130,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_64" importance="0">
+      <polygonElement id="e_64" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Pyrénées-Atlantiques (64)"/>
           <name language="en" text="Pyrénées-Atlantiques (64)"/>
@@ -1102,7 +1147,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_65" importance="0">
+      <polygonElement id="e_65" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Hautes-Pyrénées (65)"/>
           <name language="en" text="Hautes-Pyrénées (65)"/>
@@ -1119,7 +1164,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_66" importance="0">
+      <polygonElement id="e_66" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Pyrénées-Orientales (66)"/>
           <name language="en" text="Pyrénées-Orientales (66)"/>
@@ -1136,7 +1181,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_69" importance="0">
+      <polygonElement id="e_69" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Rhône (69)"/>
           <name language="en" text="Rhône (69)"/>
@@ -1153,7 +1198,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_72" importance="0">
+      <polygonElement id="e_72" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Sarthe (72)"/>
           <name language="en" text="Sarthe (72)"/>
@@ -1170,7 +1215,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_73" importance="0">
+      <polygonElement id="e_73" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Savoie (73)"/>
           <name language="en" text="Savoie (73)"/>
@@ -1187,7 +1232,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_74" importance="0">
+      <polygonElement id="e_74" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Haute-Savoie (74)"/>
           <name language="en" text="Haute-Savoie (74)"/>
@@ -1204,24 +1249,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_76" importance="0">
-        <name>
-          <name language="fr" text="Seine-Maritime (76)"/>
-          <name language="en" text="Seine-Maritime (76)"/>
-        </name>
-        <shortName>
-          <name language="fr" text="76"/>
-          <name language="en" text="76"/>
-        </shortName>
-        <looks>
-          <look id="pl_Departement"/>
-        </looks>
-        <coveredElementList>
-          <element id="e_Normandie"/>
-          <!--<element id="e_France"/>-->
-        </coveredElementList>
-      </polygonElement>
-      <polygonElement id="e_75" importance="0">
+      <polygonElement id="e_75" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Paris (75)"/>
           <name language="en" text="Paris (75)"/>
@@ -1238,7 +1266,24 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_77" importance="0">
+      <polygonElement id="e_76" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Seine-Maritime (76)"/>
+          <name language="en" text="Seine-Maritime (76)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="76"/>
+          <name language="en" text="76"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Normandie"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_77" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Seine-et-Marne (77)"/>
           <name language="en" text="Seine-et-Marne (77)"/>
@@ -1255,7 +1300,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_78" importance="0">
+      <polygonElement id="e_78" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Yvelines (78)"/>
           <name language="en" text="Yvelines (78)"/>
@@ -1272,7 +1317,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_79" importance="0">
+      <polygonElement id="e_79" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Deux-Sèvres (79)"/>
           <name language="en" text="Deux-Sèvres (79)"/>
@@ -1289,7 +1334,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_80" importance="0">
+      <polygonElement id="e_80" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Somme (80)"/>
           <name language="en" text="Somme (80)"/>
@@ -1306,7 +1351,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_81" importance="0">
+      <polygonElement id="e_81" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Tarn (81)"/>
           <name language="en" text="Tarn (81)"/>
@@ -1323,7 +1368,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_82" importance="0">
+      <polygonElement id="e_82" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Tarn-et-Garonne (82)"/>
           <name language="en" text="Tarn-et-Garonne (82)"/>
@@ -1340,7 +1385,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_83" importance="0">
+      <polygonElement id="e_83" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Var (83)"/>
           <name language="en" text="Var (83)"/>
@@ -1357,7 +1402,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_84" importance="0">
+      <polygonElement id="e_84" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Vaucluse (84)"/>
           <name language="en" text="Vaucluse (84)"/>
@@ -1374,7 +1419,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_85" importance="0">
+      <polygonElement id="e_85" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Vendée (85)"/>
           <name language="en" text="Vendée (85)"/>
@@ -1391,7 +1436,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_86" importance="0">
+      <polygonElement id="e_86" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Vienne (86)"/>
           <name language="en" text="Vienne (86)"/>
@@ -1408,7 +1453,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_87" importance="0">
+      <polygonElement id="e_87" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Haute-Vienne (87)"/>
           <name language="en" text="Haute-Vienne (87)"/>
@@ -1425,7 +1470,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_91" importance="0">
+      <polygonElement id="e_91" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Essonne (91)"/>
           <name language="en" text="Essonne (91)"/>
@@ -1442,7 +1487,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_92" importance="0">
+      <polygonElement id="e_92" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Hauts-de-Seine (92)"/>
           <name language="en" text="Hauts-de-Seine (92)"/>
@@ -1459,7 +1504,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_93" importance="0">
+      <polygonElement id="e_93" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Seine-Saint-Denis (93)"/>
           <name language="en" text="Seine-Saint-Denis (93)"/>
@@ -1476,7 +1521,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_94" importance="0">
+      <polygonElement id="e_94" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Val-de-Marne (94)"/>
           <name language="en" text="Val-de-Marne (94)"/>
@@ -1493,7 +1538,7 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_95" importance="0">
+      <polygonElement id="e_95" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Val-d'Oise (95)"/>
           <name language="en" text="Val-d'Oise (95)"/>
@@ -1513,7 +1558,7 @@
     </polygonElementList>
     <lineElementList>
       <!--Fleuves et rivières-->
-      <lineElement id="e_Rhin" importance="0">
+      <lineElement id="e_Rhin" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Rhin"/>
           <name language="en" text="Rhin"/>
@@ -1523,7 +1568,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Rhone" importance="0">
+      <lineElement id="e_Rhone" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Rhône"/>
           <name language="en" text="Rhône"/>
@@ -1535,7 +1580,7 @@
           <element id="e_13"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Loire" importance="0">
+      <lineElement id="e_Loire" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Loire"/>
           <name language="en" text="Loire"/>
@@ -1547,7 +1592,7 @@
           <element id="e_44"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Meuse" importance="0">
+      <lineElement id="e_Meuse" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Meuse"/>
           <name language="en" text="Meuse"/>
@@ -1557,7 +1602,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Seine" importance="0">
+      <lineElement id="e_Seine" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Seine"/>
           <name language="en" text="Seine"/>
@@ -1569,7 +1614,7 @@
           <element id="e_76"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Garonne" importance="0">
+      <lineElement id="e_Garonne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Garonne"/>
           <name language="en" text="Garonne"/>
@@ -1581,7 +1626,7 @@
           <element id="e_33"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Moselle" importance="0">
+      <lineElement id="e_Moselle" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Moselle"/>
           <name language="en" text="Moselle"/>
@@ -1593,7 +1638,7 @@
           <element id="e_Rhin"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Saone" importance="0">
+      <lineElement id="e_Saone" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Saône"/>
           <name language="en" text="Saône"/>
@@ -1605,7 +1650,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Dordogne" importance="0">
+      <lineElement id="e_Dordogne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Dordogne"/>
           <name language="en" text="Dordogne"/>
@@ -1617,7 +1662,7 @@
           <element id="e_33"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Marne" importance="0">
+      <lineElement id="e_Marne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Marne"/>
           <name language="en" text="Marne"/>
@@ -1629,7 +1674,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Lot" importance="0">
+      <lineElement id="e_Lot" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Lot"/>
           <name language="en" text="Lot"/>
@@ -1641,7 +1686,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Doubs" importance="0">
+      <lineElement id="e_Doubs" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Doubs"/>
           <name language="en" text="Doubs"/>
@@ -1653,7 +1698,7 @@
           <element id="e_Saone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Isere" importance="0">
+      <lineElement id="e_Isere" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Isère"/>
           <name language="en" text="Isère"/>
@@ -1665,7 +1710,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Tarn" importance="0">
+      <lineElement id="e_Tarn" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Tarn"/>
           <name language="en" text="Tarn"/>
@@ -1677,7 +1722,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vienne" importance="0">
+      <lineElement id="e_Vienne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Vienne"/>
           <name language="en" text="Vienne"/>
@@ -1689,7 +1734,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Allier" importance="0">
+      <lineElement id="e_Allier" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Allier"/>
           <name language="en" text="Allier"/>
@@ -1701,7 +1746,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Escaut" importance="0">
+      <lineElement id="e_Escaut" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Escaut"/>
           <name language="en" text="Escaut"/>
@@ -1711,7 +1756,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Adour" importance="0">
+      <lineElement id="e_Adour" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Adour"/>
           <name language="en" text="Adour"/>
@@ -1723,7 +1768,7 @@
           <element id="e_64"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Durance" importance="0">
+      <lineElement id="e_Durance" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Durance"/>
           <name language="en" text="Durance"/>
@@ -1735,7 +1780,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Charente" importance="0">
+      <lineElement id="e_Charente" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Charente"/>
           <name language="en" text="Charente"/>
@@ -1747,7 +1792,7 @@
           <element id="e_17"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Cher" importance="0">
+      <lineElement id="e_Cher" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Cher"/>
           <name language="en" text="Cher"/>
@@ -1759,7 +1804,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Oise" importance="0">
+      <lineElement id="e_Oise" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Oise"/>
           <name language="en" text="Oise"/>
@@ -1771,7 +1816,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aisne" importance="0">
+      <lineElement id="e_Aisne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Aisne"/>
           <name language="en" text="Aisne"/>
@@ -1783,7 +1828,7 @@
           <element id="e_Oise"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Maine" importance="0">
+      <lineElement id="e_Maine" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Maine"/>
           <name language="en" text="Maine"/>
@@ -1795,7 +1840,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sarthe" importance="0">
+      <lineElement id="e_Sarthe" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Sarthe"/>
           <name language="en" text="Sarthe"/>
@@ -1807,7 +1852,7 @@
           <element id="e_Maine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Yonne" importance="0">
+      <lineElement id="e_Yonne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Yonne"/>
           <name language="en" text="Yonne"/>
@@ -1819,7 +1864,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Loir" importance="0">
+      <lineElement id="e_Loir" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Loir"/>
           <name language="en" text="Loir"/>
@@ -1831,7 +1876,7 @@
           <element id="e_Sarthe"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Creuse" importance="0">
+      <lineElement id="e_Creuse" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Creuse"/>
           <name language="en" text="Creuse"/>
@@ -1843,7 +1888,7 @@
           <element id="e_Vienne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sarre" importance="0">
+      <lineElement id="e_Sarre" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Sarre"/>
           <name language="en" text="Sarre"/>
@@ -1855,7 +1900,7 @@
           <element id="e_Moselle"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Isle" importance="0">
+      <lineElement id="e_Isle" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Isle"/>
           <name language="en" text="Isle"/>
@@ -1867,7 +1912,7 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ain" importance="0">
+      <lineElement id="e_Ain" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Ain"/>
           <name language="en" text="Ain"/>
@@ -1879,7 +1924,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aveyron" importance="0">
+      <lineElement id="e_Aveyron" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Aveyron"/>
           <name language="en" text="Aveyron"/>
@@ -1891,7 +1936,7 @@
           <element id="e_Tarn"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vilaine" importance="0">
+      <lineElement id="e_Vilaine" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Vilaine"/>
           <name language="en" text="Vilaine"/>
@@ -1903,7 +1948,7 @@
           <element id="e_56"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aube" importance="0">
+      <lineElement id="e_Aube" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Aube"/>
           <name language="en" text="Aube"/>
@@ -1915,7 +1960,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Indre" importance="0">
+      <lineElement id="e_Indre" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Indre"/>
           <name language="en" text="Indre"/>
@@ -1927,7 +1972,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Somme" importance="0">
+      <lineElement id="e_Somme" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Somme"/>
           <name language="en" text="Somme"/>
@@ -1939,7 +1984,7 @@
           <element id="e_80"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ill" importance="0">
+      <lineElement id="e_Ill" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Ill"/>
           <name language="en" text="Ill"/>
@@ -1951,7 +1996,7 @@
           <element id="e_Rhin"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GavesReunis" importance="0">
+      <lineElement id="e_GavesReunis" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Gaves réunis"/>
           <name language="en" text="Gaves réunis"/>
@@ -1963,7 +2008,7 @@
           <element id="e_Adour"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GaveDePau" importance="0">
+      <lineElement id="e_GaveDePau" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Gave de Pau"/>
           <name language="en" text="Gave de Pau"/>
@@ -1975,7 +2020,7 @@
           <element id="e_GavesReunis"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vezere" importance="0">
+      <lineElement id="e_Vezere" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Vézère"/>
           <name language="en" text="Vézère"/>
@@ -1987,7 +2032,7 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aude" importance="0">
+      <lineElement id="e_Aude" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Aude"/>
           <name language="en" text="Aude"/>
@@ -1999,7 +2044,7 @@
           <element id="e_34"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Eure" importance="0">
+      <lineElement id="e_Eure" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Eure"/>
           <name language="en" text="Eure"/>
@@ -2011,7 +2056,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ognon" importance="0">
+      <lineElement id="e_Ognon" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Ognon"/>
           <name language="en" text="Ognon"/>
@@ -2023,7 +2068,7 @@
           <element id="e_Saone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Mayenne" importance="0">
+      <lineElement id="e_Mayenne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Mayenne"/>
           <name language="en" text="Mayenne"/>
@@ -2035,7 +2080,7 @@
           <element id="e_Maine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Agout" importance="0">
+      <lineElement id="e_Agout" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Agout"/>
           <name language="en" text="Agout"/>
@@ -2047,7 +2092,7 @@
           <element id="e_Tarn"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GaveOloron" importance="0">
+      <lineElement id="e_GaveOloron" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Gave d'Oloron"/>
           <name language="en" text="Gave d'Oloron"/>
@@ -2059,7 +2104,7 @@
           <element id="e_GavesReunis"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Truyere" importance="0">
+      <lineElement id="e_Truyere" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Truyère"/>
           <name language="en" text="Truyère"/>
@@ -2071,7 +2116,7 @@
           <element id="e_Lot"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ariege" importance="0">
+      <lineElement id="e_Ariege" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Ariège"/>
           <name language="en" text="Ariège"/>
@@ -2083,7 +2128,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Armancon" importance="0">
+      <lineElement id="e_Armancon" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Armançon"/>
           <name language="en" text="Armançon"/>
@@ -2095,7 +2140,7 @@
           <element id="e_Yonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Gartempe" importance="0">
+      <lineElement id="e_Gartempe" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Gartempe"/>
           <name language="en" text="Gartempe"/>
@@ -2107,7 +2152,7 @@
           <element id="e_Creuse"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Dronne" importance="0">
+      <lineElement id="e_Dronne" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Dronne"/>
           <name language="en" text="Dronne"/>
@@ -2119,7 +2164,7 @@
           <element id="e_Isle"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sambre" importance="0">
+      <lineElement id="e_Sambre" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Sambre"/>
           <name language="en" text="Sambre"/>
@@ -2131,7 +2176,7 @@
           <element id="e_Meuse"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Drac" importance="0">
+      <lineElement id="e_Drac" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Drac"/>
           <name language="en" text="Drac"/>
@@ -2143,7 +2188,7 @@
           <element id="e_Isere"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Lys" importance="0">
+      <lineElement id="e_Lys" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Lys"/>
           <name language="en" text="Lys"/>
@@ -2155,7 +2200,7 @@
           <element id="e_Escaut"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Herault" importance="0">
+      <lineElement id="e_Herault" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Hérault"/>
           <name language="en" text="Hérault"/>
@@ -2167,7 +2212,7 @@
           <element id="e_34"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Verdon" importance="0">
+      <lineElement id="e_Verdon" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Verdon"/>
           <name language="en" text="Verdon"/>
@@ -2182,7 +2227,7 @@
     </lineElementList>
     <pointElementList>
       <!--Villes 01-->
-      <pointElement id="e_BourgEnBresse" importance="0">
+      <pointElement id="e_BourgEnBresse" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Bourg-en-Bresse"/>
           <name language="en" text="Bourg-en-Bresse"/>
@@ -2191,7 +2236,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Gex" importance="0">
+      <pointElement id="e_Gex" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Gex"/>
           <name language="en" text="Gex"/>
@@ -2200,7 +2245,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Belley" importance="0">
+      <pointElement id="e_Belley" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Belley"/>
           <name language="en" text="Belley"/>
@@ -2209,7 +2254,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Nantua" importance="0">
+      <pointElement id="e_Nantua" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Nantua"/>
           <name language="en" text="Nantua"/>
@@ -2219,7 +2264,7 @@
         </looks>
       </pointElement>
       <!--Villes 02-->
-      <pointElement id="e_Laon" importance="0">
+      <pointElement id="e_Laon" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Laon"/>
           <name language="en" text="Laon"/>
@@ -2228,7 +2273,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintQuentin" importance="0">
+      <pointElement id="e_SaintQuentin" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Saint-Quentin"/>
           <name language="en" text="Saint-Quentin"/>
@@ -2237,7 +2282,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Soissons" importance="0">
+      <pointElement id="e_Soissons" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Soissons"/>
           <name language="en" text="Soissons"/>
@@ -2246,7 +2291,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChateauThierry" importance="0">
+      <pointElement id="e_ChateauThierry" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Château-Thierry"/>
           <name language="en" text="Château-Thierry"/>
@@ -2255,7 +2300,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vervins" importance="0">
+      <pointElement id="e_Vervins" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Vervins"/>
           <name language="en" text="Vervins"/>
@@ -2265,7 +2310,7 @@
         </looks>
       </pointElement>
       <!--Villes 03-->
-      <pointElement id="e_Moulins" importance="0">
+      <pointElement id="e_Moulins" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Moulins"/>
           <name language="en" text="Moulins"/>
@@ -2274,7 +2319,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montlucon" importance="0">
+      <pointElement id="e_Montlucon" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Montluçon"/>
           <name language="en" text="Montluçon"/>
@@ -2283,7 +2328,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vichy" importance="0">
+      <pointElement id="e_Vichy" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Vichy"/>
           <name language="en" text="Vichy"/>
@@ -2293,7 +2338,7 @@
         </looks>
       </pointElement>
       <!--Villes 04-->
-      <pointElement id="e_DigneLesBains" importance="0">
+      <pointElement id="e_DigneLesBains" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Digne-les-Bains"/>
           <name language="en" text="Digne-les-Bains"/>
@@ -2302,7 +2347,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Forcalquier" importance="0">
+      <pointElement id="e_Forcalquier" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Forcalquier"/>
           <name language="en" text="Forcalquier"/>
@@ -2311,7 +2356,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Barcelonnette" importance="0">
+      <pointElement id="e_Barcelonnette" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Barcelonnette"/>
           <name language="en" text="Barcelonnette"/>
@@ -2320,7 +2365,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Castellane" importance="0">
+      <pointElement id="e_Castellane" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Castellane"/>
           <name language="en" text="Castellane"/>
@@ -2330,7 +2375,7 @@
         </looks>
       </pointElement>
       <!--Villes 05-->
-      <pointElement id="e_Gap" importance="0">
+      <pointElement id="e_Gap" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Gap"/>
           <name language="en" text="Gap"/>
@@ -2339,7 +2384,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Briancon" importance="0">
+      <pointElement id="e_Briancon" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Briançon"/>
           <name language="en" text="Briançon"/>
@@ -2349,7 +2394,7 @@
         </looks>
       </pointElement>
       <!--Villes 06-->
-      <pointElement id="e_Nice" importance="0">
+      <pointElement id="e_Nice" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Nice"/>
           <name language="en" text="Nice"/>
@@ -2358,7 +2403,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Grasse" importance="0">
+      <pointElement id="e_Grasse" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Grasse"/>
           <name language="en" text="Grasse"/>
@@ -2367,7 +2412,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Antibes" importance="0">
+      <pointElement id="e_Antibes" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Antibes"/>
           <name language="en" text="Antibes"/>
@@ -2376,7 +2421,7 @@
           <look id="tl_Ville"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cannes" importance="0">
+      <pointElement id="e_Cannes" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Cannes"/>
           <name language="en" text="Cannes"/>
@@ -2385,7 +2430,7 @@
           <look id="tl_Ville"/>
         </looks>
       </pointElement>
-      <pointElement id="e_CagnesSurMer" importance="0">
+      <pointElement id="e_CagnesSurMer" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Cagnes-sur-Mer"/>
           <name language="en" text="Cagnes-sur-Mer"/>
@@ -2395,7 +2440,7 @@
         </looks>
       </pointElement>
       <!--Villes 07-->
-      <pointElement id="e_Privas" importance="0">
+      <pointElement id="e_Privas" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Privas"/>
           <name language="en" text="Privas"/>
@@ -2404,7 +2449,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_TournonSurRhone" importance="0">
+      <pointElement id="e_TournonSurRhone" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Tournon-sur-Rhône"/>
           <name language="en" text="Tournon-sur-Rhône"/>
@@ -2413,7 +2458,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Largentiere" importance="0">
+      <pointElement id="e_Largentiere" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Largentière"/>
           <name language="en" text="Largentière"/>
@@ -2423,7 +2468,7 @@
         </looks>
       </pointElement>
       <!--Villes 08-->
-      <pointElement id="e_CharlevilleMezieres" importance="0">
+      <pointElement id="e_CharlevilleMezieres" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Charleville-Mézières"/>
           <name language="en" text="Charleville-Mézières"/>
@@ -2432,7 +2477,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sedan" importance="0">
+      <pointElement id="e_Sedan" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Sedan"/>
           <name language="en" text="Sedan"/>
@@ -2441,7 +2486,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Rethel" importance="0">
+      <pointElement id="e_Rethel" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Rethel"/>
           <name language="en" text="Rethel"/>
@@ -2450,7 +2495,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vouziers" importance="0">
+      <pointElement id="e_Vouziers" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Vouziers"/>
           <name language="en" text="Vouziers"/>
@@ -2460,7 +2505,7 @@
         </looks>
       </pointElement>
       <!--Villes 09-->
-      <pointElement id="e_Foix" importance="0">
+      <pointElement id="e_Foix" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Foix"/>
           <name language="en" text="Foix"/>
@@ -2469,7 +2514,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pamiers" importance="0">
+      <pointElement id="e_Pamiers" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Pamiers"/>
           <name language="en" text="Pamiers"/>
@@ -2478,7 +2523,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintGirons" importance="0">
+      <pointElement id="e_SaintGirons" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Saint-Girons"/>
           <name language="en" text="Saint-Girons"/>
@@ -2488,7 +2533,7 @@
         </looks>
       </pointElement>
       <!--Villes 10-->
-      <pointElement id="e_Troyes" importance="0">
+      <pointElement id="e_Troyes" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Troyes"/>
           <name language="en" text="Troyes"/>
@@ -2497,7 +2542,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_NogentSurSeine" importance="0">
+      <pointElement id="e_NogentSurSeine" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Nogent-sur-Seine"/>
           <name language="en" text="Nogent-sur-Seine"/>
@@ -2506,7 +2551,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BarSurAube" importance="0">
+      <pointElement id="e_BarSurAube" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Bar-sur-Aube"/>
           <name language="en" text="Bar-sur-Aube"/>
@@ -2516,7 +2561,7 @@
         </looks>
       </pointElement>
       <!--Villes 11-->
-      <pointElement id="e_Carcassonne" importance="0">
+      <pointElement id="e_Carcassonne" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Carcassonne"/>
           <name language="en" text="Carcassonne"/>
@@ -2525,7 +2570,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Narbonne" importance="0">
+      <pointElement id="e_Narbonne" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Narbonne"/>
           <name language="en" text="Narbonne"/>
@@ -2534,7 +2579,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Limoux" importance="0">
+      <pointElement id="e_Limoux" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Limoux"/>
           <name language="en" text="Limoux"/>
@@ -2544,7 +2589,7 @@
         </looks>
       </pointElement>
       <!--Villes 12-->
-      <pointElement id="e_Rodez" importance="0">
+      <pointElement id="e_Rodez" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Rodez"/>
           <name language="en" text="Rodez"/>
@@ -2553,7 +2598,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Millau" importance="0">
+      <pointElement id="e_Millau" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Millau"/>
           <name language="en" text="Millau"/>
@@ -2562,7 +2607,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VillefrancheDeRouergue" importance="0">
+      <pointElement id="e_VillefrancheDeRouergue" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Villefranche-de-Rouergue"/>
           <name language="en" text="Villefranche-de-Rouergue"/>
@@ -2572,7 +2617,7 @@
         </looks>
       </pointElement>
       <!--Villes 13-->
-      <pointElement id="e_Marseille" importance="0">
+      <pointElement id="e_Marseille" category="ca_Prefecture" importance="0">
         <name>
           <name language="fr" text="Marseille"/>
           <name language="en" text="Marseille"/>
@@ -2581,7 +2626,7 @@
           <look id="tl_Prefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_AixEnProvence" importance="0">
+      <pointElement id="e_AixEnProvence" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Aix-en-Provence"/>
           <name language="en" text="Aix-en-Provence"/>
@@ -2590,7 +2635,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Arles" importance="0">
+      <pointElement id="e_Arles" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Arles"/>
           <name language="en" text="Arles"/>
@@ -2599,7 +2644,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Istres" importance="0">
+      <pointElement id="e_Istres" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Istres"/>
           <name language="en" text="Istres"/>
@@ -2608,7 +2653,7 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Martigues" importance="0">
+      <pointElement id="e_Martigues" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Martigues"/>
           <name language="en" text="Martigues"/>
@@ -2617,7 +2662,7 @@
           <look id="tl_Ville"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Aubagne" importance="0">
+      <pointElement id="e_Aubagne" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Aubagne"/>
           <name language="en" text="Aubagne"/>
@@ -2626,7 +2671,7 @@
           <look id="tl_Ville"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SalonDeProvence" importance="0">
+      <pointElement id="e_SalonDeProvence" category="ca_Ville" importance="0">
         <name>
           <name language="fr" text="Salon-de-Provence"/>
           <name language="en" text="Salon-de-Provence"/>

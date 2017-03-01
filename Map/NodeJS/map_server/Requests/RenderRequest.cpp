@@ -47,7 +47,7 @@ namespace map_server
         _map = mapData->getMap(_mapId);
         if (_map != 0)
         {
-            bool createSvg = false;
+            bool createSvg = (strcmp(_socketId, "svg") == 0);
 
             std::vector<MapElement *> elementVector;
             unsigned int i, n = _elementIds.size();
@@ -56,7 +56,6 @@ namespace map_server
                 std::string elementId = _elementIds[i];
                 MapElement *element = _map->getElement(elementId);
                 if (element != 0) elementVector.push_back(element);
-                else if (elementId == "#svg" && _svgCreator == 0) createSvg = true;
 
                 // Disable potential image creation, because it's only a developement/debug/test feature.
                 // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.

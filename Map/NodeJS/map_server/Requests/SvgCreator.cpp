@@ -14,7 +14,6 @@
 #include "MessageTypeEnum.h"
 
 #include <sstream>
-#include <fstream>
 
 namespace map_server
 {
@@ -251,13 +250,6 @@ namespace map_server
 
         content << "<rect x=\\\"0.5\\\" y=\\\"0.5\\\" width=\\\"" << _widthInPixels - 1.0 << "\\\" height=\\\"" << _heightInPixels - 1.0
                 << "\\\" style=\\\"fill:none;stroke-width:1;stroke:black\\\"/>" << "\\n" << "</svg>";
-
-        /*std::string fileName;
-		if (_socketId.size() > 2) fileName = "map_" + _socketId.substr(2, _socketId.size() - 2) + ".svg";
-		else fileName = "map_" + _socketId + ".svg";
-
-        std::ofstream file(fileName);
-        file << content.str();*/
 
         _coutMutexPtr->lock();
         std::cout << _socketId << " " << _requestId << " " << map_server::SVG

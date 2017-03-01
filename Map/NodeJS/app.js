@@ -228,15 +228,23 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    
    if (!replay)
    {
-      if (requestType == svgMessageType)
+      if (socketId == 'svg')
       {
          res = responses[requestId];
          delete responses[requestId];
          if (res)
          {
-            res.setHeader('content-type', 'image/svg+xml');
-            res.setHeader('content-disposition', 'inline; filename=map.svg');
-            res.end(responseContent.svg);
+            if (requestType == svgMessageType)
+            {
+               res.setHeader('content-type', 'image/svg+xml');
+               res.setHeader('content-disposition', 'inline; filename=map.svg');
+               res.end(responseContent.svg);
+            }
+            else
+            {
+               res.statusCode = 500;
+               res.end();
+            }
          }
       }
       else

@@ -39,6 +39,7 @@ namespace map_server
         bool loadNameAndLanguages(mongo::BSONObj dbMap, std::string& languagesJson, std::string& namesJson);
         bool loadResolutions(mongo::BSONObj dbMap);
         bool loadLooks(mongo::BSONObj dbMap);
+        bool loadCategories(mongo::BSONObj dbMap, std::string& categoriesJson);
 
         std::map<std::string, std::string> _languageNameMap;
         std::vector<std::string> _languageIdVector;

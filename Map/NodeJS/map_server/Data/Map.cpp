@@ -301,7 +301,7 @@ namespace map_server
     void Map::load(void)
     {
         _loaded = true;
-        std::string elementIdsJson, languagesJson, namesJson;
+        std::string elementIdsJson, languagesJson, namesJson, categoriesJson;
 
         if (!loadElements(elementIdsJson))
         {
@@ -352,14 +352,22 @@ namespace map_server
                 return;
             }
 
-            if (elementIdsJson.empty()) elementIdsJson = "undefined";
-            if (languagesJson.empty()) languagesJson = "undefined";
-            if (namesJson.empty()) namesJson = "undefined";
+            if (!loadCategories(dbMap, categoriesJson))
+            {
+                _error = true;
+                return;
+            }
+
+            if (elementIdsJson.empty()) elementIdsJson = "null";
+            if (languagesJson.empty()) languagesJson = "null";
+            if (namesJson.empty()) namesJson = "null";
+            if (categoriesJson.empty()) categoriesJson = "null";
 
             std::stringstream jsonStream;
-            jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson << ",\"names\":" << namesJson
-                        << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
-                        << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
+            jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson
+                       << ",\"names\":" << namesJson << ",\"categories\":" << categoriesJson
+                       << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
+                       << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
             _infoJson = jsonStream.str();
         }
     }
@@ -656,6 +664,47 @@ namespace map_server
                                                     fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
+        }
+
+        return true;
+    }
+
+    bool Map::loadCategories(mongo::BSONObj dbMap, std::string& categoriesJson)
+    {
+        mongo::BSONElement categoriesElt = dbMap.getField("categories");
+        if (categoriesElt.type() != mongo::Array)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        std::vector<mongo::BSONElement> dbCategoryVector = categoriesElt.Array();
+
+        int i, n = dbCategoryVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONElement categoryElt = dbCategoryVector[i];
+            if (categoryElt.type() != mongo::Object)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            mongo::BSONObj dbCategory = categoryElt.Obj();
+
+            int id = dbCategory.getIntField("id");
+            if (id < 0 || id > _maxIntDbValue )
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+
+            mongo::BSONElement nameElt = dbCategory.getField("name");
+            if (nameElt.type() != mongo::Object)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            mongo::BSONObj dbName = nameElt.Obj();
+
         }
 
         return true;

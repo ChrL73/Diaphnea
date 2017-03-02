@@ -10,25 +10,22 @@ namespace MapDataProcessing
 {
     abstract class MapElement
     {
-        private static int _counter = -1;
-        internal static void reset() { _counter = -1; }
-
-        private readonly int _numericalId;
         private readonly String _id;
         private readonly MapData _mapData;
         private readonly ElementName _name;
         private readonly ElementName _shortName;
         private readonly double _importance;
         private readonly List<int> _lookIds = new List<int>();
+        private readonly int _categoryId;
 
-        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds)
+        internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)
         {
-            _numericalId = ++_counter;
             _id = id;
             _mapData = mapData;
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
             _importance = importance;
+            _categoryId = mapData.getCategory(categoryId).Id;
 
             foreach (string lookId in lookIds) _lookIds.Add(mapData.getLook(lookId).Id);
         }
@@ -50,11 +47,11 @@ namespace MapDataProcessing
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
                 { "id", _id},
-                //{ "num_id", _numericalId}, // No longer used
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "importance", _importance },
-                { "look_ids", lookIdArray }
+                { "look_ids", lookIdArray },
+                { "category_id", _categoryId }
             };
 
             return elementDocument;

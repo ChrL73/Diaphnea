@@ -118,7 +118,9 @@
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlPolygonLook1">
-    <xsd:sequence/>
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlElementName"/>
+    </xsd:sequence>
     <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
     <xsd:attribute name="contourZIndex" type="XmlZIndex" use="required"/>
     <xsd:attribute name="contourAlpha" type="xsd:unsignedByte" use="required"/>
@@ -135,7 +137,9 @@
     <xsd:attribute name="textSize" type="XmlPositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlPolygonLook2">
-    <xsd:sequence/>
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlElementName"/>
+    </xsd:sequence>
     <xsd:attribute name="id" type="XmlPolygonLookId" use="required" />
     <xsd:attribute name="contourZIndex" type="XmlZIndex" use="required"/>
     <xsd:attribute name="contourAlpha" type="xsd:unsignedByte" use="required"/>
@@ -155,7 +159,9 @@
     <xsd:attribute name="textSize" type="XmlPositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlLineLook">
-    <xsd:sequence/>
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlElementName"/>
+    </xsd:sequence>
     <xsd:attribute name="id" type="XmlLineLookId" use="required" />
     <xsd:attribute name="lineZIndex" type="XmlZIndex" use="required"/>
     <xsd:attribute name="lineAlpha" type="xsd:unsignedByte" use="required"/>
@@ -170,7 +176,9 @@
     <xsd:attribute name="textSize" type="XmlPositiveDouble" use="required" />
   </xsd:complexType>
   <xsd:complexType name="XmlPointLook">
-    <xsd:sequence/>
+    <xsd:sequence>
+      <xsd:element name="name" type="XmlElementName"/>
+    </xsd:sequence>
     <xsd:attribute name="id" type="XmlPointLookId" use="required" />
     <xsd:attribute name="pointZIndex" type="XmlZIndex" use="required"/>
     <xsd:attribute name="pointAlpha" type="xsd:unsignedByte" use="required"/>

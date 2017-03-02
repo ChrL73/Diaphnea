@@ -12,6 +12,7 @@ namespace MapDataProcessing
         private readonly XmlPointLook _look;
 
         internal PointLook(XmlPointLook look)
+            : base(look.name)
         {
             _look = look;
         }
@@ -23,6 +24,7 @@ namespace MapDataProcessing
                 { "id", Id },
                 { "xml_id", _look.id },
                 { "type", "point" },
+                { "name", Name.getBsonDocument() },
                 { "point_z_index", _look.pointZIndex },
                 { "point_alpha", _look.pointAlpha },
                 { "point_red", _look.pointRed },

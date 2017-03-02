@@ -33,11 +33,11 @@ namespace MapDataProcessing
             PolygonLinePart.clearAll();
             PolygonPolygonPart.clearAll();
             LineLinePart.clearAll();
-            MapElement.reset();
             GeoPoint.reset();
             ElementName.reset();
             ItemId.reset();
             Look.reset();
+            Category.reset();
 
             if (result == 0) result = loadData();
             if (result == 0) result = createElements();
@@ -146,7 +146,7 @@ namespace MapDataProcessing
                 foreach (XmlPolygonLookRef lookRef in xmlPolygonElement.looks) lookIds.Add(lookRef.id);
 
                 PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName,
-                                                                            xmlPolygonElement.importance, lookIds, coveredElementList);
+                                                                            xmlPolygonElement.importance, lookIds, xmlPolygonElement.category, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
             }
 
@@ -157,7 +157,7 @@ namespace MapDataProcessing
                 List<string> lookIds = new List<string>();
                 foreach (XmlLineLookRef lookRef in xmlLineElement.looks) lookIds.Add(lookRef.id);
 
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, lookIds);
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, lookIds, xmlLineElement.category);
                 _elementDictionary.Add(id, lineMapElement);
             }
 
@@ -168,7 +168,7 @@ namespace MapDataProcessing
                 List<string> lookIds = new List<string>();
                 foreach (XmlPointLookRef lookRef in xmlPointElement.looks) lookIds.Add(lookRef.id);
 
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, lookIds);
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, lookIds, xmlPointElement.category);
                 _elementDictionary.Add(id, pointMapElement);
             }
 
@@ -364,6 +364,12 @@ namespace MapDataProcessing
                 lookArray.Add(look.getBsonDocument());
             }
 
+            BsonArray categoryArray = new BsonArray();
+            foreach (Category category in _mapData.CategoryList)
+            {
+                categoryArray.Add(category.getBsonDocument());
+            }
+
             BsonDocument mapDocument = new BsonDocument()
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
@@ -371,6 +377,7 @@ namespace MapDataProcessing
                 { "languages", languagesArray },
                 { "resolutions", resolutionArray },
                 { "looks", lookArray },
+                { "categories", categoryArray },
                 { "zoom_min_distance", _mapData.XmlMapData.parameters.zoomMinDistance },
                 { "zoom_max_distance", _mapData.XmlMapData.parameters.zoomMaxDistance },
                 { "resolution_threshold", _mapData.XmlMapData.parameters.resolutionThreshold },

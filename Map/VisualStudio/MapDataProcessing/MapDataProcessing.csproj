@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
     <Compile Include="DatabaseMapItem.cs" />
     <Compile Include="DistanceCalculator.cs" />
     <Compile Include="ElementName.cs" />

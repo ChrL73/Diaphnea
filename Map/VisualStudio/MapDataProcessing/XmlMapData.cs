@@ -884,6 +884,8 @@ public partial class XmlCategory {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlPointLook {
     
+    private XmlName[] nameField;
+    
     private string idField;
     
     private int pointZIndexField;
@@ -907,6 +909,17 @@ public partial class XmlPointLook {
     private byte textBlueField;
     
     private double textSizeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
@@ -1048,6 +1061,8 @@ public partial class XmlPointLook {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlLineLook {
     
+    private XmlName[] nameField;
+    
     private string idField;
     
     private int lineZIndexField;
@@ -1071,6 +1086,17 @@ public partial class XmlLineLook {
     private byte textBlueField;
     
     private double textSizeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
@@ -1212,6 +1238,8 @@ public partial class XmlLineLook {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlPolygonLook2 {
     
+    private XmlName[] nameField;
+    
     private string idField;
     
     private int contourZIndexField;
@@ -1245,6 +1273,17 @@ public partial class XmlPolygonLook2 {
     private byte textBlueField;
     
     private double textSizeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
@@ -1441,6 +1480,8 @@ public partial class XmlPolygonLook2 {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlPolygonLook1 {
     
+    private XmlName[] nameField;
+    
     private string idField;
     
     private int contourZIndexField;
@@ -1468,6 +1509,17 @@ public partial class XmlPolygonLook1 {
     private byte textBlueField;
     
     private double textSizeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]

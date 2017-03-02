@@ -12,6 +12,8 @@ namespace MapDataProcessing
         private readonly XmlMapData _xmlMapData;
         private readonly Dictionary<string, Look> _lookDictionary = new Dictionary<string, Look>();
         private readonly List<Look> _lookList = new List<Look>();
+        private readonly Dictionary<string, Category> _categoryDictionary = new Dictionary<string, Category>();
+        private readonly List<Category> _categoryList = new List<Category>();
 
         private readonly Dictionary<XmlResolution, LineSuperposer> _lineSuperposerDictionary = new Dictionary<XmlResolution, LineSuperposer>();
 
@@ -22,29 +24,36 @@ namespace MapDataProcessing
             foreach (XmlPolygonLook1 polygonLook1 in _xmlMapData.lookList.polygonLookList1)
             {
                 Look look = new PolygonLook(polygonLook1);
-                _lookDictionary.Add(polygonLook1.id.ToString(), look);
+                _lookDictionary.Add(polygonLook1.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlPolygonLook2 polygonLook2 in _xmlMapData.lookList.polygonLookList2)
             {
                 Look look = new PolygonLook(polygonLook2);
-                _lookDictionary.Add(polygonLook2.id.ToString(), look);
+                _lookDictionary.Add(polygonLook2.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlLineLook lineLook in _xmlMapData.lookList.lineLookList)
             {
                 Look look = new LineLook(lineLook);
-                _lookDictionary.Add(lineLook.id.ToString(), look);
+                _lookDictionary.Add(lineLook.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlPointLook pointLook in _xmlMapData.lookList.pointLookList)
             {
                 Look look = new PointLook(pointLook);
-                _lookDictionary.Add(pointLook.id.ToString(), look);
+                _lookDictionary.Add(pointLook.id, look);
                 _lookList.Add(look);
+            }
+
+            foreach (XmlCategory xmlCategory in _xmlMapData.categoryList)
+            {
+                Category category = new Category(xmlCategory);
+                _categoryDictionary.Add(xmlCategory.id, category);
+                _categoryList.Add(category);
             }
 
             foreach (XmlResolution xmlResolution in _xmlMapData.resolutionList) _lineSuperposerDictionary.Add(xmlResolution, new LineSuperposer());
@@ -68,6 +77,15 @@ namespace MapDataProcessing
         }
 
         internal List<Look> LookList { get { return _lookList; } }
+
+        internal Category getCategory(string id)
+        {
+            Category category;
+            if (_categoryDictionary.TryGetValue(id, out category)) return category;
+            return null;
+        }
+
+        internal List<Category> CategoryList { get { return _categoryList; } }
 
         internal  Dictionary<XmlResolution, LineSuperposer> LineSuperposerDictionary { get { return _lineSuperposerDictionary; } }
     }

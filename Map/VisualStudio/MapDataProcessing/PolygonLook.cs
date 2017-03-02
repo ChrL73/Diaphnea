@@ -13,12 +13,14 @@ namespace MapDataProcessing
         private readonly XmlPolygonLook2 _look2;
 
         internal PolygonLook(XmlPolygonLook1 look1)
+            : base(look1.name)
         {
             _look1 = look1;
             _look2 = null;
         }
 
         internal PolygonLook(XmlPolygonLook2 look2)
+            : base(look2.name)
         {
             _look1 = null;
             _look2 = look2;
@@ -31,6 +33,7 @@ namespace MapDataProcessing
                 { "id", Id },
                 { "xml_id", _look2 == null ? _look1.id : _look2.id },
                 { "type", "polygon" },
+                { "name", Name.getBsonDocument() },
                 { "contour_z_index", _look2 == null ? _look1.contourZIndex : _look2.contourZIndex },
                 { "contour_alpha", _look2 == null ? _look1.contourAlpha : _look2.contourAlpha },
                 { "contour_red", _look2 == null ? _look1.contourRed : _look2.contourRed },

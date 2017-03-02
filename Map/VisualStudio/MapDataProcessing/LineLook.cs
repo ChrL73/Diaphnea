@@ -12,6 +12,7 @@ namespace MapDataProcessing
         private readonly XmlLineLook _look;
 
         internal LineLook(XmlLineLook look)
+            : base(look.name)
         {
             _look = look;
         }
@@ -23,6 +24,7 @@ namespace MapDataProcessing
                 { "id", Id },
                 { "xml_id", _look.id },
                 { "type", "line" },
+                { "name", Name.getBsonDocument() },
                 { "line_z_index", _look.lineZIndex },
                 { "line_alpha", _look.lineAlpha },
                 { "line_red", _look.lineRed },

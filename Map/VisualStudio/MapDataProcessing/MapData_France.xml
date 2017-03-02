@@ -27,32 +27,67 @@
       <polygonLook id="pl_France" contourZIndex="5"
                    contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.7"
                    fillLightRatio="0.07" fillZIndex="16"
-                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="19"/>
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="19">
+        <name>
+          <name language="fr" text="France"/>
+          <name language="en" text="France"/>
+        </name>
+      </polygonLook>
       <polygonLook id="pl_Region" contourZIndex="6"
                    contourAlpha="255" contourRed="0" contourGreen="128" contourBlue="32" contourSize="2.4"
                    fillLightRatio="0.1" fillZIndex="15"
-                   textAlpha="255" textRed="0" textGreen="128" textBlue="32" textSize="20"/>
+                   textAlpha="255" textRed="0" textGreen="128" textBlue="32" textSize="20">
+        <name>
+          <name language="fr" text="Régions"/>
+          <name language="en" text="Regions"/>
+        </name>
+      </polygonLook>
       <polygonLook id="pl_Departement" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
                    fillLightRatio="0.15" fillZIndex="14"
-                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19"/>
+                   textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19">
+        <name>
+          <name language="fr" text="Départements"/>
+          <name language="en" text="Departments"/>
+        </name>
+      </polygonLook>
     </polygonLookList1>
     <polygonLookList2/>
     <lineLookList>
       <lineLook id="ll_FleuveRiviere" lineZIndex="4"
                 lineAlpha="255" lineRed="0" lineGreen="0" lineBlue="255" lineSize="1.4"
-                textAlpha="255" textRed="0" textGreen="0" textBlue="192" textSize="17"/>
+                textAlpha="255" textRed="0" textGreen="0" textBlue="192" textSize="17">
+        <name>
+          <name language="fr" text="Cours d'eau"/>
+          <name language="en" text="Rivers"/>
+        </name>
+      </lineLook>
     </lineLookList>
     <pointLookList>
       <pointLook id="tl_Prefecture" pointZIndex="1"
                  pointAlpha="255" pointRed="255" pointGreen="0" pointBlue="0" pointSize="9"
-                 textAlpha="255" textRed="172" textGreen="0" textBlue="0" textSize="18"/>
+                 textAlpha="255" textRed="172" textGreen="0" textBlue="0" textSize="18">
+        <name>
+          <name language="fr" text="Chefs-lieux de département"/>
+          <name language="en" text="Department capitals"/>
+        </name>
+      </pointLook>
       <pointLook id="tl_SousPrefecture" pointZIndex="2"
                  pointAlpha="255" pointRed="128" pointGreen="200" pointBlue="0" pointSize="8"
-                 textAlpha="255" textRed="48" textGreen="128" textBlue="0" textSize="17"/>
+                 textAlpha="255" textRed="48" textGreen="128" textBlue="0" textSize="17">
+        <name>
+          <name language="fr" text="Chefs-lieux d'arrondissement"/>
+          <name language="en" text="Arrondissement capitals"/>
+        </name>
+      </pointLook>
       <pointLook id="tl_Ville" pointZIndex="3"
                  pointAlpha="255" pointRed="192" pointGreen="128" pointBlue="255" pointSize="7.2"
-                 textAlpha="255" textRed="64" textGreen="0" textBlue="128" textSize="16"/>
+                 textAlpha="255" textRed="64" textGreen="0" textBlue="128" textSize="16">
+        <name>
+          <name language="fr" text="Autres villes"/>
+          <name language="en" text="Other cities"/>
+        </name>
+      </pointLook>
     </pointLookList>
   </lookList>
 

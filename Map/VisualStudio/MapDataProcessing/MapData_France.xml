@@ -187,13 +187,19 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_Corse" category="ca_Region" look="pl_Region">
+      <polygonElement id="e_Corse" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Corse"/>
           <name language="en" text="Corse"/>
         </name>
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Est" category="ca_Region" look="pl_Region">
+      <!--<polygonElement id="e_Est" category="ca_Region" look="pl_Region">
         <name>
           <name language="fr" text="Grand-Est"/>
           <name language="en" text="Grand-Est"/>
@@ -584,6 +590,40 @@
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_2a" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Corse-du-Sud (2A)"/>
+          <name language="en" text="Corse-du-Sud (2A)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="2A"/>
+          <name language="en" text="2A"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Corse"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_2b" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Haute-Corse (2B)"/>
+          <name language="en" text="Haute-Corse (2B)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="2B"/>
+          <name language="en" text="2B"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Corse"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -2713,6 +2753,248 @@
         </name>
         <looks>
           <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 14-->
+      <pointElement id="e_Caen" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Caen"/>
+          <name language="en" text="Caen"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lisieux" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lisieux"/>
+          <name language="en" text="Lisieux"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Bayeux" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Bayeux"/>
+          <name language="en" text="Bayeux"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vire" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Vire"/>
+          <name language="en" text="Vire"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 15-->
+      <pointElement id="e_Aurillac" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Aurillac"/>
+          <name language="en" text="Aurillac"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintFlour" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Flour"/>
+          <name language="en" text="Saint-Flour"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Mauriac" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Mauriac"/>
+          <name language="en" text="Mauriac"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 16-->
+      <pointElement id="e_Angouleme" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Angoulême"/>
+          <name language="en" text="Angoulême"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Cognac" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Cognac"/>
+          <name language="en" text="Cognac "/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Confolens" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Confolens"/>
+          <name language="en" text="Confolens"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 17-->
+      <pointElement id="e_Rochelle" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="La Rochelle"/>
+          <name language="en" text="La Rochelle"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Saintes" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saintes"/>
+          <name language="en" text="Saintes "/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Rochefort" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Rochefort"/>
+          <name language="en" text="Rochefort"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintJeanAngely" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Jean-d'Angély"/>
+          <name language="en" text="Saint-Jean-d'Angély "/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Jonzac" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Jonzac"/>
+          <name language="en" text="Jonzac"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 18-->
+      <pointElement id="e_Bourges" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Bourges"/>
+          <name language="en" text="Bourges"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vierzon" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Vierzon"/>
+          <name language="en" text="Vierzon "/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintAmandMontrond" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Amand-Montrond"/>
+          <name language="en" text="Saint-Amand-Montrond"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 19-->
+      <pointElement id="e_Tulle" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Tulle"/>
+          <name language="en" text="Tulle"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_BriveLaGaillarde" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Brive-la-Gaillarde"/>
+          <name language="en" text="Brive-la-Gaillarde"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Ussel" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Ussel"/>
+          <name language="en" text="Ussel"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 2A-->
+      <pointElement id="e_Ajaccio" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Ajaccio"/>
+          <name language="en" text="Ajaccio"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Sartene" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Sartène"/>
+          <name language="en" text="Sartène"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 2B-->
+      <pointElement id="e_Bastia" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Bastia"/>
+          <name language="en" text="Bastia"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Corte" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Corte"/>
+          <name language="en" text="Corte"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Calvi" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Calvi"/>
+          <name language="en" text="Calvi"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
     </pointElementList>

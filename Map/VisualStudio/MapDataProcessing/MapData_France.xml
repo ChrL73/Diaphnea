@@ -2997,6 +2997,155 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
+    <!--Villes 21-->
+      <pointElement id="e_Dijon" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Dijon"/>
+          <name language="en" text="Dijon"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Beaune" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Beaune"/>
+          <name language="en" text="Beaune"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Montbard" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Montbard"/>
+          <name language="en" text="Montbard"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+    <!--Villes 22-->
+      <pointElement id="e_SaintBrieuc" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Brieuc"/>
+          <name language="en" text="Saint-Brieuc"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lannion" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lannion"/>
+          <name language="en" text="Lannion"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Dinan" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Dinan"/>
+          <name language="en" text="Dinan"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+    <pointElement id="e_Guingamp" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Guingamp"/>
+          <name language="en" text="Guingamp"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+    <!--Villes 23-->
+      <pointElement id="e_Gueret" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Guéret"/>
+          <name language="en" text="Guéret"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Aubusson" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Aubusson"/>
+          <name language="en" text="Aubusson"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+    <!--Villes 24-->
+      <pointElement id="e_Perigueux" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Périgueux"/>
+          <name language="en" text="Périgueux"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Bergerac" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Bergerac"/>
+          <name language="en" text="Bergerac"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SarlatLaCaneda" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Sarlat-la-Canéda"/>
+          <name language="en" text="Sarlat-la-Canéda"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Nontron" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Nontron"/>
+          <name language="en" text="Nontron"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+    <!--Villes 25-->
+      <pointElement id="e_Besancon" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Besançon"/>
+          <name language="en" text="Besançon"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Montbeliard" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Montbéliard"/>
+          <name language="en" text="Montbéliard"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Pontarlier" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Pontarlier"/>
+          <name language="en" text="Pontarlier"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
     </pointElementList>
   </elementList>
   

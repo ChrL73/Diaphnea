@@ -31,6 +31,28 @@ namespace MapDataProcessing
             }
         }
 
+        public ElementName(XmlName[] name, XmlName[] suffix)
+        {
+            if (name != null)
+            {
+                foreach (XmlName translation in name)
+                {
+                    string languageId = translation.language.ToString();
+                    _languageDictionary[languageId] = 0;
+                    _dictionary.Add(languageId, translation.text);
+                }
+
+                if (suffix != null)
+                {
+                    foreach (XmlName translation in suffix)
+                    {
+                        string languageId = translation.language.ToString();
+                        if (_languageDictionary.ContainsKey(languageId)) _dictionary[languageId] += translation.text;
+                    }
+                }
+            }
+        }
+
         internal BsonDocument getBsonDocument()
         {
             BsonDocument textDocument = new BsonDocument();

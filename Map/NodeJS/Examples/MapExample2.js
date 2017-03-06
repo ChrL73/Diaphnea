@@ -46,7 +46,8 @@ $(function()
             elementArray.forEach(function(element)
             {
                var elementId = element.getId();
-               $('#elementList').append('<p><input class="elt" type="checkbox" id="' + elementId + '"/><label for="' + elementId + '"> ' + element.getName('fr') + '</label></p>');
+               $('#elementList').append('<p><input class="elt" type="checkbox" id="' + elementId + '"/><label for="' + elementId + '"> '
+                                        + element.getName('fr') /*+ ' (' + map.getCategories()[element.getCategoryIndex()]['fr'] + ')'*/ + '</label></p>');
                $('#' + elementId).change(function()
                {
                   if ($('#' + elementId).prop('checked')) element.show();

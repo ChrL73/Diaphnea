@@ -82,6 +82,20 @@
                  pointAlpha="255" pointRed="192" pointGreen="128" pointBlue="255" pointSize="7.2"
                  textAlpha="255" textRed="64" textGreen="0" textBlue="128" textSize="16"/>
     </pointLookList>
+    <nameSuffixes>
+      <text>
+        <name language="fr" text=" (texte)"/>
+        <name language="en" text=" (text)"/>
+      </text>
+      <fill>
+        <name language="fr" text=" (remplissage)"/>
+        <name language="en" text=" (fill)"/>
+      </fill>
+      <stroke>
+        <name language="fr" text=" (trait)"/>
+        <name language="en" text=" (stroke)"/>
+      </stroke>
+    </nameSuffixes>
   </lookList>
 
   <categoryList>

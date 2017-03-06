@@ -89,6 +89,20 @@
         </name>
       </pointLook>
     </pointLookList>
+    <nameSuffixes>
+      <text>
+        <name language="fr" text=" (texte)"/>
+        <name language="en" text=" (text)"/>
+      </text>
+      <fill>
+        <name language="fr" text=" (remplissage)"/>
+        <name language="en" text=" (fill)"/>
+      </fill>
+      <stroke>
+        <name language="fr" text=" (trait)"/>
+        <name language="en" text=" (stroke)"/>
+      </stroke>
+    </nameSuffixes>
   </lookList>
 
   <categoryList>
@@ -2501,6 +2515,246 @@
         </looks>
         <attachmentList>
           <element id="e_Dordogne"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_VireRiver" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Vire"/>
+          <name language="en" text="Vire"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_50"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Gimone" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Gimone"/>
+          <name language="en" text="Gimone"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Garonne"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Risle" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Risle"/>
+          <name language="en" text="Risle"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Seine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Sauldre" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Sauldre"/>
+          <name language="en" text="Sauldre"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Cher"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Argens" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Argens"/>
+          <name language="en" text="Argens"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_83"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Tet" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Têt"/>
+          <name language="en" text="Têt"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_66"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Drome" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Drôme"/>
+          <name language="en" text="Drôme"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Rhone"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Epte" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Epte"/>
+          <name language="en" text="Epte"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Seine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Eygues" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Eygues"/>
+          <name language="en" text="Eygues"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Rhone"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Correze" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Corrèze"/>
+          <name language="en" text="Corrèze"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Vezere"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Romanche" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Romanche"/>
+          <name language="en" text="Romanche"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Drac"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Authie" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Authie"/>
+          <name language="en" text="Authie"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_62"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Rance" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Rance"/>
+          <name language="en" text="Rance"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_35"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Canche" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Canche"/>
+          <name language="en" text="Canche"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_62"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Tech" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Tech"/>
+          <name language="en" text="Tech"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_66"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Andelle" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Andelle"/>
+          <name language="en" text="Andelle"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Seine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Ille" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Ille"/>
+          <name language="en" text="Ille"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Vilaine"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Huisne" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Huisne"/>
+          <name language="en" text="Huisne"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Sarthe"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Saulx" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Saulx"/>
+          <name language="en" text="Saulx"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Marne"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_HersVif" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Hers-Vif"/>
+          <name language="en" text="Hers-Vif"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Ariege"/>
         </attachmentList>
       </lineElement>
     </lineElementList>

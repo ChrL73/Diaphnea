@@ -10,11 +10,14 @@ namespace MapDataProcessing
     class PointLook : Look
     {
         private readonly XmlPointLook _look;
+        private readonly ElementName _pointName;
+        private readonly ElementName _textName;
 
-        internal PointLook(XmlPointLook look)
-            : base(look.name)
+        internal PointLook(XmlPointLook look, XmlNameSuffixes suffixes)
         {
             _look = look;
+            _pointName = new ElementName(look.name, suffixes.fill);
+            _textName = new ElementName(look.name, suffixes.text);
         }
 
         internal override BsonDocument getBsonDocument()
@@ -24,13 +27,14 @@ namespace MapDataProcessing
                 { "id", Id },
                 { "xml_id", _look.id },
                 { "type", "point" },
-                { "name", Name.getBsonDocument() },
+                { "point_name", _pointName.getBsonDocument() },
                 { "point_z_index", _look.pointZIndex },
                 { "point_alpha", _look.pointAlpha },
                 { "point_red", _look.pointRed },
                 { "point_green", _look.pointGreen },
                 { "point_blue", _look.pointBlue },
                 { "point_size", _look.pointSize },
+                { "text_name", _textName.getBsonDocument() },
                 { "text_alpha", _look.textAlpha },
                 { "text_red", _look.textRed },
                 { "text_green", _look.textGreen },

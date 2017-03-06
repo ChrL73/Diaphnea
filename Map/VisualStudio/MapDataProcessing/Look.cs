@@ -15,13 +15,7 @@ namespace MapDataProcessing
         private readonly int _id;
         internal int Id { get { return _id; } }
 
-        protected ElementName Name { get; private set; }
-
-        protected Look(XmlName[] name)
-        {
-            _id = ++_counter;
-            Name = new ElementName(name);
-        }
+        protected Look() { _id = ++_counter; }
 
         abstract internal BsonDocument getBsonDocument();
     }

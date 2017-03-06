@@ -23,28 +23,28 @@ namespace MapDataProcessing
             _xmlMapData = xmlMapData;
             foreach (XmlPolygonLook1 polygonLook1 in _xmlMapData.lookList.polygonLookList1)
             {
-                Look look = new PolygonLook(polygonLook1);
+                Look look = new PolygonLook(polygonLook1, _xmlMapData.lookList.nameSuffixes);
                 _lookDictionary.Add(polygonLook1.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlPolygonLook2 polygonLook2 in _xmlMapData.lookList.polygonLookList2)
             {
-                Look look = new PolygonLook(polygonLook2);
+                Look look = new PolygonLook(polygonLook2, _xmlMapData.lookList.nameSuffixes);
                 _lookDictionary.Add(polygonLook2.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlLineLook lineLook in _xmlMapData.lookList.lineLookList)
             {
-                Look look = new LineLook(lineLook);
+                Look look = new LineLook(lineLook, _xmlMapData.lookList.nameSuffixes);
                 _lookDictionary.Add(lineLook.id, look);
                 _lookList.Add(look);
             }
 
             foreach (XmlPointLook pointLook in _xmlMapData.lookList.pointLookList)
             {
-                Look look = new PointLook(pointLook);
+                Look look = new PointLook(pointLook, _xmlMapData.lookList.nameSuffixes);
                 _lookDictionary.Add(pointLook.id, look);
                 _lookList.Add(look);
             }

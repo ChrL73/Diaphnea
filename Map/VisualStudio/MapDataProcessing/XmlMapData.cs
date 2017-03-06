@@ -882,6 +882,53 @@ public partial class XmlCategory {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlNameSuffixes {
+    
+    private XmlName[] textField;
+    
+    private XmlName[] fillField;
+    
+    private XmlName[] strokeField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] text {
+        get {
+            return this.textField;
+        }
+        set {
+            this.textField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] fill {
+        get {
+            return this.fillField;
+        }
+        set {
+            this.fillField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
+    public XmlName[] stroke {
+        get {
+            return this.strokeField;
+        }
+        set {
+            this.strokeField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlPointLook {
     
     private XmlName[] nameField;
@@ -1691,6 +1738,8 @@ public partial class XmlLookList {
     
     private XmlPointLook[] pointLookListField;
     
+    private XmlNameSuffixes nameSuffixesField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("polygonLook", IsNullable=false)]
     public XmlPolygonLook1[] polygonLookList1 {
@@ -1732,6 +1781,16 @@ public partial class XmlLookList {
         }
         set {
             this.pointLookListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public XmlNameSuffixes nameSuffixes {
+        get {
+            return this.nameSuffixesField;
+        }
+        set {
+            this.nameSuffixesField = value;
         }
     }
 }

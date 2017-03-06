@@ -197,6 +197,20 @@
         </name>
       </pointLook>
     </pointLookList>
+    <nameSuffixes>
+      <text>
+        <name language="fr" text=" (texte)"/>
+        <name language="en" text=" (text)"/>
+      </text>
+      <fill>
+        <name language="fr" text=" (remplissage)"/>
+        <name language="en" text=" (fill)"/>
+      </fill>
+      <stroke>
+        <name language="fr" text=" (trait)"/>
+        <name language="en" text=" (stroke)"/>
+      </stroke>
+    </nameSuffixes>
   </lookList>
 
   <categoryList>

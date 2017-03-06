@@ -76,6 +76,17 @@
         </name>
       </pointLook>
     </pointLookList>
+    <nameSuffixes>
+      <text>
+        <name language="fr" text=" (texte)"/>
+      </text>
+      <fill>
+        <name language="fr" text=" (remplissage)"/>
+      </fill>
+      <stroke>
+        <name language="fr" text=" (trait)"/>
+      </stroke>
+    </nameSuffixes>
   </lookList>
 
   <categoryList>

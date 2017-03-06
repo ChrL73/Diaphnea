@@ -117,7 +117,8 @@ var mapServerInterface =
             
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
-            this.getElementIds = function() { return mapInfo.elementIds; };  
+            this.getElementIds = function() { return mapInfo.elementIds; };
+            this.getCategories = function() { return mapInfo.categories; }
             
             this.loadElement = function(elementId, onElementLoaded)
             {
@@ -157,6 +158,7 @@ var mapServerInterface =
             {
                this.getId = function() { return elementId; }
                this.getName = function(languageId) { return elementInfo.names[languageId]; }
+               this.getCategoryIndex = function() { return elementInfo.category; }
                
                this.show = function()
                {

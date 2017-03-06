@@ -24,8 +24,9 @@ namespace map_server
         mongo::BSONElement importanceElt = dbElement.getField("importance");
         mongo::BSONElement nameElt = dbElement.getField("name");
         mongo::BSONElement shortNameElt = dbElement.getField("short_name");
+        int categoryId = dbElement.getIntField("category_id");
 
-        if (importanceElt.type() != mongo::NumberDouble || nameElt.type() != mongo::Object || shortNameElt.type() != mongo::Object)
+        if (importanceElt.type() != mongo::NumberDouble || nameElt.type() != mongo::Object || shortNameElt.type() != mongo::Object || categoryId < 0 || categoryId > _maxIntDbValue)
         {
             return false;
         }
@@ -56,8 +57,8 @@ namespace map_server
         }
         if (!namesJson.empty()) namesJson += "\"}";
 
-        if (namesJson.empty()) namesJson = "undefined";
-        _infoJson = "{\"names\":" + namesJson + "}";
+        if (namesJson.empty()) namesJson = "null";
+        _infoJson = "{\"names\":" + namesJson + ",\"category\":" + std::to_string(categoryId) + "}";
 
         return true;
     }

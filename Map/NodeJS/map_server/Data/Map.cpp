@@ -485,6 +485,12 @@ namespace map_server
         }
 
         int i, n = dbLanguageVector.size();
+        if (n == 0)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+
         for (i = 0; i < n; ++i)
         {
             mongo::BSONElement languageElt = dbLanguageVector[i];
@@ -680,6 +686,12 @@ namespace map_server
         std::vector<mongo::BSONElement> dbCategoryVector = categoriesElt.Array();
 
         int i, n = dbCategoryVector.size();
+        if (n == 0)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+
         for (i = 0; i < n; ++i)
         {
             mongo::BSONElement categoryElt = dbCategoryVector[i];
@@ -705,7 +717,29 @@ namespace map_server
             }
             mongo::BSONObj dbName = nameElt.Obj();
 
+            if (i == 0) categoriesJson += "[";
+            else categoriesJson += ",";
+
+            int j, m = _languageIdVector.size();
+            for (j = 0; j < m; ++j)
+            {
+                std::string categoryName = dbName.getStringField(_languageIdVector[j]);
+
+                if (categoryName.empty())
+                {
+                    _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                    return false;
+                }
+                else
+                {
+                    if (j == 0) categoriesJson += "{\"";
+                    else categoriesJson += "\",\"";
+                    categoriesJson += std::string(_languageIdVector[j]) + "\":\"" + categoryName;
+                }
+            }
+            categoriesJson += "\"}";
         }
+        categoriesJson += "]";
 
         return true;
     }

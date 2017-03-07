@@ -602,6 +602,9 @@ namespace map_server
                 return false;
             }
 
+            std::string textNameJson;
+            if (!getLookNameJson(dbLook, "text_name", textNameJson)) return false;
+
             if (type == "point")
             {
                 int pointZIndex = dbLook.getIntField("point_z_index");
@@ -618,8 +621,11 @@ namespace map_server
                     return false;
                 }
 
-                PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), pointZIndex, pointAlpha,
-                                                pointRed, pointGreen, pointBlue, pointSizeElt.Double(), this);
+                std::string pointNameJson;
+                if (!getLookNameJson(dbLook, "point_name", pointNameJson)) return false;
+
+                PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson, pointZIndex, pointAlpha,
+                                                pointRed, pointGreen, pointBlue, pointSizeElt.Double(), pointNameJson, this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
             else if (type == "line")
@@ -638,8 +644,11 @@ namespace map_server
                     return false;
                 }
 
-                LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), lineZIndex, lineAlpha,
-                                                lineRed, lineGreen, lineBlue, lineSizeElt.Double(), this);
+                std::string lineNameJson;
+                if (!getLookNameJson(dbLook, "line_name", lineNameJson)) return false;
+
+                LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson, lineZIndex, lineAlpha,
+                                              lineRed, lineGreen, lineBlue, lineSizeElt.Double(), lineNameJson, this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
             else if (type == "polygon")
@@ -665,12 +674,50 @@ namespace map_server
                     return false;
                 }
 
-                PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(),
-                                                    contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(),
-                                                    fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
+                std::string contourNameJson;
+                if (!getLookNameJson(dbLook, "contour_name", contourNameJson)) return false;
+
+                std::string fillNameJson;
+                if (!getLookNameJson(dbLook, "fill_name", fillNameJson)) return false;
+
+                PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson,
+                                                    contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(), contourNameJson,
+                                                    fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, fillNameJson, this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
         }
+
+        return true;
+    }
+
+    bool Map::getLookNameJson(mongo::BSONObj dbLook, const std::string& fieldName, std::string& json)
+    {
+        mongo::BSONElement nameElt = dbLook.getField(fieldName);
+        if (nameElt.type() != mongo::Object)
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
+        mongo::BSONObj dbName = nameElt.Obj();
+
+        int j, m = _languageIdVector.size();
+        for (j = 0; j < m; ++j)
+        {
+            std::string lookName = dbName.getStringField(_languageIdVector[j]);
+
+            if (lookName.empty())
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            else
+            {
+                if (j == 0) json += "{\"";
+                else json += "\",\"";
+                json += std::string(_languageIdVector[j]) + "\":\"" + lookName;
+            }
+        }
+        json += "\"}";
 
         return true;
     }

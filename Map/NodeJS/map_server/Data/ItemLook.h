@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace map_server
 {
     class IMap;
@@ -14,11 +16,11 @@ namespace map_server
         const int _green;
         const int _blue;
         const double _size;
-        char _json[128];
+        std::string _json;
         char _hexColor[8];
 
     public:
-        ItemLook(int id, int zIndex, int alpha, int red, int green, int blue, double size, IMap *iMap);
+        ItemLook(int id, int zIndex, int alpha, int red, int green, int blue, double size, const std::string& nameJson, IMap *iMap);
 
         int getId(void) const { return _id; }
         int getZIndex(void) const { return _zIndex; }
@@ -28,7 +30,7 @@ namespace map_server
         int getBlue(void) const { return _blue; }
         double getSize(void) const { return _size; }
 
-        const char *getJson(void) const { return _json; }
+        const std::string& getJson(void) const { return _json; }
         const char *getHexColor(void) const { return _hexColor; }
     };
 }

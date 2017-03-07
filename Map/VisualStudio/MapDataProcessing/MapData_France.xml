@@ -2757,6 +2757,66 @@
           <element id="e_Ariege"/>
         </attachmentList>
       </lineElement>
+      <lineElement id="e_Taurion" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Taurion"/>
+          <name language="en" text="Taurion"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_Vienne"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Leyre" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Leyre"/>
+          <name language="en" text="Leyre"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_33"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Trieux" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Trieux"/>
+          <name language="en" text="Trieux"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_22"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Selune" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Sélune"/>
+          <name language="en" text="Sélune"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_50"/>
+        </attachmentList>
+      </lineElement>
+      <lineElement id="e_Touques" category="ca_FleuveRiviere" importance="0">
+        <name>
+          <name language="fr" text="Touques"/>
+          <name language="en" text="Touques"/>
+        </name>
+        <looks>
+          <look id="ll_FleuveRiviere"/>
+        </looks>
+        <attachmentList>
+          <element id="e_14"/>
+        </attachmentList>
+      </lineElement>
     </lineElementList>
     <pointElementList>
       <!--Villes 01-->
@@ -3840,6 +3900,208 @@
         <name>
           <name language="fr" text="Mirande"/>
           <name language="en" text="Mirande"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 33-->
+      <pointElement id="e_Bordeaux" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Bordeaux"/>
+          <name language="en" text="Bordeaux"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Libourne" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Libourne"/>
+          <name language="en" text="Libourne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Arcachon" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Arcachon"/>
+          <name language="en" text="Arcachon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Langon" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Langon"/>
+          <name language="en" text="Langon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_LesparreMedoc" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lesparre-Médoc"/>
+          <name language="en" text="Lesparre-Médoc"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Blaye" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Blaye"/>
+          <name language="en" text="Blaye"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Merignac" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Mérignac"/>
+          <name language="en" text="Mérignac"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Pessac" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Pessac"/>
+          <name language="en" text="Pessac"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Talence" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Talence"/>
+          <name language="en" text="Talence"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 34-->
+      <pointElement id="e_Montpellier" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Montpellier"/>
+          <name language="en" text="Montpellier"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Beziers" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Béziers"/>
+          <name language="en" text="Béziers"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lodeve" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lodève"/>
+          <name language="en" text="Lodève"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Sete" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Sète"/>
+          <name language="en" text="Sète"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Agde" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Agde"/>
+          <name language="en" text="Agde"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 35-->
+      <pointElement id="e_Rennes" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Rennes"/>
+          <name language="en" text="Rennes"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintMalo" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Malo"/>
+          <name language="en" text="Saint-Malo"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Fougeres" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Fougères"/>
+          <name language="en" text="Fougères"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Redon" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Redon"/>
+          <name language="en" text="Redon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 36-->
+      <pointElement id="e_Chateauroux" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Châteauroux"/>
+          <name language="en" text="Châteauroux"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Issoudun" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Issoudun"/>
+          <name language="en" text="Issoudun"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Blanc" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Le Blanc"/>
+          <name language="en" text="Le Blanc"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Chatre" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="La Châtre"/>
+          <name language="en" text="La Châtre"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture"/>

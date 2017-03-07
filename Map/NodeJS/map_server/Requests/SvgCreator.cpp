@@ -89,7 +89,10 @@ namespace map_server
                                 y2 = (point->getBezierInfo()->getY2() - _yFocus) * _scale + 0.5 * _heightInPixels;
                             }
 
-                            curveInfoVector.push_back(new SvgCurveInfo(x1, y1, x2, y2, x, y));
+                            if (curveInfoVector.back()->getX() != x || curveInfoVector.back()->getY() != y)
+                            {
+                                curveInfoVector.push_back(new SvgCurveInfo(x1, y1, x2, y2, x, y));
+                            }
                         }
 
                         lastIn = in;
@@ -99,6 +102,7 @@ namespace map_server
                             << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
                             << ";fill-rule:evenodd;stroke:none\\\" d=\\\"";
 
+                    n = curveInfoVector.size();
                     for (i = 0; i < n; ++i)
                     {
                         SvgCurveInfo *curveInfo = curveInfoVector[i];

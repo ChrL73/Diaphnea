@@ -118,8 +118,8 @@ namespace map_server
                                 SvgCurveInfo *pCurveInfo = curveInfoVector[i - 1];
                                 SvgCurveInfo *nCurveInfo = curveInfoVector[i + 1];
 
-                                if ((y < -(d - 1.0) || y > _widthInPixels + (d - 1.0)) && pCurveInfo->getX() == x && nCurveInfo->getX() == x) ok = false;
-                                if ((x < -(d - 1.0) || x > _heightInPixels + (d - 1.0)) && pCurveInfo->getY() == y && nCurveInfo->getY() == y) ok = false;
+                                if ((y < -(d - 1.0) || y > _widthInPixels + (d - 1.0)) && pCurveInfo->getY() == y && nCurveInfo->getY() == y) ok = false;
+                                if ((x < -(d - 1.0) || x > _heightInPixels + (d - 1.0)) && pCurveInfo->getX() == x && nCurveInfo->getX() == x) ok = false;
                             }
 
                             if (ok) content << "C " << curveInfo->getX1() << " " << curveInfo->getY1() << ","

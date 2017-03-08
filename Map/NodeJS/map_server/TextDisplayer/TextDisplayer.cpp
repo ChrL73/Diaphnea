@@ -79,6 +79,7 @@ namespace map_server
         _mutex.lock();
         bool b = (*_clientActiveDisplayerId == _id);
         _mutex.unlock();
+
         return b;
 	}
 
@@ -145,7 +146,7 @@ namespace map_server
 
     bool TextDisplayer::displayText(ItemCopy *item, TextInfo *textInfo)
     {
-        if (textInfo == 0) return false;
+        if (textInfo == 0 || !isDisplayerActive()) return false;
 
         PointItemCopy *pointItem = dynamic_cast<PointItemCopy *>(item);
         if (pointItem != 0) return displayPointText(pointItem, textInfo);
@@ -316,6 +317,8 @@ namespace map_server
                 }
 
                 yD += dy;
+
+                if (!isDisplayerActive()) return false;
             }
 		}
 
@@ -429,6 +432,8 @@ namespace map_server
                 }
 
                 xD += dx;
+
+                if (!isDisplayerActive()) return false;
             }
 		}
 
@@ -564,12 +569,13 @@ namespace map_server
                         pMin = textPotential;
                     }
 
-                    if (!isDisplayerActive()) return false;
                     x += dx;
                 }
             }
 
             yD += dy;
+
+            if (!isDisplayerActive()) return false;
         }
 
         if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;

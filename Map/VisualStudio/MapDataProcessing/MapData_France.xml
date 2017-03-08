@@ -1811,7 +1811,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vienne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_VienneRiver" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Vienne"/>
           <name language="en" text="Vienne"/>
@@ -1974,7 +1974,7 @@
           <look id="ll_FleuveRiviere"/>
         </looks>
         <attachmentList>
-          <element id="e_Vienne"/>
+          <element id="e_VienneRiver"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Sarre" category="ca_FleuveRiviere" importance="0">
@@ -2766,7 +2766,7 @@
           <look id="ll_FleuveRiviere"/>
         </looks>
         <attachmentList>
-          <element id="e_Vienne"/>
+          <element id="e_VienneRiver"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Leyre" category="ca_FleuveRiviere" importance="0">
@@ -4105,6 +4105,201 @@
         </name>
         <looks>
           <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 37-->
+      <pointElement id="e_Tours" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Tours"/>
+          <name language="en" text="Tours"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Chinon" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Chinon"/>
+          <name language="en" text="Chinon"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Loches" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Loches"/>
+          <name language="en" text="Loches"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_JoueLesTours" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Joué-lès-Tours"/>
+          <name language="en" text="Joué-lès-Tours"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 38-->
+      <pointElement id="e_Grenoble" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Grenoble"/>
+          <name language="en" text="Grenoble"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vienne" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Vienne"/>
+          <name language="en" text="Vienne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_TourDuPin" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="La Tour-du-Pin"/>
+          <name language="en" text="La Tour-du-Pin"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Echirolles" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Échirolles"/>
+          <name language="en" text="Échirolles"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintMartinHeres" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Saint-Martin-d'Hères"/>
+          <name language="en" text="Saint-Martin-d'Hères"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 39-->
+      <pointElement id="e_LonsLeSaunier" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Lons-le-Saunier"/>
+          <name language="en" text="Lons-le-Saunier"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Dole" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Dole"/>
+          <name language="en" text="Dole"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintClaude" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Claude"/>
+          <name language="en" text="Saint-Claude"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 40-->
+      <pointElement id="e_MontDeMarsan" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Mont-de-Marsan"/>
+          <name language="en" text="Mont-de-Marsan"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Dax" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Dax"/>
+          <name language="en" text="Dax"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 41-->
+      <pointElement id="e_Blois" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Blois"/>
+          <name language="en" text="Blois"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_RomorantinLanthenay" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Romorantin-Lanthenay"/>
+          <name language="en" text="Romorantin-Lanthenay"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Vendome" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Vendôme"/>
+          <name language="en" text="Vendôme"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 42-->
+      <pointElement id="e_SaintEtienne" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Étienne"/>
+          <name language="en" text="Saint-Étienne"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Roanne" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Roanne"/>
+          <name language="en" text="Roanne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Montbrison" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Montbrison"/>
+          <name language="en" text="Montbrison"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintChamond" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Saint-Chamond"/>
+          <name language="en" text="Saint-Chamond"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
         </looks>
       </pointElement>
     </pointElementList>

@@ -20,6 +20,7 @@ namespace MapDataProcessing
         private readonly Dictionary<String, List<LineMapElement>> _attachedLineElementDictionary = new Dictionary<string, List<LineMapElement>>();
         private readonly Dictionary<String, List<LineMapElement>> _attachedPolygonElementDictionary = new Dictionary<string, List<LineMapElement>>();
         private readonly Dictionary<String, int> _fileNameDictionary = new Dictionary<string, int>();
+        private readonly ElementLinker _elementLinker = new ElementLinker();
 
         internal MapDataProcessor(String configFile)
         {
@@ -57,6 +58,7 @@ namespace MapDataProcessing
 
             if (result == 0) result = LineLinePart.smoothAll(_mapData);
             if (result == 0) result = formContours();
+            if (result == 0) result = linkElements();
             if (result == 0) result = fillDatabase();
 
             return result;
@@ -308,6 +310,30 @@ namespace MapDataProcessing
             {
                 if (element.formContours() != 0) return -1;
             }
+
+            return 0;
+        }
+
+        private int linkElements()
+        {
+            XmlResolution bestResolution = null;
+            foreach(XmlResolution resolution in _mapData.XmlMapData.resolutionList)
+            {
+                if (bestResolution == null || resolution.sampleLength1 * Double.Parse(resolution.sampleRatio) < bestResolution.sampleLength1 * Double.Parse(bestResolution.sampleRatio))
+                {
+                    bestResolution = resolution;
+                }
+            }
+
+            _elementLinker.Resolution = bestResolution;
+            _elementLinker.Projection = _mapData.XmlMapData.parameters.projection;
+
+            foreach (PolygonMapElement element in _elementDictionary.Values.OfType<PolygonMapElement>())
+            {
+                if (_elementLinker.addPolygon(element) != 0) return -1;
+            }
+
+            _elementLinker.classifySegments();
 
             return 0;
         }

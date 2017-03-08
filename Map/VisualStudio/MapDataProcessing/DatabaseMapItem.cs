@@ -29,6 +29,13 @@ namespace MapDataProcessing
             _lineDictionary.Add(resolution, line);
         }
 
+        internal List<GeoPoint> getLine(XmlResolution resolution)
+        {
+            List<GeoPoint> line;
+            if (!_lineDictionary.TryGetValue(resolution, out line)) return null;
+            return line;
+        }
+
         internal BsonValue Id { get; set; }
         internal bool Cap1Round { private get; set; }
         internal bool Cap2Round { private get; set; }

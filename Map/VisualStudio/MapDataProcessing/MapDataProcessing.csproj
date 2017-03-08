@@ -57,6 +57,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="DatabaseMapItem.cs" />
     <Compile Include="DistanceCalculator.cs" />
+    <Compile Include="ElementLinker.cs" />
     <Compile Include="ElementName.cs" />
     <Compile Include="GeoPoint.cs" />
     <Compile Include="IAttachment.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="LineLook.cs" />
     <Compile Include="LineMapElement.cs" />
     <Compile Include="LineSuperposer.cs" />
+    <Compile Include="LinkerSegment.cs" />
     <Compile Include="Look.cs" />
     <Compile Include="MapData.cs" />
     <Compile Include="MapDataProcessingMain.cs" />

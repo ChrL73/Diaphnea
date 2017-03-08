@@ -28,6 +28,11 @@ namespace MapDataProcessing
             _contourMapItem = new DatabaseMapItem(true, Id);
         }
 
+        internal List<GeoPoint> getContourLine(XmlResolution resolution)
+        {
+            return _contourMapItem.getLine(resolution);
+        }
+
         internal override int addKmlFile(String path)
         {
             KmlFileData data = KmlFileData.getData(path);

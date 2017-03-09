@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+   <Placemark>
+      <Point>	
+         <coordinates>
+            .707825,44.406584
+         </coordinates>
+      </Point>
+   </Placemark>
+</kml>

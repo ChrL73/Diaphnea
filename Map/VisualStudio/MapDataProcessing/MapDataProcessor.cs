@@ -39,48 +39,81 @@ namespace MapDataProcessing
             ItemId.reset();
             Look.reset();
             Category.reset();
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Loading configurationfile {0} ...", _configFile));
-            if (result == 0) result = loadData();
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Creating elements...");
-            if (result == 0) result = createElements();
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking line elements...");
-            if (result == 0) result = attachElements();
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Adding KML files...");
-            if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming elements parts...");
-            if (result == 0) result = formParts();
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of polygon elements...");
-            if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing polygon parts of polygon elements...");
-            if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
-
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Classifying segment for superposing algorithm...");
+            
             if (result == 0)
             {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Loading configurationfile {0} ...", _configFile));
+                result = loadData();
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Creating elements...");
+                result = createElements();
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking line elements...");
+                result = attachElements();
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Adding KML files...");
+                result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming elements parts...");
+                result = formParts();
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of polygon elements...");
+                result = PolygonLinePart.smoothAll(_mapData);
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing polygon parts of polygon elements...");
+                result = PolygonPolygonPart.smoothAll(_mapData);
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Classifying segment for superposing algorithm...");
                 foreach (XmlResolution xmlResolution in _mapData.XmlMapData.resolutionList)
                 {
                     _mapData.LineSuperposerDictionary[xmlResolution].classifySegments(_mapData.XmlMapData.parameters.superposingThreshold);
                 }
             }
 
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of line elements...");
-            if (result == 0) result = LineLinePart.smoothAll(_mapData);
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of line elements...");
+                result = LineLinePart.smoothAll(_mapData);
+            }
 
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming contours of polygon elements...");
-            if (result == 0) result = formContours();
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming contours of polygon elements...");
+                result = formContours();
+            }
 
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking elements...");
-            if (result == 0) result = linkElements();
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking elements...");
+                result = linkElements();
+            }
 
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
-            if (result == 0) result = fillDatabase();
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
+                result = fillDatabase();
+            }
 
             return result;
         }

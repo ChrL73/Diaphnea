@@ -46,6 +46,14 @@ namespace MapDataProcessing
             return 0;
         }
 
+        internal GeoPoint Point
+        {
+            get
+            {
+                return _kmlFile.PointList[0];
+            }
+        }
+
         internal override int formParts1()
         {
             if (_kmlFile == null)

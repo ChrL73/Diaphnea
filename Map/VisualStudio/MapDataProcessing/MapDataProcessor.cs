@@ -40,14 +40,28 @@ namespace MapDataProcessing
             Look.reset();
             Category.reset();
 
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Loading configurationfile {0} ...", _configFile));
             if (result == 0) result = loadData();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Creating elements...");
             if (result == 0) result = createElements();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking line elements...");
             if (result == 0) result = attachElements();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Adding KML files...");
             if (result == 0) result = addKmlFiles(_mapData.XmlMapData.parameters.kmlDir);
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming elements parts...");
             if (result == 0) result = formParts();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of polygon elements...");
             if (result == 0) result = PolygonLinePart.smoothAll(_mapData);
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing polygon parts of polygon elements...");
             if (result == 0) result = PolygonPolygonPart.smoothAll(_mapData);
 
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Classifying segment for superposing algorithm...");
             if (result == 0)
             {
                 foreach (XmlResolution xmlResolution in _mapData.XmlMapData.resolutionList)
@@ -56,9 +70,16 @@ namespace MapDataProcessing
                 }
             }
 
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Smoothing line parts of line elements...");
             if (result == 0) result = LineLinePart.smoothAll(_mapData);
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Forming contours of polygon elements...");
             if (result == 0) result = formContours();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking elements...");
             if (result == 0) result = linkElements();
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
             if (result == 0) result = fillDatabase();
 
             return result;
@@ -106,8 +127,6 @@ namespace MapDataProcessing
                 Console.WriteLine(e.Message);
                 return -1;
             }
-
-            Console.WriteLine("Reading configuration file " + _configFile + " ...");
 
             XmlSerializer serializer = new XmlSerializer(typeof(XmlMapData));
             XmlMapData mapData = null;
@@ -226,7 +245,7 @@ namespace MapDataProcessing
 
             if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
             {
-                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Browsing Kml path {0} ...", path));
+                //MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Browsing Kml path {0} ...", path));
                 List<String> entries = new List<String>(Directory.EnumerateFileSystemEntries(path));
                 foreach (String entry in entries)
                 {                
@@ -334,6 +353,18 @@ namespace MapDataProcessing
             }
 
             _elementLinker.classifySegments();
+
+            foreach (PointMapElement element in _elementDictionary.Values.OfType<PointMapElement>())
+            {
+                List<PolygonMapElement> linkedPolygons = _elementLinker.getLinkedPolygons(element);
+                if (linkedPolygons == null) return -1;
+
+                foreach(PolygonMapElement linkedPolygon in linkedPolygons)
+                {
+                    element.LinkedElements1.Add(linkedPolygon);
+                    linkedPolygon.LinkedElements1.Add(element);
+                }
+            }
 
             return 0;
         }

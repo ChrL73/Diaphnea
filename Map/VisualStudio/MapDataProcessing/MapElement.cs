@@ -18,6 +18,11 @@ namespace MapDataProcessing
         private readonly List<int> _lookIds = new List<int>();
         private readonly int _categoryId;
 
+        private readonly List<MapElement> _linkedElements1 = new List<MapElement>();
+        private readonly List<MapElement> _linkedElements2 = new List<MapElement>();
+        internal List<MapElement> LinkedElements1 { get { return _linkedElements1; } }
+        internal List<MapElement> LinkedElements2 { get { return _linkedElements2; } }
+
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)
         {
             _id = id;
@@ -43,6 +48,9 @@ namespace MapDataProcessing
             BsonArray lookIdArray = new BsonArray();
             foreach (int lookId in _lookIds) lookIdArray.Add(lookId);
 
+            BsonArray _linkedElements1Array = new BsonArray();
+            foreach (MapElement linkedElement in _linkedElements1) _linkedElements1Array.Add(linkedElement.Id);
+
             BsonDocument elementDocument = new BsonDocument()
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
@@ -50,6 +58,7 @@ namespace MapDataProcessing
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "importance", _importance },
+                { "linked_elements1", _linkedElements1Array },
                 { "look_ids", lookIdArray },
                 { "category_id", _categoryId }
             };

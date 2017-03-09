@@ -187,7 +187,7 @@ namespace MapDataProcessing
             if (iX < 0) iX = 0;
             if (iX >= _nX) iX = _nX - 1;
             if (iY < 0) iY = 0;
-            if (iY >= _nX) iY = _nY - 1;
+            if (iY >= _nY) iY = _nY - 1;
             if (iZ < 0) iZ = 0;
             if (iZ >= _nZ) iZ = _nZ - 1;
 

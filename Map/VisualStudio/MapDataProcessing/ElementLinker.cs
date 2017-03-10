@@ -10,6 +10,7 @@ namespace MapDataProcessing
     {
         internal XmlResolution Resolution { get; set; }
         internal XmlProjectionEnum Projection { get; set; }
+        internal double LinePointLinkThreshold { get; set; }   
 
         private double _yMin = Double.MaxValue;
         private double _yMax = Double.MinValue;
@@ -18,8 +19,14 @@ namespace MapDataProcessing
         private readonly double _dy1 = 0.3 * Math.Pow(10.0, -_digits);
         private readonly double _dy2 = 0.6 * Math.Pow(10.0, -_digits);
 
+        private readonly Dictionary<string, MapElement> _elementDictionary = new Dictionary<string, MapElement>();
         private readonly List<LinkerSegment> _segmentList = new List<LinkerSegment>();
         private readonly List<LinkerSegment>[] _segmentArray = new List<LinkerSegment>[_n];
+
+        internal void addElement(string id, MapElement element)
+        {
+            _elementDictionary.Add(id, element);
+        }
 
         internal int addPolygon(PolygonMapElement element)
         {
@@ -88,9 +95,36 @@ namespace MapDataProcessing
             }
         }
 
-        internal List<PolygonMapElement> getLinkedPolygons(PointMapElement pointElement)
+        internal List<MapElement> getLinked1Elements(MapElement element)
         {
-            List<PolygonMapElement> polygonList = new List<PolygonMapElement>();
+            if (element is PointMapElement)
+            {
+                List<MapElement> list1 = getLinked1Polygons((PointMapElement)element);
+                if (list1 == null) return null;
+
+                List<MapElement> list2 = getLinked1Lines((PointMapElement)element);
+                if (list2 == null) return null;
+
+                list1.AddRange(list2);
+                return list1;
+            }
+
+            if (element is LineMapElement) return getLinked1Polygons((LineMapElement)element);
+            if (element is PolygonMapElement) return getLinked1Polygons((PolygonMapElement)element);
+
+            return new List<MapElement>();
+        }
+
+        internal List<MapElement> getLinked2Elements(MapElement element)
+        {
+            if (element is LineMapElement) return getLinked2Lines((LineMapElement)element);
+            if (element is PolygonMapElement) return getLinked2Polygons((PolygonMapElement)element);
+            return new List<MapElement>();
+        }
+
+        private List<MapElement> getLinked1Polygons(PointMapElement pointElement)
+        {
+            Dictionary<MapElement, int> polygonDictionary = new Dictionary<MapElement, int>();
 
             double x, y;
             if (!pointElement.Point.getProjection(Projection, out x, out y))
@@ -99,10 +133,64 @@ namespace MapDataProcessing
                 return null;
             }
 
+            getLinkedPolygons(x, y, polygonDictionary);
+            return polygonDictionary.Keys.ToList();
+        }
+
+        private List<MapElement> getLinked1Lines(PointMapElement pointElement)
+        {
+            List<MapElement> lineList = new List<MapElement>();
+
+            foreach (LineMapElement lineElement in _elementDictionary.Values.OfType<LineMapElement>())
+            {
+                if (lineElement.getDistance(pointElement.Point, Resolution) < LinePointLinkThreshold) lineList.Add(lineElement);
+            }
+
+            return lineList;
+        }
+
+        private List<MapElement> getLinked1Polygons(LineMapElement lineElement)
+        {
+            Dictionary<MapElement, int> polygonDictionary = new Dictionary<MapElement, int>();
+
+            List<GeoPoint> points = lineElement.getPoints(Resolution);
+            foreach (GeoPoint point in points)
+            {
+                double x, y;
+                if (!point.getProjection(Projection, out x, out y))
+                {
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR, "Projection error");
+                    return null;
+                }
+
+                getLinkedPolygons(x, y, polygonDictionary);
+            }
+
+            return polygonDictionary.Keys.ToList();
+        }
+
+        private List<MapElement> getLinked1Polygons(PolygonMapElement polygonElement)
+        {
+            List<MapElement> polygonsList = new List<MapElement>();
+
+            foreach (string elementId in polygonElement.CoveredElementList)
+            {
+                MapElement element;
+                if (_elementDictionary.TryGetValue(elementId, out element))
+                {
+                    if (element is PolygonMapElement) polygonsList.Add((PolygonMapElement)element);
+                }
+            }
+
+            return polygonsList;
+        }
+
+        private void getLinkedPolygons(double x, double y, Dictionary<MapElement, int> polygonDictionary)
+        {
             y = Math.Round((double)_n * (y - _yMin) / (_yMax - _yMin), _digits) + _dy2;
             int i = getIndex(y);
 
-            Dictionary<PolygonMapElement, int> intersectionCountDictionary = new Dictionary<PolygonMapElement, int>();
+            Dictionary<MapElement, int> intersectionCountDictionary = new Dictionary<MapElement, int>();
 
             foreach (LinkerSegment segment in _segmentArray[i])
             {
@@ -117,12 +205,20 @@ namespace MapDataProcessing
                 }
             }
 
-            foreach(KeyValuePair<PolygonMapElement, int> pair in intersectionCountDictionary)
+            foreach (KeyValuePair<MapElement, int> pair in intersectionCountDictionary)
             {
-                if (pair.Value % 2 == 1) polygonList.Add(pair.Key);
+                if (pair.Value % 2 == 1 && !polygonDictionary.ContainsKey(pair.Key)) polygonDictionary.Add(pair.Key, 0);
             }
+        }
 
-            return polygonList;
+        private List<MapElement> getLinked2Lines(LineMapElement lineElement)
+        {
+            return new List<MapElement>();
+        }
+
+        private List<MapElement> getLinked2Polygons(PolygonMapElement polygonElement)
+        {
+            return new List<MapElement>();
         }
 
         private int getIndex(double y)

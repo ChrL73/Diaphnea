@@ -54,6 +54,11 @@ namespace MapDataProcessing
             _smoothedLineMapItem = new DatabaseMapItem(false, element0Id);
         }
 
+        internal List<GeoPoint> getLine(XmlResolution resolution)
+        {
+            return _smoothedLineMapItem.getLine(resolution);
+        }
+
         internal GeoPoint Point1 { get { return _lineData.PointList[0]; } }
         internal GeoPoint Point2 { get { return _lineData.PointList[_lineData.PointList.Count - 1]; } }
 

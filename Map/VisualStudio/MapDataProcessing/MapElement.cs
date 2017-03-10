@@ -51,6 +51,9 @@ namespace MapDataProcessing
             BsonArray _linkedElements1Array = new BsonArray();
             foreach (MapElement linkedElement in _linkedElements1) _linkedElements1Array.Add(linkedElement.Id);
 
+            BsonArray _linkedElements2Array = new BsonArray();
+            foreach (MapElement linkedElement in _linkedElements2) _linkedElements2Array.Add(linkedElement.Id);
+
             BsonDocument elementDocument = new BsonDocument()
             {
                 { "map", _mapData.XmlMapData.parameters.mapId },
@@ -59,6 +62,7 @@ namespace MapDataProcessing
                 { "short_name", _shortName.getBsonDocument() },
                 { "importance", _importance },
                 { "linked_elements1", _linkedElements1Array },
+                { "linked_elements2", _linkedElements2Array },
                 { "look_ids", lookIdArray },
                 { "category_id", _categoryId }
             };

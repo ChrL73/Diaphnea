@@ -202,6 +202,7 @@ namespace MapDataProcessing
                 PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName,
                                                                             xmlPolygonElement.importance, lookIds, xmlPolygonElement.category, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
+                _elementLinker.addElement(id, polygonMapElement);
             }
 
             foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList)
@@ -213,6 +214,7 @@ namespace MapDataProcessing
 
                 LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, lookIds, xmlLineElement.category);
                 _elementDictionary.Add(id, lineMapElement);
+                _elementLinker.addElement(id, lineMapElement);
             }
 
             foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList)
@@ -224,6 +226,7 @@ namespace MapDataProcessing
 
                 PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, lookIds, xmlPointElement.category);
                 _elementDictionary.Add(id, pointMapElement);
+                _elementLinker.addElement(id, pointMapElement);
             }
 
             return 0;
@@ -379,6 +382,7 @@ namespace MapDataProcessing
 
             _elementLinker.Resolution = bestResolution;
             _elementLinker.Projection = _mapData.XmlMapData.parameters.projection;
+            _elementLinker.LinePointLinkThreshold = _mapData.XmlMapData.parameters.linePointLinkThreshold;
 
             foreach (PolygonMapElement element in _elementDictionary.Values.OfType<PolygonMapElement>())
             {
@@ -387,15 +391,24 @@ namespace MapDataProcessing
 
             _elementLinker.classifySegments();
 
-            foreach (PointMapElement element in _elementDictionary.Values.OfType<PointMapElement>())
+            foreach (MapElement element in _elementDictionary.Values)
             {
-                List<PolygonMapElement> linkedPolygons = _elementLinker.getLinkedPolygons(element);
-                if (linkedPolygons == null) return -1;
+                List<MapElement> linked1Elements = _elementLinker.getLinked1Elements(element);
+                if (linked1Elements == null) return -1;
 
-                foreach(PolygonMapElement linkedPolygon in linkedPolygons)
+                foreach(MapElement linked1Element in linked1Elements)
                 {
-                    element.LinkedElements1.Add(linkedPolygon);
-                    linkedPolygon.LinkedElements1.Add(element);
+                    element.LinkedElements1.Add(linked1Element);
+                    linked1Element.LinkedElements1.Add(element);
+                }
+
+                List<MapElement> linked2Elements = _elementLinker.getLinked2Elements(element);
+                if (linked2Elements == null) return -1;
+
+                foreach (MapElement linked2Element in linked2Elements)
+                {
+                    element.LinkedElements2.Add(linked2Element);
+                    linked2Element.LinkedElements2.Add(element);
                 }
             }
 

@@ -113,6 +113,8 @@ public partial class XmlParameters {
     
     private double superposingThresholdField;
     
+    private double linePointLinkThresholdField;
+    
     private XmlProjectionEnum projectionField;
     
     private string exclusionTagField;
@@ -234,6 +236,17 @@ public partial class XmlParameters {
         }
         set {
             this.superposingThresholdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double linePointLinkThreshold {
+        get {
+            return this.linePointLinkThresholdField;
+        }
+        set {
+            this.linePointLinkThresholdField = value;
         }
     }
     

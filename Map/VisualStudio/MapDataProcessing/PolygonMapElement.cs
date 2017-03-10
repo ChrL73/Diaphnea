@@ -33,6 +33,8 @@ namespace MapDataProcessing
             return _contourMapItem.getLine(resolution);
         }
 
+        internal List<string> CoveredElementList { get { return _coveredElementList; } }
+
         internal override int addKmlFile(String path)
         {
             KmlFileData data = KmlFileData.getData(path);

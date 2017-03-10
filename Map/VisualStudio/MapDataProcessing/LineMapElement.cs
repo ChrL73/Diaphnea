@@ -20,6 +20,26 @@ namespace MapDataProcessing
         internal LineMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId) :
             base(id, mapData, name, shortName, importance, lookIds, categoryId) { }
 
+        internal List<GeoPoint> getPoints(XmlResolution resolution)
+        {
+            List<GeoPoint> points = new List<GeoPoint>();
+            foreach (LineLinePart part in _partList) points.AddRange(part.getLine(resolution));
+            return points;
+        }
+
+        internal double getDistance(GeoPoint point, XmlResolution resolution)
+        {
+            double d = Double.MaxValue;
+
+            foreach (LineLinePart part in _partList)
+            {
+                double d1 = DistanceCalculator.getDistance(part.getLine(resolution), point);
+                if (d1 < d) d = d1;
+            }
+
+            return d;
+        }
+
         internal override int addKmlFile(String path)
         {
             KmlFileData data = KmlFileData.getData(path);

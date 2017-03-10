@@ -3,7 +3,7 @@ $(function()
    document.addEventListener('wheel', function(e) { e.preventDefault(); });
    $('#svg').hide();
    
-   var url = 'http://192.168.50.177:3001';
+   var url = 'http://albertine:3001';
    mapServerInterface.createNewConnection(url, onConnected, onError);
    
    function onError(error)

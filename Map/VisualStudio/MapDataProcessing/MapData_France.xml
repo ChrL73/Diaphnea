@@ -5032,6 +5032,411 @@
           <look id="tl_SousPrefecture"/>
         </looks>
       </pointElement>
+      <!--Villes 62-->
+      <pointElement id="e_Arras" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Arras"/>
+          <name language="en" text="Arras"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Calais" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Calais"/>
+          <name language="en" text="Calais"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_BoulogneSurMer" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Boulogne-sur-Mer"/>
+          <name language="en" text="Boulogne-sur-Mer"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lens" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lens"/>
+          <name language="en" text="Lens"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Bethune" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Béthune"/>
+          <name language="en" text="Béthune"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintOmer" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saint-Omer"/>
+          <name language="en" text="Saint-Omer"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_MontreuilSurMer" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Montreuil"/>
+          <name language="en" text="Montreuil"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lievin" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Liévin"/>
+          <name language="en" text="Liévin"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 63-->
+      <pointElement id="e_ClermontFerrand" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Clermont-Ferrand"/>
+          <name language="en" text="Clermont-Ferrand"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Riom" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Riom"/>
+          <name language="en" text="Riom"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Issoire" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Issoire"/>
+          <name language="en" text="Issoire"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Thiers" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Thiers"/>
+          <name language="en" text="Thiers"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Ambert" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Ambert"/>
+          <name language="en" text="Ambert"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 64-->
+      <pointElement id="e_Pau" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Pau"/>
+          <name language="en" text="Pau"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Bayonne" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Bayonne"/>
+          <name language="en" text="Bayonne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_OloronSainteMarie" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Oloron-Sainte-Marie"/>
+          <name language="en" text="Oloron-Sainte-Marie"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Anglet" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Anglet"/>
+          <name language="en" text="Anglet"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 65-->
+      <pointElement id="e_Tarbes" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Tarbes"/>
+          <name language="en" text="Tarbes"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_BagneresDeBigorre" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Bagnères-de-Bigorre"/>
+          <name language="en" text="Bagnères-de-Bigorre"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_ArgelesGazost" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Argelès-Gazost"/>
+          <name language="en" text="Argelès-Gazost"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lourdes" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Lourdes"/>
+          <name language="en" text="Lourdes"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 66-->
+      <pointElement id="e_Perpignan" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Perpignan"/>
+          <name language="en" text="Perpignan"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Ceret" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Céret"/>
+          <name language="en" text="Céret"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Prades" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Prades"/>
+          <name language="en" text="Prades"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 67-->
+      <pointElement id="e_Strasbourg" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Strasbourg"/>
+          <name language="en" text="Strasbourg"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Haguenau" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Haguenau"/>
+          <name language="en" text="Haguenau"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Selestat" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Sélestat"/>
+          <name language="en" text="Sélestat"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Saverne" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Saverne"/>
+          <name language="en" text="Saverne"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Molsheim" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Molsheim"/>
+          <name language="en" text="Molsheim"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Wissembourg" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Wissembourg"/>
+          <name language="en" text="Wissembourg"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Schiltigheim" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Schiltigheim"/>
+          <name language="en" text="Schiltigheim"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 68-->
+      <pointElement id="e_Colmar" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Colmar"/>
+          <name language="en" text="Colmar"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Mulhouse" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Mulhouse"/>
+          <name language="en" text="Mulhouse"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Guebwiller" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Guebwiller"/>
+          <name language="en" text="Guebwiller"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Thann" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Thann"/>
+          <name language="en" text="Thann"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Altkirch" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Altkirch"/>
+          <name language="en" text="Altkirch"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Ribeauville" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Ribeauvillé"/>
+          <name language="en" text="Ribeauvillé"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <!--Villes 69-->
+      <pointElement id="e_Lyon" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Lyon"/>
+          <name language="en" text="Lyon"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_VillefrancheSurSaone" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Villefranches-sur-Saône"/>
+          <name language="en" text="Villefranches-sur-Saône"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Villeurbanne" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Villeurbanne"/>
+          <name language="en" text="Villeurbanne"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Venissieux" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Vénissieux"/>
+          <name language="en" text="Vénissieux"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_SaintPriest" category="ca_Ville" importance="0">
+        <name>
+          <name language="fr" text="Saint-Priest"/>
+          <name language="en" text="Saint-Priest"/>
+        </name>
+        <looks>
+          <look id="tl_Ville"/>
+        </looks>
+      </pointElement>
+      <!--Villes 70-->
+      <pointElement id="e_Vesoul" category="ca_Prefecture" importance="0">
+        <name>
+          <name language="fr" text="Vesoul"/>
+          <name language="en" text="Vesoul"/>
+        </name>
+        <looks>
+          <look id="tl_Prefecture"/>
+        </looks>
+      </pointElement>
+      <pointElement id="e_Lure" category="ca_SousPrefecture" importance="0">
+        <name>
+          <name language="fr" text="Lure"/>
+          <name language="en" text="Lure"/>
+        </name>
+        <looks>
+          <look id="tl_SousPrefecture"/>
+        </looks>
+      </pointElement>
     </pointElementList>
   </elementList>
   

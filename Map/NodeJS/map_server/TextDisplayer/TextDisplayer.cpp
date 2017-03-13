@@ -171,10 +171,10 @@ namespace map_server
         {
             double alpha = 2.0 * static_cast<double>(i) * M_PI / static_cast<double>(n);
             double s = sin(alpha);
-            if (s > 0.8) s = 0.8;
-            else if (s < -0.8) s = -0.8;
-            double x = item->getX() + cos(alpha) * (0.5 * textInfo->getWidth() + item->getDiameter());
-            double y = item->getY() - s * (0.5 * textInfo->getHeight() + item->getDiameter());
+            if (s > 0.85) s = 0.85;
+            else if (s < -0.85) s = -0.85;
+            double x = item->getX() + cos(alpha) * (0.5 * textInfo->getWidth() + 1.2 * item->getDiameter());
+            double y = item->getY() - s * (0.5 * textInfo->getHeight() + 1.2 * item->getDiameter());
             TextPotential textPotential = std::move(getTextPotential(item, textInfo, x, y, false));
 
             if (textPotential.compareTo(pMin) < 0.0 && textPotential.getMax() < _parameters->getPotentialThreshold())

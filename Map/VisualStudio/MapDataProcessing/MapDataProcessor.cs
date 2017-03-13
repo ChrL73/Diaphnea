@@ -248,6 +248,7 @@ namespace MapDataProcessing
                     {
                         if (!_attachedLineElementDictionary.ContainsKey(attachedElementId)) _attachedLineElementDictionary.Add(attachedElementId, new List<LineMapElement>());
                         _attachedLineElementDictionary[attachedElementId].Add(lineMapElement);
+                        _elementLinker.addAttachment(lineMapElement, (LineMapElement)attachedElement);
                     }
                     else if (attachedElement is PolygonMapElement)
                     {
@@ -314,12 +315,37 @@ namespace MapDataProcessing
 
             if (exclusionTag == null || !idList.Contains(exclusionTag))
             {
-                foreach (String id in idList)
+                int i, n = idList.Length;
+                for (i = 0; i < n; ++i)
                 {
+                    string id = idList[i];
+
                     MapElement element;
                     if (_elementDictionary.TryGetValue(id, out element))
                     {
                         if (element.addKmlFile(path) != 0) return -1;
+
+                        if (element is PolygonMapElement)
+                        {
+                            KmlFileData data = KmlFileData.getData(path);
+                            if (data.Type == KmlFileTypeEnum.LINE)
+                            {
+                                int j;
+                                for (j = i + 1; j < n; ++j)
+                                {
+                                    string id2 = idList[j];
+                                    MapElement element2;
+                                    if (_elementDictionary.TryGetValue(id2, out element2))
+                                    {
+                                        PolygonMapElement polygon2 = element2 as PolygonMapElement;
+                                        if (polygon2 != null && element.CategoryId == polygon2.CategoryId)
+                                        {
+                                            _elementLinker.addNeighbor((PolygonMapElement)element, polygon2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     List<LineMapElement> lineElementList;
@@ -393,22 +419,22 @@ namespace MapDataProcessing
 
             foreach (MapElement element in _elementDictionary.Values)
             {
-                List<MapElement> linked1Elements = _elementLinker.getLinked1Elements(element);
+                Dictionary<MapElement, int> linked1Elements = _elementLinker.getLinked1Elements(element);
                 if (linked1Elements == null) return -1;
 
-                foreach(MapElement linked1Element in linked1Elements)
+                foreach(MapElement linked1Element in linked1Elements.Keys)
                 {
-                    element.LinkedElements1.Add(linked1Element);
-                    linked1Element.LinkedElements1.Add(element);
+                    if (!element.LinkedElements1.ContainsKey(linked1Element)) element.LinkedElements1.Add(linked1Element, 0);
+                    if (!linked1Element.LinkedElements1.ContainsKey(element)) linked1Element.LinkedElements1.Add(element, 0);
                 }
 
-                List<MapElement> linked2Elements = _elementLinker.getLinked2Elements(element);
+                Dictionary<MapElement, int> linked2Elements = _elementLinker.getLinked2Elements(element);
                 if (linked2Elements == null) return -1;
 
-                foreach (MapElement linked2Element in linked2Elements)
+                foreach (MapElement linked2Element in linked2Elements.Keys)
                 {
-                    element.LinkedElements2.Add(linked2Element);
-                    linked2Element.LinkedElements2.Add(element);
+                    if (!element.LinkedElements2.ContainsKey(linked2Element)) element.LinkedElements2.Add(linked2Element, 0);
+                    if (!linked2Element.LinkedElements2.ContainsKey(element)) linked2Element.LinkedElements2.Add(element, 0);
                 }
             }
 

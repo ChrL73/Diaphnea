@@ -18,10 +18,10 @@ namespace MapDataProcessing
         private readonly List<int> _lookIds = new List<int>();
         private readonly int _categoryId;
 
-        private readonly List<MapElement> _linkedElements1 = new List<MapElement>();
-        private readonly List<MapElement> _linkedElements2 = new List<MapElement>();
-        internal List<MapElement> LinkedElements1 { get { return _linkedElements1; } }
-        internal List<MapElement> LinkedElements2 { get { return _linkedElements2; } }
+        private readonly Dictionary<MapElement, int> _linkedElements1 = new Dictionary<MapElement, int>();
+        private readonly Dictionary<MapElement, int> _linkedElements2 = new Dictionary<MapElement, int>();
+        internal Dictionary<MapElement, int> LinkedElements1 { get { return _linkedElements1; } }
+        internal Dictionary<MapElement, int> LinkedElements2 { get { return _linkedElements2; } }
 
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)
         {
@@ -40,8 +40,9 @@ namespace MapDataProcessing
         abstract internal int formParts2();
         abstract internal int fillDatabase(IMongoDatabase database);
 
-        protected String Id { get { return _id; } }
+        protected string Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }
+        internal int CategoryId { get { return _categoryId; } }
 
         protected BsonDocument getBsonDocument()
         {
@@ -49,10 +50,10 @@ namespace MapDataProcessing
             foreach (int lookId in _lookIds) lookIdArray.Add(lookId);
 
             BsonArray _linkedElements1Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements1) _linkedElements1Array.Add(linkedElement.Id);
+            foreach (MapElement linkedElement in _linkedElements1.Keys) _linkedElements1Array.Add(linkedElement.Id);
 
             BsonArray _linkedElements2Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements2) _linkedElements2Array.Add(linkedElement.Id);
+            foreach (MapElement linkedElement in _linkedElements2.Keys) _linkedElements2Array.Add(linkedElement.Id);
 
             BsonDocument elementDocument = new BsonDocument()
             {

@@ -56,9 +56,50 @@ namespace map_server
             namesJson += std::string(languageId) + "\":\"" + name;
         }
         if (!namesJson.empty()) namesJson += "\"}";
+        else namesJson = "null";
 
-        if (namesJson.empty()) namesJson = "null";
-        _infoJson = "{\"names\":" + namesJson + ",\"category\":" + std::to_string(categoryId) + "}";
+        std::string linkedElements1Json;
+        mongo::BSONElement linkedElements1Elt = dbElement.getField("linked_elements1");
+        if (linkedElements1Elt.type() != mongo::Array) return false;
+        std::vector<mongo::BSONElement> dbLinkedElement1Vector = linkedElements1Elt.Array();
+
+        n = dbLinkedElement1Vector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONElement linkedElement1Elt = dbLinkedElement1Vector[i];
+            if (linkedElement1Elt.type() != mongo::String) return false;
+            std::string linkedElement1 = linkedElement1Elt.String();
+            if (linkedElement1.empty()) return false;
+
+            if (linkedElements1Json.empty()) linkedElements1Json = "[\"";
+            else linkedElements1Json += "\",\"";
+            linkedElements1Json += linkedElement1;
+        }
+        if (!linkedElements1Json.empty()) linkedElements1Json += "\"]";
+        else linkedElements1Json = "[]";
+
+        std::string linkedElements2Json;
+        mongo::BSONElement linkedElements2Elt = dbElement.getField("linked_elements2");
+        if (linkedElements2Elt.type() != mongo::Array) return false;
+        std::vector<mongo::BSONElement> dbLinkedElement2Vector = linkedElements2Elt.Array();
+
+        n = dbLinkedElement2Vector.size();
+        for (i = 0; i < n; ++i)
+        {
+            mongo::BSONElement linkedElement2Elt = dbLinkedElement2Vector[i];
+            if (linkedElement2Elt.type() != mongo::String) return false;
+            std::string linkedElement2 = linkedElement2Elt.String();
+            if (linkedElement2.empty()) return false;
+
+            if (linkedElements2Json.empty()) linkedElements2Json = "[\"";
+            else linkedElements2Json += "\",\"";
+            linkedElements2Json += linkedElement2;
+        }
+        if (!linkedElements2Json.empty()) linkedElements2Json += "\"]";
+        else linkedElements2Json = "[]";
+
+        _infoJson = "{\"names\":" + namesJson + ",\"linkedElements1\":" + linkedElements1Json + ",\"linkedElements2\":" + linkedElements2Json
+                    + ",\"category\":" + std::to_string(categoryId) + "}";
 
         return true;
     }

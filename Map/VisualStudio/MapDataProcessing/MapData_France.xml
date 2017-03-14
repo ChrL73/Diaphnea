@@ -213,12 +213,18 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
-      <!--<polygonElement id="e_Est" category="ca_Region" look="pl_Region">
+      <polygonElement id="e_Est" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Grand-Est"/>
           <name language="en" text="Grand-Est"/>
         </name>
-      </polygonElement>-->
+        <looks>
+          <look id="pl_Region"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_HDF" category="ca_Region" importance="0">
         <name>
           <name language="fr" text="Hauts-de-France"/>
@@ -435,7 +441,10 @@
         <looks>
           <look id="pl_Departement"/>
         </looks>
-        <coveredElementList/>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
       </polygonElement>
       <polygonElement id="e_09" category="ca_Departement" importance="0">
         <name>
@@ -451,6 +460,23 @@
         </looks>
         <coveredElementList>
           <element id="e_Occitanie"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_10" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Aube (10)"/>
+          <name language="en" text="Aube (10)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="10"/>
+          <name language="en" text="10"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -638,6 +664,23 @@
         </looks>
         <coveredElementList>
           <element id="e_Corse"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_21" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Côte-d'Or (21)"/>
+          <name language="en" text="Côte-d'Or (21)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="21"/>
+          <name language="en" text="21"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_BFC"/>-->
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -1100,6 +1143,40 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_51" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Marne (51)"/>
+          <name language="en" text="Marne (51)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="51"/>
+          <name language="en" text="51"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_52" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Haute-Marne (52)"/>
+          <name language="en" text="Haute-Marne (52)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="52"/>
+          <name language="en" text="52"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_53" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Mayenne (53)"/>
@@ -1117,6 +1194,40 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_54" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Meurthe-et-Moselle (54)"/>
+          <name language="en" text="Meurthe-et-Moselle (54)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="54"/>
+          <name language="en" text="54"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_55" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Meuse (55)"/>
+          <name language="en" text="Meuse (55)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="55"/>
+          <name language="en" text="55"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
        <polygonElement id="e_56" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Morbihan (56)"/>
@@ -1131,6 +1242,40 @@
         </looks>
         <coveredElementList>
           <element id="e_Bretagne"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_57" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Moselle (57)"/>
+          <name language="en" text="Moselle (57)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="57"/>
+          <name language="en" text="57"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_58" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Nièvre (58)"/>
+          <name language="en" text="Nièvre (58)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="58"/>
+          <name language="en" text="58"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_BFC"/>-->
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -1270,6 +1415,40 @@
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
+      <polygonElement id="e_67" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Bas-Rhin (67)"/>
+          <name language="en" text="Bas-Rhin (67)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="67"/>
+          <name language="en" text="67"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_68" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Haut-Rhin (68)"/>
+          <name language="en" text="Haut-Rhin (68)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="68"/>
+          <name language="en" text="68"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
       <polygonElement id="e_69" category="ca_Departement" importance="0">
         <name>
           <name language="fr" text="Rhône (69)"/>
@@ -1284,6 +1463,40 @@
         </looks>
         <coveredElementList>
           <element id="e_ARA"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_70" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Haute-Saône (70)"/>
+          <name language="en" text="Haute-Saône (70)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="70"/>
+          <name language="en" text="70"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_BFC"/>-->
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_71" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Saône-et-Loire (71)"/>
+          <name language="en" text="Saône-et-Loire (71)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="71"/>
+          <name language="en" text="71"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_BFC"/>-->
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>
@@ -1556,6 +1769,40 @@
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_88" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Vosges (88)"/>
+          <name language="en" text="Vosges (88)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="88"/>
+          <name language="en" text="88"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <element id="e_Est"/>
+          <!--<element id="e_France"/>-->
+        </coveredElementList>
+      </polygonElement>
+      <polygonElement id="e_89" category="ca_Departement" importance="0">
+        <name>
+          <name language="fr" text="Yonne (89)"/>
+          <name language="en" text="Yonne (89)"/>
+        </name>
+        <shortName>
+          <name language="fr" text="89"/>
+          <name language="en" text="89"/>
+        </shortName>
+        <looks>
+          <look id="pl_Departement"/>
+        </looks>
+        <coveredElementList>
+          <!--<element id="e_BFC"/>-->
           <!--<element id="e_France"/>-->
         </coveredElementList>
       </polygonElement>

@@ -6,7 +6,6 @@
       <link rel="stylesheet" href="styles.css"/>
       <title>Quiz</title>
       <style>
-         .errorMessage { display: none; }
          <% if (!data.showQuestionnaireLanguageSelect) {%>
             .questionnaireLanguageSelection { display: none; }
          <% } %>
@@ -15,82 +14,127 @@
 
    <body>  
       <div class="container">
-         <div class="row" style="line-height:60px;">
+         <div class="row" style="margin-top:16px;">
             <div class="col-md-10">
                <% if (data.userName) { %>
                   <form class="form-inline" action="/" method="post">
-                     <label><%=data.userName%></label>  
+                     <label><%=data.userName%></label>
                      <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
                   </form>
                <% } else { %>
                   <form class="form-inline" action="/" method="post">
-                     <label class="input-sm" for="nameInput"><%=data.texts.name%>: </label><input class="form-control input-sm" type="text" id="nameInput" name="name"/>
-                     <label class="input-sm" for="passInput"><%=data.texts.password%>: </label><input class="form-control input-sm" type="password" id="passInput" name="pass"/>
+                     <small>
+                        <label for="nameInput" style="margin-left:8px;margin-right:6px;"><%=data.texts.name%>: </label>
+                        <input class="form-control input-sm" type="text" id="nameInput" name="name"/>
+                     </small>
+                     <small>
+                        <label for="passInput" style="margin-left:8px;margin-right:6px;"><%=data.texts.password%>: </label>
+                        <input class="form-control input-sm" type="password" id="passInput" name="pass"/>
+                     </small>
+                     <br class="hidden-md hidden-lg">
                      <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
                      <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
                   </form>
                <% } %>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 text-center">
+               <br class="hidden-md hidden-lg">
                <%- include('language_select.ejs', data) %>
             </div>
          </div>
-         <div class="row">
-            <div class="alert alert-warning col-md-4 alert-dismissable errorMessage" id="cnxMessage1">
-               <button type="button" class="close" data-dismiss="alert">x</button>
-               <span><%=data.texts.unknownUserOrWrongPassword%></span>
+         <div class="modal fade" id="cnxMessage1">
+            <div class="modal-dialog">  
+               <div class="modal-content">
+                  <div class="modal-body bg-danger">
+                     <%=data.texts.unknownUserOrWrongPassword%>
+                     <button type="button" class="close" data-dismiss="modal">x</button>
+                  </div>
+                </div>
             </div>
-            <div class="alert alert-error col-md-4 alert-dismissable errorMessage" id="cnxMessage2"><%=data.texts.connectionFailure%> (<%=data.texts.internalServerError%>)</div>
          </div>
-         <div class="col-sm-4 col-sm-offset-4">
-         <form action="/" method="post">
+         <div class="modal fade" id="cnxMessage2">
+            <div class="modal-dialog">  
+               <div class="modal-content">
+                  <div class="modal-body bg-danger">
+                     <%=data.texts.connectionFailure%> (<%=data.texts.internalServerError%>)
+                     <button type="button" class="close" data-dismiss="modal">x</button>
+                  </div>
+                </div>
+            </div>
+         </div>
+         <form action="/" method="post">    
+            <div class="row"> 
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label" for="questionnaireSelect" style="margin-top:24px;"><%=data.texts.questionnaire%>: </label> 
+               </div>
+            </div>
             <div class="row">
-               <label class="control-label" for="questionnaireSelect" style="margin-top:24px;"><%=data.texts.questionnaire%>: </label> 
-               <select class="form-control" id="questionnaireSelect">
-                  <% data.questionnaireList.forEach(function(questionnaire) { 
-                     if (questionnaire.id == data.questionnaireId) { %>
-                     <option selected value="<%= questionnaire.id %>">
-                     <%  } else { %>
-                     <option value="<%= questionnaire.id %>"> <% } %>
-                        <%= questionnaire.name %>
-                     </option>
-                  <% }); %>
+               <div class="col-sm-4 col-sm-offset-4">
+                  <select class="form-control" id="questionnaireSelect">
+                     <% data.questionnaireList.forEach(function(questionnaire) { 
+                        if (questionnaire.id == data.questionnaireId) { %>
+                        <option selected value="<%= questionnaire.id %>">
+                        <%  } else { %>
+                        <option value="<%= questionnaire.id %>"> <% } %>
+                           <%= questionnaire.name %>
+                        </option>
+                     <% }); %>
                   </select>
-               <img src="wait.gif" id="questionnaireWait" class="waitImg"/>
+               </div>
+               <div class="col-sm-1">
+                  <img src="wait.gif" id="questionnaireWait" class="waitImg"/>
+               </div>
             </div>
             <div class="row">
-               <label class="control-label questionnaireLanguageSelection" for="questionnaireLanguageSelect" style="margin-top:16px;"><%=data.texts.language%>: </label>
-               <select class="form-control questionnaireLanguageSelection" id="questionnaireLanguageSelect">
-                  <% data.questionnaireLanguageList.forEach(function(language) { 
-                     if (language.id == data.questionnaireLanguageId) { %>
-                     <option selected value="<%= language.id %>">
-                     <%  } else { %>
-                     <option value="<%= language.id %>"> <% } %>
-                        <%= language.name %>
-                     </option>
-                  <% }); %>
-               </select>
-               <img src="wait.gif" id="questionnaireLanguageWait" class="waitImg"/>
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label questionnaireLanguageSelection" for="questionnaireLanguageSelect" style="margin-top:16px;"><%=data.texts.language%>: </label>
+               </div>
             </div>
             <div class="row">
-               <label class="control-label" for="levelSelect" style="margin-top:16px;"><%=data.texts.level%>: </label> 
-               <select class="form-control" id="levelSelect">
-                  <% data.levelList.forEach(function(level) { 
-                     if (level.id == data.levelId) { %>
-                     <option selected value="<%= level.id %>">
-                     <%  } else { %>
-                     <option value="<%= level.id %>"> <% } %>
-                        <%= level.name %>
-                     </option>
-                  <% }); %>
-               </select>
-               <img src="wait.gif" id="levelWait" class="waitImg"/>
+               <div class="col-sm-4 col-sm-offset-4">
+                  <select class="form-control questionnaireLanguageSelection" id="questionnaireLanguageSelect">
+                     <% data.questionnaireLanguageList.forEach(function(language) { 
+                        if (language.id == data.questionnaireLanguageId) { %>
+                        <option selected value="<%= language.id %>">
+                        <%  } else { %>
+                        <option value="<%= language.id %>"> <% } %>
+                           <%= language.name %>
+                        </option>
+                     <% }); %>
+                  </select>
+               </div>
+               <div class="col-sm-1">
+                  <img src="wait.gif" id="questionnaireLanguageWait" class="waitImg"/>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label" for="levelSelect" style="margin-top:16px;"><%=data.texts.level%>: </label> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <select class="form-control" id="levelSelect">
+                     <% data.levelList.forEach(function(level) { 
+                        if (level.id == data.levelId) { %>
+                        <option selected value="<%= level.id %>">
+                        <%  } else { %>
+                        <option value="<%= level.id %>"> <% } %>
+                           <%= level.name %>
+                        </option>
+                     <% }); %>
+                  </select>
+               </div>
+               <div class="col-sm-1">
+                  <img src="wait.gif" id="questionnaireLanguageWait" class="waitImg"/>
+               </div>
             </div>
             <div class="row">    
-               <input class="btn btn-success" type="submit" value="<%=data.texts.start%>" name="start" style="margin-top:20px;"/>
+               <div class="col-sm-4 col-sm-offset-4">
+                  <input class="btn btn-success" type="submit" value="<%=data.texts.start%>" name="start" style="margin-top:20px;"/>
+               </div>
             </div>
          </form>
-         </div>
       </div>
       
       <script>

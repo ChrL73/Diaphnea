@@ -2,8 +2,8 @@ $(function()
 {
    var socket = io.connect();
    
-   if (unknwon) $('#cnxMessage1').show();
-   if (error) $('#cnxMessage2').show();
+   if (unknwon) $('#cnxMessage1').modal('show');
+   if (error) $('#cnxMessage2').modal('show');
    
    $('#siteLanguageSelect').change(function()
    {

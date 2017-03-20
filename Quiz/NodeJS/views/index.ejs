@@ -31,14 +31,14 @@
                         <label for="passInput" style="margin-left:8px;margin-right:6px;"><%=data.texts.password%>: </label>
                         <input class="form-control input-sm" type="password" id="passInput" name="pass"/>
                      </small>
-                     <br class="hidden-md hidden-lg">
+                     <div class="visible-xs visible-sm"><br></div>
                      <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
                      <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
                   </form>
                <% } %>
             </div>
             <div class="col-md-2 text-center">
-               <br class="hidden-md hidden-lg">
+               <div class="visible-xs visible-sm"><br></div>
                <%- include('language_select.ejs', data) %>
             </div>
          </div>

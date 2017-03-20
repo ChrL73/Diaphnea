@@ -131,12 +131,15 @@ namespace QuestionInstantiation
             BsonArray languagesArray = new BsonArray();
             foreach (XmlLanguage language in _quizData.XmlQuizData.parameters.languageList)
             {
-                BsonDocument languageDocument = new BsonDocument()
+                if (language.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED)
                 {
-                    { "id", language.id.ToString() },
-                    { "name", language.name }
-                };
-                languagesArray.Add(languageDocument);
+                    BsonDocument languageDocument = new BsonDocument()
+                    {
+                        { "id", language.id.ToString() },
+                        { "name", language.name }
+                    };
+                    languagesArray.Add(languageDocument);
+                }
             }
             BsonDocument languagesDocument = new BsonDocument()
             {

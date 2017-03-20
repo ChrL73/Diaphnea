@@ -62,7 +62,7 @@ $(function()
       
       if (data.showQuestionnaireLanguageSelect)
       {
-         $('.questionnaireLanguageSelection').css('display', 'inline');
+         $('.questionnaireLanguageSelection').css('display', 'block');
       }
       else
       {

@@ -1,5 +1,5 @@
-<form class="inlineBlockForm" id="siteLanguageForm" action="/" method="post">
-   <select id="siteLanguageSelect" name="siteLanguageSelect" form="siteLanguageForm">
+<form class="form-inline" id="siteLanguageForm" action="/" method="post">
+   <select class="form-control input-sm" id="siteLanguageSelect" name="siteLanguageSelect" form="siteLanguageForm">
       <% data.siteLanguageList.forEach(function(language) { 
          if (language.id == data.siteLanguageId) { %>
          <option selected value="<%= language.id %>">

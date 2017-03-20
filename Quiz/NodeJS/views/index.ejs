@@ -2,6 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
       <link rel="stylesheet" href="styles.css"/>
       <title>Quiz</title>
       <style>
@@ -13,70 +14,83 @@
    </head>
 
    <body>  
-      <div>
-         <% if (data.userName) { %>
-            <span><%=data.userName%></span>
-            <form class="inlineBlockForm" action="/" method="post">
-               <input type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
-            </form>
-         <% } else { %>
-            <form class="inlineBlockForm" action="/" method="post">
-               <label for="nameInput"><%=data.texts.name%>: </label><input type="text" id="nameInput" name="name"/>
-               <label for="passInput"><%=data.texts.password%>: </label><input type="password" id="passInput" name="pass"/>
-               <input type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
-               <input type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
-            </form>
-         <% } %>
-         <span class="errorMessage" id="cnxMessage1"><%=data.texts.unknownUserOrWrongPassword%></span>
-         <span class="errorMessage" id="cnxMessage2"><%=data.texts.connectionFailure%> (<%=data.texts.internalServerError%>)</span>
-         <%- include('language_select.ejs', data) %>
-      </div>
-      <p>
-         <label for="questionnaireSelect"><%=data.texts.questionnaire%>: </label> 
-         <select id="questionnaireSelect">
-            <% data.questionnaireList.forEach(function(questionnaire) { 
-               if (questionnaire.id == data.questionnaireId) { %>
-               <option selected value="<%= questionnaire.id %>">
-               <%  } else { %>
-               <option value="<%= questionnaire.id %>"> <% } %>
-                  <%= questionnaire.name %>
-               </option>
-            <% }); %>
-         </select>
-         <img src="wait.gif" id="questionnaireWait" class="waitImg"/>
-      </p>     
-      <p>
-         <label class="questionnaireLanguageSelection" for="questionnaireLanguageSelect"><%=data.texts.language%>: </label> 
-         <select class="questionnaireLanguageSelection" id="questionnaireLanguageSelect">
-            <% data.questionnaireLanguageList.forEach(function(language) { 
-               if (language.id == data.questionnaireLanguageId) { %>
-               <option selected value="<%= language.id %>">
-               <%  } else { %>
-               <option value="<%= language.id %>"> <% } %>
-                  <%= language.name %>
-               </option>
-            <% }); %>
-         </select>
-         <img src="wait.gif" id="questionnaireLanguageWait" class="waitImg"/>
-      </p>   
-      <p>
-         <label for="levelSelect"><%=data.texts.level%>: </label> 
-         <select id="levelSelect">
-            <% data.levelList.forEach(function(level) { 
-               if (level.id == data.levelId) { %>
-               <option selected value="<%= level.id %>">
-               <%  } else { %>
-               <option value="<%= level.id %>"> <% } %>
-                  <%= level.name %>
-               </option>
-            <% }); %>
-         </select>
-         <img src="wait.gif" id="levelWait" class="waitImg"/>
-      </p>
-      <div>
+      <div class="container">
+         <div class="row" style="line-height:60px;">
+            <div class="col-md-10">
+               <% if (data.userName) { %>
+                  <form class="form-inline" action="/" method="post">
+                     <label><%=data.userName%></label>  
+                     <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
+                  </form>
+               <% } else { %>
+                  <form class="form-inline" action="/" method="post">
+                     <label class="input-sm" for="nameInput"><%=data.texts.name%>: </label><input class="form-control input-sm" type="text" id="nameInput" name="name"/>
+                     <label class="input-sm" for="passInput"><%=data.texts.password%>: </label><input class="form-control input-sm" type="password" id="passInput" name="pass"/>
+                     <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
+                     <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
+                  </form>
+               <% } %>
+            </div>
+            <div class="col-md-2">
+               <%- include('language_select.ejs', data) %>
+            </div>
+         </div>
+         <div class="row">
+            <div class="alert alert-warning col-md-4 alert-dismissable errorMessage" id="cnxMessage1">
+               <button type="button" class="close" data-dismiss="alert">x</button>
+               <span><%=data.texts.unknownUserOrWrongPassword%></span>
+            </div>
+            <div class="alert alert-error col-md-4 alert-dismissable errorMessage" id="cnxMessage2"><%=data.texts.connectionFailure%> (<%=data.texts.internalServerError%>)</div>
+         </div>
+         <div class="col-sm-4 col-sm-offset-4">
          <form action="/" method="post">
-            <input type="submit" value="<%=data.texts.start%>" name="start"/>
+            <div class="row">
+               <label class="control-label" for="questionnaireSelect" style="margin-top:24px;"><%=data.texts.questionnaire%>: </label> 
+               <select class="form-control" id="questionnaireSelect">
+                  <% data.questionnaireList.forEach(function(questionnaire) { 
+                     if (questionnaire.id == data.questionnaireId) { %>
+                     <option selected value="<%= questionnaire.id %>">
+                     <%  } else { %>
+                     <option value="<%= questionnaire.id %>"> <% } %>
+                        <%= questionnaire.name %>
+                     </option>
+                  <% }); %>
+                  </select>
+               <img src="wait.gif" id="questionnaireWait" class="waitImg"/>
+            </div>
+            <div class="row">
+               <label class="control-label questionnaireLanguageSelection" for="questionnaireLanguageSelect" style="margin-top:16px;"><%=data.texts.language%>: </label>
+               <select class="form-control questionnaireLanguageSelection" id="questionnaireLanguageSelect">
+                  <% data.questionnaireLanguageList.forEach(function(language) { 
+                     if (language.id == data.questionnaireLanguageId) { %>
+                     <option selected value="<%= language.id %>">
+                     <%  } else { %>
+                     <option value="<%= language.id %>"> <% } %>
+                        <%= language.name %>
+                     </option>
+                  <% }); %>
+               </select>
+               <img src="wait.gif" id="questionnaireLanguageWait" class="waitImg"/>
+            </div>
+            <div class="row">
+               <label class="control-label" for="levelSelect" style="margin-top:16px;"><%=data.texts.level%>: </label> 
+               <select class="form-control" id="levelSelect">
+                  <% data.levelList.forEach(function(level) { 
+                     if (level.id == data.levelId) { %>
+                     <option selected value="<%= level.id %>">
+                     <%  } else { %>
+                     <option value="<%= level.id %>"> <% } %>
+                        <%= level.name %>
+                     </option>
+                  <% }); %>
+               </select>
+               <img src="wait.gif" id="levelWait" class="waitImg"/>
+            </div>
+            <div class="row">    
+               <input class="btn btn-success" type="submit" value="<%=data.texts.start%>" name="start" style="margin-top:20px;"/>
+            </div>
          </form>
+         </div>
       </div>
       
       <script>
@@ -90,6 +104,7 @@
       </script>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="utils.js"></script>
       <script src="index.js"></script>

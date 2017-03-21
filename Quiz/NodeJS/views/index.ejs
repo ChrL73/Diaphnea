@@ -14,7 +14,7 @@
 
    <body>  
       <div class="container">
-         <div class="row" style="margin-top:16px;">
+         <header class="row" style="margin-top:16px;">
             <div class="col-md-10">
                <% if (data.userName) { %>
                   <form class="form-inline" action="/" method="post">
@@ -23,17 +23,15 @@
                   </form>
                <% } else { %>
                   <form class="form-inline" action="/" method="post">
-                     <small>
-                        <label for="nameInput" style="margin-left:8px;margin-right:6px;"><%=data.texts.name%>: </label>
+                     <small>   
+                        <label for="nameInput"><%=data.texts.name%>: </label>
                         <input class="form-control input-sm" type="text" id="nameInput" name="name"/>
+                        <label for="passInput"><%=data.texts.password%>: </label>
+                        <input class="form-control input-sm" type="password" id="passInput" name="pass"/>              
+                        <div class="visible-xs"><br></div>
+                        <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
+                        <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
                      </small>
-                     <small>
-                        <label for="passInput" style="margin-left:8px;margin-right:6px;"><%=data.texts.password%>: </label>
-                        <input class="form-control input-sm" type="password" id="passInput" name="pass"/>
-                     </small>
-                     <div class="visible-xs visible-sm"><br></div>
-                     <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
-                     <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
                   </form>
                <% } %>
             </div>
@@ -41,7 +39,7 @@
                <div class="visible-xs visible-sm"><br></div>
                <%- include('language_select.ejs', data) %>
             </div>
-         </div>
+         </header>
          <div class="modal fade" id="cnxMessage1">
             <div class="modal-dialog">  
                <div class="modal-content">

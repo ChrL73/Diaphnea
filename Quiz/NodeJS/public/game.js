@@ -109,8 +109,8 @@ $(function()
    
    function resizeCanvas()
    {
-      var h = $(this).height() - $('#gameHeader').height() - 20;
-      if ($(this).width() < 768) h -= $('#questionDiv').height();
+      var h = $(this).height() - $('#gameHeader').height() - 48;
+      if ($(this).width() < 768) h -= $('#questionDiv').height() + 20;
       if (h <= 100) h = 100;
       $('#canvas').height(h);
    }

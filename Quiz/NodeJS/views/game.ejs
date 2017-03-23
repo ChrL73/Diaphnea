@@ -14,15 +14,15 @@
       var answered = [];%>
       
       <div class="container-fluid">
-         <div class="row" id="gameHeader">
+         <header class="row" id="gameHeader" style="margin-left:16px;">
             <span class="gameHeader"><%=data.texts.questionnaire%>: <%=data.questionnaireName%></span>
             <span class="gameHeader"><%=data.texts.level%>: <%=data.levelName%></span>
             <%=data.texts.score%>: <span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
             <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span>s<img src="wait.gif" class="waitImg" id="waitTimeImg"/>
-         </div>
+         </header>
 
-         <div class="row">
-            <div class="col-md-3 col-sm-4">
+         <div class="row" style="margin-top:16px;">
+            <div class="col-lg-3 col-md-4 col-sm-5">
                <div id="questionDiv">
                   <%questions.forEach(function(question, iQuestion) {
                      var disabled = questionStates[iQuestion].answered;
@@ -59,21 +59,21 @@
                      </div>
                   <% }); %>
 
-                  <p>
-                     <button id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
-                     <button id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
-                     <button id="nextButton" <% if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.next%></button>
-                  </p>
+                  <div style="margin-top:20px;">
+                     <button class="btn btn-primary input-sm" id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
+                     <button class="btn btn-success input-sm" id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
+                     <button class="btn btn-primary input-sm" id="nextButton" <% if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.next%></button>
+                  </div>
 
                   <form id="stopForm" action="/" method="post">
-                     <p>
-                        <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
-                     </p>
+                     <div style="margin-top:20px; margin-bottom:20px;">
+                        <input class="btn btn-warning input-sm" type="submit" value="<%=data.texts.stop%>" name="stop"/>
+                     </div>
                   </form>
                </div>
             </div>
             
-            <div class="col-md-9 col-sm-8">
+            <div class="col-lg-9 col-md-8 col-sm-7">
                <canvas id="canvas"></canvas>
             </div>
             

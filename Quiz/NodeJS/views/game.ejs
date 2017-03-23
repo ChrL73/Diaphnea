@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8" />
-      <link rel="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" href="styles.css"/>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
       <link rel="stylesheet" href="styles.css"/>
       <title>Quiz</title>
    </head>
@@ -13,59 +13,72 @@
       var questionStates = data.questionStates;
       var answered = [];%>
       
-      <p>
-         <span class="gameHeader"><%=data.texts.questionnaire%>: <%=data.questionnaireName%></span>
-         <span class="gameHeader"><%=data.texts.level%>: <%=data.levelName%></span>
-         <%=data.texts.score%>: <span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
-         <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span>s<img src="wait.gif" class="waitImg" id="waitTimeImg"/>
-      </p>
-      
-      <%questions.forEach(function(question, iQuestion) {
-         var disabled = questionStates[iQuestion].answered;
-         answered.push(disabled);%>
-         <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
-            <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
-            <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg waitAnswerImg"/></p>
-            <% question.choices.forEach(function(choice, iChoice) {
-               var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
-               var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
-               var classStr;
-               if (disabled && rightChoice) classStr = 'boldChoice';
-   
-               if (question.isMultiple) {
-                  if (disabled)
-                  {
-                     if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
-                  } %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
-                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
-                  <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
-            
-               <% } else {
-                  if (disabled && checked)
-                  {
-                     if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
-                  } %>
-                  <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
-                  <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
-                  <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
-            <%}});%>
+      <div class="container-fluid">
+         <div class="row" id="gameHeader">
+            <span class="gameHeader"><%=data.texts.questionnaire%>: <%=data.questionnaireName%></span>
+            <span class="gameHeader"><%=data.texts.level%>: <%=data.levelName%></span>
+            <%=data.texts.score%>: <span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
+            <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span>s<img src="wait.gif" class="waitImg" id="waitTimeImg"/>
          </div>
-      <% }); %>
-      
-      <p>
-         <button id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
-         <button id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
-         <button id="nextButton" <% if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.next%></button>
-      </p>
-      
-      <form id="stopForm" action="/" method="post">
-         <p>
-            <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
-         </p>
-      </form>
+
+         <div class="row">
+            <div class="col-md-3 col-sm-4">
+               <div id="questionDiv">
+                  <%questions.forEach(function(question, iQuestion) {
+                     var disabled = questionStates[iQuestion].answered;
+                     answered.push(disabled);%>
+                     <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
+                        <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
+                        <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg waitAnswerImg"/></p>
+                        <% question.choices.forEach(function(choice, iChoice) {
+                           var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
+                           var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
+                           var classStr;
+                           if (disabled && rightChoice) classStr = 'boldChoice';
+
+                           if (question.isMultiple) {
+                              if (disabled)
+                              {
+                                 if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                                 else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                              } %>
+                              <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
+                              <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                              <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
+
+                           <% } else {
+                              if (disabled && checked)
+                              {
+                                 if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                                 else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                              } %>
+                              <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
+                              <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                              <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
+                        <%}});%>
+                     </div>
+                  <% }); %>
+
+                  <p>
+                     <button id="previousButton" <% if (displayedQuestion == 0) { %>disabled<% } %>><%=data.texts.previous%></button>
+                     <button id="submitButton" <% if (questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.submit%></button>
+                     <button id="nextButton" <% if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) { %>disabled<% } %>><%=data.texts.next%></button>
+                  </p>
+
+                  <form id="stopForm" action="/" method="post">
+                     <p>
+                        <input type="submit" value="<%=data.texts.stop%>" name="stop"/>
+                     </p>
+                  </form>
+               </div>
+            </div>
+            
+            <div class="col-md-9 col-sm-8">
+               <canvas id="canvas"></canvas>
+            </div>
+            
+         </div>
+      </div>
    
       <script>
          var quizId = "<%=data.quizId%>";

@@ -38,12 +38,14 @@ $(function()
    function checkForm()
    {
       $('.errorMessage').hide();   
+      $('.form-group').removeClass('has-error');
       var ok = true;
       
       var name = $('#nameInput').val();
       if (name.length < 2 || name.length > 16)
       {
          $('#nameMessage1').show();
+         $('#nameGroup').addClass('has-error');
          ok = false;
       }
       
@@ -53,12 +55,14 @@ $(function()
          if (!(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(pass1)))
          {
             $('#pass1bMessage').show();
+            $('#pass1Group').addClass('has-error');
             ok = false;
          }
       }
       else
       {
          $('#pass1aMessage').show();
+         $('#pass1Group').addClass('has-error');
          ok = false;
       }
       
@@ -66,6 +70,7 @@ $(function()
       if (pass1 !== pass2)
       {
          $('#pass2Message').show();
+         $('#pass2Group').addClass('has-error');
          ok = false;
       }
       

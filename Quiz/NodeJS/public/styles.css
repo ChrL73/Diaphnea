@@ -1,18 +1,7 @@
-/*
-*
-{
-   font-family: sans-serif;
-}
-
-.inlineBlockForm
-{
-   display: inline-block;
-}
-
 .gameHeader
 {
    margin-right: 32px;
-}*/
+}
 
 .question
 {
@@ -39,4 +28,10 @@
    display: none;
    height: 24px;
    width: 24px;
+}
+
+canvas
+{
+   border: 1px solid black;
+   width: 100%;
 }

@@ -10,35 +10,39 @@
 
    <body>
       <div class="container">
+         <header style="margin-top:16px;">
+            <div class="navbar">
+               <div class="text-center">
+                  <%- include('language_select.ejs', data) %>
+               </div>
+            </div>
+         </header>
          <div>
-            <%- include('language_select.ejs', data) %>
-         </div>
-         <div>
-            <form id="signUpForm" action="/" method="post">
-               <p>
-                  <label for="nameInput"><%=data.texts.name%>: </label>
-                  <input type="text" id="nameInput" name="name" value="<%=data.name%>"/>
-                  <span class="errorMessage" id="nameMessage1"><%=data.texts.nameMustBeBetween2And16Chars%></span>
-                  <span class="errorMessage" id="nameMessage2"><%=data.texts.theNameIsAlreadyUsed%></span>
-               </p>
-               <p>
-                  <label for="passInput1"><%=data.texts.password%>: </label>
-                  <input type="password" id="passInput1" name="pass1" value="<%=data.pass1%>"/>
-                  <span class="errorMessage" id="pass1aMessage"><%=data.texts.passwordMustContainAtLeast8Chars%></span>
-                  <span class="errorMessage" id="pass1bMessage"><%=data.texts.passwordMustContainOnlyLettersNumbersEtc%></span>
-               </p>
-               <p>
-                  <label for="passInput2"><%=data.texts.confirmPassword%>: </label>
-                  <input type="password" id="passInput2" name="pass2" value="<%=data.pass2%>"/>
-                  <span class="errorMessage" id="pass2Message"><%=data.texts.twoPasswordsAreNotIdentical%></span>
-               </p>
-               <p>
-                  <input id="submitSignUp" type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
-                  <input id="cancelSignUp" type="submit" value="<%=data.texts.cancel%>" name="cancelSignUp"/>
-               </p>
-               <p>
-                  <span class="errorMessage" id="serverErrorMessage"><%=data.texts.failToCreateUserAccount%> (<%=data.texts.internalServerError%>)</span>
-               </p>
+            <form id="signUpForm" action="/" method="post">      
+               <div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">
+                  <div class="form-group" id="nameGroup">
+                     <label for="nameInput"><%=data.texts.name%>: </label>
+                     <input class="form-control" type="text" id="nameInput" name="name" value="<%=data.name%>"/>
+                     <div class="errorMessage text-danger" id="nameMessage1"><%=data.texts.nameMustBeBetween2And16Chars%></div>
+                     <div class="errorMessage text-danger" id="nameMessage2"><%=data.texts.theNameIsAlreadyUsed%></div>
+                  </div>
+                  <div class="form-group" id="pass1Group">
+                     <label for="passInput1" ><%=data.texts.password%>: </label>
+                     <input class="form-control" type="password" id="passInput1" name="pass1" value="<%=data.pass1%>"/>
+                     <div class="errorMessage text-danger" id="pass1aMessage"><%=data.texts.passwordMustContainAtLeast8Chars%></div>
+                     <div class="errorMessage text-danger" id="pass1bMessage"><%=data.texts.passwordMustContainOnlyLettersNumbersEtc%></div>
+                  </div>
+                  <div class="form-group" id="pass2Group">
+                     <label for="passInput2" ><%=data.texts.confirmPassword%>: </label>
+                     <input class="form-control" type="password" id="passInput2" name="pass2" value="<%=data.pass2%>"/>
+                     <div class="errorMessage text-danger" id="pass2Message"><%=data.texts.twoPasswordsAreNotIdentical%></div>
+                  </div>
+                  <div class="form-group">
+                     <input class="btn btn-info" id="submitSignUp" type="submit" value="<%=data.texts.signUp%>" name="submitSignUp"/>
+                     <input class="btn btn-warning" id="cancelSignUp" type="submit" value="<%=data.texts.cancel%>" name="cancelSignUp"/>
+                  </div>
+                  <div class="errorMessage text-danger" id="serverErrorMessage"><%=data.texts.failToCreateUserAccount%> (<%=data.texts.internalServerError%>)</div>
+               </div>      
             </form>
          </div>
       </div>

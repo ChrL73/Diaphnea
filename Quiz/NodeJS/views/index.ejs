@@ -14,30 +14,32 @@
 
    <body>  
       <div class="container">
-         <header class="row" style="margin-top:16px;">
-            <div class="col-md-10">
-               <% if (data.userName) { %>
-                  <form class="form-inline" action="/" method="post">
-                     <label><%=data.userName%></label>
-                     <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
-                  </form>
-               <% } else { %>
-                  <form class="form-inline" action="/" method="post">
-                     <small>   
-                        <label for="nameInput"><%=data.texts.name%>: </label>
-                        <input class="form-control input-sm" type="text" id="nameInput" name="name"/>
-                        <label for="passInput"><%=data.texts.password%>: </label>
-                        <input class="form-control input-sm" type="password" id="passInput" name="pass"/>              
-                        <div class="visible-xs"><br></div>
-                        <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
-                        <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
-                     </small>
-                  </form>
-               <% } %>
-            </div>
-            <div class="col-md-2 text-center">
-               <div class="visible-xs visible-sm"><br></div>
-               <%- include('language_select.ejs', data) %>
+         <header style="margin-top:16px;">
+            <div class="navbar">
+               <div class="col-md-10">
+                  <% if (data.userName) { %>
+                     <form class="navbar-form" action="/" method="post">
+                        <label><%=data.userName%></label>
+                        <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signOut%>" name="signOut"/>
+                     </form>
+                  <% } else { %>
+                     <form class="navbar-form" action="/" method="post">
+                        <small>   
+                           <label for="nameInput"><%=data.texts.name%>: </label>
+                           <input class="form-control input-sm" type="text" id="nameInput" name="name"/>
+                           <label for="passInput"><%=data.texts.password%>: </label>
+                           <input class="form-control input-sm" type="password" id="passInput" name="pass"/>              
+                           <div class="visible-xs"><br></div>
+                           <input class="btn btn-primary btn-sm" type="submit" value="<%=data.texts.signIn%>" name="signIn"/>
+                           <input class="btn btn-info btn-sm" type="submit" value="<%=data.texts.signUp%>" name="enterSignUp"/>
+                        </small>
+                     </form>
+                  <% } %>
+               </div>
+               <div class="col-md-2 text-center">
+                  <div class="visible-xs visible-sm"><br></div>
+                  <%- include('language_select.ejs', data) %>
+               </div>
             </div>
          </header>
          <div class="modal fade" id="cnxMessage1">

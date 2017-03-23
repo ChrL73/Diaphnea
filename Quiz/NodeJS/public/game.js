@@ -1,5 +1,7 @@
 $(function()
 {
+   resizeCanvas();
+   
    var socket = io.connect();
    
    var finished = false;
@@ -102,6 +104,16 @@ $(function()
       $('#wait' + displayedQuestion).css('display', 'inline');
       socket.emit('submit', data);
    });
+   
+   $(window).resize(resizeCanvas);
+   
+   function resizeCanvas()
+   {
+      var h = $(this).height() - $('#gameHeader').height() - 20;
+      if ($(this).width() < 768) h -= $('#questionDiv').height();
+      if (h <= 100) h = 100;
+      $('#canvas').height(h);
+   }
    
    socket.on('reload', function()
    {

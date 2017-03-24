@@ -201,6 +201,7 @@
     <xsd:attribute name="type" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="sortKey" type="xsd:string" use="optional" />
+    <xsd:attribute name="mapId" type="XmlMapIdRef" use="optional"/>
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeList">
     <xsd:sequence>
@@ -237,6 +238,11 @@
   <xsd:simpleType name="XmlElementId">
     <xsd:restriction base="xsd:ID">
       <xsd:pattern value="el_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlMapIdRef">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="e_(.)+" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:complexType name="XmlRelation">

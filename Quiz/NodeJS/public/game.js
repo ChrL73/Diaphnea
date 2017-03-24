@@ -4,7 +4,6 @@ $(function()
    
    var socket = io.connect();
    
-   var finished = false;
    var timeout;
    initTime(t0);
    socket.on('time', initTime);
@@ -35,7 +34,7 @@ $(function()
             return;
          }
          
-         $('#timeSpan').text(displayedTime);
+         $('#timeSpan').text(displayedTime + 's');
          lastDisplayedTime = displayedTime;
          timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
       }
@@ -133,7 +132,7 @@ $(function()
             finished = true;
             if (timeout) clearInterval(timeout);
             timeout = undefined;
-            $('#timeSpan').text(data.finalTime);
+            $('#timeSpan').text(data.finalTime + 's');
          }
             
          data.questionStates.forEach(function(state)

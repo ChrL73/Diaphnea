@@ -1,11 +1,13 @@
 header
 {
-   margin-top: 16px;
+   padding-top: 12px;
+   padding-bottom: 8px;
+   margin-bottom: 16px;
 }
 
 .gameHeader
 {
-   margin-right: 32px;
+   margin-right: 48px;
 }
 
 .question

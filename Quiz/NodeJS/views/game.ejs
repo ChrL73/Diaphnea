@@ -14,48 +14,55 @@
       var answered = [];%>
       
       <div class="container-fluid">
-         <header class="row" id="gameHeader" style="margin-left:16px;">
-            <span class="gameHeader"><%=data.texts.questionnaire%>: <%=data.questionnaireName%></span>
-            <span class="gameHeader"><%=data.texts.level%>: <%=data.levelName%></span>
-            <%=data.texts.score%>: <span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
-            <%=data.texts.time%>: <span id="timeSpan"><%=Math.floor(0.001 * data.time)%></span>s<img src="wait.gif" class="waitImg" id="waitTimeImg"/>
+         <header class="row bg-success" id="gameHeader" style="padding-left:30px; border-bottom:1px solid #bbd8a2;">
+            <span class="gameHeader"><%=data.texts.questionnaire%>:&nbsp;<strong><%=data.questionnaireName%></strong></span>
+            <span class="gameHeader"><%=data.texts.level%>:&nbsp;<strong><%=data.levelName%></strong></span>
+            <%=data.texts.score%>:&nbsp;<span class="gameHeader" id="scoreSpan"><%=data.rightAnswerCount%>/<%=data.answerCount%></span>
+            <%=data.texts.time%>:&nbsp;<span id="timeSpan"><%=data.finalTime ? data.finalTime : Math.floor(0.001 * data.time)%>s</span>
+            <img src="wait.gif" class="waitImg" id="waitTimeImg"/>
          </header>
 
-         <div class="row" style="margin-top:16px;">
+         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-5">
                <div id="questionDiv">
+                  
                   <%questions.forEach(function(question, iQuestion) {
                      var disabled = questionStates[iQuestion].answered;
                      answered.push(disabled);%>
-                     <div class="question" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
-                        <p><%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%></p>
-                        <p><%=question.question%> <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg waitAnswerImg"/></p>
-                        <% question.choices.forEach(function(choice, iChoice) {
-                           var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
-                           var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
-                           var classStr;
-                           if (disabled && rightChoice) classStr = 'boldChoice';
+                     <div class="question panel panel-info" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
+                        <div class="panel-heading">
+                           <%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%>
+                           <img src="wait.gif" id="wait<%=iQuestion%>" class="waitImg waitAnswerImg" style="margin-top:-6px; margin-bottom:-6px;"/>
+                        </div>
+                        <div class="panel-body">
+                           <p><%=question.question%></p>
+                           <% question.choices.forEach(function(choice, iChoice) {
+                              var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
+                              var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
+                              var classStr;
+                              if (disabled && rightChoice) classStr = 'boldChoice';
 
-                           if (question.isMultiple) {
-                              if (disabled)
-                              {
-                                 if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                                 else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
-                              } %>
-                              <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
-                              <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
-                              <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
+                              if (question.isMultiple) {
+                                 if (disabled)
+                                 {
+                                    if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                                    else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                                 } %>
+                                 <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="checkbox" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %>>
+                                 <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                                 <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
 
-                           <% } else {
-                              if (disabled && checked)
-                              {
-                                 if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                                 else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
-                              } %>
-                              <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
-                              <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
-                              <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
-                        <%}});%>
+                              <% } else {
+                                 if (disabled && checked)
+                                 {
+                                    if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                                    else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                                 } %>
+                                 <input class="input<%=iQuestion%>" id="input<%=iQuestion%>_<%=iChoice%>" type="radio" <% if (checked) { %>checked<% } %> <% if (disabled) { %>disabled<% } %> name="radio<%=iQuestion%>">
+                                 <span <% if (classStr) { %>class="<%=classStr%>"<% } %>><%=choice.text%></span>
+                                 <span id="comment<%=iQuestion%>_<%=iChoice%>"><% if (disabled && choice.comment.length) { %> (<%=choice.comment%>)<% } %></span><br>
+                           <%}});%>
+                        </div>
                      </div>
                   <% }); %>
 
@@ -86,6 +93,7 @@
          var questionCount = <%=questions.length%>;
          var answered = [<%=answered%>];
          var t0 = <%=data.time%>;
+         var finished = <%=data.finalTime ? true : false%>;
       </script> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="/socket.io/socket.io.js"></script>

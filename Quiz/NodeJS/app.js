@@ -224,6 +224,7 @@ function game(req, res, context)
          answerCount: context.answerCount,
          rightAnswerCount: context.rightAnswerCount,
          time: Date.now() - context.startDate,
+         finalTime: context.finalTime,
          error: !context.quizId // Todo: handle error in view
       };
       
@@ -478,7 +479,7 @@ io.on('connection', function(socket)
                ++context.answerCount;
                if (context.answerCount == context.questions.length)
                {
-                  context.finalTime = 0.1 * Math.floor(0.01 * (Date.now() - context.startDate));
+                  context.finalTime = (0.001 * (Date.now() - context.startDate)).toFixed(1);
                }
                
                questionState.answered = true;

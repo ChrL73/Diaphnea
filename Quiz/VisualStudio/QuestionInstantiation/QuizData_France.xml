@@ -116,8 +116,8 @@
         <relation type="r1N_Region_Departements" linkedElement="el_PuyDeDome"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_AinDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_ArdecheDepartement"/>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_DromeDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_IsereDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_DromeDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_IsereDepartement"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_LoireDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_RhoneDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Savoie"/>
@@ -145,11 +145,11 @@
         <numericalAttribute type="nt_Latitude" value="47.2"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_CoteOr"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_Nievre"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_CoteOr"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Nievre"/>
         <relation type="r1N_Region_Departements" linkedElement="el_SaoneEtLoire"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_YonneDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_DoubsDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_YonneDepartement"/>-->
+        <relation type="r1N_Region_Departements" linkedElement="el_DoubsDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Jura"/>
         <!--<relation type="r1N_Region_Departements" linkedElement="el_HauteSaone"/>
         <relation type="r1N_Region_Departements" linkedElement="el_TerritoireDeBelfort"/>-->
@@ -176,8 +176,8 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r1N_Region_Departements" linkedElement="el_CotesArmor"/>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_Finistere"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_IlleEtVilaine"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_Finistere"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_IlleEtVilaine"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Morbihan"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Normandie"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>
@@ -199,9 +199,9 @@
         <numericalAttribute type="nt_Latitude" value="47.6"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_CherDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_CherDepartement"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_EureEtLoir"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_IndreDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_IndreDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_IndreEtLoire"/>
         <relation type="r1N_Region_Departements" linkedElement="el_LoirEtCher"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Loiret"/>-->
@@ -339,9 +339,9 @@
       <relationList>
         <relation type="r1N_Region_Departements" linkedElement="el_Calvados"/>
         <!--<relation type="r1N_Region_Departements" linkedElement="el_MancheDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_OrneDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_OrneDepartement"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_EureDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_SeineMaritime"/>-->
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_SeineMaritime"/>-->
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_Bretagne"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_PaysDeLaLoire"/>
         <relation type="rNN_Region_RegionsLimitrophes" linkedElement="el_CentreValDeLoire"/>
@@ -365,14 +365,14 @@
         <numericalAttribute type="nt_Latitude" value="45.25"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_DordogneDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_Gironde"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_DordogneDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_Gironde"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Landes"/>
         <relation type="r1N_Region_Departements" linkedElement="el_LotEtGaronne"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_PyreneesAtlantiques"/>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_CorrezeDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_CorrezeDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_CreuseDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_HauteVienne"/>-->
+        <!-- <relation type="r1N_Region_Departements" linkedElement="el_HauteVienne"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_CharenteDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_CharenteMaritime"/>
         <!--<relation type="r1N_Region_Departements" linkedElement="el_DeuxSevres"/>
@@ -400,8 +400,8 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r1N_Region_Departements" linkedElement="el_AudeDepartement"/>
-        <!--<relation type="r1N_Region_Departements" linkedElement="el_GardDepartement"/>
-        <relation type="r1N_Region_Departements" linkedElement="el_HeraultDepartement"/>
+        <relation type="r1N_Region_Departements" linkedElement="el_GardDepartement"/>
+        <!--<relation type="r1N_Region_Departements" linkedElement="el_HeraultDepartement"/>
         <relation type="r1N_Region_Departements" linkedElement="el_Lozere"/>
         <relation type="r1N_Region_Departements" linkedElement="el_PyreneesOrientales"/>-->
         <relation type="r1N_Region_Departements" linkedElement="el_AriegeDepartement"/>
@@ -451,8 +451,8 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom2">
-          <value language="fr" value="Pays de la Loire"/>
-          <value language="en" value="Pays de la Loire"/>
+          <value language="fr" value="Provence-Alpes-Côte d'Azur"/>
+          <value language="en" value="Provence-Alpes-Côte d'Azur"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -582,9 +582,9 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vichy"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Moulins"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_Montlucon"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Vichy"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Vichy"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>-->
@@ -626,9 +626,9 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_DigneLesBains"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_Forcalquier"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Barcelonnette"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Castellane"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Castellane"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesMaritimes"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautesAlpes"/>
@@ -663,8 +663,8 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Gap"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_Briancon"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
       </relationList>
     </element>
@@ -737,11 +737,11 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Privas"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_TournonSurRhone"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Largentiere"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DromeDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireDepartement"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>-->
       </relationList>
@@ -848,9 +848,9 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Troyes"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_NogentSurSeine"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_BarSurAube"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_YonneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_YonneDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteMarne"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteMarne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MarneDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineEtMarne"/>-->
       </relationList>
@@ -925,9 +925,9 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_TarnEtGaronne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_TarnDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>-->
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Cantal"/>
       </relationList>
     </element>
@@ -965,9 +965,9 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Istres"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Martigues"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Aubagne"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SalonDeProvence"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SalonDeProvence"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>-->
       </relationList>
     </element>
@@ -1004,8 +1004,8 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Bayeux"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_VireVille"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MancheDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OrneDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OrneDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureDepartement"/>
       </relationList>
     </element>
     <element id="el_Cantal" sortKey="15" type="et_Departement" minLevel="0" mapId="e_15">
@@ -1042,8 +1042,8 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AveyronDepartement"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteLoire"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorrezeDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorrezeDepartement"/>
       </relationList>
     </element>
     <element id="el_CharenteDepartement" sortKey="16" type="et_Departement"  minLevel="0" mapId="e_16">
@@ -1079,8 +1079,8 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteMaritime"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VienneDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteVienne"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteVienne"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>
       </relationList>
     </element>
     <element id="el_CharenteMaritime" sortKey="17" type="et_Departement" minLevel="0" mapId="e_17">
@@ -1124,8 +1124,8 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vendee"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteDepartement"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Gironde"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Gironde"/>-->
       </relationList>
     </element>
     <element id="el_CherDepartement" sortKey="18" type="et_Departement" minLevel="0" mapId="e_18">
@@ -1157,13 +1157,51 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintAmandMontrond"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Bourges"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Vierzon"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintAmandMontrond"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintAmandMontrond"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AllierDepartement"/>
         <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Loiret"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoirEtCher"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IndreDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_CorrezeDepartement" sortKey="19" type="et_Departement" minLevel="0" mapId="e_19">
+      <elementName>
+        <name language="fr" text="Corrèze"/>
+        <name language="en" text="Corrèze"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Corrèze"/>
+          <value language="en" value="Corrèze"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Corrèze"/>
+          <value language="en" value="Corrèze"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="19"/>
+          <value language="en" value="19"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="1.95"/>
+        <numericalAttribute type="nt_Latitude" value="45.35"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Tulle"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_BriveLaGaillarde"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ussel"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Tulle"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_BriveLaGaillarde"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Ussel"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DordogneDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteVienne"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CreuseDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Cantal"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotDepartement"/>-->
       </relationList>
     </element>
     <element id="el_CorseDuSud" sortKey="20A" type="et_Departement" minLevel="0" mapId="e_2a">
@@ -1238,6 +1276,45 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorseDuSud"/>
       </relationList>
     </element>
+    <element id="el_CoteOr" sortKey="21" type="et_Departement" minLevel="0" mapId="e_21">
+      <elementName>
+        <name language="fr" text="Côte-d'Or"/>
+        <name language="en" text="Côte-d'Or"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Côte-d'Or"/>
+          <value language="en" value="Côte-d'Or"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Côte-d'Or"/>
+          <value language="en" value="Côte-d'Or"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="21"/>
+          <value language="en" value="21"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.7"/>
+        <numericalAttribute type="nt_Latitude" value="47.4"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Dijon"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Beaune"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montbard"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Dijon"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Beaune"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montbard"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_YonneDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Nievre"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSaone"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteMarne"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AubeDepartement"/>
+      </relationList>
+    </element>
     <element id="el_CotesArmor" sortKey="22" type="et_Departement" minLevel="0" mapId="e_22">
       <elementName>
         <name language="fr" text="Côtes-d'Armor"/>
@@ -1273,10 +1350,315 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintBrieuc"/>
         <!--<relation type="r1N_Departement_Villes" linkedElement="el_Lannion"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Dinan"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Guingamp"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Guingamp"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Finistere"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IlleEtVilaine"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>-->
+      </relationList>
+    </element>
+    <element id="el_CreuseDepartement" sortKey="23" type="et_Departement" minLevel="0" mapId="e_23">
+      <elementName>
+        <name language="fr" text="Creuse"/>
+        <name language="en" text="Creuse"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">   
+          <value language="fr" value="La Creuse"/>
+          <value language="en" value="Creuse"/>
+        </attribute>
+        <attribute type="at_Nom2">   
+          <value language="fr" value="de la Creuse"/>
+          <value language="en" value="Creuse"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="23"/>
+          <value language="en" value="23"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="2.05"/>
+        <numericalAttribute type="nt_Latitude" value="46.05"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Gueret"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Aubusson"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Gueret"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Aubusson"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteVienne"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorrezeDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_PuyDeDome"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AllierDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CherDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IndreDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_DordogneDepartement" sortKey="24" type="et_Departement" minLevel="0" mapId="e_24">
+      <elementName>
+        <name language="fr" text="Dordogne"/>
+        <name language="en" text="Dordogne"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Dordogne"/>
+          <value language="en" value="Dordogne"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Dordogne"/>
+          <value language="en" value="Dordogne"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="24"/>
+          <value language="en" value="24"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="0.75"/>
+        <numericalAttribute type="nt_Latitude" value="45.1"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Perigueux"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bergerac"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SarlatLaCaneda"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nontron"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Perigueux"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bergerac"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SarlatLaCaneda"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nontron"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteMaritime"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteVienne"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CorrezeDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotEtGaronne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Gironde"/>-->
+      </relationList>
+    </element>
+    <element id="el_DoubsDepartement" sortKey="25" type="et_Departement" minLevel="0" mapId="e_25">
+      <elementName>
+        <name language="fr" text="Doubs"/>
+        <name language="en" text="Doubs"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Doubs"/>
+          <value language="en" value="Doubs"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Doubs"/>
+          <value language="en" value="Doubs"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="25"/>
+          <value language="en" value="25"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="6.45"/>
+        <numericalAttribute type="nt_Latitude" value="47.2"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Besancon"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montbeliard"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Pontarlier"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Besancon"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montbeliard"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Pontarlier"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_TerritoireDeBelfort"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSaone"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Jura"/>
+      </relationList>
+    </element>
+    <element id="el_DromeDepartement" sortKey="26" type="et_Departement" minLevel="0" mapId="e_26">
+      <elementName>
+        <name language="fr" text="Drôme"/>
+        <name language="en" text="Drôme"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Drôme"/>
+          <value language="en" value="Drôme"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Drôme"/>
+          <value language="en" value="Drôme"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="26"/>
+          <value language="en" value="26"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="5.15"/>
+        <numericalAttribute type="nt_Latitude" value="44.8"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Valence"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Nyons"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Die"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Valence"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nyons"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Die"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montelimar"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_RomansSurIsere"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautesAlpes"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ArdecheDepartement"/>
+      </relationList>
+    </element>
+    <element id="el_EureDepartement" sortKey="27" type="et_Departement" minLevel="0" mapId="e_27">
+      <elementName>
+        <name language="fr" text="Eure"/>
+        <name language="en" text="Eure"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Eure"/>
+          <value language="en" value="Eure"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Eure"/>
+          <value language="en" value="Eure"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="27"/>
+          <value language="en" value="27"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="1.0"/>
+        <numericalAttribute type="nt_Latitude" value="49.1"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Evreux"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bernay"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Andelys"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Evreux"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bernay"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Andelys"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Calvados"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OrneDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureEtLoir"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Yvelines"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ValOise"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OiseDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineMaritime"/>-->
+      </relationList>
+    </element>
+    <element id="el_EureEtLoir" sortKey="28" type="et_Departement" minLevel="0" mapId="e_28">
+      <elementName>
+        <name language="fr" text="Eure-et-Loir"/>
+        <name language="en" text="Eure-et-Loir"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Eure-et-Loir"/>
+          <value language="en" value="Eure-et-Loir"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Eure-et-Loir"/>
+          <value language="en" value="Eure-et-Loir"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="28"/>
+          <value language="en" value="28"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="1.4"/>
+        <numericalAttribute type="nt_Latitude" value="48.4"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Chartres"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dreux"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaudun"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_NogentLeRotrou"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Chartres"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Dreux"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Chateaudun"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_NogentLeRotrou"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SartheDepartement"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoirEtCher"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Loiret"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Essonne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Yvelines"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OrneDepartement"/>-->
+      </relationList>
+    </element>
+    <element id="el_Finistere" sortKey="29" type="et_Departement" minLevel="0" mapId="e_29">
+      <elementName>
+        <name language="fr" text="Finistère"/>
+        <name language="en" text="Finistère"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Finistère"/>
+          <value language="en" value="Finistère"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Finistère"/>
+          <value language="en" value="Finistère"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="29"/>
+          <value language="en" value="29"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="-4.05"/>
+        <numericalAttribute type="nt_Latitude" value="48.3"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Quimper"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Brest"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Morlaix"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaulin"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Quimper"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Brest"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Morlaix"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Chateaulin"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CotesArmor"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>-->
+      </relationList>
+    </element>
+    <element id="el_GardDepartement" sortKey="30" type="et_Departement" minLevel="0" mapId="e_30">
+      <elementName>
+        <name language="fr" text="Gard"/>
+        <name language="en" text="Gard"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Gard"/>
+          <value language="en" value="Gard"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Gard"/>
+          <value language="en" value="Gard"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="30"/>
+          <value language="en" value="30"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="4.25"/>
+        <numericalAttribute type="nt_Latitude" value="44.0"/>
+      </numericalAttributeList>
+      <relationList>
+        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nimes"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ales"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Vigan"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Nimes"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Ales"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Vigan"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AveyronDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lozere"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ArdecheDepartement"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>
       </relationList>
     </element>
     <element id="el_Jura" sortKey="39" type="et_Departement" minLevel="0" mapId="e_39">
@@ -1308,11 +1690,11 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintClaude"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_LonsLeSaunier"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Dole"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintClaude"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintClaude"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DoubsDepartement"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSaone"/>
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSaone"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
+        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
       </relationList>
     </element>
@@ -2142,9 +2524,9 @@
         <!--<relation type="rNN_Riviere_Departements" linkedElement="el_IsereDepartement"/>-->
         <relation type="rNN_Riviere_Departements" linkedElement="el_LoireDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_ArdecheDepartement"/>
-        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_DromeDepartement"/>
-        <relation type="rNN_Riviere_Departements" linkedElement="el_Vaucluse"/>
-        <relation type="rNN_Riviere_Departements" linkedElement="el_GardDepartement"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_DromeDepartement"/>
+        <!--<relation type="rNN_Riviere_Departements" linkedElement="el_Vaucluse"/>-->
+        <relation type="rNN_Riviere_Departements" linkedElement="el_GardDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_BouchesDuRhone"/>
         <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Villeurbanne"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_Lyon"/>
@@ -2344,9 +2726,9 @@
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_CharenteMaritime"/>
         <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Vendee"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>
-        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Morbihan"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Morbihan"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Finistere"/>
-        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Guadeloupe"/>
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Guadeloupe"/>
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Martinique"/>
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_Guyanne"/>-->
       </relationList>
@@ -2378,9 +2760,9 @@
         <relation type="r1N_Destination_Fleuves" linkedElement="el_Tech"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_AlpesMaritimes"/>
         <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>
-        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>
+        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
-        <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>-->
+        <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_AudeDepartement"/>
         <!--<relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_PyreneesOrientales"/>-->
         <relation type="rNN_Mer_DepartementsLimitrophes" linkedElement="el_CorseDuSud"/>
@@ -2481,8 +2863,8 @@
       <numericalAttributeList/>
       <relationList>
         <!--<relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautRhin"/>
-        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_TerritoireDeBelfort"/>
-        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_DoubsDepartement"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_TerritoireDeBelfort"/>-->
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_DoubsDepartement"/>
         <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Jura"/>
         <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
         <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>

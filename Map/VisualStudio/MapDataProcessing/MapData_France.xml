@@ -1957,7 +1957,7 @@
       <lineElement id="e_Rhin" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Rhin"/>
-          <name language="en" text="Rhin"/>
+          <name language="en" text="Rhine"/>
         </name>
         <looks>
           <look id="ll_FleuveRiviere"/>
@@ -2145,7 +2145,7 @@
       <lineElement id="e_Escaut" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Escaut"/>
-          <name language="en" text="Escaut"/>
+          <name language="en" text="Scheldt"/>
         </name>
         <looks>
           <look id="ll_FleuveRiviere"/>

@@ -2711,7 +2711,7 @@
         <numericalAttribute type="nt_Latitude" value="49.02"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Metz"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Metz"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Thionville"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Forbach"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sarreguemines"/>
@@ -2724,7 +2724,7 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Sarreguemines"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Sarrebourg"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_BoulayMoselle"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauSalins"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauSalins"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BasRhin"/>
       </relationList>
@@ -2753,14 +2753,14 @@
         <numericalAttribute type="nt_Latitude" value="47.1"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Nevers"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Nevers"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_CosneCoursSurLoire"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Clamecy"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauChinon"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Nevers"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_CosneCoursSurLoire"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Clamecy"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauChinon"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauChinon"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AllierDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SaoneEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CoteOr"/>
@@ -8955,6 +8955,250 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 57-->
+    <element id="el_Metz" type="et_Ville" minLevel="0" mapId="e_Metz">
+      <elementName>
+        <name language="fr" text="Metz"/>
+        <name language="en" text="Metz"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Metz"/>
+          <value language="en" value="Metz"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Metz"/>
+          <value language="en" value="Metz"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="122840"/>
+        <numericalAttribute type="nt_Longitude" value="6.176905"/>
+        <numericalAttribute type="nt_Latitude" value="49.119666"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Thionville" type="et_Ville" minLevel="1" mapId="e_Thionville">
+      <elementName>
+        <name language="fr" text="Thionville"/>
+        <name language="en" text="Thionville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Thionville"/>
+          <value language="en" value="Thionville"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Thionville"/>
+          <value language="en" value="Thionville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="41130"/>
+        <numericalAttribute type="nt_Longitude" value="6.168426"/>
+        <numericalAttribute type="nt_Latitude" value="49.357571"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Forbach" type="et_Ville" minLevel="2" mapId="e_Forbach">
+      <elementName>
+        <name language="fr" text="Forbach"/>
+        <name language="en" text="Forbach"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Forbach"/>
+          <value language="en" value="Forbach"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Forbach"/>
+          <value language="en" value="Forbach"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="22240"/>
+        <numericalAttribute type="nt_Longitude" value="6.895295"/>
+        <numericalAttribute type="nt_Latitude" value="49.186515"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Sarreguemines" type="et_Ville" minLevel="3" mapId="e_Sarreguemines">
+      <elementName>
+        <name language="fr" text="Sarreguemines"/>
+        <name language="en" text="Sarreguemines"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Sarreguemines"/>
+          <value language="en" value="Sarreguemines"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Sarreguemines"/>
+          <value language="en" value="Sarreguemines"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="22015"/>
+        <numericalAttribute type="nt_Longitude" value="7.070862"/>
+        <numericalAttribute type="nt_Latitude" value="49.106031"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Sarrebourg" type="et_Ville" minLevel="3" mapId="e_Sarrebourg">
+      <elementName>
+        <name language="fr" text="Sarrebourg"/>
+        <name language="en" text="Sarrebourg"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Sarrebourg"/>
+          <value language="en" value="Sarrebourg"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Sarrebourg"/>
+          <value language="en" value="Sarrebourg"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="12930"/>
+        <numericalAttribute type="nt_Longitude" value="7.052587"/>
+        <numericalAttribute type="nt_Latitude" value="48.732663"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_BoulayMoselle" type="et_Ville" minLevel="4" mapId="e_BoulayMoselle">
+      <elementName>
+        <name language="fr" text="Boulay-Moselle"/>
+        <name language="en" text="Boulay-Moselle"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Boulay-Moselle"/>
+          <value language="en" value="Boulay-Moselle"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Boulay-Moselle"/>
+          <value language="en" value="Boulay-Moselle"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="4820"/>
+        <numericalAttribute type="nt_Longitude" value="6.49811"/>
+        <numericalAttribute type="nt_Latitude" value="49.184543"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_ChateauSalins" type="et_Ville" minLevel="4" mapId="e_ChateauSalins">
+      <elementName>
+        <name language="fr" text="Château-Salins"/>
+        <name language="en" text="Château-Salins"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Château-Salins"/>
+          <value language="en" value="Château-Salins"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Château-Salins"/>
+          <value language="en" value="v"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="2500"/>
+        <numericalAttribute type="nt_Longitude" value="6.507137"/>
+        <numericalAttribute type="nt_Latitude" value="48.820138"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 58-->
+    <element id="el_Nevers" type="et_Ville" minLevel="0" mapId="e_Nevers">
+      <elementName>
+        <name language="fr" text="Nevers"/>
+        <name language="en" text="Nevers"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Nevers"/>
+          <value language="en" value="Nevers"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Nevers"/>
+          <value language="en" value="Nevers"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="37555"/>
+        <numericalAttribute type="nt_Longitude" value="3.161603"/>
+        <numericalAttribute type="nt_Latitude" value="46.987178"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_CosneCoursSurLoire" type="et_Ville" minLevel="1" mapId="e_CosneCoursSurLoire">
+      <elementName>
+        <name language="fr" text="Cosne-Cours-sur-Loire"/>
+        <name language="en" text="Cosne-Cours-sur-Loire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Cosne-Cours-sur-Loire"/>
+          <value language="en" value="Cosne-Cours-sur-Loire"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Cosne-Cours-sur-Loire"/>
+          <value language="en" value="Cosne-Cours-sur-Loire"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="11165"/>
+        <numericalAttribute type="nt_Longitude" value="2.925291"/>
+        <numericalAttribute type="nt_Latitude" value="47.411363"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Clamecy" type="et_Ville" minLevel="2" mapId="e_Clamecy">
+      <elementName>
+        <name language="fr" text="Clamecy"/>
+        <name language="en" text="Clamecy"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Clamecy"/>
+          <value language="en" value="Clamecy"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Clamecy"/>
+          <value language="en" value="Clamecy"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="4425"/>
+        <numericalAttribute type="nt_Longitude" value="3.5207516"/>
+        <numericalAttribute type="nt_Latitude" value="47.46127"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_ChateauChinon" type="et_Ville" minLevel="3" mapId="e_ChateauChinon">
+      <elementName>
+        <name language="fr" text="Château-Chinon"/>
+        <name language="en" text="Château-Chinon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Château-Chinon"/>
+          <value language="en" value="Château-Chinon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Château-Chinon"/>
+          <value language="en" value="Château-Chinon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="2165"/>
+        <numericalAttribute type="nt_Longitude" value="3.93379"/>
+        <numericalAttribute type="nt_Latitude" value="47.06308"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
     <!--Villes 69-->
     <element id="el_Lyon" type="et_Ville" minLevel="0" mapId="e_Lyon">
       <elementName>
@@ -9140,8 +9384,8 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_MaineEtLoire"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_LoireAtlantique"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Roanne"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Nevers"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_CosneCoursSurLoire"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Nevers"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_CosneCoursSurLoire"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Orleans"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Blois"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Tours"/>
@@ -9364,9 +9608,9 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_MoselleDepartement"/>
         <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Epinal"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_Toul"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Metz"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Metz"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Thionville"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Konz"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Konz"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Meurthe"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Sarre"/>
         <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Coblence"/>
@@ -10192,8 +10436,8 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_Nievre"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_YonneDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_SeineEtMarne"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Clamecy"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Auxerre"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Clamecy"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Auxerre"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sens"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Armancon"/>
       </relationList>
@@ -10317,9 +10561,9 @@
       <relationList>
         <relation type="rNN_Riviere_Departements" linkedElement="el_BasRhin"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_MoselleDepartement"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Sarrebourg"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Sarrebourg"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sarreguemines"/>
-        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Konz"/>-->
+        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_Konz"/>-->
       </relationList>
     </element>
     <element id="el_Isle" type="et_FleuveRiviere" minLevel="1" mapId="e_Isle">

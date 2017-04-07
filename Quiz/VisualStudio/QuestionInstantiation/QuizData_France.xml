@@ -3357,12 +3357,12 @@
         <numericalAttribute type="nt_Latitude" value="45.49"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Chambery"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Chambery"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Albertville"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintJeanDeMaurienne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Chambery"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Albertville"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJeanDeMaurienne"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJeanDeMaurienne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteSavoie"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_IsereDepartement"/>
@@ -3397,14 +3397,14 @@
         <numericalAttribute type="nt_Latitude" value="46.04"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Annecy"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Annecy"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ThononLesBains"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bonneville"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintJulienEnGenevois"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Annecy"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_ThononLesBains"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Bonneville"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJulienEnGenevois"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_SaintJulienEnGenevois"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AinDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Savoie"/>
       </relationList>
@@ -3437,8 +3437,8 @@
         <numericalAttribute type="nt_Latitude" value="48.85"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_ParisVille"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_ParisVille"/>-->
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_ParisVille"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_ParisVille"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautsDeSeine"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineSaintDenis"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ValDeMarne"/>
@@ -3472,13 +3472,13 @@
         <numericalAttribute type="nt_Latitude" value="49.65"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Rouen"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Rouen"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Havre"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Dieppe"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Rouen"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Havre"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Dieppe"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SottevilleLesRouen"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_SottevilleLesRouen"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OiseDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SommeDepartement"/>
@@ -3508,7 +3508,7 @@
         <numericalAttribute type="nt_Latitude" value="48.65"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Melun"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Melun"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Meaux"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Torcy"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Fontainebleau"/>
@@ -3518,7 +3518,7 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Torcy"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Fontainebleau"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Provins"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_PontaultCombault"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_PontaultCombault"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ValOise"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineSaintDenis"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_ValDeMarne"/>
@@ -3559,7 +3559,7 @@
         <numericalAttribute type="nt_Latitude" value="48.8"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Versailles"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Versailles"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_MantesLaJolie"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintGermainEnLaye"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Rambouillet"/>
@@ -3569,7 +3569,7 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Rambouillet"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Sartrouville"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Poissy"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_ConflansSainteHonorine"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_ConflansSainteHonorine"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_EureEtLoir"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Essonne"/>
@@ -3601,12 +3601,12 @@
         <numericalAttribute type="nt_Latitude" value="46.6"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Niort"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Niort"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Parthenay"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Bressuire"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Niort"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Parthenay"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Bressuire"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bressuire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteMaritime"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_CharenteDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VienneDepartement"/>
@@ -3638,14 +3638,14 @@
         <numericalAttribute type="nt_Latitude" value="49.9"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Amiens"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Amiens"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Abbeville"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Peronne"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Montdidier"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Amiens"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Abbeville"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Peronne"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Montdidier"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Montdidier"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineMaritime"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OiseDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AisneDepartement"/>
@@ -3677,10 +3677,10 @@
         <numericalAttribute type="nt_Latitude" value="43.8"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Albi"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Albi"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Castres"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Albi"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Castres"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Castres"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AudeDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HeraultDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AveyronDepartement"/>
@@ -3716,10 +3716,10 @@
         <numericalAttribute type="nt_Latitude" value="44.05"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Montauban"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Montauban"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Castelsarrasin"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Montauban"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Castelsarrasin"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Castelsarrasin"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotEtGaronne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LotDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AveyronDepartement"/>
@@ -3752,7 +3752,7 @@
         <numericalAttribute type="nt_Latitude" value="43.5"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Toulon"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Toulon"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Draguignan"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Brignoles"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Toulon"/>
@@ -3760,7 +3760,7 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Brignoles"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_SeyneSurMer"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Hyeres"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Frejus"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Frejus"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vaucluse"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AlpesHauteProvence"/>
@@ -3795,12 +3795,12 @@
         <numericalAttribute type="nt_Latitude" value="44.05"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_Avignon"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Avignon"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Carpentras"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Apt"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Avignon"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Carpentras"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Apt"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_Apt"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_GardDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BouchesDuRhone"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_VarDepartement"/>
@@ -3833,12 +3833,12 @@
         <numericalAttribute type="nt_Latitude" value="46.7"/>
       </numericalAttributeList>
       <relationList>
-        <!--<relation type="r11_Departement_ChefLieu" linkedElement="el_LaRocheSurYon"/>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_LaRocheSurYon"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SablesOlonne"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_FontenayLeComte"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_LaRocheSurYon"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_SablesOlonne"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_FontenayLeComte"/>-->
+        <relation type="r1N_Departement_Villes" linkedElement="el_FontenayLeComte"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_LoireAtlantique"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MaineEtLoire"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_DeuxSevres"/>
@@ -10731,6 +10731,1075 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <!--Villes 73-->
+    <element id="el_Chambery" type="et_Ville" minLevel="0" mapId="e_Chambery">
+      <elementName>
+        <name language="fr" text="Chambéry"/>
+        <name language="en" text="Chambéry"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Chambéry"/>
+          <value language="en" value="Chambéry"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Chambéry"/>
+          <value language="en" value="Chambéry"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="58835"/>
+        <numericalAttribute type="nt_Longitude" value="5.917781"/>
+        <numericalAttribute type="nt_Latitude" value="45.564601"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Albertville" type="et_Ville" minLevel="1" mapId="e_Albertville">
+      <elementName>
+        <name language="fr" text="Albertville"/>
+        <name language="en" text="Albertville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Albertville"/>
+          <value language="en" value="Albertville"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Albertville"/>
+          <value language="en" value="Albertville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="18480"/>
+        <numericalAttribute type="nt_Longitude" value="6.392726"/>
+        <numericalAttribute type="nt_Latitude" value="45.675535"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SaintJeanDeMaurienne" type="et_Ville" minLevel="2" mapId="e_SaintJeanDeMaurienne">
+      <elementName>
+        <name language="fr" text="Saint-Jean-de-Maurienne"/>
+        <name language="en" text="Saint-Jean-de-Maurienne"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Saint-Jean-de-Maurienne"/>
+          <value language="en" value="Saint-Jean-de-Maurienne"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Saint-Jean-de-Maurienne"/>
+          <value language="en" value="Saint-Jean-de-Maurienne"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="8505"/>
+        <numericalAttribute type="nt_Longitude" value="6.344886"/>
+        <numericalAttribute type="nt_Latitude" value="45.275403"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 74-->
+    <element id="el_Annecy" type="et_Ville" minLevel="0" mapId="e_Annecy">
+       <elementName>
+        <name language="fr" text="Annecy"/>
+        <name language="en" text="Annecy"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Annecy"/>
+          <value language="en" value="Annecy"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Annecy"/>
+          <value language="en" value="Annecy"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="50115"/>
+        <numericalAttribute type="nt_Longitude" value="6.129384"/>
+        <numericalAttribute type="nt_Latitude" value="45.899247"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_ThononLesBains" type="et_Ville" minLevel="1" mapId="e_ThononLesBains">
+       <elementName>
+        <name language="fr" text="Thonon-les-Bains"/>
+        <name language="en" text="Thonon-les-Bains"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Thonon-les-Bains"/>
+          <value language="en" value="Thonon-les-Bains"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Thonon-les-Bains"/>
+          <value language="en" value="Thonon-les-Bains"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="32825"/>
+        <numericalAttribute type="nt_Longitude" value="6.477635"/>
+        <numericalAttribute type="nt_Latitude" value="46.373565"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Bonneville" type="et_Ville" minLevel="2" mapId="e_Bonneville">
+       <elementName>
+        <name language="fr" text="Bonneville"/>
+        <name language="en" text="Bonneville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Bonneville"/>
+          <value language="en" value="Bonneville"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Bonneville"/>
+          <value language="en" value="Bonneville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="11830"/>
+        <numericalAttribute type="nt_Longitude" value="6.409053"/>
+        <numericalAttribute type="nt_Latitude" value="46.078025"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SaintJulienEnGenevois" type="et_Ville" minLevel="3" mapId="e_SaintJulienEnGenevois">
+       <elementName>
+        <name language="fr" text="Saint-Julien-en-Genevois"/>
+        <name language="en" text="Saint-Julien-en-Genevois"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Saint-Julien-en-Genevois"/>
+          <value language="en" value="Saint-Julien-en-Genevois"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Saint-Julien-en-Genevois"/>
+          <value language="en" value="Saint-Julien-en-Genevois"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="11020"/>
+        <numericalAttribute type="nt_Longitude" value="6.081338"/>
+        <numericalAttribute type="nt_Latitude" value="46.144516"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Ville 75-->
+    <element id="el_ParisVille" type="et_Ville" minLevel="0" mapId="e_Paris">
+      <elementName>
+        <name language="fr" text="Paris"/>
+        <name language="en" text="Paris"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Paris"/>
+          <value language="en" value="Paris"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Paris"/>
+          <value language="en" value="Paris"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="2211295"/>
+        <numericalAttribute type="nt_Longitude" value="2.352222"/>
+        <numericalAttribute type="nt_Latitude" value="48.856614"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 76-->
+    <element id="el_Rouen" type="et_Ville" minLevel="0" mapId="e_Rouen">
+      <elementName>
+        <name language="fr" text="Rouen"/>
+        <name language="en" text="Rouen"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Rouen"/>
+          <value language="en" value="Rouen"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Rouen"/>
+          <value language="en" value="Rouen"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="109425"/>
+        <numericalAttribute type="nt_Longitude" value="1.098492"/>
+        <numericalAttribute type="nt_Latitude" value="49.442367"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Havre" type="et_Ville" minLevel="1" mapId="e_Havre">
+      <elementName>
+        <name language="fr" text="Le Havre"/>
+        <name language="en" text="Le Havre"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Havre"/>
+          <value language="en" value="Le Havre"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Havre"/>
+          <value language="en" value="Le Havre"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="178770"/>
+        <numericalAttribute type="nt_Longitude" value="0.106503"/>
+        <numericalAttribute type="nt_Latitude" value="49.492591"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Dieppe" type="et_Ville" minLevel="2" mapId="e_Dieppe">
+      <elementName>
+        <name language="fr" text="Dieppe"/>
+        <name language="en" text="Dieppe"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Dieppe"/>
+          <value language="en" value="Dieppe"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Dieppe"/>
+          <value language="en" value="Dieppe"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="33590"/>
+        <numericalAttribute type="nt_Longitude" value="1.087869"/>
+        <numericalAttribute type="nt_Latitude" value="49.927492"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SottevilleLesRouen" type="et_Ville" minLevel="3" mapId="e_SottevilleLesRouen">
+      <elementName>
+        <name language="fr" text="Sotteville-lès-Rouen"/>
+        <name language="en" text="Sotteville-lès-Rouen"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Sotteville-lès-Rouen"/>
+          <value language="en" value="Sotteville-lès-Rouen"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Sotteville-lès-Rouen"/>
+          <value language="en" value="Sotteville-lès-Rouen"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="30040"/>
+        <numericalAttribute type="nt_Longitude" value="1.091512"/>
+        <numericalAttribute type="nt_Latitude" value="49.414653"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 77-->
+    <element id="el_Melun" type="et_Ville" minLevel="0" mapId="e_Melun">
+      <elementName>
+        <name language="fr" text="Melun"/>
+        <name language="en" text="Melun"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Melun"/>
+          <value language="en" value="Melun"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Melun"/>
+          <value language="en" value="Melun"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="39940"/>
+        <numericalAttribute type="nt_Longitude" value="2.6554"/>
+        <numericalAttribute type="nt_Latitude" value="48.542105"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Meaux" type="et_Ville" minLevel="1" mapId="e_Meaux">
+      <elementName>
+        <name language="fr" text="Meaux"/>
+        <name language="en" text="Meaux"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Meaux"/>
+          <value language="en" value="Meaux"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Meaux"/>
+          <value language="en" value="Meaux"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="46655"/>
+        <numericalAttribute type="nt_Longitude" value="2.879255"/>
+        <numericalAttribute type="nt_Latitude" value="48.959396"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Torcy" type="et_Ville" minLevel="2" mapId="e_Torcy">
+      <elementName>
+        <name language="fr" text="Torcy"/>
+        <name language="en" text="Torcy"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Torcy"/>
+          <value language="en" value="Torcy"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Torcy"/>
+          <value language="en" value="Torcy"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="21930"/>
+        <numericalAttribute type="nt_Longitude" value="2.654472"/>
+        <numericalAttribute type="nt_Latitude" value="48.850572"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Fontainebleau" type="et_Ville" minLevel="3" mapId="e_Fontainebleau">
+      <elementName>
+        <name language="fr" text="Fontainebleau"/>
+        <name language="en" text="Fontainebleau"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Fontainebleau"/>
+          <value language="en" value="Fontainebleau"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Fontainebleau"/>
+          <value language="en" value="Fontainebleau"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="15410"/>
+        <numericalAttribute type="nt_Longitude" value="2.70162"/>
+        <numericalAttribute type="nt_Latitude" value="48.404676"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Provins" type="et_Ville" minLevel="4" mapId="e_Provins">
+      <elementName>
+        <name language="fr" text="Provins"/>
+        <name language="en" text="Provins"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Provins"/>
+          <value language="en" value="Provins"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Provins"/>
+          <value language="en" value="Provins"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="12265"/>
+        <numericalAttribute type="nt_Longitude" value="3.299203"/>
+        <numericalAttribute type="nt_Latitude" value="48.560149"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_PontaultCombault" type="et_Ville" minLevel="4" mapId="e_PontaultCombault">
+      <elementName>
+        <name language="fr" text="Pontault-Combault"/>
+        <name language="en" text="Pontault-Combault"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Pontault-Combault"/>
+          <value language="en" value="Pontault-Combault"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Pontault-Combault"/>
+          <value language="en" value="Pontault-Combault"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="34815"/>
+        <numericalAttribute type="nt_Longitude" value="2.607598"/>
+        <numericalAttribute type="nt_Latitude" value="48.801255"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 78-->
+    <element id="el_Versailles" type="et_Ville" minLevel="0" mapId="e_Versailles">
+      <elementName>
+        <name language="fr" text="Versailles"/>
+        <name language="en" text="Versailles"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Versailles"/>
+          <value language="en" value="Versailles"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Versailles"/>
+          <value language="en" value="Versailles"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="86685"/>
+        <numericalAttribute type="nt_Longitude" value="2.130122"/>
+        <numericalAttribute type="nt_Latitude" value="48.801408"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_MantesLaJolie" type="et_Ville" minLevel="1" mapId="e_MantesLaJolie">
+      <elementName>
+        <name language="fr" text="Mantes-la-Jolie"/>
+        <name language="en" text="Mantes-la-Jolie"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Mantes-la-Jolie"/>
+          <value language="en" value="Mantes-la-Jolie"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Mantes-la-Jolie"/>
+          <value language="en" value="MelMantes-la-Jolieun"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="42595"/>
+        <numericalAttribute type="nt_Longitude" value="1.714958"/>
+        <numericalAttribute type="nt_Latitude" value="48.989323"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SaintGermainEnLaye" type="et_Ville" minLevel="2" mapId="e_SaintGermainEnLaye">
+      <elementName>
+        <name language="fr" text="Saint-Germain-en-Laye"/>
+        <name language="en" text="Saint-Germain-en-Laye"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Saint-Germain-en-Laye"/>
+          <value language="en" value="Saint-Germain-en-Laye"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Saint-Germain-en-Laye"/>
+          <value language="en" value="Saint-Germain-en-Laye"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="40940"/>
+        <numericalAttribute type="nt_Longitude" value="2.093761"/>
+        <numericalAttribute type="nt_Latitude" value="48.898908"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Rambouillet" type="et_Ville" minLevel="3" mapId="e_Rambouillet">
+      <elementName>
+        <name language="fr" text="Rambouillet"/>
+        <name language="en" text="Rambouillet"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Rambouillet"/>
+          <value language="en" value="Rambouillet"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Rambouillet"/>
+          <value language="en" value="Rambouillet"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="26155"/>
+        <numericalAttribute type="nt_Longitude" value="1.8290798"/>
+        <numericalAttribute type="nt_Latitude" value="48.64386"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Sartrouville" type="et_Ville" minLevel="3" mapId="e_Sartrouville">
+      <elementName>
+        <name language="fr" text="Sartrouville"/>
+        <name language="en" text="Sartrouville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Sartrouville"/>
+          <value language="en" value="Sartrouville"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Sartrouville"/>
+          <value language="en" value="Sartrouville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="51445"/>
+        <numericalAttribute type="nt_Longitude" value="2.158431"/>
+        <numericalAttribute type="nt_Latitude" value="48.941106"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Poissy" type="et_Ville" minLevel="4" mapId="e_Poissy">
+      <elementName>
+        <name language="fr" text="Poissy"/>
+        <name language="en" text="Poissy"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Poissy"/>
+          <value language="en" value="Poissy"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Poissy"/>
+          <value language="en" value="Poissy"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="37465"/>
+        <numericalAttribute type="nt_Longitude" value="2.046982"/>
+        <numericalAttribute type="nt_Latitude" value="48.929584"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_ConflansSainteHonorine" type="et_Ville" minLevel="4" mapId="e_ConflansSainteHonorine">
+      <elementName>
+        <name language="fr" text="Conflans-Sainte-Honorine"/>
+        <name language="en" text="Conflans-Sainte-Honorine"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Conflans-Sainte-Honorine"/>
+          <value language="en" value="Conflans-Sainte-Honorine"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Conflans-Sainte-Honorine"/>
+          <value language="en" value="Conflans-Sainte-Honorine"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="34815"/>
+        <numericalAttribute type="nt_Longitude" value="2.09178"/>
+        <numericalAttribute type="nt_Latitude" value="49.000275"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 79-->
+    <element id="el_Niort" type="et_Ville" minLevel="0" mapId="e_Niort">
+      <elementName>
+        <name language="fr" text="Niort"/>
+        <name language="en" text="Niort"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Niort"/>
+          <value language="en" value="Niort"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Niort"/>
+          <value language="en" value="Niort"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="58075"/>
+        <numericalAttribute type="nt_Longitude" value="-0.457584"/>
+        <numericalAttribute type="nt_Latitude" value="46.323857"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Bressuire" type="et_Ville" minLevel="1" mapId="e_Bressuire">
+      <elementName>
+        <name language="fr" text="Bressuire"/>
+        <name language="en" text="Bressuire"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Bressuire"/>
+          <value language="en" value="Bressuire"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Bressuire"/>
+          <value language="en" value="Bressuire"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="18605"/>
+        <numericalAttribute type="nt_Longitude" value="-0.491137"/>
+        <numericalAttribute type="nt_Latitude" value="46.842676"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Parthenay" type="et_Ville" minLevel="2" mapId="e_Parthenay">
+      <elementName>
+        <name language="fr" text="Parthenay"/>
+        <name language="en" text="Parthenay"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Parthenay"/>
+          <value language="en" value="Parthenay"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Parthenay"/>
+          <value language="en" value="Parthenay"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="10405"/>
+        <numericalAttribute type="nt_Longitude" value="-0.248225"/>
+        <numericalAttribute type="nt_Latitude" value="46.645358"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 80-->
+    <element id="el_Amiens" type="et_Ville" minLevel="0" mapId="e_Amiens">
+      <elementName>
+        <name language="fr" text="Amiens"/>
+        <name language="en" text="Amiens"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Amiens"/>
+          <value language="en" value="Amiens"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Amiens"/>
+          <value language="en" value="Amiens"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="34380"/>
+        <numericalAttribute type="nt_Longitude" value="2.295753"/>
+        <numericalAttribute type="nt_Latitude" value="49.894067"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Abbeville" type="et_Ville" minLevel="1" mapId="e_Abbeville">
+      <elementName>
+        <name language="fr" text="Abbeville"/>
+        <name language="en" text="Abbeville"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Abbeville"/>
+          <value language="en" value="Abbeville"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Abbeville"/>
+          <value language="en" value="Abbeville"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="24130"/>
+        <numericalAttribute type="nt_Longitude" value="1.836833"/>
+        <numericalAttribute type="nt_Latitude" value="50.105467"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Peronne" type="et_Ville" minLevel="2" mapId="e_Peronne">
+      <elementName>
+        <name language="fr" text="Péronne"/>
+        <name language="en" text="Péronne"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Péronne"/>
+          <value language="en" value="Péronne"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Péronne"/>
+          <value language="en" value="Péronne"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="8220"/>
+        <numericalAttribute type="nt_Longitude" value="2.933353"/>
+        <numericalAttribute type="nt_Latitude" value="49.933071"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Montdidier" type="et_Ville" minLevel="3" mapId="e_Montdidier">
+      <elementName>
+        <name language="fr" text="Montdidier"/>
+        <name language="en" text="Montdidier"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Montdidier"/>
+          <value language="en" value="Montdidier"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Montdidier"/>
+          <value language="en" value="Montdidier"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="6010"/>
+        <numericalAttribute type="nt_Longitude" value="2.566932"/>
+        <numericalAttribute type="nt_Latitude" value="49.647007"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 81-->
+    <element id="el_Albi" type="et_Ville" minLevel="0" mapId="e_Albi">
+      <elementName>
+        <name language="fr" text="Albi"/>
+        <name language="en" text="Albi"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Albi"/>
+          <value language="en" value="Albi"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Albi"/>
+          <value language="en" value="Albi"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="48890"/>
+        <numericalAttribute type="nt_Longitude" value="2.148255"/>
+        <numericalAttribute type="nt_Latitude" value="43.927424"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Castres" type="et_Ville" minLevel="1" mapId="e_Castres">
+      <elementName>
+        <name language="fr" text="Castres"/>
+        <name language="en" text="Castres"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Castres"/>
+          <value language="en" value="Castres"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Castres"/>
+          <value language="en" value="Castres"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="43010"/>
+        <numericalAttribute type="nt_Longitude" value="2.241008"/>
+        <numericalAttribute type="nt_Latitude" value="43.605291"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 82-->
+    <element id="el_Montauban" type="et_Ville" minLevel="0" mapId="e_Montauban">
+      <elementName>
+        <name language="fr" text="Montauban"/>
+        <name language="en" text="Montauban"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Montauban"/>
+          <value language="en" value="Montauban"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Montauban"/>
+          <value language="en" value="Montauban"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="55975"/>
+        <numericalAttribute type="nt_Longitude" value="1.358914"/>
+        <numericalAttribute type="nt_Latitude" value="44.017575"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Castelsarrasin" type="et_Ville" minLevel="1" mapId="e_Castelsarrasin">
+      <elementName>
+        <name language="fr" text="Castelsarrasin"/>
+        <name language="en" text="Castelsarrasin"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Castelsarrasin"/>
+          <value language="en" value="Castelsarrasin"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Castelsarrasin"/>
+          <value language="en" value="Castelsarrasin"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="13350"/>
+        <numericalAttribute type="nt_Longitude" value="1.105343"/>
+        <numericalAttribute type="nt_Latitude" value="44.04201"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 83-->
+    <element id="el_Toulon" type="et_Ville" minLevel="0" mapId="e_Toulon">
+       <elementName>
+        <name language="fr" text="Toulon"/>
+        <name language="en" text="Toulon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Toulon"/>
+          <value language="en" value="Toulon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Toulon"/>
+          <value language="en" value="Toulon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="166735"/>
+        <numericalAttribute type="nt_Longitude" value="5.931112"/>
+        <numericalAttribute type="nt_Latitude" value="43.125161"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Draguignan" type="et_Ville" minLevel="1" mapId="e_Draguignan">
+       <elementName>
+        <name language="fr" text="Draguignan"/>
+        <name language="en" text="Draguignan"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Draguignan"/>
+          <value language="en" value="Draguignan"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Draguignan"/>
+          <value language="en" value="Draguignan"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="37090"/>
+        <numericalAttribute type="nt_Longitude" value="6.464732"/>
+        <numericalAttribute type="nt_Latitude" value="43.541094"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Brignoles" type="et_Ville" minLevel="2" mapId="e_Brignoles">
+       <elementName>
+        <name language="fr" text="Brignoles"/>
+        <name language="en" text="Brignoles"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Brignoles"/>
+          <value language="en" value="Brignoles"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Brignoles"/>
+          <value language="en" value="Brignoles"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="15910"/>
+        <numericalAttribute type="nt_Longitude" value="6.061752"/>
+        <numericalAttribute type="nt_Latitude" value="43.40627"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SeyneSurMer" type="et_Ville" minLevel="3" mapId="e_SeyneSurMer">
+       <elementName>
+        <name language="fr" text="La Seyne-sur-Mer"/>
+        <name language="en" text="La Seyne-sur-Mer"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Seyne-sur-Mer"/>
+          <value language="en" value="La Seyne-sur-Mer"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Seyne-sur-Mer"/>
+          <value language="en" value="La Seyne-sur-Mer"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="60000"/>
+        <numericalAttribute type="nt_Longitude" value="5.882861"/>
+        <numericalAttribute type="nt_Latitude" value="43.094468"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Hyeres" type="et_Ville" minLevel="4" mapId="e_Hyeres">
+       <elementName>
+        <name language="fr" text="Hyères"/>
+        <name language="en" text="Hyères"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Hyères"/>
+          <value language="en" value="Hyères"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Hyères"/>
+          <value language="en" value="Hyères"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="55135"/>
+        <numericalAttribute type="nt_Longitude" value="6.128577"/>
+        <numericalAttribute type="nt_Latitude" value="43.119869"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Frejus" type="et_Ville" minLevel="4" mapId="e_Frejus">
+       <elementName>
+        <name language="fr" text="Fréjus"/>
+        <name language="en" text="Fréjus"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Fréjus"/>
+          <value language="en" value="Fréjus"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Fréjus"/>
+          <value language="en" value="Fréjus"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="52685"/>
+        <numericalAttribute type="nt_Longitude" value="6.73518"/>
+        <numericalAttribute type="nt_Latitude" value="43.432468"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 84-->
+    <element id="el_Avignon" type="et_Ville" minLevel="0" mapId="e_Avignon">
+      <elementName>
+        <name language="fr" text="Avignon"/>
+        <name language="en" text="Avignon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Avignon"/>
+          <value language="en" value="Avignon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Avignon"/>
+          <value language="en" value="Avignon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="90110"/>
+        <numericalAttribute type="nt_Longitude" value="4.805941"/>
+        <numericalAttribute type="nt_Latitude" value="43.948744"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Carpentras" type="et_Ville" minLevel="1" mapId="e_Carpentras">
+      <elementName>
+        <name language="fr" text="Carpentras"/>
+        <name language="en" text="Carpentras"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Carpentras"/>
+          <value language="en" value="Carpentras"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Carpentras"/>
+          <value language="en" value="Carpentras"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="30065"/>
+        <numericalAttribute type="nt_Longitude" value="5.047693"/>
+        <numericalAttribute type="nt_Latitude" value="44.052077"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Apt" type="et_Ville" minLevel="2" mapId="e_Apt">
+      <elementName>
+        <name language="fr" text="Apt"/>
+        <name language="en" text="Apt"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Apt"/>
+          <value language="en" value="Apt"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="d'Apt"/>
+          <value language="en" value="Apt"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="11145"/>
+        <numericalAttribute type="nt_Longitude" value="5.393848"/>
+        <numericalAttribute type="nt_Latitude" value="43.876502"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Villes 85-->
+    <element id="el_LaRocheSurYon" type="et_Ville" minLevel="0" mapId="e_LaRocheSurYon">
+      <elementName>
+        <name language="fr" text="La Roche-sur-Yon"/>
+        <name language="en" text="La Roche-sur-Yon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="La Roche-sur-Yon"/>
+          <value language="en" value="La Roche-sur-Yon"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Roche-sur-Yon"/>
+          <value language="en" value="La Roche-sur-Yon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="51725"/>
+        <numericalAttribute type="nt_Longitude" value="-1.418721"/>
+        <numericalAttribute type="nt_Latitude" value="46.669378"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_SablesOlonne" type="et_Ville" minLevel="1" mapId="e_SablesOlonne">
+      <elementName>
+        <name language="fr" text="Les Sables-d'Olonne"/>
+        <name language="en" text="Les Sables-d'Olonne"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Les Sables-d'Olonne"/>
+          <value language="en" value="Les Sables-d'Olonne"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="des Sables-d'Olonne"/>
+          <value language="en" value="Les Sables-d'Olonne"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="15025"/>
+        <numericalAttribute type="nt_Longitude" value="-1.771294"/>
+        <numericalAttribute type="nt_Latitude" value="46.496177"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_FontenayLeComte" type="et_Ville" minLevel="2" mapId="e_FontenayLeComte">
+      <elementName>
+        <name language="fr" text="Fontenay-le-Comte"/>
+        <name language="en" text="Fontenay-le-Comte"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Fontenay-le-Comte"/>
+          <value language="en" value="Fontenay-le-Comte"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Fontenay-le-Comte"/>
+          <value language="en" value="Fontenay-le-Comte"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Population" value="14340"/>
+        <numericalAttribute type="nt_Longitude" value="-0.806065"/>
+        <numericalAttribute type="nt_Latitude" value="46.465952"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
     <!--Villes étrangères sur cours d'eau passant en France-->
     <element id="el_Coblence" type="et_Ville" minLevel="2" mapId="e_Coblence">
       <elementName>
@@ -10839,7 +11908,7 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_TournonSurRhone"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Valence"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Montelimar"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Avignon"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Avignon"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Arles"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_AinRiviere"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Saone"/>
@@ -10998,25 +12067,25 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_SeineMaritime"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Troyes"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_NogentSurSeine"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Melun"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_CorbeilEssonnes"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Melun"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_CorbeilEssonnes"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Evry"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_SavignySurOrge"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_VitrySurSeine"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_VitrySurSeine"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_ParisVille"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_BoulogneBillancourt"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_BoulogneBillancourt"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Courbevoie"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_AsnieresSurSeine"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_SaintDenis"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Argenteuil"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Colombes"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Colombes"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sartrouville"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_ConflansSainteHonorine"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Poissy"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_MantesLaJolie"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_MantesLaJolie"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Andelys"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_SottevilleLesRouen"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Rouen"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_SottevilleLesRouen"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Rouen"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_AubeRiviere"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_YonneRiviere"/>
         <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Loing"/>-->
@@ -11025,8 +12094,8 @@
         <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Epte"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Andelle"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_EureRiviere"/>
-        <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Risle"/>
-        <relation type="r11_Fleuve_VilleEmbouchure" linkedElement="el_Havre"/>-->
+        <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Risle"/>-->
+        <relation type="r11_Fleuve_VilleEmbouchure" linkedElement="el_Havre"/>
       </relationList>
     </element>
     <element id="el_Garonne" type="et_FleuveRiviere" minLevel="0" mapId="e_Garonne">
@@ -11260,8 +12329,8 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_ChalonsEnChampagne"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Epernay"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_ChateauThierry"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Meaux"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_NogentSurMarne"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Meaux"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_NogentSurMarne"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_ChampignySurMarne"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_SaintMaurDesFosses"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Creteil"/>-->
@@ -11388,7 +12457,7 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_Savoie"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_IsereDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_DromeDepartement"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Albertville"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Albertville"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Grenoble"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_RomansSurIsere"/>
         <!--<relation type="r1N_Riviere_Affluents" linkedElement="el_Arc"/>
@@ -11434,8 +12503,8 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_HauteGaronne"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_TarnEtGaronne"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Millau"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Albi"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Montauban"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Albi"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Montauban"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Agout"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_AveyronRiviere"/>
       </relationList>
@@ -11779,7 +12848,7 @@
         <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Pontoise"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Cergy"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement ="el_AisneRiviere"/>
-        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_ConflansSainteHonorine"/>-->
+        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_ConflansSainteHonorine"/>
       </relationList>
     </element>
     <element id="el_AisneRiviere" type="et_FleuveRiviere" minLevel="1" mapId="e_Aisne">
@@ -12344,9 +13413,9 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_AisneDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_SommeDepartement"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_SaintQuentin"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Peronne"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Peronne"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Amiens"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Abbeville"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Abbeville"/>
       </relationList>
     </element>
     <element id="el_Ill" type="et_FleuveRiviere" minLevel="1" mapId="e_Ill">
@@ -12699,7 +13768,7 @@
       <relationList>
         <relation type="rNN_Riviere_Departements" linkedElement="el_HeraultDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_TarnDepartement"/>
-        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Castres"/>-->
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Castres"/>
       </relationList>
     </element>
     <element id="el_GaveOloron" type="et_FleuveRiviere" minLevel="2" mapId="e_GaveOloron">

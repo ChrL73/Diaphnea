@@ -2587,7 +2587,7 @@
       <lineElement id="e_Lys" category="ca_FleuveRiviere" importance="0">
         <name>
           <name language="fr" text="Lys"/>
-          <name language="en" text="Lys"/>
+          <name language="en" text="Leie"/>
         </name>
         <looks>
           <look id="ll_FleuveRiviere"/>

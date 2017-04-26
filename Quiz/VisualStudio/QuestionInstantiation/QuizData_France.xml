@@ -6959,8 +6959,8 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Lesparre-Médoc-Médoc"/>
-          <value language="en" value="Toulouse"/>
+          <value language="fr" value="Lesparre-Médoc"/>
+          <value language="en" value="Lesparre-Médoc"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Lesparre-Médoc"/>
@@ -14526,7 +14526,7 @@
       </relationList>
     </element>
     <element id="el_GavesReunis" type="et_FleuveRiviere" minLevel="1" mapId="e_GavesReunis">
-       <elementName>
+      <elementName>
         <name language="fr" text="Gaves réunis"/>
         <name language="en" text="Gaves réunis" />
       </elementName>
@@ -14545,7 +14545,7 @@
         </attribute>
         <attribute type="at_Nom4">
           <value language="fr" value="les Gaves réunis sont-ils"/>
-          <value language="en" value="Somme"/>
+          <value language="en" value="Gaves réunis"/>
         </attribute>
         <!--<attribute type="at_NomConfluence" >
           <value language="fr" value="des Gaves réunis et de l'Adour"/>
@@ -14852,12 +14852,12 @@
           <value language="en" value="Gave d'Oloron"/>
         </attribute>
         <attribute type="at_Nom3">
-          <value language="fr" value="le Gave d'Oloronu"/>
+          <value language="fr" value="le Gave d'Oloron"/>
           <value language="en" value="Gave d'Oloron"/>
         </attribute>
         <attribute type="at_Nom4">
-          <value language="fr" value="le Gave de Pau est-il"/>
-          <value language="en" value="Gave de Pau"/>
+          <value language="fr" value="le Gave d'Oloron est-il"/>
+          <value language="en" value="Gave d'Oloron"/>
         </attribute>
         <attribute type="at_NomConfluence" >
           <value language="fr" value="du Gave d'Oloron et du Gave de Pau"/>
@@ -15303,8 +15303,8 @@
     </element>
     <element id="el_SevreNiortaise" type="et_FleuveRiviere" minLevel="2" mapId="e_SevreNiortaise">
       <elementName>
-        <name language="fr" text="Sèvre Niortaise Niortaise"/>
-        <name language="en" text="Aude"/>
+        <name language="fr" text="Sèvre Niortaise"/>
+        <name language="en" text="Sèvre Niortaise"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1" >
@@ -15321,7 +15321,7 @@
         </attribute>
         <attribute type="at_Nom4">
           <value language="fr" value="la Sèvre Niortaise est-elle"/>
-          <value language="en" value="Aude"/>
+          <value language="en" value="Sèvre Niortaise"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -15396,7 +15396,7 @@
         </attribute>
         <attribute type="at_Nom4">
           <value language="fr" value="l'Orne est-elle"/>
-          <value language="en" value="Aude"/>
+          <value language="en" value="Orne"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -15619,7 +15619,7 @@
         </attribute>
         <attribute type="at_Nom3">
           <value language="fr" value="l'Arc"/>
-          <value language="en" value="Agout"/>
+          <value language="en" value="Arc"/>
         </attribute>
         <attribute type="at_Nom4">
           <value language="fr" value="l'Arc est-il"/>
@@ -15627,7 +15627,7 @@
         </attribute>
         <attribute type="at_NomConfluence" >
           <value language="fr" value="de l'Arc et de l'Isère"/>
-          <value language="en" value="Agout and the Isère"/>
+          <value language="en" value="Arc and the Isère"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -17335,6 +17335,60 @@
         <questionText language="en" text="Which of thes rivers is the longest?"/>
     </attributeOrderQuestionCategory>
     </attributeOrderQuestionCategoryList>
+    <relationLimitQuestionCategoryList>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                     answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="60" minLevel="1">
+        <questionText language="fr" text="Dans quel département se situe la source {0} ?"/>
+        <questionText language="en" text="In which department is the source of the {0}?"/> 
+        <exception questionElement="el_GavesReunis"/>
+        <exception questionElement="el_Maine"/>
+        <exception questionElement="el_Sauldre"/>
+        <exception questionElement="el_AriegeRiviere"/>
+        <!--<exception questionElement="el_Maroni"/>-->
+        <exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_Garonne"/>
+        <exception questionElement="el_RhoneFleuve"/>
+        <exception questionElement="el_Rhin"/>
+        <exception questionElement="el_VireFleuve"/>
+        <exception questionElement="el_Vilaine"/>
+        <exception questionElement="el_Selune"/>
+      </relationLimitQuestionCategory>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                     answerProximityCriterion="NONE" weight="40" minLevel="2">
+        <questionText language="fr" text="Quel est le numéro du département où se situe la source {0} ?"/>
+        <questionText language="en" text="What is the number of the department where the source of the {0} is located?"/> 
+        <exception questionElement="el_GavesReunis"/>
+        <exception questionElement="el_Maine"/>
+        <exception questionElement="el_Sauldre"/>
+        <exception questionElement="el_AriegeRiviere"/>
+        <!--<exception questionElement="el_Maroni"/>-->
+        <exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_Garonne"/>
+        <exception questionElement="el_RhoneFleuve"/>
+        <exception questionElement="el_Rhin"/>
+        <exception questionElement="el_VireFleuve"/>
+        <exception questionElement="el_Vilaine"/>
+        <exception questionElement="el_Selune"/>
+      </relationLimitQuestionCategory>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                     answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="40" minLevel="1">
+        <questionText language="fr" text="Dans quel département se situe le confluent {0} ?"/>
+        <questionText language="en" text="In which department is the confluence of the {0}?"/> 
+        <exception questionElement="el_Lys"/>
+        <exception questionElement="el_Sambre"/>
+        <exception questionElement="el_Sarre"/>
+        <exception questionElement="el_MoselleRiviere"/>
+      </relationLimitQuestionCategory>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Numero"
+                                    answerProximityCriterion="ELEMENT_LOCATION" weight="30" minLevel="2">
+        <questionText language="fr" text="Quel est le numéro du département où se situe le confluent {0} ?"/>
+        <questionText language="en" text="What is the number of the department where the confluence of the {0} is located?"/> 
+        <exception questionElement="el_Lys"/>
+        <exception questionElement="el_Sambre"/>
+        <exception questionElement="el_Sarre"/>
+        <exception questionElement="el_MoselleRiviere"/>
+      </relationLimitQuestionCategory>
+    </relationLimitQuestionCategoryList>
   </questionCategories>
   
 </quizData>

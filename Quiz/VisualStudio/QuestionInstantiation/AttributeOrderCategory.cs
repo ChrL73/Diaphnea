@@ -103,7 +103,7 @@ namespace QuestionInstantiation
             return categoryDocument;
         }
 
-        internal BsonDocument getChoiceListDocument(string questionnaireId)
+        private BsonDocument getChoiceListDocument(string questionnaireId)
         {
             BsonArray choicesArray = new BsonArray();
             foreach (AttributeOrderElement element in _elementList)

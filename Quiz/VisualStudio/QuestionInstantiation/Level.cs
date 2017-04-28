@@ -178,9 +178,8 @@ namespace QuestionInstantiation
             if (addRelationNQuestions() != 0) return -1;
             if (addAttributeOrderQuestions() != 0) return -1;
             if (addRelationLimitQuestions() != 0) return -1;
-            
-            /*if (!addRelationOrderQuestions()) return false;
-            if (!addRelationExistenceQuestions()) return false;*/
+            if (addRelationOrderQuestions() != 0) return -1;
+            //if (!addRelationExistenceQuestions()) return false;
 
             foreach(KeyValuePair<XmlElementType, List<Element>> pair in _elementByTypeDictionary)
             {
@@ -886,9 +885,9 @@ namespace QuestionInstantiation
                             }
                         }
 
-                       int choiceCount = category.ChoiceCount;
+                        int choiceCount = category.ChoiceCount;
 
-                       if (category.QuestionCount == 0)
+                        if (category.QuestionCount == 0)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
                                 _nameInLog, questionNameInLog));
@@ -922,6 +921,133 @@ namespace QuestionInstantiation
                             _nameInLog, questionNameInLog, endElementType.id));
                     }
                 }
+	        }
+
+            return 0;
+        }
+
+        private int addRelationOrderQuestions()
+        {
+            foreach (XmlRelationOrderQuestionCategory xmlRelationOrderQuestionCategory in _quizData.XmlQuizData.questionCategories.relationOrderQuestionCategoryList)
+	        {
+                int minLevel = Int32.Parse(xmlRelationOrderQuestionCategory.minLevel);
+		        if (_value >= minLevel)
+		        {
+                    RelationType relationType = _quizData.getRelationType(xmlRelationOrderQuestionCategory.relation);
+                    if (xmlRelationOrderQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
+
+                    string questionNameInLog = xmlRelationOrderQuestionCategory.questionText[0].text;
+
+                    if (relationType.Nature == RelationNatureEnum.RELATION_11 || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.DIRECT))
+                    {
+                        MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format(
+                               "Error in {0}: Error in definition of category \"{1}\": Relation ({2}) can not define \"relation order\" questions",
+                               _quizData.DataFileName, questionNameInLog, relationType.FullName));
+                        return -1;
+                    }
+
+                    XmlElementType startElementType = relationType.StartType;
+                    XmlElementType endElementType = relationType.EndType;
+
+                    if (_elementByTypeDictionary.ContainsKey(startElementType) && _elementByTypeDictionary.ContainsKey(endElementType))
+			        {
+                        XmlAttributeType questionAttributeType = _quizData.getXmlAttributeType(xmlRelationOrderQuestionCategory.questionAttribute);
+                        if (!questionAttributeType.canBeQuestion)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Error in {0}: Error in definition of category \"{1}\": Attribute {2} can not be used as a question",
+                                _quizData.DataFileName, questionNameInLog, questionAttributeType.id));
+                            return -1;
+                        }
+
+                        XmlAttributeType answerAttributeType = _quizData.getXmlAttributeType(xmlRelationOrderQuestionCategory.answerAttribute);
+
+                        double distribParameterCorrection = 0.0;
+                        if (xmlRelationOrderQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlRelationOrderQuestionCategory.distribParameterCorrection;
+
+                        Int32 weight = Int32.Parse(xmlRelationOrderQuestionCategory.weight);
+                        _weightSum += weight;
+
+				        RelationOrderCategory category = new RelationOrderCategory(_weightSum, questionNameInLog, _quizData, distribParameterCorrection);
+				
+                        foreach (Element startElement in _elementByTypeDictionary[startElementType])
+				        {
+                            AttributeValue questionAttributeValue = startElement.getAttributeValue(questionAttributeType);
+
+					        int endElementCount = startElement.getLinkedNElementCount(relationType);
+
+					        if (questionAttributeValue != null && endElementCount != 0 && endElementCount >= 2 * _choiceCount)
+                            {
+                                Text questionText = new Text();
+                                foreach (XmlQuestionText1P xmlQuestionText in xmlRelationOrderQuestionCategory.questionText)
+                                {
+                                    string languageId = xmlQuestionText.language.ToString();
+                                    string questionString = String.Format(xmlQuestionText.text, questionAttributeValue.Value.getText(languageId));
+                                    questionText.setText(languageId, questionString);
+                                }
+                                if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
+
+						        RelationOrderQuestion question = new RelationOrderQuestion(questionText);
+
+                                int k1, k2, dk;
+                                if (xmlRelationOrderQuestionCategory.mode == XmlRelationOrderModeEnum.BEGIN)
+                                {
+                                    k1 = 0;
+                                    k2 = endElementCount;
+                                    dk = 1;
+                                }
+                                else
+                                {
+                                    k1 = endElementCount - 1;
+                                    k2 = -1;
+                                    dk = -1;
+                                }
+
+						        int k;
+						        for (k = k1; k != k2; k += dk)
+						        {
+							        Element linkedElement = startElement.getLinkedNElement(relationType, k);
+                                    AttributeValue answerAttributeValue = linkedElement.getAttributeValue(answerAttributeType);
+							        if (answerAttributeValue != null)
+							        {
+                                        Choice choice = new Choice(answerAttributeValue, linkedElement, _quizData);
+                                        question.addChoice(choice);
+							        }
+						        }	
+
+						        if (question.ChoiceCount >= 2 * _choiceCount)
+						        {
+							        category.addQuestion(question);
+						        }
+					        }
+				        }
+
+                        if (category.QuestionCount == 0)
+                        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format("Level \"{0}\": No question in category \"{1}\". The category is ignored",
+                                _nameInLog, questionNameInLog));
+                            _weightSum -= weight;
+                        }
+				        else
+				        {
+                            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("Level \"{0}\", category \"{1}\": {2} question(s)",
+                                _nameInLog, questionNameInLog, category.QuestionCount));
+                            _categoryList.Add(category);
+                            _totalQuestionCount += category.QuestionCount;
+				        }
+			        }
+			        else if (!_elementByTypeDictionary.ContainsKey(startElementType))
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, startElementType.id));
+			        }
+			        else
+			        {
+                        MessageLogger.addMessage(XmlLogLevelEnum.WARNING, String.Format(
+                            "Level \"{0}\": No question in category \"{1}\" because there is no element of type {2}. The category is ignored",
+                            _nameInLog, questionNameInLog, endElementType.id));
+			        }
+		        }
 	        }
 
             return 0;

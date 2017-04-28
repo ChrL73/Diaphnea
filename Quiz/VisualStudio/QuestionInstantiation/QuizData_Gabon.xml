@@ -521,6 +521,7 @@
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList/>
     <attributeOrderQuestionCategoryList/>
+    <relationLimitQuestionCategoryList/>
   </questionCategories>
   
 </quizData>

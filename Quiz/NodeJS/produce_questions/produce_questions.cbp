@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="57b59c7bdb404c1c20add652 fr" />
+				<Option parameters="5909b4afdb404c23a8247b7b fr" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -76,6 +76,10 @@
 		<Unit filename="QuizData.h" />
 		<Unit filename="RandomNumberGenerator.cpp" />
 		<Unit filename="RandomNumberGenerator.h" />
+		<Unit filename="RelationOrderCategory.cpp" />
+		<Unit filename="RelationOrderCategory.h" />
+		<Unit filename="RelationOrderQuestion.cpp" />
+		<Unit filename="RelationOrderQuestion.h" />
 		<Unit filename="SimpleAnswerCategory.cpp" />
 		<Unit filename="SimpleAnswerCategory.h" />
 		<Unit filename="SimpleAnswerQuestion.cpp" />

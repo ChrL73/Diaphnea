@@ -5,6 +5,8 @@
 #include "MultipleAnswerCategory.h"
 #include "MultipleAnswerQuestion.h"
 #include "AttributeOrderCategory.h"
+#include "RelationOrderCategory.h"
+#include "RelationOrderQuestion.h"
 #include "Choice.h"
 #include "AttributeOrderChoice.h"
 #include "TextAndComment.h"
@@ -75,6 +77,9 @@ namespace produce_questions
 
         std::map<std::pair<std::string, int>, const AttributeOrderChoice *>::iterator attributeOrderChoiceIt = _attributeOrderChoiceMap.begin();
         for (; attributeOrderChoiceIt != _attributeOrderChoiceMap.end(); ++attributeOrderChoiceIt) delete (*attributeOrderChoiceIt).second;
+
+        std::map<std::pair<std::string, int>, const RelationOrderQuestion *>::iterator relationOrderQuestionIt = _relationOrderQuestionMap.begin();
+        for (; relationOrderQuestionIt != _relationOrderQuestionMap.end(); ++relationOrderQuestionIt) delete (*relationOrderQuestionIt).second;
 
         mongo::Status status = mongo::client::shutdown();
         if (!status.isOK())
@@ -155,6 +160,16 @@ namespace produce_questions
                         AttributeOrderCategory *attributeOrderCategory = new AttributeOrderCategory(weightIndex, questionText, categoryChoiceCount, choiceListId, distribParameterCorrection, maxIndex);
 
                         categoryVector.push_back(attributeOrderCategory);
+                    }
+                    else if  (strcmp(categoryType, "RelationOrder") == 0)
+                    {
+                        int categoryQuestionCount = dbCategory.getIntField("question_count");
+                        std::string questionListId = dbCategory.getField("question_list").OID().toString();
+                        double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
+
+                        RelationOrderCategory *relationOrderCategory = new RelationOrderCategory(weightIndex, categoryQuestionCount, questionListId, distribParameterCorrection);
+
+                        categoryVector.push_back(relationOrderCategory);
                     }
                 }
 
@@ -366,6 +381,68 @@ namespace produce_questions
             else
             {
                 it = _attributeOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, AttributeOrderChoice *>(key, 0)).first;
+            }
+        }
+
+        return (*it).second;
+    }
+
+    const RelationOrderQuestion *QuizData::getRelationOrderQuestion(const std::string& questionListId, int index)
+    {
+        std::pair<std::string, int> key(questionListId, index);
+        std::map<std::pair<std::string, int>, const RelationOrderQuestion *>::iterator it = _relationOrderQuestionMap.find(key);
+
+        if (it == _relationOrderQuestionMap.end())
+        {
+            char projectionStr[64];
+            sprintf(projectionStr, "{ questions: { $slice: [%d, 1] } }", index);
+            mongo::BSONObj projection = mongo::fromjson(projectionStr);
+            auto cursor = _connection.query("diaphnea.question_lists", MONGO_QUERY( "_id" << mongo::OID(questionListId)), 1, 0, &projection);
+
+            if (cursor->more())
+            {
+                mongo::BSONObj dbList = cursor->next();
+                mongo::BSONObj dbQuestion = dbList.getField("questions").Array()[0].Obj();
+
+                const char *questionText = dbQuestion.getField("question").Obj().getStringField(_languageId);
+                int choiceCount = dbQuestion.getIntField("choice_count");
+                std::string choiceListId = dbQuestion.getField("choice_list").OID().toString();
+
+                RelationOrderQuestion *question = new RelationOrderQuestion(questionText, choiceCount, choiceListId);
+                it = _relationOrderQuestionMap.insert(std::pair<std::pair<std::string, int>, RelationOrderQuestion *>(key, question)).first;
+            }
+            else
+            {
+                it = _relationOrderQuestionMap.insert(std::pair<std::pair<std::string, int>, RelationOrderQuestion *>(key, 0)).first;
+            }
+        }
+
+        return (*it).second;
+    }
+
+    const std::string& QuizData::getRelationOrderChoice(const std::string& choiceListId, int index)
+    {
+        std::pair<std::string, int> key(choiceListId, index);
+        std::map<std::pair<std::string, int>, std::string>::iterator it = _relationOrderChoiceMap.find(key);
+
+        if (it == _relationOrderChoiceMap.end())
+        {
+            char projectionStr[64];
+            sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
+            mongo::BSONObj projection = mongo::fromjson(projectionStr);
+            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+
+            if (cursor->more())
+            {
+                mongo::BSONObj dbList = cursor->next();
+                mongo::BSONObj dbChoice = dbList.getField("choices").Array()[0].Obj();
+                const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
+
+                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, std::string>(key, choiceText)).first;
+            }
+            else
+            {
+                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, std::string>(key, std::string())).first;
             }
         }
 

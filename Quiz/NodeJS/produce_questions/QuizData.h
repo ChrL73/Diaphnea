@@ -5,7 +5,15 @@
 #endif
 
 #include "ProximityCriterionTypeEnum.h"
+
+#ifdef __GNUC__
+// Avoid this warning: ‘template<class> class std::auto_ptr’ is deprecated
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
 #include "mongo/client/dbclient.h"
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
+#endif
 
 #include <map>
 #include <string>
@@ -17,6 +25,7 @@ namespace produce_questions
     class MultipleAnswerQuestion;
     class Choice;
     class AttributeOrderChoice;
+    class RelationOrderQuestion;
 
     class QuizData
     {
@@ -37,6 +46,8 @@ namespace produce_questions
         std::map<std::pair<std::string, int>, const MultipleAnswerQuestion *> _multipleAnswerQuestionMap;
         std::map<std::pair<std::string, int>, const Choice *> _choiceMap;
         std::map<std::pair<std::string, int>, const AttributeOrderChoice *> _attributeOrderChoiceMap;
+        std::map<std::pair<std::string, int>, const RelationOrderQuestion *> _relationOrderQuestionMap;
+        std::map<std::pair<std::string, int>, std::string> _relationOrderChoiceMap;
 
     public:
         static QuizData *instance(void);
@@ -49,5 +60,7 @@ namespace produce_questions
         const MultipleAnswerQuestion *getMultipleAnswerQuestion(const std::string& questionListId, int index, ProximityCriterionTypeEnum proximityCriterionType, const std::vector<const Choice *>& choiceVector);
         const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
         const AttributeOrderChoice *getAttributeOrderChoice(const std::string& choiceListId, int index);
+        const RelationOrderQuestion *getRelationOrderQuestion(const std::string& questionListId, int index);
+        const std::string& getRelationOrderChoice(const std::string& choiceListId, int index);
     };
 }

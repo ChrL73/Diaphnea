@@ -3,7 +3,6 @@
 
 namespace produce_questions
 {
-
     Level::~Level()
     {
         int i, n = _categoryVector.size();

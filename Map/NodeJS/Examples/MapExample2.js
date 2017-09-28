@@ -3,7 +3,7 @@ $(function()
    document.addEventListener('wheel', function(e) { e.preventDefault(); });
    $('#svg').hide();
    
-   var url = 'http://192.168.50.148:3001';
+   var url = 'http://192.168.50.197:3001';
    mapServerInterface.createNewConnection(url, onConnected, onError);
    
    function onError(error)
@@ -14,7 +14,7 @@ $(function()
    function onConnected(mapServerConnection)
    {
       var canvasId = 'canvas';
-      var mapId = '_France';   
+      var mapId = '_Gabon';   
       mapServerConnection.loadMap(mapId, canvasId, onMapLoaded);
       
       function onMapLoaded(map)

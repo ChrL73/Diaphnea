@@ -199,8 +199,10 @@ namespace MapDataProcessing
                 List<string> lookIds = new List<string>();
                 foreach (XmlPolygonLookRef lookRef in xmlPolygonElement.looks) lookIds.Add(lookRef.id);
 
+                double importance = _mapData.getCategory(xmlPolygonElement.category).Importance + xmlPolygonElement.importance;
+
                 PolygonMapElement polygonMapElement = new PolygonMapElement(id, _mapData, xmlPolygonElement.name, xmlPolygonElement.shortName,
-                                                                            xmlPolygonElement.importance, lookIds, xmlPolygonElement.category, coveredElementList);
+                                                                            importance, lookIds, xmlPolygonElement.category, coveredElementList);
                 _elementDictionary.Add(id, polygonMapElement);
                 _elementLinker.addElement(id, polygonMapElement);
             }
@@ -212,7 +214,9 @@ namespace MapDataProcessing
                 List<string> lookIds = new List<string>();
                 foreach (XmlLineLookRef lookRef in xmlLineElement.looks) lookIds.Add(lookRef.id);
 
-                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, xmlLineElement.importance, lookIds, xmlLineElement.category);
+                double importance = _mapData.getCategory(xmlLineElement.category).Importance + xmlLineElement.importance;
+
+                LineMapElement lineMapElement = new LineMapElement(id, _mapData, xmlLineElement.name, xmlLineElement.shortName, importance, lookIds, xmlLineElement.category);
                 _elementDictionary.Add(id, lineMapElement);
                 _elementLinker.addElement(id, lineMapElement);
             }
@@ -224,7 +228,9 @@ namespace MapDataProcessing
                 List<string> lookIds = new List<string>();
                 foreach (XmlPointLookRef lookRef in xmlPointElement.looks) lookIds.Add(lookRef.id);
 
-                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, xmlPointElement.importance, lookIds, xmlPointElement.category);
+                double importance = _mapData.getCategory(xmlPointElement.category).Importance + xmlPointElement.importance;
+
+                PointMapElement pointMapElement = new PointMapElement(id, _mapData, xmlPointElement.name, xmlPointElement.shortName, importance, lookIds, xmlPointElement.category);
                 _elementDictionary.Add(id, pointMapElement);
                 _elementLinker.addElement(id, pointMapElement);
             }

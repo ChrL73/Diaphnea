@@ -25,6 +25,8 @@ namespace MapDataProcessing
             _name = new ElementName(xmlCategory.name);
         }
 
+        internal double Importance { get { return _xmlCategory.importance; } }
+
         internal BsonDocument getBsonDocument()
         {
             BsonDocument categoryDocument = new BsonDocument()

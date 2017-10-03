@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="MapExample3.css"/>
+      <title>Map example 3</title>
+   </head>
+
+   <body>
+      <div class="container-fluid" style="margin-top:14px;">
+         <div class="row">
+            <div class="modal fade" id="errorModal">
+               <div class="modal-dialog">  
+                  <div class="modal-content">
+                     <div class="modal-body bg-danger">
+                        <span id="errorSpan"></span>
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-10">
+               <canvas id="canvas"></canvas>
+            </div>
+            <div class="col-lg-2">
+               <form id="connectionForm">
+                  <div class="form-group">
+                     <label for="serverInput">Server:</label>
+                     <input class="form-control" type="text" id="serverInput" />
+                  </div>
+                  <div class="form-group">
+                     <label for="portInput">Port:</label>
+                     <input class="form-control" type="text" id="portInput" />
+                  </div>
+                  <div class="form-group">
+                     <input class="btn btn-success" id="connectionButton" type="submit" value="Connection" />
+                  </div>
+               </form>
+               <form id="mapForm" style="display:none;">
+                  <div class="form-group" >
+                     <label for="mapSelect">Map:</label>
+                     <select class="form-control" id="mapSelect" ></select>
+                  </div>
+                  <div class="form-group" >
+                     <label for="languageSelect">Language:</label>
+                     <select class="form-control" id="languageSelect" ></select>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="../API/diaphnea_map_api.js"></script>
+      <script src="MapExample3.js"></script>
+      
+   </body>
+</html>

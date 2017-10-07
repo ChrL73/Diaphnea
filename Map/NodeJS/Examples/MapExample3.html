@@ -8,7 +8,7 @@
    </head>
 
    <body>
-      <div class="container-fluid" style="margin-top:14px;">
+      <div class="container-fluid">
          <div class="row">
             <div class="modal fade" id="errorModal">
                <div class="modal-dialog">  
@@ -20,10 +20,10 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-10">
-               <canvas id="canvas"></canvas>
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6" id="column1">
+               <canvas id="canvas" style="margin-top:14px;margin-bottom:14px;"></canvas>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6"  id="column2" style="overflow:auto;">
                <form id="connectionForm">
                   <div class="form-group">
                      <label for="serverInput">Server:</label>
@@ -46,6 +46,7 @@
                      <label for="languageSelect">Language:</label>
                      <select class="form-control" id="languageSelect" ></select>
                   </div>
+                  <div id="categoryDiv"></div>
                </form>
             </div>
          </div>

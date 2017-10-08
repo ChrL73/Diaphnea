@@ -69,6 +69,7 @@ namespace map_server
             std::set<std::string> coveredElementSet;
 
             n = elementVector.size();
+            bool noElement = (n == 0);
             for (i = 0; i < n; ++i)
             {
                 MapElement *element = elementVector[i];
@@ -306,7 +307,7 @@ namespace map_server
                     _coutMutexPtr->unlock();
                 }
             }
-            else
+            else if (noElement)
             {
                 _coutMutexPtr->lock();
                 std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID

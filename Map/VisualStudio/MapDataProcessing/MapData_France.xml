@@ -106,43 +106,43 @@
   </lookList>
 
   <categoryList>
-    <category id="ca_France">
+    <category id="ca_France" importance="0">
       <name>
         <name language="fr" text="France"/>
         <name language="en" text="France"/>
       </name>
     </category>
-    <category id="ca_Region">
+    <category id="ca_Region" importance="0">
       <name>
         <name language="fr" text="Régions"/>
         <name language="en" text="Regions"/>
       </name>
     </category>
-    <category id="ca_Departement">
+    <category id="ca_Departement" importance="0">
       <name>
         <name language="fr" text="Départements"/>
         <name language="en" text="Departments"/>
       </name>
     </category>
-    <category id="ca_FleuveRiviere">
+    <category id="ca_FleuveRiviere" importance="0">
       <name>
         <name language="fr" text="Cours d'eau"/>
         <name language="en" text="Rivers"/>
       </name>
     </category>
-    <category id="ca_Prefecture">
+    <category id="ca_Prefecture" importance="0">
       <name>
         <name language="fr" text="Chefs-lieux de département"/>
         <name language="en" text="Department capitals"/>
       </name>
     </category>
-    <category id="ca_SousPrefecture">
+    <category id="ca_SousPrefecture" importance="0">
       <name>
         <name language="fr" text="Chefs-lieux d'arrondissement"/>
         <name language="en" text="Arrondissement capitals"/>
       </name>
     </category>
-    <category id="ca_Ville">
+    <category id="ca_Ville" importance="0">
       <name>
         <name language="fr" text="Autres villes"/>
         <name language="en" text="Other cities"/>

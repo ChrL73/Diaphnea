@@ -867,6 +867,8 @@ public partial class XmlCategory {
     
     private string idField;
     
+    private double importanceField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
     public XmlName[] name {
@@ -886,6 +888,17 @@ public partial class XmlCategory {
         }
         set {
             this.idField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public double importance {
+        get {
+            return this.importanceField;
+        }
+        set {
+            this.importanceField = value;
         }
     }
 }

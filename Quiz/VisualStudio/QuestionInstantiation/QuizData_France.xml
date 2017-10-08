@@ -17113,7 +17113,7 @@
   
   <questionCategories>
     <attributeQuestionCategoryList>
-      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
@@ -17132,10 +17132,10 @@
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="10" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} department bears its current name?"/>
-      </attributeQuestionCategory>-->
+      </attributeQuestionCategory>
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
-      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
@@ -17194,10 +17194,10 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
         <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
         <questionText language="en" text="Near which city is the mouth of the {0}?"/>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
@@ -17301,10 +17301,10 @@
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
         <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/> 
-      </relationNQuestionCategory>-->
+      </relationNQuestionCategory>
     </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList>
-      <!--<attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
         <questionText language="en" text="Which of thes cities is the northernmost?"/> 
@@ -17333,19 +17333,19 @@
                                       distribParameterCorrection="0.2">
         <questionText language="fr" text="Lequel de ces cours d'eau est le plus long ?"/>
         <questionText language="en" text="Which of thes rivers is the longest?"/>
-      </attributeOrderQuestionCategory>-->
+      </attributeOrderQuestionCategory>
     </attributeOrderQuestionCategoryList>
     <relationLimitQuestionCategoryList>
-      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                      answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="60" minLevel="1">
         <questionText language="fr" text="Dans quel département se situe la source {0} ?"/>
         <questionText language="en" text="In which department is the source of the {0}?"/> 
         <exception questionElement="el_GavesReunis"/>
         <exception questionElement="el_Maine"/>
         <exception questionElement="el_Sauldre"/>
-        <exception questionElement="el_AriegeRiviere"/>-->
+        <exception questionElement="el_AriegeRiviere"/>
         <!--<exception questionElement="el_Maroni"/>-->
-      <!--<exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_OiseRiviere"/>
         <exception questionElement="el_Garonne"/>
         <exception questionElement="el_RhoneFleuve"/>
         <exception questionElement="el_Rhin"/>
@@ -17360,9 +17360,9 @@
         <exception questionElement="el_GavesReunis"/>
         <exception questionElement="el_Maine"/>
         <exception questionElement="el_Sauldre"/>
-        <exception questionElement="el_AriegeRiviere"/>-->
+        <exception questionElement="el_AriegeRiviere"/>
         <!--<exception questionElement="el_Maroni"/>-->
-      <!--<exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_OiseRiviere"/>
         <exception questionElement="el_Garonne"/>
         <exception questionElement="el_RhoneFleuve"/>
         <exception questionElement="el_Rhin"/>
@@ -17387,7 +17387,7 @@
         <exception questionElement="el_Sambre"/>
         <exception questionElement="el_Sarre"/>
         <exception questionElement="el_MoselleRiviere"/>
-      </relationLimitQuestionCategory>-->
+      </relationLimitQuestionCategory>
     </relationLimitQuestionCategoryList>
     <relationOrderQuestionCategoryList>
       <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
@@ -17411,6 +17411,24 @@
         <questionText language="en" text="Among these tributaries of the {0}, which is the one whose confluence is the most upstream?"/>
       </relationOrderQuestionCategory>
     </relationOrderQuestionCategoryList>
+    <relationExistenceQuestionCategoryList>
+      <relationExistenceQuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" mode="DOES_NOT_EXIST" answerAttribute="at_Nom1" weight="65" minLevel="1">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels sont des fleuves ?"/>
+        <questionText language="en" text="Among these rivers, which flow into a sea or an ocean?"/>
+        <exception questionElement="el_Risle"/>
+        <exception questionElement="el_DordogneFleuve"/>
+      </relationExistenceQuestionCategory>
+      <relationExistenceQuestionCategory relation="r11_Departement_ChefLieu" way="INVERSE" mode="EXISTS" answerAttribute="at_Nom1" weight="100" minLevel="1">
+        <questionText language="fr" text="Parmi ces villes, lesquelles sont des préfectures ?"/>
+        <questionText language="en" text="Among these cities, which are prefectures?"/>
+        <exception questionElement="el_Cergy"/>
+        <exception questionElement="el_Pontoise"/>
+      </relationExistenceQuestionCategory>
+      <relationExistenceQuestionCategory relation="r1N_Departement_ChefsLieuxArrondissement" way="INVERSE" mode="EXISTS" answerAttribute="at_Nom1" weight="100" minLevel="2">
+        <questionText language="fr" text="Parmi ces villes, lesquelles sont des sous-préfectures ?"/>
+        <questionText language="en" text="Among these cities, which are subprefectures?"/>
+      </relationExistenceQuestionCategory>
+    </relationExistenceQuestionCategoryList>
   </questionCategories>
   
 </quizData>

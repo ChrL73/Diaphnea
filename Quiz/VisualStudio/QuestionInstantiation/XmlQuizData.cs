@@ -277,6 +277,209 @@ public enum XmlLanguageStatusEnum {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlRelationExistenceQuestionCategory {
+    
+    private XmlQuestionText0P[] questionTextField;
+    
+    private XmlException1[] exceptionField;
+    
+    private string relationField;
+    
+    private XmlWayEnum wayField;
+    
+    private XmlRelationExistenceModeEnum modeField;
+    
+    private string answerAttributeField;
+    
+    private string weightField;
+    
+    private string minLevelField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("questionText")]
+    public XmlQuestionText0P[] questionText {
+        get {
+            return this.questionTextField;
+        }
+        set {
+            this.questionTextField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("exception")]
+    public XmlException1[] exception {
+        get {
+            return this.exceptionField;
+        }
+        set {
+            this.exceptionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string relation {
+        get {
+            return this.relationField;
+        }
+        set {
+            this.relationField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlWayEnum way {
+        get {
+            return this.wayField;
+        }
+        set {
+            this.wayField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlRelationExistenceModeEnum mode {
+        get {
+            return this.modeField;
+        }
+        set {
+            this.modeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string answerAttribute {
+        get {
+            return this.answerAttributeField;
+        }
+        set {
+            this.answerAttributeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string weight {
+        get {
+            return this.weightField;
+        }
+        set {
+            this.weightField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+    public string minLevel {
+        get {
+            return this.minLevelField;
+        }
+        set {
+            this.minLevelField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlQuestionText0P {
+    
+    private XmlLanguageIdRef languageField;
+    
+    private string textField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlLanguageIdRef language {
+        get {
+            return this.languageField;
+        }
+        set {
+            this.languageField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string text {
+        get {
+            return this.textField;
+        }
+        set {
+            this.textField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlLanguageIdRef {
+    
+    /// <remarks/>
+    fr,
+    
+    /// <remarks/>
+    en,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlException1 {
+    
+    private string questionElementField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
+    public string questionElement {
+        get {
+            return this.questionElementField;
+        }
+        set {
+            this.questionElementField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlWayEnum {
+    
+    /// <remarks/>
+    DIRECT,
+    
+    /// <remarks/>
+    INVERSE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlRelationExistenceModeEnum {
+    
+    /// <remarks/>
+    EXISTS,
+    
+    /// <remarks/>
+    DOES_NOT_EXIST,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlRelationOrderQuestionCategory {
     
     private XmlQuestionText1P[] questionTextField;
@@ -447,30 +650,6 @@ public partial class XmlQuestionText1P {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
-public enum XmlLanguageIdRef {
-    
-    /// <remarks/>
-    fr,
-    
-    /// <remarks/>
-    en,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-public enum XmlWayEnum {
-    
-    /// <remarks/>
-    DIRECT,
-    
-    /// <remarks/>
-    INVERSE,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
 public enum XmlRelationOrderModeEnum {
     
     /// <remarks/>
@@ -478,27 +657,6 @@ public enum XmlRelationOrderModeEnum {
     
     /// <remarks/>
     END,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlException1 {
-    
-    private string questionElementField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-    public string questionElement {
-        get {
-            return this.questionElementField;
-        }
-        set {
-            this.questionElementField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -681,40 +839,6 @@ public enum XmlSimpleAnswerProximityCriterionEnum {
     
     /// <remarks/>
     NONE,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlQuestionText0P {
-    
-    private XmlLanguageIdRef languageField;
-    
-    private string textField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public XmlLanguageIdRef language {
-        get {
-            return this.languageField;
-        }
-        set {
-            this.languageField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string text {
-        get {
-            return this.textField;
-        }
-        set {
-            this.textField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -1418,6 +1542,8 @@ public partial class XmlQuestionCategories {
     
     private XmlRelationOrderQuestionCategory[] relationOrderQuestionCategoryListField;
     
+    private XmlRelationExistenceQuestionCategory[] relationExistenceQuestionCategoryListField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("attributeQuestionCategory", IsNullable=false)]
     public XmlAttributeQuestionCategory[] attributeQuestionCategoryList {
@@ -1481,6 +1607,17 @@ public partial class XmlQuestionCategories {
         }
         set {
             this.relationOrderQuestionCategoryListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("relationExistenceQuestionCategory", IsNullable=false)]
+    public XmlRelationExistenceQuestionCategory[] relationExistenceQuestionCategoryList {
+        get {
+            return this.relationExistenceQuestionCategoryListField;
+        }
+        set {
+            this.relationExistenceQuestionCategoryListField = value;
         }
     }
 }

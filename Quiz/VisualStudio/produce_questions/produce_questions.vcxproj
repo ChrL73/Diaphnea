@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -97,6 +97,8 @@
     <ClCompile Include="..\..\NodeJS\produce_questions\QuestionProducer.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\QuizData.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\RandomNumberGenerator.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\RelationOrderCategory.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\RelationOrderQuestion.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\SimpleAnswerCategory.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\SimpleAnswerQuestion.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\TextAndComment.cpp" />
@@ -117,6 +119,8 @@
     <ClInclude Include="..\..\NodeJS\produce_questions\QuestionProducer.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\QuizData.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\RandomNumberGenerator.h" />
+    <ClInclude Include="..\..\NodeJS\produce_questions\RelationOrderCategory.h" />
+    <ClInclude Include="..\..\NodeJS\produce_questions\RelationOrderQuestion.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\SimpleAnswerCategory.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\SimpleAnswerQuestion.h" />
     <ClInclude Include="..\..\NodeJS\produce_questions\TextAndComment.h" />

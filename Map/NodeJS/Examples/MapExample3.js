@@ -52,10 +52,17 @@ $(function()
                $('#languageSelect').append('<option value="' + language.id + '">' + language.name + '</option>');          
             });
             
+            $('#languageSelect').off();
             $('#languageSelect').change(function()
             {
                updateCategories(elements);
             });
+         
+            window.onresize = function()
+            {
+               resizeCanvas();
+               map.redraw();
+            }
             
             var elementIds = map.getElementIds();
             map.loadElements(elementIds, function(elementArray)
@@ -82,7 +89,7 @@ $(function()
                
                var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
                   + '<div class="panel-heading">'
-                  + '<input type="checkbox"><span> All (' + elementArray.length + ')</span>'
+                  + '<input id="all__" type="checkbox"><span> All (' + elementArray.length + ')</span>'
                   + '<span class="glyphicon glyphicon-triangle-top pull-right" id="collpaseAllIcon"'
                   + 'data-toggle="collapse" data-target="#collapseAll" aria-controls="collapseAll"></span>'
                   + '</div></div>'
@@ -103,12 +110,26 @@ $(function()
                {
                   if (categoryArray[i].length > 0)
                   {
+                     var categoryName = category[languageId];
                      categoryArray[i].sort(function(a, b) { return a.getName(languageId).localeCompare(b.getName(languageId)); });
-                     addCategory(category[languageId], i, categoryArray[i], languageId);
+                     addCategory(categoryName, i, categoryArray[i], languageId);
+                     
+                     var a = '#category_' + i;
+                     $(a).change(function()
+                     {
+                        var checked = Boolean($(a).prop('checked'));
+                        $('#collapse_' + i).find('input').prop('checked', checked).change();
+                     });
                   }
                });
                
                $('#collapseAll').collapse();
+               
+               $('#all__').change(function()
+               {
+                  var checked = Boolean($('#all__').prop('checked'));
+                  $('#collapseAll').find('.categoryInput').prop('checked', checked).change();
+               });
             }
          }
       }
@@ -118,7 +139,7 @@ $(function()
    {
       var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
          + '<div class="panel-heading">'
-         + '<input type="checkbox"><span> ' + categoryName + ' (' + elementArray.length + ')</span>'
+         + '<input type="checkbox" id="category_' + categoryIndex + '" class="categoryInput"><span> ' + categoryName + ' (' + elementArray.length + ')</span>'
          + '<span class="glyphicon glyphicon-triangle-bottom pull-right" id="collpaseIcon_' + categoryIndex + '"'
          + 'data-toggle="collapse" data-target="#collapse_' + categoryIndex + '" aria-controls="collapse_' + categoryIndex + '"></span>'
          + '</div>'
@@ -127,7 +148,7 @@ $(function()
       
       elementArray.forEach(function(element)
       {
-         html += '<p><input type="checkbox" value="' + element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';      
+         html += '<p><input type="checkbox" id="' + element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';      
       });
       
       html += '</div></div></div>'; 
@@ -144,21 +165,26 @@ $(function()
          $('#collpaseIcon_' + categoryIndex).removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
          e.stopImmediatePropagation();
       });
+      
+      elementArray.forEach(function(element)
+      {
+         $('#' + element.getId()).change(function()
+         {
+            if ($('#' + element.getId()).prop('checked')) element.show();
+            else element.hide();
+         });  
+      });
    }
    
    resizeCanvas();
-         
-   window.onresize = function()
-   {
-      resizeCanvas();
-      //map.redraw();
-   }
 
    function resizeCanvas()
    {
-      var h = (window.innerHeight - 34).toString() + 'px';
       $('#column1').height((window.innerHeight - 34).toString() + 'px');
-      $('#column2').height((window.innerHeight - 8).toString() + 'px');
+      $('#column2').height((window.innerHeight - 8).toString() + 'px');      
+      
+      $('#canvas').attr('width', $('#column1').width());
+      $('#canvas').attr('height', window.innerHeight - 34);
    }
    
 });

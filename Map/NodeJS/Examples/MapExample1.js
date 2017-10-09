@@ -1,6 +1,6 @@
 $(function()
 {
-   var url = 'http://192.168.50.181:3001';
+   var url = 'http://192.168.50.113:3001';
    mapServerInterface.createNewConnection(url, onConnected);
    
    function onConnected(mapServerConnection)

@@ -27,6 +27,9 @@ $(function()
 
          $('#mapSelect').append('<option value="' + mapId + '">' + mapName + '</option>');
       });
+      
+      var mapCounter = -1;
+      var mapInfos = {};
 
       onMapChange();
       $('#mapSelect').change(onMapChange);
@@ -38,13 +41,31 @@ $(function()
       
       function loadMap(mapId)
       {
-         var canvasId = 'canvas';
-         mapServerConnection.loadMap(mapId, canvasId, onMapLoaded);
-
-         function onMapLoaded(map)
+         $('canvas').hide();
+         
+         if (mapInfos[mapId])
          {
-            var elements;
+            $('#' + mapInfos[mapId].canvasId).show();
+            onMapLoaded(mapInfos[mapId].map, true);
+         }
+         else
+         {
+            ++mapCounter;
+            var canvasId = 'canvas' + mapCounter;
+            mapInfos[mapId] = { canvasId: canvasId, selection: {} };
             
+            $('#column1').append('<canvas id="' + canvasId + '"></canvas>');
+            $('#' + canvasId).attr('width', $('#column1').width());
+            $('#' + canvasId).attr('height', window.innerHeight - 36);
+            
+            mapServerConnection.loadMap(mapId, canvasId, onMapLoaded);
+         }
+
+         function onMapLoaded(map, reload)
+         {
+            if (!reload) { mapInfos[mapId].map = map; }
+            
+            $('#languageSelect').off();
             $('#languageSelect').empty();
             var languages = map.getLanguages();
             languages.forEach(function(language)
@@ -52,10 +73,23 @@ $(function()
                $('#languageSelect').append('<option value="' + language.id + '">' + language.name + '</option>');          
             });
             
-            $('#languageSelect').off();
+            if (reload)
+            {
+               $('#languageSelect').val(mapInfos[mapId].language).change();
+            }
+            else
+            {
+               mapInfos[mapId].language = $('#languageSelect').val();
+               map.setLanguage($('#languageSelect').val());
+            }
+                   
             $('#languageSelect').change(function()
             {
-               updateCategories(elements);
+               var languageId = $('#languageSelect').val();
+               map.setLanguage(languageId);
+               mapInfos[mapId].language = languageId;
+               map.redraw();
+               updateCategories(mapInfos[mapId].elements);
             });
          
             window.onresize = function()
@@ -64,12 +98,19 @@ $(function()
                map.redraw();
             }
             
-            var elementIds = map.getElementIds();
-            map.loadElements(elementIds, function(elementArray)
+            if (reload)
             {
-               elements = elementArray;
-               updateCategories(elementArray);
-            });
+               updateCategories(mapInfos[mapId].elements);
+            }
+            else
+            {
+               var elementIds = map.getElementIds();
+               map.loadElements(elementIds, function(elementArray)
+               {
+                  mapInfos[mapId].elements = elementArray;
+                  updateCategories(elementArray);
+               });
+            }
                              
             function updateCategories(elementArray)
             {
@@ -112,7 +153,7 @@ $(function()
                   {
                      var categoryName = category[languageId];
                      categoryArray[i].sort(function(a, b) { return a.getName(languageId).localeCompare(b.getName(languageId)); });
-                     addCategory(categoryName, i, categoryArray[i], languageId);
+                     addCategory(categoryName, i, categoryArray[i], languageId, mapInfos[mapId].selection);
                      
                      var a = '#category_' + i;
                      $(a).change(function()
@@ -135,7 +176,7 @@ $(function()
       }
    }
    
-   function addCategory(categoryName, categoryIndex, elementArray, languageId)
+   function addCategory(categoryName, categoryIndex, elementArray, languageId, selection)
    {
       var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
          + '<div class="panel-heading">'
@@ -148,7 +189,8 @@ $(function()
       
       elementArray.forEach(function(element)
       {
-         html += '<p><input type="checkbox" id="' + element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';      
+         html += '<p><input' + (selection[element.getId()] ? ' checked' : '') + ' type="checkbox" id="' +
+                 element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';      
       });
       
       html += '</div></div></div>'; 
@@ -170,8 +212,16 @@ $(function()
       {
          $('#' + element.getId()).change(function()
          {
-            if ($('#' + element.getId()).prop('checked')) element.show();
-            else element.hide();
+            if ($('#' + element.getId()).prop('checked'))
+            {
+               element.show();
+               selection[element.getId()] = true;
+            }
+            else
+            {
+               element.hide();
+               selection[element.getId()] = false;
+            }
          });  
       });
    }
@@ -180,11 +230,11 @@ $(function()
 
    function resizeCanvas()
    {
-      $('#column1').height((window.innerHeight - 34).toString() + 'px');
+      $('#column1').height((window.innerHeight - 36).toString() + 'px');
       $('#column2').height((window.innerHeight - 8).toString() + 'px');      
       
-      $('#canvas').attr('width', $('#column1').width());
-      $('#canvas').attr('height', window.innerHeight - 34);
+      $('canvas').attr('width', $('#column1').width());
+      $('canvas').attr('height', window.innerHeight - 36);
    }
    
 });

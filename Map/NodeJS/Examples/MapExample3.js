@@ -146,6 +146,8 @@ $(function()
                   $('#collpaseAllIcon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
                });
                
+               var atLeastOneIndeterminate = false;
+               var checkedCategoryCount = 0;
                var languageId = $('#languageSelect').val();
                categories.forEach(function(category, i)
                {
@@ -153,7 +155,10 @@ $(function()
                   {
                      var categoryName = category[languageId];
                      categoryArray[i].sort(function(a, b) { return a.getName(languageId).localeCompare(b.getName(languageId)); });
-                     addCategory(categoryName, i, categoryArray[i], languageId, mapInfos[mapId].selection);
+                     var status = addCategory(categoryName, i, categoryArray[i], languageId, mapInfos[mapId].selection);
+                     
+                     if (status == 1) atLeastOneIndeterminate = true;
+                     else if (status == 2) ++checkedCategoryCount;
                      
                      var a = '#category_' + i;
                      $(a).change(function()
@@ -170,7 +175,16 @@ $(function()
                {
                   var checked = Boolean($('#all__').prop('checked'));
                   $('#collapseAll').find('.categoryInput').prop('checked', checked).change();
-               });
+               });     
+               
+               if (checkedCategoryCount == categories.length)
+               {
+                  $('#all__').prop('checked', true);
+               }
+               else if (atLeastOneIndeterminate || checkedCategoryCount > 0)
+               {
+                  $('#all__').prop('indeterminate', true);
+               }
             }
          }
       }
@@ -187,15 +201,30 @@ $(function()
          + '<div class="collapse" id="collapse_' + categoryIndex + '">'
          + '<div class="panel-body">';
       
+      var checkedElementCount = 0;
       elementArray.forEach(function(element)
       {
-         html += '<p><input' + (selection[element.getId()] ? ' checked' : '') + ' type="checkbox" id="' +
-                 element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';      
+         var checked = selection[element.getId()];
+         html += '<p><input' + (checked ? ' checked' : '') + ' type="checkbox" id="' +
+                 element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';    
+         if (checked) ++checkedElementCount;  
       });
       
       html += '</div></div></div>'; 
       
       $('#collapseAll').append(html);
+      
+      var returnValue = 0;
+      if (checkedElementCount == elementArray.length)
+      {
+         $('#category_' + categoryIndex).prop('checked', true);
+         returnValue = 2;
+      }
+      else if (checkedElementCount != 0)
+      {
+         $('#category_' + categoryIndex).prop('indeterminate', true);
+         returnValue = 1;
+      }
       
       $('#collapse_' + categoryIndex).on('shown.bs.collapse', function(e)
       {
@@ -207,7 +236,7 @@ $(function()
          $('#collpaseIcon_' + categoryIndex).removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
          e.stopImmediatePropagation();
       });
-      
+       
       elementArray.forEach(function(element)
       {
          $('#' + element.getId()).change(function()
@@ -222,8 +251,63 @@ $(function()
                element.hide();
                selection[element.getId()] = false;
             }
+            
+            var checkCount = 0;
+            $('#collapse_' + categoryIndex).find('input').each(function()
+            {
+               if ($(this).prop('checked')) ++checkCount;
+            });
+            
+            if (checkCount == 0)
+            {
+               $('#category_' + categoryIndex).prop('checked', false);
+               $('#category_' + categoryIndex).prop('indeterminate', false);
+            }
+            else if (checkCount == elementArray.length)
+            {
+               $('#category_' + categoryIndex).prop('checked', true);
+               $('#category_' + categoryIndex).prop('indeterminate', false);
+            }
+            else
+            {
+               $('#category_' + categoryIndex).prop('indeterminate', true);
+            }
+            
+            checkCount = 0;
+            var indeterminateCount = 0;
+            var categoryCount = 0;
+            $('#collapseAll').find('.categoryInput').each(function()
+            {
+               ++categoryCount;
+               if ($(this).prop('checked')) ++checkCount;
+               if ($(this).prop('indeterminate')) ++indeterminateCount;
+            });
+            
+            if (indeterminateCount > 0)
+            {
+               $('#all__').prop('indeterminate', true);
+            }
+            else
+            {
+               if (checkCount == 0)
+               {
+                  $('#all__').prop('checked', false);
+                  $('#all__').prop('indeterminate', false);
+               }
+               else if (checkCount == categoryCount)
+               {
+                  $('#all__').prop('checked', true);
+                  $('#all__').prop('indeterminate', false);
+               }
+               else
+               {
+                  $('#all__').prop('indeterminate', true);
+               }
+            }
          });  
       });
+      
+      return returnValue;
    }
    
    resizeCanvas();

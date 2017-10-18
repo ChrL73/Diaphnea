@@ -189,6 +189,8 @@ var mapServerInterface =
                this.getId = function() { return elementId; }
                this.getName = function(languageId) { return elementInfo.names[languageId]; }
                this.getCategoryIndex = function() { return elementInfo.category; }
+               this.getLinkedElements1 = function() { return elementInfo.linkedElements1; }
+               this.getLinkedElements2 = function() { return elementInfo.linkedElements2; }
                
                this.show = function()
                {

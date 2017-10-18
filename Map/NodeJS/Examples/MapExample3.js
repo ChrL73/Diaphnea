@@ -36,6 +36,7 @@ $(function()
       
       function onMapChange()
       {
+         $('#categoryDiv').empty();
          loadMap($('#mapSelect').val());
       }
       
@@ -52,7 +53,7 @@ $(function()
          {
             ++mapCounter;
             var canvasId = 'canvas' + mapCounter;
-            mapInfos[mapId] = { canvasId: canvasId, selection: {} };
+            mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, linkDepth: 1, linkThreshold: 50 };
             
             $('#column1').append('<canvas id="' + canvasId + '"></canvas>');
             $('#' + canvasId).attr('width', $('#column1').width());
@@ -64,6 +65,9 @@ $(function()
          function onMapLoaded(map, reload)
          {
             if (!reload) { mapInfos[mapId].map = map; }
+            
+            $('#depthInput').val(mapInfos[mapId].linkDepth);
+            $('#thresholdInput').val(mapInfos[mapId].linkThreshold);
             
             $('#languageSelect').off();
             $('#languageSelect').empty();
@@ -89,7 +93,7 @@ $(function()
                map.setLanguage(languageId);
                mapInfos[mapId].language = languageId;
                map.redraw();
-               updateCategories(mapInfos[mapId].elements);
+               updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
             });
          
             window.onresize = function()
@@ -100,97 +104,103 @@ $(function()
             
             if (reload)
             {
-               updateCategories(mapInfos[mapId].elements);
+               updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
             }
             else
             {
                var elementIds = map.getElementIds();
                map.loadElements(elementIds, function(elementArray)
                {
-                  mapInfos[mapId].elements = elementArray;
-                  updateCategories(elementArray);
-               });
-            }
-                             
-            function updateCategories(elementArray)
-            {
-               $('#categoryDiv').empty();
-               
-               var categories = map.getCategories();
-               var categoryArray = [];
-               categories.forEach(function(category)
-               {
-                  categoryArray.push([]);
-               });
-               
-               elementArray.forEach(function(element)
-               {
-                  categoryArray[element.getCategoryIndex()].push(element);
-               });
-               
-               var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
-                  + '<div class="panel-heading">'
-                  + '<input id="all__" type="checkbox"><span> All (' + elementArray.length + ')</span>'
-                  + '<span class="glyphicon glyphicon-triangle-top pull-right" id="collpaseAllIcon"'
-                  + 'data-toggle="collapse" data-target="#collapseAll" aria-controls="collapseAll"></span>'
-                  + '</div></div>'
-                  + '<div id="collapseAll" class="collpase"></div>';
-               $('#categoryDiv').append(html);
-               
-               $('#collapseAll').on('shown.bs.collapse', function()
-               {
-                  $('#collpaseAllIcon').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-top');
-               });
-               $('#collapseAll').on('hidden.bs.collapse', function()
-               {
-                  $('#collpaseAllIcon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
-               });
-               
-               var atLeastOneIndeterminate = false;
-               var checkedCategoryCount = 0;
-               var languageId = $('#languageSelect').val();
-               categories.forEach(function(category, i)
-               {
-                  if (categoryArray[i].length > 0)
+                  var i, n = elementArray.length;
+                  for (i = 0; i < n; ++i)
                   {
-                     var categoryName = category[languageId];
-                     categoryArray[i].sort(function(a, b) { return a.getName(languageId).localeCompare(b.getName(languageId)); });
-                     var status = addCategory(categoryName, i, categoryArray[i], languageId, mapInfos[mapId].selection);
-                     
-                     if (status == 1) atLeastOneIndeterminate = true;
-                     else if (status == 2) ++checkedCategoryCount;
-                     
-                     var a = '#category_' + i;
-                     $(a).change(function()
-                     {
-                        var checked = Boolean($(a).prop('checked'));
-                        $('#collapse_' + i).find('input').prop('checked', checked).change();
-                     });
+                     mapInfos[mapId].elementsById[elementIds[i]] = elementArray[i];
                   }
+                  
+                  mapInfos[mapId].elements = elementArray;
+                  updateCategories(elementArray, map, mapInfos[mapId]);
                });
-               
-               $('#collapseAll').collapse();
-               
-               $('#all__').change(function()
-               {
-                  var checked = Boolean($('#all__').prop('checked'));
-                  $('#collapseAll').find('.categoryInput').prop('checked', checked).change();
-               });     
-               
-               if (checkedCategoryCount == categories.length)
-               {
-                  $('#all__').prop('checked', true);
-               }
-               else if (atLeastOneIndeterminate || checkedCategoryCount > 0)
-               {
-                  $('#all__').prop('indeterminate', true);
-               }
             }
          }
       }
    }
    
-   function addCategory(categoryName, categoryIndex, elementArray, languageId, selection)
+   function updateCategories(elementArray, map, mapInfo)
+   {
+      $('#categoryDiv').empty();
+
+      var categories = map.getCategories();
+      var categoryArray = [];
+      categories.forEach(function(category)
+      {
+         categoryArray.push([]);
+      });
+
+      elementArray.forEach(function(element)
+      {
+         categoryArray[element.getCategoryIndex()].push(element);
+      });
+
+      var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
+         + '<div class="panel-heading">'
+         + '<input id="all__" type="checkbox"><span> All (' + elementArray.length + ')</span>'
+         + '<span class="glyphicon glyphicon-triangle-top pull-right" id="collpaseAllIcon"'
+         + 'data-toggle="collapse" data-target="#collapseAll" aria-controls="collapseAll"></span>'
+         + '</div></div>'
+         + '<div id="collapseAll" class="collpase"></div>';
+      $('#categoryDiv').append(html);
+
+      $('#collapseAll').on('shown.bs.collapse', function()
+      {
+         $('#collpaseAllIcon').removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-top');
+      });
+      $('#collapseAll').on('hidden.bs.collapse', function()
+      {
+         $('#collpaseAllIcon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom');
+      });
+
+      var atLeastOneIndeterminate = false;
+      var checkedCategoryCount = 0;
+      var languageId = $('#languageSelect').val();
+      categories.forEach(function(category, i)
+      {
+         if (categoryArray[i].length > 0)
+         {
+            var categoryName = category[languageId];
+            categoryArray[i].sort(function(a, b) { return a.getName(languageId).localeCompare(b.getName(languageId)); });
+            var status = addCategory(categoryName, i, categoryArray[i], languageId, map, mapInfo);
+
+            if (status == 1) atLeastOneIndeterminate = true;
+            else if (status == 2) ++checkedCategoryCount;
+
+            var a = '#category_' + i;
+            $(a).change(function()
+            {
+               var checked = Boolean($(a).prop('checked'));
+               $('#collapse_' + i).find('input').prop('checked', checked).change();
+            });
+         }
+      });
+
+      $('#collapseAll').collapse();
+
+      $('#all__').change(function()
+      {
+         var checked = Boolean($('#all__').prop('checked'));
+         $('#collapseAll').find('.categoryInput').prop('checked', checked).change();
+      });     
+
+      if (checkedCategoryCount == categories.length)
+      {
+         $('#all__').prop('checked', true);
+      }
+      else if (atLeastOneIndeterminate || checkedCategoryCount > 0)
+      {
+         $('#all__').prop('indeterminate', true);
+      }
+   }
+   
+   function addCategory(categoryName, categoryIndex, elementArray, languageId, map, mapInfo)
    {
       var html = '<div class="panel panel-default" style="margin-bottom:0px;">'
          + '<div class="panel-heading">'
@@ -201,13 +211,15 @@ $(function()
          + '<div class="collapse" id="collapse_' + categoryIndex + '">'
          + '<div class="panel-body">';
       
+      var selection = mapInfo.selection;
       var checkedElementCount = 0;
       elementArray.forEach(function(element)
       {
          var checked = selection[element.getId()];
          html += '<p><input' + (checked ? ' checked' : '') + ' type="checkbox" id="' +
-                 element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId)+ '</span></p>';    
-         if (checked) ++checkedElementCount;  
+                 element.getId() + '" style="margin-left:12px;"><span> ' + element.getName(languageId) +
+                 '</span><span id="arrow_' + element.getId() + '"class="glyphicon glyphicon-arrow-right pull-right" style="cursor:pointer;"></span></p>';    
+         if (checked) ++checkedElementCount;
       });
       
       html += '</div></div></div>'; 
@@ -304,10 +316,66 @@ $(function()
                   $('#all__').prop('indeterminate', true);
                }
             }
-         });  
+         });
+         
+         $('#arrow_' + element.getId()).click(function()
+         {
+            var elements = getLinkedElements(element, mapInfo);
+            updateCategories(elements, map, mapInfo);
+            
+            $('#linkGroup').show();
+            
+            /*console.log(elements.length);
+            elements.forEach(function(element)
+            {
+               console.log(element.getId());
+            });*/
+         });
       });
       
       return returnValue;
+   }
+      
+   function getLinkedElements(element, mapInfo)
+   {
+      var linkedElements = {};
+      linkedElements[element.getId()] = true;
+      
+      var i = 0;
+      while (i < mapInfo.linkDepth)
+      {
+         var elementsToAdd = [];
+            
+         Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+         { 
+            var linkedElements1 = mapInfo.elementsById[elementId].getLinkedElements1();
+            if (i < 2 || linkedElements1.length < mapInfo.linkThreshold) { Array.prototype.push.apply(elementsToAdd, linkedElements1); }
+         });        
+         ++i; 
+         
+         if (i < mapInfo.linkDepth)
+         {
+            Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+            { 
+               var linkedElements2 = mapInfo.elementsById[elementId].getLinkedElements2();
+               if (i < 2 || linkedElements2.length < mapInfo.linkThreshold) { Array.prototype.push.apply(elementsToAdd, linkedElements2); }
+            });
+            ++i;
+         }
+         
+         elementsToAdd.forEach(function(elementId)
+         {
+            linkedElements[elementId] = true;
+         });
+      }
+      
+      var elements = [];
+      Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+      { 
+         elements.push(mapInfo.elementsById[elementId]);
+      });
+      
+      return elements;
    }
    
    resizeCanvas();

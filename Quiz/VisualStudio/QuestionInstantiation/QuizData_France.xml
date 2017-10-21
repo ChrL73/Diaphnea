@@ -103,8 +103,7 @@
           <value language="fr" value="Auvergne-Rhône-Alpes"/>
           <value language="en" value="Auvergne-Rhône-Alpes"/>
         </attribute>
-      </attributeList>
-      
+      </attributeList>  
       <numericalAttributeList>
         <numericalAttribute type="nt_Longitude" value="4.6"/>
         <numericalAttribute type="nt_Latitude" value="45.4"/>

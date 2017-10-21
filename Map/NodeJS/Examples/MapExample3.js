@@ -324,12 +324,6 @@ $(function()
             updateCategories(elements, map, mapInfo);
             
             $('#linkGroup').show();
-            
-            /*console.log(elements.length);
-            elements.forEach(function(element)
-            {
-               console.log(element.getId());
-            });*/
          });
       });
       

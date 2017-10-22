@@ -47,10 +47,15 @@
                      <select class="form-control" id="languageSelect" ></select>
                   </div>
                   <div id="linkGroup" class="form-group" style="display:none;">
+                     <p>
+                        <label id="currentElement"></label>
+                        <span id="refresh__" class="glyphicon glyphicon-refresh" style="cursor:pointer;margin-left:8px;"></span>
+                        <span id="home__" class="glyphicon glyphicon-home" style="cursor:pointer;margin-left:8px;"></span>
+                     </p>
                      <label for="depthInput">Depth: </label>
                      <input id="depthInput" class="form-control" type="number" min="0" max="20"/>
                      <label for="thresholdInput">Threshold: </label>
-                     <input id="thresholdInput" class="form-control" type="number" min="1" max="200"/>
+                     <input id="thresholdInput" class="form-control" type="number" min="1" max="1000"/>
                   </div>
                   <div id="categoryDiv"></div>
                </form>

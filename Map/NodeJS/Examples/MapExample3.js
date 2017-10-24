@@ -43,6 +43,7 @@ $(function()
       function loadMap(mapId)
       {
          $('canvas').hide();
+         $('#linkGroup').hide();
          
          if (mapInfos[mapId])
          {
@@ -53,7 +54,7 @@ $(function()
          {
             ++mapCounter;
             var canvasId = 'canvas' + mapCounter;
-            mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, linkDepth: 1, linkThreshold: 50 };
+            mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, fillingStyle: '0_', linkDepth: 1, linkThreshold: 50 };
             
             $('#column1').append('<canvas id="' + canvasId + '"></canvas>');
             $('#' + canvasId).attr('width', $('#column1').width());
@@ -64,9 +65,9 @@ $(function()
 
          function onMapLoaded(map, reload)
          {
-            if (!reload) { mapInfos[mapId].map = map; }
+            $('#home__').off();
             
-            $('#linkGroup').hide();
+            if (!reload) { mapInfos[mapId].map = map; }
             
             $('#depthInput').val(mapInfos[mapId].linkDepth);
             $('#thresholdInput').val(mapInfos[mapId].linkThreshold);
@@ -90,6 +91,7 @@ $(function()
             });
             
             $('#languageSelect').off();
+            $('#fillingStyleSelect').off();
             $('#languageSelect').empty();
             var languages = map.getLanguages();
             languages.forEach(function(language)
@@ -97,14 +99,18 @@ $(function()
                $('#languageSelect').append('<option value="' + language.id + '">' + language.name + '</option>');          
             });
             
+            $('#fillingStyleSelect').val(mapInfos[mapId].fillingStyle);
+            
             if (reload)
             {
-               $('#languageSelect').val(mapInfos[mapId].language).change();
+               $('#languageSelect').val(mapInfos[mapId].language);
             }
             else
             {
                mapInfos[mapId].language = $('#languageSelect').val();
                map.setLanguage($('#languageSelect').val());
+               mapInfos[mapId].fillingStyle = $('#fillingStyleSelect').val();
+               map.setFillingStyle($('#fillingStyleSelect').val());
             }
                    
             $('#languageSelect').change(function()
@@ -113,7 +119,16 @@ $(function()
                map.setLanguage(languageId);
                mapInfos[mapId].language = languageId;
                map.redraw();
+               $('#linkGroup').hide();
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
+            });
+               
+            $('#fillingStyleSelect').change(function()
+            {
+               var fillingStyle = $('#fillingStyleSelect').val();
+               map.setFillingStyle(fillingStyle);
+               mapInfos[mapId].fillingStyle = fillingStyle;
+               map.redraw();
             });
          
             window.onresize = function()
@@ -141,6 +156,12 @@ $(function()
                   updateCategories(elementArray, map, mapInfos[mapId]);
                });
             }
+            
+            $('#home__').click(function()
+            {
+               $('#linkGroup').hide();
+               updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
+            });
          }
       }
    }

@@ -141,6 +141,12 @@ var mapServerInterface =
                currentLanguageId = languageId;
             };
             
+            var currentFillingStyle = 0;
+            this.setFillingStyle = function(fillingStyle)
+            {
+               currentFillingStyle = fillingStyle;
+            };
+            
             var addedItemsByZIndex = [];
             var i;
             for (i = 0; i < 32; ++i) addedItemsByZIndex.push({});
@@ -264,7 +270,7 @@ var mapServerInterface =
                   });
                   
                   var id = ++requestCounter;
-                  var request = { id: id, mapId: mapId, language: currentLanguageId, elementIds: elementIds, width: canvas.width, height: canvas.height, lookIndex: 2 };
+                  var request = { id: id, mapId: mapId, language: currentLanguageId, elementIds: elementIds, width: canvas.width, height: canvas.height, lookIndex: currentFillingStyle };
                   
                   var context;
                   if (!svgRequested) context = { scale: scale };

@@ -81,9 +81,45 @@
       </polygonLook>
     </polygonLookList1>
     <polygonLookList2>
+      <polygonLook id="pl_Province3_1" contourZIndex="6"
+                   contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.4"
+                   fillAlpha="255" fillRed="242" fillGreen="234" fillBlue="213" fillZIndex="15"
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20">
+        <name>
+          <name language="fr" text="Provinces 1 (style 3)"/>
+          <name language="en" text="Provinces 1 (style 3)"/>
+        </name>
+      </polygonLook>
+      <polygonLook id="pl_Province3_2" contourZIndex="6"
+                   contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.4"
+                   fillAlpha="255" fillRed="213" fillGreen="242" fillBlue="220" fillZIndex="15"
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20">
+        <name>
+          <name language="fr" text="Provinces 2 (style 3)"/>
+          <name language="en" text="Provinces 2 (style 3)"/>
+        </name>
+      </polygonLook>
+      <polygonLook id="pl_Province3_3" contourZIndex="6"
+                   contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.4"
+                   fillAlpha="255" fillRed="213" fillGreen="219" fillBlue="239" fillZIndex="15"
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20">
+        <name>
+          <name language="fr" text="Provinces 3 (style 3)"/>
+          <name language="en" text="Provinces 3 (style 3)"/>
+        </name>
+      </polygonLook>
+      <polygonLook id="pl_Province3_4" contourZIndex="6"
+                   contourAlpha="255" contourRed="140" contourGreen="0" contourBlue="0" contourSize="2.4"
+                   fillAlpha="255" fillRed="239" fillGreen="213" fillBlue="233" fillZIndex="15"
+                   textAlpha="255" textRed="96" textGreen="0" textBlue="0" textSize="20">
+        <name>
+          <name language="fr" text="Provinces 4 (style 3)"/>
+          <name language="en" text="Provinces 4 (style 3)"/>
+        </name>
+      </polygonLook>
       <polygonLook id="pl_Departement2_1" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
-                   fillAlpha="255" fillRed="239" fillGreen="167" fillBlue="167" fillZIndex="14"
+                   fillAlpha="255" fillRed="247" fillGreen="173" fillBlue="173" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19">
         <name>
           <name language="fr" text="Départements 1 (style 2)"/>
@@ -92,7 +128,7 @@
       </polygonLook>
       <polygonLook id="pl_Departement2_2" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
-                   fillAlpha="255" fillRed="203" fillGreen="239" fillBlue="167" fillZIndex="14"
+                   fillAlpha="255" fillRed="210" fillGreen="247" fillBlue="173" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19">
         <name>
           <name language="fr" text="Départements 2 (style 2)"/>
@@ -101,7 +137,7 @@
       </polygonLook>
       <polygonLook id="pl_Departement2_3" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
-                   fillAlpha="255" fillRed="167" fillGreen="239" fillBlue="239" fillZIndex="14"
+                   fillAlpha="255" fillRed="173" fillGreen="247" fillBlue="247" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19">
         <name>
           <name language="fr" text="Départements 3 (style 2)"/>
@@ -110,7 +146,7 @@
       </polygonLook>
       <polygonLook id="pl_Departement2_4" contourZIndex="7"
                    contourAlpha="255" contourRed="32" contourGreen="32" contourBlue="32" contourSize="1.8"
-                   fillAlpha="255" fillRed="205" fillGreen="169" fillBlue="242" fillZIndex="14"
+                   fillAlpha="255" fillRed="210" fillGreen="173" fillBlue="247" fillZIndex="14"
                    textAlpha="255" textRed="0" textGreen="0" textBlue="0" textSize="19">
         <name>
           <name language="fr" text="Départements 4 (style 2)"/>
@@ -326,6 +362,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_1"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -343,6 +380,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_3"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -360,6 +398,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_3"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -377,6 +416,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_1"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -394,6 +434,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -411,6 +452,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_4"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -428,6 +470,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -445,6 +488,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_4"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>
@@ -462,6 +506,7 @@
         <looks>
           <look id="pl_Province1"/>
           <look id="pl_Province2"/>
+          <look id="pl_Province3_2"/>
         </looks>
         <coveredElementList>
           <element id="e_Gabon"/>

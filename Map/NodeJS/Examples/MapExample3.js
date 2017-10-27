@@ -13,6 +13,11 @@ $(function()
       $('#errorSpan').text('Error: ' + error.message);
       $('#errorModal').modal('show');
    }
+   
+   $('#svgExport').click(function(e)
+   {
+      e.preventDefault();
+   });
 
    function onConnected(mapServerConnection)
    {
@@ -66,6 +71,13 @@ $(function()
          function onMapLoaded(map, reload)
          {
             $('#home__').off();
+            
+            $('#svgExport').off();
+            $('#svgExport').click(function(e)
+            {
+               e.preventDefault();
+               map.requestSvg();
+            });
             
             if (!reload) { mapInfos[mapId].map = map; }
             

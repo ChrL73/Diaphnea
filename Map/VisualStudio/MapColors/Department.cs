@@ -10,15 +10,62 @@ namespace MapColors
     {
         internal string Id { get; set; }
         internal Region Region { get; set; }
-        internal Dictionary<Department, int> AdjacentDepartments { get; set; }
+        internal Dictionary<Department, int> AdjacentDepartments { get; private set; }
         internal double Latitude { get; set; }
         internal double Longitude { get; set; }
-        internal ColorEnum Color { get; set; }
+        internal ColorEnum Color { get; private set; }
+        private Dictionary<ColorEnum, int> _unsuitableColors = new Dictionary<ColorEnum, int>();
+
+        private static Dictionary<ColorEnum, int> _colorCount;
+
+        static Department()
+        {
+            _colorCount = new Dictionary<ColorEnum, int>();
+            _colorCount[ColorEnum.RED] = 0;
+            _colorCount[ColorEnum.GREEN] = 0;
+            _colorCount[ColorEnum.BLUE] = 0;
+            _colorCount[ColorEnum.YELLOW] = 0;
+        }
 
         internal Department()
         {
             Color = ColorEnum.NONE;
             AdjacentDepartments = new Dictionary<Department, int>();
+        }
+
+        internal void clear()
+        {
+            _unsuitableColors.Clear();
+            Color = ColorEnum.NONE;
+        }
+
+        internal bool setColor()
+        {
+            if (_unsuitableColors.Count == 4)
+            {
+                if (Color != ColorEnum.NONE) --_colorCount[Color];
+                Color = ColorEnum.NONE;
+            }
+            else
+            {
+                SortedDictionary<int, List<ColorEnum>> suitableColors = new SortedDictionary<int, List<ColorEnum>>();
+
+                foreach (KeyValuePair<ColorEnum, int> pair in _colorCount)
+                {
+                    if (!_unsuitableColors.ContainsKey(pair.Key))
+                    {
+                        if (!suitableColors.ContainsKey(pair.Value)) suitableColors[pair.Value] = new List<ColorEnum>();
+                        suitableColors[pair.Value].Add(pair.Key);
+                    }
+                }
+
+                if (Color != ColorEnum.NONE) --_colorCount[Color];
+                Color = suitableColors.First().Value[0];
+                ++_colorCount[Color];
+                _unsuitableColors.Add(Color, 0);
+            }
+
+            return Color != ColorEnum.NONE;
         }
 
         internal double distance(Department department)

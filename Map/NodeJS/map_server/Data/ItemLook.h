@@ -20,7 +20,7 @@ namespace map_server
         char _hexColor[8];
 
     public:
-        ItemLook(int id, int zIndex, int alpha, int red, int green, int blue, double size, const std::string& nameJson, IMap *iMap);
+        ItemLook(int id, int zIndex, int alpha, int red, int green, int blue, double size, IMap *iMap);
 
         int getId(void) const { return _id; }
         int getZIndex(void) const { return _zIndex; }

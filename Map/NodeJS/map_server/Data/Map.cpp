@@ -301,7 +301,7 @@ namespace map_server
     void Map::load(void)
     {
         _loaded = true;
-        std::string elementIdsJson, languagesJson, namesJson, categoriesJson;
+        std::string elementIdsJson, languagesJson, namesJson, looksJson, categoriesJson;
 
         if (!loadElements(elementIdsJson))
         {
@@ -346,7 +346,7 @@ namespace map_server
                 return;
             }
 
-            if (!loadLooks(dbMap))
+            if (!loadLooks(dbMap, looksJson))
             {
                 _error = true;
                 return;
@@ -361,11 +361,12 @@ namespace map_server
             if (elementIdsJson.empty()) elementIdsJson = "null";
             if (languagesJson.empty()) languagesJson = "null";
             if (namesJson.empty()) namesJson = "null";
+            if (looksJson.empty()) looksJson = "null";
             if (categoriesJson.empty()) categoriesJson = "null";
 
             std::stringstream jsonStream;
             jsonStream << "{\"elementIds\":" << elementIdsJson << ",\"languages\":" << languagesJson
-                       << ",\"names\":" << namesJson << ",\"categories\":" << categoriesJson
+                       << ",\"names\":" << namesJson << ",\"categories\":" << categoriesJson << ",\"looks\":" << looksJson
                        << ",\"zoomMinDistance\":" << _zoomMinDistance << ",\"zoomMaxDistance\":" << _zoomMaxDistance
                        << ",\"sizeParameter1\":" << _sizeParameter1 << ",\"sizeParameter2\":" << _sizeParameter2 << "}";
             _infoJson = jsonStream.str();
@@ -566,7 +567,7 @@ namespace map_server
         return true;
     }
 
-    bool Map::loadLooks(mongo::BSONObj dbMap)
+    bool Map::loadLooks(mongo::BSONObj dbMap, std::string& looksJson)
     {
         mongo::BSONElement looksElt = dbMap.getField("looks");
         if (looksElt.type() != mongo::Array)
@@ -575,6 +576,8 @@ namespace map_server
             return false;
         }
         std::vector<mongo::BSONElement> dbLookVector = looksElt.Array();
+
+        looksJson = "[";
 
         int i, n = dbLookVector.size();
         for (i = 0; i < n; ++i)
@@ -605,6 +608,8 @@ namespace map_server
             std::string textNameJson;
             if (!getLookNameJson(dbLook, "text_name", textNameJson)) return false;
 
+            if (i != 0) looksJson += ",";
+
             if (type == "point")
             {
                 int pointZIndex = dbLook.getIntField("point_z_index");
@@ -624,8 +629,11 @@ namespace map_server
                 std::string pointNameJson;
                 if (!getLookNameJson(dbLook, "point_name", pointNameJson)) return false;
 
-                PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson, pointZIndex, pointAlpha,
-                                                pointRed, pointGreen, pointBlue, pointSizeElt.Double(), pointNameJson, this);
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
+                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + pointNameJson + "}";
+
+                PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), pointZIndex, pointAlpha,
+                                                pointRed, pointGreen, pointBlue, pointSizeElt.Double(), this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
             else if (type == "line")
@@ -647,8 +655,11 @@ namespace map_server
                 std::string lineNameJson;
                 if (!getLookNameJson(dbLook, "line_name", lineNameJson)) return false;
 
-                LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson, lineZIndex, lineAlpha,
-                                              lineRed, lineGreen, lineBlue, lineSizeElt.Double(), lineNameJson, this);
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
+                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + lineNameJson + "}";
+
+                LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), lineZIndex, lineAlpha,
+                                              lineRed, lineGreen, lineBlue, lineSizeElt.Double(), this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
             else if (type == "polygon")
@@ -680,12 +691,18 @@ namespace map_server
                 std::string fillNameJson;
                 if (!getLookNameJson(dbLook, "fill_name", fillNameJson)) return false;
 
-                PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), textNameJson,
-                                                    contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(), contourNameJson,
-                                                    fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, fillNameJson, this);
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
+                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + contourNameJson +
+                             "},{\"id\":" + std::to_string(3 * id + 2) + ",\"name\":" + fillNameJson + "}";
+
+                PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(),
+                                                    contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(),
+                                                    fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue, this);
                 _lookMap.insert(std::pair<int, const Look *> (id, look));
             }
         }
+
+        looksJson += "]";
 
         return true;
     }

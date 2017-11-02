@@ -13,7 +13,8 @@ namespace MapColors
     {
         static XmlQuizData _quizData;
         static Dictionary<string, Department> _departments = new Dictionary<string, Department>();
-        static List<Department> _sortedDepartments = new List<Department>();
+        static List<Department> _departmentsAlgoOrder = new List<Department>();
+        static List<Department> _departmentsXmlOrder = new List<Department>();
         static SortedDictionary<string, Department> _unsortedDepartments = new SortedDictionary<string, Department>();
 
         static void Main(string[] args)
@@ -29,6 +30,7 @@ namespace MapColors
                 if (result == 0) result = loadData(args[0]);
                 if (result == 0) result = sortDepartments();
                 if (result == 0) result = color();
+                if (result == 0) result = printResults();
 
                 if (result == 0) Console.WriteLine("MapColors terminated successfully for file {0}", args[0]);
                 else Console.WriteLine("MapColors terminated with errors for file {0}", args[0]);
@@ -36,6 +38,64 @@ namespace MapColors
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+        }
+
+        static int printResults()
+        {
+            int i;
+            int n = _departmentsXmlOrder.Count;
+            for (i = 0; i < n; ++i)
+            {
+                Console.WriteLine(String.Format("{0} {1}", _departmentsXmlOrder[i].Id, (int)_departmentsXmlOrder[i].Color));
+            }
+            Console.WriteLine();
+
+            int[] colorCounts = new int[5];
+            int[] colorCounts0 = new int[5];
+
+            for (i = 0; i < 5; ++i)
+            {
+                colorCounts[i] = 0;
+                colorCounts0[i] = 0;
+            }
+
+            n = _departmentsAlgoOrder.Count;
+            for (i = 0; i < n; ++i)
+            {
+                Department dep = _departmentsAlgoOrder[i];
+
+                Console.WriteLine(String.Format("{0} {1}", dep.Id, dep.Color));
+                ++colorCounts[(int)dep.Color];
+
+                if (i == n - 1 || dep.Region != _departmentsAlgoOrder[i + 1].Region)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(_departmentsAlgoOrder[i].Region.Id);
+                    //Console.WriteLine("NONE: {0}", colorCounts[0] - colorCounts0[0]);
+                    Console.WriteLine("RED: {0}", colorCounts[1] - colorCounts0[1]);
+                    Console.WriteLine("GREEN: {0}", colorCounts[2] - colorCounts0[2]);
+                    Console.WriteLine("BLUE: {0}", colorCounts[3] - colorCounts0[3]);
+                    Console.WriteLine("YELLOW: {0}", colorCounts[4] - colorCounts0[4]);
+                    Console.WriteLine();
+                    int j;
+                    for (j = 0; j < 5; ++j) colorCounts0[j] = colorCounts[j];
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("NONE: {0}", colorCounts[0]);
+            Console.WriteLine("RED: {0}", colorCounts[1]);
+            Console.WriteLine("GREEN: {0}", colorCounts[2]);
+            Console.WriteLine("BLUE: {0}", colorCounts[3]);
+            Console.WriteLine("YELLOW: {0}", colorCounts[4]);
+
+            if (colorCounts[0] != 0)
+            {
+                Console.WriteLine("Error in algorithm implementation: All departments should have a color");
+                return -1;
+            }
+
+            return 0;
         }
 
         static int color()
@@ -48,7 +108,7 @@ namespace MapColors
                 if (k % 1000000 == 0) Console.WriteLine(index);
                 ++k;
 
-                Department department = _sortedDepartments[index];
+                Department department = _departmentsAlgoOrder[index];
 
                 bool colorOk = false;
 
@@ -74,52 +134,6 @@ namespace MapColors
                         }
                     }
                 }
-            }
-
-            int[] colorCounts = new int[5];
-            int[] colorCounts0 = new int[5];
-
-            int i;
-            for (i = 0; i < 5; ++i)
-            {
-                colorCounts[i] = 0;
-                colorCounts0[i] = 0;
-            }
-
-            int n = _sortedDepartments.Count;
-            for (i = 0; i < n; ++i)
-            {
-                Department dep = _sortedDepartments[i];
-
-                Console.WriteLine(String.Format("{0} {1}", dep.Id, dep.Color));
-                ++colorCounts[(int)dep.Color];
-
-                if (i == n - 1 || dep.Region != _sortedDepartments[i + 1].Region)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine(_sortedDepartments[i].Region.Id);
-                    //Console.WriteLine("NONE: {0}", colorCounts[0] - colorCounts0[0]);
-                    Console.WriteLine("RED: {0}", colorCounts[1] - colorCounts0[1]);
-                    Console.WriteLine("GREEN: {0}", colorCounts[2] - colorCounts0[2]);
-                    Console.WriteLine("BLUE: {0}", colorCounts[3] - colorCounts0[3]);
-                    Console.WriteLine("YELLOW: {0}", colorCounts[4] - colorCounts0[4]);
-                    Console.WriteLine();
-                    int j;
-                    for (j = 0; j < 5; ++j) colorCounts0[j] = colorCounts[j];
-                }
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("NONE: {0}", colorCounts[0]);
-            Console.WriteLine("RED: {0}", colorCounts[1]);
-            Console.WriteLine("GREEN: {0}", colorCounts[2]);
-            Console.WriteLine("BLUE: {0}", colorCounts[3]);
-            Console.WriteLine("YELLOW: {0}", colorCounts[4]);
-
-            if (colorCounts[0] != 0)
-            {
-                Console.WriteLine("Error in algorithm implementation: All departments should have a color");
-                return -1;
             }
 
             return 0;
@@ -161,7 +175,7 @@ namespace MapColors
             
             while (department != null)
             {
-                _sortedDepartments.Add(department);
+                _departmentsAlgoOrder.Add(department);
                 _unsortedDepartments.Remove(department.Id);
                 department = getNearestUnsortedDepartment(department);
             }
@@ -261,6 +275,7 @@ namespace MapColors
                     departement.Latitude = latitude;
                     departement.Longitude = longitude;
 
+                    _departmentsXmlOrder.Add(departement);
                     _departments.Add(xmlElement.id, departement);
                     _unsortedDepartments.Add(xmlElement.id, departement);
                 }
@@ -325,6 +340,10 @@ namespace MapColors
             _departments["el_LoireAtlantique"].AdjacentDepartments.Add(_departments["el_MayenneDepartement"], 0);
             _departments["el_Calvados"].AdjacentDepartments.Add(_departments["el_SeineMaritime"], 0);
             _departments["el_SeineMaritime"].AdjacentDepartments.Add(_departments["el_Calvados"], 0);
+            _departments["el_BouchesDuRhone"].AdjacentDepartments.Add(_departments["el_AlpesHauteProvence"], 0);
+            _departments["el_AlpesHauteProvence"].AdjacentDepartments.Add(_departments["el_BouchesDuRhone"], 0);
+            _departments["el_HautRhin"].AdjacentDepartments.Add(_departments["el_HauteSaone"], 0);
+            _departments["el_HauteSaone"].AdjacentDepartments.Add(_departments["el_HautRhin"], 0);
 
             return 0;
         }

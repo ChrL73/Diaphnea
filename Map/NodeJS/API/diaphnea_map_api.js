@@ -132,8 +132,20 @@ var mapServerInterface =
             var addedItems = {};
             var itemsToRemove = {};
             var removableTexts = {};
-            var looks = {};
             var xFocus, yFocus, scale;
+            
+            var looks = {};
+            mapInfo.looks.forEach(function(look)
+            {
+               looks[look.id] =
+               {
+                  zI: look.zI,
+                  size: look.size,
+                  canvasColor: 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')',
+                  svgColor: '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1),
+                  svgOpacity: (look.a / 255.0)
+               };
+            });
             
             var currentLanguageId = mapInfo.languages[0].id;
             this.setLanguage = function(languageId)
@@ -312,7 +324,6 @@ var mapServerInterface =
                if (!context || response.requestId != lastRenderRequestId) return;
                
                var renderInfo = response.content;
-               //console.log(renderInfo);      
                
                if (!context.ignoreServerScale)
                {
@@ -322,7 +333,6 @@ var mapServerInterface =
                   if (!context.scale) context.scale = scale;
                }
                
-               var lookToItems = {};
                var itemsToRender_itemKey = {};
                var itemsToRender_itemId = {};
                var itemsToRender_keyAndLook = [];
@@ -351,25 +361,11 @@ var mapServerInterface =
                         resolution: resolution
                      };
                   }
-
-                  if (!looks[lookId])
-                  {
-                     if (!lookToItems[lookId]) lookToItems[lookId] = [];
-                     lookToItems[lookId].push(itemKey);
-                  } 
                   
                   if (!addedItems[itemKey] || items[itemKey].lookId != lookId)
                   {
                      itemsToRender_keyAndLook.push({ itemKey: itemKey, lookId: lookId });
                   }
-               });
-               
-               Object.getOwnPropertyNames(lookToItems).forEach(function(lookId)
-               {
-                  var id = ++requestCounter;
-                  var request = { id: id, mapId: mapId, lookId: lookId };
-                  setContext(id, { mapId: mapId, lookId: lookId, itemKeyArray: lookToItems[lookId] });
-                  socket.emit('lookReq', request);
                });
                
                Object.getOwnPropertyNames(addedItems).forEach(function(itemKey)
@@ -401,7 +397,6 @@ var mapServerInterface =
                if (!context || response.requestId != lastRenderRequestId) return;
                
                var textInfo = response.content;
-               //console.log(textInfo);
                if (!visibleElements[textInfo.e]) return;
                var itemKey = '_' + textInfo.e;
                
@@ -461,7 +456,6 @@ var mapServerInterface =
                if (!context) return;
                
                var itemData = response.content;
-               //console.log(itemData);
 
                var item = items[context.itemKey];
                
@@ -481,28 +475,6 @@ var mapServerInterface =
                   if (!itemsToRemove[context.itemKey]) addItem(context.itemKey, context.lookId);
                }
             });
-
-            socket.on('lookRes', function(response)
-            {
-               var context = getContext(response, false, mapId);
-               if (!context) return;
-               
-               var lookData = response.content;
-               
-               looks[context.lookId] =
-               {
-                  zI: lookData.zI,
-                  size: lookData.size,
-                  canvasColor: 'rgba(' + lookData.r + ', ' + lookData.g + ', ' + lookData.b + ', ' + (lookData.a / 255.0) + ')',
-                  svgColor: '#' + (0x1000000 | lookData.b | (lookData.g << 8) | (lookData.r << 16)).toString(16).substr(1),
-                  svgOpacity: (lookData.a / 255.0),
-               };
-               
-               context.itemKeyArray.forEach(function(itemKey)
-               {
-                  if (!itemsToRemove[itemKey]) addItem(itemKey, context.lookId);
-               });
-            });
             
             function addItem(itemKey, lookId)
             {
@@ -521,8 +493,6 @@ var mapServerInterface =
                   
                if (item.type && look)
                {
-                  // console.log('Add item ' + itemKey);
-                  
                   Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemKey2)
                   {
                      var item2 = items[itemKey2];

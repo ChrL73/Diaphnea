@@ -629,8 +629,12 @@ namespace map_server
                 std::string pointNameJson;
                 if (!getLookNameJson(dbLook, "point_name", pointNameJson)) return false;
 
-                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
-                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + pointNameJson + "}";
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson + ",\"zI\":0,\"a\":"
+                             + std::to_string(textAlpha) + ",\"r\":" + std::to_string(textRed) + ",\"g\":" + std::to_string(textGreen) + ",\"b\":"
+                             + std::to_string(textBlue) + ",\"size\":" + std::to_string(textSizeElt.Double())
+                             + "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + pointNameJson + ",\"zI\":" + std::to_string(pointZIndex) + ",\"a\":"
+                             + std::to_string(pointAlpha) + ",\"r\":" + std::to_string(pointRed) + ",\"g\":" + std::to_string(pointGreen) + ",\"b\":"
+                             + std::to_string(pointBlue) + ",\"size\":" + std::to_string(pointSizeElt.Double()) + "}";
 
                 PointLook *look = new PointLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), pointZIndex, pointAlpha,
                                                 pointRed, pointGreen, pointBlue, pointSizeElt.Double(), this);
@@ -655,8 +659,12 @@ namespace map_server
                 std::string lineNameJson;
                 if (!getLookNameJson(dbLook, "line_name", lineNameJson)) return false;
 
-                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
-                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + lineNameJson + "}";
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson + ",\"zI\":0,\"a\":"
+                             + std::to_string(textAlpha) + ",\"r\":" + std::to_string(textRed) + ",\"g\":" + std::to_string(textGreen) + ",\"b\":"
+                             + std::to_string(textBlue) + ",\"size\":" + std::to_string(textSizeElt.Double())
+                             + "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + lineNameJson + ",\"zI\":" + std::to_string(lineZIndex) + ",\"a\":"
+                             + std::to_string(lineAlpha) + ",\"r\":" + std::to_string(lineRed) + ",\"g\":" + std::to_string(lineGreen) + ",\"b\":"
+                             + std::to_string(lineBlue) + ",\"size\":" + std::to_string(lineSizeElt.Double()) + "}";
 
                 LineLook *look = new LineLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(), lineZIndex, lineAlpha,
                                               lineRed, lineGreen, lineBlue, lineSizeElt.Double(), this);
@@ -691,9 +699,15 @@ namespace map_server
                 std::string fillNameJson;
                 if (!getLookNameJson(dbLook, "fill_name", fillNameJson)) return false;
 
-                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson +
-                             "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + contourNameJson +
-                             "},{\"id\":" + std::to_string(3 * id + 2) + ",\"name\":" + fillNameJson + "}";
+                looksJson += "{\"id\":" + std::to_string(3 * id) + ",\"name\":" + textNameJson + ",\"zI\":0,\"a\":"
+                             + std::to_string(textAlpha) + ",\"r\":" + std::to_string(textRed) + ",\"g\":" + std::to_string(textGreen) + ",\"b\":"
+                             + std::to_string(textBlue) + ",\"size\":" + std::to_string(textSizeElt.Double())
+                             + "},{\"id\":" + std::to_string(3 * id + 1) + ",\"name\":" + contourNameJson + ",\"zI\":" + std::to_string(contourZIndex) + ",\"a\":"
+                             + std::to_string(contourAlpha) + ",\"r\":" + std::to_string(contourRed) + ",\"g\":" + std::to_string(contourGreen) + ",\"b\":"
+                             + std::to_string(contourBlue) + ",\"size\":" + std::to_string(contourSizeElt.Double())
+                             + "},{\"id\":" + std::to_string(3 * id + 2) + ",\"name\":" + fillNameJson + ",\"zI\":" + std::to_string(fillZIndex) + ",\"a\":"
+                             + std::to_string(fillAlpha) + ",\"r\":" + std::to_string(fillRed) + ",\"g\":" + std::to_string(fillGreen) + ",\"b\":"
+                             + std::to_string(fillBlue) + ",\"size\":0.0}";
 
                 PolygonLook *look = new PolygonLook(id, textAlpha, textRed, textGreen, textBlue, textSizeElt.Double(),
                                                     contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeElt.Double(),

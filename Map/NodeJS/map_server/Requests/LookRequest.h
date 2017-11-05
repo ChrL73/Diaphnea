@@ -4,6 +4,7 @@
 
 namespace map_server
 {
+    // Note: 'Look' request is no more usefull, because all look information is now sent in the 'MapInfo' response
     class LookRequest : public Request
     {
     private:

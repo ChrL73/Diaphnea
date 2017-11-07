@@ -21,7 +21,7 @@
                </div>
             </div>
             <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6" id="column1">
-               <canvas></canvas>
+               <canvas class="mapCanvas"></canvas>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6"  id="column2" style="overflow:auto;">
                <form id="connectionForm">
@@ -49,10 +49,22 @@
                   <div class="form-group" >
                      <label for="fillingStyleSelect">Filling style:</label>
                      <select class="form-control" id="fillingStyleSelect" >
-                        <option value="0_">0</option>
-                        <option value="1_">1</option>
-                        <option value="2_">2</option>
+                        <option value="0_">1</option>
+                        <option value="1_">2</option>
+                        <option value="2_">3</option>
                      </select>
+                  </div>
+                  <div class="form-group" >
+                     <label for="colorSelect">Customize color:</label>
+                     <select class="form-control" id="colorSelect" ></select>
+                  </div>
+                  <div class="panel panel-default" id="customColor" style="display:none;">
+                     <div class="panel-heading">
+                        <span id="colorName"></span>
+                        <button id="closeCustomColor" type="button" class="close">x</button>
+                     </div>
+                     <div class="panel-body">
+                     </div>
                   </div>
                   <div class="form-group">
                      <button class="btn btn-success" id="svgExport">SVG export</button>

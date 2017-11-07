@@ -18,6 +18,15 @@ $(function()
    {
       e.preventDefault();
    });
+   
+   $('#closeCustomColor').click(resetColorSelect);
+   
+   function resetColorSelect()
+   {
+      $('#customColor').hide();
+      $('#colorSelect').show();
+      $('#colorSelect').val('__');
+   }
 
    function onConnected(mapServerConnection)
    {
@@ -47,8 +56,9 @@ $(function()
       
       function loadMap(mapId)
       {
-         $('canvas').hide();
+         $('.mapCanvas').hide();
          $('#linkGroup').hide();
+         resetColorSelect();
          
          if (mapInfos[mapId])
          {
@@ -61,7 +71,7 @@ $(function()
             var canvasId = 'canvas' + mapCounter;
             mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, fillingStyle: '0_', linkDepth: 1, linkThreshold: 50 };
             
-            $('#column1').append('<canvas id="' + canvasId + '"></canvas>');
+            $('#column1').append('<canvas class="mapCanvas" id="' + canvasId + '"></canvas>');
             $('#' + canvasId).attr('width', $('#column1').width());
             $('#' + canvasId).attr('height', window.innerHeight - 36);
             
@@ -104,6 +114,7 @@ $(function()
             
             $('#languageSelect').off();
             $('#fillingStyleSelect').off();
+            $('#colorSelect').off();
             $('#languageSelect').empty();
             var languages = map.getLanguages();
             languages.forEach(function(language)
@@ -127,12 +138,21 @@ $(function()
                    
             $('#languageSelect').change(function()
             {
+               resetColorSelect();
                var languageId = $('#languageSelect').val();
                map.setLanguage(languageId);
                mapInfos[mapId].language = languageId;
                map.redraw();
                $('#linkGroup').hide();
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
+               updateColors(map, languageId);
+            });
+            
+            $('#colorSelect').change(function()
+            {
+               $('#colorName').html($('#colorSelect option:selected').text());
+               $('#colorSelect').hide();
+               $('#customColor').show();
             });
                
             $('#fillingStyleSelect').change(function()
@@ -148,6 +168,8 @@ $(function()
                resizeCanvas();
                map.redraw();
             }
+            
+            updateColors(map, mapInfos[mapId].language);
             
             if (reload)
             {
@@ -176,6 +198,19 @@ $(function()
             });
          }
       }
+   }
+   
+   function updateColors(map, languageId)
+   {
+      $('#colorSelect').empty();
+      $('#colorSelect').append('<option value="__"></option>');
+    
+      var colorIds = map.getColorIds();
+      colorIds.forEach(function(colorId)
+      {
+         var color = map.getColorInfo(colorId, languageId);
+         $('#colorSelect').append('<option value="' + colorId + '">' + color.name + '</option>');
+      });
    }
    
    function updateCategories(elementArray, map, mapInfo)
@@ -440,8 +475,8 @@ $(function()
       $('#column1').height((window.innerHeight - 36).toString() + 'px');
       $('#column2').height((window.innerHeight - 8).toString() + 'px');      
       
-      $('canvas').attr('width', $('#column1').width());
-      $('canvas').attr('height', window.innerHeight - 36);
+      $('.mapCanvas').attr('width', $('#column1').width());
+      $('.mapCanvas').attr('height', window.innerHeight - 36);
    }
    
 });

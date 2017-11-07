@@ -135,17 +135,43 @@ var mapServerInterface =
             var xFocus, yFocus, scale;
             
             var looks = {};
+            var lookIds = [];
             mapInfo.looks.forEach(function(look)
             {
                looks[look.id] =
                {
                   zI: look.zI,
                   size: look.size,
+                  r: look.r,
+                  g: look.g,
+                  b: look.b,
+                  a: look.a,
                   canvasColor: 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')',
                   svgColor: '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1),
-                  svgOpacity: (look.a / 255.0)
+                  svgOpacity: (look.a / 255.0),
+                  name: look.name
                };
+               
+               lookIds.push(look.id);
             });
+            
+            this.getColorIds = function() { return lookIds; };
+            this.getColorInfo = function(lookId, languageId)
+            {
+               var look = looks[lookId];
+               if (look)
+               { 
+                  var info =
+                  {
+                     r: look.r,
+                     g: look.g,
+                     b: look.b,
+                     a: look.a,
+                     name: look.name[languageId]
+                  };
+                  return info;
+               }
+            };
             
             var currentLanguageId = mapInfo.languages[0].id;
             this.setLanguage = function(languageId)
@@ -166,7 +192,7 @@ var mapServerInterface =
             this.getLanguages = function() { return mapInfo.languages; };
             this.getName = function(languageId) { return mapInfo.names[languageId]; };
             this.getElementIds = function() { return mapInfo.elementIds; };
-            this.getCategories = function() { return mapInfo.categories; }
+            this.getCategories = function() { return mapInfo.categories; };
             
             this.loadElement = function(elementId, onElementLoaded)
             {

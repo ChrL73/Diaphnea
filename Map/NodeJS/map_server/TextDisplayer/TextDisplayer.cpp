@@ -676,11 +676,7 @@ namespace map_server
                 << ",\"y1\":" << yMin
                 << ",\"y2\":" << yMax
                 << ",\"s\":" << textInfo->getFontSize()
-                << ",\"z\":" << textInfo->getZIndex()
-                << ",\"a\":" << textInfo->getAlpha()
-                << ",\"r\":" << textInfo->getRed()
-                << ",\"g\":" << textInfo->getGreen()
-                << ",\"b\":" << textInfo->getBlue()
+                << ",\"look\":" << textInfo->getLookId()
                 << "}" << std::endl;
             _coutMutexPtr->unlock();
         }

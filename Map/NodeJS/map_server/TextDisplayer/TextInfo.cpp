@@ -11,7 +11,7 @@
 namespace map_server
 {
     TextInfo::TextInfo(const std::vector<TextInfoLine *>& lineVector, double fontSize, const ItemLook *textLook, FT_Face face) :
-        _lineVector(lineVector), _zIndex(textLook->getZIndex()), _alpha(textLook->getAlpha()), _red(textLook->getRed()),
+        _lineVector(lineVector), _lookId(textLook->getId()), _zIndex(textLook->getZIndex()), _alpha(textLook->getAlpha()), _red(textLook->getRed()),
         _green(textLook->getGreen()), _blue(textLook->getBlue()), _hexColor(textLook->getHexColor()), _fontSize(fontSize), _width(0.0), _ok(false)
     {
 		const double minFontSize = 5.0;

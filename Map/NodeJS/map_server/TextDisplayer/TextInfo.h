@@ -13,6 +13,7 @@ namespace map_server
     {
     private:
 		const std::vector<TextInfoLine *> _lineVector;
+		const int _lookId;
 		const int _zIndex;
         const int _alpha;
         const int _red;
@@ -37,6 +38,7 @@ namespace map_server
 
         const std::vector<TextInfoLine *>& getLineVector(void) const { return _lineVector; }
         double getFontSize(void) const { return _fontSize; }
+        int getLookId(void) const { return _lookId; }
 		int getZIndex(void) const { return _zIndex; }
 		int getAlpha(void) const { return _alpha; }
 		int getRed(void) const { return _red; }

@@ -20,10 +20,10 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-6" id="column1">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-5" id="column1">
                <canvas class="mapCanvas"></canvas>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6"  id="column2" style="overflow:auto;">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-7" id="column2" style="overflow:auto;">
                <form id="connectionForm">
                   <div class="form-group">
                      <label for="serverInput">Server:</label>
@@ -64,6 +64,34 @@
                         <button id="closeCustomColor" type="button" class="close">x</button>
                      </div>
                      <div class="panel-body">
+                        <div class="form-group row" >
+                           <span class="col-md-4 col-sm-5 col-sm-offset-2 col-xs-5 col-xs-offset-2 text-center">Default</span>
+                           <span class="col-md-4 col-sm-5 col-xs-5 text-center">Custom</span>
+                        </div>
+                        <div class="form-group row" style="margin-top:8px;">
+                           <span class="col-sm-2 col-xs-2 text-center" >Red</span>
+                           <span id="r1" class="col-md-4 col-sm-5 col-xs-5 text-center"></span>
+                           <div class="col-md-4 col-sm-5 col-xs-5"><input class="form-control text-center" id="r2" type=text/></div>
+                        </div>
+                        <div class="form-group row" style="margin-top:8px;">
+                           <span class="col-sm-2 col-xs-2 text-center" >Green</span>
+                           <span id="g1" class="col-md-4 col-sm-5 col-xs-5 text-center"></span>
+                           <div class="col-md-4 col-sm-5 col-xs-5"><input class="form-control text-center" id="g2" type=text/></div>
+                        </div>
+                        <div class="form-group row" style="margin-top:8px;">
+                           <span class="col-sm-2 col-xs-2 text-center" >Blue</span>
+                           <span id="b1" class="col-md-4 col-sm-5 col-xs-5 text-center"></span>
+                           <div class="col-md-4 col-sm-5 col-xs-5"><input class="form-control text-center" id="b2" type=text/></div>
+                        </div>
+                        <div class="form-group row" style="margin-top:8px;">
+                           <span class="col-sm-2 col-xs-2 text-center" >Alpha</span>
+                           <span id="a1" class="col-md-4 col-sm-5 col-xs-5 text-center"></span>
+                           <div class="col-md-4 col-sm-5 col-xs-5"><input class="form-control text-center" id="a2" type=text/></div>
+                        </div>
+                        <div class="form-group row" style="margin-top:8px;">
+                           <div class="col-md-4 col-sm-5 col-xs-5 col-sm-offset-2 col-xs-offset-2 text-center"><button id="colorApply" class="btn btn-default">Restore</button></div>
+                           <div class="col-md-4 col-sm-5 col-xs-5 text-center"><button id="colorRestore" class="btn btn-default">Apply</button></div>
+                        </div>
                      </div>
                   </div>
                   <div class="form-group">

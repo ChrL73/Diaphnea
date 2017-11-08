@@ -14,10 +14,9 @@ $(function()
       $('#errorModal').modal('show');
    }
    
-   $('#svgExport').click(function(e)
-   {
-      e.preventDefault();
-   });
+   $('#svgExport').click(function(e) { e.preventDefault(); }); 
+   $('#colorApply').click(function(e) { e.preventDefault(); });
+   $('#colorRestore').click(function(e) { e.preventDefault(); });
    
    $('#closeCustomColor').click(resetColorSelect);
    
@@ -153,6 +152,21 @@ $(function()
                $('#colorName').html($('#colorSelect option:selected').text());
                $('#colorSelect').hide();
                $('#customColor').show();
+               
+               var colorId = $('#colorSelect').val();
+               var color = map.getColorInfo(colorId);
+               
+               $('#r1').text(color.defaultR);
+               $('#r2').val(color.r);
+               
+               $('#g1').text(color.defaultG);
+               $('#g2').val(color.g);
+               
+               $('#b1').text(color.defaultB);
+               $('#b2').val(color.b);
+               
+               $('#a1').text(color.defaultA);
+               $('#a2').val(color.a);
             });
                
             $('#fillingStyleSelect').change(function()

@@ -142,6 +142,10 @@ var mapServerInterface =
                {
                   zI: look.zI,
                   size: look.size,
+                  defaultR: look.r,
+                  defaultG: look.g,
+                  defaultB: look.b,
+                  defaultA: look.a,
                   r: look.r,
                   g: look.g,
                   b: look.b,
@@ -156,13 +160,17 @@ var mapServerInterface =
             });
             
             this.getColorIds = function() { return lookIds; };
-            this.getColorInfo = function(lookId, languageId)
+            this.getColorInfo = function(colorId, languageId)
             {
-               var look = looks[lookId];
+               var look = looks[colorId];
                if (look)
                { 
                   var info =
                   {
+                     defaultR: look.defaultR,
+                     defaultG: look.defaultG,
+                     defaultB: look.defaultB,
+                     defaultA: look.defaultA,
                      r: look.r,
                      g: look.g,
                      b: look.b,

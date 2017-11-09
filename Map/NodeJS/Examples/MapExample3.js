@@ -157,16 +157,77 @@ $(function()
                var color = map.getColorInfo(colorId);
                
                $('#r1').text(color.defaultR);
-               $('#r2').val(color.r);
-               
+               $('#r2').val(color.customR);             
                $('#g1').text(color.defaultG);
-               $('#g2').val(color.g);
-               
+               $('#g2').val(color.customG);          
                $('#b1').text(color.defaultB);
-               $('#b2').val(color.b);
-               
+               $('#b2').val(color.customB);          
                $('#a1').text(color.defaultA);
-               $('#a2').val(color.a);
+               $('#a2').val(color.customA);
+               
+               var r2 = color.customR;
+               $('#r2').change(function()
+               {
+                  var value = $('#r2').val();
+                  value = parseInt(value, 10);
+                  if (!isNaN(value) && value >=0 && value <= 255) { r2 = value; }
+                  $('#r2').val(r2);
+                  showColors();
+               });
+               
+               var g2 = color.customG;
+               $('#g2').change(function()
+               {
+                  var value = $('#g2').val();
+                  value = parseInt(value, 10);
+                  if (!isNaN(value) && value >=0 && value <= 255) { g2 = value; }
+                  $('#g2').val(g2);
+                  showColors();
+               });
+               
+               var b2 = color.customB;
+               $('#b2').change(function()
+               {
+                  var value = $('#b2').val();
+                  value = parseInt(value, 10);
+                  if (!isNaN(value) && value >=0 && value <= 255) { b2 = value; }
+                  $('#b2').val(b2);
+                  showColors();
+               });
+               
+               var a2 = color.customA;
+               $('#a2').change(function()
+               {
+                  var value = $('#a2').val();
+                  value = parseInt(value, 10);
+                  if (!isNaN(value) && value >=0 && value <= 255) { a2 = value; }
+                  $('#a2').val(a2);
+                  showColors();
+               });
+               
+               showColors();
+               
+               function showColors()
+               {
+                  $("#c1").css('background-color', 'rgba(' + color.defaultR + ', ' + color.defaultG + ', ' + color.defaultB + ', ' + (color.defaultA / 255.0) + ')');
+                  $("#c2").css('background-color', 'rgba(' + r2 + ', ' + g2 + ', ' + b2 + ', ' + (a2 / 255.0) + ')');
+               }
+               
+               $('#colorApply').off();
+               $('#colorApply').click(function(e)
+               {
+                  e.preventDefault();
+                  map.setCustomColor(colorId, r2, g2, b2, a2);
+                  map.redraw();
+               });
+               
+               $('#colorRestore').off();
+               $('#colorRestore').click(function(e)
+               {
+                  e.preventDefault();
+                  map.restoreDefaultColor(colorId);
+                  map.redraw();
+               });
             });
                
             $('#fillingStyleSelect').change(function()

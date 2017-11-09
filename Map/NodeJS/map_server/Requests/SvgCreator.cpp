@@ -12,6 +12,7 @@
 #include "BezierInfo.h"
 #include "TextInfo.h"
 #include "MessageTypeEnum.h"
+#include "SvgCustomColor.h"
 
 #include <sstream>
 
@@ -44,6 +45,10 @@ namespace map_server
                 const MapItem *item = svgItemInfo->getItem();
                 const ItemLook *look = svgItemInfo->getLook();
                 int resolutionIndex = svgItemInfo->getResolutionIndex();
+
+                SvgCustomColor *customColor = 0;
+                std::map<int, SvgCustomColor *>::const_iterator customColorIt = _customColorMap->find(look->getId());
+                if (customColorIt != _customColorMap->end()) customColor = (*customColorIt).second;
 
                 const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
                 if (filledPolygonItem != 0)
@@ -98,8 +103,8 @@ namespace map_server
                         lastIn = in;
                     }
 
-                    content << "<path style=\\\"fill:" << look->getHexColor()
-                            << ";fill-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
+                    content << "<path style=\\\"fill:" << (customColor ? customColor->getColor() : look->getHexColor())
+                            << ";fill-opacity:" << (customColor ? customColor->getOpacity() : static_cast<double>(look->getAlpha()) / 255.0)
                             << ";fill-rule:evenodd;stroke:none\\\" d=\\\"";
 
                     n = curveInfoVector.size();
@@ -152,8 +157,8 @@ namespace map_server
                             if (lineItem->cap2Round()) addCircle2 = true;
                         }
 
-                        content << "<path style=\\\"fill:none;stroke:" << look->getHexColor()
-                                << ";stroke-opacity:" << static_cast<double>(look->getAlpha()) / 255.0
+                        content << "<path style=\\\"fill:none;stroke:" << (customColor ? customColor->getColor() : look->getHexColor())
+                                << ";stroke-opacity:" << (customColor ? customColor->getOpacity() : static_cast<double>(look->getAlpha()) / 255.0)
                                 << ";stroke-width:" << look->getSize() * _scale * _sizeFactor
                                 << ";stroke-linecap:" << strokeLineCap << ";stroke-linejoin:round\\\" d=\\\"";
 
@@ -194,8 +199,8 @@ namespace map_server
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
                             content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << look->getHexColor()
-                                << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
+                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << (customColor ? customColor->getColor() : look->getHexColor())
+                                << "\\\" fill-opacity=\\\"" << (customColor ? customColor->getOpacity() : static_cast<double>(look->getAlpha()) / 255.0) << "\\\"></circle>" << "\\n";
                         }
 
                         if (addCircle2)
@@ -205,8 +210,8 @@ namespace map_server
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
                             content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
-                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << look->getHexColor()
-                                << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
+                                << "\\\" stroke=\\\"none\\\" fill=\\\"" << (customColor ? customColor->getColor() : look->getHexColor())
+                                << "\\\" fill-opacity=\\\"" << (customColor ? customColor->getOpacity() : static_cast<double>(look->getAlpha()) / 255.0) << "\\\"></circle>" << "\\n";
                         }
                     }
                     else
@@ -221,8 +226,9 @@ namespace map_server
                             {
                                 content << "<circle cx=\\\"" << x << "\\\" cy=\\\"" << y << "\\\" r=\\\"" << 0.5 * look->getSize() * _scale * _sizeFactor
                                         << "\\\" stroke=\\\"black\\\" stroke-width=\\\"" << _scale * _sizeFactor
-                                        << "\\\" fill=\\\"" << look->getHexColor()
-                                        << "\\\" fill-opacity=\\\"" << static_cast<double>(look->getAlpha()) / 255.0 << "\\\"></circle>" << "\\n";
+                                        << "\\\" fill=\\\"" << (customColor ? customColor->getColor() : look->getHexColor())
+                                        << "\\\" fill-opacity=\\\"" << (customColor ? customColor->getOpacity() : static_cast<double>(look->getAlpha()) / 255.0)
+                                        << "\\\"></circle>" << "\\n";
                             }
                         }
                     }
@@ -233,6 +239,20 @@ namespace map_server
                 SvgTextInfo *svgTextInfo = dynamic_cast<SvgTextInfo *>((*it).second);
                 if (svgTextInfo != 0)
                 {
+                    const char *color;
+                    double opacity;
+                    std::map<int, SvgCustomColor *>::const_iterator customColorIt = _customColorMap->find(svgTextInfo->getTextInfo()->getLookId());
+                    if (customColorIt != _customColorMap->end())
+                    {
+                        color = (*customColorIt).second->getColor().c_str();
+                        opacity = (*customColorIt).second->getOpacity();
+                    }
+                    else
+                    {
+                        color = svgTextInfo->getTextInfo()->getHexColor();
+                        opacity = static_cast<double>(svgTextInfo->getTextInfo()->getAlpha()) / 255.0;
+                    }
+
                     int i, n = svgTextInfo->getLineVector().size();
                     for (i = 0; i < n; ++i)
                     {
@@ -242,8 +262,8 @@ namespace map_server
                         double y = (lineInfo->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
                         content << "<text x=\\\"" << x << "\\\" y=\\\"" << y << "\\\" font-size=\\\"" << svgTextInfo->getTextInfo()->getFontSize()
-                                << "\\\" font-family=\\\"arial\\\" fill=\\\"" << svgTextInfo->getTextInfo()->getHexColor()
-                                << "\\\" fill-opacity=\\\"" << static_cast<double>(svgTextInfo->getTextInfo()->getAlpha()) / 255.0
+                                << "\\\" font-family=\\\"arial\\\" fill=\\\"" << color
+                                << "\\\" fill-opacity=\\\"" << opacity
                                 << "\\\">" << lineInfo->getText() << "</text>" << "\\n";
                     }
                 }

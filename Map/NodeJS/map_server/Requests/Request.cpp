@@ -11,6 +11,7 @@
 #include "MapData.h"
 #include "Map.h"
 #include "DatabaseError.h"
+#include "SvgCustomColor.h"
 
 #include <string>
 #include <iostream>
@@ -251,7 +252,36 @@ namespace map_server
                 }
 
 				std::vector<const char *> elementIds;
-				for (i = 11; i < tokenCount; ++i) elementIds.push_back(tokenVector[i]);
+				for (i = 11; i < tokenCount; ++i)
+				{
+                    if (strcmp(tokenVector[i], "#") == 0) break;
+                    elementIds.push_back(tokenVector[i]);
+                }
+
+				std::map<int, SvgCustomColor *> customColorMap;
+				int i0 = i + 1;
+				for (i = i0; i + 2 < tokenCount; i += 3)
+				{
+                    int colorId;
+                    try
+                    {
+                        colorId = std::stoi(tokenVector[i]);
+                    }
+                    catch (...)
+                    {
+                        continue;
+                    }
+
+                    SvgCustomColor *svgCustomColor = new SvgCustomColor(tokenVector[i + 1], tokenVector[i + 2]);
+                    if (svgCustomColor->ok())
+                    {
+                        customColorMap.insert(std::pair<int, SvgCustomColor *>(colorId, svgCustomColor));
+                    }
+                    else
+                    {
+                        delete svgCustomColor;
+                    }
+				}
 
 				double scale, xFocus, yFocus;
 				try
@@ -262,10 +292,11 @@ namespace map_server
 				}
 				catch (...)
 				{
-					return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds);
+					return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, customColorMap);
 				}
 
-				return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, scale, xFocus, yFocus);
+				return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, customColorMap,
+                                         scale, xFocus, yFocus);
 			}
 		}
 

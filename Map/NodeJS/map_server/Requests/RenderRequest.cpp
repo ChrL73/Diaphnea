@@ -24,6 +24,7 @@
 #include "SvgCreator.h"
 #include "SvgItemInfo.h"
 #include "ErrorEnum.h"
+#include "SvgCustomColor.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -39,6 +40,12 @@
 
 namespace map_server
 {
+    RenderRequest::~RenderRequest()
+    {
+        std::map<int, SvgCustomColor *>::const_iterator it = _customColorMap.begin();
+        for (; it != _customColorMap.end(); ++it) delete (*it).second;
+    }
+
     void RenderRequest::execute()
     {
         MapData::lock();
@@ -210,7 +217,7 @@ namespace map_server
 
                 double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
 
-                if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId);
+                if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
                 else response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
 
                 n = itemVector2.size();

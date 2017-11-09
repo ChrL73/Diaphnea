@@ -7,6 +7,7 @@
 namespace map_server
 {
     class SvgInfo;
+    class SvgCustomColor;
 
     class SvgCreator
     {
@@ -21,18 +22,20 @@ namespace map_server
         const double _yFocus;
         const std::string _socketId;
         const std::string _requestId;
+        const std::map<int, SvgCustomColor *> *_customColorMap;
 
         std::multimap<int, SvgInfo *> _infoMap;
 
     public:
-        SvgCreator(double widthInPixels, double heightInPixels, double scale, double sizeFactor, double xFocus, double yFocus, const std::string& socketId, const std::string& requestId) :
-            _widthInPixels(widthInPixels), _heightInPixels(heightInPixels), _scale(scale), _sizeFactor(sizeFactor), _xFocus(xFocus), _yFocus(yFocus), _socketId(socketId), _requestId(requestId) {}
+        SvgCreator(double widthInPixels, double heightInPixels, double scale, double sizeFactor, double xFocus, double yFocus,
+                   const std::string& socketId, const std::string& requestId, const std::map<int, SvgCustomColor *> *customColorMap) :
+            _widthInPixels(widthInPixels), _heightInPixels(heightInPixels), _scale(scale), _sizeFactor(sizeFactor), _xFocus(xFocus), _yFocus(yFocus),
+            _socketId(socketId), _requestId(requestId), _customColorMap(customColorMap) {}
         ~SvgCreator();
 
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
 
         void addInfo(int zIndex, SvgInfo *info) { _infoMap.insert(std::pair<int, SvgInfo *>(-zIndex, info)); }
         void execute(void);
-
     };
 }

@@ -219,6 +219,16 @@ function onRenderReq(socketId, request)
    {
       req += ' ' + elementId;
    });
+   
+   if (request.customColors)
+   {
+      req += ' #';
+      request.customColors.forEach(function(customColor)
+      {
+         req += ' ' + customColor.i + ' ' + customColor.c + ' ' + customColor.o;
+      });
+   }
+   
    cppServer.sendRequest(req);
 }
 

@@ -146,6 +146,10 @@ var mapServerInterface =
                   defaultG: look.g,
                   defaultB: look.b,
                   defaultA: look.a,
+                  customR: look.r,
+                  customG: look.g,
+                  customB: look.b,
+                  customA: look.a,
                   r: look.r,
                   g: look.g,
                   b: look.b,
@@ -171,6 +175,10 @@ var mapServerInterface =
                      defaultG: look.defaultG,
                      defaultB: look.defaultB,
                      defaultA: look.defaultA,
+                     customR: look.customR,
+                     customG: look.customG,
+                     customB: look.customB,
+                     customA: look.customA,
                      r: look.r,
                      g: look.g,
                      b: look.b,
@@ -178,6 +186,42 @@ var mapServerInterface =
                      name: look.name[languageId]
                   };
                   return info;
+               }
+            };
+            
+            this.setCustomColor = function(colorId, r, g, b, a)
+            {
+               var look = looks[colorId];
+               if (look)
+               {
+                  if ((r || r === 0) && (g || g === 0) && (b || b === 0) && (a || a === 0))
+                  {
+                     look.customR = r;
+                     look.customG = g;
+                     look.customB = b;
+                     look.customA = a;
+                  }
+                  
+                  look.r = look.customR;
+                  look.g = look.customG;
+                  look.b = look.customB;
+                  look.a = look.customA;
+                  look.canvasColor = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                  look.svgColor = '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1);
+               }
+            };
+            
+            this.restoreDefaultColor = function(colorId)
+            {
+               var look = looks[colorId];
+               if (look)
+               {
+                  look.r = look.defaultR;
+                  look.g = look.defaultG;
+                  look.b = look.defaultB;
+                  look.a = look.defaultA;
+                  look.canvasColor = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
+                  look.svgColor = '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1);
                }
             };
             
@@ -258,7 +302,7 @@ var mapServerInterface =
                   if (textItem)
                   {
                      delete addedItems[textItemKey];
-                     delete addedItemsByZIndex[textItem.zI][textItemKey];
+                     delete addedItemsByZIndex[looks[textItem.lookId].zI][textItemKey];
                      delete removableTexts[textItemKey];
                   }
                   scheduleRenderRequest();
@@ -443,11 +487,8 @@ var mapServerInterface =
                   xMax: textInfo.x2,
                   yMin: textInfo.y1,
                   yMax: textInfo.y2,
-                  zI: textInfo.z,
+                  lookId: textInfo.look,
                   size: textInfo.s,
-                  canvasColor: 'rgba(' + textInfo.r + ', ' + textInfo.g + ', ' + textInfo.b + ', ' + (textInfo.a / 255.0) + ')',
-                  svgColor: '#' + (0x1000000 | textInfo.b | (textInfo.g << 8) | (textInfo.r << 16)).toString(16).substr(1),        
-                  svgOpacity: (textInfo.a / 255.0),
                   scale: context.scale
                }
                           
@@ -458,12 +499,12 @@ var mapServerInterface =
                   if (textInfo.x1 <= item2.xMax && textInfo.x2 >= item2.xMin && textInfo.y1 <= item2.yMax && textInfo.y2 >= item2.yMin)
                   {
                      delete addedItems[itemKey2];
-                     delete addedItemsByZIndex[item2.zI][itemKey2];
+                     delete addedItemsByZIndex[looks[item2.lookId].zI][itemKey2];
                      delete removableTexts[itemKey2];
                   }
                });
                
-               addItem(itemKey);
+               addItem(itemKey, textInfo.look);
                cancelAnimationFrame(reqAnimFrameId);
                reqAnimFrameId = requestAnimationFrame(renderCanvas);
             });
@@ -479,7 +520,7 @@ var mapServerInterface =
                if (item)
                {
                   delete addedItems[itemKey];
-                  delete addedItemsByZIndex[item.zI][itemKey];
+                  delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
                   delete removableTexts[itemKey];
                }
             });
@@ -521,10 +562,7 @@ var mapServerInterface =
                   item.lookId = lookId;
                }
                
-               var look;
-               if (lookId) look = looks[lookId];
-               else look = item; // Case of a text item: Item has no 'lookId', look parameters are in the 'item' object
-                  
+               var look = looks[lookId];
                if (item.type && look)
                {
                   Object.getOwnPropertyNames(itemsToRemove).forEach(function(itemKey2)
@@ -537,7 +575,7 @@ var mapServerInterface =
                   });
                   
                   addedItems[itemKey] = true;
-                  addedItemsByZIndex[look.zI][itemKey] = true;
+                  addedItemsByZIndex[looks[item.lookId].zI][itemKey] = true;
                           
                   cancelAnimationFrame(reqAnimFrameId);
                   reqAnimFrameId = requestAnimationFrame(renderCanvas);
@@ -636,7 +674,7 @@ var mapServerInterface =
                               && (item.yMin - yFocus) * scale + 0.5 * canvas.height >= 0
                               && (item.yMax - yFocus) * scale - 0.5 * canvas.height <= 0)
                         {
-                           ctx.fillStyle = item.canvasColor;
+                           ctx.fillStyle = look.canvasColor;
                            ctx.font = item.size + 'px arial';
                            
                            item.textLines.forEach(function(line)
@@ -650,7 +688,7 @@ var mapServerInterface =
                         {
                            // If the scale has changed or if the text overflows the map frame, the text item is obsolete, remove it
                            delete addedItems[itemKey];
-                           delete addedItemsByZIndex[item.zI][itemKey];
+                           delete addedItemsByZIndex[looks[item.lookId].zI][itemKey];
                            delete removableTexts[itemKey];
                         }
                      }

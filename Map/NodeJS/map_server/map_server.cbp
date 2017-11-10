@@ -130,6 +130,8 @@
 		<Unit filename="Requests/SvgCreator.h" />
 		<Unit filename="Requests/SvgCurveInfo.cpp" />
 		<Unit filename="Requests/SvgCurveInfo.h" />
+		<Unit filename="Requests/SvgCustomColor.cpp" />
+		<Unit filename="Requests/SvgCustomColor.h" />
 		<Unit filename="Requests/SvgInfo.cpp" />
 		<Unit filename="Requests/SvgInfo.h" />
 		<Unit filename="Requests/SvgItemInfo.cpp" />

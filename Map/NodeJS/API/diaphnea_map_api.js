@@ -155,8 +155,6 @@ var mapServerInterface =
                   b: look.b,
                   a: look.a,
                   canvasColor: 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')',
-                  svgColor: '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1),
-                  svgOpacity: (look.a / 255.0),
                   name: look.name
                };
                
@@ -207,7 +205,6 @@ var mapServerInterface =
                   look.b = look.customB;
                   look.a = look.customA;
                   look.canvasColor = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                  look.svgColor = '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1);
                }
             };
             
@@ -221,7 +218,6 @@ var mapServerInterface =
                   look.b = look.defaultB;
                   look.a = look.defaultA;
                   look.canvasColor = 'rgba(' + look.r + ', ' + look.g + ', ' + look.b + ', ' + (look.a / 255.0) + ')';
-                  look.svgColor = '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1);
                }
             };
             
@@ -375,6 +371,25 @@ var mapServerInterface =
                   
                   if (svgRequested)
                   {
+                     var customColors = [];
+                     Object.getOwnPropertyNames(looks).forEach(function(lookId)
+                     { 
+                        var look = looks[lookId];
+                        if (look.r != look.defaultR || look.g != look.defaultG || look.b != look.defaultB || look.a != look.defaultA)
+                        {
+                           var customColor = 
+                           {
+                              i: lookId,
+                              c: '#' + (0x1000000 | look.b | (look.g << 8) | (look.r << 16)).toString(16).substr(1),
+                              o: (look.a / 255.0).toFixed(3)
+                           }
+                           
+                           customColors.push(customColor);
+                        }
+                     });
+                     
+                     if (customColors.length != 0) request.customColors = customColors;
+                     
                      postHttpRequest('map.svg', request);
                   }
                   else

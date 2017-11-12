@@ -23,7 +23,7 @@ $(function()
    function resetColorSelect()
    {
       $('#customColor').hide();
-      $('#colorSelect').show();
+      $('.colorInputs').show();
       $('#colorSelect').val('__');
    }
 
@@ -144,16 +144,22 @@ $(function()
                map.redraw();
                $('#linkGroup').hide();
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
-               updateColors(map, languageId);
+            });
+            
+            $('#colorSelect').on('click', function()
+            {
+               updateColors(map, mapInfos[mapId].language);
             });
             
             $('#colorSelect').change(function()
             {
+               var colorId = $('#colorSelect').val();
+               if (colorId == '__') return;
+               
                $('#colorName').html($('#colorSelect option:selected').text());
-               $('#colorSelect').hide();
+               $('.colorInputs').hide();
                $('#customColor').show();
                
-               var colorId = $('#colorSelect').val();
                var color = map.getColorInfo(colorId);
                
                $('#r1').text(color.defaultR);
@@ -244,8 +250,6 @@ $(function()
                map.redraw();
             }
             
-            updateColors(map, mapInfos[mapId].language);
-            
             if (reload)
             {
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
@@ -283,8 +287,11 @@ $(function()
       var colorIds = map.getColorIds();
       colorIds.forEach(function(colorId)
       {
-         var color = map.getColorInfo(colorId, languageId);
-         $('#colorSelect').append('<option value="' + colorId + '">' + color.name + '</option>');
+         if (!$('#colorCheckbox').prop('checked') || map.isColorVisible(colorId))
+         {
+            var color = map.getColorInfo(colorId, languageId);
+            $('#colorSelect').append('<option value="' + colorId + '">' + color.name + '</option>');
+         }
       });
    }
    

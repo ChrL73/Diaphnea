@@ -136,6 +136,7 @@ var mapServerInterface =
             
             var looks = {};
             var lookIds = [];
+            var visibleLookIds = {};
             mapInfo.looks.forEach(function(look)
             {
                looks[look.id] =
@@ -186,6 +187,8 @@ var mapServerInterface =
                   return info;
                }
             };
+            
+            this.isColorVisible = function(colorId) { return visibleLookIds[colorId]; };
             
             this.setCustomColor = function(colorId, r, g, b, a)
             {
@@ -618,6 +621,8 @@ var mapServerInterface =
                ctx.clearRect(0, 0, canvas.width, canvas.height);
                var sizeFactor = mapInfo.sizeParameter1 / (mapInfo.sizeParameter2 + scale);
                
+               Object.getOwnPropertyNames(visibleLookIds).forEach(function(id) { visibleLookIds[id] = false });
+               
                var i;
                for (i = 31; i >= 0; --i)
                {
@@ -629,6 +634,8 @@ var mapServerInterface =
 
                      if (item.type == 'line')
                      {
+                        visibleLookIds[item.lookId] = true;
+                        
                         ctx.save();
                         ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
                         ctx.scale(scale, scale);
@@ -648,6 +655,8 @@ var mapServerInterface =
                      }
                      else if (item.type == 'polygon')
                      {
+                        visibleLookIds[item.lookId] = true;
+                        
                         ctx.save();
                         ctx.translate(0.5 * canvas.width - xFocus * scale, 0.5 * canvas.height - yFocus * scale);
                         ctx.scale(scale, scale);
@@ -668,6 +677,8 @@ var mapServerInterface =
                      }
                      else if (item.type == 'point')
                      {
+                        visibleLookIds[item.lookId] = true;
+                        
                         var x = (item.x - xFocus) * scale + 0.5 * canvas.width;
                         var y = (item.y - yFocus) * scale + 0.5 * canvas.height;
                         
@@ -689,6 +700,8 @@ var mapServerInterface =
                               && (item.yMin - yFocus) * scale + 0.5 * canvas.height >= 0
                               && (item.yMax - yFocus) * scale - 0.5 * canvas.height <= 0)
                         {
+                           visibleLookIds[item.lookId] = true;
+                           
                            ctx.fillStyle = look.canvasColor;
                            ctx.font = item.size + 'px arial';
                            

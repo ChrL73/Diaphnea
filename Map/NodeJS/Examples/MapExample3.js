@@ -14,7 +14,9 @@ $(function()
       $('#errorModal').modal('show');
    }
    
-   $('#svgExport').click(function(e) { e.preventDefault(); }); 
+   $('#save').click(function(e) { e.preventDefault(); });
+   $('#restore').click(function(e) { e.preventDefault(); });
+   $('#svgExport').click(function(e) { e.preventDefault(); });
    $('#colorApply').click(function(e) { e.preventDefault(); });
    $('#colorRestore').click(function(e) { e.preventDefault(); });
    
@@ -86,6 +88,23 @@ $(function()
             {
                e.preventDefault();
                map.requestSvg();
+            });
+            
+            $('#save').off();
+            $('#save').click(function(e)
+            {
+               e.preventDefault();
+               map.pushState('toto');
+               mapInfos[mapId].savedSelection = JSON.parse(JSON.stringify(mapInfos[mapId].selection));
+            });
+            
+            $('#restore').off();
+            $('#restore').click(function(e)
+            {
+               e.preventDefault();
+               map.popState('toto');
+               mapInfos[mapId].selection = JSON.parse(JSON.stringify(mapInfos[mapId].savedSelection)); 
+               updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
             });
             
             if (!reload) { mapInfos[mapId].map = map; }

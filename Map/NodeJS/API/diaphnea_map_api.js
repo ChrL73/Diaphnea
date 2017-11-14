@@ -245,6 +245,50 @@ var mapServerInterface =
             this.getElementIds = function() { return mapInfo.elementIds; };
             this.getCategories = function() { return mapInfo.categories; };
             
+            var savedStates = {};
+            this.pushState = function(stateId)
+            {
+               savedStates[stateId] =
+               {
+                  xFocus: xFocus,
+                  yFocus: yFocus,
+                  scale: scale,
+                  currentLanguageId: currentLanguageId,
+                  currentFillingStyle: currentFillingStyle
+               };
+               
+               savedStates[stateId].visibleElements = JSON.parse(JSON.stringify(visibleElements));
+               savedStates[stateId].addedItems = JSON.parse(JSON.stringify(addedItems));
+               savedStates[stateId].itemsToRemove = JSON.parse(JSON.stringify(itemsToRemove));
+               savedStates[stateId].removableTexts = JSON.parse(JSON.stringify(removableTexts));
+               savedStates[stateId].addedItemsByZIndex = JSON.parse(JSON.stringify(addedItemsByZIndex));
+            };
+            
+            this.popState = function(stateId)
+            {
+               var state = savedStates[stateId];
+               
+               if (state)
+               {
+                  xFocus = state.xFocus;
+                  yFocus = state.yFocus;
+                  scale = state.scale;
+                  currentLanguageId = state.currentLanguageId;
+                  currentFillingStyle = state.currentFillingStyle;
+                  
+                  visibleElements = JSON.parse(JSON.stringify(state.visibleElements));
+                  addedItems = JSON.parse(JSON.stringify(state.addedItems));
+                  itemsToRemove = JSON.parse(JSON.stringify(state.itemsToRemove));
+                  removableTexts = JSON.parse(JSON.stringify(state.removableTexts));
+                  addedItemsByZIndex = JSON.parse(JSON.stringify(state.addedItemsByZIndex));
+                  
+                  delete savedStates[stateId];
+                  cancelAnimationFrame(reqAnimFrameId);
+                  reqAnimFrameId = requestAnimationFrame(renderCanvas);
+                  scheduleRenderRequest();
+               }
+            };
+            
             this.loadElement = function(elementId, onElementLoaded)
             {
                var id = ++requestCounter;

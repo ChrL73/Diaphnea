@@ -28,6 +28,8 @@ $(function()
       $('.colorInputs').show();
       $('#colorSelect').val('__');
    }
+   
+   var timeoutId;
 
    function onConnected(mapServerConnection)
    {
@@ -70,7 +72,7 @@ $(function()
          {
             ++mapCounter;
             var canvasId = 'canvas' + mapCounter;
-            mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, fillingStyle: '0_', linkDepth: 1, linkThreshold: 50 };
+            mapInfos[mapId] = { canvasId: canvasId, elementsById: {}, selection: {}, fillingStyle: '0_', linkDepth: 1, linkThreshold: 50, restoreDisabled: true };
             
             $('#column1').append('<canvas class="mapCanvas" id="' + canvasId + '"></canvas>');
             $('#' + canvasId).attr('width', $('#column1').width());
@@ -96,15 +98,26 @@ $(function()
                e.preventDefault();
                map.pushState('toto');
                mapInfos[mapId].savedSelection = JSON.parse(JSON.stringify(mapInfos[mapId].selection));
+               mapInfos[mapId].savedLanguage = mapInfos[mapId].language;
+               mapInfos[mapId].savedFillingStyle = mapInfos[mapId].fillingStyle;
+               mapInfos[mapId].restoreDisabled = false;
+               $('#restore').prop('disabled', false);
             });
             
             $('#restore').off();
+            $('#restore').prop('disabled', mapInfos[mapId].restoreDisabled);
             $('#restore').click(function(e)
             {
                e.preventDefault();
                map.popState('toto');
                mapInfos[mapId].selection = JSON.parse(JSON.stringify(mapInfos[mapId].savedSelection)); 
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
+               mapInfos[mapId].language = mapInfos[mapId].savedLanguage;
+               $('#languageSelect').val(mapInfos[mapId].language);
+               mapInfos[mapId].fillingStyle = mapInfos[mapId].savedFillingStyle;
+               $('#fillingStyleSelect').val(mapInfos[mapId].fillingStyle);
+               mapInfos[mapId].restoreDisabled = true;
+               $('#restore').prop('disabled', true);
             });
             
             if (!reload) { mapInfos[mapId].map = map; }
@@ -165,7 +178,15 @@ $(function()
                updateCategories(mapInfos[mapId].elements, map, mapInfos[mapId]);
             });
             
-            $('#colorSelect').on('click', function()
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(f, 1000);
+            function f()
+            {
+               updateColors(map, mapInfos[mapId].language);
+               timeoutId = setTimeout(f, 1000);
+            }
+            
+            $('#colorSelect').on('focus', function()
             {
                updateColors(map, mapInfos[mapId].language);
             });
@@ -300,18 +321,42 @@ $(function()
    
    function updateColors(map, languageId)
    {
-      $('#colorSelect').empty();
-      $('#colorSelect').append('<option value="__"></option>');
-    
-      var colorIds = map.getColorIds();
-      colorIds.forEach(function(colorId)
+      var allColorIds = map.getColorIds();
+      var colorIds = [];
+      allColorIds.forEach(function(colorId)
       {
          if (!$('#colorCheckbox').prop('checked') || map.isColorVisible(colorId))
          {
+            colorIds.push(colorId);
+         }
+      });   
+      
+      var options = $('#colorSelect > option');
+      var changed = (options.length != colorIds.length + 1);
+      
+      if (!changed)
+      {
+         options.each(function(i, e)
+         {
+            if (i != 0 && $(e).val() != colorIds[i - 1])
+            {
+               changed = true;
+               return false;
+            }
+         });
+      }
+      
+      if(changed)
+      {
+         $('#colorSelect').empty();
+         $('#colorSelect').append('<option value="__"></option>');
+
+         colorIds.forEach(function(colorId)
+         {
             var color = map.getColorInfo(colorId, languageId);
             $('#colorSelect').append('<option value="' + colorId + '">' + color.name + '</option>');
-         }
-      });
+         });
+      }
    }
    
    function updateCategories(elementArray, map, mapInfo)

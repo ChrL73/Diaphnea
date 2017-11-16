@@ -125,6 +125,7 @@ namespace QuestionInstantiation
             BsonDocument questionnaireDocument = new BsonDocument()
             {
                 { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
+                { "map_id", _quizData.XmlQuizData.parameters.mapId },
                 { "name", _name.getBsonDocument() }
             };
 

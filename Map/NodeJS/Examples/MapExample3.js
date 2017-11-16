@@ -288,7 +288,7 @@ $(function()
             {
                resizeCanvas();
                map.redraw();
-            }
+            };
             
             if (reload)
             {

@@ -88,6 +88,8 @@ public partial class XmlParameters {
     
     private string questionnaireIdField;
     
+    private string mapIdField;
+    
     private string logFileNameField;
     
     private XmlLogLevelEnum fileLogLevelField;
@@ -137,6 +139,17 @@ public partial class XmlParameters {
         }
         set {
             this.questionnaireIdField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string mapId {
+        get {
+            return this.mapIdField;
+        }
+        set {
+            this.mapIdField = value;
         }
     }
     

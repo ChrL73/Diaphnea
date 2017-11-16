@@ -28,7 +28,8 @@ namespace QuestionInstantiation
         {
             BsonDocument questionDocument = new BsonDocument()
             {
-                { "question", _questionText.getBsonDocument() }
+                { "question", _questionText.getBsonDocument() },
+                { "map_id", _choice.Element.XmlElement.mapId == null ? "" : _choice.Element.XmlElement.mapId.Substring(2) }
             };
 
             questionDocument.AddRange(_choice.getBsonDocument());

@@ -179,7 +179,8 @@ namespace QuestionInstantiation
                 BsonDocument choiceDocument = new BsonDocument()
                 {
                     { "choice", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "comment", list[0].Comment.getBsonDocument() }
+                    { "comment", list[0].Comment.getBsonDocument() },
+                    { "map_id", list[0].Element.XmlElement.mapId == null ? "" : list[0].Element.XmlElement.mapId.Substring(2) }
                 };
 
                 if (_proximityCriterion != XmlSimpleAnswerProximityCriterionEnum.NONE)

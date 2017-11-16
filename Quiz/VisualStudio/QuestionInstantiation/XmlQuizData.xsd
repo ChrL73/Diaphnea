@@ -497,6 +497,7 @@
       <xsd:element name="levelList" type="XmlLevelList" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="questionnaireId" type="XmlQuestionnaireId" use="required"/>
+    <xsd:attribute name="mapId" type="xsd:string" use="required"/>
     <xsd:attribute name="logFileName" type="xsd:string" use="required" />
     <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />

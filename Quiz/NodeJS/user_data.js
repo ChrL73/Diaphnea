@@ -9,6 +9,7 @@ var contextSchema = mongoose.Schema(
    levelId: String,
    questionnaireName: String,
    levelName: String,
+   mapId: String,
    currentPage: Number,
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,

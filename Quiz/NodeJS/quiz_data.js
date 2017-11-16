@@ -4,7 +4,7 @@ var languages = translate().languages;
 var mongoose = require('mongoose');
 
 var languageSchema = mongoose.Schema({ id: String, name: String });
-var questionnaireSchema = mongoose.Schema({ questionnaire: String, name: mongoose.Schema.Types.Mixed, languages: [languageSchema] });
+var questionnaireSchema = mongoose.Schema({ questionnaire: String, map_id: String, name: mongoose.Schema.Types.Mixed, languages: [languageSchema] });
 var QuestionnaireModel = mongoose.model('Questionnaire', questionnaireSchema);
 
 var levelSchema = 
@@ -125,6 +125,7 @@ function getLevelChoiceDownData(upData, callback)
       downData.questionnaireLanguageId = questionnaireLanguage.id;
       downData.levelId = level.level_id;
       downData.levelName = level.name[questionnaireLanguage.id];
+      downData.mapId = questionnaire.map_id;
       
       callback(downData);
    }

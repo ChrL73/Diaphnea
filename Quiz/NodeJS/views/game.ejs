@@ -80,7 +80,7 @@
                </div>
             </div>
             
-            <div class="col-lg-9 col-md-8 col-sm-7">
+            <div class="col-lg-9 col-md-8 col-sm-7" id="canvasColumn">
                <canvas id="canvas"></canvas>
             </div>
             
@@ -94,8 +94,11 @@
          var answered = [<%=answered%>];
          var t0 = <%=data.time%>;
          var finished = <%=data.finalTime ? true : false%>;
+         var mapServerUrl = '<%=data.mapServerUrl%>';
+         var mapId = '<%=data.mapId%>';
       </script> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="diaphnea_map_api.js"></script>
       <script src="/socket.io/socket.io.js"></script>
       <script src="game.js"></script>
       

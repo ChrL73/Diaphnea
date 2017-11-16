@@ -4,6 +4,22 @@ $(function()
    
    var socket = io.connect();
    
+   var map;
+   mapServerInterface.createNewConnection(mapServerUrl, function(mapServerConnection)
+   {
+      mapServerConnection.loadMap(mapId, 'canvas', function(_map)
+      {
+         map = _map;
+         
+         // 'Bretagne': Tmp for test
+         var elementId = 'Bretagne';
+         map.loadElement(elementId, function(element)
+         {
+            element.show();
+         });
+      });
+   });
+   
    var timeout;
    initTime(t0);
    socket.on('time', initTime);
@@ -104,14 +120,18 @@ $(function()
       socket.emit('submit', data);
    });
    
-   $(window).resize(resizeCanvas);
+   window.onresize = function()
+   {
+      resizeCanvas();
+      map.redraw();
+   };
    
    function resizeCanvas()
    {
-      var h = $(this).height() - $('#gameHeader').height() - 48;
-      if ($(this).width() < 768) h -= $('#questionDiv').height() + 20;
-      if (h <= 100) h = 100;
-      $('#canvas').height(h);
+      $('#canvasColumn').height((window.innerHeight - 72).toString() + 'px');
+      
+      $('#canvas').attr('width', $('#canvasColumn').width());
+      $('#canvas').attr('height', window.innerHeight - 72);
    }
    
    socket.on('reload', function()

@@ -47,6 +47,8 @@ io.use(function(socket, next)
 });
 app.use(sessionMiddleware);
 
+var mapServerUrl = 'http://' + config.mapServerAddress + ':' + config.mapServerPort;
+
 var pages =
 {
    index: 0,
@@ -174,6 +176,7 @@ function game(req, res, context)
                   context.questions = JSON.parse(stdout);
                   context.questionStates = [];
                   context.questionnaireName = downData.questionnaireName;
+                  context.mapId = downData.mapId;
                   context.levelName = downData.levelName;
                   context.answerCount = 0;
                   context.rightAnswerCount = 0;
@@ -225,6 +228,8 @@ function game(req, res, context)
          rightAnswerCount: context.rightAnswerCount,
          time: Date.now() - context.startDate,
          finalTime: context.finalTime,
+         mapServerUrl: mapServerUrl,
+         mapId: context.mapId,
          error: !context.quizId // Todo: handle error in view
       };
       

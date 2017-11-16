@@ -1,6 +1,7 @@
 #include "CompleteQuestion.h"
 #include "TextAndComment.h"
 #include "RandomNumberGenerator.h"
+#include "MapIdInfo.h"
 
 namespace produce_questions
 {
@@ -15,6 +16,9 @@ namespace produce_questions
     {
         int i, n = _choiceVector.size();
         for (i = 0; i < n; ++i) delete _choiceVector[i];
+
+        n = _mapIdVector.size();
+        for (i = 0; i < n; ++i) delete _mapIdVector[i];
     }
 
     void CompleteQuestion::addChoice(const std::string& text, const std::string& comment, bool rightAnswer)
@@ -23,6 +27,11 @@ namespace produce_questions
         _filledLocationSet.insert(i);
         _choiceVector[i] = new TextAndComment(text, comment);
         if (rightAnswer) _rightAnswerSet.insert(i);
+    }
+
+    void CompleteQuestion::addMapId(const std::string& id, int depth)
+    {
+        _mapIdVector.push_back(new MapIdInfo(id, depth));
     }
 
     const std::string& CompleteQuestion::getJson(void)

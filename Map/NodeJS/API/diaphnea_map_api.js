@@ -818,16 +818,20 @@ var mapServerInterface =
 
                if (geoSize != geoSize0)
                {   
+                  var rect = canvas.getBoundingClientRect();
+                  var x = e.clientX - rect.left;
+                  var y = e.clientY - rect.top;
+                  
                   var zoomFactor = geoSize0 / geoSize;
                   if (delta > 0)
                   {
-                     xFocus += (0.5 * canvas.width - e.clientX) * (1.0 - zoomFactor) / scale;
-                     yFocus += (0.5 * canvas.height - e.clientY) * (1.0 - zoomFactor) / scale;
+                     xFocus += (0.5 * canvas.width - x) * (1.0 - zoomFactor) / scale;
+                     yFocus += (0.5 * canvas.height - y) * (1.0 - zoomFactor) / scale;
                   }
                   else
                   {
-                     xFocus += (0.5 * canvas.width - e.clientX) * (1.0 / zoomFactor - 1.0) / scale;
-                     yFocus += (0.5 * canvas.height - e.clientY) * (1.0 / zoomFactor - 1.0) / scale;
+                     xFocus += (0.5 * canvas.width - x) * (1.0 / zoomFactor - 1.0) / scale;
+                     yFocus += (0.5 * canvas.height - y) * (1.0 / zoomFactor - 1.0) / scale;
                   }
                   
                   scale *= zoomFactor;

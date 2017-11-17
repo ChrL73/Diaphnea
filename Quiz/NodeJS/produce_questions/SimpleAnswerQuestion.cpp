@@ -7,9 +7,10 @@
 
 namespace produce_questions
 {
-    SimpleAnswerQuestion::SimpleAnswerQuestion(const std::string& question, const std::string& answer, const std::string& comment, const std::string& excludedChoice, ProximityCriterionTypeEnum proximityCriterionType,
-                                               double doubleCriterionValue, const std::string& stringCriterionValue, const Point *pointCriterionValue, const std::vector<const Choice *>& choiceVector) :
-            _question(question), _answer(answer), _comment(comment), _excludedChoice(excludedChoice), _proximityCriterionType(proximityCriterionType),
+    SimpleAnswerQuestion::SimpleAnswerQuestion(const std::string& question, const std::string& answer, const std::string& comment, const std::string& mapId, const std::string& excludedChoice,
+                                               ProximityCriterionTypeEnum proximityCriterionType, double doubleCriterionValue, const std::string& stringCriterionValue, const Point *pointCriterionValue,
+                                               const std::vector<const Choice *>& choiceVector) :
+            _question(question), _answer(answer), _comment(comment), _mapId(mapId), _excludedChoice(excludedChoice), _proximityCriterionType(proximityCriterionType),
             _doubleCriterionValue(doubleCriterionValue), _stringCriterionValue(stringCriterionValue), _pointCriterionValue(pointCriterionValue)
     {
         if (_proximityCriterionType == produce_questions::STRING)

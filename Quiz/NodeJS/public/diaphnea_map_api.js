@@ -270,6 +270,8 @@ var mapServerInterface =
                
                if (state)
                {
+                  contexts = {};
+                  
                   xFocus = state.xFocus;
                   yFocus = state.yFocus;
                   scale = state.scale;

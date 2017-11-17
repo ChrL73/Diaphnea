@@ -47,7 +47,32 @@ io.use(function(socket, next)
 });
 app.use(sessionMiddleware);
 
-var mapServerUrl = 'http://' + config.mapServerAddress + ':' + config.mapServerPort;
+if (!config.mapServerPort) throw new Error("No 'mapServerPort' value in config.js");
+var mapServerUrl;
+if (config.mapServerAddress)
+{
+   mapServerUrl = 'http://' + config.mapServerAddress + ':' + config.mapServerPort;
+}
+else
+{
+   var locaIp;
+   var os = require('os');
+   var ifaces = os.networkInterfaces();
+   Object.keys(ifaces).forEach(function(ifname)
+   {
+      if (!locaIp)
+      {
+         ifaces[ifname].forEach(function(iface)
+         { 
+            if (!locaIp && 'IPv4' === iface.family && iface.internal === false) 
+            {
+               locaIp = iface.address;
+            }
+         });
+      }
+   });
+   mapServerUrl = 'http://' + locaIp + ':' + config.mapServerPort;
+}
 
 var pages =
 {
@@ -212,7 +237,7 @@ function game(req, res, context)
       context.saver.save(function(err)
       {
          if (err) console.log(err);
-         // Todo: handle error
+         // Todo: Handle error
       });
       
       var data =
@@ -230,7 +255,7 @@ function game(req, res, context)
          finalTime: context.finalTime,
          mapServerUrl: mapServerUrl,
          mapId: context.mapId,
-         error: !context.quizId // Todo: handle error in view
+         error: !context.quizId // Todo: Handle error in view
       };
       
       res.render('game.ejs', { data: data });
@@ -248,7 +273,7 @@ function stop(req, res, context)
 
 function enterSignUp(req, res, context0, flags)
 {
-   if (req.session.userId) // Todo: test this case
+   if (req.session.userId) // Todo: Test this case
    {
       req.session.userId = undefined;
       getContext(req.session, req.sessionID, req.cookies, function(context)
@@ -267,7 +292,7 @@ function enterSignUp(req, res, context0, flags)
       context.saver.save(function(err)
       {
          if (err) console.log(err);
-         /* Todo: handle error */
+         /* Todo: Handle error */
       });
 
       var data =
@@ -386,7 +411,7 @@ function getContext(session0, sessionId, cookies, callback)
             // In this case, we save the session, then call again 'getContext'
             session0.save(function(err)
             {
-               // Todo: handle error
+               // Todo: Handle error
                if (err) console.log(err);
                getContext(session0, sessionId, cookies, callback);
             });
@@ -419,7 +444,7 @@ function getContext(session0, sessionId, cookies, callback)
                   if (err)
                   {
                      console.log(err);
-                     // Todo: handle error
+                     // Todo: Handle error
                   }
                });
             }
@@ -447,7 +472,7 @@ io.on('connection', function(socket)
          context.questionnaireId = downData.questionnaireId;
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
-         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
          setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
       }
    });
@@ -460,7 +485,7 @@ io.on('connection', function(socket)
          if (context.quizId && context.quizId == data.quizId)
          {
             context.displayedQuestion = data.displayedQuestion;
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } }); 
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } }); 
             socket.emit('updateQuestions', getOutData(context));
          }
          else

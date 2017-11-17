@@ -31,7 +31,7 @@ namespace produce_questions
 
     void CompleteQuestion::addMapId(const std::string& id, int depth)
     {
-        _mapIdVector.push_back(new MapIdInfo(id, depth));
+        if (!id.empty()) _mapIdVector.push_back(new MapIdInfo(id, depth));
     }
 
     const std::string& CompleteQuestion::getJson(void)
@@ -46,6 +46,16 @@ namespace produce_questions
             _json += "{\"text\":\"" + _choiceVector[i]->getText()
                      + "\",\"comment\":\"" + _choiceVector[i]->getComment() + "\",\"isRight\":"
                      + (_rightAnswerSet.find(i) != _rightAnswerSet.end() ? "true" : "false") + "}";
+            if (i != n - 1) _json += ",";
+        }
+
+        _json += "],\"mapIds\":[";
+
+        n = _mapIdVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            _json += "{\"id\":\"" + _mapIdVector[i]->getId()
+                     + "\",\"depth\":" + std::to_string(_mapIdVector[i]->getDepth()) + "}";
             if (i != n - 1) _json += ",";
         }
 

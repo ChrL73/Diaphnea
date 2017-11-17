@@ -206,6 +206,7 @@ namespace produce_questions
                 const char *answer = dbQuestion.getField("answer").Obj().getStringField(_languageId);
                 const char *comment = dbQuestion.getField("comment").Obj().getStringField(_languageId);
                 const char *excludedChoice = dbQuestion.getField("excluded_choice").Obj().getStringField(_languageId);
+                const char *mapId = dbQuestion.getStringField("map_id");
 
                 double doubleCriterionValue = 0.0;
                 std::string stringCriterionValue;
@@ -228,7 +229,8 @@ namespace produce_questions
                     pointCriterionValue = new Point(x, y, z);
                 }
 
-                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, excludedChoice, proximityCriterionType, doubleCriterionValue, stringCriterionValue, pointCriterionValue, choiceVector);
+                SimpleAnswerQuestion *question = new SimpleAnswerQuestion(questionText, answer, comment, mapId, excludedChoice, proximityCriterionType,
+                                                                          doubleCriterionValue, stringCriterionValue, pointCriterionValue, choiceVector);
                 it = _simpleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, SimpleAnswerQuestion *>(key, question)).first;
             }
             else

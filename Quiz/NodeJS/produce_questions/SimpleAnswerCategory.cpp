@@ -29,6 +29,7 @@
 
         CompleteQuestion *completeQuestion = new CompleteQuestion(question->getQuestion(), produce_questions::SIMPLE, choiceCount);
         completeQuestion->addChoice(question->getAnswer(), question->getComment(), true);
+        completeQuestion->addMapId(question->getMapId(), 1);
 
         std::set<unsigned int> excludedValues;
         int wrongChoiceCount1 = question->getWrongChoiceCount1();

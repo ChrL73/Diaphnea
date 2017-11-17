@@ -11,7 +11,8 @@
       <%var questions = data.questions;
       var displayedQuestion = data.displayedQuestion;
       var questionStates = data.questionStates;
-      var answered = [];%>
+      var answered = [];
+      var mapIds = [];%>
       
       <div class="container-fluid">
          <header class="row bg-success" id="gameHeader" style="padding-left:30px; border-bottom:1px solid #bbd8a2;">
@@ -28,7 +29,23 @@
                   
                   <%questions.forEach(function(question, iQuestion) {
                      var disabled = questionStates[iQuestion].answered;
-                     answered.push(disabled);%>
+                     answered.push(disabled);
+                     if (disabled)
+                     {
+                        var ids = '[';
+                        var nId = question.mapIds.length;
+                        question.mapIds.forEach(function(mapId, iId)
+                        {
+                           ids += '{id:\'' + mapId.id + '\',depth:' + mapId.depth + '}';
+                           if (iId != nId - 1) ids += ',';
+                        });
+                        ids += ']';
+                        mapIds.push(ids);
+                     }
+                     else
+                     {
+                        mapIds.push('[]');
+                     }%>
                      <div class="question panel panel-info" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
                         <div class="panel-heading">
                            <%=data.texts.question%> <span id="iQuestion"><%=iQuestion + 1%></span>/<%=questions.length%>
@@ -88,7 +105,7 @@
       </div>
    
       <script>
-         var quizId = "<%=data.quizId%>";
+         var quizId = '<%=data.quizId%>';
          var displayedQuestion = <%=displayedQuestion%>;
          var questionCount = <%=questions.length%>;
          var answered = [<%=answered%>];
@@ -96,6 +113,7 @@
          var finished = <%=data.finalTime ? true : false%>;
          var mapServerUrl = '<%=data.mapServerUrl%>';
          var mapId = '<%=data.mapId%>';
+         var mapIds = [<%-mapIds%>];
       </script> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="diaphnea_map_api.js"></script>

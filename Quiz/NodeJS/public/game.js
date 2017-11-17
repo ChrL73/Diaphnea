@@ -5,20 +5,23 @@ $(function()
    var socket = io.connect();
    
    var map;
-   mapServerInterface.createNewConnection(mapServerUrl, function(mapServerConnection)
+   var mapElements = {};
+   mapServerInterface.createNewConnection(mapServerUrl, onConnected, onError);
+   
+   function onConnected(mapServerConnection)
    {
       mapServerConnection.loadMap(mapId, 'canvas', function(_map)
       {
          map = _map;
-         
-         // 'Bretagne': Tmp for test
-         var elementId = 'Bretagne';
-         map.loadElement(elementId, function(element)
-         {
-            element.show();
-         });
+         updateMap(displayedQuestion);
+         answered.forEach(function(b, i) { map.pushState(i); });
       });
-   });
+   }
+   
+   function onError(error)
+   {
+      console.error(error);
+   }
    
    var timeout;
    initTime(t0);
@@ -97,6 +100,8 @@ $(function()
       };
       
       socket.emit('changeQuestion', data);
+      
+      updateMap(displayedQuestion, previousQuestion);
    }
    
    $('#submitButton').click(function(e)
@@ -123,7 +128,7 @@ $(function()
    window.onresize = function()
    {
       resizeCanvas();
-      map.redraw();
+      if (map) map.redraw();
    };
    
    function resizeCanvas()
@@ -197,4 +202,29 @@ $(function()
          $('.waitAnswerImg').css('display', 'none');
       }
    });
+   
+   function updateMap(newQuestion, oldQuestion)
+   {
+      if (!map) return;
+      
+      if (oldQuestion || oldQuestion === 0) map.pushState(oldQuestion);
+      map.popState(newQuestion);
+         
+      mapIds[newQuestion].forEach(function(idInfo)
+      {
+         var element = mapElements[idInfo.id];
+         if (element)
+         {
+            element.show();      
+         }
+         else
+         {
+            map.loadElement(idInfo.id, function(newElement)
+            {
+               mapElements[idInfo.id] = newElement;
+               newElement.show();
+            });
+         }
+      });
+   }
 });

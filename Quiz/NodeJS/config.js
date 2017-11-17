@@ -6,8 +6,8 @@ config.port = 3000;
 config.sessionSecret = 'dev1';
 config.cookieSecret = 'dev2';
 
-// [todo] If 'config.mapServerAddress' is not define, we assume that the map server run on the same machine as the quiz server 
-config.mapServerAddress = '192.168.50.129';
+// If 'config.mapServerAddress' is not defined, the quiz server assumes that the map server runs on the same machine as the quiz server 
+//config.mapServerAddress = '192.168.50.50';
 config.mapServerPort = '3001';
 
 //config.debugDelay = 2000;

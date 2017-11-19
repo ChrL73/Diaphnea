@@ -50,7 +50,9 @@
             if (_proximityCriterionType == produce_questions::NONE) draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount1, excludedValues);
             else draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount1, distribParameter + _distribParameterCorrection, excludedValues);
             excludedValues.insert(draw);
-            completeQuestion->addChoice(question->getWrongChoice1(draw)->getChoiceText(), question->getWrongChoice1(draw)->getComment(), false);
+            const Choice *wrongChoice = question->getWrongChoice1(draw);
+            completeQuestion->addChoice(wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
+            //completeQuestion->addMapId(wrongChoice->getMapId(), 1);
         }
 
         excludedValues.clear();
@@ -59,7 +61,9 @@
             if (_proximityCriterionType == produce_questions::NONE) draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount2, excludedValues);
             else draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount2, distribParameter + _distribParameterCorrection, excludedValues);
             excludedValues.insert(draw);
-            completeQuestion->addChoice (question->getWrongChoice2(draw)->getChoiceText(), question->getWrongChoice2(draw)->getComment(), false);
+            const Choice *wrongChoice = question->getWrongChoice2(draw);
+            completeQuestion->addChoice (wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
+            //completeQuestion->addMapId(wrongChoice->getMapId(), 1);
         }
 
         return completeQuestion;

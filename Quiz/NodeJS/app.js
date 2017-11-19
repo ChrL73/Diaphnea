@@ -570,6 +570,7 @@ io.on('connection', function(socket)
          rightAnswerCount: context.rightAnswerCount,
          answerCount: context.answerCount,
          questionStates: [],
+         mapIds: [],
          finalTime: context.finalTime
       };
       
@@ -584,6 +585,7 @@ io.on('connection', function(socket)
                outState.choiceStates.push({ state: state, comment: comment.length ? comment : undefined } );
             });
             outData.questionStates.push(outState);
+            outData.mapIds.push(context.questions[i].mapIds);
          }
       });
       

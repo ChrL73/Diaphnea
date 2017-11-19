@@ -314,6 +314,7 @@ namespace produce_questions
 
                 const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
                 const char *comment = dbChoice.getField("comment").Obj().getStringField(_languageId);
+                const char *mapId = dbChoice.getStringField("map_id");
 
                 std::vector<std::string> stringCriterionVector;
                 std::vector<double> doubleCriterionVector;
@@ -344,7 +345,7 @@ namespace produce_questions
                     }
                 }
 
-                Choice *choice = new Choice(choiceText, comment, doubleCriterionVector, stringCriterionVector, pointCriterionVector);
+                Choice *choice = new Choice(choiceText, comment, mapId, doubleCriterionVector, stringCriterionVector, pointCriterionVector);
                 it = _choiceMap.insert(std::pair<std::pair<std::string, int>, Choice *>(key, choice)).first;
             }
             else

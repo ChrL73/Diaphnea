@@ -312,37 +312,37 @@
         <name language="en" text="France"/>
       </name>
     </category>
-    <category id="ca_Region" importance="0">
+    <category id="ca_Region" importance="5000">
       <name>
         <name language="fr" text="Régions"/>
         <name language="en" text="Regions"/>
       </name>
     </category>
-    <category id="ca_Departement" importance="0">
+    <category id="ca_Departement" importance="6000">
       <name>
         <name language="fr" text="Départements"/>
         <name language="en" text="Departments"/>
       </name>
     </category>
-    <category id="ca_FleuveRiviere" importance="0">
+    <category id="ca_FleuveRiviere" importance="1000">
       <name>
         <name language="fr" text="Cours d'eau"/>
         <name language="en" text="Rivers"/>
       </name>
     </category>
-    <category id="ca_Prefecture" importance="0">
+    <category id="ca_Prefecture" importance="4000">
       <name>
         <name language="fr" text="Chefs-lieux de département"/>
         <name language="en" text="Department capitals"/>
       </name>
     </category>
-    <category id="ca_SousPrefecture" importance="0">
+    <category id="ca_SousPrefecture" importance="3000">
       <name>
         <name language="fr" text="Chefs-lieux d'arrondissement"/>
         <name language="en" text="Arrondissement capitals"/>
       </name>
     </category>
-    <category id="ca_Ville" importance="0">
+    <category id="ca_Ville" importance="2000">
       <name>
         <name language="fr" text="Autres villes"/>
         <name language="en" text="Other cities"/>
@@ -352,7 +352,7 @@
     
   <elementList>
     <polygonElementList>
-      <polygonElement id="e_France" category="ca_France" importance="0">
+      <polygonElement id="e_France" category="ca_France" importance="1">
         <name>
           <name language="fr" text="France"/>
           <name language="en" text="France"/>
@@ -364,7 +364,7 @@
         <coveredElementList/>
       </polygonElement>
       <!--Régions-->
-      <polygonElement id="e_ARA" category="ca_Region" importance="0">
+      <polygonElement id="e_ARA" category="ca_Region" importance="12">
         <name>
           <name language="fr" text="Auvergne-Rhône-Alpes"/>
           <name language="en" text="Auvergne-Rhône-Alpes"/>
@@ -378,7 +378,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_BFC" category="ca_Region" importance="0">
+      <polygonElement id="e_BFC" category="ca_Region" importance="3">
         <name>
           <name language="fr" text="Bourgogne-Franche-Comté"/>
           <name language="en" text="Bourgogne-Franche-Comté"/>
@@ -392,7 +392,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Bretagne" category="ca_Region" importance="0">
+      <polygonElement id="e_Bretagne" category="ca_Region" importance="4">
         <name>
           <name language="fr" text="Bretagne"/>
           <name language="en" text="Bretagne"/>
@@ -406,7 +406,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_CVL" category="ca_Region" importance="0">
+      <polygonElement id="e_CVL" category="ca_Region" importance="2">
         <name>
           <name language="fr" text="Centre-Val de Loire"/>
           <name language="en" text="Centre-Val de Loire"/>
@@ -420,7 +420,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Corse" category="ca_Region" importance="0">
+      <polygonElement id="e_Corse" category="ca_Region" importance="1">
         <name>
           <name language="fr" text="Corse"/>
           <name language="en" text="Corse"/>
@@ -434,7 +434,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Est" category="ca_Region" importance="0">
+      <polygonElement id="e_Est" category="ca_Region" importance="8">
         <name>
           <name language="fr" text="Grand-Est"/>
           <name language="en" text="Grand-Est"/>
@@ -448,7 +448,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_HDF" category="ca_Region" importance="0">
+      <polygonElement id="e_HDF" category="ca_Region" importance="11">
         <name>
           <name language="fr" text="Hauts-de-France"/>
           <name language="en" text="Hauts-de-France"/>
@@ -462,7 +462,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_IDF" category="ca_Region" importance="0">
+      <polygonElement id="e_IDF" category="ca_Region" importance="13">
         <name>
           <name language="fr" text="Île-de-France"/>
           <name language="en" text="Île-de-France"/>
@@ -476,7 +476,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Normandie" category="ca_Region" importance="0">
+      <polygonElement id="e_Normandie" category="ca_Region" importance="5">
         <name>
           <name language="fr" text="Normandie"/>
           <name language="en" text="Normandie"/>
@@ -490,7 +490,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Aquitaine" category="ca_Region" importance="0">
+      <polygonElement id="e_Aquitaine" category="ca_Region" importance="10">
         <name>
           <name language="fr" text="Nouvelle-Aquitaine"/>
           <name language="en" text="Nouvelle-Aquitaine"/>
@@ -504,7 +504,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_Occitanie" category="ca_Region" importance="0">
+      <polygonElement id="e_Occitanie" category="ca_Region" importance="9">
         <name>
           <name language="fr" text="Occitanie"/>
           <name language="en" text="Occitanie"/>
@@ -518,7 +518,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_PDLL" category="ca_Region" importance="0">
+      <polygonElement id="e_PDLL" category="ca_Region" importance="6">
         <name>
           <name language="fr" text="Pays de la Loire"/>
           <name language="en" text="Pays de la Loire"/>
@@ -532,7 +532,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_PACA" category="ca_Region" importance="0">
+      <polygonElement id="e_PACA" category="ca_Region" importance="7">
         <name>
           <name language="fr" text="Provence-Alpes-Côte d'Azur"/>
           <name language="en" text="Provence-Alpes-Côte d'Azur"/>
@@ -547,7 +547,7 @@
         </coveredElementList>
       </polygonElement>
       <!--Départements-->
-      <polygonElement id="e_01" category="ca_Departement" importance="0">
+      <polygonElement id="e_01" category="ca_Departement" importance="58">
         <name>
           <name language="fr" text="Ain (01)"/>
           <name language="en" text="Ain (01)"/>
@@ -566,7 +566,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_02" category="ca_Departement" importance="0">
+      <polygonElement id="e_02" category="ca_Departement" importance="49">
         <name>
           <name language="fr" text="Aisne (02)"/>
           <name language="en" text="Aisne (02)"/>
@@ -585,7 +585,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_03" category="ca_Departement" importance="0">
+      <polygonElement id="e_03" category="ca_Departement" importance="32">
         <name>
           <name language="fr" text="Allier (03)"/>
           <name language="en" text="Allier (03)"/>
@@ -604,7 +604,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_04" category="ca_Departement" importance="0">
+      <polygonElement id="e_04" category="ca_Departement" importance="8">
         <name>
           <name language="fr" text="Alpes-de-Haute-Provence (04)"/>
           <name language="en" text="Alpes-de-Haute-Provence (04)"/>
@@ -623,7 +623,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_05" category="ca_Departement" importance="0">
+      <polygonElement id="e_05" category="ca_Departement" importance="3">
         <name>
           <name language="fr" text="Hautes-Alpes (05)"/>
           <name language="en" text="Hautes-Alpes (05)"/>
@@ -642,7 +642,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_06" category="ca_Departement" importance="0">
+      <polygonElement id="e_06" category="ca_Departement" importance="77">
         <name>
           <name language="fr" text="Alpes-Maritimes (06)"/>
           <name language="en" text="Alpes-Maritimes (06)"/>
@@ -661,7 +661,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_07" category="ca_Departement" importance="0">
+      <polygonElement id="e_07" category="ca_Departement" importance="28">
         <name>
           <name language="fr" text="Ardèche (07)"/>
           <name language="en" text="Ardèche (07)"/>
@@ -680,7 +680,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_08" category="ca_Departement" importance="0">
+      <polygonElement id="e_08" category="ca_Departement" importance="23">
         <name>
           <name language="fr" text="Ardennes (08)"/>
           <name language="en" text="Ardennes (08)"/>
@@ -699,7 +699,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_09" category="ca_Departement" importance="0">
+      <polygonElement id="e_09" category="ca_Departement" importance="7">
         <name>
           <name language="fr" text="Ariège (09)"/>
           <name language="en" text="Ariège (09)"/>
@@ -718,7 +718,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_10" category="ca_Departement" importance="0">
+      <polygonElement id="e_10" category="ca_Departement" importance="26">
         <name>
           <name language="fr" text="Aube (10)"/>
           <name language="en" text="Aube (10)"/>
@@ -737,7 +737,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_11" category="ca_Departement" importance="0">
+      <polygonElement id="e_11" category="ca_Departement" importance="34">
         <name>
           <name language="fr" text="Aude (11)"/>
           <name language="en" text="Aude (11)"/>
@@ -756,7 +756,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_12" category="ca_Departement" importance="0">
+      <polygonElement id="e_12" category="ca_Departement" importance="22">
         <name>
           <name language="fr" text="Aveyron (12)"/>
           <name language="en" text="Aveyron (12)"/>
@@ -775,7 +775,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_13" category="ca_Departement" importance="0">
+      <polygonElement id="e_13" category="ca_Departement" importance="94">
         <name>
           <name language="fr" text="Bouches-du-Rhône (13)"/>
           <name language="en" text="Bouches-du-Rhône (13)"/>
@@ -794,7 +794,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_14" category="ca_Departement" importance="0">
+      <polygonElement id="e_14" category="ca_Departement" importance="64">
         <name>
           <name language="fr" text="Calvados (14)"/>
           <name language="en" text="Calvados (14)"/>
@@ -813,7 +813,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_15" category="ca_Departement" importance="0">
+      <polygonElement id="e_15" category="ca_Departement" importance="5">
         <name>
           <name language="fr" text="Cantal (15)"/>
           <name language="en" text="Cantal (15)"/>
@@ -832,7 +832,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_16" category="ca_Departement" importance="0">
+      <polygonElement id="e_16" category="ca_Departement" importance="33">
         <name>
           <name language="fr" text="Charente (16)"/>
           <name language="en" text="Charente (16)"/>
@@ -851,7 +851,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_17" category="ca_Departement" importance="0">
+      <polygonElement id="e_17" category="ca_Departement" importance="59">
         <name>
           <name language="fr" text="Charente-Maritime (17)"/>
           <name language="en" text="Charente-Maritime (17)"/>
@@ -870,7 +870,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_18" category="ca_Departement" importance="0">
+      <polygonElement id="e_18" category="ca_Departement" importance="27">
         <name>
           <name language="fr" text="Cher (18)"/>
           <name language="en" text="Cher (18)"/>
@@ -889,7 +889,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_19" category="ca_Departement" importance="0">
+      <polygonElement id="e_19" category="ca_Departement" importance="19">
         <name>
           <name language="fr" text="Corrèze (19)"/>
           <name language="en" text="Corrèze (19)"/>
@@ -908,7 +908,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_2a" category="ca_Departement" importance="0">
+      <polygonElement id="e_2a" category="ca_Departement" importance="6">
         <name>
           <name language="fr" text="Corse-du-Sud (2A)"/>
           <name language="en" text="Corse-du-Sud (2A)"/>
@@ -927,7 +927,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_2b" category="ca_Departement" importance="0">
+      <polygonElement id="e_2b" category="ca_Departement" importance="9">
         <name>
           <name language="fr" text="Haute-Corse (2B)"/>
           <name language="en" text="Haute-Corse (2B)"/>
@@ -946,7 +946,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_21" category="ca_Departement" importance="0">
+      <polygonElement id="e_21" category="ca_Departement" importance="47">
         <name>
           <name language="fr" text="Côte-d'Or (21)"/>
           <name language="en" text="Côte-d'Or (21)"/>
@@ -965,7 +965,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_22" category="ca_Departement" importance="0">
+      <polygonElement id="e_22" category="ca_Departement" importance="55">
         <name>
           <name language="fr" text="Côtes-d'Armor (22)"/>
           <name language="en" text="Côtes-d'Armor (22)"/>
@@ -984,7 +984,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_23" category="ca_Departement" importance="0">
+      <polygonElement id="e_23" category="ca_Departement" importance="2">
         <name>
           <name language="fr" text="Creuse (23)"/>
           <name language="en" text="Creuse (23)"/>
@@ -1003,7 +1003,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_24" category="ca_Departement" importance="0">
+      <polygonElement id="e_24" category="ca_Departement" importance="40">
         <name>
           <name language="fr" text="Dordogne (24)"/>
           <name language="en" text="Dordogne (24)"/>
@@ -1022,7 +1022,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_25" category="ca_Departement" importance="0">
+      <polygonElement id="e_25" category="ca_Departement" importance="48">
         <name>
           <name language="fr" text="Doubs (25)"/>
           <name language="en" text="Doubs (25)"/>
@@ -1041,7 +1041,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_26" category="ca_Departement" importance="0">
+      <polygonElement id="e_26" category="ca_Departement" importance="45">
         <name>
           <name language="fr" text="Drôme (26)"/>
           <name language="en" text="Drôme (26)"/>
@@ -1060,7 +1060,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_27" category="ca_Departement" importance="0">
+      <polygonElement id="e_27" category="ca_Departement" importance="56">
         <name>
           <name language="fr" text="Eure (27)"/>
           <name language="en" text="Eure (27)"/>
@@ -1079,7 +1079,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_28" category="ca_Departement" importance="0">
+      <polygonElement id="e_28" category="ca_Departement" importance="43">
         <name>
           <name language="fr" text="Eure-et-Loire (28)"/>
           <name language="en" text="Eure-et-Loire (28)"/>
@@ -1098,7 +1098,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_29" category="ca_Departement" importance="0">
+      <polygonElement id="e_29" category="ca_Departement" importance="73">
         <name>
           <name language="fr" text="Finistère (29)"/>
           <name language="en" text="Finistère (29)"/>
@@ -1117,7 +1117,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_30" category="ca_Departement" importance="0">
+      <polygonElement id="e_30" category="ca_Departement" importance="66">
         <name>
           <name language="fr" text="Gard (30)"/>
           <name language="en" text="Gard (30)"/>
@@ -1136,7 +1136,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_31" category="ca_Departement" importance="0">
+      <polygonElement id="e_31" category="ca_Departement" importance="84">
         <name>
           <name language="fr" text="Haute-Garonne (31)"/>
           <name language="en" text="Haute-Garonne (31)"/>
@@ -1155,7 +1155,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_32" category="ca_Departement" importance="0">
+      <polygonElement id="e_32" category="ca_Departement" importance="12">
         <name>
           <name language="fr" text="Gers (32)"/>
           <name language="en" text="Gers (32)"/>
@@ -1174,7 +1174,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_33" category="ca_Departement" importance="0">
+      <polygonElement id="e_33" category="ca_Departement" importance="90">
         <name>
           <name language="fr" text="Gironde (33)"/>
           <name language="en" text="Gironde (33)"/>
@@ -1193,7 +1193,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_34" category="ca_Departement" importance="0">
+      <polygonElement id="e_34" category="ca_Departement" importance="78">
         <name>
           <name language="fr" text="Hérault (34)"/>
           <name language="en" text="Hérault (34)"/>
@@ -1212,7 +1212,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_35" category="ca_Departement" importance="0">
+      <polygonElement id="e_35" category="ca_Departement" importance="74">
         <name>
           <name language="fr" text="Ille-et-Vilaine (35)"/>
           <name language="en" text="Ille-et-Vilaine (35)"/>
@@ -1231,7 +1231,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_36" category="ca_Departement" importance="0">
+      <polygonElement id="e_36" category="ca_Departement" importance="15">
         <name>
           <name language="fr" text="Indre (36)"/>
           <name language="en" text="Indre (36)"/>
@@ -1250,7 +1250,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_37" category="ca_Departement" importance="0">
+      <polygonElement id="e_37" category="ca_Departement" importance="57">
         <name>
           <name language="fr" text="Indre-et-Loire (37)"/>
           <name language="en" text="Indre-et-Loire (37)"/>
@@ -1269,7 +1269,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_38" category="ca_Departement" importance="0">
+      <polygonElement id="e_38" category="ca_Departement" importance="81">
         <name>
           <name language="fr" text="Isère (38)"/>
           <name language="en" text="Isère (38)"/>
@@ -1288,7 +1288,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_39" category="ca_Departement" importance="0">
+      <polygonElement id="e_39" category="ca_Departement" importance="21">
         <name>
           <name language="fr" text="Jura (39)"/>
           <name language="en" text="Jura (39)"/>
@@ -1307,7 +1307,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_40" category="ca_Departement" importance="0">
+      <polygonElement id="e_40" category="ca_Departement" importance="39">
         <name>
           <name language="fr" text="Landes (40)"/>
           <name language="en" text="Landes (40)"/>
@@ -1326,7 +1326,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_41" category="ca_Departement" importance="0">
+      <polygonElement id="e_41" category="ca_Departement" importance="30">
         <name>
           <name language="fr" text="Loir-et-Cher (41)"/>
           <name language="en" text="Loir-et-Cher (41)"/>
@@ -1345,7 +1345,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_42" category="ca_Departement" importance="0">
+      <polygonElement id="e_42" category="ca_Departement" importance="68">
         <name>
           <name language="fr" text="Loire (42)"/>
           <name language="en" text="Loire (42)"/>
@@ -1364,7 +1364,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_43" category="ca_Departement" importance="0">
+      <polygonElement id="e_43" category="ca_Departement" importance="16">
         <name>
           <name language="fr" text="Haute-Loire (43)"/>
           <name language="en" text="Haute-Loire (43)"/>
@@ -1383,7 +1383,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_44" category="ca_Departement" importance="0">
+      <polygonElement id="e_44" category="ca_Departement" importance="85">
         <name>
           <name language="fr" text="Loire-Atlantique (44)"/>
           <name language="en" text="Loire-Atlantique (44)"/>
@@ -1402,7 +1402,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_45" category="ca_Departement" importance="0">
+      <polygonElement id="e_45" category="ca_Departement" importance="63">
         <name>
           <name language="fr" text="Loiret (45)"/>
           <name language="en" text="Loiret (45)"/>
@@ -1421,7 +1421,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_46" category="ca_Departement" importance="0">
+      <polygonElement id="e_46" category="ca_Departement" importance="10">
         <name>
           <name language="fr" text="Lot (46)"/>
           <name language="en" text="Lot (46)"/>
@@ -1440,7 +1440,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_47" category="ca_Departement" importance="0">
+      <polygonElement id="e_47" category="ca_Departement" importance="29">
         <name>
           <name language="fr" text="Lot-et-Garonne (47)"/>
           <name language="en" text="Lot-et-Garonne (47)"/>
@@ -1459,7 +1459,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_48" category="ca_Departement" importance="0">
+      <polygonElement id="e_48" category="ca_Departement" importance="1">
         <name>
           <name language="fr" text="Lozère (48)"/>
           <name language="en" text="Lozère (48)"/>
@@ -1478,7 +1478,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_49" category="ca_Departement" importance="0">
+      <polygonElement id="e_49" category="ca_Departement" importance="71">
         <name>
           <name language="fr" text="Maine-et-Loire (49)"/>
           <name language="en" text="Maine-et-Loire (49)"/>
@@ -1497,7 +1497,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_50" category="ca_Departement" importance="0">
+      <polygonElement id="e_50" category="ca_Departement" importance="46">
         <name>
           <name language="fr" text="Manche (50)"/>
           <name language="en" text="Manche (50)"/>
@@ -1516,7 +1516,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_51" category="ca_Departement" importance="0">
+      <polygonElement id="e_51" category="ca_Departement" importance="53">
         <name>
           <name language="fr" text="Marne (51)"/>
           <name language="en" text="Marne (51)"/>
@@ -1535,7 +1535,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_52" category="ca_Departement" importance="0">
+      <polygonElement id="e_52" category="ca_Departement" importance="11">
         <name>
           <name language="fr" text="Haute-Marne (52)"/>
           <name language="en" text="Haute-Marne (52)"/>
@@ -1554,7 +1554,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_53" category="ca_Departement" importance="0">
+      <polygonElement id="e_53" category="ca_Departement" importance="25">
         <name>
           <name language="fr" text="Mayenne (53)"/>
           <name language="en" text="Mayenne (53)"/>
@@ -1573,7 +1573,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_54" category="ca_Departement" importance="0">
+      <polygonElement id="e_54" category="ca_Departement" importance="65">
         <name>
           <name language="fr" text="Meurthe-et-Moselle (54)"/>
           <name language="en" text="Meurthe-et-Moselle (54)"/>
@@ -1592,7 +1592,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_55" category="ca_Departement" importance="0">
+      <polygonElement id="e_55" category="ca_Departement" importance="13">
         <name>
           <name language="fr" text="Meuse (55)"/>
           <name language="en" text="Meuse (55)"/>
@@ -1611,7 +1611,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_56" category="ca_Departement" importance="0">
+      <polygonElement id="e_56" category="ca_Departement" importance="67">
         <name>
           <name language="fr" text="Morbihan (56)"/>
           <name language="en" text="Morbihan (56)"/>
@@ -1630,7 +1630,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_57" category="ca_Departement" importance="0">
+      <polygonElement id="e_57" category="ca_Departement" importance="76">
         <name>
           <name language="fr" text="Moselle (57)"/>
           <name language="en" text="Moselle (57)"/>
@@ -1649,7 +1649,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_58" category="ca_Departement" importance="0">
+      <polygonElement id="e_58" category="ca_Departement" importance="14">
         <name>
           <name language="fr" text="Nièvre (58)"/>
           <name language="en" text="Nièvre (58)"/>
@@ -1668,7 +1668,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_59" category="ca_Departement" importance="0">
+      <polygonElement id="e_59" category="ca_Departement" importance="96">
         <name>
           <name language="fr" text="Nord (59)"/>
           <name language="en" text="Nord (59)"/>
@@ -1687,7 +1687,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_60" category="ca_Departement" importance="0">
+      <polygonElement id="e_60" category="ca_Departement" importance="72">
         <name>
           <name language="fr" text="Oise (60)"/>
           <name language="en" text="Oise (60)"/>
@@ -1706,7 +1706,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_61" category="ca_Departement" importance="0">
+      <polygonElement id="e_61" category="ca_Departement" importance="24">
         <name>
           <name language="fr" text="Orne (61)"/>
           <name language="en" text="Orne (61)"/>
@@ -1725,7 +1725,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_62" category="ca_Departement" importance="0">
+      <polygonElement id="e_62" category="ca_Departement" importance="89">
         <name>
           <name language="fr" text="Pas-de-Calais (62)"/>
           <name language="en" text="Pas-de-Calais (62)"/>
@@ -1744,7 +1744,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_63" category="ca_Departement" importance="0">
+      <polygonElement id="e_63" category="ca_Departement" importance="60">
         <name>
           <name language="fr" text="Puy-de-Dôme (63)"/>
           <name language="en" text="Puy-de-Dôme (63)"/>
@@ -1763,7 +1763,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_64" category="ca_Departement" importance="0">
+      <polygonElement id="e_64" category="ca_Departement" importance="62">
         <name>
           <name language="fr" text="Pyrénées-Atlantiques (64)"/>
           <name language="en" text="Pyrénées-Atlantiques (64)"/>
@@ -1782,7 +1782,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_65" category="ca_Departement" importance="0">
+      <polygonElement id="e_65" category="ca_Departement" importance="17">
         <name>
           <name language="fr" text="Hautes-Pyrénées (65)"/>
           <name language="en" text="Hautes-Pyrénées (65)"/>
@@ -1801,7 +1801,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_66" category="ca_Departement" importance="0">
+      <polygonElement id="e_66" category="ca_Departement" importance="44">
         <name>
           <name language="fr" text="Pyrénées-Orientales (66)"/>
           <name language="en" text="Pyrénées-Orientales (66)"/>
@@ -1820,7 +1820,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_67" category="ca_Departement" importance="0">
+      <polygonElement id="e_67" category="ca_Departement" importance="79">
         <name>
           <name language="fr" text="Bas-Rhin (67)"/>
           <name language="en" text="Bas-Rhin (67)"/>
@@ -1839,7 +1839,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_68" category="ca_Departement" importance="0">
+      <polygonElement id="e_68" category="ca_Departement" importance="69">
         <name>
           <name language="fr" text="Haut-Rhin (68)"/>
           <name language="en" text="Haut-Rhin (68)"/>
@@ -1858,7 +1858,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_69" category="ca_Departement" importance="0">
+      <polygonElement id="e_69" category="ca_Departement" importance="93">
         <name>
           <name language="fr" text="Rhône (69)"/>
           <name language="en" text="Rhône (69)"/>
@@ -1877,7 +1877,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_70" category="ca_Departement" importance="0">
+      <polygonElement id="e_70" category="ca_Departement" importance="18">
         <name>
           <name language="fr" text="Haute-Saône (70)"/>
           <name language="en" text="Haute-Saône (70)"/>
@@ -1896,7 +1896,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_71" category="ca_Departement" importance="0">
+      <polygonElement id="e_71" category="ca_Departement" importance="51">
         <name>
           <name language="fr" text="Saône-et-Loire (71)"/>
           <name language="en" text="Saône-et-Loire (71)"/>
@@ -1915,7 +1915,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_72" category="ca_Departement" importance="0">
+      <polygonElement id="e_72" category="ca_Departement" importance="52">
         <name>
           <name language="fr" text="Sarthe (72)"/>
           <name language="en" text="Sarthe (72)"/>
@@ -1934,7 +1934,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_73" category="ca_Departement" importance="0">
+      <polygonElement id="e_73" category="ca_Departement" importance="41">
         <name>
           <name language="fr" text="Savoie (73)"/>
           <name language="en" text="Savoie (73)"/>
@@ -1953,7 +1953,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_74" category="ca_Departement" importance="0">
+      <polygonElement id="e_74" category="ca_Departement" importance="70">
         <name>
           <name language="fr" text="Haute-Savoie (74)"/>
           <name language="en" text="Haute-Savoie (74)"/>
@@ -1972,7 +1972,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_75" category="ca_Departement" importance="0">
+      <polygonElement id="e_75" category="ca_Departement" importance="95">
         <name>
           <name language="fr" text="Paris (75)"/>
           <name language="en" text="Paris (75)"/>
@@ -1991,7 +1991,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_76" category="ca_Departement" importance="0">
+      <polygonElement id="e_76" category="ca_Departement" importance="82">
         <name>
           <name language="fr" text="Seine-Maritime (76)"/>
           <name language="en" text="Seine-Maritime (76)"/>
@@ -2010,7 +2010,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_77" category="ca_Departement" importance="0">
+      <polygonElement id="e_77" category="ca_Departement" importance="87">
         <name>
           <name language="fr" text="Seine-et-Marne (77)"/>
           <name language="en" text="Seine-et-Marne (77)"/>
@@ -2029,7 +2029,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_78" category="ca_Departement" importance="0">
+      <polygonElement id="e_78" category="ca_Departement" importance="88">
         <name>
           <name language="fr" text="Yvelines (78)"/>
           <name language="en" text="Yvelines (78)"/>
@@ -2048,7 +2048,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_79" category="ca_Departement" importance="0">
+      <polygonElement id="e_79" category="ca_Departement" importance="35">
         <name>
           <name language="fr" text="Deux-Sèvres (79)"/>
           <name language="en" text="Deux-Sèvres (79)"/>
@@ -2067,7 +2067,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_80" category="ca_Departement" importance="0">
+      <polygonElement id="e_80" category="ca_Departement" importance="54">
         <name>
           <name language="fr" text="Somme (80)"/>
           <name language="en" text="Somme (80)"/>
@@ -2086,7 +2086,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_81" category="ca_Departement" importance="0">
+      <polygonElement id="e_81" category="ca_Departement" importance="38">
         <name>
           <name language="fr" text="Tarn (81)"/>
           <name language="en" text="Tarn (81)"/>
@@ -2105,7 +2105,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_82" category="ca_Departement" importance="0">
+      <polygonElement id="e_82" category="ca_Departement" importance="20">
         <name>
           <name language="fr" text="Tarn-et-Garonne (82)"/>
           <name language="en" text="Tarn-et-Garonne (82)"/>
@@ -2124,7 +2124,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_83" category="ca_Departement" importance="0">
+      <polygonElement id="e_83" category="ca_Departement" importance="75">
         <name>
           <name language="fr" text="Var (83)"/>
           <name language="en" text="Var (83)"/>
@@ -2143,7 +2143,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_84" category="ca_Departement" importance="0">
+      <polygonElement id="e_84" category="ca_Departement" importance="50">
         <name>
           <name language="fr" text="Vaucluse (84)"/>
           <name language="en" text="Vaucluse (84)"/>
@@ -2162,7 +2162,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_85" category="ca_Departement" importance="0">
+      <polygonElement id="e_85" category="ca_Departement" importance="61">
         <name>
           <name language="fr" text="Vendée (85)"/>
           <name language="en" text="Vendée (85)"/>
@@ -2181,7 +2181,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_86" category="ca_Departement" importance="0">
+      <polygonElement id="e_86" category="ca_Departement" importance="42">
         <name>
           <name language="fr" text="Vienne (86)"/>
           <name language="en" text="Vienne (86)"/>
@@ -2200,7 +2200,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_87" category="ca_Departement" importance="0">
+      <polygonElement id="e_87" category="ca_Departement" importance="37">
         <name>
           <name language="fr" text="Haute-Vienne (87)"/>
           <name language="en" text="Haute-Vienne (87)"/>
@@ -2219,7 +2219,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_88" category="ca_Departement" importance="0">
+      <polygonElement id="e_88" category="ca_Departement" importance="36">
         <name>
           <name language="fr" text="Vosges (88)"/>
           <name language="en" text="Vosges (88)"/>
@@ -2238,7 +2238,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_89" category="ca_Departement" importance="0">
+      <polygonElement id="e_89" category="ca_Departement" importance="31">
         <name>
           <name language="fr" text="Yonne (89)"/>
           <name language="en" text="Yonne (89)"/>
@@ -2257,7 +2257,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_90" category="ca_Departement" importance="0">
+      <polygonElement id="e_90" category="ca_Departement" importance="4">
         <name>
           <name language="fr" text="Territoire de Belfort (90)"/>
           <name language="en" text="Territoire de Belfort (90)"/>
@@ -2276,7 +2276,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_91" category="ca_Departement" importance="0">
+      <polygonElement id="e_91" category="ca_Departement" importance="83">
         <name>
           <name language="fr" text="Essonne (91)"/>
           <name language="en" text="Essonne (91)"/>
@@ -2295,7 +2295,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_92" category="ca_Departement" importance="0">
+      <polygonElement id="e_92" category="ca_Departement" importance="92">
         <name>
           <name language="fr" text="Hauts-de-Seine (92)"/>
           <name language="en" text="Hauts-de-Seine (92)"/>
@@ -2314,7 +2314,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_93" category="ca_Departement" importance="0">
+      <polygonElement id="e_93" category="ca_Departement" importance="91">
         <name>
           <name language="fr" text="Seine-Saint-Denis (93)"/>
           <name language="en" text="Seine-Saint-Denis (93)"/>
@@ -2333,7 +2333,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_94" category="ca_Departement" importance="0">
+      <polygonElement id="e_94" category="ca_Departement" importance="86">
         <name>
           <name language="fr" text="Val-de-Marne (94)"/>
           <name language="en" text="Val-de-Marne (94)"/>
@@ -2352,7 +2352,7 @@
           <element id="e_France"/>
         </coveredElementList>
       </polygonElement>
-      <polygonElement id="e_95" category="ca_Departement" importance="0">
+      <polygonElement id="e_95" category="ca_Departement" importance="80">
         <name>
           <name language="fr" text="Val-d'Oise (95)"/>
           <name language="en" text="Val-d'Oise (95)"/>

@@ -11,10 +11,17 @@ $(function()
    function onConnected(mapServerConnection)
    {
       mapServerConnection.loadMap(mapId, 'canvas', function(_map)
-      {
-         map = _map;
-         updateMap(displayedQuestion);
-         answered.forEach(function(b, i) { map.pushState(i); });
+      {     
+         var elementIds = _map.getElementIds();
+         _map.loadElements(elementIds, function(elementArray)
+         {
+            var i, n = elementArray.length;
+            for (i = 0; i < n; ++i) mapElements[elementIds[i]] = elementArray[i];
+            
+            map = _map;
+            answered.forEach(function(b, i) { _map.pushState(i); });
+            updateMap(displayedQuestion);
+         });
       });
    }
    
@@ -200,6 +207,9 @@ $(function()
          $('#scoreSpan').text(data.rightAnswerCount + '/' + data.answerCount);
          
          $('.waitAnswerImg').css('display', 'none');
+         
+         mapIds = data.mapIds;
+         updateMap(displayedQuestion);
       }
    });
    
@@ -212,19 +222,47 @@ $(function()
          
       mapIds[newQuestion].forEach(function(idInfo)
       {
-         var element = mapElements[idInfo.id];
-         if (element)
+         showLinkedElements(mapElements[idInfo.id], idInfo.depth);
+      });
+   }
+   
+   function showLinkedElements(element, depth)
+   {
+      var threshold = 50;
+      var linkedElements = {};
+      linkedElements[element.getId()] = true;
+      
+      var i = 0;
+      while (i < depth)
+      {
+         var elementsToAdd = [];
+            
+         Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+         { 
+            var linkedElements1 = mapElements[elementId].getLinkedElements1();
+            if (i < 2 || linkedElements1.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements1); }
+         });        
+         ++i; 
+         
+         if (i < depth)
          {
-            element.show();      
-         }
-         else
-         {
-            map.loadElement(idInfo.id, function(newElement)
-            {
-               mapElements[idInfo.id] = newElement;
-               newElement.show();
+            Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+            { 
+               var linkedElements2 = mapElements[elementId].getLinkedElements2();
+               if (i < 2 || linkedElements2.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements2); }
             });
+            ++i;
          }
+         
+         elementsToAdd.forEach(function(elementId)
+         {
+            linkedElements[elementId] = true;
+         });
+      }
+      
+      Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+      { 
+         mapElements[elementId].show();
       });
    }
 });

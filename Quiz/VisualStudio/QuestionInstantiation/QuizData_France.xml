@@ -2200,11 +2200,12 @@
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Nantes"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SaintNazaire"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Chateaubriant"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ancenis"/>
+        <!--Ancenis n'est plus une sous-préfecture depuis 2017-->
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ancenis"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Nantes"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintNazaire"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Chateaubriant"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Ancenis"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Ancenis"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_SaintHerblain"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Reze"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Morbihan"/>
@@ -2477,12 +2478,13 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Reims"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Epernay"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_VitryLeFrancois"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SainteMenehould"/>
+        <!--Sainte-Menehould n'est plus une sous-préfecture depuis 2017-->
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_SainteMenehould"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_ChalonsEnChampagne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Reims"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Epernay"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_VitryLeFrancois"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_SainteMenehould"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_SainteMenehould"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_SeineEtMarne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AubeDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HauteMarne"/>
@@ -2715,15 +2717,16 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Forbach"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sarreguemines"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Sarrebourg"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_BoulayMoselle"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauSalins"/>
+        <!--Boulay-Moselle et Château-Salins ne sont plus des sous-préfectures depuis 2015-->
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_BoulayMoselle"/>
+        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_ChateauSalins"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Metz"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Thionville"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Forbach"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Sarreguemines"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Sarrebourg"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_BoulayMoselle"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauSalins"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_BoulayMoselle"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_ChateauSalins"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BasRhin"/>
       </relationList>
@@ -3115,13 +3118,14 @@
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Selestat"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Saverne"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Molsheim"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Wissembourg"/>
+        <!--Wissembourg n'est plus une sous-préfecture depuis 2015-->
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Wissembourg"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Strasbourg"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Haguenau"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Selestat"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Saverne"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Molsheim"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Wissembourg"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Wissembourg"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Schiltigheim"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MoselleDepartement"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_MeurtheEtMoselle"/>
@@ -3155,16 +3159,17 @@
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Colmar"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Mulhouse"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Guebwiller"/>
+        <!--Guebwiller et Ribeauvillé ne sont plus des sous-préfectures depuis 2015-->
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Guebwiller"/>-->
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Thann"/>
         <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Altkirch"/>
-        <relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ribeauville"/>
+        <!--<relation type="r1N_Departement_ChefsLieuxArrondissement" linkedElement="el_Ribeauville"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Colmar"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Mulhouse"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Guebwiller"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Guebwiller"/>-->
         <relation type="r1N_Departement_Villes" linkedElement="el_Thann"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Altkirch"/>
-        <relation type="r1N_Departement_Villes" linkedElement="el_Ribeauville"/>
+        <!--<relation type="r1N_Departement_Villes" linkedElement="el_Ribeauville"/>-->
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_BasRhin"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Vosges"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_TerritoireDeBelfort"/>
@@ -5415,17 +5420,17 @@
     </element>
     <element id="el_VireVille" type="et_Ville" minLevel="3" mapId="e_Vire">
       <elementName>
-        <name language="fr" text="Vire"/>
-        <name language="en" text="Vire"/>
+        <name language="fr" text="Vire Normandie"/>
+        <name language="en" text="Vire Normandie"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Vire"/>
-          <value language="en" value="Vire"/>
+          <value language="fr" value="Vire Normandie"/>
+          <value language="en" value="Vire Normandie"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="fr" value="de Vire"/>
-          <value language="en" value="Vire"/>
+          <value language="fr" value="de Vire Normandie"/>
+          <value language="en" value="Vire Normandie"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -7952,7 +7957,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Ancenis" type="et_Ville" minLevel="3" mapId="e_Ancenis">
+    <!--Ancenis n'est plus une sous-préfecture depuis 2017-->
+    <!--<element id="el_Ancenis" type="et_Ville" minLevel="3" mapId="e_Ancenis">
       <elementName>
         <name language="fr" text="Ancenis"/>
         <name language="en" text="Ancenis"/>
@@ -7973,7 +7979,7 @@
         <numericalAttribute type="nt_Latitude" value="47.36615"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <element id="el_SaintHerblain" type="et_Ville" minLevel="4" mapId="e_SaintHerblain">
       <elementName>
         <name language="fr" text="Saint-Herblain"/>
@@ -8266,17 +8272,17 @@
     </element>
     <element id="el_Florac" type="et_Ville" minLevel="1" mapId="e_Florac">
       <elementName>
-        <name language="fr" text="Florac"/>
-        <name language="en" text="Florac"/>
+        <name language="fr" text="Florac Trois Rivières"/>
+        <name language="en" text="Florac Trois Rivières"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Florac"/>
-          <value language="en" value="Florac"/>
+          <value language="fr" value="Florac Trois Rivières"/>
+          <value language="en" value="Florac Trois Rivières"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="fr" value="de Florac"/>
-          <value language="en" value="Florac"/>
+          <value language="fr" value="de Florac Trois Rivières"/>
+          <value language="en" value="Florac Trois Rivières"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -8355,17 +8361,17 @@
     </element>
     <element id="el_Segre" type="et_Ville" minLevel="3" mapId="e_Segre">
       <elementName>
-        <name language="fr" text="Segré"/>
-        <name language="en" text="Segré"/>
+        <name language="fr" text="Segré-en-Anjou Bleu"/>
+        <name language="en" text="Segré-en-Anjou Bleu"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Segré"/>
-          <value language="en" value="Segré"/>
+          <value language="fr" value="Segré-en-Anjou Bleu"/>
+          <value language="en" value="Segré-en-Anjou Bleu"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="fr" value="de Segré"/>
-          <value language="en" value="Segré"/>
+          <value language="fr" value="de Segré-en-Anjou Bleu"/>
+          <value language="en" value="Segré-en-Anjou Bleu"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -8400,17 +8406,17 @@
     </element>
     <element id="el_CherbourgOcteville" type="et_Ville" minLevel="1" mapId="e_CherbourgOcteville">
       <elementName>
-        <name language="fr" text="Cherbourg-Octeville"/>
-        <name language="en" text="Cherbourg-Octeville"/>
+        <name language="fr" text="Cherbourg-en-Cotentin"/>
+        <name language="en" text="Cherbourg-en-Cotentin"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Cherbourg-Octeville"/>
-          <value language="en" value="Cherbourg-Octeville"/>
+          <value language="fr" value="Cherbourg-en-Cotentin"/>
+          <value language="en" value="Cherbourg-en-Cotentin"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="fr" value="de Cherbourg-Octeville"/>
-          <value language="en" value="Cherbourg-Octeville"/>
+          <value language="fr" value="de Cherbourg-en-Cotentin"/>
+          <value language="en" value="Cherbourg-en-Cotentin"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -8553,7 +8559,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_SainteMenehould" type="et_Ville" minLevel="4" mapId="e_SainteMenehould">
+    <!--Sainte-Menehould n'est plus une sous-préfecture depuis 2017-->
+    <!--<element id="el_SainteMenehould" type="et_Ville" minLevel="4" mapId="e_SainteMenehould">
        <elementName>
         <name language="fr" text="Sainte-Menehould"/>
         <name language="en" text="Sainte-Menehould"/>
@@ -8574,7 +8581,7 @@
         <numericalAttribute type="nt_Latitude" value="49.090822"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <!--Villes 52-->
     <element id="el_Chaumont" type="et_Ville" minLevel="0" mapId="e_Chaumont">
       <elementName>
@@ -8778,17 +8785,17 @@
     </element>
     <element id="el_Briey" type="et_Ville" minLevel="3" mapId="e_Briey">
       <elementName>
-        <name language="fr" text="Briey"/>
-        <name language="en" text="Briey"/>
+        <name language="fr" text="Val de Briey"/>
+        <name language="en" text="Val de Briey"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Briey"/>
-          <value language="en" value="Briey"/>
+          <value language="fr" value="Val de Briey"/>
+          <value language="en" value="Val de Briey"/>
         </attribute>
         <attribute type="at_Nom2">
-          <value language="fr" value="de Briey"/>
-          <value language="en" value="Briey"/>
+          <value language="fr" value="de Val de Briey"/>
+          <value language="en" value="Val de Briey"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -9065,7 +9072,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_BoulayMoselle" type="et_Ville" minLevel="4" mapId="e_BoulayMoselle">
+    <!--Boulay-Moselle et Château-Salins ne sont plus des sous-préfectures depuis 2015-->
+    <!--<element id="el_BoulayMoselle" type="et_Ville" minLevel="4" mapId="e_BoulayMoselle">
       <elementName>
         <name language="fr" text="Boulay-Moselle"/>
         <name language="en" text="Boulay-Moselle"/>
@@ -9099,7 +9107,7 @@
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="de Château-Salins"/>
-          <value language="en" value="v"/>
+          <value language="en" value="Château-Salins"/>
         </attribute>
       </attributeList>
       <numericalAttributeList>
@@ -9108,7 +9116,7 @@
         <numericalAttribute type="nt_Latitude" value="48.820138"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <!--Villes 58-->
     <element id="el_Nevers" type="et_Ville" minLevel="0" mapId="e_Nevers">
       <elementName>
@@ -10219,7 +10227,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Wissembourg" type="et_Ville" minLevel="4" mapId="e_Wissembourg">
+    <!--Wissembourg n'est plus une sous-préfecture depuis 2015-->
+    <!--<element id="el_Wissembourg" type="et_Ville" minLevel="4" mapId="e_Wissembourg">
       <elementName>
         <name language="fr" text="Wissembourg"/>
         <name language="en" text="Wissembourg"/>
@@ -10240,7 +10249,7 @@
         <numericalAttribute type="nt_Latitude" value="49.036858"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <element id="el_Schiltigheim" type="et_Ville" minLevel="4" mapId="e_Schiltigheim">
       <elementName>
         <name language="fr" text="Schiltigheim"/>
@@ -10308,7 +10317,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Guebwiller" type="et_Ville" minLevel="2" mapId="e_Guebwiller">
+    <!--Guebwiller et Ribeauvillé ne sont plus des sous-préfectures depuis 2015-->
+    <!--<element id="el_Guebwiller" type="et_Ville" minLevel="2" mapId="e_Guebwiller">
       <elementName>
         <name language="fr" text="Guebwiller"/>
         <name language="en" text="Guebwiller"/>
@@ -10329,7 +10339,7 @@
         <numericalAttribute type="nt_Latitude" value="47.911586"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <element id="el_Thann" type="et_Ville" minLevel="3" mapId="e_Thann">
       <elementName>
         <name language="fr" text="Thann"/>
@@ -10374,7 +10384,7 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Ribeauville" type="et_Ville" minLevel="4" mapId="e_Ribeauville">
+    <!--<element id="el_Ribeauville" type="et_Ville" minLevel="4" mapId="e_Ribeauville">
       <elementName>
         <name language="fr" text="Ribeauvillé"/>
         <name language="en" text="Ribeauvillé"/>
@@ -10395,7 +10405,7 @@
         <numericalAttribute type="nt_Latitude" value="48.194668"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <!--Villes 69-->
     <element id="el_Lyon" type="et_Ville" minLevel="0" mapId="e_Lyon">
       <elementName>
@@ -13033,7 +13043,7 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_Blois"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Tours"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Saumur"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Ancenis"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Ancenis"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_Nantes"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_SaintNazaire"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_AllierRiviere"/>
@@ -13954,7 +13964,7 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_Ardennes"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_AisneDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_OiseDepartement"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_SainteMenehould"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_SainteMenehould"/>-->
         <relation type="r1N_Riviere_Villes" linkedElement="el_Vouziers"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Rethel"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Soissons"/>

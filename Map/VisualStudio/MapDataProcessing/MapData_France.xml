@@ -2374,7 +2374,7 @@
     </polygonElementList>
     <lineElementList>
       <!--Fleuves et rivières-->
-      <lineElement id="e_Rhin" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Rhin" category="ca_FleuveRiviere" importance="98">
         <name>
           <name language="fr" text="Rhin"/>
           <name language="en" text="Rhine"/>
@@ -2386,7 +2386,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Rhone" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Rhone" category="ca_FleuveRiviere" importance="97">
         <name>
           <name language="fr" text="Rhône"/>
           <name language="en" text="Rhône"/>
@@ -2400,7 +2400,7 @@
           <element id="e_13"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Loire" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Loire" category="ca_FleuveRiviere" importance="96">
         <name>
           <name language="fr" text="Loire"/>
           <name language="en" text="Loire"/>
@@ -2414,7 +2414,7 @@
           <element id="e_44"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Meuse" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Meuse" category="ca_FleuveRiviere" importance="95">
         <name>
           <name language="fr" text="Meuse"/>
           <name language="en" text="Meuse"/>
@@ -2426,7 +2426,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Seine" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Seine" category="ca_FleuveRiviere" importance="94">
         <name>
           <name language="fr" text="Seine"/>
           <name language="en" text="Seine"/>
@@ -2440,7 +2440,7 @@
           <element id="e_76"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Garonne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Garonne" category="ca_FleuveRiviere" importance="93">
         <name>
           <name language="fr" text="Garonne"/>
           <name language="en" text="Garonne"/>
@@ -2454,7 +2454,7 @@
           <element id="e_33"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Moselle" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Moselle" category="ca_FleuveRiviere" importance="92">
         <name>
           <name language="fr" text="Moselle"/>
           <name language="en" text="Moselle"/>
@@ -2468,7 +2468,7 @@
           <element id="e_Rhin"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Saone" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Saone" category="ca_FleuveRiviere" importance="91">
         <name>
           <name language="fr" text="Saône"/>
           <name language="en" text="Saône"/>
@@ -2482,7 +2482,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Dordogne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Dordogne" category="ca_FleuveRiviere" importance="90">
         <name>
           <name language="fr" text="Dordogne"/>
           <name language="en" text="Dordogne"/>
@@ -2496,7 +2496,7 @@
           <element id="e_33"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Marne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Marne" category="ca_FleuveRiviere" importance="89">
         <name>
           <name language="fr" text="Marne"/>
           <name language="en" text="Marne"/>
@@ -2510,7 +2510,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Lot" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Lot" category="ca_FleuveRiviere" importance="88">
         <name>
           <name language="fr" text="Lot"/>
           <name language="en" text="Lot"/>
@@ -2524,7 +2524,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Doubs" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Doubs" category="ca_FleuveRiviere" importance="87">
         <name>
           <name language="fr" text="Doubs"/>
           <name language="en" text="Doubs"/>
@@ -2538,7 +2538,7 @@
           <element id="e_Saone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Isere" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Isere" category="ca_FleuveRiviere" importance="86">
         <name>
           <name language="fr" text="Isère"/>
           <name language="en" text="Isère"/>
@@ -2552,7 +2552,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Tarn" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Tarn" category="ca_FleuveRiviere" importance="85">
         <name>
           <name language="fr" text="Tarn"/>
           <name language="en" text="Tarn"/>
@@ -2566,7 +2566,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_VienneRiver" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_VienneRiver" category="ca_FleuveRiviere" importance="84">
         <name>
           <name language="fr" text="Vienne"/>
           <name language="en" text="Vienne"/>
@@ -2580,7 +2580,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Allier" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Allier" category="ca_FleuveRiviere" importance="83">
         <name>
           <name language="fr" text="Allier"/>
           <name language="en" text="Allier"/>
@@ -2594,7 +2594,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Escaut" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Escaut" category="ca_FleuveRiviere" importance="82">
         <name>
           <name language="fr" text="Escaut"/>
           <name language="en" text="Scheldt"/>
@@ -2606,7 +2606,7 @@
         </looks>
         <attachmentList/>
       </lineElement>
-      <lineElement id="e_Adour" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Adour" category="ca_FleuveRiviere" importance="81">
         <name>
           <name language="fr" text="Adour"/>
           <name language="en" text="Adour"/>
@@ -2620,7 +2620,7 @@
           <element id="e_64"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Durance" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Durance" category="ca_FleuveRiviere" importance="80">
         <name>
           <name language="fr" text="Durance"/>
           <name language="en" text="Durance"/>
@@ -2634,7 +2634,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Charente" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Charente" category="ca_FleuveRiviere" importance="79">
         <name>
           <name language="fr" text="Charente"/>
           <name language="en" text="Charente"/>
@@ -2648,7 +2648,7 @@
           <element id="e_17"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Cher" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Cher" category="ca_FleuveRiviere" importance="78">
         <name>
           <name language="fr" text="Cher"/>
           <name language="en" text="Cher"/>
@@ -2662,7 +2662,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Oise" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Oise" category="ca_FleuveRiviere" importance="77">
         <name>
           <name language="fr" text="Oise"/>
           <name language="en" text="Oise"/>
@@ -2676,7 +2676,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aisne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Aisne" category="ca_FleuveRiviere" importance="76">
         <name>
           <name language="fr" text="Aisne"/>
           <name language="en" text="Aisne"/>
@@ -2690,7 +2690,7 @@
           <element id="e_Oise"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Maine" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Maine" category="ca_FleuveRiviere" importance="75">
         <name>
           <name language="fr" text="Maine"/>
           <name language="en" text="Maine"/>
@@ -2704,7 +2704,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sarthe" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Sarthe" category="ca_FleuveRiviere" importance="74">
         <name>
           <name language="fr" text="Sarthe"/>
           <name language="en" text="Sarthe"/>
@@ -2718,7 +2718,7 @@
           <element id="e_Maine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Yonne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Yonne" category="ca_FleuveRiviere" importance="73">
         <name>
           <name language="fr" text="Yonne"/>
           <name language="en" text="Yonne"/>
@@ -2732,7 +2732,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Loir" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Loir" category="ca_FleuveRiviere" importance="72">
         <name>
           <name language="fr" text="Loir"/>
           <name language="en" text="Loir"/>
@@ -2746,7 +2746,7 @@
           <element id="e_Sarthe"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Creuse" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Creuse" category="ca_FleuveRiviere" importance="71">
         <name>
           <name language="fr" text="Creuse"/>
           <name language="en" text="Creuse"/>
@@ -2760,7 +2760,7 @@
           <element id="e_VienneRiver"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sarre" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Sarre" category="ca_FleuveRiviere" importance="70">
         <name>
           <name language="fr" text="Sarre"/>
           <name language="en" text="Sarre"/>
@@ -2774,7 +2774,7 @@
           <element id="e_Moselle"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Isle" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Isle" category="ca_FleuveRiviere" importance="69">
         <name>
           <name language="fr" text="Isle"/>
           <name language="en" text="Isle"/>
@@ -2788,7 +2788,7 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ain" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ain" category="ca_FleuveRiviere" importance="68">
         <name>
           <name language="fr" text="Ain"/>
           <name language="en" text="Ain"/>
@@ -2802,7 +2802,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aveyron" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Aveyron" category="ca_FleuveRiviere" importance="67">
         <name>
           <name language="fr" text="Aveyron"/>
           <name language="en" text="Aveyron"/>
@@ -2816,7 +2816,7 @@
           <element id="e_Tarn"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vilaine" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Vilaine" category="ca_FleuveRiviere" importance="66">
         <name>
           <name language="fr" text="Vilaine"/>
           <name language="en" text="Vilaine"/>
@@ -2830,7 +2830,7 @@
           <element id="e_56"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aube" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Aube" category="ca_FleuveRiviere" importance="65">
         <name>
           <name language="fr" text="Aube"/>
           <name language="en" text="Aube"/>
@@ -2844,7 +2844,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Indre" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Indre" category="ca_FleuveRiviere" importance="64">
         <name>
           <name language="fr" text="Indre"/>
           <name language="en" text="Indre"/>
@@ -2858,7 +2858,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Somme" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Somme" category="ca_FleuveRiviere" importance="63">
         <name>
           <name language="fr" text="Somme"/>
           <name language="en" text="Somme"/>
@@ -2872,7 +2872,7 @@
           <element id="e_80"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ill" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ill" category="ca_FleuveRiviere" importance="62">
         <name>
           <name language="fr" text="Ill"/>
           <name language="en" text="Ill"/>
@@ -2886,7 +2886,7 @@
           <element id="e_Rhin"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GavesReunis" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_GavesReunis" category="ca_FleuveRiviere" importance="61">
         <name>
           <name language="fr" text="Gaves réunis"/>
           <name language="en" text="Gaves réunis"/>
@@ -2900,7 +2900,7 @@
           <element id="e_Adour"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GaveDePau" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_GaveDePau" category="ca_FleuveRiviere" importance="60">
         <name>
           <name language="fr" text="Gave de Pau"/>
           <name language="en" text="Gave de Pau"/>
@@ -2914,7 +2914,7 @@
           <element id="e_GavesReunis"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Vezere" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Vezere" category="ca_FleuveRiviere" importance="59">
         <name>
           <name language="fr" text="Vézère"/>
           <name language="en" text="Vézère"/>
@@ -2928,7 +2928,7 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aude" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Aude" category="ca_FleuveRiviere" importance="58">
         <name>
           <name language="fr" text="Aude"/>
           <name language="en" text="Aude"/>
@@ -2942,7 +2942,7 @@
           <element id="e_34"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Eure" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Eure" category="ca_FleuveRiviere" importance="57">
         <name>
           <name language="fr" text="Eure"/>
           <name language="en" text="Eure"/>
@@ -2956,7 +2956,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ognon" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ognon" category="ca_FleuveRiviere" importance="56">
         <name>
           <name language="fr" text="Ognon"/>
           <name language="en" text="Ognon"/>
@@ -2970,7 +2970,7 @@
           <element id="e_Saone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_MayenneRiver" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_MayenneRiver" category="ca_FleuveRiviere" importance="55">
         <name>
           <name language="fr" text="Mayenne"/>
           <name language="en" text="Mayenne"/>
@@ -2984,7 +2984,7 @@
           <element id="e_Maine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Agout" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Agout" category="ca_FleuveRiviere" importance="54">
         <name>
           <name language="fr" text="Agout"/>
           <name language="en" text="Agout"/>
@@ -2998,7 +2998,7 @@
           <element id="e_Tarn"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_GaveOloron" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_GaveOloron" category="ca_FleuveRiviere" importance="53">
         <name>
           <name language="fr" text="Gave d'Oloron"/>
           <name language="en" text="Gave d'Oloron"/>
@@ -3012,7 +3012,7 @@
           <element id="e_GavesReunis"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Truyere" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Truyere" category="ca_FleuveRiviere" importance="52">
         <name>
           <name language="fr" text="Truyère"/>
           <name language="en" text="Truyère"/>
@@ -3026,7 +3026,7 @@
           <element id="e_Lot"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ariege" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ariege" category="ca_FleuveRiviere" importance="51">
         <name>
           <name language="fr" text="Ariège"/>
           <name language="en" text="Ariège"/>
@@ -3040,7 +3040,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Armancon" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Armancon" category="ca_FleuveRiviere" importance="50">
         <name>
           <name language="fr" text="Armançon"/>
           <name language="en" text="Armançon"/>
@@ -3054,7 +3054,7 @@
           <element id="e_Yonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Gartempe" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Gartempe" category="ca_FleuveRiviere" importance="49">
         <name>
           <name language="fr" text="Gartempe"/>
           <name language="en" text="Gartempe"/>
@@ -3068,7 +3068,7 @@
           <element id="e_Creuse"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Dronne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Dronne" category="ca_FleuveRiviere" importance="48">
         <name>
           <name language="fr" text="Dronne"/>
           <name language="en" text="Dronne"/>
@@ -3082,7 +3082,7 @@
           <element id="e_Isle"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sambre" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Sambre" category="ca_FleuveRiviere" importance="47">
         <name>
           <name language="fr" text="Sambre"/>
           <name language="en" text="Sambre"/>
@@ -3096,7 +3096,7 @@
           <element id="e_Meuse"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Drac" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Drac" category="ca_FleuveRiviere" importance="46">
         <name>
           <name language="fr" text="Drac"/>
           <name language="en" text="Drac"/>
@@ -3110,7 +3110,7 @@
           <element id="e_Isere"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Lys" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Lys" category="ca_FleuveRiviere" importance="45">
         <name>
           <name language="fr" text="Lys"/>
           <name language="en" text="Leie"/>
@@ -3124,7 +3124,7 @@
           <element id="e_Escaut"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Baise" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Baise" category="ca_FleuveRiviere" importance="44">
         <name>
           <name language="fr" text="Baïse"/>
           <name language="en" text="Baïse"/>
@@ -3138,7 +3138,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Herault" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Herault" category="ca_FleuveRiviere" importance="43">
         <name>
           <name language="fr" text="Hérault"/>
           <name language="en" text="Hérault"/>
@@ -3152,7 +3152,7 @@
           <element id="e_34"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Verdon" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Verdon" category="ca_FleuveRiviere" importance="42">
         <name>
           <name language="fr" text="Verdon"/>
           <name language="en" text="Verdon"/>
@@ -3166,7 +3166,7 @@
           <element id="e_Durance"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_SevreNiortaise" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_SevreNiortaise" category="ca_FleuveRiviere" importance="41">
         <name>
           <name language="fr" text="Sèvre Niortaise"/>
           <name language="en" text="Sèvre Niortaise"/>
@@ -3180,7 +3180,7 @@
           <element id="e_17"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Meurthe" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Meurthe" category="ca_FleuveRiviere" importance="40">
         <name>
           <name language="fr" text="Meurthe"/>
           <name language="en" text="Meurthe"/>
@@ -3194,7 +3194,7 @@
           <element id="e_Moselle"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Orne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Orne" category="ca_FleuveRiviere" importance="39">
         <name>
           <name language="fr" text="Orne"/>
           <name language="en" text="Orne"/>
@@ -3208,7 +3208,7 @@
           <element id="e_14"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Gers" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Gers" category="ca_FleuveRiviere" importance="38">
         <name>
           <name language="fr" text="Gers"/>
           <name language="en" text="Gers"/>
@@ -3222,7 +3222,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Loing" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Loing" category="ca_FleuveRiviere" importance="37">
         <name>
           <name language="fr" text="Loing"/>
           <name language="en" text="Loing"/>
@@ -3236,7 +3236,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_SevreNantaise" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_SevreNantaise" category="ca_FleuveRiviere" importance="36">
         <name>
           <name language="fr" text="Sèvre Nantaise"/>
           <name language="en" text="Sèvre Nantaise"/>
@@ -3250,7 +3250,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ardeche" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ardeche" category="ca_FleuveRiviere" importance="35">
         <name>
           <name language="fr" text="Ardèche"/>
           <name language="en" text="Ardèche"/>
@@ -3264,7 +3264,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Blavet" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Blavet" category="ca_FleuveRiviere" importance="34">
         <name>
           <name language="fr" text="Blavet"/>
           <name language="en" text="Blavet"/>
@@ -3278,7 +3278,7 @@
           <element id="e_56"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Arc" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Arc" category="ca_FleuveRiviere" importance="33">
         <name>
           <name language="fr" text="Arc"/>
           <name language="en" text="Arc"/>
@@ -3292,7 +3292,7 @@
           <element id="e_Isere"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Aulne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Aulne" category="ca_FleuveRiviere" importance="32">
         <name>
           <name language="fr" text="Aulne"/>
           <name language="en" text="Aulne"/>
@@ -3306,7 +3306,7 @@
           <element id="e_29"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Var" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Var" category="ca_FleuveRiviere" importance="31">
         <name>
           <name language="fr" text="Var"/>
           <name language="en" text="Var"/>
@@ -3320,7 +3320,7 @@
           <element id="e_06"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Gard" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Gard" category="ca_FleuveRiviere" importance="30">
         <name>
           <name language="fr" text="Gard"/>
           <name language="en" text="Gard"/>
@@ -3334,7 +3334,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Orb" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Orb" category="ca_FleuveRiviere" importance="29">
         <name>
           <name language="fr" text="Orb"/>
           <name language="en" text="Orb"/>
@@ -3348,7 +3348,7 @@
           <element id="e_34"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Thouet" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Thouet" category="ca_FleuveRiviere" importance="28">
         <name>
           <name language="fr" text="Thouet"/>
           <name language="en" text="Thouet"/>
@@ -3362,7 +3362,7 @@
           <element id="e_Loire"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Save" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Save" category="ca_FleuveRiviere" importance="27">
         <name>
           <name language="fr" text="Save"/>
           <name language="en" text="Save"/>
@@ -3376,7 +3376,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Cere" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Cere" category="ca_FleuveRiviere" importance="26">
         <name>
           <name language="fr" text="Cère"/>
           <name language="en" text="Cère"/>
@@ -3390,7 +3390,7 @@
           <element id="e_Dordogne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_VireRiver" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_VireRiver" category="ca_FleuveRiviere" importance="25">
         <name>
           <name language="fr" text="Vire"/>
           <name language="en" text="Vire"/>
@@ -3404,7 +3404,7 @@
           <element id="e_50"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Gimone" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Gimone" category="ca_FleuveRiviere" importance="24">
         <name>
           <name language="fr" text="Gimone"/>
           <name language="en" text="Gimone"/>
@@ -3418,7 +3418,7 @@
           <element id="e_Garonne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Risle" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Risle" category="ca_FleuveRiviere" importance="23">
         <name>
           <name language="fr" text="Risle"/>
           <name language="en" text="Risle"/>
@@ -3432,7 +3432,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Sauldre" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Sauldre" category="ca_FleuveRiviere" importance="22">
         <name>
           <name language="fr" text="Sauldre"/>
           <name language="en" text="Sauldre"/>
@@ -3446,7 +3446,7 @@
           <element id="e_Cher"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Argens" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Argens" category="ca_FleuveRiviere" importance="21">
         <name>
           <name language="fr" text="Argens"/>
           <name language="en" text="Argens"/>
@@ -3460,7 +3460,7 @@
           <element id="e_83"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Tet" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Tet" category="ca_FleuveRiviere" importance="20">
         <name>
           <name language="fr" text="Têt"/>
           <name language="en" text="Têt"/>
@@ -3474,7 +3474,7 @@
           <element id="e_66"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Drome" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Drome" category="ca_FleuveRiviere" importance="19">
         <name>
           <name language="fr" text="Drôme"/>
           <name language="en" text="Drôme"/>
@@ -3488,7 +3488,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Epte" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Epte" category="ca_FleuveRiviere" importance="18">
         <name>
           <name language="fr" text="Epte"/>
           <name language="en" text="Epte"/>
@@ -3502,7 +3502,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Eygues" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Eygues" category="ca_FleuveRiviere" importance="17">
         <name>
           <name language="fr" text="Eygues"/>
           <name language="en" text="Eygues"/>
@@ -3516,7 +3516,7 @@
           <element id="e_Rhone"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Correze" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Correze" category="ca_FleuveRiviere" importance="16">
         <name>
           <name language="fr" text="Corrèze"/>
           <name language="en" text="Corrèze"/>
@@ -3530,7 +3530,7 @@
           <element id="e_Vezere"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Romanche" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Romanche" category="ca_FleuveRiviere" importance="15">
         <name>
           <name language="fr" text="Romanche"/>
           <name language="en" text="Romanche"/>
@@ -3544,7 +3544,7 @@
           <element id="e_Drac"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Authie" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Authie" category="ca_FleuveRiviere" importance="14">
         <name>
           <name language="fr" text="Authie"/>
           <name language="en" text="Authie"/>
@@ -3558,7 +3558,7 @@
           <element id="e_62"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Rance" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Rance" category="ca_FleuveRiviere" importance="13">
         <name>
           <name language="fr" text="Rance"/>
           <name language="en" text="Rance"/>
@@ -3572,7 +3572,7 @@
           <element id="e_35"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Canche" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Canche" category="ca_FleuveRiviere" importance="12">
         <name>
           <name language="fr" text="Canche"/>
           <name language="en" text="Canche"/>
@@ -3586,7 +3586,7 @@
           <element id="e_62"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Tech" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Tech" category="ca_FleuveRiviere" importance="11">
         <name>
           <name language="fr" text="Tech"/>
           <name language="en" text="Tech"/>
@@ -3600,7 +3600,7 @@
           <element id="e_66"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Andelle" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Andelle" category="ca_FleuveRiviere" importance="10">
         <name>
           <name language="fr" text="Andelle"/>
           <name language="en" text="Andelle"/>
@@ -3614,7 +3614,7 @@
           <element id="e_Seine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Ille" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Ille" category="ca_FleuveRiviere" importance="9">
         <name>
           <name language="fr" text="Ille"/>
           <name language="en" text="Ille"/>
@@ -3628,7 +3628,7 @@
           <element id="e_Vilaine"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Huisne" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Huisne" category="ca_FleuveRiviere" importance="8">
         <name>
           <name language="fr" text="Huisne"/>
           <name language="en" text="Huisne"/>
@@ -3642,7 +3642,7 @@
           <element id="e_Sarthe"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Saulx" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Saulx" category="ca_FleuveRiviere" importance="7">
         <name>
           <name language="fr" text="Saulx"/>
           <name language="en" text="Saulx"/>
@@ -3656,7 +3656,7 @@
           <element id="e_Marne"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_HersVif" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_HersVif" category="ca_FleuveRiviere" importance="6">
         <name>
           <name language="fr" text="Hers-Vif"/>
           <name language="en" text="Hers-Vif"/>
@@ -3670,7 +3670,7 @@
           <element id="e_Ariege"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Taurion" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Taurion" category="ca_FleuveRiviere" importance="5">
         <name>
           <name language="fr" text="Taurion"/>
           <name language="en" text="Taurion"/>
@@ -3684,7 +3684,7 @@
           <element id="e_VienneRiver"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Leyre" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Leyre" category="ca_FleuveRiviere" importance="4">
         <name>
           <name language="fr" text="Leyre"/>
           <name language="en" text="Leyre"/>
@@ -3698,7 +3698,7 @@
           <element id="e_33"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Trieux" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Trieux" category="ca_FleuveRiviere" importance="3">
         <name>
           <name language="fr" text="Trieux"/>
           <name language="en" text="Trieux"/>
@@ -3712,7 +3712,7 @@
           <element id="e_22"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Selune" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Selune" category="ca_FleuveRiviere" importance="2">
         <name>
           <name language="fr" text="Sélune"/>
           <name language="en" text="Sélune"/>
@@ -3726,7 +3726,7 @@
           <element id="e_50"/>
         </attachmentList>
       </lineElement>
-      <lineElement id="e_Touques" category="ca_FleuveRiviere" importance="0">
+      <lineElement id="e_Touques" category="ca_FleuveRiviere" importance="1">
         <name>
           <name language="fr" text="Touques"/>
           <name language="en" text="Touques"/>
@@ -3743,7 +3743,7 @@
     </lineElementList>
     <pointElementList>
       <!--Villes 01-->
-      <pointElement id="e_BourgEnBresse" category="ca_Prefecture" importance="0">
+      <pointElement id="e_BourgEnBresse" category="ca_Prefecture" importance="31">
         <name>
           <name language="fr" text="Bourg-en-Bresse"/>
           <name language="en" text="Bourg-en-Bresse"/>
@@ -3754,7 +3754,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Gex" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Gex" category="ca_SousPrefecture" importance="93">
         <name>
           <name language="fr" text="Gex"/>
           <name language="en" text="Gex"/>
@@ -3765,7 +3765,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Belley" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Belley" category="ca_SousPrefecture" importance="75">
         <name>
           <name language="fr" text="Belley"/>
           <name language="en" text="Belley"/>
@@ -3776,7 +3776,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Nantua" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Nantua" category="ca_SousPrefecture" importance="15">
         <name>
           <name language="fr" text="Nantua"/>
           <name language="en" text="Nantua"/>
@@ -3788,7 +3788,7 @@
         </looks>
       </pointElement>
       <!--Villes 02-->
-      <pointElement id="e_Laon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Laon" category="ca_Prefecture" importance="17">
         <name>
           <name language="fr" text="Laon"/>
           <name language="en" text="Laon"/>
@@ -3799,7 +3799,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintQuentin" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintQuentin" category="ca_SousPrefecture" importance="208">
         <name>
           <name language="fr" text="Saint-Quentin"/>
           <name language="en" text="Saint-Quentin"/>
@@ -3810,7 +3810,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Soissons" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Soissons" category="ca_SousPrefecture" importance="172">
         <name>
           <name language="fr" text="Soissons"/>
           <name language="en" text="Soissons"/>
@@ -3821,7 +3821,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChateauThierry" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ChateauThierry" category="ca_SousPrefecture" importance="120">
         <name>
           <name language="fr" text="Château-Thierry"/>
           <name language="en" text="Château-Thierry"/>
@@ -3832,7 +3832,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vervins" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vervins" category="ca_SousPrefecture" importance="6">
         <name>
           <name language="fr" text="Vervins"/>
           <name language="en" text="Vervins"/>
@@ -3844,7 +3844,7 @@
         </looks>
       </pointElement>
       <!--Villes 03-->
-      <pointElement id="e_Moulins" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Moulins" category="ca_Prefecture" importance="13">
         <name>
           <name language="fr" text="Moulins"/>
           <name language="en" text="Moulins"/>
@@ -3855,7 +3855,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montlucon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montlucon" category="ca_SousPrefecture" importance="187">
         <name>
           <name language="fr" text="Montluçon"/>
           <name language="en" text="Montluçon"/>
@@ -3866,7 +3866,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vichy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vichy" category="ca_SousPrefecture" importance="163">
         <name>
           <name language="fr" text="Vichy"/>
           <name language="en" text="Vichy"/>
@@ -3878,7 +3878,7 @@
         </looks>
       </pointElement>
       <!--Villes 04-->
-      <pointElement id="e_DigneLesBains" category="ca_Prefecture" importance="0">
+      <pointElement id="e_DigneLesBains" category="ca_Prefecture" importance="8">
         <name>
           <name language="fr" text="Digne-les-Bains"/>
           <name language="en" text="Digne-les-Bains"/>
@@ -3889,7 +3889,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Forcalquier" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Forcalquier" category="ca_SousPrefecture" importance="29">
         <name>
           <name language="fr" text="Forcalquier"/>
           <name language="en" text="Forcalquier"/>
@@ -3900,7 +3900,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Barcelonnette" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Barcelonnette" category="ca_SousPrefecture" importance="7">
         <name>
           <name language="fr" text="Barcelonnette"/>
           <name language="en" text="Barcelonnette"/>
@@ -3911,7 +3911,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Castellane" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Castellane" category="ca_SousPrefecture" importance="1">
         <name>
           <name language="fr" text="Castellane"/>
           <name language="en" text="Castellane"/>
@@ -3923,7 +3923,7 @@
         </looks>
       </pointElement>
       <!--Villes 05-->
-      <pointElement id="e_Gap" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Gap" category="ca_Prefecture" importance="29">
         <name>
           <name language="fr" text="Gap"/>
           <name language="en" text="Gap"/>
@@ -3934,7 +3934,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Briancon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Briancon" category="ca_SousPrefecture" importance="104">
         <name>
           <name language="fr" text="Briançon"/>
           <name language="en" text="Briançon"/>
@@ -3946,7 +3946,7 @@
         </looks>
       </pointElement>
       <!--Villes 06-->
-      <pointElement id="e_Nice" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nice" category="ca_Prefecture" importance="92">
         <name>
           <name language="fr" text="Nice"/>
           <name language="en" text="Nice"/>
@@ -3957,7 +3957,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Grasse" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Grasse" category="ca_SousPrefecture" importance="203">
         <name>
           <name language="fr" text="Grasse"/>
           <name language="en" text="Grasse"/>
@@ -3968,7 +3968,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Antibes" category="ca_Ville" importance="0">
+      <pointElement id="e_Antibes" category="ca_Ville" importance="46">
         <name>
           <name language="fr" text="Antibes"/>
           <name language="en" text="Antibes"/>
@@ -3979,7 +3979,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cannes" category="ca_Ville" importance="0">
+      <pointElement id="e_Cannes" category="ca_Ville" importance="42">
         <name>
           <name language="fr" text="Cannes"/>
           <name language="en" text="Cannes"/>
@@ -3990,7 +3990,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_CagnesSurMer" category="ca_Ville" importance="0">
+      <pointElement id="e_CagnesSurMer" category="ca_Ville" importance="32">
         <name>
           <name language="fr" text="Cagnes-sur-Mer"/>
           <name language="en" text="Cagnes-sur-Mer"/>
@@ -4002,7 +4002,7 @@
         </looks>
       </pointElement>
       <!--Villes 07-->
-      <pointElement id="e_Privas" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Privas" category="ca_Prefecture" importance="1">
         <name>
           <name language="fr" text="Privas"/>
           <name language="en" text="Privas"/>
@@ -4013,7 +4013,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_TournonSurRhone" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_TournonSurRhone" category="ca_SousPrefecture" importance="90">
         <name>
           <name language="fr" text="Tournon-sur-Rhône"/>
           <name language="en" text="Tournon-sur-Rhône"/>
@@ -4024,7 +4024,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Largentiere" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Largentiere" category="ca_SousPrefecture" importance="2">
         <name>
           <name language="fr" text="Largentière"/>
           <name language="en" text="Largentière"/>
@@ -4036,7 +4036,7 @@
         </looks>
       </pointElement>
       <!--Villes 08-->
-      <pointElement id="e_CharlevilleMezieres" category="ca_Prefecture" importance="0">
+      <pointElement id="e_CharlevilleMezieres" category="ca_Prefecture" importance="40">
         <name>
           <name language="fr" text="Charleville-Mézières"/>
           <name language="en" text="Charleville-Mézières"/>
@@ -4047,7 +4047,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sedan" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sedan" category="ca_SousPrefecture" importance="135">
         <name>
           <name language="fr" text="Sedan"/>
           <name language="en" text="Sedan"/>
@@ -4058,7 +4058,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Rethel" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Rethel" category="ca_SousPrefecture" importance="63">
         <name>
           <name language="fr" text="Rethel"/>
           <name language="en" text="Rethel"/>
@@ -4069,7 +4069,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vouziers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vouziers" category="ca_SousPrefecture" importance="25">
         <name>
           <name language="fr" text="Vouziers"/>
           <name language="en" text="Vouziers"/>
@@ -4081,7 +4081,7 @@
         </looks>
       </pointElement>
       <!--Villes 09-->
-      <pointElement id="e_Foix" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Foix" category="ca_Prefecture" importance="2">
         <name>
           <name language="fr" text="Foix"/>
           <name language="en" text="Foix"/>
@@ -4092,7 +4092,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pamiers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Pamiers" category="ca_SousPrefecture" importance="126">
         <name>
           <name language="fr" text="Pamiers"/>
           <name language="en" text="Pamiers"/>
@@ -4103,7 +4103,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintGirons" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintGirons" category="ca_SousPrefecture" importance="42">
         <name>
           <name language="fr" text="Saint-Girons"/>
           <name language="en" text="Saint-Girons"/>
@@ -4115,7 +4115,7 @@
         </looks>
       </pointElement>
       <!--Villes 10-->
-      <pointElement id="e_Troyes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Troyes" category="ca_Prefecture" importance="53">
         <name>
           <name language="fr" text="Troyes"/>
           <name language="en" text="Troyes"/>
@@ -4126,7 +4126,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_NogentSurSeine" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_NogentSurSeine" category="ca_SousPrefecture" importance="39">
         <name>
           <name language="fr" text="Nogent-sur-Seine"/>
           <name language="en" text="Nogent-sur-Seine"/>
@@ -4137,7 +4137,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BarSurAube" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_BarSurAube" category="ca_SousPrefecture" importance="30">
         <name>
           <name language="fr" text="Bar-sur-Aube"/>
           <name language="en" text="Bar-sur-Aube"/>
@@ -4149,7 +4149,7 @@
         </looks>
       </pointElement>
       <!--Villes 11-->
-      <pointElement id="e_Carcassonne" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Carcassonne" category="ca_Prefecture" importance="38">
         <name>
           <name language="fr" text="Carcassonne"/>
           <name language="en" text="Carcassonne"/>
@@ -4160,7 +4160,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Narbonne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Narbonne" category="ca_SousPrefecture" importance="205">
         <name>
           <name language="fr" text="Narbonne"/>
           <name language="en" text="Narbonne"/>
@@ -4171,7 +4171,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Limoux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Limoux" category="ca_SousPrefecture" importance="84">
         <name>
           <name language="fr" text="Limoux"/>
           <name language="en" text="Limoux"/>
@@ -4183,7 +4183,7 @@
         </looks>
       </pointElement>
       <!--Villes 12-->
-      <pointElement id="e_Rodez" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Rodez" category="ca_Prefecture" importance="16">
         <name>
           <name language="fr" text="Rodez"/>
           <name language="en" text="Rodez"/>
@@ -4194,7 +4194,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Millau" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Millau" category="ca_SousPrefecture" importance="152">
         <name>
           <name language="fr" text="Millau"/>
           <name language="en" text="Millau"/>
@@ -4205,7 +4205,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VillefrancheDeRouergue" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_VillefrancheDeRouergue" category="ca_SousPrefecture" importance="99">
         <name>
           <name language="fr" text="Villefranche-de-Rouergue"/>
           <name language="en" text="Villefranche-de-Rouergue"/>
@@ -4217,7 +4217,7 @@
         </looks>
       </pointElement>
       <!--Villes 13-->
-      <pointElement id="e_Marseille" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Marseille" category="ca_Prefecture" importance="95">
         <name>
           <name language="fr" text="Marseille"/>
           <name language="en" text="Marseille"/>
@@ -4228,7 +4228,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_AixEnProvence" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_AixEnProvence" category="ca_SousPrefecture" importance="222">
         <name>
           <name language="fr" text="Aix-en-Provence"/>
           <name language="en" text="Aix-en-Provence"/>
@@ -4239,7 +4239,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Arles" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Arles" category="ca_SousPrefecture" importance="204">
         <name>
           <name language="fr" text="Arles"/>
           <name language="en" text="Arles"/>
@@ -4250,7 +4250,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Istres" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Istres" category="ca_SousPrefecture" importance="196">
         <name>
           <name language="fr" text="Istres"/>
           <name language="en" text="Istres"/>
@@ -4261,7 +4261,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Martigues" category="ca_Ville" importance="0">
+      <pointElement id="e_Martigues" category="ca_Ville" importance="31">
         <name>
           <name language="fr" text="Martigues"/>
           <name language="en" text="Martigues"/>
@@ -4272,7 +4272,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Aubagne" category="ca_Ville" importance="0">
+      <pointElement id="e_Aubagne" category="ca_Ville" importance="30">
         <name>
           <name language="fr" text="Aubagne"/>
           <name language="en" text="Aubagne"/>
@@ -4283,7 +4283,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SalonDeProvence" category="ca_Ville" importance="0">
+      <pointElement id="e_SalonDeProvence" category="ca_Ville" importance="25">
         <name>
           <name language="fr" text="Salon-de-Provence"/>
           <name language="en" text="Salon-de-Provence"/>
@@ -4295,7 +4295,7 @@
         </looks>
       </pointElement>
       <!--Villes 14-->
-      <pointElement id="e_Caen" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Caen" category="ca_Prefecture" importance="68">
         <name>
           <name language="fr" text="Caen"/>
           <name language="en" text="Caen"/>
@@ -4306,7 +4306,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lisieux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lisieux" category="ca_SousPrefecture" importance="148">
         <name>
           <name language="fr" text="Lisieux"/>
           <name language="en" text="Lisieux"/>
@@ -4317,7 +4317,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bayeux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bayeux" category="ca_SousPrefecture" importance="112">
         <name>
           <name language="fr" text="Bayeux"/>
           <name language="en" text="Bayeux"/>
@@ -4328,10 +4328,10 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vire" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vire" category="ca_SousPrefecture" importance="136">
         <name>
-          <name language="fr" text="Vire"/>
-          <name language="en" text="Vire"/>
+          <name language="fr" text="Vire Normandie"/>
+          <name language="en" text="Vire Normandie"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture1"/>
@@ -4340,7 +4340,7 @@
         </looks>
       </pointElement>
       <!--Villes 15-->
-      <pointElement id="e_Aurillac" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Aurillac" category="ca_Prefecture" importance="19">
         <name>
           <name language="fr" text="Aurillac"/>
           <name language="en" text="Aurillac"/>
@@ -4351,7 +4351,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintFlour" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintFlour" category="ca_SousPrefecture" importance="48">
         <name>
           <name language="fr" text="Saint-Flour"/>
           <name language="en" text="Saint-Flour"/>
@@ -4362,7 +4362,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Mauriac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Mauriac" category="ca_SousPrefecture" importance="17">
         <name>
           <name language="fr" text="Mauriac"/>
           <name language="en" text="Mauriac"/>
@@ -4374,7 +4374,7 @@
         </looks>
       </pointElement>
       <!--Villes 16-->
-      <pointElement id="e_Angouleme" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Angouleme" category="ca_Prefecture" importance="33">
         <name>
           <name language="fr" text="Angoulême"/>
           <name language="en" text="Angoulême"/>
@@ -4385,7 +4385,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cognac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Cognac" category="ca_SousPrefecture" importance="138">
         <name>
           <name language="fr" text="Cognac"/>
           <name language="en" text="Cognac "/>
@@ -4396,7 +4396,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Confolens" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Confolens" category="ca_SousPrefecture" importance="8">
         <name>
           <name language="fr" text="Confolens"/>
           <name language="en" text="Confolens"/>
@@ -4408,7 +4408,7 @@
         </looks>
       </pointElement>
       <!--Villes 17-->
-      <pointElement id="e_Rochelle" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Rochelle" category="ca_Prefecture" importance="60">
         <name>
           <name language="fr" text="La Rochelle"/>
           <name language="en" text="La Rochelle"/>
@@ -4419,7 +4419,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Saintes" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Saintes" category="ca_SousPrefecture" importance="162">
         <name>
           <name language="fr" text="Saintes"/>
           <name language="en" text="Saintes "/>
@@ -4430,7 +4430,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Rochefort" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Rochefort" category="ca_SousPrefecture" importance="158">
         <name>
           <name language="fr" text="Rochefort"/>
           <name language="en" text="Rochefort"/>
@@ -4441,7 +4441,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintJeanAngely" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintJeanAngely" category="ca_SousPrefecture" importance="56">
         <name>
           <name language="fr" text="Saint-Jean-d'Angély"/>
           <name language="en" text="Saint-Jean-d'Angély "/>
@@ -4452,7 +4452,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Jonzac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Jonzac" category="ca_SousPrefecture" importance="13">
         <name>
           <name language="fr" text="Jonzac"/>
           <name language="en" text="Jonzac"/>
@@ -4464,7 +4464,7 @@
         </looks>
       </pointElement>
       <!--Villes 18-->
-      <pointElement id="e_Bourges" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Bourges" category="ca_Prefecture" importance="57">
         <name>
           <name language="fr" text="Bourges"/>
           <name language="en" text="Bourges"/>
@@ -4475,7 +4475,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vierzon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vierzon" category="ca_SousPrefecture" importance="169">
         <name>
           <name language="fr" text="Vierzon"/>
           <name language="en" text="Vierzon "/>
@@ -4486,7 +4486,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintAmandMontrond" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintAmandMontrond" category="ca_SousPrefecture" importance="83">
         <name>
           <name language="fr" text="Saint-Amand-Montrond"/>
           <name language="en" text="Saint-Amand-Montrond"/>
@@ -4498,7 +4498,7 @@
         </looks>
       </pointElement>
       <!--Villes 19-->
-      <pointElement id="e_Tulle" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Tulle" category="ca_Prefecture" importance="5">
         <name>
           <name language="fr" text="Tulle"/>
           <name language="en" text="Tulle"/>
@@ -4509,7 +4509,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BriveLaGaillarde" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_BriveLaGaillarde" category="ca_SousPrefecture" importance="201">
         <name>
           <name language="fr" text="Brive-la-Gaillarde"/>
           <name language="en" text="Brive-la-Gaillarde"/>
@@ -4520,7 +4520,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ussel" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Ussel" category="ca_SousPrefecture" importance="79">
         <name>
           <name language="fr" text="Ussel"/>
           <name language="en" text="Ussel"/>
@@ -4532,7 +4532,7 @@
         </looks>
       </pointElement>
       <!--Villes 2A-->
-      <pointElement id="e_Ajaccio" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Ajaccio" category="ca_Prefecture" importance="58">
         <name>
           <name language="fr" text="Ajaccio"/>
           <name language="en" text="Ajaccio"/>
@@ -4543,7 +4543,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sartene" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sartene" category="ca_SousPrefecture" importance="12">
         <name>
           <name language="fr" text="Sartène"/>
           <name language="en" text="Sartène"/>
@@ -4555,7 +4555,7 @@
         </looks>
       </pointElement>
       <!--Villes 2B-->
-      <pointElement id="e_Bastia" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Bastia" category="ca_Prefecture" importance="34">
         <name>
           <name language="fr" text="Bastia"/>
           <name language="en" text="Bastia"/>
@@ -4566,7 +4566,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Corte" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Corte" category="ca_SousPrefecture" importance="57">
         <name>
           <name language="fr" text="Corte"/>
           <name language="en" text="Corte"/>
@@ -4577,7 +4577,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Calvi" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Calvi" category="ca_SousPrefecture" importance="32">
         <name>
           <name language="fr" text="Calvi"/>
           <name language="en" text="Calvi"/>
@@ -4588,8 +4588,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <!--Villes 21-->
-      <pointElement id="e_Dijon" category="ca_Prefecture" importance="0">
+      <!--Villes 21-->
+      <pointElement id="e_Dijon" category="ca_Prefecture" importance="82">
         <name>
           <name language="fr" text="Dijon"/>
           <name language="en" text="Dijon"/>
@@ -4600,7 +4600,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Beaune" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Beaune" category="ca_SousPrefecture" importance="150">
         <name>
           <name language="fr" text="Beaune"/>
           <name language="en" text="Beaune"/>
@@ -4611,7 +4611,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montbard" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montbard" category="ca_SousPrefecture" importance="34">
         <name>
           <name language="fr" text="Montbard"/>
           <name language="en" text="Montbard"/>
@@ -4622,8 +4622,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <!--Villes 22-->
-      <pointElement id="e_SaintBrieuc" category="ca_Prefecture" importance="0">
+      <!--Villes 22-->
+      <pointElement id="e_SaintBrieuc" category="ca_Prefecture" importance="37">
         <name>
           <name language="fr" text="Saint-Brieuc"/>
           <name language="en" text="Saint-Brieuc"/>
@@ -4634,7 +4634,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lannion" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lannion" category="ca_SousPrefecture" importance="144">
         <name>
           <name language="fr" text="Lannion"/>
           <name language="en" text="Lannion"/>
@@ -4645,7 +4645,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dinan" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dinan" category="ca_SousPrefecture" importance="92">
         <name>
           <name language="fr" text="Dinan"/>
           <name language="en" text="Dinan"/>
@@ -4656,7 +4656,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <pointElement id="e_Guingamp" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Guingamp" category="ca_SousPrefecture" importance="52">
         <name>
           <name language="fr" text="Guingamp"/>
           <name language="en" text="Guingamp"/>
@@ -4667,8 +4667,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <!--Villes 23-->
-      <pointElement id="e_Gueret" category="ca_Prefecture" importance="0">
+      <!--Villes 23-->
+      <pointElement id="e_Gueret" category="ca_Prefecture" importance="4">
         <name>
           <name language="fr" text="Guéret"/>
           <name language="en" text="Guéret"/>
@@ -4679,7 +4679,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Aubusson" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Aubusson" category="ca_SousPrefecture" importance="16">
         <name>
           <name language="fr" text="Aubusson"/>
           <name language="en" text="Aubusson"/>
@@ -4690,8 +4690,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <!--Villes 24-->
-      <pointElement id="e_Perigueux" category="ca_Prefecture" importance="0">
+      <!--Villes 24-->
+      <pointElement id="e_Perigueux" category="ca_Prefecture" importance="20">
         <name>
           <name language="fr" text="Périgueux"/>
           <name language="en" text="Périgueux"/>
@@ -4702,7 +4702,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bergerac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bergerac" category="ca_SousPrefecture" importance="171">
         <name>
           <name language="fr" text="Bergerac"/>
           <name language="en" text="Bergerac"/>
@@ -4713,7 +4713,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SarlatLaCaneda" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SarlatLaCaneda" category="ca_SousPrefecture" importance="77">
         <name>
           <name language="fr" text="Sarlat-la-Canéda"/>
           <name language="en" text="Sarlat-la-Canéda"/>
@@ -4724,7 +4724,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Nontron" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Nontron" category="ca_SousPrefecture" importance="11">
         <name>
           <name language="fr" text="Nontron"/>
           <name language="en" text="Nontron"/>
@@ -4735,8 +4735,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-    <!--Villes 25-->
-      <pointElement id="e_Besancon" category="ca_Prefecture" importance="0">
+      <!--Villes 25-->
+      <pointElement id="e_Besancon" category="ca_Prefecture" importance="71">
         <name>
           <name language="fr" text="Besançon"/>
           <name language="en" text="Besançon"/>
@@ -4747,7 +4747,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montbeliard" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montbeliard" category="ca_SousPrefecture" importance="167">
         <name>
           <name language="fr" text="Montbéliard"/>
           <name language="en" text="Montbéliard"/>
@@ -4758,7 +4758,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pontarlier" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Pontarlier" category="ca_SousPrefecture" importance="131">
         <name>
           <name language="fr" text="Pontarlier"/>
           <name language="en" text="Pontarlier"/>
@@ -4770,7 +4770,7 @@
         </looks>
       </pointElement>
       <!--Villes 26-->
-      <pointElement id="e_Valence" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Valence" category="ca_Prefecture" importance="54">
         <name>
           <name language="fr" text="Valence"/>
           <name language="en" text="Valence"/>
@@ -4781,7 +4781,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Nyons" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Nyons" category="ca_SousPrefecture" importance="47">
         <name>
           <name language="fr" text="Nyons"/>
           <name language="en" text="Nyons"/>
@@ -4792,7 +4792,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Die" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Die" category="ca_SousPrefecture" importance="26">
         <name>
           <name language="fr" text="Die"/>
           <name language="en" text="Die"/>
@@ -4803,7 +4803,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montelimar" category="ca_Ville" importance="0">
+      <pointElement id="e_Montelimar" category="ca_Ville" importance="13">
         <name>
           <name language="fr" text="Montélimar"/>
           <name language="en" text="Montélimar"/>
@@ -4814,7 +4814,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_RomansSurIsere" category="ca_Ville" importance="0">
+      <pointElement id="e_RomansSurIsere" category="ca_Ville" importance="9">
         <name>
           <name language="fr" text="Romans-sur-Isère"/>
           <name language="en" text="Romans-sur-Isère"/>
@@ -4826,7 +4826,7 @@
         </looks>
       </pointElement>
       <!--Villes 27-->
-      <pointElement id="e_Evreux" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Evreux" category="ca_Prefecture" importance="41">
         <name>
           <name language="fr" text="Évreux"/>
           <name language="en" text="Évreux"/>
@@ -4837,7 +4837,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bernay" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bernay" category="ca_SousPrefecture" importance="87">
         <name>
           <name language="fr" text="Bernay"/>
           <name language="en" text="Bernay"/>
@@ -4848,7 +4848,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Andelys" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Andelys" category="ca_SousPrefecture" importance="70">
         <name>
           <name language="fr" text="Les Andelys"/>
           <name language="en" text="Les Andelys"/>
@@ -4860,7 +4860,7 @@
         </looks>
       </pointElement>
       <!--Villes 28-->
-      <pointElement id="e_Chartres" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Chartres" category="ca_Prefecture" importance="27">
         <name>
           <name language="fr" text="Chartres"/>
           <name language="en" text="Chartres"/>
@@ -4871,7 +4871,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dreux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dreux" category="ca_SousPrefecture" importance="177">
         <name>
           <name language="fr" text="Dreux"/>
           <name language="en" text="Dreux"/>
@@ -4882,7 +4882,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chateaudun" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chateaudun" category="ca_SousPrefecture" importance="109">
         <name>
           <name language="fr" text="Châteaudun"/>
           <name language="en" text="Châteaudun"/>
@@ -4893,7 +4893,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_NogentLeRotrou" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_NogentLeRotrou" category="ca_SousPrefecture" importance="82">
         <name>
           <name language="fr" text="Nogent-le-Rotrou"/>
           <name language="en" text="Nogent-le-Rotrou"/>
@@ -4905,7 +4905,7 @@
         </looks>
       </pointElement>
       <!--Villes 29-->
-      <pointElement id="e_Quimper" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Quimper" category="ca_Prefecture" importance="56">
         <name>
           <name language="fr" text="Quimper"/>
           <name language="en" text="Quimper"/>
@@ -4916,7 +4916,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Brest" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Brest" category="ca_SousPrefecture" importance="221">
         <name>
           <name language="fr" text="Brest"/>
           <name language="en" text="Brest"/>
@@ -4927,7 +4927,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Morlaix" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Morlaix" category="ca_SousPrefecture" importance="123">
         <name>
           <name language="fr" text="Morlaix"/>
           <name language="en" text="Morlaix"/>
@@ -4938,7 +4938,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chateaulin" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chateaulin" category="ca_SousPrefecture" importance="31">
         <name>
           <name language="fr" text="Châteaulin"/>
           <name language="en" text="Châteaulin"/>
@@ -4950,7 +4950,7 @@
         </looks>
       </pointElement>
       <!--Villes 30-->
-      <pointElement id="e_Nimes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nimes" category="ca_Prefecture" importance="81">
         <name>
           <name language="fr" text="Nîmes"/>
           <name language="en" text="Nîmes"/>
@@ -4961,7 +4961,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ales" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Ales" category="ca_SousPrefecture" importance="189">
         <name>
           <name language="fr" text="Alès"/>
           <name language="en" text="Alès"/>
@@ -4972,7 +4972,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vigan" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vigan" category="ca_SousPrefecture" importance="20">
         <name>
           <name language="fr" text="Le Vigan"/>
           <name language="en" text="Le Vigan"/>
@@ -4984,7 +4984,7 @@
         </looks>
       </pointElement>
       <!--Villes 31-->
-      <pointElement id="e_Toulouse" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Toulouse" category="ca_Prefecture" importance="93">
         <name>
           <name language="fr" text="Toulouse"/>
           <name language="en" text="Toulouse"/>
@@ -4995,7 +4995,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Muret" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Muret" category="ca_SousPrefecture" importance="161">
         <name>
           <name language="fr" text="Muret"/>
           <name language="en" text="Muret"/>
@@ -5006,7 +5006,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintGaudens" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintGaudens" category="ca_SousPrefecture" importance="94">
         <name>
           <name language="fr" text="Saint-Gaudens"/>
           <name language="en" text="Saint-Gaudens"/>
@@ -5017,7 +5017,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Colomiers" category="ca_Ville" importance="0">
+      <pointElement id="e_Colomiers" category="ca_Ville" importance="7">
         <name>
           <name language="fr" text="Colomiers"/>
           <name language="en" text="Colomiers"/>
@@ -5029,7 +5029,7 @@
         </looks>
       </pointElement>
       <!--Villes 32-->
-      <pointElement id="e_Auch" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Auch" category="ca_Prefecture" importance="14">
         <name>
           <name language="fr" text="Auch"/>
           <name language="en" text="Auch"/>
@@ -5040,7 +5040,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Condom" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Condom" category="ca_SousPrefecture" importance="51">
         <name>
           <name language="fr" text="Condom"/>
           <name language="en" text="Condom"/>
@@ -5051,7 +5051,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Mirande" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Mirande" category="ca_SousPrefecture" importance="14">
         <name>
           <name language="fr" text="Mirande"/>
           <name language="en" text="Mirande"/>
@@ -5063,7 +5063,7 @@
         </looks>
       </pointElement>
       <!--Villes 33-->
-      <pointElement id="e_Bordeaux" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Bordeaux" category="ca_Prefecture" importance="88">
         <name>
           <name language="fr" text="Bordeaux"/>
           <name language="en" text="Bordeaux"/>
@@ -5074,7 +5074,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Libourne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Libourne" category="ca_SousPrefecture" importance="160">
         <name>
           <name language="fr" text="Libourne"/>
           <name language="en" text="Libourne"/>
@@ -5085,7 +5085,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Arcachon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Arcachon" category="ca_SousPrefecture" importance="86">
         <name>
           <name language="fr" text="Arcachon"/>
           <name language="en" text="Arcachon"/>
@@ -5096,7 +5096,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Langon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Langon" category="ca_SousPrefecture" importance="59">
         <name>
           <name language="fr" text="Langon"/>
           <name language="en" text="Langon"/>
@@ -5107,7 +5107,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_LesparreMedoc" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_LesparreMedoc" category="ca_SousPrefecture" importance="35">
         <name>
           <name language="fr" text="Lesparre-Médoc"/>
           <name language="en" text="Lesparre-Médoc"/>
@@ -5118,7 +5118,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Blaye" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Blaye" category="ca_SousPrefecture" importance="28">
         <name>
           <name language="fr" text="Blaye"/>
           <name language="en" text="Blaye"/>
@@ -5129,7 +5129,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Merignac" category="ca_Ville" importance="0">
+      <pointElement id="e_Merignac" category="ca_Ville" importance="41">
         <name>
           <name language="fr" text="Mérignac"/>
           <name language="en" text="Mérignac"/>
@@ -5140,7 +5140,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pessac" category="ca_Ville" importance="0">
+      <pointElement id="e_Pessac" category="ca_Ville" importance="37">
         <name>
           <name language="fr" text="Pessac"/>
           <name language="en" text="Pessac"/>
@@ -5151,7 +5151,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Talence" category="ca_Ville" importance="0">
+      <pointElement id="e_Talence" category="ca_Ville" importance="24">
         <name>
           <name language="fr" text="Talence"/>
           <name language="en" text="Talence"/>
@@ -5163,7 +5163,7 @@
         </looks>
       </pointElement>
       <!--Villes 34-->
-      <pointElement id="e_Montpellier" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Montpellier" category="ca_Prefecture" importance="89">
         <name>
           <name language="fr" text="Montpellier"/>
           <name language="en" text="Montpellier"/>
@@ -5174,7 +5174,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Beziers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Beziers" category="ca_SousPrefecture" importance="213">
         <name>
           <name language="fr" text="Béziers"/>
           <name language="en" text="Béziers"/>
@@ -5185,7 +5185,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lodeve" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lodeve" category="ca_SousPrefecture" importance="58">
         <name>
           <name language="fr" text="Lodève"/>
           <name language="en" text="Lodève"/>
@@ -5196,7 +5196,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sete" category="ca_Ville" importance="0">
+      <pointElement id="e_Sete" category="ca_Ville" importance="28">
         <name>
           <name language="fr" text="Sète"/>
           <name language="en" text="Sète"/>
@@ -5207,7 +5207,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Agde" category="ca_Ville" importance="0">
+      <pointElement id="e_Agde" category="ca_Ville" importance="2">
         <name>
           <name language="fr" text="Agde"/>
           <name language="en" text="Agde"/>
@@ -5219,7 +5219,7 @@
         </looks>
       </pointElement>
       <!--Villes 35-->
-      <pointElement id="e_Rennes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Rennes" category="ca_Prefecture" importance="86">
         <name>
           <name language="fr" text="Rennes"/>
           <name language="en" text="Rennes"/>
@@ -5230,7 +5230,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintMalo" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintMalo" category="ca_SousPrefecture" importance="200">
         <name>
           <name language="fr" text="Saint-Malo"/>
           <name language="en" text="Saint-Malo"/>
@@ -5241,7 +5241,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Fougeres" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Fougeres" category="ca_SousPrefecture" importance="145">
         <name>
           <name language="fr" text="Fougères"/>
           <name language="en" text="Fougères"/>
@@ -5252,7 +5252,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Redon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Redon" category="ca_SousPrefecture" importance="74">
         <name>
           <name language="fr" text="Redon"/>
           <name language="en" text="Redon"/>
@@ -5264,7 +5264,7 @@
         </looks>
       </pointElement>
       <!--Villes 36-->
-      <pointElement id="e_Chateauroux" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Chateauroux" category="ca_Prefecture" importance="35">
         <name>
           <name language="fr" text="Châteauroux"/>
           <name language="en" text="Châteauroux"/>
@@ -5275,7 +5275,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Issoudun" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Issoudun" category="ca_SousPrefecture" importance="102">
         <name>
           <name language="fr" text="Issoudun"/>
           <name language="en" text="Issoudun"/>
@@ -5286,7 +5286,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Blanc" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Blanc" category="ca_SousPrefecture" importance="46">
         <name>
           <name language="fr" text="Le Blanc"/>
           <name language="en" text="Le Blanc"/>
@@ -5297,7 +5297,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chatre" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chatre" category="ca_SousPrefecture" importance="23">
         <name>
           <name language="fr" text="La Châtre"/>
           <name language="en" text="La Châtre"/>
@@ -5309,7 +5309,7 @@
         </looks>
       </pointElement>
       <!--Villes 37-->
-      <pointElement id="e_Tours" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Tours" category="ca_Prefecture" importance="77">
         <name>
           <name language="fr" text="Tours"/>
           <name language="en" text="Tours"/>
@@ -5320,7 +5320,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chinon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chinon" category="ca_SousPrefecture" importance="69">
         <name>
           <name language="fr" text="Chinon"/>
           <name language="en" text="Chinon"/>
@@ -5331,7 +5331,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Loches" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Loches" category="ca_SousPrefecture" importance="43">
         <name>
           <name language="fr" text="Loches"/>
           <name language="en" text="Loches"/>
@@ -5342,7 +5342,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_JoueLesTours" category="ca_Ville" importance="0">
+      <pointElement id="e_JoueLesTours" category="ca_Ville" importance="17">
         <name>
           <name language="fr" text="Joué-lès-Tours"/>
           <name language="en" text="Joué-lès-Tours"/>
@@ -5354,7 +5354,7 @@
         </looks>
       </pointElement>
       <!--Villes 38-->
-      <pointElement id="e_Grenoble" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Grenoble" category="ca_Prefecture" importance="83">
         <name>
           <name language="fr" text="Grenoble"/>
           <name language="en" text="Grenoble"/>
@@ -5365,7 +5365,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vienne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vienne" category="ca_SousPrefecture" importance="174">
         <name>
           <name language="fr" text="Vienne"/>
           <name language="en" text="Vienne"/>
@@ -5376,7 +5376,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_TourDuPin" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_TourDuPin" category="ca_SousPrefecture" importance="68">
         <name>
           <name language="fr" text="La Tour-du-Pin"/>
           <name language="en" text="La Tour-du-Pin"/>
@@ -5387,7 +5387,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Echirolles" category="ca_Ville" importance="0">
+      <pointElement id="e_Echirolles" category="ca_Ville" importance="16">
         <name>
           <name language="fr" text="Échirolles"/>
           <name language="en" text="Échirolles"/>
@@ -5398,7 +5398,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintMartinHeres" category="ca_Ville" importance="0">
+      <pointElement id="e_SaintMartinHeres" category="ca_Ville" importance="15">
         <name>
           <name language="fr" text="Saint-Martin-d'Hères"/>
           <name language="en" text="Saint-Martin-d'Hères"/>
@@ -5410,7 +5410,7 @@
         </looks>
       </pointElement>
       <!--Villes 39-->
-      <pointElement id="e_LonsLeSaunier" category="ca_Prefecture" importance="0">
+      <pointElement id="e_LonsLeSaunier" category="ca_Prefecture" importance="9">
         <name>
           <name language="fr" text="Lons-le-Saunier"/>
           <name language="en" text="Lons-le-Saunier"/>
@@ -5421,7 +5421,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dole" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dole" category="ca_SousPrefecture" importance="155">
         <name>
           <name language="fr" text="Dole"/>
           <name language="en" text="Dole"/>
@@ -5432,7 +5432,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintClaude" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintClaude" category="ca_SousPrefecture" importance="81">
         <name>
           <name language="fr" text="Saint-Claude"/>
           <name language="en" text="Saint-Claude"/>
@@ -5444,7 +5444,7 @@
         </looks>
       </pointElement>
       <!--Villes 40-->
-      <pointElement id="e_MontDeMarsan" category="ca_Prefecture" importance="0">
+      <pointElement id="e_MontDeMarsan" category="ca_Prefecture" importance="21">
         <name>
           <name language="fr" text="Mont-de-Marsan"/>
           <name language="en" text="Mont-de-Marsan"/>
@@ -5455,7 +5455,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dax" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dax" category="ca_SousPrefecture" importance="147">
         <name>
           <name language="fr" text="Dax"/>
           <name language="en" text="Dax"/>
@@ -5467,7 +5467,7 @@
         </looks>
       </pointElement>
       <!--Villes 41-->
-      <pointElement id="e_Blois" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Blois" category="ca_Prefecture" importance="39">
         <name>
           <name language="fr" text="Blois"/>
           <name language="en" text="Blois"/>
@@ -5478,7 +5478,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_RomorantinLanthenay" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_RomorantinLanthenay" category="ca_SousPrefecture" importance="132">
         <name>
           <name language="fr" text="Romorantin-Lanthenay"/>
           <name language="en" text="Romorantin-Lanthenay"/>
@@ -5489,7 +5489,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Vendome" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Vendome" category="ca_SousPrefecture" importance="130">
         <name>
           <name language="fr" text="Vendôme"/>
           <name language="en" text="Vendôme"/>
@@ -5501,7 +5501,7 @@
         </looks>
       </pointElement>
       <!--Villes 42-->
-      <pointElement id="e_SaintEtienne" category="ca_Prefecture" importance="0">
+      <pointElement id="e_SaintEtienne" category="ca_Prefecture" importance="85">
         <name>
           <name language="fr" text="Saint-Étienne"/>
           <name language="en" text="Saint-Étienne"/>
@@ -5512,7 +5512,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Roanne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Roanne" category="ca_SousPrefecture" importance="185">
         <name>
           <name language="fr" text="Roanne"/>
           <name language="en" text="Roanne"/>
@@ -5523,7 +5523,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montbrison" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montbrison" category="ca_SousPrefecture" importance="127">
         <name>
           <name language="fr" text="Montbrison"/>
           <name language="en" text="Montbrison"/>
@@ -5534,7 +5534,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintChamond" category="ca_Ville" importance="0">
+      <pointElement id="e_SaintChamond" category="ca_Ville" importance="14">
         <name>
           <name language="fr" text="Saint-Chamond"/>
           <name language="en" text="Saint-Chamond"/>
@@ -5546,7 +5546,7 @@
         </looks>
       </pointElement>
       <!--Villes 43-->
-      <pointElement id="e_PuyEnVelay" category="ca_Prefecture" importance="0">
+      <pointElement id="e_PuyEnVelay" category="ca_Prefecture" importance="10">
         <name>
           <name language="fr" text="Le Puy-en-Velay"/>
           <name language="en" text="Le Puy-en-Velay"/>
@@ -5557,7 +5557,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Yssingeaux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Yssingeaux" category="ca_SousPrefecture" importance="55">
         <name>
           <name language="fr" text="Yssingeaux"/>
           <name language="en" text="Yssingeaux"/>
@@ -5568,7 +5568,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Brioude" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Brioude" category="ca_SousPrefecture" importance="49">
         <name>
           <name language="fr" text="Brioude"/>
           <name language="en" text="Brioude"/>
@@ -5580,7 +5580,7 @@
         </looks>
       </pointElement>
       <!--Villes 44-->
-      <pointElement id="e_Nantes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nantes" category="ca_Prefecture" importance="91">
         <name>
           <name language="fr" text="Nantes"/>
           <name language="en" text="Nantes"/>
@@ -5591,7 +5591,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintNazaire" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintNazaire" category="ca_SousPrefecture" importance="212">
         <name>
           <name language="fr" text="Saint-Nazaire"/>
           <name language="en" text="Saint-Nazaire"/>
@@ -5602,7 +5602,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chateaubriant" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chateaubriant" category="ca_SousPrefecture" importance="101">
         <name>
           <name language="fr" text="Châteaubriant"/>
           <name language="en" text="Châteaubriant"/>
@@ -5613,7 +5613,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ancenis" category="ca_SousPrefecture" importance="0">
+      <!--Ancenis n'est plus une sous-préfecture depuis 2017-->
+      <!--<pointElement id="e_Ancenis" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Ancenis"/>
           <name language="en" text="Ancenis"/>
@@ -5623,8 +5624,8 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
-      <pointElement id="e_SaintHerblain" category="ca_Ville" importance="0">
+      </pointElement>-->
+      <pointElement id="e_SaintHerblain" category="ca_Ville" importance="29">
         <name>
           <name language="fr" text="Saint-Herblain"/>
           <name language="en" text="Saint-Herblain"/>
@@ -5635,7 +5636,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Reze" category="ca_Ville" importance="0">
+      <pointElement id="e_Reze" category="ca_Ville" importance="21">
         <name>
           <name language="fr" text="Rezé"/>
           <name language="en" text="Rezé"/>
@@ -5647,7 +5648,7 @@
         </looks>
       </pointElement>
       <!--Villes 45-->
-      <pointElement id="e_Orleans" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Orleans" category="ca_Prefecture" importance="70">
         <name>
           <name language="fr" text="Orléans"/>
           <name language="en" text="Orléans"/>
@@ -5658,7 +5659,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montargis" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montargis" category="ca_SousPrefecture" importance="116">
         <name>
           <name language="fr" text="Montargis"/>
           <name language="en" text="Montargis"/>
@@ -5669,7 +5670,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pithiviers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Pithiviers" category="ca_SousPrefecture" importance="76">
         <name>
           <name language="fr" text="Pithiviers"/>
           <name language="en" text="Pithiviers"/>
@@ -5681,7 +5682,7 @@
         </looks>
       </pointElement>
       <!--Villes 46-->
-      <pointElement id="e_Cahors" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Cahors" category="ca_Prefecture" importance="12">
         <name>
           <name language="fr" text="Cahors"/>
           <name language="en" text="Cahors"/>
@@ -5692,7 +5693,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Figeac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Figeac" category="ca_SousPrefecture" importance="80">
         <name>
           <name language="fr" text="Figeac"/>
           <name language="en" text="Figeac"/>
@@ -5703,7 +5704,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Gourdon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Gourdon" category="ca_SousPrefecture" importance="24">
         <name>
           <name language="fr" text="Gourdon"/>
           <name language="en" text="Gourdon"/>
@@ -5715,7 +5716,7 @@
         </looks>
       </pointElement>
       <!--Villes 47-->
-      <pointElement id="e_Agen" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Agen" category="ca_Prefecture" importance="24">
         <name>
           <name language="fr" text="Agen"/>
           <name language="en" text="Agen"/>
@@ -5726,7 +5727,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VilleneuveSurLot" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_VilleneuveSurLot" category="ca_SousPrefecture" importance="154">
         <name>
           <name language="fr" text="Villeneuve-sur-Lot"/>
           <name language="en" text="Villeneuve-sur-Lot"/>
@@ -5737,7 +5738,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Marmande" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Marmande" category="ca_SousPrefecture" importance="134">
         <name>
           <name language="fr" text="Marmande"/>
           <name language="en" text="Marmande"/>
@@ -5748,7 +5749,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Nerac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Nerac" category="ca_SousPrefecture" importance="54">
         <name>
           <name language="fr" text="Nérac"/>
           <name language="en" text="Nérac"/>
@@ -5760,7 +5761,7 @@
         </looks>
       </pointElement>
       <!--Villes 48-->
-      <pointElement id="e_Mende" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Mende" category="ca_Prefecture" importance="3">
         <name>
           <name language="fr" text="Mende"/>
           <name language="en" text="Mende"/>
@@ -5771,10 +5772,10 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Florac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Florac" category="ca_SousPrefecture" importance="4">
         <name>
-          <name language="fr" text="Florac"/>
-          <name language="en" text="Florac"/>
+          <name language="fr" text="Florac Trois Rivières"/>
+          <name language="en" text="Florac Trois Rivières"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture1"/>
@@ -5783,7 +5784,7 @@
         </looks>
       </pointElement>
       <!--Villes 49-->
-      <pointElement id="e_Angers" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Angers" category="ca_Prefecture" importance="80">
         <name>
           <name language="fr" text="Angers"/>
           <name language="en" text="Angers"/>
@@ -5794,7 +5795,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cholet" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Cholet" category="ca_SousPrefecture" importance="207">
         <name>
           <name language="fr" text="Cholet"/>
           <name language="en" text="Cholet"/>
@@ -5805,7 +5806,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Saumur" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Saumur" category="ca_SousPrefecture" importance="170">
         <name>
           <name language="fr" text="Saumur"/>
           <name language="en" text="Saumur"/>
@@ -5816,10 +5817,10 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Segre" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Segre" category="ca_SousPrefecture" importance="133">
         <name>
-          <name language="fr" text="Segré"/>
-          <name language="en" text="Segré"/>
+          <name language="fr" text="Segré-en-Anjou Bleu"/>
+          <name language="en" text="Segré-en-Anjou Bleu"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture1"/>
@@ -5828,7 +5829,7 @@
         </looks>
       </pointElement>
       <!--Villes 50-->
-      <pointElement id="e_SaintLo" category="ca_Prefecture" importance="0">
+      <pointElement id="e_SaintLo" category="ca_Prefecture" importance="11">
         <name>
           <name language="fr" text="Saint-Lô"/>
           <name language="en" text="Saint-Lô"/>
@@ -5839,10 +5840,10 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_CherbourgOcteville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_CherbourgOcteville" category="ca_SousPrefecture" importance="215">
         <name>
-          <name language="fr" text="Cherbourg-Octeville"/>
-          <name language="en" text="Cherbourg-Octeville"/>
+          <name language="fr" text="Cherbourg-en-Cotentin"/>
+          <name language="en" text="Cherbourg-en-Cotentin"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture1"/>
@@ -5850,7 +5851,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Coutances" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Coutances" category="ca_SousPrefecture" importance="73">
         <name>
           <name language="fr" text="Coutances"/>
           <name language="en" text="Coutances"/>
@@ -5861,7 +5862,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Avranches" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Avranches" category="ca_SousPrefecture" importance="64">
         <name>
           <name language="fr" text="Avranches"/>
           <name language="en" text="Avranches"/>
@@ -5873,7 +5874,7 @@
         </looks>
       </pointElement>
       <!--Villes 51-->
-      <pointElement id="e_ChalonsEnChampagne" category="ca_Prefecture" importance="0">
+      <pointElement id="e_ChalonsEnChampagne" category="ca_Prefecture" importance="36">
         <name>
           <name language="fr" text="Châlons-en-Champagne"/>
           <name language="en" text="Châlons-en-Champagne"/>
@@ -5884,7 +5885,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Reims" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Reims" category="ca_SousPrefecture" importance="224">
         <name>
           <name language="fr" text="Reims"/>
           <name language="en" text="Reims"/>
@@ -5895,7 +5896,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Epernay" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Epernay" category="ca_SousPrefecture" importance="153">
         <name>
           <name language="fr" text="Épernay"/>
           <name language="en" text="Épernay"/>
@@ -5906,7 +5907,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VitryLeFrancois" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_VitryLeFrancois" category="ca_SousPrefecture" importance="107">
         <name>
           <name language="fr" text="Vitry-le-François"/>
           <name language="en" text="Vitry-le-François"/>
@@ -5917,7 +5918,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SainteMenehould" category="ca_SousPrefecture" importance="0">
+      <!--Sainte-Menehould n'est plus une sous-préfecture depuis 2017-->
+      <!--<pointElement id="e_SainteMenehould" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Sainte-Menehould"/>
           <name language="en" text="Sainte-Menehould"/>
@@ -5927,9 +5929,9 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
+      </pointElement>-->
       <!--Villes 52-->
-      <pointElement id="e_Chaumont" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Chaumont" category="ca_Prefecture" importance="15">
         <name>
           <name language="fr" text="Chaumont"/>
           <name language="en" text="Chaumont"/>
@@ -5940,7 +5942,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintDizier" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintDizier" category="ca_SousPrefecture" importance="165">
         <name>
           <name language="fr" text="Saint-Dizier"/>
           <name language="en" text="Saint-Dizier"/>
@@ -5951,7 +5953,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Langres" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Langres" category="ca_SousPrefecture" importance="65">
         <name>
           <name language="fr" text="Langres"/>
           <name language="en" text="Langres"/>
@@ -5963,7 +5965,7 @@
         </looks>
       </pointElement>
       <!--Villes 53-->
-      <pointElement id="e_Laval" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Laval" category="ca_Prefecture" importance="44">
         <name>
           <name language="fr" text="Laval"/>
           <name language="en" text="Laval"/>
@@ -5974,7 +5976,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Mayenne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Mayenne" category="ca_SousPrefecture" importance="106">
         <name>
           <name language="fr" text="Mayenne"/>
           <name language="en" text="Mayenne"/>
@@ -5985,7 +5987,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChateauGontier" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ChateauGontier" category="ca_SousPrefecture" importance="96">
         <name>
           <name language="fr" text="Château-Gontier"/>
           <name language="en" text="Château-Gontier"/>
@@ -5997,7 +5999,7 @@
         </looks>
       </pointElement>
       <!--Villes 54-->
-      <pointElement id="e_Nancy" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nancy" category="ca_Prefecture" importance="67">
         <name>
           <name language="fr" text="Nancy"/>
           <name language="en" text="Nancy"/>
@@ -6008,7 +6010,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Luneville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Luneville" category="ca_SousPrefecture" importance="142">
         <name>
           <name language="fr" text="Lunéville"/>
           <name language="en" text="Lunéville"/>
@@ -6019,7 +6021,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Toul" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Toul" category="ca_SousPrefecture" importance="128">
         <name>
           <name language="fr" text="Toul"/>
           <name language="en" text="Toul"/>
@@ -6030,10 +6032,10 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Briey" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Briey" category="ca_SousPrefecture" importance="71">
         <name>
-          <name language="fr" text="Briey"/>
-          <name language="en" text="Briey"/>
+          <name language="fr" text="Val de Briey"/>
+          <name language="en" text="Val de Briey"/>
         </name>
         <looks>
           <look id="tl_SousPrefecture1"/>
@@ -6041,7 +6043,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VandoeuvreLesNancy" category="ca_Ville" importance="0">
+      <pointElement id="e_VandoeuvreLesNancy" category="ca_Ville" importance="4">
         <name>
           <name language="fr" text="Vandœuvre-lès-Nancy"/>
           <name language="en" text="Vandœuvre-lès-Nancy"/>
@@ -6052,8 +6054,8 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-    <!--Villes 55-->
-      <pointElement id="e_BarLeDuc" category="ca_Prefecture" importance="0">
+      <!--Villes 55-->
+      <pointElement id="e_BarLeDuc" category="ca_Prefecture" importance="7">
         <name>
           <name language="fr" text="Bar-le-Duc"/>
           <name language="en" text="Bar-le-Duc"/>
@@ -6064,7 +6066,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Verdun" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Verdun" category="ca_SousPrefecture" importance="137">
         <name>
           <name language="fr" text="Verdun"/>
           <name language="en" text="Verdun"/>
@@ -6075,7 +6077,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Commercy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Commercy" category="ca_SousPrefecture" importance="37">
         <name>
           <name language="fr" text="Commercy"/>
           <name language="en" text="Commercy"/>
@@ -6087,7 +6089,7 @@
         </looks>
       </pointElement>
       <!--Villes 56-->
-      <pointElement id="e_Vannes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Vannes" category="ca_Prefecture" importance="46">
         <name>
           <name language="fr" text="Vannes"/>
           <name language="en" text="Vannes"/>
@@ -6098,7 +6100,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lorient" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lorient" category="ca_SousPrefecture" importance="210">
         <name>
           <name language="fr" text="Lorient"/>
           <name language="en" text="Lorient"/>
@@ -6109,7 +6111,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Pontivy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Pontivy" category="ca_SousPrefecture" importance="114">
         <name>
           <name language="fr" text="Pontivy"/>
           <name language="en" text="Pontivy"/>
@@ -6121,7 +6123,7 @@
         </looks>
       </pointElement>
       <!--Villes 57-->
-      <pointElement id="e_Metz" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Metz" category="ca_Prefecture" importance="72">
         <name>
           <name language="fr" text="Metz"/>
           <name language="en" text="Metz"/>
@@ -6132,7 +6134,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Thionville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Thionville" category="ca_SousPrefecture" importance="193">
         <name>
           <name language="fr" text="Thionville"/>
           <name language="en" text="Thionville"/>
@@ -6143,7 +6145,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Forbach" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Forbach" category="ca_SousPrefecture" importance="151">
         <name>
           <name language="fr" text="Forbach"/>
           <name language="en" text="Forbach"/>
@@ -6154,7 +6156,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sarreguemines" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sarreguemines" category="ca_SousPrefecture" importance="149">
         <name>
           <name language="fr" text="Sarreguemines"/>
           <name language="en" text="Sarreguemines"/>
@@ -6165,7 +6167,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sarrebourg" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sarrebourg" category="ca_SousPrefecture" importance="103">
         <name>
           <name language="fr" text="Sarrebourg"/>
           <name language="en" text="Sarrebourg"/>
@@ -6176,7 +6178,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BoulayMoselle" category="ca_SousPrefecture" importance="0">
+      <!--Boulay-Moselle et Château-Salins ne sont plus des sous-préfectures depuis 2015-->
+      <!--<pointElement id="e_BoulayMoselle" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Boulay-Moselle"/>
           <name language="en" text="Boulay-Moselle"/>
@@ -6197,9 +6200,9 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
+      </pointElement>-->
       <!--Villes 58-->
-      <pointElement id="e_Nevers" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nevers" category="ca_Prefecture" importance="25">
         <name>
           <name language="fr" text="Nevers"/>
           <name language="en" text="Nevers"/>
@@ -6210,7 +6213,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_CosneCoursSurLoire" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_CosneCoursSurLoire" category="ca_SousPrefecture" importance="89">
         <name>
           <name language="fr" text="Cosne-Cours-sur-Loire"/>
           <name language="en" text="Cosne-Cours-sur-Loire"/>
@@ -6221,7 +6224,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Clamecy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Clamecy" category="ca_SousPrefecture" importance="19">
         <name>
           <name language="fr" text="Clamecy"/>
           <name language="en" text="Clamecy"/>
@@ -6232,7 +6235,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChateauChinon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ChateauChinon" category="ca_SousPrefecture" importance="3">
         <name>
           <name language="fr" text="Château-Chinon"/>
           <name language="en" text="Château-Chinon"/>
@@ -6244,7 +6247,7 @@
         </looks>
       </pointElement>
       <!--Villes 59-->
-      <pointElement id="e_Lille" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Lille" category="ca_Prefecture" importance="87">
         <name>
           <name language="fr" text="Lille"/>
           <name language="en" text="Lille"/>
@@ -6255,7 +6258,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dunkerque" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dunkerque" category="ca_SousPrefecture" importance="216">
         <name>
           <name language="fr" text="Dunkerque"/>
           <name language="en" text="Dunkerque"/>
@@ -6266,7 +6269,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Valenciennes" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Valenciennes" category="ca_SousPrefecture" importance="197">
         <name>
           <name language="fr" text="Valenciennes"/>
           <name language="en" text="Valenciennes"/>
@@ -6277,7 +6280,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Douai" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Douai" category="ca_SousPrefecture" importance="192">
         <name>
           <name language="fr" text="Douai"/>
           <name language="en" text="Douai"/>
@@ -6288,7 +6291,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cambrai" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Cambrai" category="ca_SousPrefecture" importance="182">
         <name>
           <name language="fr" text="Cambrai"/>
           <name language="en" text="Cambrai"/>
@@ -6299,7 +6302,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_AvesnesSurHelpe" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_AvesnesSurHelpe" category="ca_SousPrefecture" importance="27">
         <name>
           <name language="fr" text="Avesnes-sur-Helpe"/>
           <name language="en" text="Avesnes-sur-Helpe"/>
@@ -6310,7 +6313,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Roubaix" category="ca_Ville" importance="0">
+      <pointElement id="e_Roubaix" category="ca_Ville" importance="53">
         <name>
           <name language="fr" text="Roubaix"/>
           <name language="en" text="Roubaix"/>
@@ -6321,7 +6324,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Tourcoing" category="ca_Ville" importance="0">
+      <pointElement id="e_Tourcoing" category="ca_Ville" importance="52">
         <name>
           <name language="fr" text="Tourcoing"/>
           <name language="en" text="Tourcoing"/>
@@ -6332,7 +6335,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VilleneuveAscq" category="ca_Ville" importance="0">
+      <pointElement id="e_VilleneuveAscq" category="ca_Ville" importance="40">
         <name>
           <name language="fr" text="Villeneuve-d'Ascq"/>
           <name language="en" text="Villeneuve-d'Ascq"/>
@@ -6344,7 +6347,7 @@
         </looks>
       </pointElement>
       <!--Villes 60-->
-      <pointElement id="e_Beauvais" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Beauvais" category="ca_Prefecture" importance="49">
         <name>
           <name language="fr" text="Beauvais"/>
           <name language="en" text="Beauvais"/>
@@ -6355,7 +6358,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Compiegne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Compiegne" category="ca_SousPrefecture" importance="191">
         <name>
           <name language="fr" text="Compiègne"/>
           <name language="en" text="Compiègne"/>
@@ -6366,7 +6369,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Senlis" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Senlis" category="ca_SousPrefecture" importance="125">
         <name>
           <name language="fr" text="Senlis"/>
           <name language="en" text="Senlis"/>
@@ -6377,7 +6380,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Clermont" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Clermont" category="ca_SousPrefecture" importance="88">
         <name>
           <name language="fr" text="Clermont"/>
           <name language="en" text="Clermont"/>
@@ -6388,7 +6391,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Creil" category="ca_Ville" importance="0">
+      <pointElement id="e_Creil" category="ca_Ville" importance="10">
         <name>
           <name language="fr" text="Creil"/>
           <name language="en" text="Creil"/>
@@ -6400,7 +6403,7 @@
         </looks>
       </pointElement>
       <!--Villes 61-->
-      <pointElement id="e_Alencon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Alencon" category="ca_Prefecture" importance="18">
         <name>
           <name language="fr" text="Alençon"/>
           <name language="en" text="Alençon"/>
@@ -6411,7 +6414,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Argentan" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Argentan" category="ca_SousPrefecture" importance="115">
         <name>
           <name language="fr" text="Argentan"/>
           <name language="en" text="Argentan"/>
@@ -6422,7 +6425,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_MortagneAuPerche" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_MortagneAuPerche" category="ca_SousPrefecture" importance="21">
         <name>
           <name language="fr" text="Mortagne-au-Perche"/>
           <name language="en" text="Mortagne-au-Perche"/>
@@ -6434,7 +6437,7 @@
         </looks>
       </pointElement>
       <!--Villes 62-->
-      <pointElement id="e_Arras" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Arras" category="ca_Prefecture" importance="32">
         <name>
           <name language="fr" text="Arras"/>
           <name language="en" text="Arras"/>
@@ -6445,7 +6448,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Calais" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Calais" category="ca_SousPrefecture" importance="214">
         <name>
           <name language="fr" text="Calais"/>
           <name language="en" text="Calais"/>
@@ -6456,7 +6459,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BoulogneSurMer" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_BoulogneSurMer" category="ca_SousPrefecture" importance="195">
         <name>
           <name language="fr" text="Boulogne-sur-Mer"/>
           <name language="en" text="Boulogne-sur-Mer"/>
@@ -6467,7 +6470,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lens" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lens" category="ca_SousPrefecture" importance="179">
         <name>
           <name language="fr" text="Lens"/>
           <name language="en" text="Lens"/>
@@ -6478,7 +6481,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bethune" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bethune" category="ca_SousPrefecture" importance="164">
         <name>
           <name language="fr" text="Béthune"/>
           <name language="en" text="Béthune"/>
@@ -6489,7 +6492,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintOmer" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintOmer" category="ca_SousPrefecture" importance="117">
         <name>
           <name language="fr" text="Saint-Omer"/>
           <name language="en" text="Saint-Omer"/>
@@ -6500,7 +6503,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_MontreuilSurMer" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_MontreuilSurMer" category="ca_SousPrefecture" importance="5">
         <name>
           <name language="fr" text="Montreuil"/>
           <name language="en" text="Montreuil"/>
@@ -6511,7 +6514,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lievin" category="ca_Ville" importance="0">
+      <pointElement id="e_Lievin" category="ca_Ville" importance="6">
         <name>
           <name language="fr" text="Liévin"/>
           <name language="en" text="Liévin"/>
@@ -6523,7 +6526,7 @@
         </looks>
       </pointElement>
       <!--Villes 63-->
-      <pointElement id="e_ClermontFerrand" category="ca_Prefecture" importance="0">
+      <pointElement id="e_ClermontFerrand" category="ca_Prefecture" importance="78">
         <name>
           <name language="fr" text="Clermont-Ferrand"/>
           <name language="en" text="Clermont-Ferrand"/>
@@ -6534,7 +6537,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Riom" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Riom" category="ca_SousPrefecture" importance="139">
         <name>
           <name language="fr" text="Riom"/>
           <name language="en" text="Riom"/>
@@ -6545,7 +6548,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Issoire" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Issoire" category="ca_SousPrefecture" importance="121">
         <name>
           <name language="fr" text="Issoire"/>
           <name language="en" text="Issoire"/>
@@ -6556,7 +6559,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Thiers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Thiers" category="ca_SousPrefecture" importance="97">
         <name>
           <name language="fr" text="Thiers"/>
           <name language="en" text="Thiers"/>
@@ -6567,7 +6570,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ambert" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Ambert" category="ca_SousPrefecture" importance="50">
         <name>
           <name language="fr" text="Ambert"/>
           <name language="en" text="Ambert"/>
@@ -6579,7 +6582,7 @@
         </looks>
       </pointElement>
       <!--Villes 64-->
-      <pointElement id="e_Pau" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Pau" category="ca_Prefecture" importance="61">
         <name>
           <name language="fr" text="Pau"/>
           <name language="en" text="Pau"/>
@@ -6590,7 +6593,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bayonne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bayonne" category="ca_SousPrefecture" importance="202">
         <name>
           <name language="fr" text="Bayonne"/>
           <name language="en" text="Bayonne"/>
@@ -6601,7 +6604,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_OloronSainteMarie" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_OloronSainteMarie" category="ca_SousPrefecture" importance="91">
         <name>
           <name language="fr" text="Oloron-Sainte-Marie"/>
           <name language="en" text="Oloron-Sainte-Marie"/>
@@ -6612,7 +6615,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Anglet" category="ca_Ville" importance="0">
+      <pointElement id="e_Anglet" category="ca_Ville" importance="20">
         <name>
           <name language="fr" text="Anglet"/>
           <name language="en" text="Anglet"/>
@@ -6624,7 +6627,7 @@
         </looks>
       </pointElement>
       <!--Villes 65-->
-      <pointElement id="e_Tarbes" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Tarbes" category="ca_Prefecture" importance="30">
         <name>
           <name language="fr" text="Tarbes"/>
           <name language="en" text="Tarbes"/>
@@ -6635,7 +6638,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BagneresDeBigorre" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_BagneresDeBigorre" category="ca_SousPrefecture" importance="60">
         <name>
           <name language="fr" text="Bagnères-de-Bigorre"/>
           <name language="en" text="Bagnères-de-Bigorre"/>
@@ -6646,7 +6649,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ArgelesGazost" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ArgelesGazost" category="ca_SousPrefecture" importance="10">
         <name>
           <name language="fr" text="Argelès-Gazost"/>
           <name language="en" text="Argelès-Gazost"/>
@@ -6657,7 +6660,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lourdes" category="ca_Ville" importance="0">
+      <pointElement id="e_Lourdes" category="ca_Ville" importance="1">
         <name>
           <name language="fr" text="Lourdes"/>
           <name language="en" text="Lourdes"/>
@@ -6669,7 +6672,7 @@
         </looks>
       </pointElement>
       <!--Villes 66-->
-      <pointElement id="e_Perpignan" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Perpignan" category="ca_Prefecture" importance="73">
         <name>
           <name language="fr" text="Perpignan"/>
           <name language="en" text="Perpignan"/>
@@ -6680,7 +6683,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ceret" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Ceret" category="ca_SousPrefecture" importance="61">
         <name>
           <name language="fr" text="Céret"/>
           <name language="en" text="Céret"/>
@@ -6691,7 +6694,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Prades" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Prades" category="ca_SousPrefecture" importance="38">
         <name>
           <name language="fr" text="Prades"/>
           <name language="en" text="Prades"/>
@@ -6703,7 +6706,7 @@
         </looks>
       </pointElement>
       <!--Villes 67-->
-      <pointElement id="e_Strasbourg" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Strasbourg" category="ca_Prefecture" importance="90">
         <name>
           <name language="fr" text="Strasbourg"/>
           <name language="en" text="Strasbourg"/>
@@ -6714,7 +6717,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Haguenau" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Haguenau" category="ca_SousPrefecture" importance="183">
         <name>
           <name language="fr" text="Haguenau"/>
           <name language="en" text="Haguenau"/>
@@ -6725,7 +6728,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Selestat" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Selestat" category="ca_SousPrefecture" importance="143">
         <name>
           <name language="fr" text="Sélestat"/>
           <name language="en" text="Sélestat"/>
@@ -6736,7 +6739,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Saverne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Saverne" category="ca_SousPrefecture" importance="95">
         <name>
           <name language="fr" text="Saverne"/>
           <name language="en" text="Saverne"/>
@@ -6747,7 +6750,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Molsheim" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Molsheim" category="ca_SousPrefecture" importance="78">
         <name>
           <name language="fr" text="Molsheim"/>
           <name language="en" text="Molsheim"/>
@@ -6758,7 +6761,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Wissembourg" category="ca_SousPrefecture" importance="0">
+      <!--Wissembourg n'est plus une sous-préfecture depuis 2015-->
+      <!--<pointElement id="e_Wissembourg" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Wissembourg"/>
           <name language="en" text="Wissembourg"/>
@@ -6768,8 +6772,8 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
-      <pointElement id="e_Schiltigheim" category="ca_Ville" importance="0">
+      </pointElement>-->
+      <pointElement id="e_Schiltigheim" category="ca_Ville" importance="5">
         <name>
           <name language="fr" text="Schiltigheim"/>
           <name language="en" text="Schiltigheim"/>
@@ -6781,7 +6785,7 @@
         </looks>
       </pointElement>
       <!--Villes 68-->
-      <pointElement id="e_Colmar" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Colmar" category="ca_Prefecture" importance="59">
         <name>
           <name language="fr" text="Colmar"/>
           <name language="en" text="Colmar"/>
@@ -6792,7 +6796,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Mulhouse" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Mulhouse" category="ca_SousPrefecture" importance="219">
         <name>
           <name language="fr" text="Mulhouse"/>
           <name language="en" text="Mulhouse"/>
@@ -6803,7 +6807,8 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Guebwiller" category="ca_SousPrefecture" importance="0">
+      <!--Guebwiller et Ribeauvillé ne sont plus des sous-préfectures depuis 2015-->
+      <!--<pointElement id="e_Guebwiller" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Guebwiller"/>
           <name language="en" text="Guebwiller"/>
@@ -6813,8 +6818,8 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
-      <pointElement id="e_Thann" category="ca_SousPrefecture" importance="0">
+      </pointElement>-->
+      <pointElement id="e_Thann" category="ca_SousPrefecture" importance="67">
         <name>
           <name language="fr" text="Thann"/>
           <name language="en" text="Thann"/>
@@ -6825,7 +6830,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Altkirch" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Altkirch" category="ca_SousPrefecture" importance="36">
         <name>
           <name language="fr" text="Altkirch"/>
           <name language="en" text="Altkirch"/>
@@ -6836,7 +6841,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Ribeauville" category="ca_SousPrefecture" importance="0">
+      <!--<pointElement id="e_Ribeauville" category="ca_SousPrefecture" importance="0">
         <name>
           <name language="fr" text="Ribeauvillé"/>
           <name language="en" text="Ribeauvillé"/>
@@ -6846,9 +6851,9 @@
           <look id="tl_SousPrefecture2"/>
           <look id="tl_SousPrefecture3"/>
         </looks>
-      </pointElement>
+      </pointElement>-->
       <!--Villes 69-->
-      <pointElement id="e_Lyon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Lyon" category="ca_Prefecture" importance="94">
         <name>
           <name language="fr" text="Lyon"/>
           <name language="en" text="Lyon"/>
@@ -6859,7 +6864,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VillefrancheSurSaone" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_VillefrancheSurSaone" category="ca_SousPrefecture" importance="186">
         <name>
           <name language="fr" text="Villefranches-sur-Saône"/>
           <name language="en" text="Villefranches-sur-Saône"/>
@@ -6870,7 +6875,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Villeurbanne" category="ca_Ville" importance="0">
+      <pointElement id="e_Villeurbanne" category="ca_Ville" importance="55">
         <name>
           <name language="fr" text="Villeurbanne"/>
           <name language="en" text="Villeurbanne"/>
@@ -6881,7 +6886,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Venissieux" category="ca_Ville" importance="0">
+      <pointElement id="e_Venissieux" category="ca_Ville" importance="38">
         <name>
           <name language="fr" text="Vénissieux"/>
           <name language="en" text="Vénissieux"/>
@@ -6892,7 +6897,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintPriest" category="ca_Ville" importance="0">
+      <pointElement id="e_SaintPriest" category="ca_Ville" importance="26">
         <name>
           <name language="fr" text="Saint-Priest"/>
           <name language="en" text="Saint-Priest"/>
@@ -6904,7 +6909,7 @@
         </looks>
       </pointElement>
       <!--Villes 70-->
-      <pointElement id="e_Vesoul" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Vesoul" category="ca_Prefecture" importance="6">
         <name>
           <name language="fr" text="Vesoul"/>
           <name language="en" text="Vesoul"/>
@@ -6915,7 +6920,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Lure" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Lure" category="ca_SousPrefecture" importance="72">
         <name>
           <name language="fr" text="Lure"/>
           <name language="en" text="Lure"/>
@@ -6927,7 +6932,7 @@
         </looks>
       </pointElement>
       <!--Villes 71-->
-      <pointElement id="e_Macon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Macon" category="ca_Prefecture" importance="23">
         <name>
           <name language="fr" text="Mâcon"/>
           <name language="en" text="Mâcon"/>
@@ -6938,7 +6943,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChalonSurSaone" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ChalonSurSaone" category="ca_SousPrefecture" importance="198">
         <name>
           <name language="fr" text="Chalon-sur-Saône"/>
           <name language="en" text="Chalon-sur-Saône"/>
@@ -6949,7 +6954,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Autun" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Autun" category="ca_SousPrefecture" importance="113">
         <name>
           <name language="fr" text="Autun"/>
           <name language="en" text="Autun"/>
@@ -6960,7 +6965,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Louhans" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Louhans" category="ca_SousPrefecture" importance="44">
         <name>
           <name language="fr" text="Louhans"/>
           <name language="en" text="Louhans"/>
@@ -6971,7 +6976,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Charolles" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Charolles" category="ca_SousPrefecture" importance="9">
         <name>
           <name language="fr" text="Charolles"/>
           <name language="en" text="Charolles"/>
@@ -6983,7 +6988,7 @@
         </looks>
       </pointElement>
       <!--Villes 72-->
-      <pointElement id="e_Mans" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Mans" category="ca_Prefecture" importance="79">
         <name>
           <name language="fr" text="Le Mans"/>
           <name language="en" text="Le Mans"/>
@@ -6994,7 +6999,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Fleche" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Fleche" category="ca_SousPrefecture" importance="124">
         <name>
           <name language="fr" text="La Flèche"/>
           <name language="en" text="La Flèche"/>
@@ -7005,7 +7010,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Mamers" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Mamers" category="ca_SousPrefecture" importance="33">
         <name>
           <name language="fr" text="Mamers"/>
           <name language="en" text="Mamers"/>
@@ -7017,7 +7022,7 @@
         </looks>
       </pointElement>
       <!--Villes 73-->
-      <pointElement id="e_Chambery" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Chambery" category="ca_Prefecture" importance="52">
         <name>
           <name language="fr" text="Chambéry"/>
           <name language="en" text="Chambéry"/>
@@ -7028,7 +7033,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Albertville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Albertville" category="ca_SousPrefecture" importance="140">
         <name>
           <name language="fr" text="Albertville"/>
           <name language="en" text="Albertville"/>
@@ -7039,7 +7044,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintJeanDeMaurienne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintJeanDeMaurienne" category="ca_SousPrefecture" importance="66">
         <name>
           <name language="fr" text="Saint-Jean-de-Maurienne"/>
           <name language="en" text="Saint-Jean-de-Maurienne"/>
@@ -7051,7 +7056,7 @@
         </looks>
       </pointElement>
       <!--Villes 74-->
-      <pointElement id="e_Annecy" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Annecy" category="ca_Prefecture" importance="74">
         <name>
           <name language="fr" text="Annecy"/>
           <name language="en" text="Annecy"/>
@@ -7062,7 +7067,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ThononLesBains" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_ThononLesBains" category="ca_SousPrefecture" importance="184">
         <name>
           <name language="fr" text="Thonon-les-Bains"/>
           <name language="en" text="Thonon-les-Bains"/>
@@ -7073,7 +7078,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bonneville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bonneville" category="ca_SousPrefecture" importance="105">
         <name>
           <name language="fr" text="Bonneville"/>
           <name language="en" text="Bonneville"/>
@@ -7084,7 +7089,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintJulienEnGenevois" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintJulienEnGenevois" category="ca_SousPrefecture" importance="108">
         <name>
           <name language="fr" text="Saint-Julien-en-Genevois"/>
           <name language="en" text="Saint-Julien-en-Genevois"/>
@@ -7096,7 +7101,7 @@
         </looks>
       </pointElement>
       <!--Villes 75-->
-      <pointElement id="e_Paris" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Paris" category="ca_Prefecture" importance="96">
         <name>
           <name language="fr" text="Paris"/>
           <name language="en" text="Paris"/>
@@ -7108,7 +7113,7 @@
         </looks>
       </pointElement>
       <!--Villes 76-->
-      <pointElement id="e_Rouen" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Rouen" category="ca_Prefecture" importance="69">
         <name>
           <name language="fr" text="Rouen"/>
           <name language="en" text="Rouen"/>
@@ -7119,7 +7124,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Havre" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Havre" category="ca_SousPrefecture" importance="223">
         <name>
           <name language="fr" text="Le Havre"/>
           <name language="en" text="Le Havre"/>
@@ -7130,7 +7135,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Dieppe" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Dieppe" category="ca_SousPrefecture" importance="175">
         <name>
           <name language="fr" text="Dieppe"/>
           <name language="en" text="Dieppe"/>
@@ -7141,7 +7146,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SottevilleLesRouen" category="ca_Ville" importance="0">
+      <pointElement id="e_SottevilleLesRouen" category="ca_Ville" importance="3">
         <name>
           <name language="fr" text="Sotteville-lès-Rouen"/>
           <name language="en" text="Sotteville-lès-Rouen"/>
@@ -7153,7 +7158,7 @@
         </looks>
       </pointElement>
       <!--Villes 77-->
-      <pointElement id="e_Melun" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Melun" category="ca_Prefecture" importance="28">
         <name>
           <name language="fr" text="Melun"/>
           <name language="en" text="Melun"/>
@@ -7164,7 +7169,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Meaux" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Meaux" category="ca_SousPrefecture" importance="206">
         <name>
           <name language="fr" text="Meaux"/>
           <name language="en" text="Meaux"/>
@@ -7175,7 +7180,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Torcy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Torcy" category="ca_SousPrefecture" importance="157">
         <name>
           <name language="fr" text="Torcy"/>
           <name language="en" text="Torcy"/>
@@ -7186,7 +7191,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Fontainebleau" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Fontainebleau" category="ca_SousPrefecture" importance="122">
         <name>
           <name language="fr" text="Fontainebleau"/>
           <name language="en" text="Fontainebleau"/>
@@ -7197,7 +7202,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Provins" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Provins" category="ca_SousPrefecture" importance="98">
         <name>
           <name language="fr" text="Provins"/>
           <name language="en" text="Provins"/>
@@ -7208,7 +7213,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_PontaultCombault" category="ca_Ville" importance="0">
+      <pointElement id="e_PontaultCombault" category="ca_Ville" importance="11">
         <name>
           <name language="fr" text="Pontault-Combault"/>
           <name language="en" text="Pontault-Combault"/>
@@ -7220,7 +7225,7 @@
         </looks>
       </pointElement>
       <!--Villes 78-->
-      <pointElement id="e_Versailles" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Versailles" category="ca_Prefecture" importance="62">
         <name>
           <name language="fr" text="Versailles"/>
           <name language="en" text="Versailles"/>
@@ -7231,7 +7236,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_MantesLaJolie" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_MantesLaJolie" category="ca_SousPrefecture" importance="199">
         <name>
           <name language="fr" text="Mantes-la-Jolie"/>
           <name language="en" text="Mantes-la-Jolie"/>
@@ -7242,7 +7247,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintGermainEnLaye" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintGermainEnLaye" category="ca_SousPrefecture" importance="188">
         <name>
           <name language="fr" text="Saint-Germain-en-Laye"/>
           <name language="en" text="Saint-Germain-en-Laye"/>
@@ -7253,7 +7258,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Rambouillet" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Rambouillet" category="ca_SousPrefecture" importance="168">
         <name>
           <name language="fr" text="Rambouillet"/>
           <name language="en" text="Rambouillet"/>
@@ -7264,7 +7269,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sartrouville" category="ca_Ville" importance="0">
+      <pointElement id="e_Sartrouville" category="ca_Ville" importance="33">
         <name>
           <name language="fr" text="Sartrouville"/>
           <name language="en" text="Sartrouville"/>
@@ -7275,7 +7280,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Poissy" category="ca_Ville" importance="0">
+      <pointElement id="e_Poissy" category="ca_Ville" importance="19">
         <name>
           <name language="fr" text="Poissy"/>
           <name language="en" text="Poissy"/>
@@ -7286,7 +7291,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ConflansSainteHonorine" category="ca_Ville" importance="0">
+      <pointElement id="e_ConflansSainteHonorine" category="ca_Ville" importance="12">
         <name>
           <name language="fr" text="Conflans-Sainte-Honorine"/>
           <name language="en" text="Conflans-Sainte-Honorine"/>
@@ -7298,7 +7303,7 @@
         </looks>
       </pointElement>
       <!--Villes 79-->
-      <pointElement id="e_Niort" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Niort" category="ca_Prefecture" importance="50">
         <name>
           <name language="fr" text="Niort"/>
           <name language="en" text="Niort"/>
@@ -7309,7 +7314,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bressuire" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bressuire" category="ca_SousPrefecture" importance="141">
         <name>
           <name language="fr" text="Bressuire"/>
           <name language="en" text="Bressuire"/>
@@ -7320,7 +7325,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Parthenay" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Parthenay" category="ca_SousPrefecture" importance="85">
         <name>
           <name language="fr" text="Parthenay"/>
           <name language="en" text="Parthenay"/>
@@ -7332,7 +7337,7 @@
         </looks>
       </pointElement>
       <!--Villes 80-->
-      <pointElement id="e_Amiens" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Amiens" category="ca_Prefecture" importance="75">
         <name>
           <name language="fr" text="Amiens"/>
           <name language="en" text="Amiens"/>
@@ -7343,7 +7348,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Abbeville" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Abbeville" category="ca_SousPrefecture" importance="156">
         <name>
           <name language="fr" text="Abbeville"/>
           <name language="en" text="Abbeville"/>
@@ -7354,7 +7359,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Peronne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Peronne" category="ca_SousPrefecture" importance="62">
         <name>
           <name language="fr" text="Péronne"/>
           <name language="en" text="Péronne"/>
@@ -7365,7 +7370,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montdidier" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montdidier" category="ca_SousPrefecture" importance="41">
         <name>
           <name language="fr" text="Montdidier"/>
           <name language="en" text="Montdidier"/>
@@ -7377,7 +7382,7 @@
         </looks>
       </pointElement>
       <!--Villes 81-->
-      <pointElement id="e_Albi" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Albi" category="ca_Prefecture" importance="42">
         <name>
           <name language="fr" text="Albi"/>
           <name language="en" text="Albi"/>
@@ -7388,7 +7393,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Castres" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Castres" category="ca_SousPrefecture" importance="194">
         <name>
           <name language="fr" text="Castres"/>
           <name language="en" text="Castres"/>
@@ -7400,7 +7405,7 @@
         </looks>
       </pointElement>
       <!--Villes 82-->
-      <pointElement id="e_Montauban" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Montauban" category="ca_Prefecture" importance="51">
         <name>
           <name language="fr" text="Montauban"/>
           <name language="en" text="Montauban"/>
@@ -7411,7 +7416,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Castelsarrasin" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Castelsarrasin" category="ca_SousPrefecture" importance="111">
         <name>
           <name language="fr" text="Castelsarrasin"/>
           <name language="en" text="Castelsarrasin"/>
@@ -7423,7 +7428,7 @@
         </looks>
       </pointElement>
       <!--Villes 83-->
-      <pointElement id="e_Toulon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Toulon" category="ca_Prefecture" importance="84">
         <name>
           <name language="fr" text="Toulon"/>
           <name language="en" text="Toulon"/>
@@ -7434,7 +7439,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Draguignan" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Draguignan" category="ca_SousPrefecture" importance="190">
         <name>
           <name language="fr" text="Draguignan"/>
           <name language="en" text="Draguignan"/>
@@ -7445,7 +7450,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Brignoles" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Brignoles" category="ca_SousPrefecture" importance="129">
         <name>
           <name language="fr" text="Brignoles"/>
           <name language="en" text="Brignoles"/>
@@ -7456,7 +7461,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SeyneSurMer" category="ca_Ville" importance="0">
+      <pointElement id="e_SeyneSurMer" category="ca_Ville" importance="39">
         <name>
           <name language="fr" text="La Seyne-sur-Mer"/>
           <name language="en" text="La Seyne-sur-Mer"/>
@@ -7467,7 +7472,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Hyeres" category="ca_Ville" importance="0">
+      <pointElement id="e_Hyeres" category="ca_Ville" importance="35">
         <name>
           <name language="fr" text="Hyères"/>
           <name language="en" text="Hyères"/>
@@ -7478,7 +7483,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Frejus" category="ca_Ville" importance="0">
+      <pointElement id="e_Frejus" category="ca_Ville" importance="34">
         <name>
           <name language="fr" text="Fréjus"/>
           <name language="en" text="Fréjus"/>
@@ -7490,7 +7495,7 @@
         </looks>
       </pointElement>
       <!--Villes 84-->
-      <pointElement id="e_Avignon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Avignon" category="ca_Prefecture" importance="65">
         <name>
           <name language="fr" text="Avignon"/>
           <name language="en" text="Avignon"/>
@@ -7501,7 +7506,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Carpentras" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Carpentras" category="ca_SousPrefecture" importance="173">
         <name>
           <name language="fr" text="Carpentras"/>
           <name language="en" text="Carpentras"/>
@@ -7512,7 +7517,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Apt" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Apt" category="ca_SousPrefecture" importance="100">
         <name>
           <name language="fr" text="Apt"/>
           <name language="en" text="Apt"/>
@@ -7524,7 +7529,7 @@
         </looks>
       </pointElement>
       <!--Villes 85-->
-      <pointElement id="e_RocheSurYon" category="ca_Prefecture" importance="0">
+      <pointElement id="e_RocheSurYon" category="ca_Prefecture" importance="47">
         <name>
           <name language="fr" text="La Roche-sur-Yon"/>
           <name language="en" text="La Roche-sur-Yon"/>
@@ -7535,7 +7540,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SablesOlonne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SablesOlonne" category="ca_SousPrefecture" importance="118">
         <name>
           <name language="fr" text="Les Sables-d'Olonne"/>
           <name language="en" text="Les Sables-d'Olonne"/>
@@ -7546,7 +7551,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_FontenayLeComte" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_FontenayLeComte" category="ca_SousPrefecture" importance="110">
         <name>
           <name language="fr" text="Fontenay-le-Comte"/>
           <name language="en" text="Fontenay-le-Comte"/>
@@ -7558,7 +7563,7 @@
         </looks>
       </pointElement>
       <!--Villes 86-->
-      <pointElement id="e_Poitiers" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Poitiers" category="ca_Prefecture" importance="63">
         <name>
           <name language="fr" text="Poitiers"/>
           <name language="en" text="Poitiers"/>
@@ -7569,7 +7574,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Chatellerault" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Chatellerault" category="ca_SousPrefecture" importance="180">
         <name>
           <name language="fr" text="Châtellerault"/>
           <name language="en" text="Châtellerault"/>
@@ -7580,7 +7585,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montmorillon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Montmorillon" category="ca_SousPrefecture" importance="40">
         <name>
           <name language="fr" text="Montmorillon"/>
           <name language="en" text="Montmorillon"/>
@@ -7592,7 +7597,7 @@
         </looks>
       </pointElement>
       <!--Villes 87-->
-      <pointElement id="e_Limoges" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Limoges" category="ca_Prefecture" importance="76">
         <name>
           <name language="fr" text="Limoges"/>
           <name language="en" text="Limoges"/>
@@ -7603,7 +7608,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Bellac" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Bellac" category="ca_SousPrefecture" importance="22">
         <name>
           <name language="fr" text="Bellac"/>
           <name language="en" text="Bellac"/>
@@ -7614,7 +7619,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Rochechouart" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Rochechouart" category="ca_SousPrefecture" importance="18">
         <name>
           <name language="fr" text="Rochechouart"/>
           <name language="en" text="Rochechouart"/>
@@ -7626,7 +7631,7 @@
         </looks>
       </pointElement>
       <!--Villes 88-->
-      <pointElement id="e_Epinal" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Epinal" category="ca_Prefecture" importance="22">
         <name>
           <name language="fr" text="Épinal"/>
           <name language="en" text="Épinal"/>
@@ -7637,7 +7642,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintDieDesVosges" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintDieDesVosges" category="ca_SousPrefecture" importance="146">
         <name>
           <name language="fr" text="Saint-Dié-des-Vosges"/>
           <name language="en" text="Saint-Dié-des-Vosges"/>
@@ -7648,7 +7653,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Neufchateau" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Neufchateau" category="ca_SousPrefecture" importance="45">
         <name>
           <name language="fr" text="Neufchâteau"/>
           <name language="en" text="Neufchâteau"/>
@@ -7660,7 +7665,7 @@
         </looks>
       </pointElement>
       <!--Villes 89-->
-      <pointElement id="e_Auxerre" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Auxerre" category="ca_Prefecture" importance="26">
         <name>
           <name language="fr" text="Auxerre"/>
           <name language="en" text="Auxerre"/>
@@ -7671,7 +7676,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sens" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sens" category="ca_SousPrefecture" importance="166">
         <name>
           <name language="fr" text="Sens"/>
           <name language="en" text="Sens"/>
@@ -7682,7 +7687,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Avallon" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Avallon" category="ca_SousPrefecture" importance="53">
         <name>
           <name language="fr" text="Avallon"/>
           <name language="en" text="Avallon"/>
@@ -7694,7 +7699,7 @@
         </looks>
       </pointElement>
       <!--Villes 90-->
-      <pointElement id="e_Belfort" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Belfort" category="ca_Prefecture" importance="43">
         <name>
           <name language="fr" text="Belfort"/>
           <name language="en" text="Belfort"/>
@@ -7706,7 +7711,7 @@
         </looks>
       </pointElement>
       <!--Villes 91-->
-      <pointElement id="e_Evry" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Evry" category="ca_Prefecture" importance="48">
         <name>
           <name language="fr" text="Évry"/>
           <name language="en" text="Évry"/>
@@ -7717,7 +7722,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Palaiseau" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Palaiseau" category="ca_SousPrefecture" importance="181">
         <name>
           <name language="fr" text="Palaiseau"/>
           <name language="en" text="Palaiseau"/>
@@ -7728,7 +7733,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Etampes" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Etampes" category="ca_SousPrefecture" importance="159">
         <name>
           <name language="fr" text="Étampes"/>
           <name language="en" text="Étampes"/>
@@ -7739,7 +7744,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_CorbeilEssonnes" category="ca_Ville" importance="0">
+      <pointElement id="e_CorbeilEssonnes" category="ca_Ville" importance="27">
         <name>
           <name language="fr" text="Corbeil-Essonnes"/>
           <name language="en" text="Corbeil-Essonnes"/>
@@ -7750,7 +7755,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Massy" category="ca_Ville" importance="0">
+      <pointElement id="e_Massy" category="ca_Ville" importance="23">
         <name>
           <name language="fr" text="Massy"/>
           <name language="en" text="Massy"/>
@@ -7761,7 +7766,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SavignySurOrge" category="ca_Ville" importance="0">
+      <pointElement id="e_SavignySurOrge" category="ca_Ville" importance="18">
         <name>
           <name language="fr" text="Savigny-sur-Orge"/>
           <name language="en" text="Savigny-sur-Orge"/>
@@ -7773,7 +7778,7 @@
         </looks>
       </pointElement>
       <!--Villes 92-->
-      <pointElement id="e_Nanterre" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Nanterre" category="ca_Prefecture" importance="66">
         <name>
           <name language="fr" text="Nanterre"/>
           <name language="en" text="Nanterre"/>
@@ -7784,7 +7789,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_BoulogneBillancourt" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_BoulogneBillancourt" category="ca_SousPrefecture" importance="220">
         <name>
           <name language="fr" text="Boulogne-Billancourt"/>
           <name language="en" text="Boulogne-Billancourt"/>
@@ -7795,7 +7800,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Antony" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Antony" category="ca_SousPrefecture" importance="211">
         <name>
           <name language="fr" text="Antony"/>
           <name language="en" text="Antony"/>
@@ -7806,7 +7811,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Courbevoie" category="ca_Ville" importance="0">
+      <pointElement id="e_Courbevoie" category="ca_Ville" importance="51">
         <name>
           <name language="fr" text="Courbevoie"/>
           <name language="en" text="Courbevoie"/>
@@ -7817,7 +7822,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Colombes" category="ca_Ville" importance="0">
+      <pointElement id="e_Colombes" category="ca_Ville" importance="49">
         <name>
           <name language="fr" text="Colombes"/>
           <name language="en" text="Colombes"/>
@@ -7828,7 +7833,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_AsnieresSurSeine" category="ca_Ville" importance="0">
+      <pointElement id="e_AsnieresSurSeine" category="ca_Ville" importance="47">
         <name>
           <name language="fr" text="Asnières-sur-Seine"/>
           <name language="en" text="Asnières-sur-Seine"/>
@@ -7840,7 +7845,7 @@
         </looks>
       </pointElement>
       <!--Villes 93-->
-      <pointElement id="e_Bobigny" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Bobigny" category="ca_Prefecture" importance="45">
         <name>
           <name language="fr" text="Bobigny"/>
           <name language="en" text="Bobigny"/>
@@ -7851,7 +7856,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintDenis" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_SaintDenis" category="ca_SousPrefecture" importance="218">
         <name>
           <name language="fr" text="Saint-Denis"/>
           <name language="en" text="Saint-Denis"/>
@@ -7862,7 +7867,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Raincy" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Raincy" category="ca_SousPrefecture" importance="119">
         <name>
           <name language="fr" text="Le Raincy"/>
           <name language="en" text="Le Raincy"/>
@@ -7873,7 +7878,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Montreuil" category="ca_Ville" importance="0">
+      <pointElement id="e_Montreuil" category="ca_Ville" importance="54">
         <name>
           <name language="fr" text="Montreuil"/>
           <name language="en" text="Montreuil"/>
@@ -7884,7 +7889,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_AulnaySousBois" category="ca_Ville" importance="0">
+      <pointElement id="e_AulnaySousBois" category="ca_Ville" importance="48">
         <name>
           <name language="fr" text="Aulnay-sous-Bois"/>
           <name language="en" text="Aulnay-sous-Bois"/>
@@ -7895,7 +7900,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Aubervilliers" category="ca_Ville" importance="0">
+      <pointElement id="e_Aubervilliers" category="ca_Ville" importance="43">
         <name>
           <name language="fr" text="Aubervilliers"/>
           <name language="en" text="Aubervilliers"/>
@@ -7907,7 +7912,7 @@
         </looks>
       </pointElement>
       <!--Villes 94-->
-      <pointElement id="e_Creteil" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Creteil" category="ca_Prefecture" importance="64">
         <name>
           <name language="fr" text="Créteil"/>
           <name language="en" text="Créteil"/>
@@ -7918,7 +7923,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_NogentSurMarne" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_NogentSurMarne" category="ca_SousPrefecture" importance="178">
         <name>
           <name language="fr" text="Nogent-sur-Marne"/>
           <name language="en" text="Nogent-sur-Marne"/>
@@ -7929,7 +7934,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_HayLesRoses" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_HayLesRoses" category="ca_SousPrefecture" importance="176">
         <name>
           <name language="fr" text="L'Haÿ-les-Roses"/>
           <name language="en" text="L'Haÿ-les-Roses"/>
@@ -7940,7 +7945,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_VitrySurSeine" category="ca_Ville" importance="0">
+      <pointElement id="e_VitrySurSeine" category="ca_Ville" importance="50">
         <name>
           <name language="fr" text="Vitry-sur-Seine"/>
           <name language="en" text="Vitry-sur-Seine"/>
@@ -7951,7 +7956,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_SaintMaurDesFosses" category="ca_Ville" importance="0">
+      <pointElement id="e_SaintMaurDesFosses" category="ca_Ville" importance="45">
         <name>
           <name language="fr" text="Saint-Maur-des-Fossés"/>
           <name language="en" text="Saint-Maur-des-Fossés"/>
@@ -7962,7 +7967,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_ChampignySurMarne" category="ca_Ville" importance="0">
+      <pointElement id="e_ChampignySurMarne" category="ca_Ville" importance="44">
         <name>
           <name language="fr" text="Champigny-sur-Marne"/>
           <name language="en" text="Champigny-sur-Marne"/>
@@ -7974,7 +7979,7 @@
         </looks>
       </pointElement>
       <!--Villes 95-->
-      <pointElement id="e_Pontoise" category="ca_Prefecture" importance="0">
+      <pointElement id="e_Pontoise" category="ca_Prefecture" importance="18.5">
         <name>
           <name language="fr" text="Pontoise"/>
           <name language="en" text="Pontoise"/>
@@ -7985,7 +7990,7 @@
           <look id="tl_Prefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Argenteuil" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Argenteuil" category="ca_SousPrefecture" importance="217">
         <name>
           <name language="fr" text="Argenteuil"/>
           <name language="en" text="Argenteuil"/>
@@ -7996,7 +8001,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Sarcelles" category="ca_SousPrefecture" importance="0">
+      <pointElement id="e_Sarcelles" category="ca_SousPrefecture" importance="209">
         <name>
           <name language="fr" text="Sarcelles"/>
           <name language="en" text="Sarcelles"/>
@@ -8007,7 +8012,7 @@
           <look id="tl_SousPrefecture3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Cergy" category="ca_Ville" importance="0">
+      <pointElement id="e_Cergy" category="ca_Ville" importance="36">
         <name>
           <name language="fr" text="Cergy"/>
           <name language="en" text="Cergy"/>
@@ -8018,7 +8023,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_GargesLesGonesse" category="ca_Ville" importance="0">
+      <pointElement id="e_GargesLesGonesse" category="ca_Ville" importance="22">
         <name>
           <name language="fr" text="Garges-lès-Gonesse"/>
           <name language="en" text="Garges-lès-Gonesse"/>
@@ -8029,7 +8034,7 @@
           <look id="tl_Ville3"/>
         </looks>
       </pointElement>
-      <pointElement id="e_Franconville" category="ca_Ville" importance="0">
+      <pointElement id="e_Franconville" category="ca_Ville" importance="8">
         <name>
           <name language="fr" text="Franconville"/>
           <name language="en" text="Franconville"/>

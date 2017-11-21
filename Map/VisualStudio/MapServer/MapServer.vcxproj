@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\NodeJS\map_server\Data\BezierInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Category.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\Combinations.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\DatabaseError.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\ElementName.cpp" />
@@ -207,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\Data\BezierInfo.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Category.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\Combinations.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\DatabaseError.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\ElementName.h" />

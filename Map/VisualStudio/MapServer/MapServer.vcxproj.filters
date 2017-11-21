@@ -189,6 +189,9 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgCustomColor.cpp">
       <Filter>Fichiers sources\Requests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\Category.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgCustomColor.h">
       <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\Category.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -103,16 +103,12 @@
     <None Include="XmlMapData.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MapData_DepGabon.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="MapData_France.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="MapData_Gabon.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MapData_Gabon2.xml" />
     <Content Include="MapData_Test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

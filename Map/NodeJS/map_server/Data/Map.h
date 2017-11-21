@@ -10,6 +10,7 @@ namespace map_server
     class MultipointsItem;
     class MapItem;
 	class DatabaseError;
+	class Category;
 
     class Map : public IMap
     {
@@ -59,6 +60,7 @@ namespace map_server
         std::map<std::string, LineItem *> _lineItemMap;
         std::map<std::string, FilledPolygonItem *> _filledPolygonItemMap;
         std::map<int, MapItem *> _itemMap;
+        std::map<int, const Category *> _categoryMap;
 
         bool addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
 
@@ -90,6 +92,7 @@ namespace map_server
         MapItem *getItem(int itemId);
         const ItemLook *getItemLook(int lookId) const;
         int getResolutionIndex(double scale);
+        const Category *getCategory(int categoryId) const;
         bool knownLanguage(const std::string& languageId) const { return _languageIdSet.find(languageId) != _languageIdSet.end(); }
 		std::vector<DatabaseError *>& getErrorVector(void) { return _errorVector; }
     };

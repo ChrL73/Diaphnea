@@ -67,6 +67,7 @@ namespace map_server
 			_filledPolygonItem->setNameMap(&_nameMap);
             _filledPolygonItem->setElementIdForText(_id);
             _filledPolygonItem->setImportance(_importance);
+            _filledPolygonItem->setCurrentCategory(getCategory());
 
             mongo::BSONElement itemsElt = dbElement.getField("items");
             if (itemsElt.type() != mongo::Array)

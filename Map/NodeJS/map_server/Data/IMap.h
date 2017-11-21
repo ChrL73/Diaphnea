@@ -24,6 +24,7 @@ namespace map_server
     class FilledPolygonItem;
     class PointItem;
     class ItemLook;
+    class Category;
 
     class IMap
     {
@@ -37,5 +38,6 @@ namespace map_server
         virtual const Look *getLook(int lookId) const = 0;
         virtual void addItemLook(const ItemLook *look) = 0;
         virtual void addPointItem(PointItem *pointItem) = 0;
+        virtual const Category *getCategory(int categoryId) const = 0;
     };
 }

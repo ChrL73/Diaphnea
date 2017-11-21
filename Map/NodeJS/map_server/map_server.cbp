@@ -65,6 +65,8 @@
 		</Compiler>
 		<Unit filename="Data/BezierInfo.cpp" />
 		<Unit filename="Data/BezierInfo.h" />
+		<Unit filename="Data/Category.cpp" />
+		<Unit filename="Data/Category.h" />
 		<Unit filename="Data/Combinations.cpp" />
 		<Unit filename="Data/Combinations.h" />
 		<Unit filename="Data/DatabaseError.cpp" />

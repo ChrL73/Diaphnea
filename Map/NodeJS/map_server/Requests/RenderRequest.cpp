@@ -25,6 +25,7 @@
 #include "SvgItemInfo.h"
 #include "ErrorEnum.h"
 #include "SvgCustomColor.h"
+#include "Category.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -132,6 +133,7 @@ namespace map_server
                 std::vector<const ItemLook *> contourLook;
                 contourLook.push_back(element->getLook(_lookIndex)->getContourLook());
                 item->setCurrentLooks(contourLook);
+                item->setCurrentCategory(element->getCategory());
                 itemVector.push_back(item);
             }
 
@@ -173,11 +175,17 @@ namespace map_server
                     for (i = 0; i < n; ++i)
                     {
                         MapItem *item = itemVector[i];
-                        if (item->getXMin() < xMin) xMin = item->getXMin();
-                        if (item->getXMax() > xMax) xMax = item->getXMax();
-                        if (item->getYMin() < yMin) yMin = item->getYMin();
-                        if (item->getYMax() > yMax) yMax = item->getYMax();
                         itemVector2.push_back(item);
+
+                        int framingLevel = 0;
+                        if (item->getCurrentCategory() != 0) framingLevel = item->getCurrentCategory()->getFramingLevel();
+                        if (framingLevel >= _framingLevel)
+                        {
+                            if (item->getXMin() < xMin) xMin = item->getXMin();
+                            if (item->getXMax() > xMax) xMax = item->getXMax();
+                            if (item->getYMin() < yMin) yMin = item->getYMin();
+                            if (item->getYMax() > yMax) yMax = item->getYMax();
+                        }
                     }
 
                     _xFocus = 0.5 * (xMin + xMax);

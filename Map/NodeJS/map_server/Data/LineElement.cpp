@@ -76,6 +76,7 @@ namespace map_server
 				lineItem->setNameMap(&_nameMap);
                 lineItem->setElementIdForText(_id);
                 lineItem->setImportance(_importance);
+                lineItem->setCurrentCategory(getCategory());
 				_itemVector.push_back(lineItem);
             }
         }

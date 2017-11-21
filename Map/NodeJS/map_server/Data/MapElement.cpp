@@ -1,6 +1,7 @@
 #include "MapElement.h"
 #include "ElementName.h"
 #include "Combinations.h"
+#include "IMap.h"
 
 #undef max
 #include <limits>
@@ -32,6 +33,8 @@ namespace map_server
         }
 
         _importance = importanceElt.Double();
+        _category = _iMap->getCategory(categoryId);
+
         mongo::BSONObj dbName = nameElt.Obj();
         mongo::BSONObj dbShortName = shortNameElt.Obj();
 

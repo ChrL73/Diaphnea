@@ -79,6 +79,7 @@ namespace map_server
             _item->setNameMap(&_nameMap);
             _item->setElementIdForText(_id);
             _item->setImportance(_importance);
+            _item->setCurrentCategory(getCategory());
             _iMap->addPointItem(_item);
         }
         else

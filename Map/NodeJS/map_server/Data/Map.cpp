@@ -11,6 +11,7 @@
 #include "Point.h"
 #include "ItemLook.h"
 #include "DatabaseError.h"
+#include "Category.h"
 
 namespace map_server
 {
@@ -24,6 +25,9 @@ namespace map_server
 
         std::map<int, const Look *>::iterator lookIt = _lookMap.begin();
         for (; lookIt != _lookMap.end(); ++lookIt) delete (*lookIt).second;
+
+        std::map<int,const Category *>::iterator categoryIt = _categoryMap.begin();
+        for (; categoryIt != _categoryMap.end(); ++categoryIt) delete (*categoryIt).second;
     }
 
     MapElement *Map::getElement(const std::string& id)
@@ -787,6 +791,16 @@ namespace map_server
                 return false;
             }
 
+            int framingLevel = dbCategory.getIntField("framing_level");
+            if (framingLevel < -_maxIntDbValue || framingLevel > _maxIntDbValue )
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+
+            Category *category = new Category(id, framingLevel);
+            _categoryMap.insert(std::pair<int, const Category *>(id, category));
+
             mongo::BSONElement nameElt = dbCategory.getField("name");
             if (nameElt.type() != mongo::Object)
             {
@@ -820,5 +834,12 @@ namespace map_server
         categoriesJson += "]";
 
         return true;
+    }
+
+    const Category *Map::getCategory(int categoryId) const
+    {
+        std::map<int, const Category *>::const_iterator it = _categoryMap.find(categoryId);
+        if (it != _categoryMap.end()) return (*it).second;
+        return 0;
     }
 }

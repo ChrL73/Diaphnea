@@ -869,6 +869,8 @@ public partial class XmlCategory {
     
     private double importanceField;
     
+    private int framingLevelField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("name", IsNullable=false)]
     public XmlName[] name {
@@ -899,6 +901,17 @@ public partial class XmlCategory {
         }
         set {
             this.importanceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public int framingLevel {
+        get {
+            return this.framingLevelField;
+        }
+        set {
+            this.framingLevelField = value;
         }
     }
 }

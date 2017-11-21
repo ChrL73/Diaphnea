@@ -90,7 +90,7 @@
   </lookList>
 
   <categoryList>
-    <category id="ca_categorie1" importance="0">
+    <category id="ca_categorie1" importance="0" framingLevel="1">
       <name>
         <name language="fr" text="Catégorie 1"/>
       </name>

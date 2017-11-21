@@ -291,48 +291,48 @@
   </lookList>
 
   <categoryList>
-    <category id="ca_Gabon" importance="600">
+    <category id="ca_Gabon" importance="600" framingLevel="2">
       <name>
         <name language="fr" text="Gabon"/>
         <name language="en" text="Gabon"/>
       </name>
     </category>
-    <category id="ca_Province" importance="500">
+    <category id="ca_Province" importance="500" framingLevel="6">
       <name>
         <name language="fr" text="Provinces"/>
         <name language="en" text="Provinces"/>
       </name>
     </category>
-    <category id="ca_Departement" importance="300">
+    <category id="ca_Departement" importance="300" framingLevel="7">
       <name>
         <name language="fr" text="Départements"/>
         <name language="en" text="Departments"/>
       </name>
     </category>
-    <category id="ca_FleuveRiviere" importance="100">
+    <category id="ca_FleuveRiviere" importance="100" framingLevel="1">
       <name>
         <name language="fr" text="Cours d'eau"/>
         <name language="en" text="Rivers"/>
       </name>
     </category>
-    <category id="ca_ChefLieuProvince" importance="400">
+    <category id="ca_ChefLieuProvince" importance="400" framingLevel="5">
       <name>
         <name language="fr" text="Chefs-lieux de province"/>
         <name language="en" text="Province capitals"/>
       </name>
     </category>
-    <category id="ca_ChefLieuDepartement" importance="200">
+    <category id="ca_ChefLieuDepartement" importance="200" framingLevel="4">
       <name>
         <name language="fr" text="Chefs-lieux de département"/>
         <name language="en" text="Department capitals"/>
       </name>
     </category>
-    <category id="ca_Ville" importance="0">
+    <!--<category id="ca_Ville" importance="0" framingLevel="3">
       <name>
         <name language="fr" text="Autres villes"/>
         <name language="en" text="Other cities"/>
       </name>
-    </category>
+    </category>-->
   </categoryList>
 
   <elementList>

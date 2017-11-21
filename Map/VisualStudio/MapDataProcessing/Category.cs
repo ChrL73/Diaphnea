@@ -33,6 +33,7 @@ namespace MapDataProcessing
             {
                 { "id", _id },
                 { "xml_id", _xmlCategory.id },
+                { "framing_level", _xmlCategory.framingLevel },
                 { "name", _name.getBsonDocument() }
             };
 

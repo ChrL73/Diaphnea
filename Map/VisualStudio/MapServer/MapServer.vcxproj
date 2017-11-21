@@ -184,6 +184,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\Request.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgCreator.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgCustomColor.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgItemInfo.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Requests\SvgTextInfo.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\Request.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgCreator.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgCustomColor.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgItemInfo.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Requests\SvgTextInfo.h" />

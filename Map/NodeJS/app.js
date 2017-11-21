@@ -213,8 +213,28 @@ function onRenderReq(socketId, request)
       tester.logRequest(socketId, messageTypes.render, request);
    }
    
+   var scale_or_framingLevel, xFocus, yFocus;
+   if (request.scale && request.xFocus && request.yFocus)
+   {
+      scale_or_framingLevel = request.scale;
+      xFocus = request.xFocus;
+      yFocus = request.yFocus;
+   }
+   else if (request.framingLevel)
+   {
+      scale_or_framingLevel = request.framingLevel;
+      xFocus = 'N';
+      yFocus = 'N'; 
+   }
+   else
+   {
+      scale_or_framingLevel = 'N';
+      xFocus = 'N';
+      yFocus = 'N';    
+   }
+   
    var req = socketId + ' ' + request.id + ' ' + messageTypes.render + ' ' + request.mapId + ' ' + request.language + ' ' + request.width + ' ' + request.height + ' '
-             + request.lookIndex + ' ' + (request.scale ? request.scale : 'N') + ' ' + (request.xFocus ? request.xFocus : 'N') + ' ' + (request.yFocus ? request.yFocus : 'N');
+             + request.lookIndex + ' ' + scale_or_framingLevel + ' ' + xFocus + ' ' + yFocus;
    request.elementIds.forEach(function(elementId)
    {
       req += ' ' + elementId;

@@ -292,21 +292,23 @@ namespace map_server
 				}
 				catch (...)
 				{
-					return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, customColorMap);
+                    int framingLevel;
+                    try
+                    {
+                        framingLevel = std::stoi(tokenVector[8]);
+                    }
+                    catch (...)
+                    {
+                        framingLevel = 0;
+                    }
+
+					return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels,
+                                             lookIndex, elementIds, customColorMap, framingLevel);
 				}
 
-				int framingLevel;
-				try
-				{
-                    framingLevel = std::stoi(tokenVector[8]);
-				}
-				catch (...)
-				{
-                    framingLevel = 0;
-				}
 
 				return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, customColorMap,
-                                         scale, xFocus, yFocus, framingLevel);
+                                         scale, xFocus, yFocus);
 			}
 		}
 

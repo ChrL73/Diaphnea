@@ -169,8 +169,13 @@ namespace map_server
                 {
                     double xMin = std::numeric_limits<double>::max();
                     double xMax = std::numeric_limits<double>::lowest();
-                    double yMin = std::numeric_limits<double>::max();
-                    double yMax = std::numeric_limits<double>::lowest();
+                    double yMin = xMin;
+                    double yMax = xMax;
+                    double xMin0 = xMin;
+                    double xMax0 = xMax;
+                    double yMin0 = xMin;
+                    double yMax0 = xMax;
+                    bool minMaxSet = false;
 
                     for (i = 0; i < n; ++i)
                     {
@@ -185,7 +190,24 @@ namespace map_server
                             if (item->getXMax() > xMax) xMax = item->getXMax();
                             if (item->getYMin() < yMin) yMin = item->getYMin();
                             if (item->getYMax() > yMax) yMax = item->getYMax();
+                            minMaxSet = true;
                         }
+
+                        if (!minMaxSet)
+                        {
+                            if (item->getXMin() < xMin0) xMin0 = item->getXMin();
+                            if (item->getXMax() > xMax0) xMax0 = item->getXMax();
+                            if (item->getYMin() < yMin0) yMin0 = item->getYMin();
+                            if (item->getYMax() > yMax0) yMax0 = item->getYMax();
+                        }
+                    }
+
+                    if (!minMaxSet)
+                    {
+                        xMin = xMin0;
+                        xMax = xMax0;
+                        yMin = yMin0;
+                        yMax = yMax0;
                     }
 
                     _xFocus = 0.5 * (xMin + xMax);

@@ -444,6 +444,26 @@ namespace MapDataProcessing
                 }
             }
 
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                Dictionary<MapElement, int> elementsToLink = new Dictionary<MapElement, int>();
+                foreach (MapElement linkedElement in element.LinkedElements1.Keys)
+                {
+                    // If 'linkedElement' is a river, all rivers along the stream to the sea (or ocean) must be linked to 'element'
+                    Dictionary<MapElement, int> unsymetricalLinked1Elements = _elementLinker.getUnsymetricalLinked1Elements(linkedElement);
+                    if (unsymetricalLinked1Elements == null) return -1;
+                    foreach (MapElement unsymetricalLinked1Element in unsymetricalLinked1Elements.Keys)
+                    {
+                        if (!elementsToLink.ContainsKey(unsymetricalLinked1Element)) elementsToLink.Add(unsymetricalLinked1Element, 0);
+                    }
+                }
+
+                foreach (MapElement elementToLink in elementsToLink.Keys)
+                {
+                    if (!element.LinkedElements1.ContainsKey(elementToLink)) element.LinkedElements1.Add(elementToLink, 0);
+                }
+            }
+
             return 0;
         }
 

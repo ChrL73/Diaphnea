@@ -131,6 +131,24 @@ namespace MapDataProcessing
             return Linked1Elements;
         }
 
+        internal Dictionary<MapElement, int> getUnsymetricalLinked1Elements(MapElement element)
+        {
+            Dictionary<MapElement, int> Linked1Elements = new Dictionary<MapElement, int>();
+
+            if (element is LineMapElement)
+            {
+                LineMapElement currentElement = (LineMapElement)element;
+                while (true)
+                {
+                    if (!_attachmentDictionary.ContainsKey(currentElement) || _attachmentDictionary[currentElement].Count == 0) break;
+                    currentElement = _attachmentDictionary[currentElement].First().Key;
+                    Linked1Elements.Add(currentElement, 0);
+                }
+            }
+
+            return Linked1Elements;
+        }
+
         internal Dictionary<MapElement, int> getLinked2Elements(MapElement element)
         {
             Dictionary<MapElement, int> Linked2Elements = new Dictionary<MapElement, int>();

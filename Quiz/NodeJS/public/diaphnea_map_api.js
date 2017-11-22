@@ -236,6 +236,12 @@ var mapServerInterface =
                currentFillingStyle = fillingStyle;
             };
             
+            var currentFramingLevel = 0;
+            this.setFramingLevel = function(framingLevel)
+            {
+               currentFramingLevel = framingLevel;
+            };
+            
             var addedItemsByZIndex = [];
             var i;
             for (i = 0; i < 32; ++i) addedItemsByZIndex.push({});
@@ -254,7 +260,8 @@ var mapServerInterface =
                   yFocus: yFocus,
                   scale: scale,
                   currentLanguageId: currentLanguageId,
-                  currentFillingStyle: currentFillingStyle
+                  currentFillingStyle: currentFillingStyle,
+                  currentFramingLevel: currentFramingLevel
                };
                
                savedStates[stateId].visibleElements = JSON.parse(JSON.stringify(visibleElements));
@@ -275,6 +282,7 @@ var mapServerInterface =
                   scale = state.scale;
                   currentLanguageId = state.currentLanguageId;
                   currentFillingStyle = state.currentFillingStyle;
+                  currentFramingLevel = state.currentFramingLevel;
                   
                   visibleElements = JSON.parse(JSON.stringify(state.visibleElements));
                   addedItems = JSON.parse(JSON.stringify(state.addedItems));
@@ -414,6 +422,10 @@ var mapServerInterface =
                      request.xFocus = xFocus;
                      request.yFocus = yFocus;
                      if (!svgRequested) context.ignoreServerScale = true;
+                  }
+                  else
+                  {
+                     request.framingLevel = currentFramingLevel;
                   }
                   
                   if (svgRequested)

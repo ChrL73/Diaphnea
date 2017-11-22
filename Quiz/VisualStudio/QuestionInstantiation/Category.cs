@@ -13,12 +13,14 @@ namespace QuestionInstantiation
         private readonly Int32 _weightIndex;
         private readonly string _questionNameInLog;
         private readonly QuizData _quizData;
+        private readonly XmlMapParameters _mapParameters;
 
-        protected Category(int weightIndex, string questionNameInLog, QuizData quizData)
+        protected Category(int weightIndex, string questionNameInLog, QuizData quizData, XmlMapParameters mapParameters)
         {
             _weightIndex = weightIndex;
             _questionNameInLog = questionNameInLog;
             _quizData = quizData;
+            _mapParameters = mapParameters;
         }
 
         protected Int32 WeightIndex
@@ -34,6 +36,28 @@ namespace QuestionInstantiation
         protected QuizData QuizData
         {
             get { return _quizData; }
+        }
+
+        protected BsonDocument getMapParameterBsonDocument()
+        {
+            if (_mapParameters == null) throw new NotImplementedException();
+
+            BsonArray categoryArray = new BsonArray();
+            foreach (XmlMapCategory mapCategory in _mapParameters.category)
+            {
+                categoryArray.Add(mapCategory.id);
+            }
+
+            BsonDocument mapParametersDocument = new BsonDocument()
+            {
+                { "framing_level", _mapParameters.framingLevel },
+                { "answer_draw_depth", _mapParameters.answerDrawDepth },
+                { "wrong_choice_draw_depth", _mapParameters.wrongChoiceDrawDepth },
+                { "category_selection_mode", _mapParameters.categorySelectionMode.ToString() },
+                { "categories", categoryArray}
+            };
+
+            return mapParametersDocument;
         }
 
         abstract internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId);

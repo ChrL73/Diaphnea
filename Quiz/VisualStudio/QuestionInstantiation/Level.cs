@@ -223,7 +223,8 @@ namespace QuestionInstantiation
 
                         double distribParameterCorrection = 0.0;
                         if (xmlAttributeQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeQuestionCategory.distribParameterCorrection;
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlAttributeQuestionCategory.answerProximityCriterion, distribParameterCorrection);
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlAttributeQuestionCategory.answerProximityCriterion,
+                                                                                 distribParameterCorrection, xmlAttributeQuestionCategory.mapParameters);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
                         {
@@ -370,7 +371,8 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelation1QuestionCategory.weight);
                         _weightSum += weight;
 
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelation1QuestionCategory.answerProximityCriterion, distribParameterCorrection);
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelation1QuestionCategory.answerProximityCriterion,
+                                                                                 distribParameterCorrection, null);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -550,7 +552,8 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationNQuestionCategory.weight);
                         _weightSum += weight;
 
-                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationNQuestionCategory.answerProximityCriterion, distribParameterCorrection);
+                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationNQuestionCategory.answerProximityCriterion,
+                                                                                     distribParameterCorrection, null);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -730,7 +733,7 @@ namespace QuestionInstantiation
                         double distribParameterCorrection = 0.0;
                         if (xmlAttributeOrderQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeOrderQuestionCategory.distribParameterCorrection;
                         AttributeOrderCategory category = new AttributeOrderCategory(_weightSum, questionNameInLog, _quizData, numericalAttributeType, questionText,
-                                                                                     xmlAttributeOrderQuestionCategory.mode, distribParameterCorrection);
+                                                                                     xmlAttributeOrderQuestionCategory.mode, distribParameterCorrection, null);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
                         {
@@ -827,7 +830,8 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationLimitQuestionCategory.weight);
                         _weightSum += weight;
 
-                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationLimitQuestionCategory.answerProximityCriterion, distribParameterCorrection);
+                        SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationLimitQuestionCategory.answerProximityCriterion,
+                                                                                 distribParameterCorrection, null);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -970,7 +974,7 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationOrderQuestionCategory.weight);
                         _weightSum += weight;
 
-				        RelationOrderCategory category = new RelationOrderCategory(_weightSum, questionNameInLog, _quizData, distribParameterCorrection);
+				        RelationOrderCategory category = new RelationOrderCategory(_weightSum, questionNameInLog, _quizData, distribParameterCorrection, null);
 				
                         foreach (Element startElement in _elementByTypeDictionary[startElementType])
 				        {
@@ -1096,7 +1100,7 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationExistenceQuestionCategory.weight);
                         _weightSum += weight;
 
-                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0);
+                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0, null);
                         MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, XmlMultipleAnswerProximityCriterionEnum.NONE);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])

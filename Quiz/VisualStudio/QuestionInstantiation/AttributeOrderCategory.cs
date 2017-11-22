@@ -21,8 +21,8 @@ namespace QuestionInstantiation
         private int _maxIndex;
 
         internal AttributeOrderCategory (int weightIndex, string questionNameInLog, QuizData quizData, XmlNumericalAttributeType numericalAttributeType,
-                                         Text questionText, XmlAttributeOrderModeEnum mode, double distribParameterCorrection)
-            : base(weightIndex, questionNameInLog, quizData)
+                                         Text questionText, XmlAttributeOrderModeEnum mode, double distribParameterCorrection, XmlMapParameters mapParameters)
+            : base(weightIndex, questionNameInLog, quizData, mapParameters)
         {
             _numericalAttributeType = numericalAttributeType;
             _questionText = questionText;

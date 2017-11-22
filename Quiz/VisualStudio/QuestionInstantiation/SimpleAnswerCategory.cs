@@ -15,8 +15,9 @@ namespace QuestionInstantiation
         private readonly XmlSimpleAnswerProximityCriterionEnum _proximityCriterion;
         private readonly double _distribParameterCorrection;
 
-        internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlSimpleAnswerProximityCriterionEnum proximityCriterion, double distribParameterCorrection)
-            : base(weightIndex, questionNameInLog, quizData)
+        internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlSimpleAnswerProximityCriterionEnum proximityCriterion,
+                                      double distribParameterCorrection, XmlMapParameters mapParameters)
+            : base(weightIndex, questionNameInLog, quizData, mapParameters)
         {
             _proximityCriterion = proximityCriterion;
             _distribParameterCorrection = distribParameterCorrection;
@@ -143,13 +144,14 @@ namespace QuestionInstantiation
                 { "choice_list", choiceListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },
                 { "distrib_parameter_correction", _distribParameterCorrection },
-                { "proximity_criterion_type", proximityCriterionType }
+                { "proximity_criterion_type", proximityCriterionType },
+                { "mapParameters", getMapParameterBsonDocument() }
             };
 
             return categoryDocument;
         }
 
-        internal BsonDocument getQuestionListDocument(string questionnaireId)
+        private BsonDocument getQuestionListDocument(string questionnaireId)
         {
             BsonDocument questionListDocument = new BsonDocument();
 
@@ -171,7 +173,7 @@ namespace QuestionInstantiation
             return questionListDocument;
         }
 
-        internal BsonDocument getChoiceListDocument(string questionnaireId)
+        private BsonDocument getChoiceListDocument(string questionnaireId)
         {
             BsonArray choicesArray = new BsonArray();
             foreach (List<Choice> list in _choiceDictionary.Values)

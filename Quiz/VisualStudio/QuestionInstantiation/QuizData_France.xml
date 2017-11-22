@@ -17126,6 +17126,9 @@
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
+        <mapParameters framingLevel="7" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category id="ca_region"/>
+        </mapParameters>
       </attributeQuestionCategory>
       <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">

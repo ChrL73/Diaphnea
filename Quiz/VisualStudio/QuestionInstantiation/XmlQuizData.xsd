@@ -245,6 +245,11 @@
       <xsd:pattern value="e_(.)+" />
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="XmlMapCategoryIdRef">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="ca_(.)+" />
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:complexType name="XmlRelation">
     <xsd:sequence />
     <xsd:attribute name="type" type="XmlRelationIdRef" use="required" />
@@ -290,6 +295,7 @@
   <xsd:complexType name="XmlAttributeQuestionCategory">
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText1P" maxOccurs="unbounded" minOccurs="0" />
+      <xsd:element name="mapParameters" type="XmlMapParameters" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="elementType" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="questionAttribute" type="XmlAttributeTypeIdRef" use="required" />
@@ -416,6 +422,19 @@
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
   </xsd:complexType>
+  <xsd:complexType name="XmlMapParameters">
+    <xsd:sequence>
+      <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="framingLevel" type="xsd:int" use="required"/>
+    <xsd:attribute name="answerDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="wrongChoiceDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlMapCategory">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="XmlMapCategoryIdRef" use="required"/>
+  </xsd:complexType>
   <xsd:simpleType name="XmlRelation1IdRef">
     <xsd:restriction base="xsd:IDREF">
       <xsd:pattern value="r1._(.)+" />
@@ -483,6 +502,12 @@
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="EXISTS" />
       <xsd:enumeration value="DOES_NOT_EXIST" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlCategorySelectionModeEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="INCLUDE" />
+      <xsd:enumeration value="EXCLUDE" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlString1P">

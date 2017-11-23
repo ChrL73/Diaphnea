@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="5a0d8518db404c2bd80f4dcb fr" />
+				<Option parameters="5a16d8b2db404c18e4498bf4 fr" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -66,6 +66,8 @@
 		<Unit filename="Level.h" />
 		<Unit filename="MapIdInfo.cpp" />
 		<Unit filename="MapIdInfo.h" />
+		<Unit filename="MapParameters.cpp" />
+		<Unit filename="MapParameters.h" />
 		<Unit filename="MultipleAnswerCategory.cpp" />
 		<Unit filename="MultipleAnswerCategory.h" />
 		<Unit filename="MultipleAnswerQuestion.cpp" />

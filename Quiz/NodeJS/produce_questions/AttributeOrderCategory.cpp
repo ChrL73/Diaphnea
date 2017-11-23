@@ -6,8 +6,10 @@
 
 namespace produce_questions
 {
-    AttributeOrderCategory::AttributeOrderCategory(unsigned int weightIndex, const std::string& questionText, int choiceCount, const std::string& choiceListId, double distribParameterCorrection, int maxIndex) :
-        Category(weightIndex), _questionText(questionText), _choiceCount(choiceCount), _choiceListId(choiceListId), _distribParameterCorrection(distribParameterCorrection), _maxIndex(maxIndex)
+    AttributeOrderCategory::AttributeOrderCategory(unsigned int weightIndex, const MapParameters *mapParameters, const std::string& questionText,
+                                                   int choiceCount, const std::string& choiceListId, double distribParameterCorrection, int maxIndex) :
+        Category(weightIndex, mapParameters), _questionText(questionText), _choiceCount(choiceCount), _choiceListId(choiceListId),
+        _distribParameterCorrection(distribParameterCorrection), _maxIndex(maxIndex)
     {
         QuizData *quizData = QuizData::instance();
         int i;

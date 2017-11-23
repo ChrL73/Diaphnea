@@ -10,6 +10,7 @@
 #include "Choice.h"
 #include "AttributeOrderChoice.h"
 #include "TextAndComment.h"
+#include "MapParameters.h"
 
 namespace produce_questions
 {
@@ -113,6 +114,8 @@ namespace produce_questions
                     const char *categoryType = dbCategory.getStringField("type");
                     unsigned int weightIndex = dbCategory.getIntField("weight_index");
 
+                    const MapParameters *mapParameters = getMapParameteres(dbCategory);
+
                     if (strcmp(categoryType, "SimpleAnswer") == 0)
                     {
                         int categoryQuestionCount = dbCategory.getIntField("question_count");
@@ -127,7 +130,7 @@ namespace produce_questions
                         else if (criterion[1] == 'u') proximityCriterionType = produce_questions::NUMBER;
                         else if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
 
-                        SimpleAnswerCategory *simpleAnswerCategory = new SimpleAnswerCategory(weightIndex, categoryQuestionCount, questionListId, categoryChoiceCount,
+                        SimpleAnswerCategory *simpleAnswerCategory = new SimpleAnswerCategory(weightIndex, mapParameters, categoryQuestionCount, questionListId, categoryChoiceCount,
                                                                                               choiceListId, distribParameterCorrection, proximityCriterionType);
 
                         categoryVector.push_back(simpleAnswerCategory);
@@ -144,7 +147,7 @@ namespace produce_questions
                         const char *criterion = dbCategory.getStringField("proximity_criterion_type");
                         if (criterion[0] == '3') proximityCriterionType = produce_questions::POINT_3D;
 
-                        MultipleAnswerCategory *multipleAnswerCategory = new MultipleAnswerCategory(weightIndex, categoryQuestionCount, questionListId, categoryChoiceCount,
+                        MultipleAnswerCategory *multipleAnswerCategory = new MultipleAnswerCategory(weightIndex, mapParameters, categoryQuestionCount, questionListId, categoryChoiceCount,
                                                                                                     choiceListId, distribParameterCorrection, proximityCriterionType);
 
                         categoryVector.push_back(multipleAnswerCategory);
@@ -157,7 +160,8 @@ namespace produce_questions
                         double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
                         int maxIndex = dbCategory.getIntField("max_index");
 
-                        AttributeOrderCategory *attributeOrderCategory = new AttributeOrderCategory(weightIndex, questionText, categoryChoiceCount, choiceListId, distribParameterCorrection, maxIndex);
+                        AttributeOrderCategory *attributeOrderCategory = new AttributeOrderCategory(weightIndex, mapParameters, questionText, categoryChoiceCount, choiceListId,
+                                                                                                    distribParameterCorrection, maxIndex);
 
                         categoryVector.push_back(attributeOrderCategory);
                     }
@@ -167,7 +171,7 @@ namespace produce_questions
                         std::string questionListId = dbCategory.getField("question_list").OID().toString();
                         double distribParameterCorrection = dbCategory.getField("distrib_parameter_correction").numberDouble();
 
-                        RelationOrderCategory *relationOrderCategory = new RelationOrderCategory(weightIndex, categoryQuestionCount, questionListId, distribParameterCorrection);
+                        RelationOrderCategory *relationOrderCategory = new RelationOrderCategory(weightIndex, mapParameters, categoryQuestionCount, questionListId, distribParameterCorrection);
 
                         categoryVector.push_back(relationOrderCategory);
                     }
@@ -450,5 +454,28 @@ namespace produce_questions
         }
 
         return (*it).second;
+    }
+
+    const MapParameters *QuizData::getMapParameteres(mongo::BSONObj dbCategory)
+    {
+        mongo::BSONObj dbMapParameters = dbCategory.getField("map_parameters").Obj();
+
+        int framingLevel = dbMapParameters.getIntField("framing_level");
+        int questionDrawDepth = dbMapParameters.getIntField("question_draw_depth");
+        int answerDrawDepth = dbMapParameters.getIntField("answer_draw_depth");
+        int wrongChoiceDrawDepth = dbMapParameters.getIntField("wrong_choice_draw_depth");
+        const char *categorySelectionMode = dbMapParameters.getStringField("category_selection_mode");
+
+        std::vector<std::string> categories;
+        std::vector<Category *> categoryVector;
+        std::vector<mongo::BSONElement> dbCategoryVector = dbMapParameters.getField("categories").Array();
+        int i, n = dbCategoryVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            const char *category = dbCategoryVector[i].String().c_str();
+            if (strlen(category) > 3) categories.push_back(category + 3);
+        }
+
+        return new MapParameters(framingLevel, questionDrawDepth, answerDrawDepth, wrongChoiceDrawDepth, categorySelectionMode, categories);
     }
 }

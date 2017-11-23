@@ -16,8 +16,8 @@ namespace produce_questions
         CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
 
     public:
-        RelationOrderCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, double distribParameterCorrection):
-            Category(weightIndex), _questionCount(questionCount), _questionListId(questionListId), _distribParameterCorrection(distribParameterCorrection) {}
+        RelationOrderCategory(unsigned int weightIndex, const MapParameters *mapParameters, int questionCount, const std::string& questionListId, double distribParameterCorrection):
+            Category(weightIndex, mapParameters), _questionCount(questionCount), _questionListId(questionListId), _distribParameterCorrection(distribParameterCorrection) {}
 
     };
 }

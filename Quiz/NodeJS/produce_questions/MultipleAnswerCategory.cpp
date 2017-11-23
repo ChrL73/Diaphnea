@@ -8,9 +8,9 @@
 
 namespace produce_questions
 {
-    MultipleAnswerCategory::MultipleAnswerCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, int choiceCount, const std::string& choiceListId,
-                                                   double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType) :
-        Category(weightIndex), _questionCount(questionCount), _questionListId(questionListId), _choiceCount(choiceCount), _choiceListId(choiceListId),
+    MultipleAnswerCategory::MultipleAnswerCategory(unsigned int weightIndex, const MapParameters *mapParameters, int questionCount, const std::string& questionListId,
+                                                   int choiceCount, const std::string& choiceListId, double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType) :
+        Category(weightIndex, mapParameters), _questionCount(questionCount), _questionListId(questionListId), _choiceCount(choiceCount), _choiceListId(choiceListId),
         _distribParameterCorrection(distribParameterCorrection), _proximityCriterionType(proximityCriterionType)
     {
         QuizData *quizData = QuizData::instance();

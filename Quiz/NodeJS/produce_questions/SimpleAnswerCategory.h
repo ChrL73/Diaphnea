@@ -25,7 +25,7 @@ namespace produce_questions
         CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
 
     public:
-        SimpleAnswerCategory(unsigned int weightIndex, int questionCount, const std::string& questionListId, int choiceCount, const std::string& choiceListId,
-                             double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
+        SimpleAnswerCategory(unsigned int weightIndex, const MapParameters *mapParameters, int questionCount, const std::string& questionListId, int choiceCount,
+                             const std::string& choiceListId, double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType);
     };
 }

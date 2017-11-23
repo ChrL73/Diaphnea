@@ -23,6 +23,7 @@ namespace produce_questions
         CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
 
     public:
-        AttributeOrderCategory(unsigned int weightIndex, const std::string& questionText, int choiceCount, const std::string& choiceListId, double distribParameterCorrection, int maxIndex);
+        AttributeOrderCategory(unsigned int weightIndex, const MapParameters *mapParameters, const std::string& questionText, int choiceCount,
+                               const std::string& choiceListId, double distribParameterCorrection, int maxIndex);
     };
 }

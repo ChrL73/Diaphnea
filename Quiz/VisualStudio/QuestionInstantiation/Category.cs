@@ -13,9 +13,9 @@ namespace QuestionInstantiation
         private readonly Int32 _weightIndex;
         private readonly string _questionNameInLog;
         private readonly QuizData _quizData;
-        private readonly XmlMapParameters _mapParameters;
+        private readonly MapParameters _mapParameters;
 
-        protected Category(int weightIndex, string questionNameInLog, QuizData quizData, XmlMapParameters mapParameters)
+        protected Category(int weightIndex, string questionNameInLog, QuizData quizData, MapParameters mapParameters)
         {
             _weightIndex = weightIndex;
             _questionNameInLog = questionNameInLog;
@@ -43,17 +43,18 @@ namespace QuestionInstantiation
             if (_mapParameters == null) throw new NotImplementedException();
 
             BsonArray categoryArray = new BsonArray();
-            foreach (XmlMapCategory mapCategory in _mapParameters.category)
+            foreach (XmlMapCategory mapCategory in _mapParameters.Categories)
             {
                 categoryArray.Add(mapCategory.id);
             }
 
             BsonDocument mapParametersDocument = new BsonDocument()
             {
-                { "framing_level", _mapParameters.framingLevel },
-                { "answer_draw_depth", _mapParameters.answerDrawDepth },
-                { "wrong_choice_draw_depth", _mapParameters.wrongChoiceDrawDepth },
-                { "category_selection_mode", _mapParameters.categorySelectionMode.ToString() },
+                { "framing_level", _mapParameters.FramingLevel },
+                { "question_draw_depth", _mapParameters.QuestionDrawDepth },
+                { "answer_draw_depth", _mapParameters.AnswerDrawDepth },
+                { "wrong_choice_draw_depth", _mapParameters.WrongChoiceDrawDepth },
+                { "category_selection_mode", _mapParameters.CategorySelectionMode.ToString() },
                 { "categories", categoryArray}
             };
 

@@ -16,7 +16,7 @@ namespace QuestionInstantiation
         private readonly double _distribParameterCorrection;
 
         internal SimpleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlSimpleAnswerProximityCriterionEnum proximityCriterion,
-                                      double distribParameterCorrection, XmlMapParameters mapParameters)
+                                      double distribParameterCorrection, MapParameters mapParameters)
             : base(weightIndex, questionNameInLog, quizData, mapParameters)
         {
             _proximityCriterion = proximityCriterion;
@@ -145,7 +145,7 @@ namespace QuestionInstantiation
                 { "weight_index", WeightIndex },
                 { "distrib_parameter_correction", _distribParameterCorrection },
                 { "proximity_criterion_type", proximityCriterionType },
-                { "mapParameters", getMapParameterBsonDocument() }
+                { "map_parameters", getMapParameterBsonDocument() }
             };
 
             return categoryDocument;

@@ -223,8 +223,9 @@ namespace QuestionInstantiation
 
                         double distribParameterCorrection = 0.0;
                         if (xmlAttributeQuestionCategory.distribParameterCorrectionSpecified) distribParameterCorrection = xmlAttributeQuestionCategory.distribParameterCorrection;
+                        MapParameters mapParameters = new MapParameters(xmlAttributeQuestionCategory.mapParameters);
                         SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlAttributeQuestionCategory.answerProximityCriterion,
-                                                                                 distribParameterCorrection, xmlAttributeQuestionCategory.mapParameters);
+                                                                                 distribParameterCorrection, mapParameters);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
                         {

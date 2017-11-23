@@ -60,6 +60,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="GeoPoint.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="MapParameters.cs" />
     <Compile Include="MessageLogger.cs" />
     <Compile Include="MultipleAnswerCategory.cs" />
     <Compile Include="MultipleAnswerQuestion.cs" />

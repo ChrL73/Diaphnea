@@ -16,7 +16,7 @@ namespace QuestionInstantiation
         private readonly double _distribParameterCorrection;
 
         internal MultipleAnswerCategory(Int32 weightIndex, string questionNameInLog, QuizData quizData, XmlMultipleAnswerProximityCriterionEnum proximityCriterion,
-                                        double distribParameterCorrection, XmlMapParameters mapParameters)
+                                        double distribParameterCorrection, MapParameters mapParameters)
             : base(weightIndex, questionNameInLog, quizData, mapParameters)
         {
             _proximityCriterion = proximityCriterion;

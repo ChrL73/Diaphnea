@@ -13,7 +13,7 @@ namespace QuestionInstantiation
         private readonly List<RelationOrderQuestion> _questionList = new List<RelationOrderQuestion>();
         private readonly double _distribParameterCorrection;
 
-        internal RelationOrderCategory(int weightIndex, string questionNameInLog, QuizData quizData, double distribParameterCorrection, XmlMapParameters mapParameters)
+        internal RelationOrderCategory(int weightIndex, string questionNameInLog, QuizData quizData, double distribParameterCorrection, MapParameters mapParameters)
             : base(weightIndex, questionNameInLog, quizData, mapParameters)
         {
             _distribParameterCorrection = distribParameterCorrection;

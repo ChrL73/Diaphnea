@@ -1424,7 +1424,7 @@ public partial class XmlMapCategory {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class XmlMapParameters {
+public partial class XmlMapParameters1 {
     
     private XmlMapCategory[] categoryField;
     
@@ -1513,7 +1513,7 @@ public partial class XmlAttributeQuestionCategory {
     
     private XmlQuestionText1P[] questionTextField;
     
-    private XmlMapParameters mapParametersField;
+    private XmlMapParameters1 mapParametersField;
     
     private string elementTypeField;
     
@@ -1545,7 +1545,7 @@ public partial class XmlAttributeQuestionCategory {
     }
     
     /// <remarks/>
-    public XmlMapParameters mapParameters {
+    public XmlMapParameters1 mapParameters {
         get {
             return this.mapParametersField;
         }

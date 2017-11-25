@@ -433,7 +433,7 @@
   </xsd:complexType>
   <xsd:complexType name="XmlMapCategory">
     <xsd:sequence/>
-    <xsd:attribute name="id" type="XmlMapCategoryIdRef" use="required"/>
+    <xsd:attribute name="categoryIndexInMapConfigFile" type="xsd:nonNegativeInteger" use="required"/>
   </xsd:complexType>
   <xsd:simpleType name="XmlRelation1IdRef">
     <xsd:restriction base="xsd:IDREF">

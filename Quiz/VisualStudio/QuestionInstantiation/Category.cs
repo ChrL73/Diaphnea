@@ -45,7 +45,7 @@ namespace QuestionInstantiation
             BsonArray categoryArray = new BsonArray();
             foreach (XmlMapCategory mapCategory in _mapParameters.Categories)
             {
-                categoryArray.Add(mapCategory.id);
+                categoryArray.Add(Int32.Parse(mapCategory.categoryIndexInMapConfigFile));
             }
 
             BsonDocument mapParametersDocument = new BsonDocument()

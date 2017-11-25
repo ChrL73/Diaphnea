@@ -501,7 +501,7 @@
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the province whose number is {0}?"/>
         <mapParameters framingLevel="6" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category id="ca_region"/>
+          <category categoryIndexInMapConfigFile="2"/>
         </mapParameters>
       </attributeQuestionCategory>
      <!-- <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"

@@ -19,7 +19,7 @@ namespace produce_questions
 
     CompleteQuestion *RelationOrderQuestion::getNewQuestion(int choiceCount, double distribParameter) const
     {
-        CompleteQuestion *completeQuestion = new CompleteQuestion(_question, produce_questions::SIMPLE, choiceCount);
+        CompleteQuestion *completeQuestion = new CompleteQuestion(0, _question, produce_questions::SIMPLE, choiceCount);
 
         int draw1 = RandomNumberGenerator::getRandomInt(_choiceCount - choiceCount + 1);
         std::string answer = _choiceVector[draw1];

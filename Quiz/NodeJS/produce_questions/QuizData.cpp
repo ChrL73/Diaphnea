@@ -466,14 +466,14 @@ namespace produce_questions
         int wrongChoiceDrawDepth = dbMapParameters.getIntField("wrong_choice_draw_depth");
         const char *categorySelectionMode = dbMapParameters.getStringField("category_selection_mode");
 
-        std::vector<std::string> categories;
+        std::vector<int> categories;
         std::vector<Category *> categoryVector;
         std::vector<mongo::BSONElement> dbCategoryVector = dbMapParameters.getField("categories").Array();
         int i, n = dbCategoryVector.size();
         for (i = 0; i < n; ++i)
         {
-            const char *category = dbCategoryVector[i].String().c_str();
-            if (strlen(category) > 3) categories.push_back(category + 3);
+            int category = dbCategoryVector[i].Int();
+            categories.push_back(category);
         }
 
         return new MapParameters(framingLevel, questionDrawDepth, answerDrawDepth, wrongChoiceDrawDepth, categorySelectionMode, categories);

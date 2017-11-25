@@ -13,11 +13,11 @@ namespace produce_questions
         const int _answerDrawDepth;
         const int _wrongChoiceDrawDepth;
         const std::string _categorySelectionMode;
-        const std::vector<std::string> _categories;
+        const std::vector<int> _categories;
 
     public:
         MapParameters(int framingLevel, int questionDrawDepth, int answerDrawDepth, int wrongChoiceDrawDepth,
-                      const std::string& categorySelectionMode, const std::vector<std::string>& categories) :
+                      const std::string& categorySelectionMode, const std::vector<int>& categories) :
             _framingLevel(framingLevel), _questionDrawDepth(questionDrawDepth), _answerDrawDepth(answerDrawDepth), _wrongChoiceDrawDepth(wrongChoiceDrawDepth),
             _categorySelectionMode(categorySelectionMode), _categories(categories) {}
 
@@ -27,6 +27,6 @@ namespace produce_questions
         int getWrongChoiceDrawDepth(void) const { return _wrongChoiceDrawDepth; }
         const std::string& getCategorySelectionMode(void) const { return _categorySelectionMode; }
         int getCategoryCount(void) const { return _categories.size(); }
-        const std::string& getCategory(int i) const { return _categories[i]; }
+        int getCategory(int i) const { return _categories[i]; }
     };
 }

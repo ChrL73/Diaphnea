@@ -22,7 +22,7 @@ namespace produce_questions
 
     CompleteQuestion *AttributeOrderCategory::getNewQuestion(int choiceCount, double distribParameter) const
     {
-        CompleteQuestion *completeQuestion = new CompleteQuestion(_questionText, produce_questions::SIMPLE, choiceCount);
+        CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), _questionText, produce_questions::SIMPLE, choiceCount);
 
         int draw = RandomNumberGenerator::getRandomInt(_maxIndex + 1);
         const AttributeOrderChoice *choice = _choiceVector[draw];

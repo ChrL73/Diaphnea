@@ -28,7 +28,7 @@ namespace produce_questions
         QuizData *quizData = QuizData::instance();
         const MultipleAnswerQuestion *question = quizData->getMultipleAnswerQuestion(_questionListId, draw, _proximityCriterionType, _choiceVector);
 
-        CompleteQuestion *completeQuestion = new CompleteQuestion(question->getQuestion(), produce_questions::MULTIPLE, choiceCount);
+        CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), question->getQuestion(), produce_questions::MULTIPLE, choiceCount);
 
         int valueCount = choiceCount - 1;
         if (valueCount > static_cast<int>(question->getAnswerCount())) valueCount = question->getAnswerCount();

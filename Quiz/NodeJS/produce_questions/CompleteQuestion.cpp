@@ -2,11 +2,12 @@
 #include "TextAndComment.h"
 #include "RandomNumberGenerator.h"
 #include "MapIdInfo.h"
+#include "MapParameters.h"
 
 namespace produce_questions
 {
-    CompleteQuestion::CompleteQuestion(const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount) :
-                _question(question), _multiplicity(multiplicity)
+    CompleteQuestion::CompleteQuestion(const MapParameters *mapParameters, const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount) :
+                _mapParameters(mapParameters), _question(question), _multiplicity(multiplicity)
     {
         int i;
         for (i = 0; i < choiceCount; ++i) _choiceVector.push_back(0);
@@ -59,7 +60,7 @@ namespace produce_questions
             if (i != n - 1) _json += ",";
         }
 
-        _json += "]}";
+        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel()) +  "}";
 
         return _json;
     }

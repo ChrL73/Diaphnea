@@ -10,10 +10,12 @@ namespace produce_questions
 {
     class TextAndComment;
     class MapIdInfo;
+    class MapParameters;
 
     class CompleteQuestion
     {
     private:
+        const MapParameters * const _mapParameters;
         const std::string _question;
         const QuestionMultiplicityEnum _multiplicity;
         std::vector<TextAndComment *> _choiceVector;
@@ -23,7 +25,7 @@ namespace produce_questions
         std::string _json;
 
     public:
-        CompleteQuestion(const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount);
+        CompleteQuestion(const MapParameters *mapParameters, const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount);
         ~CompleteQuestion();
 
         void addChoice(const std::string& text, const std::string& comment, bool rightAnswer);

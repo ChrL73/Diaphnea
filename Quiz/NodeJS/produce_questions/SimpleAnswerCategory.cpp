@@ -4,6 +4,7 @@
  #include "QuizData.h"
  #include "CompleteQuestion.h"
  #include "Choice.h"
+ #include "MapParameters.h"
 
  namespace produce_questions
  {
@@ -27,9 +28,12 @@
         QuizData *quizData = QuizData::instance();
         const SimpleAnswerQuestion *question = quizData->getSimpleAnswerQuestion(_questionListId, draw, _proximityCriterionType, _choiceVector);
 
-        CompleteQuestion *completeQuestion = new CompleteQuestion(question->getQuestion(), produce_questions::SIMPLE, choiceCount);
+        CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), question->getQuestion(), produce_questions::SIMPLE, choiceCount);
         completeQuestion->addChoice(question->getAnswer(), question->getComment(), true);
-        completeQuestion->addMapId(question->getMapId(), 1);
+
+        int answerDrawDepth = getMapParameters()->getAnswerDrawDepth();
+        int wrongChoiceDrawDepth = getMapParameters()->getQuestionDrawDepth();
+        if (answerDrawDepth > 0) completeQuestion->addMapId(question->getMapId(), answerDrawDepth - 1);
 
         std::set<unsigned int> excludedValues;
         int wrongChoiceCount1 = question->getWrongChoiceCount1();
@@ -52,7 +56,7 @@
             excludedValues.insert(draw);
             const Choice *wrongChoice = question->getWrongChoice1(draw);
             completeQuestion->addChoice(wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
-            //completeQuestion->addMapId(wrongChoice->getMapId(), 1);
+            if (wrongChoiceDrawDepth > 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceDrawDepth - 1);
         }
 
         excludedValues.clear();
@@ -63,7 +67,7 @@
             excludedValues.insert(draw);
             const Choice *wrongChoice = question->getWrongChoice2(draw);
             completeQuestion->addChoice (wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
-            //completeQuestion->addMapId(wrongChoice->getMapId(), 1);
+            if (wrongChoiceDrawDepth > 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceDrawDepth - 1);
         }
 
         return completeQuestion;

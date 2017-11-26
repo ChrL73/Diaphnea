@@ -208,7 +208,7 @@ $(function()
          
          $('.waitAnswerImg').css('display', 'none');
          
-         mapIds = data.mapIds;
+         mapInfo = data.mapInfo;
          updateMap(displayedQuestion);
       }
    });
@@ -219,14 +219,19 @@ $(function()
       
       if (oldQuestion || oldQuestion === 0) map.pushState(oldQuestion);
       map.popState(newQuestion);
-         
-      mapIds[newQuestion].forEach(function(idInfo)
+      
+      if (!mapInfo[newQuestion]) return;
+      
+      var info = mapInfo[newQuestion];
+      map.setFramingLevel(info.framingLevel);   
+      
+      info.mapIds.forEach(function(idInfo)
       {
-         showLinkedElements(mapElements[idInfo.id], idInfo.depth);
+         showLinkedElements(mapElements[idInfo.id], idInfo.depth, info);
       });
    }
    
-   function showLinkedElements(element, depth)
+   function showLinkedElements(element, depth, info)
    {
       var threshold = 50;
       var linkedElements = {};
@@ -260,9 +265,15 @@ $(function()
          });
       }
       
+      var categories = {};
+      info.categories.forEach(function(index) { categories[index] = 1; });
+      var include = (info.mode == 'INCLUDE');
+      
       Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
       { 
-         mapElements[elementId].show();
+         var element = mapElements[elementId];
+         var categoryInList = (categories[element.getCategoryIndex()] == 1);
+         if (categoryInList == include) element.show();
       });
    }
 });

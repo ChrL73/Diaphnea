@@ -570,7 +570,7 @@ io.on('connection', function(socket)
          rightAnswerCount: context.rightAnswerCount,
          answerCount: context.answerCount,
          questionStates: [],
-         mapIds: [],
+         mapInfo: [],
          finalTime: context.finalTime
       };
       
@@ -585,7 +585,13 @@ io.on('connection', function(socket)
                outState.choiceStates.push({ state: state, comment: comment.length ? comment : undefined } );
             });
             outData.questionStates.push(outState);
-            outData.mapIds.push(context.questions[i].mapIds);
+            outData.mapInfo.push(
+            {
+               mapIds: context.questions[i].mapIds,
+               framingLevel: context.questions[i].framingLevel,
+               mode: context.questions[i].mode,
+               categories: context.questions[i].categories
+            });
          }
       });
       

@@ -60,7 +60,17 @@ namespace produce_questions
             if (i != n - 1) _json += ",";
         }
 
-        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel()) +  "}";
+        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel())
+                 + ",\"mode\":\"" + _mapParameters->getCategorySelectionMode() + "\",\"categories\":[";
+
+        n = _mapParameters->getCategoryCount();
+        for (i = 0; i < n; ++i)
+        {
+            _json += std::to_string(_mapParameters->getCategory(i));
+            if (i != n - 1) _json += ",";
+        }
+
+        _json += "]}";
 
         return _json;
     }

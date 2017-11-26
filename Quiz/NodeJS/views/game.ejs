@@ -12,7 +12,7 @@
       var displayedQuestion = data.displayedQuestion;
       var questionStates = data.questionStates;
       var answered = [];
-      var mapIds = [];%>
+      var mapInfo = [];%>
       
       <div class="container-fluid">
          <header class="row bg-success" id="gameHeader" style="padding-left:30px; border-bottom:1px solid #bbd8a2;">
@@ -32,19 +32,25 @@
                      answered.push(disabled);
                      if (disabled)
                      {
-                        var ids = '[';
+                        var info = '{mapIds:[';
                         var nId = question.mapIds.length;
                         question.mapIds.forEach(function(mapId, iId)
                         {
-                           ids += '{id:\'' + mapId.id + '\',depth:' + mapId.depth + '}';
-                           if (iId != nId - 1) ids += ',';
+                           info += '{id:\'' + mapId.id + '\',depth:' + mapId.depth + '}';
+                           if (iId != nId - 1) info += ',';
                         });
-                        ids += ']';
-                        mapIds.push(ids);
+                        info += '],framingLevel:' + question.framingLevel + ',mode:\'' + question.mode + '\',categories:[';
+                        question.categories.forEach(function(categoryId, iId)
+                        {
+                           info += categoryId;
+                           if (iId != nId - 1) info += ',';
+                        });
+                        info += ']}';
+                        mapInfo.push(info);
                      }
                      else
                      {
-                        mapIds.push('[]');
+                        mapInfo.push('null');
                      }%>
                      <div class="question panel panel-info" id="question<%=iQuestion%>" <% if(iQuestion == displayedQuestion) { %>style="display: block;"<% }%>>
                         <div class="panel-heading">
@@ -113,7 +119,7 @@
          var finished = <%=data.finalTime ? true : false%>;
          var mapServerUrl = '<%=data.mapServerUrl%>';
          var mapId = '<%=data.mapId%>';
-         var mapIds = [<%-mapIds%>];
+         var mapInfo = [<%-mapInfo%>];
       </script> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="diaphnea_map_api.js"></script>

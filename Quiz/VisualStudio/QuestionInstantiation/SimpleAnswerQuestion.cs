@@ -12,15 +12,15 @@ namespace QuestionInstantiation
         private readonly Text _questionText;
         private readonly Choice _choice;
         private readonly Choice _excludedChoice;
-        //private readonly Element _element;
+        private readonly Element _questionElement;
         private readonly XmlSimpleAnswerProximityCriterionEnum _proximityCriterion;
 
-        internal SimpleAnswerQuestion(Text questionText, Choice choice, Choice excludedChoice/*, Element element*/, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
+        internal SimpleAnswerQuestion(Text questionText, Choice choice, Choice excludedChoice, Element questionElement, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
         {
             _questionText = questionText;
             _choice = choice;
             _excludedChoice = excludedChoice;
-            //_element = element;
+            _questionElement = questionElement;
             _proximityCriterion = proximityCriterion;
         }
 
@@ -29,7 +29,8 @@ namespace QuestionInstantiation
             BsonDocument questionDocument = new BsonDocument()
             {
                 { "question", _questionText.getBsonDocument() },
-                { "map_id", _choice.Element.XmlElement.mapId == null ? "" : _choice.Element.XmlElement.mapId.Substring(2) }
+                { "question_map_id", (_questionElement == null || _questionElement.XmlElement.mapId == null) ? "" : _questionElement.XmlElement.mapId.Substring(2) },
+                { "answer_map_id", _choice.Element.XmlElement.mapId == null ? "" : _choice.Element.XmlElement.mapId.Substring(2) }
             };
 
             questionDocument.AddRange(_choice.getBsonDocument());

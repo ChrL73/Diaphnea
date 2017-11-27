@@ -250,7 +250,7 @@ namespace QuestionInstantiation
                                         }
                                         if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null/*, null*/, xmlAttributeQuestionCategory.answerProximityCriterion);
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null, null, xmlAttributeQuestionCategory.answerProximityCriterion);
                                         category.addQuestion(question);
                                     }
                                 }
@@ -372,8 +372,9 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelation1QuestionCategory.weight);
                         _weightSum += weight;
 
+                        MapParameters mapParameters = new MapParameters(xmlRelation1QuestionCategory.mapParameters);
                         SimpleAnswerCategory category = new SimpleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelation1QuestionCategory.answerProximityCriterion,
-                                                                                 distribParameterCorrection, null);
+                                                                                 distribParameterCorrection, mapParameters);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -416,7 +417,7 @@ namespace QuestionInstantiation
                                         Choice ExcludedChoice = null;
                                         if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
-                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, ExcludedChoice/*, startElement*/, xmlRelation1QuestionCategory.answerProximityCriterion);
+                                        SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, ExcludedChoice, startElement, xmlRelation1QuestionCategory.answerProximityCriterion);
                                         category.addQuestion(question);
                                     }
                                 }
@@ -887,7 +888,7 @@ namespace QuestionInstantiation
                                     }
                                     if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null/*, startElement*/, xmlRelationLimitQuestionCategory.answerProximityCriterion);
+                                    SimpleAnswerQuestion question = new SimpleAnswerQuestion(questionText, choice, null, startElement, xmlRelationLimitQuestionCategory.answerProximityCriterion);
                                     category.addQuestion(question);
                                 }
                             }

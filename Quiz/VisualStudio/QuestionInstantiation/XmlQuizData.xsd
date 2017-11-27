@@ -308,13 +308,13 @@
   </xsd:complexType>
   <xsd:complexType name="XmlRelation1QuestionCategoryList">
     <xsd:sequence>
-      <xsd:element name="relation1QuestionCategory" type="XmlRelation1QuestionCategory" maxOccurs="unbounded"
-				minOccurs="0" />
+      <xsd:element name="relation1QuestionCategory" type="XmlRelation1QuestionCategory" maxOccurs="unbounded" minOccurs="0" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlRelation1QuestionCategory">
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText1P" maxOccurs="unbounded" minOccurs="0" />
+      <xsd:element name="mapParameters" type="XmlMapParameters2" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="relation" type="XmlRelation1IdRef" use="required" />
     <xsd:attribute name="way" type="XmlWayEnum" use="required"/>
@@ -427,6 +427,16 @@
       <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
     </xsd:sequence>
     <xsd:attribute name="framingLevel" type="xsd:int" use="required"/>
+    <xsd:attribute name="answerDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="wrongChoiceDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
+    <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlMapParameters2">
+    <xsd:sequence>
+      <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="framingLevel" type="xsd:int" use="required"/>
+    <xsd:attribute name="questionDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="answerDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="wrongChoiceDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>

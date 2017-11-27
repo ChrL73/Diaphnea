@@ -24,5 +24,15 @@ namespace QuestionInstantiation
             CategorySelectionMode = xmlMapParameters1.categorySelectionMode;
             Categories = xmlMapParameters1.category.ToList();
         }
+
+        internal MapParameters(XmlMapParameters2 xmlMapParameters2)
+        {
+            FramingLevel = xmlMapParameters2.framingLevel;
+            QuestionDrawDepth = Int32.Parse(xmlMapParameters2.questionDrawDepth);
+            AnswerDrawDepth = Int32.Parse(xmlMapParameters2.answerDrawDepth);
+            WrongChoiceDrawDepth = Int32.Parse(xmlMapParameters2.wrongChoiceDrawDepth);
+            CategorySelectionMode = xmlMapParameters2.categorySelectionMode;
+            Categories = xmlMapParameters2.category.ToList();
+        }
     }
 }

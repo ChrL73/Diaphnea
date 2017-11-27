@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
 
- <parameters questionnaireId="_France" mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
+  <parameters questionnaireId="_France" mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
       <language id="fr" name="Français" status="TRANSLATION_COMPLETED"/>
       <language id="en" name="English" status="TRANSLATION_COMPLETED"/>
@@ -17122,7 +17122,7 @@
   
   <questionCategories>
     <attributeQuestionCategoryList>
-      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
@@ -17130,20 +17130,29 @@
           <category categoryIndexInMapConfigFile="1"/>
         </mapParameters>
       </attributeQuestionCategory>
-      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le numéro associé au département {0} ?"/>
         <questionText language="en" text="What is the number associated with the {0} department?"/>
+        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateCreation"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="30" minLevel="2">
         <questionText language="fr" text="En quelle année a été créé le département {0} ?"/>
         <questionText language="en" text="In what year was created the {0} department?"/>
+        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateNom"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="10" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} department bears its current name?"/>
+        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
@@ -17151,33 +17160,55 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the capital of the department whose number is {0}?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
         <questionText language="en" text="In which department is the city of {0}?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
         <questionText language="en" text="What is the number of the department where the city of {0} is located?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
         <questionText language="fr" text="De quelle région fait partie le département {0} ?"/>
         <questionText language="en" text="In what region is the {0} department?"/>
-      </relation1QuestionCategory>
+        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="3"/>
+          <category categoryIndexInMapConfigFile="5"/>
+          <category categoryIndexInMapConfigFile="6"/>
+        </mapParameters>
+      </relation1QuestionCategory>-->
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
         <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
         <questionText language="en" text="In what region is the department whose number is {0}?"/>
+        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="3"/>
+          <category categoryIndexInMapConfigFile="5"/>
+          <category categoryIndexInMapConfigFile="6"/>
+        </mapParameters>
       </relation1QuestionCategory>
-      <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
+      <!--<relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
         <questionText language="en" text="What river {0} is a tributary?"/>

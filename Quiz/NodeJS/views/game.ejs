@@ -40,10 +40,11 @@
                            if (iId != nId - 1) info += ',';
                         });
                         info += '],framingLevel:' + question.framingLevel + ',mode:\'' + question.mode + '\',categories:[';
+                        var categoryCount = question.categories.length;
                         question.categories.forEach(function(categoryId, iId)
                         {
                            info += categoryId;
-                           if (iId != nId - 1) info += ',';
+                           if (iId != categoryCount - 1) info += ',';
                         });
                         info += ']}';
                         mapInfo.push(info);

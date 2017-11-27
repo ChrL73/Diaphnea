@@ -31,9 +31,11 @@
         CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), question->getQuestion(), produce_questions::SIMPLE, choiceCount);
         completeQuestion->addChoice(question->getAnswer(), question->getComment(), true);
 
+        int questionDrawDepth = getMapParameters()->getQuestionDrawDepth();
         int answerDrawDepth = getMapParameters()->getAnswerDrawDepth();
-        int wrongChoiceDrawDepth = getMapParameters()->getQuestionDrawDepth();
-        if (answerDrawDepth > 0) completeQuestion->addMapId(question->getMapId(), answerDrawDepth - 1);
+        int wrongChoiceDrawDepth = getMapParameters()->getWrongChoiceDrawDepth();
+        if (questionDrawDepth > 0) completeQuestion->addMapId(question->getQuestionMapId(), questionDrawDepth - 1);
+        if (answerDrawDepth > 0) completeQuestion->addMapId(question->getAnswerMapId(), answerDrawDepth - 1);
 
         std::set<unsigned int> excludedValues;
         int wrongChoiceCount1 = question->getWrongChoiceCount1();

@@ -13880,7 +13880,7 @@
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Sauldre"/>
       </relationList>
     </element>
-    <element id="el_OiseRiviere" type="et_FleuveRiviere" minLevel="1" mapId="e_OiseRiviere">
+    <element id="el_OiseRiviere" type="et_FleuveRiviere" minLevel="1" mapId="e_Oise">
       <elementName>
         <name language="fr" text="Oise"/>
         <name language="en" text="Oise"/>
@@ -14650,7 +14650,7 @@
         <relation type="r1N_Riviere_Affluents" linkedElement="el_CorrezeRiviere"/>
       </relationList>
     </element>
-    <element id="el_AudeFleuve" type="et_FleuveRiviere" minLevel="2" mapId="e_AudeFleuve">
+    <element id="el_AudeFleuve" type="et_FleuveRiviere" minLevel="2" mapId="e_Aude">
       <elementName>
         <name language="fr" text="Aude"/>
         <name language="en" text="Aude"/>
@@ -15385,7 +15385,7 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_Nancy"/>
       </relationList>
     </element>
-    <element id="el_OrneFleuve" type="et_FleuveRiviere" minLevel="3" mapId="e_OrneFleuve">
+    <element id="el_OrneFleuve" type="et_FleuveRiviere" minLevel="3" mapId="e_Orne">
       <elementName>
         <name language="fr" text="Orne"/>
         <name language="en" text="Orne"/>
@@ -17197,7 +17197,7 @@
           <category categoryIndexInMapConfigFile="5"/>
           <category categoryIndexInMapConfigFile="6"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
         <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
@@ -17208,27 +17208,42 @@
           <category categoryIndexInMapConfigFile="6"/>
         </mapParameters>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
+      <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
         <questionText language="en" text="What river {0} is a tributary?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="20" minLevel="0">
         <questionText language="fr" text="Où se jette {0} ?"/>
         <questionText language="en" text="Where flows the {0}?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="0" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+          <category categoryIndexInMapConfigFile="3"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
         <questionText language="fr" text="Dans quelle région se situe la ville {0} ?"/>
         <questionText language="en" text="In what region is the city of {0}?"/> 
-      </relation1QuestionCategory>
+        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="3"/>
+          <category categoryIndexInMapConfigFile="5"/>
+          <category categoryIndexInMapConfigFile="6"/>
+        </mapParameters>
+      </relation1QuestionCategory>-->
       <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
         <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
         <questionText language="en" text="On which river is the city of {0}?"/>
+        <mapParameters framingLevel="7" questionDrawDepth="3" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
+          <category categoryIndexInMapConfigFile="1"/>
+        </mapParameters>
       </relation1QuestionCategory>
-      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+      <!--<relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="20" minLevel="1">
         <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
         <questionText language="en" text="In which city is the confluence of the {0}?"/>

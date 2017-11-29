@@ -424,21 +424,24 @@
   </xsd:complexType>
   <xsd:complexType name="XmlMapParameters1">
     <xsd:sequence>
-      <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
+      <xsd:element name="answer" type="XmlMapSubParameters" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="wrongChoice" type="XmlMapSubParameters" maxOccurs="1" minOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="framingLevel" type="xsd:int" use="required"/>
-    <xsd:attribute name="answerDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
-    <xsd:attribute name="wrongChoiceDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
-    <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlMapParameters2">
     <xsd:sequence>
-      <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
+      <xsd:element name="question" type="XmlMapSubParameters" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="answer" type="XmlMapSubParameters" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="wrongChoice" type="XmlMapSubParameters" maxOccurs="1" minOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="framingLevel" type="xsd:int" use="required"/>
-    <xsd:attribute name="questionDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
-    <xsd:attribute name="answerDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
-    <xsd:attribute name="wrongChoiceDrawDepth" type="xsd:nonNegativeInteger" use="required"/>
+  </xsd:complexType>
+  <xsd:complexType name="XmlMapSubParameters">
+    <xsd:sequence>
+      <xsd:element name="category" type="XmlMapCategory" maxOccurs="unbounded" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="drawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlMapCategory">

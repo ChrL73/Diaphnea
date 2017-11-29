@@ -17126,8 +17126,11 @@
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
-        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Nom2" answerAttribute="at_Numero"
@@ -17239,8 +17242,16 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
         <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
         <questionText language="en" text="On which river is the city of {0}?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="3" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="4"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <!--<relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"

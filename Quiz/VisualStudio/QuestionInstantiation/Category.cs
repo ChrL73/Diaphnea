@@ -42,23 +42,45 @@ namespace QuestionInstantiation
         {
             if (_mapParameters == null) throw new NotImplementedException();
 
-            BsonArray categoryArray = new BsonArray();
-            foreach (XmlMapCategory mapCategory in _mapParameters.Categories)
-            {
-                categoryArray.Add(Int32.Parse(mapCategory.categoryIndexInMapConfigFile));
-            }
-
             BsonDocument mapParametersDocument = new BsonDocument()
             {
                 { "framing_level", _mapParameters.FramingLevel },
-                { "question_draw_depth", _mapParameters.QuestionDrawDepth },
-                { "answer_draw_depth", _mapParameters.AnswerDrawDepth },
-                { "wrong_choice_draw_depth", _mapParameters.WrongChoiceDrawDepth },
-                { "category_selection_mode", _mapParameters.CategorySelectionMode.ToString() },
-                { "categories", categoryArray}
+                { "question", getMapSubParametersBsonDocument(_mapParameters.QuestionParameters) },
+                { "answer", getMapSubParametersBsonDocument(_mapParameters.AnswerParameters) },
+                { "wrong_choice", getMapSubParametersBsonDocument(_mapParameters.WrongChoiceParameters) }
             };
 
             return mapParametersDocument;
+        }
+
+        private BsonDocument getMapSubParametersBsonDocument(XmlMapSubParameters subParameters)
+        {
+            BsonArray categoryArray = new BsonArray();
+            int drawDepth = 0;
+            string selectionMode = "";
+
+            if (subParameters != null)
+            {
+               drawDepth = Int32.Parse(subParameters.drawDepth);
+               selectionMode = subParameters.categorySelectionMode.ToString();
+
+               if (subParameters.category != null)
+               {
+                   foreach (XmlMapCategory category in subParameters.category)
+                   {
+                       categoryArray.Add(Int32.Parse(category.categoryIndexInMapConfigFile));
+                   }
+               }
+            }
+
+            BsonDocument document = new BsonDocument()
+            {
+                { "draw_depth", drawDepth },
+                { "category_selection_mode", selectionMode },
+                { "categories", categoryArray }
+            };
+
+            return document;
         }
 
         abstract internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId);

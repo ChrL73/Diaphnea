@@ -1215,15 +1215,66 @@ public enum XmlCommentModeEnum {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlMapParameters2 {
     
-    private XmlMapCategory[] categoryField;
+    private XmlMapSubParameters questionField;
+    
+    private XmlMapSubParameters answerField;
+    
+    private XmlMapSubParameters wrongChoiceField;
     
     private int framingLevelField;
     
-    private string questionDrawDepthField;
+    /// <remarks/>
+    public XmlMapSubParameters question {
+        get {
+            return this.questionField;
+        }
+        set {
+            this.questionField = value;
+        }
+    }
     
-    private string answerDrawDepthField;
+    /// <remarks/>
+    public XmlMapSubParameters answer {
+        get {
+            return this.answerField;
+        }
+        set {
+            this.answerField = value;
+        }
+    }
     
-    private string wrongChoiceDrawDepthField;
+    /// <remarks/>
+    public XmlMapSubParameters wrongChoice {
+        get {
+            return this.wrongChoiceField;
+        }
+        set {
+            this.wrongChoiceField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public int framingLevel {
+        get {
+            return this.framingLevelField;
+        }
+        set {
+            this.framingLevelField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class XmlMapSubParameters {
+    
+    private XmlMapCategory[] categoryField;
+    
+    private string drawDepthField;
     
     private XmlCategorySelectionModeEnum categorySelectionModeField;
     
@@ -1239,46 +1290,13 @@ public partial class XmlMapParameters2 {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public int framingLevel {
-        get {
-            return this.framingLevelField;
-        }
-        set {
-            this.framingLevelField = value;
-        }
-    }
-    
-    /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string questionDrawDepth {
+    public string drawDepth {
         get {
-            return this.questionDrawDepthField;
+            return this.drawDepthField;
         }
         set {
-            this.questionDrawDepthField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string answerDrawDepth {
-        get {
-            return this.answerDrawDepthField;
-        }
-        set {
-            this.answerDrawDepthField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string wrongChoiceDrawDepth {
-        get {
-            return this.wrongChoiceDrawDepthField;
-        }
-        set {
-            this.wrongChoiceDrawDepthField = value;
+            this.drawDepthField = value;
         }
     }
     
@@ -1536,24 +1554,29 @@ public partial class XmlRelation1QuestionCategory {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlMapParameters1 {
     
-    private XmlMapCategory[] categoryField;
+    private XmlMapSubParameters answerField;
+    
+    private XmlMapSubParameters wrongChoiceField;
     
     private int framingLevelField;
     
-    private string answerDrawDepthField;
-    
-    private string wrongChoiceDrawDepthField;
-    
-    private XmlCategorySelectionModeEnum categorySelectionModeField;
-    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("category")]
-    public XmlMapCategory[] category {
+    public XmlMapSubParameters answer {
         get {
-            return this.categoryField;
+            return this.answerField;
         }
         set {
-            this.categoryField = value;
+            this.answerField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public XmlMapSubParameters wrongChoice {
+        get {
+            return this.wrongChoiceField;
+        }
+        set {
+            this.wrongChoiceField = value;
         }
     }
     
@@ -1565,39 +1588,6 @@ public partial class XmlMapParameters1 {
         }
         set {
             this.framingLevelField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string answerDrawDepth {
-        get {
-            return this.answerDrawDepthField;
-        }
-        set {
-            this.answerDrawDepthField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-    public string wrongChoiceDrawDepth {
-        get {
-            return this.wrongChoiceDrawDepthField;
-        }
-        set {
-            this.wrongChoiceDrawDepthField = value;
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public XmlCategorySelectionModeEnum categorySelectionMode {
-        get {
-            return this.categorySelectionModeField;
-        }
-        set {
-            this.categorySelectionModeField = value;
         }
     }
 }

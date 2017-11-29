@@ -306,7 +306,7 @@
   </lookList>
 
   <categoryList>
-    <category id="ca_France" importance="0" framingLevel="2">
+    <category id="ca_France" importance="0" framingLevel="1">
       <name>
         <name language="fr" text="France"/>
         <name language="en" text="France"/>
@@ -324,7 +324,7 @@
         <name language="en" text="Departments"/>
       </name>
     </category>
-    <category id="ca_FleuveRiviere" importance="1000" framingLevel="1">
+    <category id="ca_FleuveRiviere" importance="1000" framingLevel="2">
       <name>
         <name language="fr" text="Cours d'eau"/>
         <name language="en" text="Rivers"/>

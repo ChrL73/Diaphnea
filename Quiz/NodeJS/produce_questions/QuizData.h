@@ -27,6 +27,7 @@ namespace produce_questions
     class AttributeOrderChoice;
     class RelationOrderQuestion;
     class MapParameters;
+    class MapSubParameters;
 
     class QuizData
     {
@@ -63,6 +64,7 @@ namespace produce_questions
         const AttributeOrderChoice *getAttributeOrderChoice(const std::string& choiceListId, int index);
         const RelationOrderQuestion *getRelationOrderQuestion(const std::string& questionListId, int index);
         const std::string& getRelationOrderChoice(const std::string& choiceListId, int index);
-        const MapParameters *getMapParameteres(mongo::BSONObj dbCategory);
+        const MapParameters *getMapParameters(mongo::BSONObj dbCategory);
+        const MapSubParameters *getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName);
     };
 }

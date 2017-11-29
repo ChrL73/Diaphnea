@@ -5,6 +5,7 @@
  #include "CompleteQuestion.h"
  #include "Choice.h"
  #include "MapParameters.h"
+ #include "MapSubParameters.h"
 
  namespace produce_questions
  {
@@ -31,11 +32,11 @@
         CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), question->getQuestion(), produce_questions::SIMPLE, choiceCount);
         completeQuestion->addChoice(question->getAnswer(), question->getComment(), true);
 
-        int questionDrawDepth = getMapParameters()->getQuestionDrawDepth();
-        int answerDrawDepth = getMapParameters()->getAnswerDrawDepth();
-        int wrongChoiceDrawDepth = getMapParameters()->getWrongChoiceDrawDepth();
-        if (questionDrawDepth > 0) completeQuestion->addMapId(question->getQuestionMapId(), questionDrawDepth - 1);
-        if (answerDrawDepth > 0) completeQuestion->addMapId(question->getAnswerMapId(), answerDrawDepth - 1);
+        const MapSubParameters *questionParameters = getMapParameters()->getQuestionParameters();
+        const MapSubParameters *answerParameters = getMapParameters()->getAnswerParameters();
+        const MapSubParameters *wrongChoiceParameters = getMapParameters()->getWrongChoiceParameters();
+        if (questionParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getQuestionMapId(), questionParameters);
+        if (answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(), answerParameters);
 
         std::set<unsigned int> excludedValues;
         int wrongChoiceCount1 = question->getWrongChoiceCount1();
@@ -58,7 +59,7 @@
             excludedValues.insert(draw);
             const Choice *wrongChoice = question->getWrongChoice1(draw);
             completeQuestion->addChoice(wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
-            if (wrongChoiceDrawDepth > 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceDrawDepth - 1);
+            if (wrongChoiceParameters->getDrawDepth() != 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceParameters);
         }
 
         excludedValues.clear();
@@ -69,7 +70,7 @@
             excludedValues.insert(draw);
             const Choice *wrongChoice = question->getWrongChoice2(draw);
             completeQuestion->addChoice (wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
-            if (wrongChoiceDrawDepth > 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceDrawDepth - 1);
+            if (wrongChoiceParameters->getDrawDepth() != 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceParameters);
         }
 
         return completeQuestion;

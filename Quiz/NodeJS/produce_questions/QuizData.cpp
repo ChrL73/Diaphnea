@@ -11,6 +11,7 @@
 #include "AttributeOrderChoice.h"
 #include "TextAndComment.h"
 #include "MapParameters.h"
+#include "MapSubParameters.h"
 
 namespace produce_questions
 {
@@ -114,7 +115,7 @@ namespace produce_questions
                     const char *categoryType = dbCategory.getStringField("type");
                     unsigned int weightIndex = dbCategory.getIntField("weight_index");
 
-                    const MapParameters *mapParameters = getMapParameteres(dbCategory);
+                    const MapParameters *mapParameters = getMapParameters(dbCategory);
 
                     if (strcmp(categoryType, "SimpleAnswer") == 0)
                     {
@@ -457,19 +458,28 @@ namespace produce_questions
         return (*it).second;
     }
 
-    const MapParameters *QuizData::getMapParameteres(mongo::BSONObj dbCategory)
+    const MapParameters *QuizData::getMapParameters(mongo::BSONObj dbCategory)
     {
         mongo::BSONObj dbMapParameters = dbCategory.getField("map_parameters").Obj();
 
         int framingLevel = dbMapParameters.getIntField("framing_level");
-        int questionDrawDepth = dbMapParameters.getIntField("question_draw_depth");
-        int answerDrawDepth = dbMapParameters.getIntField("answer_draw_depth");
-        int wrongChoiceDrawDepth = dbMapParameters.getIntField("wrong_choice_draw_depth");
-        const char *categorySelectionMode = dbMapParameters.getStringField("category_selection_mode");
+
+        const MapSubParameters *questionParameters = getMapSubParameters(dbMapParameters, "question");
+        const MapSubParameters *answerParameters = getMapSubParameters(dbMapParameters, "answer");
+        const MapSubParameters *wrongChoiceParameters = getMapSubParameters(dbMapParameters, "wrong_choice");
+
+        return new MapParameters(framingLevel, questionParameters, answerParameters, wrongChoiceParameters);
+    }
+
+    const MapSubParameters *QuizData::getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName)
+    {
+        mongo::BSONObj dbMapSubParameters = dbMapParameters.getField(fieldName).Obj();
+
+        int drawDepth = dbMapSubParameters.getIntField("draw_depth");
+        const char *categorySelectionMode = dbMapSubParameters.getStringField("category_selection_mode");
 
         std::vector<int> categories;
-        std::vector<Category *> categoryVector;
-        std::vector<mongo::BSONElement> dbCategoryVector = dbMapParameters.getField("categories").Array();
+        std::vector<mongo::BSONElement> dbCategoryVector = dbMapSubParameters.getField("categories").Array();
         int i, n = dbCategoryVector.size();
         for (i = 0; i < n; ++i)
         {
@@ -477,6 +487,6 @@ namespace produce_questions
             categories.push_back(category);
         }
 
-        return new MapParameters(framingLevel, questionDrawDepth, answerDrawDepth, wrongChoiceDrawDepth, categorySelectionMode, categories);
+        return new MapSubParameters(drawDepth, categorySelectionMode, categories);
     }
 }

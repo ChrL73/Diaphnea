@@ -3,6 +3,7 @@
 #include "RandomNumberGenerator.h"
 #include "MapIdInfo.h"
 #include "MapParameters.h"
+#include "MapSubParameters.h"
 
 namespace produce_questions
 {
@@ -30,9 +31,9 @@ namespace produce_questions
         if (rightAnswer) _rightAnswerSet.insert(i);
     }
 
-    void CompleteQuestion::addMapId(const std::string& id, int depth)
+    void CompleteQuestion::addMapId(const std::string& id, const MapSubParameters *subParameters)
     {
-        if (!id.empty()) _mapIdVector.push_back(new MapIdInfo(id, depth));
+        if (!id.empty()) _mapIdVector.push_back(new MapIdInfo(id, subParameters));
     }
 
     const std::string& CompleteQuestion::getJson(void)
@@ -55,22 +56,25 @@ namespace produce_questions
         n = _mapIdVector.size();
         for (i = 0; i < n; ++i)
         {
+            const MapSubParameters *parameters = _mapIdVector[i]->getParameters();
+
             _json += "{\"id\":\"" + _mapIdVector[i]->getId()
-                     + "\",\"depth\":" + std::to_string(_mapIdVector[i]->getDepth()) + "}";
+                     + "\",\"depth\":" + std::to_string(parameters->getDrawDepth() - 1)
+                     + ",\"mode\":\"" + parameters->getCategorySelectionMode()
+                     + "\",\"categories\":[";
+
+            int j, m = parameters->getCategoryCount();
+            for (j = 0; j < m; ++j)
+            {
+                _json += std::to_string(parameters->getCategory(j));
+                if (j != m - 1) _json += ",";
+            }
+
+            _json += "]}";
             if (i != n - 1) _json += ",";
         }
 
-        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel())
-                 + ",\"mode\":\"" + _mapParameters->getCategorySelectionMode() + "\",\"categories\":[";
-
-        n = _mapParameters->getCategoryCount();
-        for (i = 0; i < n; ++i)
-        {
-            _json += std::to_string(_mapParameters->getCategory(i));
-            if (i != n - 1) _json += ",";
-        }
-
-        _json += "]}";
+        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel()) + "}";
 
         return _json;
     }

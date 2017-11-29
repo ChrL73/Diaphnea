@@ -227,18 +227,19 @@ $(function()
       
       info.mapIds.forEach(function(idInfo)
       {
-         showLinkedElements(mapElements[idInfo.id], idInfo.depth, info);
+         showLinkedElements(idInfo);
       });
    }
    
-   function showLinkedElements(element, depth, info)
+   function showLinkedElements(idInfo)
    {
+      var element = mapElements[idInfo.id];
       var threshold = 50;
       var linkedElements = {};
       linkedElements[element.getId()] = true;
       
       var i = 0;
-      while (i < depth)
+      while (i < idInfo.depth)
       {
          var elementsToAdd = [];
             
@@ -249,7 +250,7 @@ $(function()
          });        
          ++i; 
          
-         if (i < depth)
+         if (i < idInfo.depth)
          {
             Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
             { 
@@ -266,14 +267,14 @@ $(function()
       }
       
       var categories = {};
-      info.categories.forEach(function(index) { categories[index] = 1; });
-      var include = (info.mode == 'INCLUDE');
+      idInfo.categories.forEach(function(index) { categories[index] = 1; });
+      var include = (idInfo.mode == 'INCLUDE');
       
       Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
       { 
-         var element = mapElements[elementId];
-         var categoryInList = (categories[element.getCategoryIndex()] == 1);
-         if (categoryInList == include) element.show();
+         var elt = mapElements[elementId];
+         var categoryInList = (categories[elt.getCategoryIndex()] == 1);
+         if (elt == element || categoryInList == include) elt.show();
       });
    }
 });

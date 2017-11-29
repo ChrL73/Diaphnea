@@ -4,16 +4,18 @@
 
 namespace produce_questions
 {
+    class MapSubParameters;
+
     class MapIdInfo
     {
     private:
         const std::string _id;
-        const int _depth;
+        const MapSubParameters * const _parameters;
 
     public:
-        MapIdInfo(const std::string& id, int depth) : _id(id), _depth(depth) {}
+        MapIdInfo(const std::string& id, const MapSubParameters *parameters) : _id(id), _parameters(parameters) {}
 
         const std::string& getId(void) const { return _id; }
-        int getDepth(void) const { return _depth; }
+        const MapSubParameters *getParameters(void) const { return _parameters; }
     };
 }

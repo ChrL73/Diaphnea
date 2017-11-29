@@ -11,6 +11,7 @@ namespace produce_questions
     class TextAndComment;
     class MapIdInfo;
     class MapParameters;
+    class MapSubParameters;
 
     class CompleteQuestion
     {
@@ -29,7 +30,7 @@ namespace produce_questions
         ~CompleteQuestion();
 
         void addChoice(const std::string& text, const std::string& comment, bool rightAnswer);
-        void addMapId(const std::string& id, int depth);
+        void addMapId(const std::string& id, const MapSubParameters *subParameters);
         const std::string& getJson(void);
 
     };

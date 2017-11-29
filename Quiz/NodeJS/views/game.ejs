@@ -36,17 +36,17 @@
                         var nId = question.mapIds.length;
                         question.mapIds.forEach(function(mapId, iId)
                         {
-                           info += '{id:\'' + mapId.id + '\',depth:' + mapId.depth + '}';
+                           info += '{id:\'' + mapId.id + '\',depth:' + mapId.depth  + ',mode:\'' + mapId.mode + '\',categories:[';
+                           var categoryCount = mapId.categories.length;
+                           mapId.categories.forEach(function(categoryId, jId)
+                           {
+                              info += categoryId;
+                              if (jId != categoryCount - 1) info += ',';
+                           });
+                           info += ']}';
                            if (iId != nId - 1) info += ',';
                         });
-                        info += '],framingLevel:' + question.framingLevel + ',mode:\'' + question.mode + '\',categories:[';
-                        var categoryCount = question.categories.length;
-                        question.categories.forEach(function(categoryId, iId)
-                        {
-                           info += categoryId;
-                           if (iId != categoryCount - 1) info += ',';
-                        });
-                        info += ']}';
+                        info += '],framingLevel:' + question.framingLevel + '}';
                         mapInfo.push(info);
                      }
                      else

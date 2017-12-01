@@ -264,10 +264,12 @@ namespace produce_questions
             {
                 mongo::BSONObj dbList = cursor->next();
                 mongo::BSONObj dbQuestion = dbList.getField("questions").Array()[0].Obj();
+                const char *questionMapId = dbQuestion.getStringField("question_map_id");
 
                 const char *questionText = dbQuestion.getField("question").Obj().getStringField(_languageId);
 
                 std::vector<const TextAndComment *> answerVector;
+                std::vector<std::string> answerMapIds;
                 int i, answerCount = dbQuestion.getIntField("answer_count");
                 for (i = 0; i < answerCount; ++i)
                 {
@@ -275,6 +277,8 @@ namespace produce_questions
                     const char *answer = dbAnswer.getField("answer").Obj().getStringField(_languageId);
                     const char *comment = dbAnswer.getField("comment").Obj().getStringField(_languageId);
                     answerVector.push_back(new TextAndComment(answer, comment));
+                    const char *answerMapId = dbAnswer.getStringField("answer_map_id");
+                    answerMapIds.push_back(answerMapId);
                 }
 
                 const char *excludedChoice = dbQuestion.getField("excluded_choice").Obj().getStringField(_languageId);
@@ -289,7 +293,8 @@ namespace produce_questions
                     pointCriterionValue = new Point(x, y, z);
                 }
 
-                MultipleAnswerQuestion *question = new MultipleAnswerQuestion(questionText, answerVector, excludedChoice, proximityCriterionType, pointCriterionValue, choiceVector);
+                MultipleAnswerQuestion *question = new MultipleAnswerQuestion(questionText, questionMapId, answerVector, answerMapIds, excludedChoice,
+                                                                              proximityCriterionType, pointCriterionValue, choiceVector);
                 it = _multipleAnswerQuestionMap.insert(std::pair<std::pair<std::string, int>, MultipleAnswerQuestion *>(key, question)).first;
             }
             else

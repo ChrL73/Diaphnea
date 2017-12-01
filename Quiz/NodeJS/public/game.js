@@ -12,6 +12,7 @@ $(function()
    {
       mapServerConnection.loadMap(mapId, 'canvas', function(_map)
       {     
+         _map.setFillingStyle(2);
          var elementIds = _map.getElementIds();
          _map.loadElements(elementIds, function(elementArray)
          {

@@ -8,9 +8,11 @@
 
 namespace produce_questions
 {
-    MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::vector<const TextAndComment *>& answerVector, const std::string& excludedChoice, ProximityCriterionTypeEnum proximityCriterionType,
-                                                   const Point *pointCriterionValue, const std::vector<const Choice *>& choiceVector) : 
-        _question(question), _answerVector(answerVector), _excludedChoice(excludedChoice), _proximityCriterionType(proximityCriterionType), _pointCriterionValue(pointCriterionValue)
+    MultipleAnswerQuestion::MultipleAnswerQuestion(const std::string& question, const std::string& questionMapId, const std::vector<const TextAndComment *>& answerVector,
+                                                   const std::vector<std::string>& answerMapIds, const std::string& excludedChoice, ProximityCriterionTypeEnum proximityCriterionType,
+                                                   const Point *pointCriterionValue, const std::vector<const Choice *>& choiceVector) :
+        _question(question), _questionMapId(questionMapId), _answerVector(answerVector), _answerMapIds(answerMapIds), _excludedChoice(excludedChoice),
+        _proximityCriterionType(proximityCriterionType), _pointCriterionValue(pointCriterionValue)
     {
         std::set<std::string> answerSet;
         int i, n = answerVector.size();

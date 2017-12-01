@@ -72,6 +72,15 @@
     <ClCompile Include="..\..\NodeJS\produce_questions\RelationOrderQuestion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapIdInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapSubParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\produce_questions\TextAndComment.h">

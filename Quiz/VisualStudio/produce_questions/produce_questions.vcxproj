@@ -90,6 +90,9 @@
     <ClCompile Include="..\..\NodeJS\produce_questions\Choice.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\CompleteQuestion.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\Level.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapIdInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapParameters.cpp" />
+    <ClCompile Include="..\..\NodeJS\produce_questions\MapSubParameters.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\MultipleAnswerCategory.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\MultipleAnswerQuestion.cpp" />
     <ClCompile Include="..\..\NodeJS\produce_questions\Point.cpp" />

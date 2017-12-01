@@ -1000,6 +1000,8 @@ public partial class XmlRelationNQuestionCategory {
     
     private XmlQuestionText1P[] questionTextField;
     
+    private XmlMapParameters2 mapParametersField;
+    
     private string relationField;
     
     private XmlWayEnum wayField;
@@ -1034,6 +1036,16 @@ public partial class XmlRelationNQuestionCategory {
         }
         set {
             this.questionTextField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public XmlMapParameters2 mapParameters {
+        get {
+            return this.mapParametersField;
+        }
+        set {
+            this.mapParametersField = value;
         }
     }
     
@@ -1184,33 +1196,6 @@ public partial class XmlRelationNQuestionCategory {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
 [System.SerializableAttribute()]
-public enum XmlMultipleAnswerProximityCriterionEnum {
-    
-    /// <remarks/>
-    ELEMENT_LOCATION,
-    
-    /// <remarks/>
-    NONE,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
-public enum XmlCommentModeEnum {
-    
-    /// <remarks/>
-    QUESTION_ATTRIBUTE,
-    
-    /// <remarks/>
-    NAME,
-    
-    /// <remarks/>
-    NONE,
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
-[System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class XmlMapParameters2 {
@@ -1343,6 +1328,33 @@ public enum XmlCategorySelectionModeEnum {
     
     /// <remarks/>
     EXCLUDE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlMultipleAnswerProximityCriterionEnum {
+    
+    /// <remarks/>
+    ELEMENT_LOCATION,
+    
+    /// <remarks/>
+    NONE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlCommentModeEnum {
+    
+    /// <remarks/>
+    QUESTION_ATTRIBUTE,
+    
+    /// <remarks/>
+    NAME,
+    
+    /// <remarks/>
+    NONE,
 }
 
 /// <remarks/>

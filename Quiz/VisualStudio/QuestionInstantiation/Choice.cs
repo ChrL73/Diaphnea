@@ -36,7 +36,8 @@ namespace QuestionInstantiation
             BsonDocument choiceDocument = new BsonDocument()
             {
                 { "answer", _attributeValue.Value.getBsonDocument() },
-                { "comment", _attributeValue.Comment.getBsonDocument() }
+                { "comment", _attributeValue.Comment.getBsonDocument() },
+                { "answer_map_id", Element.XmlElement.mapId == null ? "" : Element.XmlElement.mapId.Substring(2) }
             };
 
             return choiceDocument;

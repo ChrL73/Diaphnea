@@ -500,8 +500,11 @@
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the province whose number is {0}?"/>
-        <mapParameters framingLevel="6" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="2"/>
+        <mapParameters framingLevel="6">
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </attributeQuestionCategory>
      <!-- <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"

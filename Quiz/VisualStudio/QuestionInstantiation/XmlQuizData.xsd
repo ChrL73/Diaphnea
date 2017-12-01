@@ -337,6 +337,7 @@
   <xsd:complexType name="XmlRelationNQuestionCategory">
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText1P" maxOccurs="unbounded" minOccurs="0" />
+      <xsd:element name="mapParameters" type="XmlMapParameters2" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="relation" type="XmlRelationIdRef" use="required" />
     <xsd:attribute name="way" type="XmlWayEnum" use="required"/>

@@ -12766,7 +12766,7 @@
       <relationList/>
     </element>
     <!--Villes étrangères sur cours d'eau passant en France-->
-    <element id="el_Gand" type="et_Ville" minLevel="2" mapId="e_Gand">
+    <!--<element id="el_Gand" type="et_Ville" minLevel="2" mapId="e_Gand">
       <elementName>
         <name language="fr" text="Gand"/>
         <name language="en" text="Ghent"/>
@@ -12897,7 +12897,7 @@
         <numericalAttribute type="nt_Latitude" value="51.924216"/>
       </numericalAttributeList>
       <relationList/>
-    </element>
+    </element>-->
     <!--Fleuves et rivières-->
     <element id="el_Rhin" type="et_FleuveRiviere" minLevel="0" mapId="e_Rhin">
       <elementName>
@@ -12930,9 +12930,9 @@
       <relationList>
         <relation type="rNN_Riviere_Departements" linkedElement="el_HautRhin"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_BasRhin"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Coblence"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Coblence"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Cologne"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Rotterdam"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Rotterdam"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Ill"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_MoselleRiviere"/>
       </relationList>
@@ -13095,7 +13095,7 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_Verdun"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sedan"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_CharlevilleMezieres"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Namur"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Namur"/>-->
       </relationList>
     </element>
     <element id="el_Seine" type="et_FleuveRiviere" minLevel="0" mapId="e_Seine">
@@ -13263,10 +13263,10 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_Toul"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Metz"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Thionville"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Konz"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Konz"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Meurthe"/>
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Sarre"/>
-        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Coblence"/>
+        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_Coblence"/>-->
       </relationList>
     </element>
     <element id="el_Saone" type="et_FleuveRiviere" minLevel="0" mapId="e_Saone">
@@ -13707,7 +13707,7 @@
       <relationList>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Cambrai"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Valenciennes"/>
-        <relation type="r1N_Riviere_Villes" linkedElement="el_Gand"/>
+        <!--<relation type="r1N_Riviere_Villes" linkedElement="el_Gand"/>-->
         <relation type="r1N_Riviere_Affluents" linkedElement="el_Lys"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_AisneDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Nord"/>
@@ -14216,7 +14216,7 @@
         <relation type="rNN_Riviere_Departements" linkedElement="el_MoselleDepartement"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sarrebourg"/>
         <relation type="r1N_Riviere_Villes" linkedElement="el_Sarreguemines"/>
-        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Konz"/>
+        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_Konz"/>-->
       </relationList>
     </element>
     <element id="el_Isle" type="et_FleuveRiviere" minLevel="1" mapId="e_Isle">
@@ -15114,7 +15114,7 @@
       <relationList>
         <relation type="rNN_Riviere_Departements" linkedElement="el_AisneDepartement"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Nord"/>
-        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Namur"/>
+        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_Namur"/>-->
       </relationList>
     </element>
     <element id="el_Drac" type="et_FleuveRiviere" minLevel="2" mapId="e_Drac">
@@ -15192,7 +15192,7 @@
       <relationList>
         <relation type="rNN_Riviere_Departements" linkedElement="el_PasDeCalais"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Nord"/>
-        <relation type="r11_Riviere_VilleConfluent" linkedElement="el_Gand"/>
+        <!--<relation type="r11_Riviere_VilleConfluent" linkedElement="el_Gand"/>-->
       </relationList>
     </element>
     <element id="el_Baise" type="et_FleuveRiviere" minLevel="2" mapId="e_Baise">
@@ -17137,24 +17137,33 @@
                                  answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le numéro associé au département {0} ?"/>
         <questionText language="en" text="What is the number associated with the {0} department?"/>
-        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateCreation"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="30" minLevel="2">
         <questionText language="fr" text="En quelle année a été créé le département {0} ?"/>
         <questionText language="en" text="In what year was created the {0} department?"/>
-        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Departement" questionAttribute ="at_Nom2" answerAttribute="at_DateNom"
                                  answerProximityCriterion="ATTRIBUTE_VALUE_AS_NUMBER" distribParameterCorrection="0.1" commentMode="NAME" weight="10" minLevel="2">
         <questionText language="fr" text="Depuis quelle année le département {0} porte-t-il son nom actuel ?"/>
         <questionText language="en" text="Since what year the {0} department bears its current name?"/>
-        <mapParameters framingLevel="7" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
@@ -17163,81 +17172,125 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Quel est le chef-lieu du département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the capital of the department whose number is {0}?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
         <questionText language="en" text="In which department is the city of {0}?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="100" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la ville {0} ?"/>
         <questionText language="en" text="What is the number of the department where the city of {0} is located?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
         <questionText language="fr" text="De quelle région fait partie le département {0} ?"/>
         <questionText language="en" text="In what region is the {0} department?"/>
-        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="3"/>
-          <category categoryIndexInMapConfigFile="5"/>
-          <category categoryIndexInMapConfigFile="6"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
         <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
         <questionText language="en" text="In what region is the department whose number is {0}?"/>
-        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="3"/>
-          <category categoryIndexInMapConfigFile="5"/>
-          <category categoryIndexInMapConfigFile="6"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
         <questionText language="en" text="What river {0} is a tributary?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="1" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="4"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Destination_Fleuves" way="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="20" minLevel="0">
         <questionText language="fr" text="Où se jette {0} ?"/>
         <questionText language="en" text="Where flows the {0}?"/>
-        <mapParameters framingLevel="7" questionDrawDepth="2" answerDrawDepth="0" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="1"/>
-          <category categoryIndexInMapConfigFile="3"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </question>
+          <answer drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
         <questionText language="fr" text="Dans quelle région se situe la ville {0} ?"/>
         <questionText language="en" text="In what region is the city of {0}?"/> 
-        <mapParameters framingLevel="6" questionDrawDepth="1" answerDrawDepth="2" wrongChoiceDrawDepth="0" categorySelectionMode="EXCLUDE">
-          <category categoryIndexInMapConfigFile="3"/>
-          <category categoryIndexInMapConfigFile="5"/>
-          <category categoryIndexInMapConfigFile="6"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
         <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
@@ -17245,6 +17298,7 @@
         <mapParameters framingLevel="2">
           <question drawDepth="2" categorySelectionMode="EXCLUDE">
             <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
           </question>
           <answer drawDepth="2" categorySelectionMode="INCLUDE">
             <category categoryIndexInMapConfigFile="4"/>
@@ -17254,24 +17308,48 @@
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="20" minLevel="1">
+      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="15" minLevel="1">
         <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
         <questionText language="en" text="In which city is the confluence of the {0}?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
         <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
         <questionText language="en" text="Near which city is the mouth of the {0}?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+        </mapParameters>
       </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+        </mapParameters>
       </relationNQuestionCategory>
-      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="NONE" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département dont le numéro est {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the department whose number is {0}?"/>

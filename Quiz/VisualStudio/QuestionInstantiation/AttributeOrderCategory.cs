@@ -97,7 +97,8 @@ namespace QuestionInstantiation
                 { "choice_list", choiceListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },
                 { "distrib_parameter_correction", _distribParameterCorrection },
-                { "max_index", _maxIndex }
+                { "max_index", _maxIndex },
+                { "map_parameters", getMapParameterBsonDocument() }
             };
 
             return categoryDocument;

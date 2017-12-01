@@ -554,8 +554,9 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationNQuestionCategory.weight);
                         _weightSum += weight;
 
+                        MapParameters mapParameters = new MapParameters(xmlRelationNQuestionCategory.mapParameters);
                         MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, xmlRelationNQuestionCategory.answerProximityCriterion,
-                                                                                     distribParameterCorrection, null);
+                                                                                     distribParameterCorrection, mapParameters);
                         Dictionary<Element, Choice> choiceDictionary = new Dictionary<Element, Choice>();
 
                         foreach (Element endElement in _elementByTypeDictionary[endElementType])
@@ -626,7 +627,7 @@ namespace QuestionInstantiation
                                     Choice ExcludedChoice = null;
                                     if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
-                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice/*, startElement*/, xmlRelationNQuestionCategory.answerProximityCriterion);
+                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice, startElement, xmlRelationNQuestionCategory.answerProximityCriterion);
 
                                     foreach(Element endElement in endElementDictionary.Keys)
                                     {
@@ -1103,7 +1104,7 @@ namespace QuestionInstantiation
                         _weightSum += weight;
 
                         MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0, null);
-                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, XmlMultipleAnswerProximityCriterionEnum.NONE);
+                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, null, XmlMultipleAnswerProximityCriterionEnum.NONE);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
 				        {

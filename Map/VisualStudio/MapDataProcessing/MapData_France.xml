@@ -2193,7 +2193,7 @@
         <looks>
           <look id="pl_Departement1"/>
           <look id="pl_Departement2_1"/>
-          <look id="pl_Departement3_1"/>
+          <look id="pl_Departement3_3"/>
         </looks>
         <coveredElementList>
           <element id="e_Aquitaine"/>

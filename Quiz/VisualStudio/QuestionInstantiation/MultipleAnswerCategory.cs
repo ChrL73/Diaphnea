@@ -158,7 +158,8 @@ namespace QuestionInstantiation
                 { "choice_list", choiceListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },
                 { "distrib_parameter_correction", _distribParameterCorrection },
-                { "proximity_criterion_type", proximityCriterionType }
+                { "proximity_criterion_type", proximityCriterionType },
+                { "map_parameters", getMapParameterBsonDocument() }
             };
 
             return categoryDocument;
@@ -194,7 +195,8 @@ namespace QuestionInstantiation
                 BsonDocument choiceDocument = new BsonDocument()
                 {
                     { "choice", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "comment", list[0].Comment.getBsonDocument() }
+                    { "comment", list[0].Comment.getBsonDocument() },
+                    { "map_id", list[0].Element.XmlElement.mapId == null ? "" : list[0].Element.XmlElement.mapId.Substring(2) }
                 };
 
                 if (_proximityCriterion != XmlMultipleAnswerProximityCriterionEnum.NONE)

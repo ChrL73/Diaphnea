@@ -41,7 +41,8 @@ namespace QuestionInstantiation
                 { "question_count", _questionList.Count },
                 { "question_list", questionListDocument.GetValue("_id") },
                 { "weight_index", WeightIndex },
-                { "distrib_parameter_correction", _distribParameterCorrection }
+                { "distrib_parameter_correction", _distribParameterCorrection },
+                { "map_parameters", getMapParameterBsonDocument() }
             };
 
             return categoryDocument;

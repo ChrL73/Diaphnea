@@ -52,7 +52,7 @@ namespace produce_questions
             excludedValues.insert(draw);
             const TextAndComment *textAndComment = question->getAnswer(draw);
             completeQuestion->addChoice(textAndComment->getText(), textAndComment->getComment(), true);
-            if (answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(i), answerParameters);
+            if (answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(draw), answerParameters);
         }
 
         excludedValues.clear();

@@ -17537,7 +17537,7 @@
         <questionText language="en" text="Among these departments, which share a border with {0} ?"/>
         <mapParameters framingLevel="7">
           <question drawDepth="0" categorySelectionMode="INCLUDE"/>
-          <answer drawDepth="2" categorySelectionMode="INCLUDE">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS">
             <category categoryIndexInMapConfigFile="0"/>
             <category categoryIndexInMapConfigFile="2"/>
           </answer>

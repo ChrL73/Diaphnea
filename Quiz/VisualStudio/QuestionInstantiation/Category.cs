@@ -50,6 +50,11 @@ namespace QuestionInstantiation
                 { "wrong_choice", getMapSubParametersBsonDocument(_mapParameters.WrongChoiceParameters) }
             };
 
+            if (_mapParameters.AnswerSelectionMode != null)
+            {
+                mapParametersDocument.AddRange(new BsonDocument() { { "answer_selection_mode", _mapParameters.AnswerSelectionMode.ToString() } });
+            }
+
             return mapParametersDocument;
         }
 

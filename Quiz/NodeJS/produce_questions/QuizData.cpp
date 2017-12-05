@@ -468,12 +468,13 @@ namespace produce_questions
         mongo::BSONObj dbMapParameters = dbCategory.getField("map_parameters").Obj();
 
         int framingLevel = dbMapParameters.getIntField("framing_level");
+        const char *answerSelectionMode = dbMapParameters.getStringField("answer_selection_mode");
 
         const MapSubParameters *questionParameters = getMapSubParameters(dbMapParameters, "question");
         const MapSubParameters *answerParameters = getMapSubParameters(dbMapParameters, "answer");
         const MapSubParameters *wrongChoiceParameters = getMapSubParameters(dbMapParameters, "wrong_choice");
 
-        return new MapParameters(framingLevel, questionParameters, answerParameters, wrongChoiceParameters);
+        return new MapParameters(framingLevel, questionParameters, answerParameters, wrongChoiceParameters, answerSelectionMode[0] == 'A');
     }
 
     const MapSubParameters *QuizData::getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName)

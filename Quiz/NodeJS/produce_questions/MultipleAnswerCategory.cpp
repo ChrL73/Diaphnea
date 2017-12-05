@@ -44,19 +44,25 @@ namespace produce_questions
         int wrongChoiceCount = question->getWrongChoiceCount();
         if (rightChoiceCount + wrongChoiceCount < choiceCount) rightChoiceCount = choiceCount - wrongChoiceCount;
 
+        int i, n;
+        if (getMapParameters()->getAllAnswersSelectionMode() && answerParameters->getDrawDepth() != 0)
+        {
+            n = question->getAnswerCount();
+            for (i = 0; i < n; ++i) completeQuestion->addMapId(question->getAnswerMapId(i), answerParameters);
+        }
+
         std::set<unsigned int> excludedValues;
-        int i;
         for (i = 0; i < rightChoiceCount; ++i)
         {
             draw = RandomNumberGenerator::getRandomInt(question->getAnswerCount(), excludedValues);
             excludedValues.insert(draw);
             const TextAndComment *textAndComment = question->getAnswer(draw);
             completeQuestion->addChoice(textAndComment->getText(), textAndComment->getComment(), true);
-            if (answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(draw), answerParameters);
+            if (!getMapParameters()->getAllAnswersSelectionMode() && answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(draw), answerParameters);
         }
 
         excludedValues.clear();
-        int n = choiceCount - rightChoiceCount;
+        n = choiceCount - rightChoiceCount;
         for (i = 0; i < n; ++i)
         {
             if (_proximityCriterionType != produce_questions::POINT_3D) draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount, excludedValues);

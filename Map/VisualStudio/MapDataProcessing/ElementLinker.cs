@@ -121,7 +121,6 @@ namespace MapDataProcessing
             else if (element is LineMapElement)
             {
                 if (getLinked1Polygons((LineMapElement)element, Linked1Elements) != 0) return null;
-                if (getLinked1Lines((LineMapElement)element, Linked1Elements) != 0) return null;
             }
             else if (element is PolygonMapElement)
             {
@@ -153,7 +152,11 @@ namespace MapDataProcessing
         {
             Dictionary<MapElement, int> Linked2Elements = new Dictionary<MapElement, int>();
 
-            if (element is PolygonMapElement)
+            if (element is LineMapElement)
+            {
+                if (getLinked2Lines((LineMapElement)element, Linked2Elements) != 0) return null;
+            }
+            else if (element is PolygonMapElement)
             {
                 if (getLinked2Polygons((PolygonMapElement)element, Linked2Elements) != 0) return null;
             }
@@ -184,13 +187,13 @@ namespace MapDataProcessing
             return 0;
         }
 
-        private int getLinked1Lines(LineMapElement lineElement, Dictionary<MapElement, int> linked1Lines)
+        private int getLinked2Lines(LineMapElement lineElement, Dictionary<MapElement, int> linked2Lines)
         {
             if (_attachmentDictionary.ContainsKey(lineElement))
             {
                 foreach (LineMapElement linkedLine in _attachmentDictionary[lineElement].Keys)
                 {
-                    if (!linked1Lines.ContainsKey(linkedLine)) linked1Lines.Add(linkedLine, 0);
+                    if (!linked2Lines.ContainsKey(linkedLine)) linked2Lines.Add(linkedLine, 0);
                 }
             }
 

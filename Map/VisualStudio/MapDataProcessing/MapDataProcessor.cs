@@ -447,10 +447,10 @@ namespace MapDataProcessing
             foreach (MapElement element in _elementDictionary.Values)
             {
                 Dictionary<MapElement, int> elementsToLink = new Dictionary<MapElement, int>();
-                foreach (MapElement linkedElement in element.LinkedElements1.Keys)
+
                 {
-                    // If 'linkedElement' is a river, all rivers along the stream to the sea (or ocean) must be linked to 'element'
-                    Dictionary<MapElement, int> unsymetricalLinked1Elements = _elementLinker.getUnsymetricalLinked1Elements(linkedElement);
+                    // If 'element' is a river, all rivers along the stream to the sea (or ocean) must be linked to 'element'
+                    Dictionary<MapElement, int> unsymetricalLinked1Elements = _elementLinker.getUnsymetricalLinked1Elements(element);
                     if (unsymetricalLinked1Elements == null) return -1;
                     foreach (MapElement unsymetricalLinked1Element in unsymetricalLinked1Elements.Keys)
                     {
@@ -458,10 +458,32 @@ namespace MapDataProcessing
                     }
                 }
 
+                foreach (MapElement linkedElement in element.LinkedElements1.Keys)
+                {
+                    // If 'linkedElement' is a river, all rivers along the stream to the sea (or ocean) must be linked to 'element'
+                    Dictionary<MapElement, int> unsymetricalLinked1Elements = _elementLinker.getUnsymetricalLinked1Elements(linkedElement);
+                    if (unsymetricalLinked1Elements == null) return -1;
+                    foreach (MapElement unsymetricalLinked1Element in unsymetricalLinked1Elements.Keys)
+                    {
+                        if (unsymetricalLinked1Element != element && !elementsToLink.ContainsKey(unsymetricalLinked1Element)) elementsToLink.Add(unsymetricalLinked1Element, 0);
+                    }
+                }
+
                 foreach (MapElement elementToLink in elementsToLink.Keys)
                 {
                     if (!element.LinkedElements1.ContainsKey(elementToLink)) element.LinkedElements1.Add(elementToLink, 0);
                 }
+            }
+
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                foreach(MapElement linkedElement1 in element.LinkedElements1.Keys)
+                {
+                    if (element.LinkedElements2.ContainsKey(linkedElement1)) element.LinkedElements2.Remove(linkedElement1);
+                }
+
+                if (element.LinkedElements1.ContainsKey(element)) element.LinkedElements1.Remove(element);
+                if (element.LinkedElements2.ContainsKey(element)) element.LinkedElements2.Remove(element); 
             }
 
             return 0;

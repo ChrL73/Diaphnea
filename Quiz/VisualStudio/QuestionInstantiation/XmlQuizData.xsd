@@ -452,6 +452,7 @@
     </xsd:sequence>
     <xsd:attribute name="drawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
+    <xsd:attribute name="framingMode" type="XmlFramingModeEnum" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlMapSubParameters3">
     <xsd:sequence>
@@ -459,6 +460,7 @@
     </xsd:sequence>
     <xsd:attribute name="drawDepth" type="xsd:nonNegativeInteger" use="required"/>
     <xsd:attribute name="categorySelectionMode" type="XmlCategorySelectionModeEnum" use="required"/>
+    <xsd:attribute name="framingMode" type="XmlFramingModeEnum" use="required"/>
     <xsd:attribute name="answerSelectionMode" type="XmlAnswerSelectionModeEnum" use="required"/>
   </xsd:complexType>
   <xsd:complexType name="XmlMapCategory">
@@ -544,6 +546,13 @@
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="ALL_ANSWERS" />
       <xsd:enumeration value="ONLY_CHOICES" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="XmlFramingModeEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NO_ELEMENT" />
+      <xsd:enumeration value="ONLY_MAIN_ELEMENT" />
+      <xsd:enumeration value="ALL_LINKED_ELEMENTS" />
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="XmlString1P">

@@ -43,6 +43,7 @@ namespace QuestionInstantiation
                 drawDepth = xmlMapParameters3.answer.drawDepth,
                 categorySelectionMode = xmlMapParameters3.answer.categorySelectionMode,
                 category = xmlMapParameters3.answer.category,
+                framingMode = xmlMapParameters3.answer.framingMode
             };
 
             AnswerSelectionMode = xmlMapParameters3.answer.answerSelectionMode;

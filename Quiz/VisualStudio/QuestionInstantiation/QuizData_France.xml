@@ -17219,7 +17219,7 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
         <questionText language="fr" text="De quelle région fait partie le département {0} ?"/>
@@ -17234,7 +17234,7 @@
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
+      <relation1QuestionCategory relation="r1N_Region_Departements" way="INVERSE" questionAttribute ="at_Numero" answerAttribute="at_Nom2"
                                  answerProximityCriterion="NONE" commentMode="NONE" weight="80" minLevel="2">
         <questionText language="fr" text="De quelle région fait partie le département dont le numéro est {0} ?"/>
         <questionText language="en" text="In what region is the department whose number is {0}?"/>
@@ -17253,7 +17253,7 @@
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
         <questionText language="en" text="What river {0} is a tributary?"/>
         <mapParameters framingLevel="2">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
           </question>
@@ -17271,7 +17271,6 @@
           <question drawDepth="2" categorySelectionMode="EXCLUDE">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
-            <category categoryIndexInMapConfigFile="3"/>
           </question>
           <answer drawDepth="0" categorySelectionMode="INCLUDE"/>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
@@ -17290,25 +17289,25 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
-      </relation1QuestionCategory>
+      </relation1QuestionCategory>-->
       <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
         <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
         <questionText language="en" text="On which river is the city of {0}?"/>
         <mapParameters framingLevel="2">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
           </question>
-          <answer drawDepth="2" categorySelectionMode="INCLUDE">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="4"/>
             <category categoryIndexInMapConfigFile="5"/>
             <category categoryIndexInMapConfigFile="6"/>
           </answer>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relation1QuestionCategory>
-      <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+      <!--<relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="15" minLevel="1">
         <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
         <questionText language="en" text="In which city is the confluence of the {0}?"/>
@@ -17544,7 +17543,7 @@
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
         </mapParameters>
       </relationNQuestionCategory>
-      relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2"
                                  answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
         <questionText language="fr" text="Parmi ces régions, lesquelles ont une frontière commune avec {0} ?"/>
         <questionText language="en" text="Among these regions, which share a border with {0} ?"/>   

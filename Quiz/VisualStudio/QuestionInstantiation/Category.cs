@@ -62,27 +62,31 @@ namespace QuestionInstantiation
         {
             BsonArray categoryArray = new BsonArray();
             int drawDepth = 0;
+            int framingMode = 0;
             string selectionMode = "";
 
             if (subParameters != null)
             {
-               drawDepth = Int32.Parse(subParameters.drawDepth);
-               selectionMode = subParameters.categorySelectionMode.ToString();
+                drawDepth = Int32.Parse(subParameters.drawDepth);
+                selectionMode = subParameters.categorySelectionMode.ToString();
+                if (subParameters.framingMode == XmlFramingModeEnum.ONLY_MAIN_ELEMENT) framingMode = 1;
+                else if (subParameters.framingMode == XmlFramingModeEnum.ALL_LINKED_ELEMENTS) framingMode = 2;
 
-               if (subParameters.category != null)
-               {
-                   foreach (XmlMapCategory category in subParameters.category)
-                   {
-                       categoryArray.Add(Int32.Parse(category.categoryIndexInMapConfigFile));
-                   }
-               }
+                if (subParameters.category != null)
+                {
+                    foreach (XmlMapCategory category in subParameters.category)
+                    {
+                        categoryArray.Add(Int32.Parse(category.categoryIndexInMapConfigFile));
+                    }
+                }
             }
 
             BsonDocument document = new BsonDocument()
             {
                 { "draw_depth", drawDepth },
                 { "category_selection_mode", selectionMode },
-                { "categories", categoryArray }
+                { "categories", categoryArray },
+                { "framing_mode", framingMode}
             };
 
             return document;

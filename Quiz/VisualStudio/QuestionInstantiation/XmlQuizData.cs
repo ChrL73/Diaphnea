@@ -1004,6 +1004,8 @@ public partial class XmlMapSubParameters3 {
     
     private XmlCategorySelectionModeEnum categorySelectionModeField;
     
+    private XmlFramingModeEnum framingModeField;
+    
     private XmlAnswerSelectionModeEnum answerSelectionModeField;
     
     /// <remarks/>
@@ -1036,6 +1038,17 @@ public partial class XmlMapSubParameters3 {
         }
         set {
             this.categorySelectionModeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlFramingModeEnum framingMode {
+        get {
+            return this.framingModeField;
+        }
+        set {
+            this.framingModeField = value;
         }
     }
     
@@ -1082,6 +1095,21 @@ public enum XmlCategorySelectionModeEnum {
     
     /// <remarks/>
     EXCLUDE,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.33440")]
+[System.SerializableAttribute()]
+public enum XmlFramingModeEnum {
+    
+    /// <remarks/>
+    NO_ELEMENT,
+    
+    /// <remarks/>
+    ONLY_MAIN_ELEMENT,
+    
+    /// <remarks/>
+    ALL_LINKED_ELEMENTS,
 }
 
 /// <remarks/>
@@ -1166,6 +1194,8 @@ public partial class XmlMapSubParameters {
     
     private XmlCategorySelectionModeEnum categorySelectionModeField;
     
+    private XmlFramingModeEnum framingModeField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("category")]
     public XmlMapCategory[] category {
@@ -1196,6 +1226,17 @@ public partial class XmlMapSubParameters {
         }
         set {
             this.categorySelectionModeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public XmlFramingModeEnum framingMode {
+        get {
+            return this.framingModeField;
+        }
+        set {
+            this.framingModeField = value;
         }
     }
 }

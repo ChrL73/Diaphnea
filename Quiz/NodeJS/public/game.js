@@ -226,13 +226,20 @@ $(function()
       var info = mapInfo[newQuestion];
       map.setFramingLevel(info.framingLevel);   
       
+      var elementsToShow = {};
       info.mapIds.forEach(function(idInfo)
       {
-         showLinkedElements(idInfo);
+         showLinkedElements(idInfo, elementsToShow);
+      });
+      
+      Object.getOwnPropertyNames(elementsToShow).forEach(function(elementId)
+      {
+         var keepFoFraming = elementsToShow[elementId];
+         mapElements[elementId].show(!keepFoFraming);
       });
    }
    
-   function showLinkedElements(idInfo)
+   function showLinkedElements(idInfo, elementsToShow)
    {
       var element = mapElements[idInfo.id];
       var threshold = 50;
@@ -275,7 +282,12 @@ $(function()
       { 
          var elt = mapElements[elementId];
          var categoryInList = (categories[elt.getCategoryIndex()] == 1);
-         if (elt == element || categoryInList == include) elt.show();
+         if (elt == element || categoryInList == include)
+         {
+            var keepFoFraming = true;
+            if (keepFoFraming) elementsToShow[elementId] = true;
+            else if (!elementsToShow[elementId]) elementsToShow[elementId] = false;
+         }
       });
    }
 });

@@ -60,6 +60,7 @@ namespace produce_questions
 
             _json += "{\"id\":\"" + _mapIdVector[i]->getId()
                      + "\",\"depth\":" + std::to_string(parameters->getDrawDepth() - 1)
+                     + ",\"framing\":" + std::to_string(parameters->getFramingMode())
                      + ",\"mode\":\"" + parameters->getCategorySelectionMode()
                      + "\",\"categories\":[";
 

@@ -493,6 +493,8 @@ namespace produce_questions
             categories.push_back(category);
         }
 
-        return new MapSubParameters(drawDepth, categorySelectionMode, categories);
+        int framingMode = dbMapSubParameters.getIntField("framing_mode");
+
+        return new MapSubParameters(drawDepth, categorySelectionMode, categories, framingMode);
     }
 }

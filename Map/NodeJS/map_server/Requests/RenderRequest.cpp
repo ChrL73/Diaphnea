@@ -133,7 +133,6 @@ namespace map_server
                 std::vector<const ItemLook *> contourLook;
                 contourLook.push_back(element->getLook(_lookIndex)->getContourLook());
                 item->setCurrentLooks(contourLook);
-                item->setCurrentCategory(element->getCategory());
                 itemVector.push_back(item);
             }
 
@@ -183,7 +182,11 @@ namespace map_server
                         itemVector2.push_back(item);
 
                         int framingLevel = 0;
-                        if (item->getCurrentCategory() != 0) framingLevel = item->getCurrentCategory()->getFramingLevel();
+                        if (item->getElementForFraming() != 0 && _framingExceptions.find(item->getElementForFraming()->getId()) == _framingExceptions.end())
+                        {
+                            framingLevel = item->getElementForFraming()->getCategory()->getFramingLevel();
+                        }
+
                         if (framingLevel >= _framingLevel)
                         {
                             if (item->getXMin() < xMin) xMin = item->getXMin();

@@ -282,9 +282,12 @@ $(function()
       { 
          var elt = mapElements[elementId];
          var categoryInList = (categories[elt.getCategoryIndex()] == 1);
+         
          if (elt == element || categoryInList == include)
          {
-            var keepFoFraming = true;
+            var keepFoFraming = false;
+            if (idInfo.framing == 1) keepFoFraming = (elt == element);
+            else if (idInfo.framing == 2) keepFoFraming = true;
             if (keepFoFraming) elementsToShow[elementId] = true;
             else if (!elementsToShow[elementId]) elementsToShow[elementId] = false;
          }

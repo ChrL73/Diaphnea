@@ -252,10 +252,19 @@ namespace map_server
                 }
 
 				std::vector<const char *> elementIds;
+				std::set<std::string> framingExceptions;
 				for (i = 11; i < tokenCount; ++i)
 				{
                     if (strcmp(tokenVector[i], "#") == 0) break;
-                    elementIds.push_back(tokenVector[i]);
+                    if (tokenVector[i][0] != '-')
+                    {
+                        elementIds.push_back(tokenVector[i]);
+                    }
+                    else
+                    {
+                        elementIds.push_back(tokenVector[i] + 1);
+                        framingExceptions.insert(tokenVector[i] + 1);
+                    }
                 }
 
 				std::map<int, SvgCustomColor *> customColorMap;
@@ -303,7 +312,7 @@ namespace map_server
                     }
 
 					return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels,
-                                             lookIndex, elementIds, customColorMap, framingLevel);
+                                             lookIndex, elementIds, customColorMap, framingLevel, framingExceptions);
 				}
 
 

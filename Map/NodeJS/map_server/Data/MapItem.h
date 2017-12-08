@@ -8,7 +8,7 @@
  {
     class ItemLook;
     class ElementName;
-    class Category;
+    class MapElement;
 
     class MapItem
     {
@@ -16,7 +16,7 @@
         const int _id;
         std::vector<const ItemLook *> _currentLooks;
 		std::vector<const ItemLook *> _currentTextLooks;
-		const Category *_currentCategory;
+		const MapElement *_elementForFraming;
         std::map<std::string, std::vector<ElementName *> > *_nameMapPtr;
         std::string _elementIdForText;
         double _importance;
@@ -33,7 +33,7 @@
 
         void setCurrentLooks(const std::vector<const ItemLook *>& looks) { _currentLooks = looks; }
 		void setCurrentTextLooks(const std::vector<const ItemLook *>& looks) { _currentTextLooks = looks; }
-		void setCurrentCategory(const Category *category) { _currentCategory = category; }
+		void setElementForFraming(const MapElement *elementForFraming) { _elementForFraming = elementForFraming; }
 
 		void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
 		void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
@@ -46,7 +46,7 @@
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(int i) const;
 		const ItemLook *getCurrentTextLook(int i) const;
-		const Category *getCurrentCategory(void) const { return _currentCategory; }
+		const MapElement *getElementForFraming(void) const { return _elementForFraming; }
         const std::string& getInfoJson(unsigned int resolutionIndex) const;
         virtual bool hasResolution(void) const = 0;
 

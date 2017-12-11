@@ -17302,7 +17302,7 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Riviere_VilleConfluent" way="DIRECT" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="15" minLevel="1">
         <questionText language="fr" text="Dans quelle ville se situe le confluent {0} ?"/>
@@ -17319,18 +17319,18 @@
           <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relation1QuestionCategory>
-      <!--<relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relation1QuestionCategory relation="r11_Fleuve_VilleEmbouchure" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
         <questionText language="fr" text="Près de quelle ville se situe l'embouchure {0} ?"/>
         <questionText language="en" text="Near which city is the mouth of the {0}?"/>
         <mapParameters framingLevel="2">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
             <category categoryIndexInMapConfigFile="3"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
@@ -17340,11 +17340,11 @@
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
@@ -17352,11 +17352,11 @@
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département dont le numéro est {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the department whose number is {0}?"/>
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
@@ -17364,13 +17364,13 @@
         <questionText language="fr" text="Parmi ces départements, lesquels font partie de la région {0} ?"/>
         <questionText language="en" text="Among these departments, which are part of the {0} region?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="3"/>
             <category categoryIndexInMapConfigFile="5"/>
             <category categoryIndexInMapConfigFile="6"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Numero"
@@ -17378,13 +17378,13 @@
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements de la région {0} ?"/>
         <questionText language="en" text="Among these numbers, which are associated with departments of the {0} region?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="3"/>
             <category categoryIndexInMapConfigFile="5"/>
             <category categoryIndexInMapConfigFile="6"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
@@ -17392,13 +17392,13 @@
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent en région {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} region?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="3"/>
             <category categoryIndexInMapConfigFile="5"/>
             <category categoryIndexInMapConfigFile="6"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
@@ -17406,11 +17406,11 @@
         <questionText language="fr" text="Parmi ces départements, lesquels sont traversés par {0} ?"/>
         <questionText language="en" text="Among these departments, which are crossed by the {0} river?"/>
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Numero"
@@ -17418,11 +17418,11 @@
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements traversés par {0} ?"/>
         <questionText language="en" text="Among these numbers, which are associated with departments crossed by the {0} river?"/>
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
@@ -17430,12 +17430,12 @@
         <questionText language="fr" text="Parmi ces villes, lesquelles sont traversées par {0} ?"/>
         <questionText language="en" text="Among these cities, which are crossed by the {0} river?"/>
         <mapParameters framingLevel="2">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
@@ -17443,11 +17443,11 @@
         <questionText language="fr" text="Parmi ces régions, lesquelles sont traversés par {0} ?"/>
         <questionText language="en" text="Among these regions, which are crossed by the {0} river?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="2"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Departement_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
@@ -17455,12 +17455,12 @@
         <questionText language="fr" text="Parmi ces départements, lesquels sont limitrophes au département {0} ?"/>
         <questionText language="en" text="Among these departments, which are adjacent to the {0} department?"/>   
         <mapParameters framingLevel="7">
-          <question drawDepth="3" categorySelectionMode="INCLUDE">
+          <question drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="0"/>
             <category categoryIndexInMapConfigFile="2"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Riviere_Affluents" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
@@ -17468,14 +17468,14 @@
         <questionText language="fr" text="Parmi ces cours d'eau, lesquels sont des affluents {0} ?"/>
         <questionText language="en" text="Among these rivers, which are tributaries of the {0}?"/>
         <mapParameters framingLevel="2">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
             <category categoryIndexInMapConfigFile="2"/>
           </question>
-          <answer drawDepth="2" categorySelectionMode="INCLUDE">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="4"/>
           </answer>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>   
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Region_RegionsLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom2"
@@ -17483,12 +17483,12 @@
         <questionText language="fr" text="Parmi ces régions, lesquelles sont limitrophes à la région {0} ?"/>
         <questionText language="en" text="Among these regions, which are adjacent to the {0} region?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="3" categorySelectionMode="INCLUDE">
+          <question drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="0"/>
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>   
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
@@ -17496,11 +17496,11 @@
         <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent le département {0} ?"/>
         <questionText language="en" text="Among these rivers, which flow through the {0} department?"/>   
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="INVERSE" questionAttribute="at_Numero" answerAttribute="at_Nom1"
@@ -17508,11 +17508,11 @@
         <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent le département dont le numéro est {0} ?"/>
         <questionText language="en" text="Among these rivers, which flow through the department whose number is {0}?"/> 
         <mapParameters framingLevel="7">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="1"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>   
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Region_Departements" way="DIRECT" relation2="rNN_Riviere_Departements" way2="INVERSE" questionAttribute="at_Nom2"
@@ -17520,13 +17520,13 @@
         <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent la région {0} ?"/>
         <questionText language="en" text="Among these rivers, which flow through the {0} region?"/>
         <mapParameters framingLevel="6">
-          <question drawDepth="2" categorySelectionMode="EXCLUDE">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="2"/>
             <category categoryIndexInMapConfigFile="5"/>
             <category categoryIndexInMapConfigFile="6"/>
           </question>
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE"/>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters> 
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
@@ -17534,39 +17534,79 @@
         <questionText language="fr" text="Parmi ces départements, lesquels ont une frontière commune avec {0} ?"/>
         <questionText language="en" text="Among these departments, which share a border with {0} ?"/>
         <mapParameters framingLevel="7">
-          <question drawDepth="0" categorySelectionMode="INCLUDE"/>
-          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="0"/>
             <category categoryIndexInMapConfigFile="2"/>
           </answer>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2"
                                  answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
         <questionText language="fr" text="Parmi ces régions, lesquelles ont une frontière commune avec {0} ?"/>
-        <questionText language="en" text="Among these regions, which share a border with {0} ?"/>   
+        <questionText language="en" text="Among these regions, which share a border with {0} ?"/>  
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements ayant une frontière commune avec {0} ?"/>
-        <questionText language="en" text="Among these numbers, which are associated with departments bordering {0} ?"/>   
+        <questionText language="en" text="Among these numbers, which are associated with departments bordering {0} ?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
                                  answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="30" minLevel="0">
         <questionText language="fr" text="Parmi ces départements, lesquels sont bordés par {0} ?"/>
-        <questionText language="en" text="Among these departments, which are bordered by {0} ?"/>   
+        <questionText language="en" text="Among these departments, which are bordered by {0} ?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3"
                                  answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
         <questionText language="fr" text="Parmi ces régions, lesquelles sont bordées par {0} ?"/>
-        <questionText language="en" text="Among these regions, which are bordered by {0} ?"/>   
-      </relationNQuestionCategory>
+        <questionText language="en" text="Among these regions, which are bordered by {0} ?"/>  
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters> 
+      </relationNQuestionCategory>-->
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
-        <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/> 
-      </relationNQuestionCategory>-->
+        <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters> 
+      </relationNQuestionCategory>
     </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList>
       <!--<attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"

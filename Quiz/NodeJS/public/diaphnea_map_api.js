@@ -18,6 +18,7 @@ var mapServerInterface =
          
          var socket;
          var requestCounter = -1;
+         var popCounter = 0;
             
          var contexts = {};
          function setContext(id, context)
@@ -279,6 +280,8 @@ var mapServerInterface =
                
                if (state)
                {
+                  ++popCounter;
+                  
                   xFocus = state.xFocus;
                   yFocus = state.yFocus;
                   scale = state.scale;
@@ -511,7 +514,7 @@ var mapServerInterface =
                   {                           
                      var id = ++requestCounter;
                      var request = { id: id, mapId: mapId, itemId: itemInfo[0], resolution: (resolution ? resolution : 0) };
-                     setContext(id.toString(), { mapId: mapId, itemKey: itemKey, itemId: itemInfo[0], resolution: resolution, lookId: lookId });
+                     setContext(id.toString(), { mapId: mapId, itemKey: itemKey, itemId: itemInfo[0], resolution: resolution, lookId: lookId, popCounter: popCounter });
                      socket.emit('itemDataReq', request);
                      
                      items[itemKey] =
@@ -629,7 +632,7 @@ var mapServerInterface =
                      item.y = itemData.y;
                   }
                   
-                  if (!itemsToRemove[context.itemKey]) addItem(context.itemKey, context.lookId);
+                  if (!itemsToRemove[context.itemKey] && popCounter == context.popCounter) addItem(context.itemKey, context.lookId);
                }
             });
             

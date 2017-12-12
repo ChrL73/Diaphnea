@@ -129,6 +129,7 @@ var mapServerInterface =
             var reqAnimFrameId;
             
             var visibleElements = {};
+            var framingExceptions = {};
             var items = {};
             var addedItems = {};
             var itemsToRemove = {};
@@ -266,6 +267,7 @@ var mapServerInterface =
                };
                
                savedStates[stateId].visibleElements = JSON.parse(JSON.stringify(visibleElements));
+               savedStates[stateId].framingExceptions = JSON.parse(JSON.stringify(framingExceptions));
                savedStates[stateId].addedItems = JSON.parse(JSON.stringify(addedItems));
                savedStates[stateId].itemsToRemove = JSON.parse(JSON.stringify(itemsToRemove));
                savedStates[stateId].removableTexts = JSON.parse(JSON.stringify(removableTexts));
@@ -288,6 +290,7 @@ var mapServerInterface =
                   currentFramingLevel = state.currentFramingLevel;
                   
                   visibleElements = JSON.parse(JSON.stringify(state.visibleElements));
+                  framingExceptions = JSON.parse(JSON.stringify(state.framingExceptions));
                   addedItems = JSON.parse(JSON.stringify(state.addedItems));
                   itemsToRemove = JSON.parse(JSON.stringify(state.itemsToRemove));
                   removableTexts = JSON.parse(JSON.stringify(state.removableTexts));
@@ -342,8 +345,9 @@ var mapServerInterface =
                this.getLinkedElements1 = function() { return elementInfo.linkedElements1; }
                this.getLinkedElements2 = function() { return elementInfo.linkedElements2; }
                
-               this.show = function()
+               this.show = function(exceptFromFraming)
                {
+                  if (exceptFromFraming) framingExceptions[elementId] = true;
                   visibleElements[elementId] = true;
                   scheduleRenderRequest();
                }
@@ -394,9 +398,13 @@ var mapServerInterface =
             function sendRenderRequest()
             {
                var elementIds = [];
+               var scaleExists = scale && xFocus && yFocus;
                Object.getOwnPropertyNames(visibleElements).forEach(function(elementId)
                {
-                  if (visibleElements[elementId]) elementIds.push(elementId);
+                  if (visibleElements[elementId])
+                  {
+                     elementIds.push((!scaleExists && framingExceptions[elementId]) ? ('-' + elementId) : elementId);
+                  }
                });
                
                if (potentialImageRequested)
@@ -419,7 +427,7 @@ var mapServerInterface =
                   var context;
                   if (!svgRequested) context = { scale: scale };
                   
-                  if (scale && xFocus && yFocus)
+                  if (scaleExists)
                   {
                      request.scale = scale;
                      request.xFocus = xFocus;

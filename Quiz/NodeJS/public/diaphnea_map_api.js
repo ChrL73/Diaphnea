@@ -388,9 +388,11 @@ var mapServerInterface =
             }
             
             var renderRequestTimeout;
+            var popCounter0;
             function scheduleRenderRequest()
             {
                clearTimeout(renderRequestTimeout);
+               popCounter0 = popCounter;
                renderRequestTimeout = setTimeout(sendRenderRequest, 100);
             }
             
@@ -465,6 +467,7 @@ var mapServerInterface =
                   else
                   {
                      context.mapId = mapId;
+                     context.popCounter = popCounter0;
                      setContext(id, context);
                      lastRenderRequestId = id;
                      socket.emit('renderReq', request);
@@ -484,7 +487,7 @@ var mapServerInterface =
             socket.on('renderRes', function(response)
             {
                var context = getContext(response, true, mapId);
-               if (!context || response.requestId != lastRenderRequestId) return;
+               if (!context || response.requestId != lastRenderRequestId || context.popCounter != popCounter) return;
                
                var renderInfo = response.content;
                

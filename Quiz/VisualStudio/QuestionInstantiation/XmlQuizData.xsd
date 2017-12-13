@@ -359,6 +359,7 @@
   <xsd:complexType name="XmlAttributeOrderQuestionCategory">
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText0P" maxOccurs="unbounded" minOccurs="0" />
+      <xsd:element name="mapParameters" type="XmlMapParameters1" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="elementType" type="XmlElementTypeIdRef" use="required" />
     <xsd:attribute name="attribute" type="XmlNumericalAttributeTypeIdRef" use="required" />
@@ -377,6 +378,7 @@
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText1P" maxOccurs="unbounded" minOccurs="0" />
       <xsd:element name="exception" type="XmlException1" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="mapParameters" type="XmlMapParameters2" maxOccurs="1" minOccurs="1" />
     </xsd:sequence>
     <xsd:attribute name="relation" type="XmlRelationNIdRef" use="required" />
     <xsd:attribute name="way" type="XmlWayEnum" use="required"/>

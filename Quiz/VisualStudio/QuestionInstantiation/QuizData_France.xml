@@ -17593,7 +17593,7 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters> 
-      </relationNQuestionCategory>-->
+      </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
@@ -17606,38 +17606,78 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters> 
-      </relationNQuestionCategory>
+      </relationNQuestionCategory>-->
     </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList>
       <!--<attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
         <questionText language="en" text="Which of thes cities is the northernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="LOWEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus au sud ?"/>
-        <questionText language="en" text="Which of thes cities is the southernmost?"/>
+        <questionText language="en" text="Which of thes cities is the southernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus à l'est ?"/>
-        <questionText language="en" text="Which of thes cities is the easternmost?"/>
+        <questionText language="en" text="Which of thes cities is the easternmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="LOWEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus à l'ouest ?"/>
-        <questionText language="en" text="Which of thes cities is the westernmost?"/>
+        <questionText language="en" text="Which of thes cities is the westernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Population" mode="GREATEST" answerAttribute="at_Nom1" weight="40" minLevel="2"
                                       distribParameterCorrection="0.2">
         <questionText language="fr" text="Laquelle de ces villes est la plus peuplée (en 2008) ?"/>
         <questionText language="en" text="Which of thes cities is the most populous (in 2008)?"/>
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_FleuveRiviere" attribute="nt_Longueur" mode="GREATEST" answerAttribute="at_Nom1" weight="50" minLevel="1"
                                       distribParameterCorrection="0.2">
         <questionText language="fr" text="Lequel de ces cours d'eau est le plus long ?"/>
         <questionText language="en" text="Which of thes rivers is the longest?"/>
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </wrongChoice>
+        </mapParameters>
       </attributeOrderQuestionCategory>-->
     </attributeOrderQuestionCategoryList>
     <relationLimitQuestionCategoryList>
@@ -17657,8 +17697,19 @@
         <exception questionElement="el_VireFleuve"/>
         <exception questionElement="el_Vilaine"/>
         <exception questionElement="el_Selune"/>
-      </relationLimitQuestionCategory>
-      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationLimitQuestionCategory>-->
+      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                      answerProximityCriterion="NONE" weight="40" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la source {0} ?"/>
         <questionText language="en" text="What is the number of the department where the source of the {0} is located?"/> 
@@ -17674,7 +17725,18 @@
         <exception questionElement="el_VireFleuve"/>
         <exception questionElement="el_Vilaine"/>
         <exception questionElement="el_Selune"/>
-      </relationLimitQuestionCategory>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationLimitQuestionCategory>-->
       <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
                                      answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="40" minLevel="1">
         <questionText language="fr" text="Dans quel département se situe le confluent {0} ?"/>
@@ -17683,8 +17745,19 @@
         <exception questionElement="el_Sambre"/>
         <exception questionElement="el_Sarre"/>
         <exception questionElement="el_MoselleRiviere"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationLimitQuestionCategory>
-      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Numero"
+      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Numero"
                                     answerProximityCriterion="ELEMENT_LOCATION" weight="30" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe le confluent {0} ?"/>
         <questionText language="en" text="What is the number of the department where the confluence of the {0} is located?"/> 

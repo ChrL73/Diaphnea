@@ -116,7 +116,8 @@ namespace QuestionInstantiation
                 {
                     { "choice", element.Element.Name.getBsonDocument() },
                     { "comment", comment },
-                    { "min_index", element.MinAnswerIndex }
+                    { "min_index", element.MinAnswerIndex },
+                    { "map_id", element.Element.XmlElement.mapId == null ? "" : element.Element.XmlElement.mapId.Substring(2) }
                 };
 
                 choicesArray.Add(choiceDocument);

@@ -388,8 +388,9 @@ namespace produce_questions
                 const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
                 const char *comment = dbChoice.getStringField("comment");
                 int minIndex = dbChoice.getIntField("min_index");
+                const char *mapId = dbChoice.getStringField("map_id");
 
-                AttributeOrderChoice *choice = new AttributeOrderChoice(choiceText, comment, minIndex);
+                AttributeOrderChoice *choice = new AttributeOrderChoice(choiceText, comment, minIndex, mapId);
                 it = _attributeOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, AttributeOrderChoice *>(key, choice)).first;
             }
             else

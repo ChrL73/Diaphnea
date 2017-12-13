@@ -3,6 +3,8 @@
 #include "QuizData.h"
 #include "CompleteQuestion.h"
 #include "RandomNumberGenerator.h"
+#include "MapParameters.h"
+#include "MapSubParameters.h"
 
 namespace produce_questions
 {
@@ -28,6 +30,10 @@ namespace produce_questions
         const AttributeOrderChoice *choice = _choiceVector[draw];
         completeQuestion->addChoice(choice->getChoiceText(), choice->getComment(), true);
 
+        const MapSubParameters *answerParameters = getMapParameters()->getAnswerParameters();
+        const MapSubParameters *wrongChoiceParameters = getMapParameters()->getWrongChoiceParameters();
+        if (answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(choice->getMapId(), answerParameters);
+
         int minIndex = choice->getMinIndex();
         int n = _choiceVector.size();
         std::set<unsigned int> excludedValues;
@@ -39,6 +45,7 @@ namespace produce_questions
             excludedValues.insert(draw);
             const AttributeOrderChoice *choice = _choiceVector[minIndex + draw];
             completeQuestion->addChoice(choice->getChoiceText(), choice->getComment(), false);
+            if (wrongChoiceParameters->getDrawDepth() != 0) completeQuestion->addMapId(choice->getMapId(), wrongChoiceParameters);
         }
 
         return completeQuestion;

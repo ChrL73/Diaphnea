@@ -333,6 +333,7 @@
   <xsd:complexType name="XmlAttachedElement">
     <xsd:sequence/>
     <xsd:attribute name="id" type="XmlElementIdRef" use="required"/>
+    <xsd:attribute name="onlyForLinker" type="xsd:boolean" use="optional"/>
   </xsd:complexType>
   <xsd:simpleType name="XmlElementId">
     <xsd:restriction base="xsd:ID">

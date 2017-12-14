@@ -249,17 +249,24 @@ namespace MapDataProcessing
                 {
                     string attachedElementId = xmlAttachedElement.id.Substring(2);
                     MapElement attachedElement = _elementDictionary[attachedElementId];
+                    bool onlyForLinker = xmlAttachedElement.onlyForLinkerSpecified && xmlAttachedElement.onlyForLinkerSpecified;
 
                     if (attachedElement is LineMapElement)
                     {
-                        if (!_attachedLineElementDictionary.ContainsKey(attachedElementId)) _attachedLineElementDictionary.Add(attachedElementId, new List<LineMapElement>());
-                        _attachedLineElementDictionary[attachedElementId].Add(lineMapElement);
+                        if (!onlyForLinker)
+                        {
+                            if (!_attachedLineElementDictionary.ContainsKey(attachedElementId)) _attachedLineElementDictionary.Add(attachedElementId, new List<LineMapElement>());
+                            _attachedLineElementDictionary[attachedElementId].Add(lineMapElement);
+                        }
                         _elementLinker.addAttachment(lineMapElement, (LineMapElement)attachedElement);
                     }
                     else if (attachedElement is PolygonMapElement)
                     {
-                        if (!_attachedPolygonElementDictionary.ContainsKey(attachedElementId)) _attachedPolygonElementDictionary.Add(attachedElementId, new List<LineMapElement>());
-                        _attachedPolygonElementDictionary[attachedElementId].Add(lineMapElement);
+                        if (!onlyForLinker)
+                        {
+                            if (!_attachedPolygonElementDictionary.ContainsKey(attachedElementId)) _attachedPolygonElementDictionary.Add(attachedElementId, new List<LineMapElement>());
+                            _attachedPolygonElementDictionary[attachedElementId].Add(lineMapElement);
+                        }
                     }
                     else
                     {

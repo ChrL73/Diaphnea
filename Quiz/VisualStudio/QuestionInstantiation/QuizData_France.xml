@@ -17736,7 +17736,7 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relationLimitQuestionCategory>-->
+      </relationLimitQuestionCategory>
       <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
                                      answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="40" minLevel="1">
         <questionText language="fr" text="Dans quel département se situe le confluent {0} ?"/>
@@ -17757,7 +17757,7 @@
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationLimitQuestionCategory>
-      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Numero"
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Numero"
                                     answerProximityCriterion="ELEMENT_LOCATION" weight="30" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe le confluent {0} ?"/>
         <questionText language="en" text="What is the number of the department where the confluence of the {0} is located?"/> 
@@ -17765,15 +17765,26 @@
         <exception questionElement="el_Sambre"/>
         <exception questionElement="el_Sarre"/>
         <exception questionElement="el_MoselleRiviere"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationLimitQuestionCategory>-->
     </relationLimitQuestionCategoryList>
     <relationOrderQuestionCategoryList>
-      <!--<relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
+      <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces villes situées sur {0}, laquelle est la plus en aval ?"/>
         <questionText language="en" text="Among these cities on the {0}, which is the most downstream?"/>
       </relationOrderQuestionCategory>
-      <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
+      <!--<relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces villes situées sur {0}, laquelle est la plus en amont ?"/>
         <questionText language="en" text="Among these cities on the {0}, which is the most upstream?"/>

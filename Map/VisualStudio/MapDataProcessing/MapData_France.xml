@@ -2716,6 +2716,7 @@
         </looks>
         <attachmentList>
           <element id="e_Maine"/>
+          <element id="e_MayenneRiver" onlyForLinker="true"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Yonne" category="ca_FleuveRiviere" importance="73">
@@ -2912,6 +2913,7 @@
         </looks>
         <attachmentList>
           <element id="e_GavesReunis"/>
+          <element id="e_GaveOloron" onlyForLinker="true"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Vezere" category="ca_FleuveRiviere" importance="59">
@@ -2982,6 +2984,7 @@
         </looks>
         <attachmentList>
           <element id="e_Maine"/>
+          <element id="e_Sarthe" onlyForLinker="true"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Agout" category="ca_FleuveRiviere" importance="54">
@@ -3010,6 +3013,7 @@
         </looks>
         <attachmentList>
           <element id="e_GavesReunis"/>
+          <element id="e_GaveDePau" onlyForLinker="true"/>
         </attachmentList>
       </lineElement>
       <lineElement id="e_Truyere" category="ca_FleuveRiviere" importance="52">

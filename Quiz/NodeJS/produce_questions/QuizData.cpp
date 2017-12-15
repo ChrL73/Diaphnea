@@ -12,6 +12,7 @@
 #include "TextAndComment.h"
 #include "MapParameters.h"
 #include "MapSubParameters.h"
+#include "RelationOrderChoice.h"
 
 namespace produce_questions
 {
@@ -422,8 +423,9 @@ namespace produce_questions
                 const char *questionText = dbQuestion.getField("question").Obj().getStringField(_languageId);
                 int choiceCount = dbQuestion.getIntField("choice_count");
                 std::string choiceListId = dbQuestion.getField("choice_list").OID().toString();
+                std::string mapId = dbQuestion.getStringField("map_id");
 
-                RelationOrderQuestion *question = new RelationOrderQuestion(questionText, choiceCount, choiceListId);
+                RelationOrderQuestion *question = new RelationOrderQuestion(questionText, choiceCount, choiceListId, mapId);
                 it = _relationOrderQuestionMap.insert(std::pair<std::pair<std::string, int>, RelationOrderQuestion *>(key, question)).first;
             }
             else
@@ -435,10 +437,10 @@ namespace produce_questions
         return (*it).second;
     }
 
-    const std::string& QuizData::getRelationOrderChoice(const std::string& choiceListId, int index)
+    const RelationOrderChoice *QuizData::getRelationOrderChoice(const std::string& choiceListId, int index)
     {
         std::pair<std::string, int> key(choiceListId, index);
-        std::map<std::pair<std::string, int>, std::string>::iterator it = _relationOrderChoiceMap.find(key);
+        std::map<std::pair<std::string, int>, const RelationOrderChoice *>::iterator it = _relationOrderChoiceMap.find(key);
 
         if (it == _relationOrderChoiceMap.end())
         {
@@ -452,12 +454,15 @@ namespace produce_questions
                 mongo::BSONObj dbList = cursor->next();
                 mongo::BSONObj dbChoice = dbList.getField("choices").Array()[0].Obj();
                 const char *choiceText = dbChoice.getField("choice").Obj().getStringField(_languageId);
+                const char *mapId = dbChoice.getStringField("map_id");
 
-                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, std::string>(key, choiceText)).first;
+                const RelationOrderChoice *relationOrderChoice = new RelationOrderChoice(choiceText, mapId);
+
+                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, const RelationOrderChoice *>(key, relationOrderChoice)).first;
             }
             else
             {
-                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, std::string>(key, std::string())).first;
+                it = _relationOrderChoiceMap.insert(std::pair<std::pair<std::string, int>, const RelationOrderChoice *>(key, 0)).first;
             }
         }
 

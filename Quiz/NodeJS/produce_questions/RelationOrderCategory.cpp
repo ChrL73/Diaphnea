@@ -11,7 +11,7 @@ namespace produce_questions
         QuizData *quizData = QuizData::instance();
         const RelationOrderQuestion *question = quizData->getRelationOrderQuestion(_questionListId, draw);
 
-        CompleteQuestion *completeQuestion = question->getNewQuestion(choiceCount, distribParameter + _distribParameterCorrection);
+        CompleteQuestion *completeQuestion = question->getNewQuestion(choiceCount, distribParameter + _distribParameterCorrection, getMapParameters());
 
         return completeQuestion;
     }

@@ -6,6 +6,8 @@
 namespace produce_questions
 {
     class CompleteQuestion;
+    class RelationOrderChoice;
+    class MapParameters;
 
     class RelationOrderQuestion
     {
@@ -13,13 +15,15 @@ namespace produce_questions
         const std::string _question;
         const int _choiceCount;
         const std::string _choiceListId;
+        const std::string _mapId;
 
-        std::vector<std::string> _choiceVector;
+        std::vector<const RelationOrderChoice *> _choiceVector;
 
     public:
-        RelationOrderQuestion(const std::string& question, int choiceCount, const std::string& choiceListId);
+        RelationOrderQuestion(const std::string& question, int choiceCount, const std::string& choiceListId, const std::string& mapId);
 
-        CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
+        const std::string& getMapId(void) const { return _mapId; }
+        CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter, const MapParameters *mapParameters) const;
 
     };
 }

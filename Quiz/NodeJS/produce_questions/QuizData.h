@@ -28,6 +28,7 @@ namespace produce_questions
     class RelationOrderQuestion;
     class MapParameters;
     class MapSubParameters;
+    class RelationOrderChoice;
 
     class QuizData
     {
@@ -49,7 +50,7 @@ namespace produce_questions
         std::map<std::pair<std::string, int>, const Choice *> _choiceMap;
         std::map<std::pair<std::string, int>, const AttributeOrderChoice *> _attributeOrderChoiceMap;
         std::map<std::pair<std::string, int>, const RelationOrderQuestion *> _relationOrderQuestionMap;
-        std::map<std::pair<std::string, int>, std::string> _relationOrderChoiceMap;
+        std::map<std::pair<std::string, int>, const RelationOrderChoice *> _relationOrderChoiceMap;
 
     public:
         static QuizData *instance(void);
@@ -63,7 +64,7 @@ namespace produce_questions
         const Choice *getChoice(const std::string& choiceListId, int index, ProximityCriterionTypeEnum criterionType);
         const AttributeOrderChoice *getAttributeOrderChoice(const std::string& choiceListId, int index);
         const RelationOrderQuestion *getRelationOrderQuestion(const std::string& questionListId, int index);
-        const std::string& getRelationOrderChoice(const std::string& choiceListId, int index);
+        const RelationOrderChoice *getRelationOrderChoice(const std::string& choiceListId, int index);
         const MapParameters *getMapParameters(mongo::BSONObj dbCategory);
         const MapSubParameters *getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName);
     };

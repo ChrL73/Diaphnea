@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="5a2161d2db404c2620a36fac fr" />
+				<Option parameters="5a33dadbdb404c19a085da80 fr" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -29,7 +29,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="5a1eb282db404c13e85a9973 fr" />
+				<Option parameters="5a33a587db404c03d8c4e8a6 fr" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
@@ -84,6 +84,8 @@
 		<Unit filename="RandomNumberGenerator.h" />
 		<Unit filename="RelationOrderCategory.cpp" />
 		<Unit filename="RelationOrderCategory.h" />
+		<Unit filename="RelationOrderChoice.cpp" />
+		<Unit filename="RelationOrderChoice.h" />
 		<Unit filename="RelationOrderQuestion.cpp" />
 		<Unit filename="RelationOrderQuestion.h" />
 		<Unit filename="SimpleAnswerCategory.cpp" />

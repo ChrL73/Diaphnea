@@ -627,7 +627,7 @@ namespace QuestionInstantiation
                                     Choice ExcludedChoice = null;
                                     if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
-                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice, startElement, xmlRelationNQuestionCategory.answerProximityCriterion);
+                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice, startElement, xmlRelationNQuestionCategory.answerProximityCriterion, ChoiceCommentModeEnum.ATTRIBUTE_COMMENT);
 
                                     foreach(Element endElement in endElementDictionary.Keys)
                                     {
@@ -980,7 +980,8 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationOrderQuestionCategory.weight);
                         _weightSum += weight;
 
-				        RelationOrderCategory category = new RelationOrderCategory(_weightSum, questionNameInLog, _quizData, distribParameterCorrection, null);
+                        MapParameters mapParameters = new MapParameters(xmlRelationOrderQuestionCategory.mapParameters);
+                        RelationOrderCategory category = new RelationOrderCategory(_weightSum, questionNameInLog, _quizData, distribParameterCorrection, mapParameters);
 				
                         foreach (Element startElement in _elementByTypeDictionary[startElementType])
 				        {
@@ -999,7 +1000,7 @@ namespace QuestionInstantiation
                                 }
                                 if (_quizData.verifyText(questionText, String.Format("question {0}", questionNameInLog)) != 0) return -1;
 
-						        RelationOrderQuestion question = new RelationOrderQuestion(questionText);
+						        RelationOrderQuestion question = new RelationOrderQuestion(questionText, startElement);
 
                                 int k1, k2, dk;
                                 if (xmlRelationOrderQuestionCategory.mode == XmlRelationOrderModeEnum.BEGIN)
@@ -1106,8 +1107,9 @@ namespace QuestionInstantiation
                         Int32 weight = Int32.Parse(xmlRelationExistenceQuestionCategory.weight);
                         _weightSum += weight;
 
-                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0, null);
-                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, null, XmlMultipleAnswerProximityCriterionEnum.NONE);
+                        MapParameters mapParameters = new MapParameters(xmlRelationExistenceQuestionCategory.mapParameters);
+                        MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0, mapParameters);
+                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, null, XmlMultipleAnswerProximityCriterionEnum.NONE, ChoiceCommentModeEnum.MAIN_COMMENT);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
 				        {
@@ -1116,6 +1118,25 @@ namespace QuestionInstantiation
                             {
                                 Choice choice = new Choice(answerAttributeValue, element, _quizData);
                                 category.addChoice(choice);
+
+                                if (xmlRelationExistenceQuestionCategory.commentMode == XmlCommentModeEnum.NAME)
+                                {
+                                    Dictionary<Element, int> linkedElements = new Dictionary<Element, int>();
+
+                                    Element linkedElement1 = element.getLinked1Element(relationType);
+                                    if (linkedElement1 != null) linkedElements.Add(linkedElement1, 0);
+
+                                    int i, n = element.getLinkedNElementCount(relationType);
+                                    for (i = 0; i < n; ++i)
+                                    {
+                                        Element linkedElementN = element.getLinkedNElement(relationType, i);
+                                        if (!linkedElements.ContainsKey(linkedElementN)) linkedElements.Add(linkedElementN, 0);
+                                    }
+
+                                    List<Text> textList = new List<Text>();
+                                    foreach (Element elt in linkedElements.Keys) textList.Add(elt.Name);
+                                    choice.Comment = Text.fromTextList(textList, _quizData);
+                                }
 
                                 bool relationExists = (element.getLinked1Element(relationType) != null || element.getLinkedNElementCount(relationType) != 0);
                                 if (relationExists == (xmlRelationExistenceQuestionCategory.mode == XmlRelationExistenceModeEnum.EXISTS)) question.addChoice(choice);

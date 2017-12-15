@@ -57,6 +57,7 @@
     <Compile Include="AttributeOrderElement.cs" />
     <Compile Include="AttributeValue.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="ChoiceCommentModeEnum.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="GeoPoint.cs" />
     <Compile Include="Level.cs" />

@@ -17779,44 +17779,100 @@
       </relationLimitQuestionCategory>-->
     </relationLimitQuestionCategoryList>
     <relationOrderQuestionCategoryList>
-      <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
+      <!--<relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces villes situées sur {0}, laquelle est la plus en aval ?"/>
         <questionText language="en" text="Among these cities on the {0}, which is the most downstream?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationOrderQuestionCategory>
-      <!--<relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
+      <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces villes situées sur {0}, laquelle est la plus en amont ?"/>
         <questionText language="en" text="Among these cities on the {0}, which is the most upstream?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationOrderQuestionCategory>
       <relationOrderQuestionCategory relation="r1N_Riviere_Affluents" way="DIRECT" mode="END" questionAttribute="at_Nom2" answerAttribute ="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces affluents {0}, quel est celui dont le confluent est le plus en aval ?"/>
         <questionText language="en" text="Among these tributaries of the {0}, which is the one whose confluence is the most downstream?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="4"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationOrderQuestionCategory>
       <relationOrderQuestionCategory relation="r1N_Riviere_Affluents" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute ="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces affluents {0}, quel est celui dont le confluent est le plus en amont ?"/>
         <questionText language="en" text="Among these tributaries of the {0}, which is the one whose confluence is the most upstream?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="4"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relationOrderQuestionCategory>-->
     </relationOrderQuestionCategoryList>
     <relationExistenceQuestionCategoryList>
-      <!--<relationExistenceQuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" mode="DOES_NOT_EXIST" answerAttribute="at_Nom1" weight="65" minLevel="1">
+      <relationExistenceQuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" mode="DOES_NOT_EXIST" commentMode="NONE" answerAttribute="at_Nom1" weight="65" minLevel="1">
         <questionText language="fr" text="Parmi ces cours d'eau, lesquels sont des fleuves ?"/>
         <questionText language="en" text="Among these rivers, which flow into a sea or an ocean?"/>
         <exception questionElement="el_Risle"/>
         <exception questionElement="el_DordogneFleuve"/>
+        <mapParameters framingLevel="2">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </wrongChoice>
+        </mapParameters>
       </relationExistenceQuestionCategory>
-      <relationExistenceQuestionCategory relation="r11_Departement_ChefLieu" way="INVERSE" mode="EXISTS" answerAttribute="at_Nom1" weight="100" minLevel="1">
+      <relationExistenceQuestionCategory relation="r11_Departement_ChefLieu" way="INVERSE" mode="EXISTS" commentMode="NAME" answerAttribute="at_Nom1" weight="100" minLevel="1">
         <questionText language="fr" text="Parmi ces villes, lesquelles sont des préfectures ?"/>
         <questionText language="en" text="Among these cities, which are prefectures?"/>
         <exception questionElement="el_Cergy"/>
         <exception questionElement="el_Pontoise"/>
+        <mapParameters framingLevel="2">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+        </mapParameters>
       </relationExistenceQuestionCategory>
-      <relationExistenceQuestionCategory relation="r1N_Departement_ChefsLieuxArrondissement" way="INVERSE" mode="EXISTS" answerAttribute="at_Nom1" weight="100" minLevel="2">
+      <relationExistenceQuestionCategory relation="r1N_Departement_ChefsLieuxArrondissement" way="INVERSE" mode="EXISTS" commentMode="NAME" answerAttribute="at_Nom1" weight="100" minLevel="2">
         <questionText language="fr" text="Parmi ces villes, lesquelles sont des sous-préfectures ?"/>
         <questionText language="en" text="Among these cities, which are subprefectures?"/>
-      </relationExistenceQuestionCategory>-->
+        <mapParameters framingLevel="2">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+        </mapParameters>
+      </relationExistenceQuestionCategory>
     </relationExistenceQuestionCategoryList>
   </questionCategories>
   

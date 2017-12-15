@@ -398,6 +398,7 @@
   <xsd:complexType name="XmlRelationOrderQuestionCategory">
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText1P" maxOccurs="unbounded" minOccurs="0"/>
+      <xsd:element name="mapParameters" type="XmlMapParameters2" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="relation" type="XmlRelationNIdRef" use="required" />
     <xsd:attribute name="way" type="XmlWayEnum" use="required"/>
@@ -417,10 +418,12 @@
     <xsd:sequence>
       <xsd:element name="questionText" type="XmlQuestionText0P" maxOccurs="unbounded" minOccurs="0"/>
       <xsd:element name="exception" type="XmlException1" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="mapParameters" type="XmlMapParameters1" minOccurs="1" maxOccurs="1"/>
     </xsd:sequence>
     <xsd:attribute name="relation" type="XmlRelationIdRef" use="required" />
     <xsd:attribute name="way" type="XmlWayEnum" use="required"/>
     <xsd:attribute name="mode" type="XmlRelationExistenceModeEnum" use="required" />
+    <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />

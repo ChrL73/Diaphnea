@@ -32,7 +32,7 @@ namespace QuestionInstantiation
                 { "question_map_id", (_questionElement == null || _questionElement.XmlElement.mapId == null) ? "" : _questionElement.XmlElement.mapId.Substring(2) }
             };
 
-            questionDocument.AddRange(_choice.getBsonDocument());
+            questionDocument.AddRange(_choice.getBsonDocument(ChoiceCommentModeEnum.ATTRIBUTE_COMMENT));
 
             if (_excludedChoice != null)
             {

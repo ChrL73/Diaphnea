@@ -15,13 +15,16 @@ namespace QuestionInstantiation
         private readonly Choice _excludedChoice;
         private readonly Element _questionElement;
         private readonly XmlMultipleAnswerProximityCriterionEnum _proximityCriterion;
+        private readonly ChoiceCommentModeEnum _choiceCommentMode;
 
-        internal MultipleAnswerQuestion(Text questionText, Choice excludedChoice, Element questionElement, XmlMultipleAnswerProximityCriterionEnum proximityCriterion)
+        internal MultipleAnswerQuestion(Text questionText, Choice excludedChoice, Element questionElement, XmlMultipleAnswerProximityCriterionEnum proximityCriterion,
+                                        ChoiceCommentModeEnum choiceCommentMode)
         {
             _questionText = questionText;
             _excludedChoice = excludedChoice;
             _questionElement = questionElement;
             _proximityCriterion = proximityCriterion;
+            _choiceCommentMode = choiceCommentMode;
         }
 
         internal void addChoice(Choice choice)
@@ -51,7 +54,7 @@ namespace QuestionInstantiation
 
             BsonArray choiceArray = new BsonArray();
             BsonArray mapIdArray = new BsonArray();
-            foreach (Choice choice in _choiceList) choiceArray.Add(choice.getBsonDocument());
+            foreach (Choice choice in _choiceList) choiceArray.Add(choice.getBsonDocument(_choiceCommentMode));
             questionDocument.AddRange(new BsonDocument() { { "answers", choiceArray } });
 
             if (_excludedChoice != null)

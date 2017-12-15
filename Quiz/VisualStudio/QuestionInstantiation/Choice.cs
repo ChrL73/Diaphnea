@@ -31,12 +31,12 @@ namespace QuestionInstantiation
             get { return _element; }
         }
 
-        internal BsonDocument getBsonDocument()
+        internal BsonDocument getBsonDocument(ChoiceCommentModeEnum commentMode)
         {
             BsonDocument choiceDocument = new BsonDocument()
             {
                 { "answer", _attributeValue.Value.getBsonDocument() },
-                { "comment", _attributeValue.Comment.getBsonDocument() },
+                { "comment", (commentMode == ChoiceCommentModeEnum.ATTRIBUTE_COMMENT) ? _attributeValue.Comment.getBsonDocument() : Comment.getBsonDocument() },
                 { "answer_map_id", Element.XmlElement.mapId == null ? "" : Element.XmlElement.mapId.Substring(2) }
             };
 

@@ -13,10 +13,12 @@ namespace QuestionInstantiation
         private readonly List<Choice> _choiceList = new List<Choice>();
         private readonly SortedDictionary<Text, Choice> _choiceDictionary = new SortedDictionary<Text, Choice>(new TextComparer());
         private readonly Text _questionText;
+        private readonly Element _questionElement;
 
-        internal RelationOrderQuestion(Text questionText)
+        internal RelationOrderQuestion(Text questionText, Element questionElement)
         {
             _questionText = questionText;
+            _questionElement = questionElement;
         }
 
         internal int ChoiceCount
@@ -57,7 +59,8 @@ namespace QuestionInstantiation
             {
                 { "question", _questionText.getBsonDocument() },
                 { "choice_count", _choiceList.Count },
-                { "choice_list", choiceListDocument.GetValue("_id") }
+                { "choice_list", choiceListDocument.GetValue("_id") },
+                { "map_id", (_questionElement.XmlElement.mapId == null) ? "" : _questionElement.XmlElement.mapId.Substring(2) }
             };
 
             return questionDocument;
@@ -70,7 +73,8 @@ namespace QuestionInstantiation
             {
                 BsonDocument choiceDocument = new BsonDocument()
                 {
-                    { "choice", choice.AttributeValue.Value.getBsonDocument() }
+                    { "choice", choice.AttributeValue.Value.getBsonDocument() },
+                    { "map_id", choice.Element.XmlElement.mapId == null ? "" : choice.Element.XmlElement.mapId.Substring(2) }
                 };
 
                 choicesArray.Add(choiceDocument);

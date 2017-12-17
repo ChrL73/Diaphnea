@@ -11,6 +11,7 @@ var contextSchema = mongoose.Schema(
    levelName: String,
    mapId: String,
    currentPage: Number,
+   indexMessages: { unkwown: Boolean, error: Boolean },
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,
    displayedQuestion: Number,

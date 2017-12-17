@@ -61,7 +61,7 @@ function getLevelChoiceDownData(upData, callback)
       questionnaire.languages.forEach(function(iLanguage)
       {
          if (!defaultLanguage) defaultLanguage = iLanguage;
-         if (iLanguage.id === upData.siteLanguageId ) siteLanguage = iLanguage;
+         if (iLanguage.id === upData.siteLanguageId) siteLanguage = iLanguage;
          if (iLanguage.id === upData.questionnaireLanguageId) questionnaireLanguage = iLanguage;
          downData.questionnaireLanguageList.push({ id: iLanguage.id, name: iLanguage.name });
       });

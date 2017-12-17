@@ -89,7 +89,9 @@ app.all('/', function(req, res)
 {
    getContext(req.session, req.sessionID, req.cookies, function(context)
    {
-      res.render('quiz.ejs', {});
+      if (context.currentPage == pages.signUp) signUp(req, res, context);
+      else if (context.currentPage == pages.game) game(req, res, context);
+      else index(req, res, context);  
    });
 });
 
@@ -97,6 +99,47 @@ app.use(function(req, res)
 {
    res.redirect('/');
 });
+
+function index(req, res, context)
+{
+   quizData.getLevelChoiceDownData(context, renderView);
+   
+   function renderView(data)
+   {
+      if (context.user) data.userName = context.user.name;
+      
+      context.questionnaireId = data.questionnaireId;
+      context.questionnaireLanguageId = data.questionnaireLanguageId;
+      context.levelId = data.levelId;
+      context.saver.save(function(err)
+      {
+         if (err) console.log(err);
+         // Todo: handle error
+      });
+         
+      data.page = 'index';
+      data.siteLanguageList = languages;
+      data.siteLanguageId = context.siteLanguageId;
+      data.texts = translate(context.siteLanguageId).texts;
+      data.unknown = context.indexMessages.unkwown;
+      data.error = context.indexMessages.error;
+      
+      console.log(data);
+      
+      if (data.error) res.status(500);
+      res.render('quiz.ejs', { data: data });
+   }
+}
+
+function signUp(req, res, context)
+{
+   res.render('quiz.ejs', {});
+}
+
+function game(req, res, context)
+{
+   res.render('quiz.ejs', {});
+}
 
 function getContext(session0, sessionId, cookies, callback)
 {
@@ -158,7 +201,8 @@ function getContext(session0, sessionId, cookies, callback)
                   questionnaireId: cookies.questionnaireId,
                   questionnaireLanguageId: cookies.questionnaireLanguageId,
                   levelId: cookies.levelId,
-                  currentPage: pages.index
+                  currentPage: pages.index,
+                  indexMessages: { unkwown: false, error: false }
                };
                
                session.context.session = session;

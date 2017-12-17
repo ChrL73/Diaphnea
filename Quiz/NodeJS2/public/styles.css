@@ -1,0 +1,48 @@
+header
+{
+   padding-top: 12px;
+   padding-bottom: 8px;
+   margin-bottom: 16px;
+}
+
+.gameHeader
+{
+   margin-right: 48px;
+}
+
+.question
+{
+   display: none;
+}
+
+.boldChoice
+{
+   font-weight: bold;
+}
+
+.redChoice
+{
+   color: red;
+}
+
+.greenChoice
+{
+   color: green;
+}
+
+input[type='checkbox'], input[type='radio']
+{
+   margin-left: 12px;
+}
+
+.waitImg
+{
+   display: none;
+   height: 24px;
+   width: 24px;
+}
+
+canvas
+{
+   border: 1px solid black;
+}

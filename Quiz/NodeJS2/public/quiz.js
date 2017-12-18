@@ -20,17 +20,29 @@ $(function()
       {
          html += '<form class="navbar-form"><small><label for="nameInput">'             
             + pageInfo.texts.name
-            + ': </label><input class="form-control input-sm" type="text" id="nameInput" name="name"/><label for="passInput">'
+            + ': </label> <input class="form-control input-sm" type="text" id="indexNameInput" /> <label for="passInput">'
             + pageInfo.texts.password
-            + ': </label><input class="form-control input-sm" type="password" id="passInput" name="pass"/><div class="visible-xs"><br></div><input class="btn btn-primary btn-sm" type="submit" value="'
+            + ': </label> <input class="form-control input-sm" type="password" id="indexPassInput" /> <div class="visible-xs"><br></div><button id="indexSignInBtn" class="btn btn-primary btn-sm">'
             + pageInfo.texts.signIn
-            + '" name="signIn"/><input class="btn btn-info btn-sm" type="submit" value="'
+            + '</button> <button id="indexSignUpBtn" class="btn btn-info btn-sm">'
             + pageInfo.texts.signUp
-            + '" name="enterSignUp"/></small></form>';
+            + '</button></small></form>';
       }
       
       html += '</div></div></header>';
       
       $('#container').append(html);
+      
+      $('#indexSignInBtn').click(function(e)
+      {
+         e.preventDefault();
+         console.log('indexSignInBtn');
+      });
+      
+      $('#indexSignUpBtn').click(function(e)
+      {
+         e.preventDefault();
+         console.log('indexSignUpBtn');
+      });
    }
 }) ;

@@ -30,7 +30,6 @@ $(function()
       $('#levelWait').css('display', 'inline');
    });
    
-   
    function emitLevelChoice()
    {
       var questionnaireId = $('#questionnaireSelect').val();
@@ -44,8 +43,7 @@ $(function()
          document.cookie = 'questionnaireLanguageId=' + questionnaireLanguageId + expires;
          document.cookie = 'levelId=' + levelId + expires;
       }
-      
-      
+        
       socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId }); 
    }
    

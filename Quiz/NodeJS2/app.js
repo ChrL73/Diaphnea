@@ -124,8 +124,6 @@ function index(req, res, context)
       data.unknown = context.indexMessages.unkwown;
       data.error = context.indexMessages.error;
       
-      console.log(data);
-      
       if (data.error) res.status(500);
       res.render('quiz.ejs', { data: data });
    }
@@ -222,6 +220,45 @@ function getContext(session0, sessionId, cookies, callback)
       });
    }
 }
+
+io.on('connection', function(socket)
+{
+   socket.on('levelChoice', function(upData)
+   {
+      var context;
+      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(fContext)
+      { 
+         context = fContext;
+         upData.siteLanguageId = context.siteLanguageId;
+         quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
+      });
+      
+      function emitUpdateSelects(downData)
+      {
+         context.questionnaireId = downData.questionnaireId;
+         context.questionnaireLanguageId = downData.questionnaireLanguageId;
+         context.levelId = downData.levelId;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
+      }
+   });
+   
+   function extractCookies(cookieString)
+   {
+      var cookieObject = {};
+      var cookieArray = cookieString.split(';');
+
+      cookieArray.forEach(function(cookie)
+      {
+         cookieParts = cookie.split('=');
+         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
+      });
+
+      return cookieObject;
+   }
+});
 
 if (!config.port) throw new Error("No 'port' value in config.js");
 console.log('Quiz server listening on port ' + config.port + '...');

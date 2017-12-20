@@ -4,7 +4,11 @@
       <meta charset="utf-8" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
       <link rel="stylesheet" href="styles.css"/>
-      <title>Quiz</title>
+      <% if (data.page == 'signUp') { %>
+         <title><%=data.texts.signUp%></title>
+      <% } else { %>
+         <title><%=data.texts.quiz%></title>
+      <% } %>
    </head>
 
    <body>  
@@ -13,10 +17,19 @@
       <script>
          pageInfo =
          {
-            page: '<%=data.page%>',
-            
+            page: '<%=data.page%>',    
             <% if (data.page == 'signUp') { %>
-               
+               texts:
+               {
+                  name: '<%=data.texts.name%>',
+                  password: '<%=data.texts.password%>',
+                  confirmPassword: '<%=data.texts.confirmPassword%>',
+                  signUp: '<%=data.texts.signUp%>',
+                  cancel: '<%=data.texts.cancel%>'
+               },
+               name: '<%=data.name%>',
+               siteLanguageList: [<% data.siteLanguageList.forEach(function(language, i) { %><% if (i != 0) { %>, <% } %>{id: '<%=language.id%>', name: '<%=language.name%>'}<% }); %>],
+               siteLanguageId: '<%=data.siteLanguageId%>'
             <% } else if (data.page == 'game') { %>
                
             <% } else { %>

@@ -1,5 +1,6 @@
 module.exports =
 {
+   'quiz': 'Quiz',
    'questionnaire': 'Questionnaire',
    'language': 'Language',
    'level': 'Level',

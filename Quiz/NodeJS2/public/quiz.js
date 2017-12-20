@@ -2,11 +2,18 @@ $(function()
 {
    var socket = io.connect();
    
-   if (pageInfo.page == 'signUp') displaySignUp();
-   else if (pageInfo.page == 'game') displayGame();
-   else displayIndex();
+   if (pageInfo.page == 'signUp') displaySignUp(pageInfo);
+   else if (pageInfo.page == 'game') displayGame(pageInfo);
+   else displayIndex(pageInfo);
    
-   function displayIndex()
+   socket.on('displayPage', function(data)
+   {
+      if (data.page == 'signUp') displaySignUp(data);
+      else if (data.page == 'game') displayGame(data);
+      else displayIndex(data);
+   });
+   
+   function displayIndex(pageData)
    {
       $('#container').empty();
       $('#container').removeClass();
@@ -14,24 +21,24 @@ $(function()
       
       var html = '<header><div class="navbar"><div class="col-md-10">';
       
-      if (pageInfo.userName)
+      if (pageData.userName)
       {
          html += '<form class="navbar-form"><label>'
-            + pageInfo.userName
+            + pageData.userName
             + '</label> <button id="indexSignOutBtn" class="btn btn-primary btn-sm">'
-            + pageInfo.texts.signOut
+            + pageData.texts.signOut
             + '</button><div class="col-sm-1 navbar-right"><img src="wait.gif" id="indexNavBarWait" class="waitImg"/></div></form>'
       }
       else
       {
          html += '<form class="navbar-form"><small><label for="indexNameInput">'             
-            + pageInfo.texts.name
+            + pageData.texts.name
             + ': </label> <input class="form-control input-sm" type="text" id="indexNameInput" /> <label for="indexPassInput">'
-            + pageInfo.texts.password
+            + pageData.texts.password
             + ': </label> <input class="form-control input-sm" type="password" id="indexPassInput" /> <div class="visible-xs"><br></div><button id="indexSignInBtn" class="btn btn-primary btn-sm">'
-            + pageInfo.texts.signIn
+            + pageData.texts.signIn
             + '</button> <button id="indexSignUpBtn" class="btn btn-info btn-sm">'
-            + pageInfo.texts.signUp
+            + pageData.texts.signUp
             + '</button><div class="col-sm-1 navbar-right"><img src="wait.gif" id="indexNavBarWait" class="waitImg"/></div></small></form>';
       }
       
@@ -39,68 +46,68 @@ $(function()
             + '<form class="navbar-form">'
             + '<select class="form-control input-sm" id="indexSiteLanguageSelect">';
       
-      pageInfo.siteLanguageList.forEach(function(language)
+      pageData.siteLanguageList.forEach(function(language)
       { 
          html += '<option ';
-         if (language.id == pageInfo.siteLanguageId) html += 'selected ';
+         if (language.id == pageData.siteLanguageId) html += 'selected ';
          html += 'value="' + language.id + '">' + language.name + '</option>';
       });
    
       html += '</select></form></div></div></header>';
       
       html += '<div class="modal fade" id="indexErrorMessage1"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger">'
-         + pageInfo.texts.unknownUserOrWrongPassword
+         + pageData.texts.unknownUserOrWrongPassword
          + '<button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div> <div class="modal fade" id="indexErrorMessage2"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger">'
-         + pageInfo.texts.internalServerError
+         + pageData.texts.internalServerError
          + '<button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div>';
       
       html += '<form><div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexQuestionnaireSelect">'
-            + pageInfo.texts.questionnaire
+            + pageData.texts.questionnaire
             + ': </label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control" id="indexQuestionnaireSelect">';
       
-      pageInfo.questionnaireList.forEach(function(questionnaire)
+      pageData.questionnaireList.forEach(function(questionnaire)
       {
          html += '<option ';
-         if (questionnaire.id == pageInfo.questionnaireId) html += 'selected ';
+         if (questionnaire.id == pageData.questionnaireId) html += 'selected ';
          html += 'value="' + questionnaire.id + '">' + questionnaire.name + '</option>';
       });
                                                                        
-      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireWait" class="waitImg"/></div></div>';
+      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireWait" class="waitImg waitImg1"/></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label questionnaireLanguageSelection" for="indexQuestionnaireLanguageSelect" style="margin-top:16px;">'
-         + pageInfo.texts.language
+         + pageData.texts.language
          + ': </label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control questionnaireLanguageSelection" id="indexQuestionnaireLanguageSelect">';
       
-      pageInfo.questionnaireLanguageList.forEach(function(language)
+      pageData.questionnaireLanguageList.forEach(function(language)
       { 
          html += '<option ';
-         if (language.id == pageInfo.questionnaireLanguageId) html += 'selected ';
+         if (language.id == pageData.questionnaireLanguageId) html += 'selected ';
          html += 'value="' + language.id + '">' + language.name + '</option>';
       });
                                                                           
-      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireLanguageWait" class="waitImg"/></div></div>';
+      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireLanguageWait" class="waitImg waitImg1"/></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexLevelSelect" style="margin-top:16px;">'
-         + pageInfo.texts.level
+         + pageData.texts.level
          + ': </label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control" id="indexLevelSelect">';
       
-      pageInfo.levelList.forEach(function(level)
+      pageData.levelList.forEach(function(level)
       { 
          html += '<option ';
-         if (level.id == pageInfo.levelId) html += 'selected ';
+         if (level.id == pageData.levelId) html += 'selected ';
          html += 'value="' + level.id + '">' + level.name + '</option>';
       });
                       
-      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexLevelWait" class="waitImg"/></div></div>';
+      html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexLevelWait" class="waitImg waitImg1"/></div></div>';
       
       html += '<div class="row" style="margin-top:20px;"><div class="col-sm-4 col-sm-offset-4"><button id="indexStartBtn" class="btn btn-success">'
-         + pageInfo.texts.start
+         + pageData.texts.start
          + '</button></div><div class="col-sm-1"><img src="wait.gif" id="indexStartWait" class="waitImg"/></div></div>';
       
       html += '</form>';
@@ -110,31 +117,33 @@ $(function()
       $('#indexSignInBtn').click(function(e)
       {
          e.preventDefault();
-         console.log('indexSignInBtn');
+         
       });
       
       $('#indexSignUpBtn').click(function(e)
       {
          e.preventDefault();
-         console.log('indexSignUpBtn');
+         var name = $('#indexNameInput').val();
+         socket.emit('signUp', { name: name });
+         $('#indexNavBarWait').show();
       });
       
       $('#indexSignOutBtn').click(function(e)
       {
          e.preventDefault();
-         console.log('indexSignOutBtn');
+         
       });
       
       $('#indexStartBtn').click(function(e)
       {
          e.preventDefault();
-         console.log('indexStartBtn');
+         
       });
       
-      if (pageInfo.unknown) $('#indexErrorMessage1').modal('show');
-      if (pageInfo.error) $('#indexErrorMessage2').modal('show');
+      if (pageData.unknown) $('#indexErrorMessage1').modal('show');
+      if (pageData.error) $('#indexErrorMessage2').modal('show');
       
-      if (!pageInfo.showQuestionnaireLanguageSelect) $('.questionnaireLanguageSelection').hide();
+      if (!pageData.showQuestionnaireLanguageSelect) $('.questionnaireLanguageSelection').hide();
       
       $('#indexQuestionnaireSelect').change(function()
       {
@@ -153,6 +162,14 @@ $(function()
          emitLevelChoice();
          $('#indexLevelWait').show();
       });
+      
+      $('#indexSiteLanguageSelect').change(function()
+      {
+         var languageId = $(this).val();
+         if (!pageData.userName) document.cookie = 'siteLanguageId=' + languageId + getCookieExpires(180);
+         socket.emit('languageChoice', { page: 'index', languageId: languageId });
+         $('#indexNavBarWait').show();
+      });
 
       function emitLevelChoice()
       {
@@ -160,7 +177,7 @@ $(function()
          var questionnaireLanguageId = $('#indexQuestionnaireLanguageSelect').val();
          var levelId = $('#indexLevelSelect').val();
 
-         if (!pageInfo.userName)
+         if (!pageData.userName)
          {
             var expires = getCookieExpires(180);
             document.cookie = 'questionnaireId=' + questionnaireId + expires;
@@ -169,18 +186,11 @@ $(function()
          }
 
          socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId });
-         
-         function getCookieExpires(days)
-         {
-            var date = new Date();
-            date.setTime(date.getTime() + days * 86400000);
-            return "; expires=" + date.toGMTString();
-         }
       }
       
       socket.on('updateSelects', function(data)
       {
-         $('.waitImg').hide();
+         $('.waitImg1').hide();
 
          $('#indexQuestionnaireSelect').find('option').remove(); 
          data.questionnaireList.forEach(function(questionnaire)
@@ -211,6 +221,60 @@ $(function()
             $('#indexLevelSelect').append('<option value="' + level.id + '">' + level.name + '</option>');
          });
          $('#indexLevelSelect').val(data.levelId);
+      });
+         
+      function getCookieExpires(days)
+      {
+         var date = new Date();
+         date.setTime(date.getTime() + days * 86400000);
+         return "; expires=" + date.toGMTString();
+      }
+   }
+   
+   function displaySignUp(pageData)
+   {
+      $('#container').empty();
+      $('#container').removeClass();
+      $('#container').addClass('container');
+      
+      var html = '<header><div class="navbar"><div class="text-center"><form class="navbar-form">'
+            + '<select class="form-control input-sm" id="indexSiteLanguageSelect">';
+      
+      pageData.siteLanguageList.forEach(function(language)
+      { 
+         html += '<option ';
+         if (language.id == pageData.siteLanguageId) html += 'selected ';
+         html += 'value="' + language.id + '">' + language.name + '</option>';
+      });
+   
+      html += '</select></form></div></div></header>';
+      
+      html += '<div><form id="signUpForm"><div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6"><div class="form-group"><label for="signUpNameInput">'
+         + pageData.texts.name
+         + ': </label><input class="form-control" type="text" id="signUpNameInput" value="'
+         + pageData.name
+         + '"/></div><div class="form-group"><label for="signUpPassInput1" >'
+         + pageData.texts.password
+         + ': </label> <input class="form-control" type="password" id="signUpPassInput1"/></div><div class="form-group"><label for="signUpPassInput2" >'
+         + pageData.texts.confirmPassword
+         + ': </label><input class="form-control" type="password" id="signUpPassInput2"/></div><div class="form-group"><button class="btn btn-info" id="submitSignUp">'
+         + pageData.texts.signUp
+         + '</button> <button class="btn btn-warning" id="cancelSignUp">'
+         + pageData.texts.cancel
+         + '</button></div></div></form></div>';
+      
+      $('#container').append(html);
+      
+      $('#submitSignUp').click(function(e)
+      {
+         e.preventDefault();
+         
+      });
+      
+      $('#cancelSignUp').click(function(e)
+      {
+         e.preventDefault();
+         
       });
    }
 });

@@ -374,6 +374,8 @@ function signOut(req, res, context)
 
 function getContext(session0, sessionId, cookies, callback)
 {
+   console.log(sessionId);
+   
    if (session0.userId)
    {
       userData.getUser(session0.userId, function(err, user)

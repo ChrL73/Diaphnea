@@ -3,8 +3,6 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var morgan = require('morgan');
-var bodyparser = require("body-parser");
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var favicon = require('serve-favicon');
@@ -23,11 +21,7 @@ var defaultLanguageId = languages[0].id;
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
-app.use(bodyparser.urlencoded({ extended: false }));
 app.use(favicon('public/favicon.ico'));
-
-if (!config.cookieSecret) throw new Error("No 'cookieSecret' value in config.js");
-app.use(cookieParser(config.cookieSecret));
 
 if (!config.sessionSecret) throw new Error("No 'sessionSecret' value in config.js");
 var sessionMiddleware = session(
@@ -85,14 +79,9 @@ var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
 quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
-app.all('/', function(req, res)
+app.all('/', function(req, res, next)
 {
-   getContext(req.session, req.sessionID, req.cookies, function(context)
-   {
-      if (context.currentPage == pages.signUp) signUp(req, res, context);
-      else if (context.currentPage == pages.game) game(req, res, context);
-      else index(req, res, context);  
-   });
+   res.sendFile(__dirname + '/quiz.html');
 });
 
 app.use(function(req, res)
@@ -100,69 +89,163 @@ app.use(function(req, res)
    res.redirect('/');
 });
 
-function index(req, res, context)
+io.on('connection', function(socket)
 {
-   quizData.getLevelChoiceDownData(context, renderView);
-   
-   function renderView(data)
+   var cookies = extractCookies(socket.handshake.headers.cookie);
+   getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
    {
-      if (context.user) data.userName = context.user.name;
-      
-      context.questionnaireId = data.questionnaireId;
-      context.questionnaireLanguageId = data.questionnaireLanguageId;
-      context.levelId = data.levelId;
-      context.saver.save(function(err)
+      if (context.currentPage == pages.signUp)
       {
-         if (err) console.log(err);
-         // Todo: handle error
-      });
+         emitDisplaySignUp(context);
+      }
+      else if (context.currentPage == pages.game)
+      {
          
-      data.page = 'index';
-      data.siteLanguageList = languages;
-      data.siteLanguageId = context.siteLanguageId;
-      data.texts = translate(context.siteLanguageId).texts;
-      data.unknown = context.indexMessages.unknown;
-      data.error = context.indexMessages.error;
-      
-      if (data.error) res.status(500);
-      res.render('quiz.ejs', { data: data });
-   }
-}
-
-function signUp(req, res, context0)
-{
-   if (req.session.userId) // Todo: Test this case
-   {
-      req.session.userId = undefined;
-      getContext(req.session, req.sessionID, req.cookies, function(context)
+      }
+      else
       {
-         continueSignUp(context);
-      });
-   }
-   else
+         quizData.getLevelChoiceDownData(context, function(downData)
+         {
+            context.questionnaireId = downData.questionnaireId;
+            context.questionnaireLanguageId = downData.questionnaireLanguageId;
+            context.levelId = downData.levelId;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
+            emitDisplayIndex(downData, context);
+         });
+      }
+   });
+         
+   function emitDisplayIndex(downData, context)
    {
-      continueSignUp(context0);
+      var texts = translate(context.siteLanguageId).texts;
+
+      downData.texts =
+      {
+         name: texts.name,
+         password: texts.password,
+         signIn: texts.signIn,
+         signUp: texts.signUp,
+         signOut: texts.signOut,
+         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
+         internalServerError: texts.internalServerError,
+         questionnaire: texts.questionnaire,
+         language: texts.language,
+         level: texts.level,
+         start: texts.start
+      }      
+
+      downData.page = 'index';
+      if (context.user) downData.userName = context.user.name;  
+      downData.siteLanguageList = languages;
+      downData.siteLanguageId = context.siteLanguageId;
+      downData.unknown = context.indexMessages.unknown;
+      downData.error = context.indexMessages.error;  
+
+      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
    }
    
-   function continueSignUp(context)
+   function emitDisplaySignUp(context)
    {
-      var data =
+      var texts = translate(context.siteLanguageId).texts;
+         
+      var downData =
       {
          page: 'signUp',
+         texts:
+         {
+            name: texts.name,
+            password: texts.password,
+            confirmPassword: texts.confirmPassword,
+            signUp: texts.signUp,
+            cancel: texts.cancel
+         },
          name: context.tmpName,
          siteLanguageList: languages,
-         siteLanguageId: context.siteLanguageId,
-         texts:translate(context.siteLanguageId).texts
+         siteLanguageId: context.siteLanguageId
       };
 
-      res.render('quiz.ejs', { data: data });
+      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
    }
-}
+   
+   socket.on('levelChoice', function(upData)
+   {
+      var context;
+      
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(fContext)
+      { 
+         context = fContext;
+         upData.siteLanguageId = context.siteLanguageId;
+         quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
+      });
+      
+      function emitUpdateSelects(downData)
+      {
+         context.questionnaireId = downData.questionnaireId;
+         context.questionnaireLanguageId = downData.questionnaireLanguageId;
+         context.levelId = downData.levelId;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
+      }
+   });
+   
+   socket.on('languageChoice', function(upData)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      {          
+         var siteLanguageId;
+         languages.forEach(function(language)
+         {
+            if (upData.languageId == language.id) siteLanguageId = language.id;
+         });
 
-function game(req, res, context)
-{
-   res.render('quiz.ejs', {});
-}
+         if (siteLanguageId) context.siteLanguageId = siteLanguageId;
+         
+         upData.questionnaireId = context.questionnaireId;
+         upData.siteLanguageId = context.siteLanguageId;
+         upData.levelId = context.levelId;
+         
+         quizData.getLevelChoiceDownData(upData, function(downData)
+         {
+            context.questionnaireId = downData.questionnaireId;
+            context.questionnaireLanguageId = downData.questionnaireLanguageId;
+            context.levelId = downData.levelId;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
+            emitDisplayIndex(downData, context);
+         });
+      });
+   });
+      
+   socket.on('signUp', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie); 
+      if (socket.request.session.userId) socket.request.session.userId = undefined; // Todo: Test this case
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.currentPage = pages.signUp;
+         context.tmpName = data.name;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         
+         emitDisplaySignUp(context);
+      });
+   });
+         
+   function extractCookies(cookieString)
+   {
+      if (!cookieString) return {};
+      var cookieObject = {};
+      var cookieArray = cookieString.split(';');
+
+      cookieArray.forEach(function(cookie)
+      {
+         cookieParts = cookie.split('=');
+         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
+      });
+
+      return cookieObject;
+   }
+});
 
 function getContext(session0, sessionId, cookies, callback)
 {
@@ -246,135 +329,6 @@ function getContext(session0, sessionId, cookies, callback)
       });
    }
 }
-
-io.on('connection', function(socket)
-{
-   socket.on('levelChoice', function(upData)
-   {
-      var context;
-      
-      var cookies = extractCookies(socket.handshake.headers.cookie);  
-      getContext(socket.request.session, socket.request.sessionID, cookies, function(fContext)
-      { 
-         context = fContext;
-         upData.siteLanguageId = context.siteLanguageId;
-         quizData.getLevelChoiceDownData(upData, emitUpdateSelects);
-      });
-      
-      function emitUpdateSelects(downData)
-      {
-         context.questionnaireId = downData.questionnaireId;
-         context.questionnaireLanguageId = downData.questionnaireLanguageId;
-         context.levelId = downData.levelId;
-         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-         setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
-      }
-   });
-   
-   socket.on('languageChoice', function(upData)
-   {
-      var cookies = extractCookies(socket.handshake.headers.cookie);  
-      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
-      {          
-         var siteLanguageId;
-         languages.forEach(function(language)
-         {
-            if (upData.languageId == language.id) siteLanguageId = language.id;
-         });
-
-         if (siteLanguageId) context.siteLanguageId = siteLanguageId;
-         
-         upData.questionnaireId = context.questionnaireId;
-         upData.siteLanguageId = context.siteLanguageId;
-         upData.levelId = context.levelId;
-         
-         quizData.getLevelChoiceDownData(upData, function(downData)
-         {
-            context.questionnaireId = downData.questionnaireId;
-            context.questionnaireLanguageId = downData.questionnaireLanguageId;
-            context.levelId = downData.levelId;
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-            
-            emitDisplayIndex(downData, context);
-         });
-      });
-   });
-         
-   function emitDisplayIndex(downData, context)
-   {
-      var texts = translate(context.siteLanguageId).texts;
-
-      downData.texts =
-      {
-         name: texts.name,
-         password: texts.password,
-         signIn: texts.signIn,
-         signUp: texts.signUp,
-         signOut: texts.signOut,
-         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
-         internalServerError: texts.internalServerError,
-         questionnaire: texts.questionnaire,
-         language: texts.language,
-         level: texts.level,
-         start: texts.start
-      }      
-
-      downData.page = 'index';
-      if (context.user) downData.userName = context.user.name;  
-      downData.siteLanguageList = languages;
-      downData.siteLanguageId = context.siteLanguageId;
-      downData.unknown = context.indexMessages.unknown;
-      downData.error = context.indexMessages.error;  
-
-      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
-   }
-      
-   socket.on('signUp', function(data)
-   {
-      var cookies = extractCookies(socket.handshake.headers.cookie); 
-      if (socket.request.session.userId) socket.request.session.userId = undefined; // Todo: Test this case
-      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
-      { 
-         context.currentPage = pages.signUp;
-         context.tmpName = data.name;
-         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-         
-         var texts = translate(context.siteLanguageId).texts;
-         
-         var downData =
-         {
-            page: 'signUp',
-            texts:
-            {
-               name: texts.name,
-               password: texts.password,
-               confirmPassword: texts.confirmPassword,
-               signUp: texts.signUp,
-               cancel: texts.cancel
-            },
-            name: data.name,
-            siteLanguageList: languages,
-            siteLanguageId: context.siteLanguageId
-         };
-         
-         setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
-      });
-   });
-         
-   function extractCookies(cookieString)
-   {
-      var cookieObject = {};
-      var cookieArray = cookieString.split(';');
-
-      cookieArray.forEach(function(cookie)
-      {
-         cookieParts = cookie.split('=');
-         cookieObject[cookieParts[0].trim()] = cookieParts[1].trim();
-      });
-
-      return cookieObject;
-   }
-});
 
 if (!config.port) throw new Error("No 'port' value in config.js");
 console.log('Quiz server listening on port ' + config.port + '...');

@@ -2,10 +2,6 @@ $(function()
 {
    var socket = io.connect();
    
-   if (pageInfo.page == 'signUp') displaySignUp(pageInfo);
-   else if (pageInfo.page == 'game') displayGame(pageInfo);
-   else displayIndex(pageInfo);
-   
    socket.on('displayPage', function(data)
    {
       if (data.page == 'signUp') displaySignUp(data);

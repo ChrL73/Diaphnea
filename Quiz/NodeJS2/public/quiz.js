@@ -4,6 +4,9 @@ $(function()
    
    socket.on('displayPage', function(data)
    {
+      socket.removeAllListeners('updateSelects');
+      socket.removeAllListeners('updateSignUp');
+      
       if (data.page == 'signUp') displaySignUp(data);
       else if (data.page == 'game') displayGame(data);
       else displayIndex(data);
@@ -29,7 +32,9 @@ $(function()
       {
          html += '<form class="navbar-form"><small><label for="indexNameInput">'             
             + pageData.texts.name
-            + ': </label> <input class="form-control input-sm" type="text" id="indexNameInput" /> <label for="indexPassInput">'
+            + ': </label> <input class="form-control input-sm" type="text" id="indexNameInput" value="'
+            + pageData.tmpName
+            + '"/> <label for="indexPassInput">'
             + pageData.texts.password
             + ': </label> <input class="form-control input-sm" type="password" id="indexPassInput" /> <div class="visible-xs"><br></div><button id="indexSignInBtn" class="btn btn-primary btn-sm">'
             + pageData.texts.signIn
@@ -186,6 +191,8 @@ $(function()
       
       socket.on('updateSelects', function(data)
       {
+         console.log('test');
+         
          $('.waitImg1').hide();
 
          $('#indexQuestionnaireSelect').find('option').remove(); 
@@ -218,13 +225,6 @@ $(function()
          });
          $('#indexLevelSelect').val(data.levelId);
       });
-         
-      function getCookieExpires(days)
-      {
-         var date = new Date();
-         date.setTime(date.getTime() + days * 86400000);
-         return "; expires=" + date.toGMTString();
-      }
    }
    
    function displaySignUp(pageData)
@@ -233,33 +233,41 @@ $(function()
       $('#container').removeClass();
       $('#container').addClass('container');
       
-      var html = '<header><div class="navbar"><div class="text-center"><form class="navbar-form">'
-            + '<select class="form-control input-sm" id="indexSiteLanguageSelect">';
+      var html = '<div><div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6"><div class="form-group">'
+         + '<header><div class="row"><div class="col-sm-8 col-sm-offset-2"><div class="navbar text-center"><form class="navbar-form"><select class="form-control input-sm" id="signUpSiteLanguageSelect">';
       
-      pageData.siteLanguageList.forEach(function(language)
-      { 
-         html += '<option ';
-         if (language.id == pageData.siteLanguageId) html += 'selected ';
-         html += 'value="' + language.id + '">' + language.name + '</option>';
-      });
-   
-      html += '</select></form></div></div></header>';
+         pageData.siteLanguageList.forEach(function(language)
+         { 
+            html += '<option ';
+            if (language.id == pageData.siteLanguageId) html += 'selected ';
+            html += 'value="' + language.id + '">' + language.name + '</option>';
+         });
+
+         html += '</select></div></div><div class="col-sm-1 col-xs-1"><img src="wait.gif" id="signUpLanguageWait" class="waitImg"/></div></div></div></header>'
       
-      html += '<div><form id="signUpForm"><div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6"><div class="form-group"><label for="signUpNameInput">'
+         + '<form><div class="form-group"><label for="signUpNameInput" id="signUpNameLabel">'
          + pageData.texts.name
          + ': </label><input class="form-control" type="text" id="signUpNameInput" value="'
          + pageData.name
-         + '"/></div><div class="form-group"><label for="signUpPassInput1" >'
+         + '"/></div><div class="form-group"><label for="signUpPassInput1" id="signUpPassInput1Label">'
          + pageData.texts.password
-         + ': </label> <input class="form-control" type="password" id="signUpPassInput1"/></div><div class="form-group"><label for="signUpPassInput2" >'
+         + ': </label> <input class="form-control" type="password" id="signUpPassInput1"/></div><div class="form-group"><label for="signUpPassInput2" id="signUpPassInput2Label">'
          + pageData.texts.confirmPassword
-         + ': </label><input class="form-control" type="password" id="signUpPassInput2"/></div><div class="form-group"><button class="btn btn-info" id="submitSignUp">'
+         + ': </label><input class="form-control" type="password" id="signUpPassInput2"/></div><div class="form-group"><div class="row"><div class="col-sm-10 col-xs-10"><button class="btn btn-info" id="submitSignUp">'
          + pageData.texts.signUp
          + '</button> <button class="btn btn-warning" id="cancelSignUp">'
          + pageData.texts.cancel
-         + '</button></div></div></form></div>';
+         + '</button></div><div class="col-sm-1 col-xs-1"><img src="wait.gif" id="signUpBtnWait" class="waitImg"/></div></div></div></div></form></div>';
       
       $('#container').append(html);
+      
+      $('#signUpSiteLanguageSelect').change(function()
+      {
+         var languageId = $(this).val();
+         document.cookie = 'siteLanguageId=' + languageId + getCookieExpires(180);
+         socket.emit('languageChoice', { page: 'signUp', languageId: languageId });
+         $('#signUpLanguageWait').show();
+      });
       
       $('#submitSignUp').click(function(e)
       {
@@ -270,7 +278,26 @@ $(function()
       $('#cancelSignUp').click(function(e)
       {
          e.preventDefault();
-         
+         var name = $('#signUpNameInput').val();
+         socket.emit('index', {});
+         $('#signUpBtnWait').show();
       });
+      
+      socket.on('updateSignUp', function(data)
+      {
+         $('#signUpLanguageWait').hide();
+         $('#signUpNameLabel').text(data.name);
+         $('#signUpPassInput1Label').text(data.password);
+         $('#signUpPassInput2Label').text(data.confirmPassword);
+         $('#submitSignUp').text(data.signUp);
+         $('#cancelSignUp').text(data.cancel);
+      });
+   }
+         
+   function getCookieExpires(days)
+   {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 86400000);
+      return "; expires=" + date.toGMTString();
    }
 });

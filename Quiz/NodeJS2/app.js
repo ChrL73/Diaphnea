@@ -104,44 +104,46 @@ io.on('connection', function(socket)
       }
       else
       {
-         quizData.getLevelChoiceDownData(context, function(downData)
-         {
-            context.questionnaireId = downData.questionnaireId;
-            context.questionnaireLanguageId = downData.questionnaireLanguageId;
-            context.levelId = downData.levelId;
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
-            emitDisplayIndex(downData, context);
-         });
+         emitDisplayIndex(context);
       }
    });
          
-   function emitDisplayIndex(downData, context)
+   function emitDisplayIndex(context)
    {
-      var texts = translate(context.siteLanguageId).texts;
-
-      downData.texts =
+      quizData.getLevelChoiceDownData(context, function(downData)
       {
-         name: texts.name,
-         password: texts.password,
-         signIn: texts.signIn,
-         signUp: texts.signUp,
-         signOut: texts.signOut,
-         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
-         internalServerError: texts.internalServerError,
-         questionnaire: texts.questionnaire,
-         language: texts.language,
-         level: texts.level,
-         start: texts.start
-      }      
+         context.questionnaireId = downData.questionnaireId;
+         context.questionnaireLanguageId = downData.questionnaireLanguageId;
+         context.levelId = downData.levelId;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
 
-      downData.page = 'index';
-      if (context.user) downData.userName = context.user.name;  
-      downData.siteLanguageList = languages;
-      downData.siteLanguageId = context.siteLanguageId;
-      downData.unknown = context.indexMessages.unknown;
-      downData.error = context.indexMessages.error;  
+         var texts = translate(context.siteLanguageId).texts;
 
-      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+         downData.texts =
+         {
+            name: texts.name,
+            password: texts.password,
+            signIn: texts.signIn,
+            signUp: texts.signUp,
+            signOut: texts.signOut,
+            unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
+            internalServerError: texts.internalServerError,
+            questionnaire: texts.questionnaire,
+            language: texts.language,
+            level: texts.level,
+            start: texts.start
+         }      
+
+         downData.page = 'index';
+         if (context.user) downData.userName = context.user.name;
+         else downData.tmpName = context.tmpName;
+         downData.siteLanguageList = languages;
+         downData.siteLanguageId = context.siteLanguageId;
+         downData.unknown = context.indexMessages.unknown;
+         downData.error = context.indexMessages.error;  
+
+         setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
+      });
    }
    
    function emitDisplaySignUp(context)
@@ -185,6 +187,7 @@ io.on('connection', function(socket)
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
          context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         
          setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
       }
    });
@@ -206,14 +209,26 @@ io.on('connection', function(socket)
          upData.siteLanguageId = context.siteLanguageId;
          upData.levelId = context.levelId;
          
-         quizData.getLevelChoiceDownData(upData, function(downData)
+         if (upData.page == 'signUp')
          {
-            context.questionnaireId = downData.questionnaireId;
-            context.questionnaireLanguageId = downData.questionnaireLanguageId;
-            context.levelId = downData.levelId;
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
-            emitDisplayIndex(downData, context);
-         });
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+            
+            var texts = translate(context.siteLanguageId).texts;
+            var downData =
+            {
+               name: texts.name,
+               password: texts.password,
+               confirmPassword: texts.confirmPassword,
+               signUp: texts.signUp,
+               cancel: texts.cancel
+            };
+
+            setTimeout(function() { socket.emit('updateSignUp', downData); }, debugDelay);
+         }
+         else
+         {
+            emitDisplayIndex(context);
+         }
       });
    });
       
@@ -228,6 +243,16 @@ io.on('connection', function(socket)
          context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
          
          emitDisplaySignUp(context);
+      });
+   });
+   
+   socket.on('index', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.currentPage = pages.index;  
+         emitDisplayIndex(context);
       });
    });
          

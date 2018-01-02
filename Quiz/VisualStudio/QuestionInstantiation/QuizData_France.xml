@@ -17122,7 +17122,7 @@
   
   <questionCategories>
     <attributeQuestionCategoryList>
-      <!--<attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <attributeQuestionCategory elementType="et_Departement" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le département dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the department whose number is {0}?"/>
@@ -17165,10 +17165,10 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
         </mapParameters>
-      </attributeQuestionCategory>-->
+      </attributeQuestionCategory>
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
-      <!--<relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
@@ -17332,10 +17332,10 @@
           <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
           <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <!--<relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationNQuestionCategory relation="r1N_Departement_Villes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans le département {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} department?"/>
@@ -17606,10 +17606,10 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters> 
-      </relationNQuestionCategory>-->
+      </relationNQuestionCategory>
     </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList>
-      <!--<attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
                                       distribParameterCorrection="0.1">
         <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
         <questionText language="en" text="Which of thes cities is the northernmost?"/> 
@@ -17678,19 +17678,19 @@
             <category categoryIndexInMapConfigFile="3"/>
           </wrongChoice>
         </mapParameters>
-      </attributeOrderQuestionCategory>-->
+      </attributeOrderQuestionCategory>
     </attributeOrderQuestionCategoryList>
     <relationLimitQuestionCategoryList>
-      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                      answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="60" minLevel="1">
         <questionText language="fr" text="Dans quel département se situe la source {0} ?"/>
         <questionText language="en" text="In which department is the source of the {0}?"/> 
         <exception questionElement="el_GavesReunis"/>
         <exception questionElement="el_Maine"/>
         <exception questionElement="el_Sauldre"/>
-        <exception questionElement="el_AriegeRiviere"/>-->
+        <exception questionElement="el_AriegeRiviere"/>
         <!--<exception questionElement="el_Maroni"/>-->
-        <!--<exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_OiseRiviere"/>
         <exception questionElement="el_Garonne"/>
         <exception questionElement="el_RhoneFleuve"/>
         <exception questionElement="el_Rhin"/>
@@ -17708,17 +17708,17 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relationLimitQuestionCategory>-->
-      <!--<relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+      </relationLimitQuestionCategory>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                      answerProximityCriterion="NONE" weight="40" minLevel="2">
         <questionText language="fr" text="Quel est le numéro du département où se situe la source {0} ?"/>
         <questionText language="en" text="What is the number of the department where the source of the {0} is located?"/> 
         <exception questionElement="el_GavesReunis"/>
         <exception questionElement="el_Maine"/>
         <exception questionElement="el_Sauldre"/>
-        <exception questionElement="el_AriegeRiviere"/>-->
+        <exception questionElement="el_AriegeRiviere"/>
         <!--<exception questionElement="el_Maroni"/>-->
-        <!--<exception questionElement="el_OiseRiviere"/>
+        <exception questionElement="el_OiseRiviere"/>
         <exception questionElement="el_Garonne"/>
         <exception questionElement="el_RhoneFleuve"/>
         <exception questionElement="el_Rhin"/>
@@ -17776,10 +17776,10 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relationLimitQuestionCategory>-->
+      </relationLimitQuestionCategory>
     </relationLimitQuestionCategoryList>
     <relationOrderQuestionCategoryList>
-      <!--<relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
+      <relationOrderQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" mode="END" questionAttribute="at_Nom3" answerAttribute="at_Nom1" weight="5" minLevel="0"
                                      distribParameterCorrection="0.1">
         <questionText language="fr" text="Parmi ces villes situées sur {0}, laquelle est la plus en aval ?"/>
         <questionText language="en" text="Among these cities on the {0}, which is the most downstream?"/>
@@ -17832,7 +17832,7 @@
           <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relationOrderQuestionCategory>-->
+      </relationOrderQuestionCategory>
     </relationOrderQuestionCategoryList>
     <relationExistenceQuestionCategoryList>
       <relationExistenceQuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" mode="DOES_NOT_EXIST" commentMode="NONE" answerAttribute="at_Nom1" weight="65" minLevel="1">

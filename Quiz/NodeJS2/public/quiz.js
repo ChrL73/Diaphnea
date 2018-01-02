@@ -4,8 +4,10 @@ $(function()
    
    socket.on('displayPage', function(data)
    {
+      socket.removeAllListeners('updateIndex');
       socket.removeAllListeners('updateSelects');
       socket.removeAllListeners('updateSignUp');
+      socket.removeAllListeners('signUpError');
       
       if (data.page == 'signUp') displaySignUp(data);
       else if (data.page == 'game') displayGame(data);
@@ -30,11 +32,11 @@ $(function()
       }
       else
       {
-         html += '<form class="navbar-form"><small><label for="indexNameInput">'             
+         html += '<form class="navbar-form"><small><label for="indexNameInput" id="indexNameLabel">'             
             + pageData.texts.name
             + ': </label> <input class="form-control input-sm" type="text" id="indexNameInput" value="'
             + pageData.tmpName
-            + '"/> <label for="indexPassInput">'
+            + '"/> <label for="indexPassInput" id="indexPassLabel">'
             + pageData.texts.password
             + ': </label> <input class="form-control input-sm" type="password" id="indexPassInput" /> <div class="visible-xs"><br></div><button id="indexSignInBtn" class="btn btn-primary btn-sm">'
             + pageData.texts.signIn
@@ -56,15 +58,15 @@ $(function()
    
       html += '</select></form></div></div></header>';
       
-      html += '<div class="modal fade" id="indexErrorMessage1"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger">'
+      html += '<div class="modal fade" id="indexErrorMessage1"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger"><span id="indexErrorSpan1">'
          + pageData.texts.unknownUserOrWrongPassword
-         + '<button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div> <div class="modal fade" id="indexErrorMessage2"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger">'
+         + '</span><button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div> <div class="modal fade" id="indexErrorMessage2"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger"><span id="indexErrorSpan2">'
          + pageData.texts.internalServerError
-         + '<button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div>';
+         + '</span><button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div>';
       
-      html += '<form><div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexQuestionnaireSelect">'
+      html += '<form><div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexQuestionnaireSelect" id="indexQuestionnaireLabel">'
             + pageData.texts.questionnaire
-            + ': </label></div></div>';
+            + ':</label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control" id="indexQuestionnaireSelect">';
       
@@ -77,9 +79,9 @@ $(function()
                                                                        
       html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireWait" class="waitImg waitImg1"/></div></div>';
       
-      html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label questionnaireLanguageSelection" for="indexQuestionnaireLanguageSelect" style="margin-top:16px;">'
+      html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label questionnaireLanguageSelection" for="indexQuestionnaireLanguageSelect" id="indexQuestionnaireLanguageLabel" style="margin-top:16px;">'
          + pageData.texts.language
-         + ': </label></div></div>';
+         + ':</label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control questionnaireLanguageSelection" id="indexQuestionnaireLanguageSelect">';
       
@@ -92,9 +94,9 @@ $(function()
                                                                           
       html += '</select></div><div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireLanguageWait" class="waitImg waitImg1"/></div></div>';
       
-      html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexLevelSelect" style="margin-top:16px;">'
+      html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><label class="control-label" for="indexLevelSelect" id="indexLevelLabel" style="margin-top:16px;">'
          + pageData.texts.level
-         + ': </label></div></div>';
+         + ':</label></div></div>';
       
       html += '<div class="row"><div class="col-sm-4 col-sm-offset-4"><select class="form-control" id="indexLevelSelect">';
       
@@ -189,6 +191,22 @@ $(function()
          socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId });
       }
       
+      socket.on('updateIndex', function(data)
+      {
+         $('#indexNavBarWait').hide();
+         $('#indexNameLabel').text(data.name);
+         $('#indexPassLabel').text(data.password);
+         $('#indexSignInBtn').text(data.signIn);
+         $('#indexSignUpBtn').text(data.signUp);
+         $('#indexSignOutBtn').text(data.signOut);
+         $('#indexErrorSpan1').text(data.unknownUserOrWrongPassword);
+         $('#indexErrorSpan2').text(data.internalServerError);
+         $('#indexQuestionnaireLabel').text(data.questionnaire + ':');
+         $('#indexQuestionnaireLanguageLabel').text(data.language + ':');
+         $('#indexLevelLabel').text(data.level + ':');
+         $('#indexStartBtn').text(data.start);
+      });
+      
       socket.on('updateSelects', function(data)
       {
          console.log('test');
@@ -244,22 +262,87 @@ $(function()
          });
 
          html += '</select></div></div><div class="col-sm-1 col-xs-1"><img src="wait.gif" id="signUpLanguageWait" class="waitImg"/></div></div></div></header>'
-      
-         + '<form><div class="form-group"><label for="signUpNameInput" id="signUpNameLabel">'
+         + '<div class="modal fade" id="signUpErrorMessage"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger"><span id="signUpErrorSpan">'
+         + pageData.texts.internalServerError
+         + '</span><button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div>'
+         + '<form><div class="form-group" id="nameGroup"><label for="signUpNameInput" id="signUpNameLabel">'
          + pageData.texts.name
          + ': </label><input class="form-control" type="text" id="signUpNameInput" value="'
          + pageData.name
-         + '"/></div><div class="form-group"><label for="signUpPassInput1" id="signUpPassInput1Label">'
+         + '"/><div class="errorMessage text-danger" id="nameMessage1">'
+         + pageData.texts.nameMustBeBetween2And16Chars
+         + '</div><div class="errorMessage text-danger" id="nameMessage2">'
+         + pageData.texts.theNameIsAlreadyUsed
+         +'</div></div><div class="form-group" id="pass1Group"><label for="signUpPassInput1" id="signUpPass1Label">'
          + pageData.texts.password
-         + ': </label> <input class="form-control" type="password" id="signUpPassInput1"/></div><div class="form-group"><label for="signUpPassInput2" id="signUpPassInput2Label">'
+         + ': </label> <input class="form-control" type="password" id="signUpPassInput1"/><div class="errorMessage text-danger" id="pass1aMessage">'
+         + pageData.texts.passwordMustContainAtLeast8Chars
+         + '</div><div class="errorMessage text-danger" id="pass1bMessage">'
+         + pageData.texts.passwordMustContainOnlyLettersNumbersEtc
+         + '</div></div><div class="form-group" id="pass2Group"><label for="signUpPassInput2" id="signUpPass2Label">'
          + pageData.texts.confirmPassword
-         + ': </label><input class="form-control" type="password" id="signUpPassInput2"/></div><div class="form-group"><div class="row"><div class="col-sm-10 col-xs-10"><button class="btn btn-info" id="submitSignUp">'
+         + ': </label><input class="form-control" type="password" id="signUpPassInput2"/><div class="errorMessage text-danger" id="pass2Message">'
+         + pageData.texts.twoPasswordsAreNotIdentical
+         + '</div></div><div class="form-group"><div class="row"><div class="col-sm-10 col-xs-10"><button class="btn btn-info" id="submitSignUp">'
          + pageData.texts.signUp
          + '</button> <button class="btn btn-warning" id="cancelSignUp">'
          + pageData.texts.cancel
          + '</button></div><div class="col-sm-1 col-xs-1"><img src="wait.gif" id="signUpBtnWait" class="waitImg"/></div></div></div></div></form></div>';
       
       $('#container').append(html);
+      
+      showErrors(pageData);
+      
+      socket.on('signUpError', function(data)
+      {
+         $('#signUpBtnWait').hide();
+         showErrors(data);
+      });
+      
+      function showErrors(data)
+      {      
+         $('.errorMessage').hide();
+         
+         if (data.name1Message)
+         {
+            $('#nameMessage1').show();
+            $('#nameGroup').addClass('has-error');
+         }
+         
+         if (data.name2Message)
+         {
+            $('#nameMessage2').show();
+            $('#nameGroup').addClass('has-error');
+         }
+         
+         if (!data.name1Message && !data.name2Message) $('#nameGroup').removeClass('has-error');
+         
+         if (data.pass1aMessage)
+         {
+            $('#pass1aMessage').show();
+            $('#pass1Group').addClass('has-error');
+         }
+         
+         if (data.pass1bMessage)
+         {
+            $('#pass1bMessage').show();
+            $('#pass1Group').addClass('has-error');
+         }
+         
+         if (!data.pass1aMessage && !data.pass1bMessage) $('#pass1Group').removeClass('has-error');
+         
+         if (data.pass2Message)
+         {
+            $('#pass2Message').show();
+            $('#pass2Group').addClass('has-error');
+         }
+         else
+         {
+            $('#pass2Group').removeClass('has-error');
+         }
+         
+         if (data.errorMessage) $('#signUpErrorMessage').modal('show');
+      }
       
       $('#signUpSiteLanguageSelect').change(function()
       {
@@ -272,7 +355,11 @@ $(function()
       $('#submitSignUp').click(function(e)
       {
          e.preventDefault();
-         
+         var name = $('#signUpNameInput').val();
+         var pass1 =  $('#signUpPassInput1').val();
+         var pass2 =  $('#signUpPassInput2').val();
+         socket.emit('submitSignUp', { name: name, pass1: pass1, pass2: pass2 });
+         $('#signUpBtnWait').show();
       });
       
       $('#cancelSignUp').click(function(e)
@@ -287,10 +374,16 @@ $(function()
       {
          $('#signUpLanguageWait').hide();
          $('#signUpNameLabel').text(data.name);
-         $('#signUpPassInput1Label').text(data.password);
-         $('#signUpPassInput2Label').text(data.confirmPassword);
+         $('#signUpPass1Label').text(data.password);
+         $('#signUpPass2Label').text(data.confirmPassword);
          $('#submitSignUp').text(data.signUp);
          $('#cancelSignUp').text(data.cancel);
+         $('#nameMessage1').text(data.nameMustBeBetween2And16Chars);
+         $('#nameMessage2').text(data.theNameIsAlreadyUsed);
+         $('#pass1aMessage').text(data.passwordMustContainAtLeast8Chars);
+         $('#pass1bMessage').text(data.passwordMustContainOnlyLettersNumbersEtc);
+         $('#pass2Message').text(data.twoPasswordsAreNotIdentical);
+         $('#signUpErrorSpan').text(data.internalServerError);
       });
    }
          

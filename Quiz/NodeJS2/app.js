@@ -58,7 +58,7 @@ else
       {
          ifaces[ifname].forEach(function(iface)
          { 
-            if (!locaIp && 'IPv4' === iface.family && iface.internal === false) 
+            if (!locaIp && iface.family === 'IPv4' && iface.internal === false) 
             {
                locaIp = iface.address;
             }
@@ -112,6 +112,7 @@ io.on('connection', function(socket)
    {
       quizData.getLevelChoiceDownData(context, function(downData)
       {
+         context.currentPage = pages.index;
          context.questionnaireId = downData.questionnaireId;
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
@@ -119,21 +120,7 @@ io.on('connection', function(socket)
 
          var texts = translate(context.siteLanguageId).texts;
 
-         downData.texts =
-         {
-            name: texts.name,
-            password: texts.password,
-            signIn: texts.signIn,
-            signUp: texts.signUp,
-            signOut: texts.signOut,
-            unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
-            internalServerError: texts.internalServerError,
-            questionnaire: texts.questionnaire,
-            language: texts.language,
-            level: texts.level,
-            start: texts.start
-         }      
-
+         downData.texts = getIndexTexts(texts);
          downData.page = 'index';
          if (context.user) downData.userName = context.user.name;
          else downData.tmpName = context.tmpName;
@@ -146,27 +133,69 @@ io.on('connection', function(socket)
       });
    }
    
-   function emitDisplaySignUp(context)
+   function getIndexTexts(texts)
    {
+      var t = 
+      {
+         name: texts.name,
+         password: texts.password,
+         signIn: texts.signIn,
+         signUp: texts.signUp,
+         signOut: texts.signOut,
+         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
+         internalServerError: texts.internalServerError,
+         questionnaire: texts.questionnaire,
+         language: texts.language,
+         level: texts.level,
+         start: texts.start
+      };
+      
+      return t;
+   }
+   
+   function emitDisplaySignUp(context)
+   {      
+      context.currentPage = pages.signUp;
+      context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+      
       var texts = translate(context.siteLanguageId).texts;
          
       var downData =
       {
          page: 'signUp',
-         texts:
-         {
-            name: texts.name,
-            password: texts.password,
-            confirmPassword: texts.confirmPassword,
-            signUp: texts.signUp,
-            cancel: texts.cancel
-         },
+         texts: getSignUpTexts(texts),
          name: context.tmpName,
          siteLanguageList: languages,
-         siteLanguageId: context.siteLanguageId
+         siteLanguageId: context.siteLanguageId,
+         name1Message: context.signUpMessages.name1,
+         name2Message: context.signUpMessages.name2,
+         pass1aMessage: context.signUpMessages.pass1a,
+         pass1bMessage: context.signUpMessages.pass1b,
+         pass2Message: context.signUpMessages.pass2,
+         errorMessage: context.signUpMessages.error
       };
 
       setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+   }
+   
+   function getSignUpTexts(texts)
+   {
+      var t = 
+      {
+         name: texts.name,
+         password: texts.password,
+         confirmPassword: texts.confirmPassword,
+         signUp: texts.signUp,
+         cancel: texts.cancel,
+         nameMustBeBetween2And16Chars: texts.nameMustBeBetween2And16Chars,
+         passwordMustContainAtLeast8Chars: texts.passwordMustContainAtLeast8Chars,
+         passwordMustContainOnlyLettersNumbersEtc: texts.passwordMustContainOnlyLettersNumbersEtc,
+         twoPasswordsAreNotIdentical: texts.twoPasswordsAreNotIdentical,
+         theNameIsAlreadyUsed: texts.theNameIsAlreadyUsed,
+         internalServerError: texts.internalServerError
+      };
+      
+      return t;
    }
    
    socket.on('levelChoice', function(upData)
@@ -203,31 +232,23 @@ io.on('connection', function(socket)
             if (upData.languageId == language.id) siteLanguageId = language.id;
          });
 
-         if (siteLanguageId) context.siteLanguageId = siteLanguageId;
+         if (siteLanguageId)
+         {
+            context.siteLanguageId = siteLanguageId;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         }
          
-         upData.questionnaireId = context.questionnaireId;
-         upData.siteLanguageId = context.siteLanguageId;
-         upData.levelId = context.levelId;
+         var texts = translate(context.siteLanguageId).texts;
          
          if (upData.page == 'signUp')
-         {
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-            
-            var texts = translate(context.siteLanguageId).texts;
-            var downData =
-            {
-               name: texts.name,
-               password: texts.password,
-               confirmPassword: texts.confirmPassword,
-               signUp: texts.signUp,
-               cancel: texts.cancel
-            };
-
+         {            
+            var downData = getSignUpTexts(texts);
             setTimeout(function() { socket.emit('updateSignUp', downData); }, debugDelay);
          }
          else
          {
-            emitDisplayIndex(context);
+            var downData = getIndexTexts(texts);
+            setTimeout(function() { socket.emit('updateIndex', downData); }, debugDelay);
          }
       });
    });
@@ -238,10 +259,7 @@ io.on('connection', function(socket)
       if (socket.request.session.userId) socket.request.session.userId = undefined; // Todo: Test this case
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
-         context.currentPage = pages.signUp;
-         context.tmpName = data.name;
-         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-         
+         context.tmpName = data.name;      
          emitDisplaySignUp(context);
       });
    });
@@ -251,8 +269,51 @@ io.on('connection', function(socket)
       var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
-         context.currentPage = pages.index;  
          emitDisplayIndex(context);
+      });
+   });
+   
+   socket.on('submitSignUp', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      {
+         context.tmpName = data.name;
+         var ok = true;
+
+         context.signUpMessages.name1 = (data.name.length < 2 || data.name.length > 16);
+         if (context.signUpMessages.name1) ok = false;
+         
+         context.signUpMessages.pass1a = (data.pass1.length < 8);
+         if (context.signUpMessages.pass1a) ok = false;
+         
+         context.signUpMessages.pass1b = !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(data.pass1));
+         if (context.signUpMessages.pass1b) ok = false;
+         
+         context.signUpMessages.pass2 = (data.pass1 !== data.pass2);
+         if (context.signUpMessages.pass2) ok = false;
+
+         if (ok)
+         {
+            // ...
+            
+            emitDisplayIndex(context);
+         }
+         else
+         {
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         
+            var downData = 
+            {
+               name1Message: context.signUpMessages.name1,
+               name2Message: context.signUpMessages.name2,
+               pass1aMessage: context.signUpMessages.pass1a,
+               pass1bMessage: context.signUpMessages.pass1b,
+               pass2Message: context.signUpMessages.pass2,
+               errorMessage: context.signUpMessages.error
+            };
+            setTimeout(function() { socket.emit('signUpError', downData); }, debugDelay);
+         }
       });
    });
          
@@ -334,6 +395,7 @@ function getContext(session0, sessionId, cookies, callback)
                   levelId: cookies.levelId,
                   currentPage: pages.index,
                   indexMessages: { unknown: false, error: false },
+                  signUpMessages: { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false },
                   tmpName: ''
                };
                

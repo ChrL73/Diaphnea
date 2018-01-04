@@ -126,8 +126,6 @@ io.on('connection', function(socket)
          else downData.tmpName = context.tmpName;
          downData.siteLanguageList = languages;
          downData.siteLanguageId = context.siteLanguageId;
-         downData.unknown = context.indexMessages.unknown;
-         downData.error = context.indexMessages.error;  
 
          setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
       });
@@ -255,13 +253,30 @@ io.on('connection', function(socket)
       
    socket.on('signUp', function(data)
    {
-      var cookies = extractCookies(socket.handshake.headers.cookie); 
-      if (socket.request.session.userId) socket.request.session.userId = undefined; // Todo: Test this case
-      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
-      { 
-         context.tmpName = data.name;      
-         emitDisplaySignUp(context);
-      });
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      
+      if (socket.request.session.userId) // Todo: Test this case
+      {
+         socket.request.session.userId = undefined;
+         socket.request.session.save(function(err)
+         {
+            if (err) { console.log(err); /* Todo: Handle error */ } 
+            continueSignUp();
+         });
+      }
+      else
+      {
+         continueSignUp();
+      }
+      
+      function continueSignUp()
+      {
+         getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+         { 
+            context.tmpName = data.name;      
+            emitDisplaySignUp(context);
+         });
+      }
    });
    
    socket.on('index', function(data)
@@ -291,15 +306,43 @@ io.on('connection', function(socket)
          if (context.signUpMessages.pass1b) ok = false;
          
          context.signUpMessages.pass2 = (data.pass1 !== data.pass2);
-         if (context.signUpMessages.pass2) ok = false;
+         if (context.signUpMessages.pass2) ok = false;         
 
          if (ok)
          {
-            // ...
-            
-            emitDisplayIndex(context);
+            userData.tryAddUser(data.name, data.pass1, context, function(err, id)
+            {
+               if (err)
+               {
+                  console.log('err: ' + err);
+                  context.signUpMessages.error = true;
+                  signUpFailed();
+               }
+               else if (!id)
+               {
+                  context.signUpMessages.name2 = true;
+                  signUpFailed();
+               }
+               else
+               {
+                  socket.request.session.userId = id;    
+                  socket.request.session.save(function(err)
+                  {
+                     if (err) { console.log(err); /* Todo: Handle error */ } 
+                     getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+                     {
+                        emitDisplayIndex(context);
+                     });
+                  });
+               }
+            });       
          }
          else
+         {
+            signUpFailed();
+         }
+         
+         function signUpFailed()
          {
             context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
          
@@ -314,6 +357,56 @@ io.on('connection', function(socket)
             };
             setTimeout(function() { socket.emit('signUpError', downData); }, debugDelay);
          }
+      });
+   });
+   
+   socket.on('signIn', function(data)
+   {     
+      userData.findUserId(data.name, data.pass, function(err, id)
+      {
+         if (err)
+         {
+            console.log(err);
+            setTimeout(function() { socket.emit('indexError', {}); }, debugDelay);
+         }
+         else if (!id)
+         {
+            setTimeout(function() { socket.emit('unknownName', {}); }, debugDelay);
+         }
+         else
+         {
+            socket.request.session.userId = id;    
+            socket.request.session.save(function(err)
+            {
+               if (err) { console.log(err); /* Todo: Handle error */ } 
+
+               var cookies = extractCookies(socket.handshake.headers.cookie);
+               getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+               {
+                  emitDisplayIndex(context);
+               });
+            });
+         }
+      });
+   });
+   
+   socket.on('signOut', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context1)
+      {
+         var name = context1.user.name;
+         
+         socket.request.session.userId = undefined;    
+         socket.request.session.save(function(err)
+         {
+            if (err) { console.log(err); /* Todo: Handle error */ } 
+            getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
+            {
+               context2.tmpName = name;
+               emitDisplayIndex(context2);
+            });
+         });
       });
    });
          
@@ -341,13 +434,13 @@ function getContext(session0, sessionId, cookies, callback)
       {
          if (err)
          {
-             console.log(err);
-            // Todo: Hanlde error
+            console.log(err);
+            noUser();
          }
          else if (!user)
          {
             console.log('!user');
-            // Todo: Hanlde error
+            noUser();
          }
          else 
          {
@@ -358,6 +451,11 @@ function getContext(session0, sessionId, cookies, callback)
       });
    }
    else
+   {
+      noUser();
+   }
+   
+   function noUser()
    {
       userData.getSession(sessionId, function(err, session)
       {
@@ -394,7 +492,6 @@ function getContext(session0, sessionId, cookies, callback)
                   questionnaireLanguageId: cookies.questionnaireLanguageId,
                   levelId: cookies.levelId,
                   currentPage: pages.index,
-                  indexMessages: { unknown: false, error: false },
                   signUpMessages: { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false },
                   tmpName: ''
                };

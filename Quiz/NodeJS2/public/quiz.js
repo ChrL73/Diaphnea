@@ -120,7 +120,10 @@ $(function()
       $('#indexSignInBtn').click(function(e)
       {
          e.preventDefault();
-         
+         var name = $('#indexNameInput').val();
+         var pass =  $('#indexPassInput').val();
+         socket.emit('signIn', { name: name, pass: pass });
+         $('#indexNavBarWait').show();
       });
       
       $('#indexSignUpBtn').click(function(e)
@@ -134,7 +137,8 @@ $(function()
       $('#indexSignOutBtn').click(function(e)
       {
          e.preventDefault();
-         
+         socket.emit('signOut', {});
+         $('#indexNavBarWait').show();
       });
       
       $('#indexStartBtn').click(function(e)
@@ -142,9 +146,6 @@ $(function()
          e.preventDefault();
          
       });
-      
-      if (pageData.unknown) $('#indexErrorMessage1').modal('show');
-      if (pageData.error) $('#indexErrorMessage2').modal('show');
       
       if (!pageData.showQuestionnaireLanguageSelect) $('.questionnaireLanguageSelection').hide();
       
@@ -190,6 +191,18 @@ $(function()
 
          socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId });
       }
+      
+      socket.on('unknownName', function()
+      {
+         $('#indexNavBarWait').hide();
+         $('#indexErrorMessage1').modal('show');
+      });
+      
+      socket.on('indexError', function()
+      {
+         $('#indexNavBarWait').hide();
+         $('#indexErrorMessage2').modal('show');
+      });
       
       socket.on('updateIndex', function(data)
       {

@@ -8,6 +8,8 @@ $(function()
       socket.removeAllListeners('updateSelects');
       socket.removeAllListeners('updateSignUp');
       socket.removeAllListeners('signUpError');
+      socket.removeAllListeners('unknownName');
+      socket.removeAllListeners('indexError');
       
       if (data.page == 'signUp') displaySignUp(data);
       else if (data.page == 'game') displayGame(data);
@@ -144,7 +146,8 @@ $(function()
       $('#indexStartBtn').click(function(e)
       {
          e.preventDefault();
-         
+         socket.emit('newGame', {});
+         $('#indexStartWait').show();
       });
       
       if (!pageData.showQuestionnaireLanguageSelect) $('.questionnaireLanguageSelection').hide();
@@ -378,8 +381,7 @@ $(function()
       $('#cancelSignUp').click(function(e)
       {
          e.preventDefault();
-         var name = $('#signUpNameInput').val();
-         socket.emit('index', {});
+         socket.emit('cancelSignUp', {});
          $('#signUpBtnWait').show();
       });
       
@@ -397,6 +399,49 @@ $(function()
          $('#pass1bMessage').text(data.passwordMustContainOnlyLettersNumbersEtc);
          $('#pass2Message').text(data.twoPasswordsAreNotIdentical);
          $('#signUpErrorSpan').text(data.internalServerError);
+      });
+   }
+   
+   function displayGame(pageData)
+   {
+      $('#container').empty();
+      $('#container').removeClass();
+      $('#container').addClass('container-fluid');
+      
+      var html = '<header class="row bg-success" id="gameHeader" style="padding-left:30px; border-bottom:1px solid #bbd8a2;"><span class="gameHeader">'
+         + pageData.texts.questionnaire
+         + ':&nbsp;<strong>'
+         + pageData.questionnaireName
+         + '</strong></span><span class="gameHeader">'
+         + pageData.texts.level
+         + ':&nbsp;<strong>'
+         + pageData.levelName
+         + '</strong></span>'
+         + pageData.texts.score
+         + ':&nbsp;<span class="gameHeader" id="scoreSpan">'
+         + pageData.rightAnswerCount + '/' + pageData.answerCount
+         + '</span>'
+         + pageData.texts.time
+         + ':&nbsp;<span id="timeSpan">'
+         + (pageData.finalTime ? pageData.finalTime : Math.floor(0.001 * pageData.time))
+         + 's</span><img src="wait.gif" class="waitImg" id="gameTimeWaitImg"/></header>';
+      
+      html += '<div class="row"><div class="col-lg-3 col-md-4 col-sm-5"><div id="questionDiv">';
+      
+      
+      html += '<form><div style="margin-top:20px; margin-bottom:20px;"><button class="btn btn-warning input-sm" id="gameStopBtn">'
+         + pageData.texts.stop
+         + '</button><img src="wait.gif" class="waitImg" id="stopGameWaitImg"/></div></form>'
+      
+      html += '</div></div><div class="col-lg-9 col-md-8 col-sm-7" id="canvasColumn"><canvas id="canvas"></canvas></div></div>'
+      
+      $('#container').append(html);
+      
+      $('#gameStopBtn').click(function(e)
+      {
+         e.preventDefault();
+         socket.emit('stopGame', {});
+         $('#stopGameWaitImg').show();
       });
    }
          

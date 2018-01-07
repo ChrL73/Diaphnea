@@ -100,7 +100,7 @@ io.on('connection', function(socket)
       }
       else if (context.currentPage == pages.game)
       {
-         
+         emitDisplayGame(context);
       }
       else
       {
@@ -196,6 +196,42 @@ io.on('connection', function(socket)
       return t;
    }
    
+   function emitDisplayGame(context)
+   {
+      context.currentPage = pages.game;
+      context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+      
+      var texts = translate(context.siteLanguageId).texts;
+         
+      var downData =
+      {
+         page: 'game',
+         texts: getGameTexts(texts),
+         questionnaireName: context.questionnaireName,
+         levelName: context.levelName,
+         rightAnswerCount: context.rightAnswerCount,
+         answerCount: context.answerCount,
+         time: Date.now() - context.startDate,
+         finalTime: context.finalTime
+      };
+
+      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+   }
+   
+   function getGameTexts(texts)
+   {
+      var t = 
+      {
+         questionnaire: texts.questionnaire,
+         level: texts.level,
+         score: texts.score,
+         time: texts.time,
+         stop: texts.stop
+      };
+      
+      return t;
+   }
+   
    socket.on('levelChoice', function(upData)
    {
       var context;
@@ -279,11 +315,12 @@ io.on('connection', function(socket)
       }
    });
    
-   socket.on('index', function(data)
+   socket.on('cancelSignUp', function(data)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
+         context.signUpMessages = { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false };
          emitDisplayIndex(context);
       });
    });
@@ -407,6 +444,79 @@ io.on('connection', function(socket)
                emitDisplayIndex(context2);
             });
          });
+      });
+   });
+   
+   socket.on('newGame', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      {
+         quizData.getLevelChoiceDownData(context, function(downData)
+         {
+            quizData.getLevelMap(function(levelMap)
+            {
+               var levelId = levelMap[downData.questionnaireId][downData.levelId];
+
+               childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId, function(err, stdout, stderr)
+               {
+                  if (err)
+                  {
+                     console.log(stderr);
+                     context.quizId = undefined;
+                     context.displayedQuestion = undefined;
+                     context.questions = undefined;
+                     context.questionStates = [];
+                     context.answerCount = undefined;
+                     context.rightAnswerCount = undefined;
+                     context.startDate = undefined;
+                     context.finalTime = undefined;
+                  }
+                  else
+                  {
+                     context.quizId = shortId.generate();
+                     context.displayedQuestion = 0;
+                     context.questions = JSON.parse(stdout);
+                     context.questionStates = [];
+                     context.questionnaireName = downData.questionnaireName;
+                     context.mapId = downData.mapId;
+                     context.levelName = downData.levelName;
+                     context.answerCount = 0;
+                     context.rightAnswerCount = 0;
+                     context.startDate = Date.now();
+                     context.finalTime = undefined;
+
+                     context.questions.forEach(function(question, iQuestion)
+                     {
+                        context.questionStates.push({ answered: false, choiceStates: [] });
+                        question.choices.forEach(function(choice, iChoice)
+                        {
+                           // 0 <= choiceStates[iChoice] <= 3 :
+                           // bit 0 = 1 if choice is checked.
+                           // bit 1 = 1 if answer has been submitted and if the choice is right
+                           if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
+                           else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
+                        });
+                     });
+                  }
+
+                  emitDisplayGame(context);
+               });
+            });
+         });
+      });
+   });
+   
+   socket.on('stopGame', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.quizId = undefined;
+         context.displayedQuestion = undefined;
+         context.questions = undefined;
+         context.questionStates = [];
+         emitDisplayIndex(context);
       });
    });
          

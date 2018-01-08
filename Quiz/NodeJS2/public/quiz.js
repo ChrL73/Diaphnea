@@ -404,6 +404,12 @@ $(function()
    
    function displayGame(pageData)
    {
+      var questions = pageData.questions;
+      var displayedQuestion = pageData.displayedQuestion;
+      var questionStates = pageData.questionStates;
+      var answered = [];
+      var mapInfo = [];
+      
       $('#container').empty();
       $('#container').removeClass();
       $('#container').addClass('container-fluid');
@@ -428,6 +434,89 @@ $(function()
       
       html += '<div class="row"><div class="col-lg-3 col-md-4 col-sm-5"><div id="questionDiv">';
       
+      questions.forEach(function(question, iQuestion)
+      {
+         var disabled = questionStates[iQuestion].answered;
+         answered.push(disabled);
+         
+         html += '<div class="question panel panel-info" id="question' + iQuestion + '" ';
+         if(iQuestion == displayedQuestion) html += 'style="display: block;"';
+         html += '>';
+         
+         html += '<div class="panel-heading">'
+            + pageData.texts.question
+            + ' <span id="iQuestion">'
+            + (iQuestion + 1)
+            + '</span>/'
+            + questions.length
+            + '<img src="wait.gif" id="wait'
+            + iQuestion
+            + '" class="waitImg waitAnswerImg" style="margin-top:-6px; margin-bottom:-6px;"/></div><div class="panel-body"><p>'
+            + question.question
+            + '</p>';
+         
+         question.choices.forEach(function(choice, iChoice)
+         {
+            var checked = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 1);
+            var rightChoice = Boolean(questionStates[iQuestion].choiceStates[iChoice] & 2);
+            var classStr;
+            if (disabled && rightChoice) classStr = 'boldChoice';
+
+            html += '<input class="input'
+               + iQuestion
+               + '" id="input'
+               + iQuestion + '_' + iChoice;
+            
+            if (question.isMultiple)
+            {
+               if (disabled)
+               {
+                  if (checked == rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                  else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+               }
+               
+               html += '" type="checkbox"';
+               if (checked) html += ' checked';
+               if (disabled) html += ' disabled';
+               html += '> <span';
+               if (classStr) html += ' class="' + classStr;
+            }
+            else
+            {
+               if (disabled && checked)
+               {
+                  if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                  else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+               }
+               
+               html += '" type="radio"';
+                  if (checked) html += ' checked';
+                  if (disabled) html += ' disabled';
+               html += ' name="radio' + iQuestion
+                  + '"> <span'
+               if (classStr) html += ' class="' + classStr;
+            }            
+            
+            html += '>' + choice.text
+               + '</span> <span id="comment'
+               + iQuestion + '_' + iChoice
+               + '">';
+            if (disabled && choice.comment.length) html += ' (' + choice.comment + ')';
+            html += '</span><br>';
+         });
+         
+         html += '</div></div>';
+      });
+      
+      html += '<div style="margin-top:20px;"><button class="btn btn-primary input-sm" id="previousButton"';
+      if (displayedQuestion == 0) html += ' disabled';       
+      html += '>' + pageData.texts.previous
+         + '</button> <button class="btn btn-success input-sm" id="submitButton"';
+      if (questionStates[displayedQuestion].answered) html += ' disabled';
+      html += '>' + pageData.texts.submit
+         + '</button> <button class="btn btn-primary input-sm" id="nextButton"';
+      if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) html += ' disabled';
+      html += '>' + pageData.texts.next + '</button></div>';
       
       html += '<form><div style="margin-top:20px; margin-bottom:20px;"><button class="btn btn-warning input-sm" id="gameStopBtn">'
          + pageData.texts.stop

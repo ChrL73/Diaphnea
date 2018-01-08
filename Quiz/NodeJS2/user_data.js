@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
+var stateSchema = mongoose.Schema({ answered: Boolean, choiceStates: [Number] }, { _id: false });
+
 var contextSchema = mongoose.Schema(
 {
    siteLanguageId: String,
@@ -16,12 +18,12 @@ var contextSchema = mongoose.Schema(
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,
    displayedQuestion: Number,
-   questionStates: [{ answered: Boolean, choiceStates: [Number] }],
+   questionStates: [stateSchema],
    rightAnswerCount: Number,
    answerCount: Number,
    startDate: Date,
    finalTime: Number
-});
+}, { _id: false });
 
 var sessionSchema = mongoose.Schema(
 {

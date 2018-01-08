@@ -202,17 +202,43 @@ io.on('connection', function(socket)
       context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
       
       var texts = translate(context.siteLanguageId).texts;
+      
+      var questions = [];
+      context.questions.forEach(function(question, iQuestion)
+      {
+         var sentQuestion =
+         {
+            question: question.question,
+            isMultiple: question.isMultiple,
+            choices: []
+         };
+         
+         question.choices.forEach(function(choice)
+         {
+            var sentChoice = { text: choice.text };     
+            if (context.questionStates[iQuestion].answered) sentChoice.comment = choice.comment;
+            sentQuestion.choices.push(sentChoice);
+         });
+         
+         questions.push(sentQuestion);
+      });
          
       var downData =
       {
          page: 'game',
          texts: getGameTexts(texts),
+         quizId: context.quizId,
+         displayedQuestion: context.displayedQuestion,
+         questions: questions,
+         questionStates: context.questionStates,
          questionnaireName: context.questionnaireName,
          levelName: context.levelName,
          rightAnswerCount: context.rightAnswerCount,
          answerCount: context.answerCount,
          time: Date.now() - context.startDate,
-         finalTime: context.finalTime
+         finalTime: context.finalTime//,
+         //mapServerUrl: mapServerUrl,
+         //mapId: context.mapId
       };
 
       setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
@@ -226,7 +252,11 @@ io.on('connection', function(socket)
          level: texts.level,
          score: texts.score,
          time: texts.time,
-         stop: texts.stop
+         stop: texts.stop,
+         previous: texts.previous,
+         submit: texts.submit,
+         next: texts.next,
+         question: texts.question
       };
       
       return t;

@@ -10,6 +10,7 @@ $(function()
       socket.removeAllListeners('signUpError');
       socket.removeAllListeners('unknownName');
       socket.removeAllListeners('indexError');
+      socket.removeAllListeners('updateQuestions');
       
       if (data.page == 'signUp') displaySignUp(data);
       else if (data.page == 'game') displayGame(data);
@@ -404,11 +405,14 @@ $(function()
    
    function displayGame(pageData)
    {
+      var quizId = pageData.quizId;
       var questions = pageData.questions;
+      var questionCount = questions.length;
       var displayedQuestion = pageData.displayedQuestion;
       var questionStates = pageData.questionStates;
       var answered = [];
-      var mapInfo = [];
+      var t0 = pageData.time;
+      var finished = pageData.finalTime ? true : false;
       
       $('#container').empty();
       $('#container').removeClass();
@@ -479,7 +483,7 @@ $(function()
                if (checked) html += ' checked';
                if (disabled) html += ' disabled';
                html += '> <span';
-               if (classStr) html += ' class="' + classStr;
+               if (classStr) html += ' class="' + classStr + '"';
             }
             else
             {
@@ -494,7 +498,7 @@ $(function()
                   if (disabled) html += ' disabled';
                html += ' name="radio' + iQuestion
                   + '"> <span'
-               if (classStr) html += ' class="' + classStr;
+               if (classStr) html += ' class="' + classStr + '"';
             }            
             
             html += '>' + choice.text
@@ -531,6 +535,136 @@ $(function()
          e.preventDefault();
          socket.emit('stopGame', {});
          $('#stopGameWaitImg').show();
+      });
+      
+      $('#submitButton').click(function(e)
+      {
+         e.preventDefault();
+         
+         $('#submitButton').prop('disabled', true);
+         $('.input' + displayedQuestion).prop('disabled', true);
+         if (displayedQuestion != questionCount - 1) $('#nextButton').prop('disabled', false);
+         answered[displayedQuestion] = 1;
+
+         var data = 
+         {
+            quizId: quizId,
+            question: displayedQuestion,
+            checks: []
+         };
+
+         var i, n = $('.input' + displayedQuestion).length;
+         for (i = 0; i < n; ++i) data.checks.push($('#input' + displayedQuestion + '_' + i).is(':checked'));
+
+         socket.emit('submit', data);   
+         $('#wait' + displayedQuestion).show();
+      });
+      
+      $('#nextButton').click(function(e)
+      {
+         if (displayedQuestion < questionCount - 1)   
+         {
+            $('#question' + displayedQuestion).hide();
+            ++displayedQuestion;
+            questionChange(displayedQuestion - 1);
+         }
+      });
+
+      $('#previousButton').click(function(e)
+      {
+         if (displayedQuestion > 0)
+         {
+            $('#question' + displayedQuestion).hide();
+            --displayedQuestion;
+            questionChange(displayedQuestion + 1);  
+         }
+      });
+
+      function questionChange(previousQuestion)
+      {
+         $('#iQuestion').text(displayedQuestion + 1);
+         $('#question' + displayedQuestion).show();
+
+         if (displayedQuestion == 0) $('#previousButton').prop('disabled', true);
+         else if (previousQuestion == 0) $('#previousButton').prop('disabled', false);
+
+         if (displayedQuestion == questionCount - 1 || !answered[displayedQuestion]) $('#nextButton').prop('disabled', true);
+         else $('#nextButton').prop('disabled', false);
+
+         if (answered[displayedQuestion]) $('#submitButton').prop('disabled', true);
+         else $('#submitButton').prop('disabled', false);
+
+         var data = 
+         {
+            quizId: quizId,
+            displayedQuestion: displayedQuestion
+         };
+
+         socket.emit('changeQuestion', data);
+
+         //updateMap(displayedQuestion, previousQuestion);
+      }
+      
+      socket.on('updateQuestions', function(data)
+      {      
+         if (data.quizId != quizId)
+         {
+            location.replace('/');
+         }
+         else
+         {
+            if (data.finalTime)
+            {
+               finished = true;
+               if (timeout) clearInterval(timeout);
+               timeout = undefined;
+               $('#timeSpan').text(data.finalTime + 's');
+            }
+
+            data.questionStates.forEach(function(state)
+            {
+               var i = state.index;
+               state.choiceStates.forEach(function(choiceState, j)
+               {
+                  var id = '#input' + i + '_' + j;
+                  $(id).prop('disabled', true);
+                  answered[i] = 1;
+                  if (i == displayedQuestion) $('#submitButton').prop('disabled', true);
+
+                  var isChecked = Boolean(choiceState.state & 1);
+                  if (isChecked) $(id).prop('checked', true);
+                  else $(id).prop('checked', false);
+
+                  var isRight = Boolean(choiceState.state & 2);
+                  $(id).next().removeClass();
+                  if (isRight) $(id).next().addClass('boldChoice');
+
+                  var isMultiple = ($(id).prop('type') == 'checkbox');
+                  if (isMultiple)
+                  {
+                     if (isChecked == isRight) $(id).next().addClass('greenChoice');
+                     else $(id).next().addClass('redChoice');
+                  }
+                  else if (isChecked)
+                  {
+                     if (isRight) $(id).next().addClass('greenChoice');
+                     else $(id).next().addClass('redChoice');
+                  }
+
+                  if (choiceState.comment)
+                  {
+                     $('#comment' + i + '_' + j).text(' (' + choiceState.comment + ')');
+                  }
+               });
+            });
+
+            $('#scoreSpan').text(data.rightAnswerCount + '/' + data.answerCount);
+
+            $('.waitAnswerImg').hide();
+
+            //mapInfo = data.mapInfo;
+            //updateMap(displayedQuestion);
+         }
       });
    }
          

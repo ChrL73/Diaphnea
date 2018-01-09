@@ -549,6 +549,76 @@ io.on('connection', function(socket)
          emitDisplayIndex(context);
       });
    });
+   
+   socket.on('submit', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         if (context.quizId && context.quizId == data.quizId)
+         {
+            var questionState = context.questionStates[data.question];
+
+            if (!questionState.answered)
+            {   
+               ++context.answerCount;
+               if (context.answerCount == context.questions.length)
+               {
+                  context.finalTime = (0.001 * (Date.now() - context.startDate)).toFixed(1);
+               }
+               
+               questionState.answered = true;
+               var question = context.questions[data.question];
+               var error = false;
+               
+               data.checks.forEach(function(check, i)
+               {
+                  var right = question.choices[i].isRight;
+                  // Note: With 'choiceStates[index] = value;' the value will not be saved to database by mongoose
+                  // -> use 'choiceStates.set(index, value);' instead
+                  questionState.choiceStates.set(i, (check ? 1 : 0) + (right ? 2 : 0));
+                  if (Boolean(check) != Boolean(right)) error = true;
+               });
+               
+               if (!error) ++context.rightAnswerCount;
+
+               context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
+            }
+            
+            setTimeout(function() { socket.emit('updateQuestions', getOutData(context)); }, debugDelay);
+         }
+         else
+         {
+            context.quizId = undefined;
+            context.displayedQuestion = undefined;
+            context.questions = undefined;
+            context.questionStates = [];
+            emitDisplayIndex(context);
+         }
+      }); 
+   });
+   
+   socket.on('changeQuestion', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         if (context.quizId && context.quizId == data.quizId)
+         {
+            context.displayedQuestion = data.displayedQuestion;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } }); 
+            socket.emit('updateQuestions', getOutData(context));
+         }
+         else
+         {
+            context.quizId = undefined;
+            context.displayedQuestion = undefined;
+            context.questions = undefined;
+            context.questionStates = [];
+            emitDisplayIndex(context);
+         }
+      });
+   });
          
    function extractCookies(cookieString)
    {
@@ -563,6 +633,42 @@ io.on('connection', function(socket)
       });
 
       return cookieObject;
+   }
+   
+   function getOutData(context)
+   {
+      var outData =
+      {
+         quizId: context.quizId,
+         rightAnswerCount: context.rightAnswerCount,
+         answerCount: context.answerCount,
+         questionStates: [],
+         mapInfo: [],
+         finalTime: context.finalTime
+      };
+      
+      context.questionStates.forEach(function(questionState, i)
+      {
+         if (questionState.answered)
+         {
+            var outState = { index: i, choiceStates: [] };
+            questionState.choiceStates.forEach(function(state, j)
+            {
+               var comment = context.questions[i].choices[j].comment;
+               outState.choiceStates.push({ state: state, comment: comment.length ? comment : undefined } );
+            });
+            outData.questionStates.push(outState);
+            outData.mapInfo.push(
+            {
+               mapIds: context.questions[i].mapIds,
+               framingLevel: context.questions[i].framingLevel,
+               mode: context.questions[i].mode,
+               categories: context.questions[i].categories
+            });
+         }
+      });
+      
+      return outData;
    }
 });
 

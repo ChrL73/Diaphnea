@@ -204,6 +204,7 @@ io.on('connection', function(socket)
       var texts = translate(context.siteLanguageId).texts;
       
       var questions = [];
+      var mapInfo = [];
       context.questions.forEach(function(question, iQuestion)
       {
          var sentQuestion =
@@ -215,13 +216,24 @@ io.on('connection', function(socket)
          
          question.choices.forEach(function(choice)
          {
-            var sentChoice = { text: choice.text };     
+            var sentChoice = { text: choice.text };   
             if (context.questionStates[iQuestion].answered) sentChoice.comment = choice.comment;
             sentQuestion.choices.push(sentChoice);
          });
          
          questions.push(sentQuestion);
-      });
+         
+         if (context.questionStates[iQuestion].answered)
+         {
+            mapInfo.push(
+            {
+               mapIds: context.questions[iQuestion].mapIds,
+               framingLevel: context.questions[iQuestion].framingLevel,
+               mode: context.questions[iQuestion].mode,
+               categories: context.questions[iQuestion].categories
+            });
+         }
+      });        
          
       var downData =
       {
@@ -236,9 +248,10 @@ io.on('connection', function(socket)
          rightAnswerCount: context.rightAnswerCount,
          answerCount: context.answerCount,
          time: Date.now() - context.startDate,
-         finalTime: context.finalTime//,
-         //mapServerUrl: mapServerUrl,
-         //mapId: context.mapId
+         finalTime: context.finalTime,
+         mapServerUrl: mapServerUrl,
+         mapId: context.mapId,
+         mapInfo: mapInfo
       };
 
       setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
@@ -617,6 +630,15 @@ io.on('connection', function(socket)
             context.questionStates = [];
             emitDisplayIndex(context);
          }
+      });
+   });
+   
+   socket.on('timeRequest', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         setTimeout(function() { socket.emit('time', Date.now() - context.startDate); }, debugDelay);
       });
    });
          

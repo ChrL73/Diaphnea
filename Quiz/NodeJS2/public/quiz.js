@@ -2,6 +2,12 @@ $(function()
 {
    var socket = io.connect();
    
+   var mapServerConnection;
+   var mapCounter = -1;
+   var maps = {};
+   
+   var timeout;
+   
    socket.on('displayPage', function(data)
    {
       socket.removeAllListeners('updateIndex');
@@ -11,6 +17,9 @@ $(function()
       socket.removeAllListeners('unknownName');
       socket.removeAllListeners('indexError');
       socket.removeAllListeners('updateQuestions');
+      socket.removeAllListeners('time');
+      if (timeout) clearInterval(timeout);
+      window.onresize = undefined;
       
       if (data.page == 'signUp') displaySignUp(data);
       else if (data.page == 'game') displayGame(data);
@@ -226,8 +235,6 @@ $(function()
       
       socket.on('updateSelects', function(data)
       {
-         console.log('test');
-         
          $('.waitImg1').hide();
 
          $('#indexQuestionnaireSelect').find('option').remove(); 
@@ -413,6 +420,7 @@ $(function()
       var answered = [];
       var t0 = pageData.time;
       var finished = pageData.finalTime ? true : false;
+      mapInfo = pageData.mapInfo;
       
       $('#container').empty();
       $('#container').removeClass();
@@ -434,7 +442,7 @@ $(function()
          + pageData.texts.time
          + ':&nbsp;<span id="timeSpan">'
          + (pageData.finalTime ? pageData.finalTime : Math.floor(0.001 * pageData.time))
-         + 's</span><img src="wait.gif" class="waitImg" id="gameTimeWaitImg"/></header>';
+         + 's</span><img src="wait.gif" class="waitImg" id="waitTimeImg"/></header>';
       
       html += '<div class="row"><div class="col-lg-3 col-md-4 col-sm-5"><div id="questionDiv">';
       
@@ -526,9 +534,129 @@ $(function()
          + pageData.texts.stop
          + '</button><img src="wait.gif" class="waitImg" id="stopGameWaitImg"/></div></form>'
       
-      html += '</div></div><div class="col-lg-9 col-md-8 col-sm-7" id="canvasColumn"><canvas id="canvas"></canvas></div></div>'
+      html += '</div></div><div class="col-lg-9 col-md-8 col-sm-7" id="canvasColumn"><canvas></canvas></div></div>'
       
       $('#container').append(html);
+      
+      var map;
+      var mapElements;
+      resizeCanvas();
+      
+      window.onresize = function()
+      {
+         resizeCanvas();
+         if (map) map.redraw();
+      };
+
+      function resizeCanvas()
+      {
+         $('#canvasColumn').height((window.innerHeight - 72).toString() + 'px');
+
+         $('canvas').attr('width', $('#canvasColumn').width());
+         $('canvas').attr('height', window.innerHeight - 72);
+      }
+      
+      if (mapServerConnection)
+      {
+         loadMap();
+      }
+      else
+      {
+         mapServerInterface.createNewConnection(pageData.mapServerUrl, onConnected, onError);
+         
+         function onConnected(_mapServerConnection)
+         {
+            mapServerConnection = _mapServerConnection;
+            loadMap();
+         }
+      }
+      
+      function onError(error)
+      {
+         console.error(error);
+      }
+      
+      function loadMap()
+      {
+         if (maps[pageData.mapId])
+         {
+            map = maps[pageData.mapId].map;
+            map.popState(-1);
+            map.pushState(-1);
+            mapElements = maps[pageData.mapId].mapElements;
+            $('#canvasColumn').empty();
+            $('#canvasColumn').append(maps[pageData.mapId].canvas);
+            resizeCanvas();
+            answered.forEach(function(b, i) { map.pushState(i); });
+            updateMap(displayedQuestion);
+         }
+         else
+         {
+            ++mapCounter;
+            var canvas = document.createElement('canvas');
+            var canvasId = 'canvas' + mapCounter;
+            canvas.setAttribute('id', canvasId);
+            $('#canvasColumn').empty();
+            $('#canvasColumn').append(canvas);
+            resizeCanvas();
+            maps[pageData.mapId] = { canvas: canvas };
+            
+            mapServerConnection.loadMap(pageData.mapId, canvasId, function(map_)
+            {
+               maps[pageData.mapId].map = map_;
+               map = map_;
+               
+               map.setFillingStyle(2);
+               map.pushState(-1);
+               var elementIds = map.getElementIds();
+               map.loadElements(elementIds, function(elementArray)
+               {
+                  var i, n = elementArray.length;
+                  mapElements = {};
+                  for (i = 0; i < n; ++i) mapElements[elementIds[i]] = elementArray[i];
+                  maps[pageData.mapId].mapElements = mapElements;
+
+                  answered.forEach(function(b, i) { map.pushState(i); });
+                  updateMap(displayedQuestion);
+               });
+            });
+         }
+      }
+      
+      initTime(t0);
+      socket.on('time', initTime);
+
+      function initTime(t0)
+      {
+         $('#waitTimeImg').hide();
+         if (timeout) clearInterval(timeout);
+         if (finished)
+         {
+            timeout = undefined;
+            return;
+         }
+
+         var lastDisplayedTime;
+         var date0 = Date.now();   
+         timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
+
+         function updateTime()
+         {
+            var t = (Date.now() - date0) + t0;
+            var displayedTime = Math.floor(0.001 * t);
+            if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
+            {
+               socket.emit('timeRequest');
+               timeout = undefined;
+               $('#waitTimeImg').show();
+               return;
+            }
+
+            $('#timeSpan').text(displayedTime + 's');
+            lastDisplayedTime = displayedTime;
+            timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
+         }
+      }
       
       $('#gameStopBtn').click(function(e)
       {
@@ -602,7 +730,7 @@ $(function()
 
          socket.emit('changeQuestion', data);
 
-         //updateMap(displayedQuestion, previousQuestion);
+         updateMap(displayedQuestion, previousQuestion);
       }
       
       socket.on('updateQuestions', function(data)
@@ -662,10 +790,90 @@ $(function()
 
             $('.waitAnswerImg').hide();
 
-            //mapInfo = data.mapInfo;
-            //updateMap(displayedQuestion);
+            mapInfo = data.mapInfo;
+            updateMap(displayedQuestion);
          }
       });
+   
+      function updateMap(newQuestion, oldQuestion)
+      {
+         if (!map) return;
+
+         if (oldQuestion || oldQuestion === 0) map.pushState(oldQuestion);
+         map.popState(newQuestion);
+
+         if (!mapInfo[newQuestion]) return;
+
+         var info = mapInfo[newQuestion];
+         map.setFramingLevel(info.framingLevel);   
+
+         var elementsToShow = {};
+         info.mapIds.forEach(function(idInfo)
+         {
+            showLinkedElements(idInfo, elementsToShow);
+         });
+
+         Object.getOwnPropertyNames(elementsToShow).forEach(function(elementId)
+         {
+            var keepForFraming = elementsToShow[elementId];
+            mapElements[elementId].show(!keepForFraming);
+         });
+      }
+
+      function showLinkedElements(idInfo, elementsToShow)
+      {
+         var element = mapElements[idInfo.id];
+         var threshold = 50;
+         var linkedElements = {};
+         linkedElements[element.getId()] = true;
+
+         var i = 0;
+         while (i < idInfo.depth)
+         {
+            var elementsToAdd = [];
+
+            Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+            { 
+               var linkedElements1 = mapElements[elementId].getLinkedElements1();
+               if (i < 2 || linkedElements1.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements1); }
+            });        
+            ++i; 
+
+            if (i < idInfo.depth)
+            {
+               Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+               { 
+                  var linkedElements2 = mapElements[elementId].getLinkedElements2();
+                  if (i < 2 || linkedElements2.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements2); }
+               });
+               ++i;
+            }
+
+            elementsToAdd.forEach(function(elementId)
+            {
+               linkedElements[elementId] = true;
+            });
+         }
+
+         var categories = {};
+         idInfo.categories.forEach(function(index) { categories[index] = 1; });
+         var include = (idInfo.mode == 'INCLUDE');
+
+         Object.getOwnPropertyNames(linkedElements).forEach(function(elementId)
+         { 
+            var elt = mapElements[elementId];
+            var categoryInList = (categories[elt.getCategoryIndex()] == 1);
+
+            if (elt == element || categoryInList == include)
+            {
+               var keepForFraming = false;
+               if (idInfo.framing == 1) keepForFraming = (elt == element);
+               else if (idInfo.framing == 2) keepForFraming = true;
+               if (keepForFraming) elementsToShow[elementId] = true;
+               else if (!elementsToShow[elementId]) elementsToShow[elementId] = false;
+            }
+         });
+      }
    }
          
    function getCookieExpires(days)

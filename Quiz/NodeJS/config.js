@@ -1,15 +1,23 @@
 var config = {};
 
-config.port = 3000;
+config.port = 3002;
 
-// Replace these values with values that are not in source control
-config.sessionSecret = 'dev1';
-config.cookieSecret = 'dev2';
+// Replace this value with a value that is not in source control
+config.sessionSecret = 'dev';
 
 // If 'config.mapServerAddress' is not defined, the quiz server assumes that the map server runs on the same machine as the quiz server 
 //config.mapServerAddress = '192.168.50.50';
 config.mapServerPort = '3001';
 
 //config.debugDelay = 2000;
+
+//jQueryUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
+jQueryUrl = 'jquery.min.js';
+
+//bootstrapCssUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+bootstrapCssUrl = 'bootstrap.min.css';
+
+//bootstrapJsUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js';
+bootstrapJsUrl = 'bootstrap.min.js';
 
 module.exports = config;

@@ -3,8 +3,6 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var morgan = require('morgan');
-var bodyparser = require("body-parser");
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var favicon = require('serve-favicon');
@@ -23,11 +21,7 @@ var defaultLanguageId = languages[0].id;
 
 app.use(express.static('public'));
 app.use(morgan('dev'));
-app.use(bodyparser.urlencoded({ extended: false }));
 app.use(favicon('public/favicon.ico'));
-
-if (!config.cookieSecret) throw new Error("No 'cookieSecret' value in config.js");
-app.use(cookieParser(config.cookieSecret));
 
 if (!config.sessionSecret) throw new Error("No 'sessionSecret' value in config.js");
 var sessionMiddleware = session(
@@ -64,7 +58,7 @@ else
       {
          ifaces[ifname].forEach(function(iface)
          { 
-            if (!locaIp && 'IPv4' === iface.family && iface.internal === false) 
+            if (!locaIp && iface.family === 'IPv4' && iface.internal === false) 
             {
                locaIp = iface.address;
             }
@@ -85,378 +79,202 @@ var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
 quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
-app.all('/', function(req, res)
+app.all('/', function(req, res, next)
 {
-   getContext(req.session, req.sessionID, req.cookies, function(context)
-   {
-      if (req.body.siteLanguageSelect)
-      {
-         var siteLanguageId;
-         languages.forEach(function(language)
-         {
-            if (req.body.siteLanguageSelect == language.id) siteLanguageId = language.id;
-         });
-
-         if (siteLanguageId) context.siteLanguageId = siteLanguageId;
-      }
-
-      var pageInBody = req.body.enterSignUp || req.body.submitSignUp || req.body.cancelSignUp ||
-                       req.body.signIn || req.body.signOut || req.body.start || req.body.stop;
-
-      if (req.body.enterSignUp || (!pageInBody && context.currentPage == pages.signUp))
-      {
-         enterSignUp(req, res, context, { reload: 'false', userExists: 'false', error: 'false' });
-      }
-      else if (req.body.submitSignUp)
-      {
-         submitSignUp(req, res, context);
-      }
-      else if (req.body.signIn)
-      {
-         signIn(req, res, context);
-      }
-      else if (req.body.signOut)
-      {
-         signOut(req, res, context);
-      }
-      else if (req.body.start || (!pageInBody && context.currentPage == pages.game))
-      {
-         game(req, res, context);
-      }
-      else if (req.body.stop)
-      {
-         stop(req, res, context);
-      }
-      else
-      {
-         index(req, res, context, { unknwon: 'false', error: 'false' });
-      }
-   });
+   res.render('quiz.ejs', config);
 });
 
 app.use(function(req, res)
 {
    res.redirect('/');
 });
-        
-function index(req, res, context, flags)
-{
-   context.currentPage = pages.index;
-   quizData.getLevelChoiceDownData(context, renderView);
-   
-   function renderView(downData)
-   {
-      if (context.user) downData.userName = context.user.name;
-      
-      context.questionnaireId = downData.questionnaireId;
-      context.questionnaireLanguageId = downData.questionnaireLanguageId;
-      context.levelId = downData.levelId;
-      context.saver.save(function(err)
-      {
-         if (err) console.log(err);
-         // Todo: handle error
-      });
-         
-      downData.siteLanguageList = languages;
-      downData.siteLanguageId = context.siteLanguageId;
-      downData.texts = translate(context.siteLanguageId).texts;
-      downData.flags = flags;
-      
-      if (flags.error == 'true') res.status(500);
-      res.render('index.ejs', { data: downData });
-   }
-}
 
-function game(req, res, context)
+io.on('connection', function(socket)
 {
-   var newGame = (context.currentPage != pages.game || !context.questions);
-   context.currentPage = pages.game;
-   
-   if (newGame)
+   var cookies = extractCookies(socket.handshake.headers.cookie);
+   getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+   {
+      if (context.currentPage == pages.signUp)
+      {
+         emitDisplaySignUp(context);
+      }
+      else if (context.currentPage == pages.game)
+      {
+         emitDisplayGame(context);
+      }
+      else
+      {
+         emitDisplayIndex(context);
+      }
+   });
+         
+   function emitDisplayIndex(context)
    {
       quizData.getLevelChoiceDownData(context, function(downData)
       {
-         quizData.getLevelMap(function(levelMap)
-         {
-            var levelId = levelMap[downData.questionnaireId][downData.levelId];
+         context.currentPage = pages.index;
+         context.questionnaireId = downData.questionnaireId;
+         context.questionnaireLanguageId = downData.questionnaireLanguageId;
+         context.levelId = downData.levelId;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });      
 
-            childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId, function(err, stdout, stderr)
-            {
-               if (err)
-               {
-                  console.log(stderr);
-                  context.quizId = undefined;
-                  context.displayedQuestion = undefined;
-                  context.questions = undefined;
-                  context.questionStates = [];
-                  context.answerCount = undefined;
-                  context.rightAnswerCount = undefined;
-                  context.startDate = undefined;
-                  context.finalTime = undefined;
-               }
-               else
-               {
-                  context.quizId =  shortId.generate();
-                  context.displayedQuestion = 0;
-                  context.questions = JSON.parse(stdout);
-                  context.questionStates = [];
-                  context.questionnaireName = downData.questionnaireName;
-                  context.mapId = downData.mapId;
-                  context.levelName = downData.levelName;
-                  context.answerCount = 0;
-                  context.rightAnswerCount = 0;
-                  context.startDate = Date.now();
-                  context.finalTime = undefined;
-                  
-                  context.questions.forEach(function(question, iQuestion)
-                  {
-                     context.questionStates.push({ answered: false, choiceStates: [] });
-                     question.choices.forEach(function(choice, iChoice)
-                     {
-                        // 0 <= choiceStates[iChoice] <= 3 :
-                        // bit 0 = 1 if choice is checked.
-                        // bit 1 = 1 if answer has been submitted and if the choice is right
-                        if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
-                        else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
-                     });
-                  });
-               }
+         var texts = translate(context.siteLanguageId).texts;
 
-               renderGameView();
-            });
-         });
+         downData.texts = getIndexTexts(texts);
+         downData.page = 'index';
+         if (context.user) downData.userName = context.user.name;
+         else downData.tmpName = context.tmpName;
+         downData.siteLanguageList = languages;
+         downData.siteLanguageId = context.siteLanguageId;
+
+         setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
       });
-   }
-   else
-   {
-      renderGameView();
    }
    
-   function renderGameView()
+   function getIndexTexts(texts)
    {
-      context.saver.save(function(err)
+      var t = 
       {
-         if (err) console.log(err);
-         // Todo: Handle error
-      });
+         name: texts.name,
+         password: texts.password,
+         signIn: texts.signIn,
+         signUp: texts.signUp,
+         signOut: texts.signOut,
+         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword,
+         internalServerError: texts.internalServerError,
+         questionnaire: texts.questionnaire,
+         language: texts.language,
+         level: texts.level,
+         start: texts.start
+      };
       
-      var data =
+      return t;
+   }
+   
+   function emitDisplaySignUp(context)
+   {      
+      context.currentPage = pages.signUp;
+      context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+      
+      var texts = translate(context.siteLanguageId).texts;
+         
+      var downData =
       {
-         texts: translate(context.siteLanguageId).texts,
+         page: 'signUp',
+         texts: getSignUpTexts(texts),
+         name: context.tmpName,
+         siteLanguageList: languages,
+         siteLanguageId: context.siteLanguageId,
+         name1Message: context.signUpMessages.name1,
+         name2Message: context.signUpMessages.name2,
+         pass1aMessage: context.signUpMessages.pass1a,
+         pass1bMessage: context.signUpMessages.pass1b,
+         pass2Message: context.signUpMessages.pass2,
+         errorMessage: context.signUpMessages.error
+      };
+
+      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+   }
+   
+   function getSignUpTexts(texts)
+   {
+      var t = 
+      {
+         name: texts.name,
+         password: texts.password,
+         confirmPassword: texts.confirmPassword,
+         signUp: texts.signUp,
+         cancel: texts.cancel,
+         nameMustBeBetween2And16Chars: texts.nameMustBeBetween2And16Chars,
+         passwordMustContainAtLeast8Chars: texts.passwordMustContainAtLeast8Chars,
+         passwordMustContainOnlyLettersNumbersEtc: texts.passwordMustContainOnlyLettersNumbersEtc,
+         twoPasswordsAreNotIdentical: texts.twoPasswordsAreNotIdentical,
+         theNameIsAlreadyUsed: texts.theNameIsAlreadyUsed,
+         internalServerError: texts.internalServerError
+      };
+      
+      return t;
+   }
+   
+   function emitDisplayGame(context)
+   {
+      context.currentPage = pages.game;
+      context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+      
+      var texts = translate(context.siteLanguageId).texts;
+      
+      var questions = [];
+      var mapInfo = [];
+      context.questions.forEach(function(question, iQuestion)
+      {
+         var sentQuestion =
+         {
+            question: question.question,
+            isMultiple: question.isMultiple,
+            choices: []
+         };
+         
+         question.choices.forEach(function(choice)
+         {
+            var sentChoice = { text: choice.text };   
+            if (context.questionStates[iQuestion].answered) sentChoice.comment = choice.comment;
+            sentQuestion.choices.push(sentChoice);
+         });
+         
+         questions.push(sentQuestion);
+         
+         if (context.questionStates[iQuestion].answered)
+         {
+            mapInfo.push(
+            {
+               mapIds: context.questions[iQuestion].mapIds,
+               framingLevel: context.questions[iQuestion].framingLevel,
+               mode: context.questions[iQuestion].mode,
+               categories: context.questions[iQuestion].categories
+            });
+         }
+      });        
+         
+      var downData =
+      {
+         page: 'game',
+         texts: getGameTexts(texts),
          quizId: context.quizId,
          displayedQuestion: context.displayedQuestion,
-         questions: context.questions,
+         questions: questions,
          questionStates: context.questionStates,
          questionnaireName: context.questionnaireName,
          levelName: context.levelName,
-         answerCount: context.answerCount,
          rightAnswerCount: context.rightAnswerCount,
+         answerCount: context.answerCount,
          time: Date.now() - context.startDate,
          finalTime: context.finalTime,
          mapServerUrl: mapServerUrl,
          mapId: context.mapId,
-         error: !context.quizId // Todo: Handle error in view
+         mapInfo: mapInfo
+      };
+
+      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+   }
+   
+   function getGameTexts(texts)
+   {
+      var t = 
+      {
+         questionnaire: texts.questionnaire,
+         level: texts.level,
+         score: texts.score,
+         time: texts.time,
+         stop: texts.stop,
+         previous: texts.previous,
+         submit: texts.submit,
+         next: texts.next,
+         question: texts.question
       };
       
-      res.render('game.ejs', { data: data });
-   }
-}
-
-function stop(req, res, context)
-{
-   context.quizId = undefined;
-   context.displayedQuestion = undefined;
-   context.questions = undefined;
-   context.questionStates = [];
-   index(req, res, context, { unknwon: 'false', error: 'false' });
-}
-
-function enterSignUp(req, res, context0, flags)
-{
-   if (req.session.userId) // Todo: Test this case
-   {
-      req.session.userId = undefined;
-      getContext(req.session, req.sessionID, req.cookies, function(context)
-      {
-         continueSignUp(context);
-      });
-   }
-   else
-   {
-      continueSignUp(context0);
+      return t;
    }
    
-   function continueSignUp(context)
-   {
-      context.currentPage = pages.signUp;
-      context.saver.save(function(err)
-      {
-         if (err) console.log(err);
-         /* Todo: Handle error */
-      });
-
-      var data =
-      {
-         name: req.body.name,
-         pass1: req.body.pass1 ? req.body.pass1 : '',
-         pass2: req.body.pass2 ? req.body.pass2 : '',
-         siteLanguageList: languages,
-         siteLanguageId: context.siteLanguageId,
-         texts: translate(context.siteLanguageId).texts,
-         flags: flags
-      };
-
-      if (flags.error == 'true') res.status(500);
-      res.render('sign_up.ejs', { data: data });   
-   }
-}
-
-function signIn(req, res, context)
-{
-   userData.findUserId(req.body.name, req.body.pass, function(err, id)
-   {
-      if (err)
-      {
-         console.log(err);
-         index(req, res, context, { unknwon: 'false', error: 'true' });
-      }
-      else if (!id)
-      {
-         index(req, res, context, { unknwon: 'true', error: 'false' });
-      }
-      else
-      {
-         req.session.userId = id;
-         res.redirect('/');
-      }
-   });
-}
-
-function submitSignUp(req, res, context)
-{
-   if (req.body.name.length < 2 || req.body.name.length > 16 || req.body.pass1.length < 8
-      || !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(req.body.pass1)) || req.body.pass1 !== req.body.pass2)
-   {
-      enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'false' });
-      return;
-   }
-   
-   userData.tryAddUser(req.body.name, req.body.pass1, context, function(err, id)
-   {
-      if (err)
-      {
-         console.log('err: ' + err);
-         enterSignUp(req, res, context, { reload: 'true', userExists: 'false', error: 'true' });
-      }
-      else if (!id)
-      {
-         enterSignUp(req, res, context, { reload: 'true', userExists: 'true', error: 'false' });
-      }
-      else
-      {
-         req.session.userId = id;       
-         getContext(req.session, req.sessionID, req.cookies, function(context)
-         {
-            index(req, res, context, { unknwon: 'false', error: 'false' });
-         });
-      }
-   });
-}
-
-function signOut(req, res, context)
-{
-   req.session.userId = undefined;
-   getContext(req.session, req.sessionID, req.cookies, function(context)
-   {
-      index(req, res, context, { unknwon: 'false', error: 'false' }); 
-   });
-}
-
-function getContext(session0, sessionId, cookies, callback)
-{
-   console.log(sessionId);
-   
-   if (session0.userId)
-   {
-      userData.getUser(session0.userId, function(err, user)
-      {
-         if (err)
-         {
-             console.log(err);
-            // Todo: Hanlde error
-         }
-         else if (!user)
-         {
-            console.log('!user');
-            // Todo: Hanlde error
-         }
-         else 
-         {
-            user.context.user = user;
-            user.context.saver = user;
-            callback(user.context);
-         }
-      });
-   }
-   else
-   {
-      userData.getSession(sessionId, function(err, session)
-      {
-         if (err)
-         {
-             console.log(err);
-            // Todo: Hanlde error
-         }
-         else if (!session)
-         {
-            // 'session' is undefined when the session has not yet been saved (case of the first request of the session). 
-            // In this case, we save the session, then call again 'getContext'
-            session0.save(function(err)
-            {
-               // Todo: Handle error
-               if (err) console.log(err);
-               getContext(session0, sessionId, cookies, callback);
-            });
-         }
-         else 
-         {
-            if (session.context)
-            {
-               session.context.session = session;
-               session.context.saver = session;
-               callback(session.context);
-            }
-            else
-            {
-               session.context =
-               {
-                  siteLanguageId: cookies.siteLanguageId ? cookies.siteLanguageId : defaultLanguageId,
-                  questionnaireId: cookies.questionnaireId,
-                  questionnaireLanguageId: cookies.questionnaireLanguageId,
-                  levelId: cookies.levelId,
-                  currentPage: pages.index
-               };
-               
-               session.context.session = session;
-               session.context.saver = session;
-               callback(session.context);
-               
-               session.save(function(err)
-               {
-                  if (err)
-                  {
-                     console.log(err);
-                     // Todo: Handle error
-                  }
-               });
-            }
-         }
-      });
-   }
-}
-
-io.on('connection', function(socket)
-{
    socket.on('levelChoice', function(upData)
    {
       var context;
@@ -475,25 +293,273 @@ io.on('connection', function(socket)
          context.questionnaireLanguageId = downData.questionnaireLanguageId;
          context.levelId = downData.levelId;
          context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         
          setTimeout(function() { socket.emit('updateSelects', downData); }, debugDelay);
       }
    });
    
-   socket.on('changeQuestion', function(data)
+   socket.on('languageChoice', function(upData)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);  
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
-      { 
-         if (context.quizId && context.quizId == data.quizId)
+      {          
+         var siteLanguageId;
+         languages.forEach(function(language)
          {
-            context.displayedQuestion = data.displayedQuestion;
-            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } }); 
-            socket.emit('updateQuestions', getOutData(context));
+            if (upData.languageId == language.id) siteLanguageId = language.id;
+         });
+
+         if (siteLanguageId)
+         {
+            context.siteLanguageId = siteLanguageId;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         }
+         
+         var texts = translate(context.siteLanguageId).texts;
+         
+         if (upData.page == 'signUp')
+         {            
+            var downData = getSignUpTexts(texts);
+            setTimeout(function() { socket.emit('updateSignUp', downData); }, debugDelay);
          }
          else
          {
-            setTimeout(function() { socket.emit('reload'); }, debugDelay);
+            var downData = getIndexTexts(texts);
+            setTimeout(function() { socket.emit('updateIndex', downData); }, debugDelay);
          }
+      });
+   });
+      
+   socket.on('signUp', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      
+      if (socket.request.session.userId) // Todo: Test this case
+      {
+         socket.request.session.userId = undefined;
+         socket.request.session.save(function(err)
+         {
+            if (err) { console.log(err); /* Todo: Handle error */ } 
+            continueSignUp();
+         });
+      }
+      else
+      {
+         continueSignUp();
+      }
+      
+      function continueSignUp()
+      {
+         getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+         { 
+            context.tmpName = data.name;      
+            emitDisplaySignUp(context);
+         });
+      }
+   });
+   
+   socket.on('cancelSignUp', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.signUpMessages = { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false };
+         emitDisplayIndex(context);
+      });
+   });
+   
+   socket.on('submitSignUp', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      {
+         context.tmpName = data.name;
+         var ok = true;
+
+         context.signUpMessages.name1 = (data.name.length < 2 || data.name.length > 16);
+         if (context.signUpMessages.name1) ok = false;
+         
+         context.signUpMessages.pass1a = (data.pass1.length < 8);
+         if (context.signUpMessages.pass1a) ok = false;
+         
+         context.signUpMessages.pass1b = !(/^(?=.*[_,?;.:!$*+=&-])[A-Za-z0-9c_,?;.:!$*+=&-]+$/.test(data.pass1));
+         if (context.signUpMessages.pass1b) ok = false;
+         
+         context.signUpMessages.pass2 = (data.pass1 !== data.pass2);
+         if (context.signUpMessages.pass2) ok = false;         
+
+         if (ok)
+         {
+            userData.tryAddUser(data.name, data.pass1, context, function(err, id)
+            {
+               if (err)
+               {
+                  console.log('err: ' + err);
+                  context.signUpMessages.error = true;
+                  signUpFailed();
+               }
+               else if (!id)
+               {
+                  context.signUpMessages.name2 = true;
+                  signUpFailed();
+               }
+               else
+               {
+                  socket.request.session.userId = id;    
+                  socket.request.session.save(function(err)
+                  {
+                     if (err) { console.log(err); /* Todo: Handle error */ } 
+                     getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+                     {
+                        emitDisplayIndex(context);
+                     });
+                  });
+               }
+            });       
+         }
+         else
+         {
+            signUpFailed();
+         }
+         
+         function signUpFailed()
+         {
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+         
+            var downData = 
+            {
+               name1Message: context.signUpMessages.name1,
+               name2Message: context.signUpMessages.name2,
+               pass1aMessage: context.signUpMessages.pass1a,
+               pass1bMessage: context.signUpMessages.pass1b,
+               pass2Message: context.signUpMessages.pass2,
+               errorMessage: context.signUpMessages.error
+            };
+            setTimeout(function() { socket.emit('signUpError', downData); }, debugDelay);
+         }
+      });
+   });
+   
+   socket.on('signIn', function(data)
+   {     
+      userData.findUserId(data.name, data.pass, function(err, id)
+      {
+         if (err)
+         {
+            console.log(err);
+            setTimeout(function() { socket.emit('indexError', {}); }, debugDelay);
+         }
+         else if (!id)
+         {
+            setTimeout(function() { socket.emit('unknownName', {}); }, debugDelay);
+         }
+         else
+         {
+            socket.request.session.userId = id;    
+            socket.request.session.save(function(err)
+            {
+               if (err) { console.log(err); /* Todo: Handle error */ } 
+
+               var cookies = extractCookies(socket.handshake.headers.cookie);
+               getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+               {
+                  emitDisplayIndex(context);
+               });
+            });
+         }
+      });
+   });
+   
+   socket.on('signOut', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context1)
+      {
+         var name = context1.user.name;
+         
+         socket.request.session.userId = undefined;    
+         socket.request.session.save(function(err)
+         {
+            if (err) { console.log(err); /* Todo: Handle error */ } 
+            getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
+            {
+               context2.tmpName = name;
+               emitDisplayIndex(context2);
+            });
+         });
+      });
+   });
+   
+   socket.on('newGame', function()
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      {
+         quizData.getLevelChoiceDownData(context, function(downData)
+         {
+            quizData.getLevelMap(function(levelMap)
+            {
+               var levelId = levelMap[downData.questionnaireId][downData.levelId];
+
+               childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId, function(err, stdout, stderr)
+               {
+                  if (err)
+                  {
+                     console.log(stderr);
+                     context.quizId = undefined;
+                     context.displayedQuestion = undefined;
+                     context.questions = undefined;
+                     context.questionStates = [];
+                     context.answerCount = undefined;
+                     context.rightAnswerCount = undefined;
+                     context.startDate = undefined;
+                     context.finalTime = undefined;
+                  }
+                  else
+                  {
+                     context.quizId = shortId.generate();
+                     context.displayedQuestion = 0;
+                     context.questions = JSON.parse(stdout);
+                     context.questionStates = [];
+                     context.questionnaireName = downData.questionnaireName;
+                     context.mapId = downData.mapId;
+                     context.levelName = downData.levelName;
+                     context.answerCount = 0;
+                     context.rightAnswerCount = 0;
+                     context.startDate = Date.now();
+                     context.finalTime = undefined;
+
+                     context.questions.forEach(function(question, iQuestion)
+                     {
+                        context.questionStates.push({ answered: false, choiceStates: [] });
+                        question.choices.forEach(function(choice, iChoice)
+                        {
+                           // 0 <= choiceStates[iChoice] <= 3 :
+                           // bit 0 = 1 if choice is checked.
+                           // bit 1 = 1 if answer has been submitted and if the choice is right
+                           if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
+                           else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
+                        });
+                     });
+                  }
+
+                  emitDisplayGame(context);
+               });
+            });
+         });
+      });
+   });
+   
+   socket.on('stopGame', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.quizId = undefined;
+         context.displayedQuestion = undefined;
+         context.questions = undefined;
+         context.questionStates = [];
+         emitDisplayIndex(context);
       });
    });
    
@@ -536,9 +602,35 @@ io.on('connection', function(socket)
          }
          else
          {
-            setTimeout(function() { socket.emit('reload'); }, debugDelay);
+            context.quizId = undefined;
+            context.displayedQuestion = undefined;
+            context.questions = undefined;
+            context.questionStates = [];
+            emitDisplayIndex(context);
          }
       }); 
+   });
+   
+   socket.on('changeQuestion', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         if (context.quizId && context.quizId == data.quizId)
+         {
+            context.displayedQuestion = data.displayedQuestion;
+            context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } }); 
+            socket.emit('updateQuestions', getOutData(context));
+         }
+         else
+         {
+            context.quizId = undefined;
+            context.displayedQuestion = undefined;
+            context.questions = undefined;
+            context.questionStates = [];
+            emitDisplayIndex(context);
+         }
+      });
    });
    
    socket.on('timeRequest', function()
@@ -549,9 +641,10 @@ io.on('connection', function(socket)
          setTimeout(function() { socket.emit('time', Date.now() - context.startDate); }, debugDelay);
       });
    });
-   
+         
    function extractCookies(cookieString)
    {
+      if (!cookieString) return {};
       var cookieObject = {};
       var cookieArray = cookieString.split(';');
 
@@ -600,6 +693,94 @@ io.on('connection', function(socket)
       return outData;
    }
 });
+
+function getContext(session0, sessionId, cookies, callback)
+{
+   if (session0.userId)
+   {
+      userData.getUser(session0.userId, function(err, user)
+      {
+         if (err)
+         {
+            console.log(err);
+            noUser();
+         }
+         else if (!user)
+         {
+            console.log('!user');
+            noUser();
+         }
+         else 
+         {
+            user.context.user = user;
+            user.context.saver = user;
+            callback(user.context);
+         }
+      });
+   }
+   else
+   {
+      noUser();
+   }
+   
+   function noUser()
+   {
+      userData.getSession(sessionId, function(err, session)
+      {
+         if (err)
+         {
+             console.log(err);
+            // Todo: Hanlde error
+         }
+         else if (!session)
+         {
+            // 'session' is undefined when the session has not yet been saved (case of the first request of the session). 
+            // In this case, we save the session, then call again 'getContext'
+            session0.save(function(err)
+            {
+               // Todo: Handle error
+               if (err) console.log(err);
+               getContext(session0, sessionId, cookies, callback);
+            });
+         }
+         else 
+         {
+            if (session.context)
+            {
+               session.context.session = session;
+               session.context.saver = session;
+               callback(session.context);
+            }
+            else
+            {
+               session.context =
+               {
+                  siteLanguageId: cookies.siteLanguageId ? cookies.siteLanguageId : defaultLanguageId,
+                  questionnaireId: cookies.questionnaireId,
+                  questionnaireLanguageId: cookies.questionnaireLanguageId,
+                  levelId: cookies.levelId,
+                  currentPage: pages.index,
+                  signUpMessages: { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false },
+                  tmpName: ''
+               };
+               
+               session.context.session = session;
+               session.context.saver = session;
+               callback(session.context);
+               
+               session.save(function(err)
+               {
+                  if (err)
+                  {
+                     console.log(err);
+                     // Todo: Handle error
+                  }
+               });
+            }
+         }
+      });
+   }
+}
 
 if (!config.port) throw new Error("No 'port' value in config.js");
 console.log('Quiz server listening on port ' + config.port + '...');

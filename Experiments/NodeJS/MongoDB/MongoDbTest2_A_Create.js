@@ -17,7 +17,7 @@ function fillArray()
    console.log("n=" + n1 + " fillArray");
    
    testSchema = mongoose.Schema({ indexField: Number, stringField: String }, { collection: "test" + n1.toString() });
-   TestModel = mongoose.model("Test" + n1.toString() , testSchema);
+   TestModel = mongoose.model("Test" + n1.toString(), testSchema);
    testArray = [];
    iArray = [];
    

@@ -44,4 +44,4 @@ $(function()
    
 });
 
-// The bug has been fixed thanks to the 'popCounter' variable in 'diaphnea_map_api.js'
+// The bug has been fixed thanks to the 'popCounter' variable in 'map_api.js'

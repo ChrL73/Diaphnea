@@ -111,9 +111,135 @@ function getSession(id, callback)
    SessionModel.findOne({ _id: id }, callback);
 }
 
+var scoreModels = {};
+
+function getScoreModel(questionnaireId, levelId, dayCount)
+{
+   var id = questionnaireId + levelId + dayCount;
+   
+   if (!scoreModels[id])
+   {
+      var schema = mongoose.Schema(
+      {
+         _id: Number,
+         user_id: mongoose.Schema.Types.ObjectId,
+         score: Number,
+         time_ms: Number,
+         date: { type: Date, expires: 3600 * 24 * dayCount }
+      });
+      scoreModels[id] = mongoose.model('Scores' + id, schema);
+   }
+   
+   return scoreModels[id];
+}
+
+// (scoreSize + timeSize + randPartSize) must be <= 52 (because JavaScript numbers are 64-bit floating point numbers, with 52-bit mantissa)
+var scoreSize = 6; // Assumes that the number of questions in a questionnaire is <= 63 (= 2^6 - 1)
+var timeSize = 28; // Assumes that the duration of a game is <= 2^28ms (~74 days)
+var randPartSize = 18;
+var maxScore = Math.pow(2, scoreSize) - 1;
+var scoreShift = Math.pow(2, timeSize + randPartSize);
+var maxTime = Math.pow(2, timeSize) - 1;
+var timeShift = Math.pow(2, randPartSize);
+var maxRandPart = Math.pow(2, randPartSize) - 1;
+
+function addScore(questionnaireId, levelId, user, score, time)
+{
+   var date = Date.now();
+   
+   if (score < 0 || score > maxScore) return;
+   
+   var time_ms = Math.floor(time * 1000);
+   if (time_ms < 0 || time_ms > maxTime) return;
+   
+   var days = [1, 7, 30, 365];
+   days.forEach(function(i)
+   {   
+      var model = getScoreModel(questionnaireId, levelId, i);
+      addScore2(user, score, time_ms, date, model);
+   });
+}
+
+function addScore2(user, score, time_ms, date, model)
+{
+   var entry = new model();
+   entry.user_id = user._id;
+   entry.score = score;  
+   entry.time_ms = time_ms;
+   entry.date = date;
+   entry.retryCount = 0;
+   
+   setIdAndSave(entry);
+}
+
+function setIdAndSave(entry)
+{
+   entry._id = (maxScore - entry.score) * scoreShift + entry.time_ms * timeShift + randomInt(maxRandPart);
+   
+   entry.save(function(err)
+   {
+      if (err)
+      {
+         if (err.code == 11000 && entry.retryCount < 20)
+         {
+            ++entry.retryCount;
+            setIdAndSave(entry);
+         }
+         else
+         {
+            console.log(err);
+         }
+      }
+   });
+}
+
+function randomInt(max)
+{
+   return Math.floor(Math.random() * Math.floor(max + 1));
+}
+
+function getScoreTable(questionnaireId, levelId, dayCount, size, callback)
+{
+   var table = [];
+   var model = getScoreModel(questionnaireId, levelId, dayCount);
+   
+   if (model)
+   {
+      console.log('model');
+      model.find().limit(size).sort('_id').exec(function(err, entries)
+      {
+         var i = 0;
+         var n = entries.length;
+         
+         entries.forEach(function(entry, j)
+         {
+            getUser(entry.user_id, function(err, user)
+            {
+               var row =
+               {
+                  score: entry.score,
+                  time_ms: entry.time_ms,
+                  name: (!err && user ? user.name : undefined)
+               };
+               table[j] = row;
+               
+               ++i;
+               if (i == n) callback(table);
+            });
+         });
+      });
+   }
+   else
+   {
+      console.log('!model');
+      callback(table); 
+   }
+}
+
 module.exports.tryAddUser = tryAddUser;
 module.exports.findUserId = findUserId;
 module.exports.getUser = getUser;
 module.exports.removeUser = removeUser;
 module.exports.getSession = getSession;
-
+module.exports.addScore = addScore;
+module.exports.getScoreTable = getScoreTable;

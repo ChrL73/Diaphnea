@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <link rel="stylesheet" href="../public/bootstrap.min.css"/>
+      <link rel="stylesheet" href="../public/styles.css"/>
+      <title>Quiz</title>
+   </head>
+
+   <body>  
+      <div id="container" class="container">
+         <header>
+            <div class="navbar">
+               <div class="col-md-10">
+                  <form class="navbar-form">
+                     <label>Christophe</label>
+                     <button id="indexSignOutBtn" class="btn btn-primary btn-sm">Déconnexion</button>
+                     <div class="col-sm-1 navbar-right"><img src="wait.gif" id="indexNavBarWait" class="waitImg"/></div>
+                  </form>
+               </div>
+               <div class="col-md-2 text-center">
+                  <div class="visible-xs visible-sm"><br></div>
+                  <form class="navbar-form">
+                     <select class="form-control input-sm" id="indexSiteLanguageSelect">
+                        <option selected value="fr">Français</option>
+                        <option value="en">English</option>
+                     </select>
+                  </form>
+               </div>
+            </div>
+         </header>
+         <div class="modal fade" id="indexErrorMessage1">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-body bg-danger">
+                     <span id="indexErrorSpan1">Utilisateur inconnu ou mot de passe incorrect</span>
+                     <button type="button" class="close" data-dismiss="modal">x</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal fade" id="indexErrorMessage2">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-body bg-danger">
+                     <span id="indexErrorSpan2">Erreur interne au serveur</span>
+                     <button type="button" class="close" data-dismiss="modal">x</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <form>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label" for="indexQuestionnaireSelect" id="indexQuestionnaireLabel">Questionnaire:</label>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4"><select class="form-control" id="indexQuestionnaireSelect">
+                  <option selected value="_France">France</option>
+                  <option value="_Gabon">Gabon</option></select></div>
+               <div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireWait" class="waitImg waitImg1"/></div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label questionnaireLanguageSelection" for="indexQuestionnaireLanguageSelect" id="indexQuestionnaireLanguageLabel" style="margin-top:16px;">Langue:</label>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <select class="form-control questionnaireLanguageSelection" id="indexQuestionnaireLanguageSelect">
+                     <option selected value="fr">Français</option>
+                     <option value="en">English</option>
+                  </select></div>
+               <div class="col-sm-1"><img src="wait.gif" id="indexQuestionnaireLanguageWait" class="waitImg waitImg1"/></div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <label class="control-label" for="indexLevelSelect" id="indexLevelLabel" style="margin-top:16px;">Niveau:</label>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <select class="form-control" id="indexLevelSelect">
+                     <option selected value="lv_TresFacile">Très facile</option>
+                     <option value="lv_Facile">Facile</option>
+                     <option value="lv_Moyen">Moyen</option>
+                     <option value="lv_Difficile">Difficile</option>
+                     <option value="lv_TresDifficile">Très difficile</option>
+                  </select>
+               </div>
+               <div class="col-sm-1">
+                  <img src="wait.gif" id="indexLevelWait" class="waitImg waitImg1"/>
+               </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <button id="indexStartBtn" class="btn btn-success">Commencer</button>
+               </div>
+               <div class="col-sm-1">
+                  <img src="wait.gif" id="indexStartWait" class="waitImg"/>
+               </div>
+            </div>
+            <div class="row col-sm-10 col-sm-offset-1" style="margin-top:60px;">
+               <div class="text-center"><strong>Meilleurs scores</strong></div>
+               <ul class="nav nav-tabs" role="tablist">
+                 <li class="nav-item">
+                   <a class="nav-link" id="table1-tab" data-toggle="tab" href="#table1" role="tab">Jour</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab">Semaine</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="table30-tab" data-toggle="tab" href="#table30" role="tab">Mois</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link" id="table365-tab" data-toggle="tab" href="#table365" role="tab">Année</a>
+                 </li>
+               </ul>
+               <div class="tab-content" >
+                  <div class="tab-pane fade" id="table1" role="tabpanel">
+                     <table class="table" style="margin-top:16px;">
+                       <thead>
+                         <tr>
+                           <th></th>
+                           <th>Nom</th>
+                           <th>Score</th>
+                           <th>Temps</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                           <th scope="row">1</th>
+                           <td>Christophe</td>
+                           <td>15</td>
+                           <td>45.323</td>
+                         </tr>
+                         <tr>
+                           <th scope="row">2</th>
+                           <td>Bob</td>
+                           <td>10</td>
+                           <td>40.322</td>
+                         </tr>
+                         <tr>
+                           <th scope="row">3</th>
+                           <td>Bill</td>
+                           <td>10</td>
+                           <td>50.236</td>
+                         </tr>
+                       </tbody>
+                     </table>
+                  </div>
+                  <div class="tab-pane fade" id="table7" role="tabpanel">Semaine</div>
+                  <div class="tab-pane fade" id="table30" role="tabpanel">Mois</div>
+                  <div class="tab-pane fade" id="table365" role="tabpanel">Année</div>
+               </div>
+            </div>
+         </form>
+      </div>
+      
+      <script src="../public/jquery.min.js"></script>
+      <script src="../public/bootstrap.min.js"></script>
+      <script>$(function() { $('#table1-tab').tab('show'); });</script>
+   </body>
+</html>

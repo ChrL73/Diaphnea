@@ -577,7 +577,7 @@ io.on('connection', function(socket)
                ++context.answerCount;
                if (context.answerCount == context.questions.length)
                {
-                  context.finalTime = (0.001 * (Date.now() - context.startDate)).toFixed(1);
+                  context.finalTime = (0.001 * (Date.now() - context.startDate)).toFixed(3);
                }
                
                questionState.answered = true;
@@ -594,6 +594,11 @@ io.on('connection', function(socket)
                });
                
                if (!error) ++context.rightAnswerCount;
+               
+               if (context.answerCount == context.questions.length && context.user)
+               {
+                  userData.addScore(context.questionnaireId, context.levelId, context.user, context.rightAnswerCount, context.finalTime);
+               }
 
                context.saver.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
             }

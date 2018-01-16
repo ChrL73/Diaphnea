@@ -126,6 +126,7 @@ io.on('connection', function(socket)
          else downData.tmpName = context.tmpName;
          downData.siteLanguageList = languages;
          downData.siteLanguageId = context.siteLanguageId;
+         downData.scoreTab = context.scoreTab;
 
          setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
       });
@@ -145,7 +146,14 @@ io.on('connection', function(socket)
          questionnaire: texts.questionnaire,
          language: texts.language,
          level: texts.level,
-         start: texts.start
+         start: texts.start,
+         highScores: texts.highScores,
+         day: texts.day,
+         week: texts.week,
+         month: texts.month,
+         year: texts.year,
+         score: texts.score,
+         time: texts.time
       };
       
       return t;
@@ -327,6 +335,16 @@ io.on('connection', function(socket)
             var downData = getIndexTexts(texts);
             setTimeout(function() { socket.emit('updateIndex', downData); }, debugDelay);
          }
+      });
+   });
+   
+   socket.on('scoreTab', function(data)
+   {
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         context.scoreTab = data.n;
+         context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
       });
    });
       
@@ -766,7 +784,8 @@ function getContext(session0, sessionId, cookies, callback)
                   levelId: cookies.levelId,
                   currentPage: pages.index,
                   signUpMessages: { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false },
-                  tmpName: ''
+                  tmpName: '',
+                  scoreTab: 1
                };
                
                session.context.session = session;

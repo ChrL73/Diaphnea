@@ -125,9 +125,37 @@ $(function()
          + pageData.texts.start
          + '</button></div><div class="col-sm-1"><img src="wait.gif" id="indexStartWait" class="waitImg"/></div></div>';
       
-      html += '</form>';
+      html += '</form><div class="col-sm-10 col-sm-offset-1" style="margin-top:60px"><div class="row"><div class="text-center col-sm-10 col-sm-offset-1" style="margin-bottom:6px;"><strong id="indexHighScores">'
+         + pageData.texts.highScores
+         + '</strong></div><div class="text-center col-sm-1"><img src="wait.gif" id="indexTableWait" class="waitImg"/></div></div><ul class="nav nav-tabs" role="tablist"><li class="nav-item"><a class="nav-link" id="table1-tab" data-toggle="tab" href="#table1" role="tab">'
+         + pageData.texts.day
+         + '</a></li><li class="nav-item"><a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab">'
+         + pageData.texts.week
+         + '</a></li><li class="nav-item"><a class="nav-link" id="table30-tab" data-toggle="tab" href="#table30" role="tab">'
+         + pageData.texts.month
+         + '</a></li><li class="nav-item"><a class="nav-link" id="table365-tab" data-toggle="tab" href="#table365" role="tab">'
+         + pageData.texts.year
+         + '</a></li></ul>';
+      
+      html += '<div class="tab-content" >';
+      
+      var d = [1, 7, 30, 365];
+      d.forEach(function(i)
+      {
+         html += '<div class="tab-pane" id="table' + i + '" role="tabpanel"><table class="table" style="margin-top:16px;"><thead><tr><th></th><th id="nameTh' + i + '">'
+         + pageData.texts.name
+         + '</th><th id="scoreTh' + i + '">'
+         + pageData.texts.score
+         + '</th><th id="timeTh' + i + '">'
+         + pageData.texts.time
+         + '</th></tr></thead><tbody></tbody></table></div>'
+      });
+      
+      html += '</div></div>';
       
       $('#container').append(html);
+      
+      $('#table' + pageData.scoreTab + '-tab').tab('show');
       
       $('#indexSignInBtn').click(function(e)
       {
@@ -205,6 +233,13 @@ $(function()
          socket.emit('levelChoice', { questionnaireId: questionnaireId, questionnaireLanguageId: questionnaireLanguageId, levelId: levelId });
       }
       
+      $('a').on('shown.bs.tab', function(e)
+      {
+         var id = e.target.id;
+         var n = Number(id.substring(5, id.length - 4));
+         socket.emit('scoreTab', { n: n });
+      });
+      
       socket.on('unknownName', function()
       {
          $('#indexNavBarWait').hide();
@@ -231,6 +266,18 @@ $(function()
          $('#indexQuestionnaireLanguageLabel').text(data.language + ':');
          $('#indexLevelLabel').text(data.level + ':');
          $('#indexStartBtn').text(data.start);
+         $('#indexHighScores').text(data.highScores);
+         $('#table1-tab').text(data.day);
+         $('#table7-tab').text(data.week);
+         $('#table30-tab').text(data.month);
+         $('#table365-tab').text(data.year);
+         
+         d.forEach(function(i)
+         {
+            $('#nameTh' + i).text(data.name);
+            $('#scoreTh' + i).text(data.score);
+            $('#timeTh' + i).text(data.time);
+         });
       });
       
       socket.on('updateSelects', function(data)

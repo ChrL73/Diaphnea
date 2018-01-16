@@ -101,65 +101,75 @@
                   <img src="wait.gif" id="indexStartWait" class="waitImg"/>
                </div>
             </div>
-            <div class="row col-sm-10 col-sm-offset-1" style="margin-top:60px;">
-               <div class="text-center"><strong>Meilleurs scores</strong></div>
-               <ul class="nav nav-tabs" role="tablist">
-                 <li class="nav-item">
-                   <a class="nav-link" id="table1-tab" data-toggle="tab" href="#table1" role="tab">Jour</a>
-                 </li>
-                 <li class="nav-item">
-                   <a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab">Semaine</a>
-                 </li>
-                 <li class="nav-item">
-                   <a class="nav-link" id="table30-tab" data-toggle="tab" href="#table30" role="tab">Mois</a>
-                 </li>
-                 <li class="nav-item">
-                   <a class="nav-link" id="table365-tab" data-toggle="tab" href="#table365" role="tab">Année</a>
-                 </li>
-               </ul>
-               <div class="tab-content" >
-                  <div class="tab-pane fade" id="table1" role="tabpanel">
-                     <table class="table" style="margin-top:16px;">
-                       <thead>
-                         <tr>
-                           <th></th>
-                           <th>Nom</th>
-                           <th>Score</th>
-                           <th>Temps</th>
-                         </tr>
-                       </thead>
-                       <tbody>
-                         <tr>
-                           <th scope="row">1</th>
-                           <td>Christophe</td>
-                           <td>15</td>
-                           <td>45.323</td>
-                         </tr>
-                         <tr>
-                           <th scope="row">2</th>
-                           <td>Bob</td>
-                           <td>10</td>
-                           <td>40.322</td>
-                         </tr>
-                         <tr>
-                           <th scope="row">3</th>
-                           <td>Bill</td>
-                           <td>10</td>
-                           <td>50.236</td>
-                         </tr>
-                       </tbody>
-                     </table>
-                  </div>
-                  <div class="tab-pane fade" id="table7" role="tabpanel">Semaine</div>
-                  <div class="tab-pane fade" id="table30" role="tabpanel">Mois</div>
-                  <div class="tab-pane fade" id="table365" role="tabpanel">Année</div>
+         </form>
+         <div class="col-sm-10 col-sm-offset-1" style="margin-top:60px">
+            <div class="row">
+               <div class="text-center col-sm-10 col-sm-offset-1" style="margin-bottom:6px;">
+                  <strong>Meilleurs scores</strong>
+               </div>
+               <div class="text-center col-sm-1">
+                  <img src="wait.gif" id="indexTableWait" class="waitImg"/>
                </div>
             </div>
-         </form>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link" id="table1-tab" data-toggle="tab" href="#table1" role="tab">Jour</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab">Semaine</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="table30-tab" data-toggle="tab" href="#table30" role="tab">Mois</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="table365-tab" data-toggle="tab" href="#table365" role="tab">Année</a>
+              </li>
+            </ul>
+            <div class="tab-content" >
+               <div class="tab-pane" id="table1" role="tabpanel">
+                  <table class="table" style="margin-top:16px;">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Score</th>
+                        <th>Temps</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Christophe</td>
+                        <td>15</td>
+                        <td>45.323</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Bob</td>
+                        <td>10</td>
+                        <td>40.322</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Bill</td>
+                        <td>10</td>
+                        <td>50.236</td>
+                      </tr>
+                    </tbody>
+                  </table>
+               </div>
+               <div class="tab-pane" id="table7" role="tabpanel">Semaine</div>
+               <div class="tab-pane" id="table30" role="tabpanel">Mois</div>
+               <div class="tab-pane" id="table365" role="tabpanel">Année</div>
+            </div>
+         </div>
       </div>
       
       <script src="../public/jquery.min.js"></script>
       <script src="../public/bootstrap.min.js"></script>
-      <script>$(function() { $('#table1-tab').tab('show'); });</script>
+      <script>
+         $(function() { $('#table1-tab').tab('show'); });
+         //$('#indexTableWait').show();
+      </script>
    </body>
 </html>

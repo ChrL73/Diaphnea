@@ -15,6 +15,7 @@ var contextSchema = mongoose.Schema(
    currentPage: Number,
    signUpMessages: { name1: Boolean, name2: Boolean, pass1a: Boolean, pass1b: Boolean, pass2: Boolean, error: Boolean },
    tmpName: String,
+   scoreTab: Number,
    quizId: String,
    questions: mongoose.Schema.Types.Mixed,
    displayedQuestion: Number,

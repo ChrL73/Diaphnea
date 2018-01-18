@@ -206,11 +206,11 @@ function getScoreTable(questionnaireId, levelId, dayCount, size, callback)
    
    if (model)
    {
-      console.log('model');
       model.find().limit(size).sort('_id').exec(function(err, entries)
       {
          var i = 0;
          var n = entries.length;
+         if (n == 0) callback(table);
          
          entries.forEach(function(entry, j)
          {
@@ -220,7 +220,7 @@ function getScoreTable(questionnaireId, levelId, dayCount, size, callback)
                {
                   score: entry.score,
                   time_ms: entry.time_ms,
-                  name: (!err && user ? user.name : undefined)
+                  name: (!err && user ? user.name : "")
                };
                table[j] = row;
                

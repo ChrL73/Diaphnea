@@ -75,6 +75,8 @@ var pages =
    game: 2,
 };
 
+var dTable = [1, 7, 30, 365];
+
 var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
 quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
@@ -345,6 +347,23 @@ io.on('connection', function(socket)
       { 
          context.scoreTab = data.n;
          context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
+      });
+   });
+   
+   socket.on('getTables', function(data)
+   {
+      var tables = [];
+      var i = 0;
+      var n = dTable.length;
+      dTable.forEach(function(dayCount)
+      {
+         userData.getScoreTable(data.questionnaireId, data.levelId, dayCount, 10, function(table)
+         {
+            table.d = dayCount;
+            tables.push({ rows: table, d: dayCount });
+            ++i;
+            if (i == n) setTimeout(function() { socket.emit('tables',  { questionnaireId: data.questionnaireId, levelId: data.levelId, tables: tables }); }, debugDelay);
+         });
       });
    });
       

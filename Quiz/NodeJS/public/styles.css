@@ -46,3 +46,8 @@ canvas
 {
    border: 1px solid black;
 }
+
+td, th
+{
+   text-align: center;
+}

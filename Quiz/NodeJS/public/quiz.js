@@ -18,6 +18,7 @@ $(function()
       socket.removeAllListeners('indexError');
       socket.removeAllListeners('updateQuestions');
       socket.removeAllListeners('time');
+      socket.removeAllListeners('tables');
       if (timeout) clearInterval(timeout);
       window.onresize = undefined;
       
@@ -148,7 +149,7 @@ $(function()
          + pageData.texts.score
          + '</th><th id="timeTh' + i + '">'
          + pageData.texts.time
-         + '</th></tr></thead><tbody></tbody></table></div>'
+         + '</th></tr></thead><tbody id="tbody' + i +'"></tbody></table></div>'
       });
       
       html += '</div></div>';
@@ -156,6 +157,18 @@ $(function()
       $('#container').append(html);
       
       $('#table' + pageData.scoreTab + '-tab').tab('show');
+      
+      updateTable();
+      
+      function updateTable()
+      {
+         d.forEach(function(i) { $('#tbody' + i).empty();});
+         
+         var questionnaireId = $('#indexQuestionnaireSelect').val();
+         var levelId = $('#indexLevelSelect').val();
+         socket.emit('getTables', { questionnaireId: questionnaireId, levelId: levelId });
+         $('#indexTableWait').show();
+      }
       
       $('#indexSignInBtn').click(function(e)
       {
@@ -218,6 +231,8 @@ $(function()
 
       function emitLevelChoice()
       {
+         d.forEach(function(i) { $('#tbody' + i).empty();});
+         
          var questionnaireId = $('#indexQuestionnaireSelect').val();
          var questionnaireLanguageId = $('#indexQuestionnaireLanguageSelect').val();
          var levelId = $('#indexLevelSelect').val();
@@ -313,6 +328,40 @@ $(function()
             $('#indexLevelSelect').append('<option value="' + level.id + '">' + level.name + '</option>');
          });
          $('#indexLevelSelect').val(data.levelId);
+         
+         updateTable();
+      });
+      
+      socket.on('tables', function(data)
+      {
+         var questionnaireId = $('#indexQuestionnaireSelect').val();
+         var levelId = $('#indexLevelSelect').val();
+         
+         if (data.questionnaireId == questionnaireId && data.levelId == levelId)
+         {
+            $('#indexTableWait').hide();
+            data.tables.forEach(function(table)
+            {
+               var html = '';
+               table.rows.forEach(function(row, rank)
+               {
+                  html += '<tr><th scope="row">' + (rank + 1) + '</th><td>'
+                     + row.name
+                     + '</td><td>'
+                     + row.score
+                     + '</td><td>'
+                     + (0.001 * row.time_ms).toFixed(3)
+                     + '</td></tr>';
+               });
+               
+               $('#tbody' + table.d).empty();
+               $('#tbody' + table.d).append(html);
+            });
+         }
+         else
+         {
+            setTimeout(updateTable, 200);
+         }
       });
    }
    

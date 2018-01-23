@@ -4,14 +4,14 @@
   <parameters questionnaireId="_Gabon" mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
     <languageList>
       <language id="fr" name="Français" status="TRANSLATION_COMPLETED"/>
-      <language id="en" name="English" status="IGNORE"/>
+      <language id="en" name="English" status="TRANSLATION_COMPLETED"/>
     </languageList>
     <questionnaireName>
       <name language="fr" text="Gabon"/>
       <name language="en" text="Gabon"/>
     </questionnaireName>
     <levelList>
-      <level levelId="lv_Facile" value="0" choiceCount="4" questionCount="10" distribParameter="0.35">
+      <level levelId="lv_Facile" value="0" choiceCount="4" questionCount="10" distribParameter="0.45">
         <name language="fr" text="Facile"/>
         <name language="en" text="Easy"/>
       </level>
@@ -19,7 +19,7 @@
         <name language="fr" text="Moyen"/>
         <name language="en" text="Medium"/>
       </level>
-      <level levelId="lv_Difficile" value="2" choiceCount="6" questionCount="15" distribParameter="0.1">
+      <level levelId="lv_Difficile" value="2" choiceCount="6" questionCount="15" distribParameter="0.05">
         <name language="fr" text="Difficile"/>
         <name language="en" text="Hard"/>
       </level>
@@ -65,7 +65,7 @@
 
   <elementList>
     <!--Provinces-->
-    <element id="el_Estuaire" sortKey="1" type="et_Province" minLevel="0" >
+    <element id="el_Estuaire" sortKey="1" type="et_Province" minLevel="0" mapId="e_Estuaire">
       <elementName>
         <name language="fr" text="Estuaire"/>
         <name language="en" text="Estuaire"/>
@@ -95,7 +95,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
       </relationList>
     </element>
-    <element id="el_HautOgooue" sortKey="2" type="et_Province" minLevel="0" >
+    <element id="el_HautOgooue" sortKey="2" type="et_Province" minLevel="0" mapId="e_HautOgooue">
       <elementName>
         <name language="fr" text="Haut-Ogooué"/>
         <name language="en" text="Haut-Ogooué"/>
@@ -124,7 +124,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
       </relationList>
     </element>
-    <element id="el_MoyenOgooue" sortKey="3" type="et_Province" minLevel="0" >
+    <element id="el_MoyenOgooue" sortKey="3" type="et_Province" minLevel="0" mapId="e_MoyenOgooue">
       <elementName>
         <name language="fr" text="Moyen-Ogooué"/>
         <name language="en" text="Moyen-Ogooué"/>
@@ -156,7 +156,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
       </relationList>
     </element>
-    <element id="el_Ngounie" sortKey="4" type="et_Province" minLevel="0" >
+    <element id="el_Ngounie" sortKey="4" type="et_Province" minLevel="0" mapId="e_Ngounie">
       <elementName>
         <name language="fr" text="Ngounié"/>
         <name language="en" text="Ngounié"/>
@@ -187,7 +187,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
       </relationList>
     </element>
-    <element id="el_Nyanga" sortKey="5" type="et_Province" minLevel="0" >
+    <element id="el_Nyanga" sortKey="5" type="et_Province" minLevel="0" mapId="e_Nyanga">
       <elementName>
         <name language="fr" text="Nyanga"/>
         <name language="en" text="Nyanga"/>
@@ -216,7 +216,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
       </relationList>
     </element>
-    <element id="el_OgooueIvindo" sortKey="6" type="et_Province" minLevel="0" >
+    <element id="el_OgooueIvindo" sortKey="6" type="et_Province" minLevel="0" mapId="e_OgooueIvindo">
       <elementName>
         <name language="fr" text="Ogooué-Ivindo"/>
         <name language="en" text="Ogooué-Ivindo"/>
@@ -247,7 +247,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_WoleuNtem"/>
       </relationList>
     </element>
-    <element id="el_OgooueLolo" sortKey="7" type="et_Province" minLevel="0" >
+    <element id="el_OgooueLolo" sortKey="7" type="et_Province" minLevel="0" mapId="e_OgooueLolo">
       <elementName>
         <name language="fr" text="Ogooué-Lolo"/>
         <name language="en" text="Ogooué-Lolo"/>
@@ -277,7 +277,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
       </relationList>
     </element>
-    <element id="el_OgooueMaritime" sortKey="8" type="et_Province" minLevel="0" >
+    <element id="el_OgooueMaritime" sortKey="8" type="et_Province" minLevel="0" mapId="e_OgooueMaritime">
       <elementName>
         <name language="fr" text="Ogooué-Maritime"/>
         <name language="en" text="Ogooué-Maritime"/>
@@ -308,7 +308,7 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Nyanga"/>
       </relationList>
     </element>
-    <element id="el_WoleuNtem" sortKey="9" type="et_Province" minLevel="0" >
+    <element id="el_WoleuNtem" sortKey="9" type="et_Province" minLevel="0" mapId="e_WoleuNtem">
       <elementName>
         <name language="fr" text="Woleu-Ntem"/>
         <name language="en" text="Woleu-Ntem"/>
@@ -338,8 +338,17 @@
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
       </relationList>
     </element>
-    <!--Ville-->
-    <element id="el_Libreville" type="et_Ville" minLevel="0" >
+    <!--Départements Estuaire-->
+    <!--Départements Haut-Ogooué-->
+    <!--Départements Moyen-Ogooué-->
+    <!--Départements Ngounié-->
+    <!--Départements Nyanga-->
+    <!--Départements Ogooué-Ivindo-->
+    <!--Départements Ogooué-Lolo-->
+    <!--Départements Ogooué-Maritime-->
+    <!--Départements Woleu-Ntem-->
+    <!--Villes Estuaire-->
+    <element id="el_Libreville" type="et_Ville" minLevel="0" mapId="e_Libreville">
       <elementName>
         <name language="fr" text="Libreville"/>
         <name language="en" text="Libreville"/>
@@ -356,7 +365,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Franceville" type="et_Ville" minLevel="0" >
+    <!--Villes Haut-Ogooué-->
+    <element id="el_Franceville" type="et_Ville" minLevel="0" mapId="e_Franceville">
       <elementName>
         <name language="fr" text="Franceville"/>
         <name language="en" text="Franceville"/>
@@ -373,7 +383,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Lambarene" type="et_Ville" minLevel="0" >
+    <!--Villes Moyen-Ogooué-->
+    <element id="el_Lambarene" type="et_Ville" minLevel="0" mapId="e_Lambarene">
       <elementName>
         <name language="fr" text="Lambaréné"/>
         <name language="en" text="Lambaréné"/>
@@ -390,7 +401,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Mouila" type="et_Ville" minLevel="0" >
+    <!--Villes Ngounié-->
+    <element id="el_Mouila" type="et_Ville" minLevel="0" mapId="e_Mouila">
       <elementName>
         <name language="fr" text="Mouila"/>
         <name language="en" text="Mouila"/>
@@ -407,7 +419,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Tchibanga" type="et_Ville" minLevel="0" >
+    <!--Villes Nyanga-->
+    <element id="el_Tchibanga" type="et_Ville" minLevel="0" mapId="e_Tchibanga">
       <elementName>
         <name language="fr" text="Tchibanga"/>
         <name language="en" text="Tchibanga"/>
@@ -424,7 +437,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Makokou" type="et_Ville" minLevel="0" >
+    <!--Villes Ogooué-Ivindo-->
+    <element id="el_Makokou" type="et_Ville" minLevel="0" mapId="e_Makokou">
       <elementName>
         <name language="fr" text="Makokou"/>
         <name language="en" text="Makokou"/>
@@ -441,7 +455,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Koulamoutou" type="et_Ville" minLevel="0" >
+    <!--Villes Ogooué-Lolo-->
+    <element id="el_Koulamoutou" type="et_Ville" minLevel="0" mapId="e_Koulamoutou">
       <elementName>
         <name language="fr" text="Koulamoutou"/>
         <name language="en" text="Koulamoutou"/>
@@ -458,7 +473,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_PortGentil" type="et_Ville" minLevel="0" >
+    <!--Villes Ogooué-Maritime-->
+    <element id="el_PortGentil" type="et_Ville" minLevel="0" mapId="e_PortGentil">
       <elementName>
         <name language="fr" text="Port-Gentil"/>
         <name language="en" text="Port-Gentil"/>
@@ -475,7 +491,8 @@
       </numericalAttributeList>
       <relationList/>
     </element>
-    <element id="el_Oyem" type="et_Ville" minLevel="0" >
+    <!--Villes Woleu-Ntem-->
+    <element id="el_Oyem" type="et_Ville" minLevel="0" mapId="e_Oyem">
       <elementName>
         <name language="fr" text="Oyem"/>
         <name language="en" text="Oyem"/>
@@ -496,21 +513,27 @@
 
   <questionCategories>
     <attributeQuestionCategoryList>
-      <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+      <!--<attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
                                  answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the province whose number is {0}?"/>
         <mapParameters framingLevel="6">
-          <answer drawDepth="1" categorySelectionMode="EXCLUDE">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
             <category categoryIndexInMapConfigFile="2"/>
           </answer>
-          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </attributeQuestionCategory>
-     <!-- <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+      <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"
                                  answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le numéro associé à la province {0} ?"/>
         <questionText language="en" text="What is the number associated with the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </attributeQuestionCategory>-->
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
@@ -518,12 +541,38 @@
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu de la province {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="2">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="1">
         <questionText language="fr" text="Quel est le chef-lieu de la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the capital of the province whose number is {0}?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
       </relation1QuestionCategory>-->
+      <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
+        <questionText language="en" text="What is the capital of the {0} department?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList/>
     <attributeOrderQuestionCategoryList/>

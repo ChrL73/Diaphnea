@@ -37,6 +37,9 @@
     <attributeTypeList>
       <attributeType id="at_Nom1" canBeQuestion="true" />
       <attributeType id="at_Nom2" canBeQuestion="true" />
+      <attributeType id="at_Nom3" canBeQuestion="true" />
+      <attributeType id="at_Nom4" canBeQuestion="true" />
+      <attributeType id="at_NomConfluence" canBeQuestion="true" />
       <attributeType id="at_Numero" canBeQuestion="true" />
     </attributeTypeList>
     <numericalAttributeTypeList>
@@ -199,6 +202,15 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Mouila"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_DouyaOnoye"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_TsambaMagotsi"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Ndolou"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Mougalaba"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Dola"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_LouetsiWano"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_LouetsiBibaka"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_BoumiLouetsi"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Ogoulou"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Nyanga"/>
@@ -230,6 +242,12 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Tchibanga"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Mougoutsi"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_BasseBanio"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_HauteBanio"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Douigni"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Doutsila"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Mongo"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueMaritime"/>
       </relationList>
@@ -259,6 +277,10 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Makokou"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Ivindo"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Zadie"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Mvoung"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Lope"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueLolo"/>
@@ -290,6 +312,10 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Koulamoutou"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_LoloBouenguidi"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_LomboBouenguidi"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_OffoueOnoye"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Mouloundou"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_HautOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
@@ -320,6 +346,9 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_PortGentil"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Bendje"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Etimboue"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Ndougou"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Ngounie"/>
@@ -351,6 +380,11 @@
       </numericalAttributeList>
       <relationList>
         <relation type="r11_Province_ChefLieu" linkedElement="el_Oyem"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Woleu"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Ntem"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_HautNtem"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_Okano"/>
+        <relation type="r1N_Province_Departements" linkedElement="el_HautKomo"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_Estuaire"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_MoyenOgooue"/>
         <relation type="rNN_Province_ProvincesLimitrophes" linkedElement="el_OgooueIvindo"/>
@@ -394,7 +428,7 @@
       <attributeList>
         <attribute type="at_Nom1">
           <value language="fr" value="Le Komo-Mondah"/>
-          <value language="en" value="Komo-Mondaho"/>
+          <value language="en" value="Komo-Mondah"/>
         </attribute>
         <attribute type="at_Nom2">
           <value language="fr" value="du Komo-Mondah"/>
@@ -445,8 +479,8 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Kango"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_KomoMondah"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Noya"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautKomo"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautKomo"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AbangaBigne"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_OgooueLacs"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_KomoOcean"/>
@@ -480,7 +514,7 @@
         <relation type="r1N_Departement_Villes" linkedElement="el_Cocobeach"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Komo"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_KomoMondah"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautKomo"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautKomo"/>
       </relationList>
     </element>
     <element id="el_KomoOcean" sortKey="105" type="et_Departement" minLevel="0" mapId="e_KomoOcean">
@@ -522,7 +556,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Mpassa"/>
+          <value language="fr" value="La Mpassa"/>
           <value language="en" value="Mpassa"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -557,7 +591,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Lébombi-Leyou"/>
+          <value language="fr" value="La Lébombi-Leyou"/>
           <value language="en" value="Lébombi-Leyou"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -621,7 +655,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Ogooué-Létili"/>
+          <value language="fr" value="L'Ogooué-Létili"/>
           <value language="en" value="Ogooué-Létili"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -651,7 +685,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Djouori-Agnili"/>
+          <value language="fr" value="La Djouori-Agnili"/>
           <value language="en" value="Djouori-Agnili"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -683,7 +717,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Plateaux"/>
+          <value language="fr" value="Les Plateaux"/>
           <value language="en" value="Plateaux"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -715,7 +749,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Djoué"/>
+          <value language="fr" value="Le Djoué"/>
           <value language="en" value="Djoué"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -780,7 +814,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Sébé-Brikolo"/>
+          <value language="fr" value="La Sébé-Brikolo"/>
           <value language="en" value="Sébé-Brikolo"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -847,7 +881,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Bayi-Brikolo"/>
+          <value language="fr" value="La Bayi-Brikolo"/>
           <value language="en" value="Bayi-Brikolo"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -878,7 +912,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Ogooué et Lacs"/>
+          <value language="fr" value="L'Ogooué et les Lacs"/>
           <value language="en" value="Ogooué et Lacs"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -913,7 +947,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Abanga-Bigné"/>
+          <value language="fr" value="L'Abanga-Bigné"/>
           <value language="en" value="Abanga-Bigné"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -933,7 +967,7 @@
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Ndjole"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Ndjole"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Komo"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lope"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ogoulou"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_TsambaMagotsi"/>
@@ -948,7 +982,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Douya-Onoyé"/>
+          <value language="fr" value="La Douya-Onoyé"/>
           <value language="en" value="Douya-Onoyé"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -980,7 +1014,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Tsamba-Magotsi"/>
+          <value language="fr" value="Le Tsamba-Magotsi"/>
           <value language="en" value="Tsamba-Magotsi"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1047,7 +1081,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Mougalaba"/>
+          <value language="fr" value="La Mougalaba"/>
           <value language="en" value="Mougalaba"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1081,7 +1115,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Dola"/>
+          <value language="fr" value="La Dola"/>
           <value language="en" value="Dola"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1115,7 +1149,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Louetsi-Wano"/>
+          <value language="fr" value="La Louetsi-Wano"/>
           <value language="en" value="Louetsi-Wano"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1146,7 +1180,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Louetsi-Bibaka"/>
+          <value language="fr" value="La Louetsi-Bibaka"/>
           <value language="en" value="Louetsi-Bibaka"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1176,7 +1210,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Boumi-Louetsi"/>
+          <value language="fr" value="La Boumi-Louetsi"/>
           <value language="en" value="Boumi-Louetsi"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1209,7 +1243,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Ogoulou"/>
+          <value language="fr" value="L'Ogoulou"/>
           <value language="en" value="Ogoulou"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1278,7 +1312,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Basse-Banio"/>
+          <value language="fr" value="La Basse-Banio"/>
           <value language="en" value="Basse-Banio"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1310,7 +1344,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Haute-Banio"/>
+          <value language="fr" value="La Haute-Banio"/>
           <value language="en" value="Haute-Banio"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1340,7 +1374,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Douigni"/>
+          <value language="fr" value="La Douigni"/>
           <value language="en" value="Douigni"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1372,7 +1406,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Doutsila"/>
+          <value language="fr" value="La Doutsila"/>
           <value language="en" value="Doutsila"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1437,7 +1471,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Ivindo"/>
+          <value language="fr" value="L'Ivindo"/>
           <value language="en" value="Ivindo"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1456,8 +1490,8 @@
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Makokou"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Makokou"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
-        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Mvoung"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lope"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Mouloundou"/>
@@ -1472,7 +1506,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Zadié"/>
+          <value language="fr" value="La Zadié"/>
           <value language="en" value="Zadié"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1501,7 +1535,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Mvoung"/>
+          <value language="fr" value="La Mvoung"/>
           <value language="en" value="Mvoung"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1520,7 +1554,7 @@
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Ovan"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Ovan"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ivindo"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lope"/>
       </relationList>
@@ -1532,7 +1566,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Lopé"/>
+          <value language="fr" value="La Lopé"/>
           <value language="en" value="Lopé"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1551,7 +1585,7 @@
       <relationList>
         <relation type="r11_Departement_ChefLieu" linkedElement="el_Booue"/>
         <relation type="r1N_Departement_Villes" linkedElement="el_Booue"/>
-        <!--<relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>-->
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Mvoung"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ivindo"/>
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Mouloundou"/>
@@ -1568,7 +1602,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Lolo-Bouenguidi"/>
+          <value language="fr" value="La Lolo-Bouenguidi"/>
           <value language="en" value="Lolo-Bouenguidi"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1602,7 +1636,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Lombo-Bouenguidi"/>
+          <value language="fr" value="La Lombo-Bouenguidi"/>
           <value language="en" value="Lombo-Bouenguidi"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1634,7 +1668,7 @@
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">
-          <value language="fr" value="Offoué-Onoyé"/>
+          <value language="fr" value="L'Offoué-Onoyé"/>
           <value language="en" value="Offoué-Onoyé"/>
         </attribute>
         <attribute type="at_Nom2">
@@ -1791,6 +1825,164 @@
       </relationList>
     </element>
     <!--Départements Woleu-Ntem-->
+    <element id="el_Woleu" sortKey="901" type="et_Departement" minLevel="0" mapId="e_Woleu">
+      <elementName>
+        <name language="fr" text="Woleu"/>
+        <name language="en" text="Woleu"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Woleu"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Woleu"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="901"/>
+          <value language="en" value="901"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.78"/>
+        <numericalAttribute type="nt_Latitude" value="1.4"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Oyem"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Oyem"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ntem"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
+      </relationList>
+    </element>
+    <element id="el_Ntem" sortKey="902" type="et_Departement" minLevel="0" mapId="e_Ntem">
+      <elementName>
+        <name language="fr" text="Ntem"/>
+        <name language="en" text="Ntem"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Ntem"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Ntem"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="902"/>
+          <value language="en" value="902"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.55"/>
+        <numericalAttribute type="nt_Latitude" value="2.1"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Bitam"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Bitam"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Woleu"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
+      </relationList>
+    </element>
+    <element id="el_HautNtem" sortKey="903" type="et_Departement" minLevel="0" mapId="e_HautNtem">
+      <elementName>
+        <name language="fr" text="Haut-Ntem"/>
+        <name language="en" text="Haut-Ntem"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Haut-Ntem"/>
+          <value language="en" value="Haut-Ntem"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Haut-Ntem"/>
+          <value language="en" value="Haut-Ntem"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="903"/>
+          <value language="en" value="903"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.53"/>
+        <numericalAttribute type="nt_Latitude" value="1.8"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Minvoul"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Minvoul"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Woleu"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ntem"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ivindo"/>
+      </relationList>
+    </element>
+    <element id="el_Okano" sortKey="904" type="et_Departement" minLevel="0" mapId="e_Okano">
+      <elementName>
+        <name language="fr" text="Okano"/>
+        <name language="en" text="Okano"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="L'Okano"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Okano"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="904"/>
+          <value language="en" value="904"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.41"/>
+        <numericalAttribute type="nt_Latitude" value="0.66"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Mitzic"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Mitzic"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_HautKomo"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Komo"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_AbangaBigne"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Lope"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Mvoung"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Ivindo"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Woleu"/>
+      </relationList>
+    </element>
+    <element id="el_HautKomo" sortKey="905" type="et_Departement" minLevel="0" mapId="e_HautKomo">
+      <elementName>
+        <name language="fr" text="Haut-Komo"/>
+        <name language="en" text="Haut-Komo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Le Haut-Komo"/>
+          <value language="en" value="Haut-Komo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Haut-Komo"/>
+          <value language="en" value="Haut-Komo"/>
+        </attribute>
+        <attribute type="at_Numero">
+          <value language="fr" value="905"/>
+          <value language="en" value="905"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.62"/>
+        <numericalAttribute type="nt_Latitude" value="0.83"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="r11_Departement_ChefLieu" linkedElement="el_Medouneu"/>
+        <relation type="r1N_Departement_Villes" linkedElement="el_Medouneu"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Noya"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Komo"/>
+        <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Okano"/>
+      </relationList>
+    </element>
     <!--Villes Estuaire-->
     <element id="el_Libreville" type="et_Ville" minLevel="0" mapId="e_Libreville">
       <elementName>
@@ -2745,6 +2937,747 @@
       </numericalAttributeList>
       <relationList/>
     </element>
+    <element id="el_Bitam" type="et_Ville" minLevel="0" mapId="e_Bitam">
+      <elementName>
+        <name language="fr" text="Bitam"/>
+        <name language="en" text="Bitam"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Bitam"/>
+          <value language="en" value="Bitam"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Bitam"/>
+          <value language="en" value="Bitam"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.48"/>
+        <numericalAttribute type="nt_Latitude" value="2.08"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Minvoul" type="et_Ville" minLevel="0" mapId="e_Minvoul">
+      <elementName>
+        <name language="fr" text="Minvoul"/>
+        <name language="en" text="Minvoul"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Minvoul"/>
+          <value language="en" value="Minvoul"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Minvoul"/>
+          <value language="en" value="Minvoul"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.13"/>
+        <numericalAttribute type="nt_Latitude" value="2.15"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Mitzic" type="et_Ville" minLevel="0" mapId="e_Mitzic">
+      <elementName>
+        <name language="fr" text="Mitzic"/>
+        <name language="en" text="Mitzic"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Mitzic"/>
+          <value language="en" value="Mitzic"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Mitzic"/>
+          <value language="en" value="Mitzic"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.55"/>
+        <numericalAttribute type="nt_Latitude" value="0.79"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <element id="el_Medouneu" type="et_Ville" minLevel="0" mapId="e_Medouneu">
+      <elementName>
+        <name language="fr" text="Médouneu"/>
+        <name language="en" text="Médouneu"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1">
+          <value language="fr" value="Médouneu"/>
+          <value language="en" value="Médouneu"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de Médouneu"/>
+          <value language="en" value="Médouneu"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.8"/>
+        <numericalAttribute type="nt_Latitude" value="1.02"/>
+      </numericalAttributeList>
+      <relationList/>
+    </element>
+    <!--Fleuves et rivières-->
+    <element id="el_Ogooue" type="et_FleuveRiviere" minLevel="0" mapId="e_Ogooue">
+      <elementName>
+        <name language="fr" text="Ogooué"/>
+        <name language="en" text="Ogooué"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Ogooué"/>
+          <value language="en" value="Ogooué"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ogooué"/>
+          <value language="en" value="Ogooué"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Ogooué"/>
+          <value language="en" value="Ogooué"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Ogooué est-il"/>
+          <value language="en" value="Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.5"/>
+        <numericalAttribute type="nt_Latitude" value="-0.3"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_OgooueLetili"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mpassa"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LebombiLeyou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mouloundou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_AbangaBigne"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_OgooueLacs"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Bendje"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Lastourville"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Booue"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Ndjole"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Lambarene"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_MpassaRiver"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_LekoniRiver"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Sebe"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Lolo"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_IvindoRiver"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Offoue"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_OkanoRiver"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Abanga"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_NgounieRiver"/>
+      </relationList>
+    </element>
+    <element id="el_NgounieRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_NgounieRiver">
+      <elementName>
+        <name language="fr" text="Ngounié"/>
+        <name language="en" text="Ngounié"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Ngounié"/>
+          <value language="en" value="Ngounié"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Ngounié"/>
+          <value language="en" value="Ngounié"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Ngounié"/>
+          <value language="en" value="Ngounié"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Ngounié est-elle"/>
+          <value language="en" value="Ngounié"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Ngounié et de l'Ogooué"/>
+          <value language="en" value="Ngounié and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.1"/>
+        <numericalAttribute type="nt_Latitude" value="-1.75"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LouetsiBibaka"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BoumiLouetsi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LouetsiWano"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Dola"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ogoulou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_DouyaOnoye"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_TsambaMagotsi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_OgooueLacs"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Mouila"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Fougamou"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_OgoulouRiver"/>
+      </relationList>
+    </element>
+    <element id="el_NyangaRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_NyangaRiver">
+      <elementName>
+        <name language="fr" text="Nyanga"/>
+        <name language="en" text="Nyanga"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Nyanga"/>
+          <value language="en" value="Nyanga"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Nyanga"/>
+          <value language="en" value="Nyanga"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Nyanga"/>
+          <value language="en" value="Nyanga"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Nyanga est-elle"/>
+          <value language="en" value="Nyanga"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.6"/>
+        <numericalAttribute type="nt_Latitude" value="-3"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Doutsila"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mongo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mougoutsi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ndougou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BasseBanio"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Tchibanga"/>
+      </relationList>
+    </element>
+    <element id="el_IvindoRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_IvindoRiver">
+      <elementName>
+        <name language="fr" text="Ivindo"/>
+        <name language="en" text="Ivindo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Ivindo"/>
+          <value language="en" value="Ivindo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ivindo"/>
+          <value language="en" value="Ivindo"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Ivindo"/>
+          <value language="en" value="Ivindo"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Ivindo est-il"/>
+          <value language="en" value="Ivindo"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de l'Ivindo et de l'Ogooué"/>
+          <value language="en" value="Ivindo and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.9"/>
+        <numericalAttribute type="nt_Latitude" value="0.85"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ivindo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mvoung"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Makokou"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_Liboumba"/>
+        <relation type="r1N_Riviere_Affluents" linkedElement="el_MvoungRiver"/>
+      </relationList>
+    </element>
+    <element id="el_KomoRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_KomoRiver">
+      <elementName>
+        <name language="fr" text="Komo"/>
+        <name language="en" text="Komo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="Le Komo"/>
+          <value language="en" value="Komo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Komo"/>
+          <value language="en" value="Komo"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="le Komo"/>
+          <value language="en" value="Komo"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="le Komo est-il"/>
+          <value language="en" value="Komo"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.5"/>
+        <numericalAttribute type="nt_Latitude" value="0.5"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HautKomo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Komo"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Kango"/>
+      </relationList>
+    </element>
+    <element id="el_Lolo" type="et_FleuveRiviere" minLevel="0" mapId="e_Lolo">
+      <elementName>
+        <name language="fr" text="Lolo"/>
+        <name language="en" text="Lolo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Lolo"/>
+          <value language="en" value="Lolo"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Lolo"/>
+          <value language="en" value="Lolo"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Lolo"/>
+          <value language="en" value="Lolo"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Lolo est-elle"/>
+          <value language="en" value="Lolo"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Lolo et de l'Ogooué"/>
+          <value language="en" value="Lolo and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.3"/>
+        <numericalAttribute type="nt_Latitude" value="-1.12"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoloBouenguidi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_OffoueOnoye"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mouloundou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Koulamoutou"/>
+      </relationList>
+    </element>
+    <element id="el_OkanoRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_OkanoRiver">
+      <elementName>
+        <name language="fr" text="Okano"/>
+        <name language="en" text="Okano"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Okano"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Okano"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Okano"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Okano est-il"/>
+          <value language="en" value="Okano"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de l'Okano et de l'Ogooué"/>
+          <value language="en" value="Okano and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.6"/>
+        <numericalAttribute type="nt_Latitude" value="0.65"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Woleu"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Okano"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_AbangaBigne"/>
+      </relationList>
+    </element>
+    <element id="el_WoleuRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_WoleuRiver">
+      <elementName>
+        <name language="fr" text="Woleu"/>
+        <name language="en" text="Woleu"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="Le Woleu"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Woleu"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="le Woleu"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="le Woleu est-il"/>
+          <value language="en" value="Woleu"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.67"/>
+        <numericalAttribute type="nt_Latitude" value="1.63"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Woleu"/>
+      </relationList>
+    </element>
+    <element id="el_NtemRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_NtemRiver">
+      <elementName>
+        <name language="fr" text="Ntem"/>
+        <name language="en" text="Ntem"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="Le Ntem"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="du Ntem"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="le Ntem"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="le Ntem est-il"/>
+          <value language="en" value="Ntem"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.26"/>
+        <numericalAttribute type="nt_Latitude" value="2.24"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ntem"/>
+      </relationList>
+    </element>
+    <element id="el_Sebe" type="et_FleuveRiviere" minLevel="0" mapId="e_Sebe">
+      <elementName>
+        <name language="fr" text="Sébé"/>
+        <name language="en" text="Sébé"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Sébé"/>
+          <value language="en" value="Sébé"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Sébé"/>
+          <value language="en" value="Sébé"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Sébé"/>
+          <value language="en" value="Sébé"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Sébé est-elle"/>
+          <value language="en" value="Sébé"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Sébé et de l'Ogooué"/>
+          <value language="en" value="Sébé and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.7"/>
+        <numericalAttribute type="nt_Latitude" value="-0.66"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Djoue"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BayiBrikolo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_SebeBrikolo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mouloundou"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Okondja"/>
+      </relationList>
+    </element>
+    <element id="el_Offoue" type="et_FleuveRiviere" minLevel="0" mapId="e_Offoue">
+      <elementName>
+        <name language="fr" text="Offoué"/>
+        <name language="en" text="Offoué"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Offoué"/>
+          <value language="en" value="Offoué"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Offoué"/>
+          <value language="en" value="Offoué"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Offoué"/>
+          <value language="en" value="Offoué"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Offoué est-elle"/>
+          <value language="en" value="Offoué"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de l'Offoué et de l'Ogooué"/>
+          <value language="en" value="Offoué and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.78"/>
+        <numericalAttribute type="nt_Latitude" value="-0.92"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_BoumiLouetsi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ogoulou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_OffoueOnoye"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LoloBouenguidi"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+      </relationList>
+    </element>
+    <element id="el_MvoungRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_MvoungRiver">
+      <elementName>
+        <name language="fr" text="Mvoung"/>
+        <name language="en" text="Mvoung"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Mvoung"/>
+          <value language="en" value="Mvoung"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Mvoung"/>
+          <value language="en" value="Mvoung"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Mvoung"/>
+          <value language="en" value="Mvoung"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Mvoung est-elle"/>
+          <value language="en" value="Mvoung"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Mvoung et de l'Ivindo"/>
+          <value language="en" value="Mvoung and the Ivindo"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="12.2"/>
+        <numericalAttribute type="nt_Latitude" value="0.83"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Woleu"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Okano"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ivindo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mvoung"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Lope"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Ovan"/>
+      </relationList>
+    </element>
+    <element id="el_OgoulouRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_OgoulouRiver">
+      <elementName>
+        <name language="fr" text="Ogoulou"/>
+        <name language="en" text="Ogoulou"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Ogoulou"/>
+          <value language="en" value="Ogoulou"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Ogoulou"/>
+          <value language="en" value="Ogoulou"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Ogoulou"/>
+          <value language="en" value="Ogoulou"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Ogoulou est-il"/>
+          <value language="en" value="Ogoulou"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de l'Ogoulou et de la Ngounié"/>
+          <value language="en" value="Ogoulou and the Ngounié"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="11.57"/>
+        <numericalAttribute type="nt_Latitude" value="-1.74"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ogoulou"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_DouyaOnoye"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Mimongo"/>
+      </relationList>
+    </element>
+    <element id="el_Liboumba" type="et_FleuveRiviere" minLevel="0" mapId="e_Liboumba">
+      <elementName>
+        <name language="fr" text="Liboumba"/>
+        <name language="en" text="Liboumba"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Liboumba"/>
+          <value language="en" value="Liboumba"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Liboumba"/>
+          <value language="en" value="Liboumba"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Liboumba"/>
+          <value language="en" value="Liboumba"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Liboumba est-elle"/>
+          <value language="en" value="Liboumba"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Liboumba et de l'Ivindo"/>
+          <value language="en" value="Liboumba and the Ivindo"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.6"/>
+        <numericalAttribute type="nt_Latitude" value="0.7"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Zadie"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Ivindo"/>
+      </relationList>
+    </element>
+    <element id="el_MpassaRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_MpassaRiver">
+      <elementName>
+        <name language="fr" text="Mpassa"/>
+        <name language="en" text="Mpassa"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Mpassa"/>
+          <value language="en" value="Mpassa"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Mpassa"/>
+          <value language="en" value="Mpassa"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Mpassa"/>
+          <value language="en" value="Mpassa"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Mpassa est-elle"/>
+          <value language="en" value="Mpassa"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Mpassa et de l'Ogooué"/>
+          <value language="en" value="Mpassa and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.9"/>
+        <numericalAttribute type="nt_Latitude" value="-1.92"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Plateaux"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_DjouoriAgnili"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mpassa"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Franceville"/>
+      </relationList>
+    </element>
+    <element id="el_Abanga" type="et_FleuveRiviere" minLevel="0" mapId="e_Abanga">
+      <elementName>
+        <name language="fr" text="Abanga"/>
+        <name language="en" text="Abanga"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="L'Abanga"/>
+          <value language="en" value="Abanga"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de l'Abanga"/>
+          <value language="en" value="Abanga"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'Abanga"/>
+          <value language="en" value="Abanga"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="l'Abanga est-elle"/>
+          <value language="en" value="Abanga"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de l'Abanga et de l'Ogooué"/>
+          <value language="en" value="Abanga and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="10.8"/>
+        <numericalAttribute type="nt_Latitude" value="0.41"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_HautKomo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Okano"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Komo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_AbangaBigne"/>
+      </relationList>
+    </element>
+    <element id="el_LekoniRiver" type="et_FleuveRiviere" minLevel="0" mapId="e_LekoniRiver">
+      <elementName>
+        <name language="fr" text="Lékoni"/>
+        <name language="en" text="Lékoni"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom1" >
+          <value language="fr" value="La Lékoni"/>
+          <value language="en" value="Lékoni"/>
+        </attribute>
+        <attribute type="at_Nom2">
+          <value language="fr" value="de la Lékoni"/>
+          <value language="en" value="Lékoni"/>
+        </attribute>
+        <attribute type="at_Nom3">
+          <value language="fr" value="la Lékoni"/>
+          <value language="en" value="Lékoni"/>
+        </attribute>
+        <attribute type="at_Nom4">
+          <value language="fr" value="la Lékoni est-elle"/>
+          <value language="en" value="Lékoni"/>
+        </attribute>
+        <attribute type="at_NomConfluence" >
+          <value language="fr" value="de la Lékoni et de l'Ogooué"/>
+          <value language="en" value="Lékoni and the Ogooué"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList>
+        <numericalAttribute type="nt_Longitude" value="13.94"/>
+        <numericalAttribute type="nt_Latitude" value="-1.26"/>
+      </numericalAttributeList>
+      <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Plateaux"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_DjouoriAgnili"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LekoniLekori"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LekabiLewolo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_SebeBrikolo"/>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_Mpassa"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Lekoni"/>
+        <relation type="r1N_Riviere_Villes" linkedElement="el_Akieni"/>
+      </relationList>
+    </element>
   </elementList>
 
   <questionCategories>
@@ -2796,7 +3729,7 @@
           <answer drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
           <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
@@ -2809,8 +3742,131 @@
           <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
+        <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
+        <questionText language="en" text="In which department is the city of {0}?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Province_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
+        <questionText language="fr" text="De quelle province fait partie le département {0} ?"/>
+        <questionText language="en" text="In what province is the {0} department?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
+        <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
+        <questionText language="en" text="What river {0} is a tributary?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="4"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
+        <questionText language="fr" text="Dans quelle province se situe la ville {0} ?"/>
+        <questionText language="en" text="In what province is the city of {0}?"/> 
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ALL_LINKED_ELEMENTS">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
+        <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
+        <questionText language="en" text="On which river is the city of {0}?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>-->
     </relation1QuestionCategoryList>
-    <relationNQuestionCategoryList/>
+    <relationNQuestionCategoryList>
+      <!--<relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels font partie de la province {0} ?"/>
+        <questionText language="en" text="Among these departments, which are part of the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans la province {0} ?"/>
+        <questionText language="en" text="Among these cities, which are located in the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="3"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+        <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="80" minLevel="0" >
+        <questionText language="fr" text="Parmi ces départements, lesquels sont traversés par {0} ?"/>
+        <questionText language="en" text="Among these departments, which are crossed by the {0} river?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>-->
+      <relationNQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NAME" weight="50" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles sont traversées par {0} ?"/>
+        <questionText language="en" text="Among these cities, which are crossed by the {0} river?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+    </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList/>
     <relationLimitQuestionCategoryList/>
     <relationOrderQuestionCategoryList/>

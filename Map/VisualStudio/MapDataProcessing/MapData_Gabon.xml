@@ -291,7 +291,7 @@
   </lookList>
 
   <categoryList>
-    <category id="ca_Gabon" importance="600" framingLevel="2">
+    <category id="ca_Gabon" importance="600" framingLevel="1">
       <name>
         <name language="fr" text="Gabon"/>
         <name language="en" text="Gabon"/>
@@ -309,7 +309,7 @@
         <name language="en" text="Departments"/>
       </name>
     </category>
-    <category id="ca_FleuveRiviere" importance="100" framingLevel="1">
+    <category id="ca_FleuveRiviere" importance="100" framingLevel="2">
       <name>
         <name language="fr" text="Cours d'eau"/>
         <name language="en" text="Rivers"/>

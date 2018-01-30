@@ -33,6 +33,7 @@
       <elementType id="et_Ville" />
       <elementType id="et_FleuveRiviere" />
       <elementType id="et_Pays" />
+      <elementType id="et_Ocean" />
     </elementTypeList>
     <attributeTypeList>
       <attributeType id="at_Nom1" canBeQuestion="true" />
@@ -63,6 +64,7 @@
       <relationNNType id="rNN_Province_ProvincesLimitrophes" startType="et_Province" endType="et_Province" checkSymetry="YES_ERROR" />
       <relationNNType id="rNN_Departement_DepartementsLimitrophes" startType="et_Departement" endType="et_Departement" checkSymetry="YES_ERROR" />
       <relationNNType id="rNN_Pays_DepartementsLimitrophes" startType="et_Pays" endType="et_Departement" />
+      <relationNNType id="rNN_Ocean_DepartementsLimitrophes" startType="et_Ocean" endType="et_Departement" />
     </relationNNTypeList>
   </typeDefinitions>
 
@@ -3146,6 +3148,7 @@
         <numericalAttribute type="nt_Latitude" value="-3"/>
       </numericalAttributeList>
       <relationList>
+        <relation type="rNN_Riviere_Departements" linkedElement="el_LouetsiBibaka"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Doutsila"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Mongo"/>
         <relation type="rNN_Riviere_Departements" linkedElement="el_Mougoutsi"/>
@@ -3678,12 +3681,109 @@
         <relation type="r1N_Riviere_Villes" linkedElement="el_Akieni"/>
       </relationList>
     </element>
+    <!--Pays limitrophes-->
+    <element id="el_GuineeEquatoriale" type="et_Pays" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Guinée équatoriale"/>
+        <name language="en" text="Equatorial Guinea"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="la Guinée équatoriale"/>
+          <value language="en" value="Equatorial Guinea"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Noya"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautKomo"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Okano"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Woleu"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ntem"/>
+      </relationList>
+    </element>
+    <element id="el_Cameroun" type="et_Pays" minLevel="0" >
+      <elementName>
+        <name language="fr" text="Cameroun"/>
+        <name language="en" text="Cameroon"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="le Cameroun"/>
+          <value language="en" value="Cameroon"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ntem"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
+      </relationList>
+    </element>
+    <element id="el_Congo" type="et_Pays" minLevel="0" >
+      <elementName>
+        <name language="fr" text="République du Congo"/>
+        <name language="en" text="Republic of the Congo"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom2">
+          <value language="fr" value="la République du Congo"/>
+          <value language="en" value="Republic of the Congo"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HautNtem"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Ivindo"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Zadie"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_SebeBrikolo"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_BayiBrikolo"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Djoue"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Plateaux"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Mpassa"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_OgooueLetili"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Lekoko"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_LomboBouenguidi"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_LoloBouenguidi"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_LouetsiBibaka"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_BoumiLouetsi"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_LouetsiWano"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Dola"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Doutsila"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_Mongo"/>
+        <relation type="rNN_Pays_DepartementsLimitrophes" linkedElement="el_HauteBanio"/>
+      </relationList>
+    </element>
+    <!--Océan-->
+    <element id="el_OceanAtlantique" type="et_Ocean" minLevel="0">
+      <elementName>
+        <name language="fr" text="Océan Atlantique"/>
+        <name language="en" text="Atlantic Ocean"/>
+      </elementName>
+      <attributeList>
+        <attribute type="at_Nom3">
+          <value language="fr" value="l'océan Atlantique"/>
+          <value language="en" value="the Atlantic Ocean"/>
+        </attribute>
+      </attributeList>
+      <numericalAttributeList/>
+      <relationList>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_Noya"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_KomoMondah"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_LibrevilleDepartement"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_KomoOcean"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_Bendje"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_Etimboue"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_Ndougou"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_BasseBanio"/>
+        <relation type="rNN_Ocean_DepartementsLimitrophes" linkedElement="el_HauteBanio"/>
+      </relationList>
+    </element>
   </elementList>
 
   <questionCategories>
     <attributeQuestionCategoryList>
-      <!--<attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="100" minLevel="0">
+      <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="SORT_KEY" commentMode="QUESTION_ATTRIBUTE" weight="30" minLevel="0">
         <questionText language="fr" text="Quel est la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the province whose number is {0}?"/>
         <mapParameters framingLevel="6">
@@ -3694,7 +3794,7 @@
         </mapParameters>
       </attributeQuestionCategory>
       <attributeQuestionCategory elementType="et_Province" questionAttribute="at_Nom2" answerAttribute="at_Numero"
-                                 answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="100" minLevel="0">
+                                 answerProximityCriterion="SORT_KEY" commentMode="NAME" weight="30" minLevel="0">
         <questionText language="fr" text="Quel est le numéro associé à la province {0} ?"/>
         <questionText language="en" text="What is the number associated with the {0} province?"/>
         <mapParameters framingLevel="6">
@@ -3703,11 +3803,11 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </attributeQuestionCategory>-->
+      </attributeQuestionCategory>
     </attributeQuestionCategoryList>
     <relation1QuestionCategoryList>
-      <!--<relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+      <relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="55" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu de la province {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} province?"/>
         <mapParameters framingLevel="6">
@@ -3719,7 +3819,7 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Province_ChefLieu" way="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="80" minLevel="1">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="QUESTION_ATTRIBUTE" weight="40" minLevel="1">
         <questionText language="fr" text="Quel est le chef-lieu de la province dont le numéro est {0} ?"/>
         <questionText language="en" text="What is the capital of the province whose number is {0}?"/>
         <mapParameters framingLevel="6">
@@ -3731,7 +3831,7 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r11_Departement_ChefLieu" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="80" minLevel="0">
         <questionText language="fr" text="Quel est le chef-lieu du département {0} ?"/>
         <questionText language="en" text="What is the capital of the {0} department?"/>
         <mapParameters framingLevel="7">
@@ -3743,7 +3843,7 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="150" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="80" minLevel="0">
         <questionText language="fr" text="Dans quel département se situe la ville {0} ?"/>
         <questionText language="en" text="In which department is the city of {0}?"/>
         <mapParameters framingLevel="7">
@@ -3757,7 +3857,7 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Province_Departements" way="INVERSE" questionAttribute ="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="100" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="60" minLevel="0">
         <questionText language="fr" text="De quelle province fait partie le département {0} ?"/>
         <questionText language="en" text="In what province is the {0} department?"/>
         <mapParameters framingLevel="6">
@@ -3771,7 +3871,7 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Affluents" way="INVERSE" questionAttribute ="at_Nom4" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="50" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="20" minLevel="0">
         <questionText language="fr" text="De quel cours d'eau {0} un affluent ?"/>
         <questionText language="en" text="What river {0} is a tributary?"/>
         <mapParameters framingLevel="2">
@@ -3786,21 +3886,33 @@
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="130" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="60" minLevel="0">
         <questionText language="fr" text="Dans quelle province se situe la ville {0} ?"/>
         <questionText language="en" text="In what province is the city of {0}?"/> 
         <mapParameters framingLevel="6">
           <question drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ALL_LINKED_ELEMENTS">
+            <category categoryIndexInMapConfigFile="2"/>
             <category categoryIndexInMapConfigFile="3"/>
-            <category categoryIndexInMapConfigFile="5"/>
-            <category categoryIndexInMapConfigFile="6"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relation1QuestionCategory>
+      <relation1QuestionCategory relation="r1N_Departement_Villes" way="INVERSE" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Numero"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="40" minLevel="1">
+        <questionText language="fr" text="Quel est le numéro de la province où se situe la ville {0} ?"/>
+        <questionText language="en" text="What is the number of the province where the city of {0} is located?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ALL_LINKED_ELEMENTS">
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="3"/>
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relation1QuestionCategory>
       <relation1QuestionCategory relation="r1N_Riviere_Villes" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="75" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="30" minLevel="0">
         <questionText language="fr" text="Sur quel cours d'eau se situe la ville {0} ?"/>
         <questionText language="en" text="On which river is the city of {0}?"/>
         <mapParameters framingLevel="2">
@@ -3811,11 +3923,11 @@
           </answer>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relation1QuestionCategory>-->
+      </relation1QuestionCategory>
     </relation1QuestionCategoryList>
     <relationNQuestionCategoryList>
-      <!--<relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+      <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="60" minLevel="0">
         <questionText language="fr" text="Parmi ces départements, lesquels font partie de la province {0} ?"/>
         <questionText language="en" text="Among these departments, which are part of the {0} province?"/>
         <mapParameters framingLevel="6">
@@ -3829,20 +3941,33 @@
         </mapParameters>
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="100" minLevel="0">
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="60" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans la province {0} ?"/>
         <questionText language="en" text="Among these cities, which are located in the {0} province?"/>
         <mapParameters framingLevel="6">
           <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
             <category categoryIndexInMapConfigFile="3"/>
-            <category categoryIndexInMapConfigFile="5"/>
-            <category categoryIndexInMapConfigFile="6"/>
           </question>
           <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT"/>
           <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-        <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
-                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="80" minLevel="0" >
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" relation2="r1N_Departement_Villes" way2="DIRECT" questionAttribute="at_Numero" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NAME" weight="40" minLevel="1">
+        <questionText language="fr" text="Parmi ces villes, lesquelles se situent dans la province dont le numéro est {0} ?"/>
+        <questionText language="en" text="Among these cities, which are located in the province  whose number is {0}?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="60" minLevel="1" >
         <questionText language="fr" text="Parmi ces départements, lesquels sont traversés par {0} ?"/>
         <questionText language="en" text="Among these departments, which are crossed by the {0} river?"/>
         <mapParameters framingLevel="7">
@@ -3852,7 +3977,7 @@
           <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
           <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
-      </relationNQuestionCategory>-->
+      </relationNQuestionCategory>
       <relationNQuestionCategory relation="r1N_Riviere_Villes" way="DIRECT" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NAME" weight="50" minLevel="0">
         <questionText language="fr" text="Parmi ces villes, lesquelles sont traversées par {0} ?"/>
@@ -3866,11 +3991,289 @@
           <wrongChoice drawDepth="1" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
         </mapParameters>
       </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="30" minLevel="0">
+        <questionText language="fr" text="Parmi ces provinces, lesquelles sont traversées par {0} ?"/>
+        <questionText language="en" text="Among these provinces, which are crossed by the {0} river?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Numero"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="20" minLevel="1">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des provinces traversées par {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with provinces crossed by the {0} river?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Departement_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="50" minLevel="2"> 
+        <questionText language="fr" text="Parmi ces départements, lesquels sont limitrophes au département {0} ?"/>
+        <questionText language="en" text="Among these departments, which are adjacent to the {0} department?"/>   
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Riviere_Affluents" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels sont des affluents {0} ?"/>
+        <questionText language="en" text="Among these rivers, which are tributaries of the {0}?"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="4"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Province_ProvincesLimitrophes" way="DIRECT" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NONE" weight="15" minLevel="1"> 
+        <questionText language="fr" text="Parmi ces provinces, lesquelles sont limitrophes à la province {0} ?"/>
+        <questionText language="en" text="Among these provinces, which are adjacent to the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>   
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Riviere_Departements" way="INVERSE" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                 answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" commentMode="NONE" weight="40" minLevel="1">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent le département {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the {0} department?"/>   
+        <mapParameters framingLevel="7">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" relation2="rNN_Riviere_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="25" minLevel="0">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent la province {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the {0} province?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters> 
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="r1N_Province_Departements" way="DIRECT" relation2="rNN_Riviere_Departements" way2="INVERSE" questionAttribute="at_Numero"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="15" minLevel="1">
+        <questionText language="fr" text="Parmi ces cours d'eau, lesquels traversent la province dont le numéro est {0} ?"/>
+        <questionText language="en" text="Among these rivers, which flow through the province whose number is {0}?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="2"/>
+            <category categoryIndexInMapConfigFile="5"/>
+            <category categoryIndexInMapConfigFile="6"/>
+          </question>
+          <answer drawDepth="1" categorySelectionMode="EXCLUDE" answerSelectionMode="ONLY_CHOICES" framingMode="NO_ELEMENT"/>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="30" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels ont une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these departments, which share a border with {0}?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="25" minLevel="0">
+        <questionText language="fr" text="Parmi ces provinces, lesquelles ont une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these provinces, which share a border with {0}?"/>  
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom2"
+                                 answerAttribute="at_Numero" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="1">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des provinces ayant une frontière commune avec {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with provinces bordering {0} ?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Ocean_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="15" minLevel="0">
+        <questionText language="fr" text="Parmi ces départements, lesquels sont bordés par {0} ?"/>
+        <questionText language="en" text="Among these departments, which are bordered by {0}?"/>
+        <mapParameters framingLevel="7">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Ocean_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="10" minLevel="0">
+        <questionText language="fr" text="Parmi ces provinces, lesquelles sont bordées par {0} ?"/>
+        <questionText language="en" text="Among these provinces, which are bordered by {0}?"/>  
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters> 
+      </relationNQuestionCategory>
+      <relationNQuestionCategory relation="rNN_Ocean_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Province_Departements" way2="INVERSE" questionAttribute="at_Nom3"
+                                 answerAttribute="at_Numero" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="5" minLevel="1">
+        <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des provinces bordées par {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with provinces bordered by {0}?"/>
+        <mapParameters framingLevel="6">
+          <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+            <category categoryIndexInMapConfigFile="1"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationNQuestionCategory>
     </relationNQuestionCategoryList>
-    <attributeOrderQuestionCategoryList/>
-    <relationLimitQuestionCategoryList/>
+    <attributeOrderQuestionCategoryList>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="20" minLevel="0"
+                                      distribParameterCorrection="0.1">
+        <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
+        <questionText language="en" text="Which of thes cities is the northernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
+      </attributeOrderQuestionCategory>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="LOWEST" answerAttribute="at_Nom1" weight="20" minLevel="0"
+                                      distribParameterCorrection="0.1">
+        <questionText language="fr" text="Laquelle de ces villes est la plus au sud ?"/>
+        <questionText language="en" text="Which of thes cities is the southernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
+      </attributeOrderQuestionCategory>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="GREATEST" answerAttribute="at_Nom1" weight="20" minLevel="0"
+                                      distribParameterCorrection="0.1">
+        <questionText language="fr" text="Laquelle de ces villes est la plus à l'est ?"/>
+        <questionText language="en" text="Which of thes cities is the easternmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
+      </attributeOrderQuestionCategory>
+      <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="LOWEST" answerAttribute="at_Nom1" weight="20" minLevel="0"
+                                      distribParameterCorrection="0.1">
+        <questionText language="fr" text="Laquelle de ces villes est la plus à l'ouest ?"/>
+        <questionText language="en" text="Which of thes cities is the westernmost?"/> 
+        <mapParameters framingLevel="3">
+          <answer drawDepth="2" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="INCLUDE">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" framingMode="ONLY_MAIN_ELEMENT" categorySelectionMode="EXCLUDE"/>
+        </mapParameters>
+      </attributeOrderQuestionCategory>
+    </attributeOrderQuestionCategoryList>
+    <relationLimitQuestionCategoryList>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="BEGIN" questionAttribute="at_Nom2" answerAttribute="at_Nom1"
+                                     answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="20" minLevel="1">
+        <questionText language="fr" text="Dans quel département se situe la source {0} ?"/>
+        <questionText language="en" text="In which department is the source of the {0}?"/> 
+        <exception questionElement="el_Abanga"/>
+        <exception questionElement="el_KomoRiver"/>
+        <exception questionElement="el_NyangaRiver"/>
+        <exception questionElement="el_Ogooue"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationLimitQuestionCategory>
+      <relationLimitQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" mode="END" questionAttribute="at_NomConfluence" answerAttribute="at_Nom1"
+                                     answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.05" weight="15" minLevel="1">
+        <questionText language="fr" text="Dans quel département se situe le confluent {0} ?"/>
+        <questionText language="en" text="In which department is the confluence of the {0}?"/> 
+        <exception questionElement="el_OgoulouRiver"/>
+        <exception questionElement="el_LekoniRiver"/>
+        <mapParameters framingLevel="2">
+          <question drawDepth="3" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="2"/>
+          </question>
+          <answer drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="1"/>
+            <category categoryIndexInMapConfigFile="3"/>
+          </answer>
+          <wrongChoice drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
+        </mapParameters>
+      </relationLimitQuestionCategory>
+    </relationLimitQuestionCategoryList>
     <relationOrderQuestionCategoryList/>
-    <relationExistenceQuestionCategoryList/>
+    <relationExistenceQuestionCategoryList>
+      <relationExistenceQuestionCategory relation="r11_Province_ChefLieu" way="INVERSE" mode="EXISTS" commentMode="NAME" answerAttribute="at_Nom1" weight="50" minLevel="0">
+        <questionText language="fr" text="Parmi ces villes, lesquelles sont des chefs-lieux de Province ?"/>
+        <questionText language="en" text="Among these cities, which are province capitals?"/>
+        <mapParameters framingLevel="2">
+          <answer drawDepth="2" categorySelectionMode="INCLUDE" framingMode="ONLY_MAIN_ELEMENT">
+            <category categoryIndexInMapConfigFile="0"/>
+          </answer>
+          <wrongChoice drawDepth="1" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT"/>
+        </mapParameters>
+      </relationExistenceQuestionCategory>
+    </relationExistenceQuestionCategoryList>
   </questionCategories>
   
 </quizData>

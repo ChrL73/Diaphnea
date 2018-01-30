@@ -16813,7 +16813,7 @@
         </attribute>
         <attribute type="at_Nom3">
           <value language="fr" value="l'océan Atlantique"/>
-          <value language="en" value="Atlantic Ocean"/>
+          <value language="en" value="the Atlantic Ocean"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -16850,7 +16850,7 @@
         </attribute>
         <attribute type="at_Nom3">
           <value language="fr" value="la mer Méditerranée"/>
-          <value language="en" value="Mediterranean Sea"/>
+          <value language="en" value="the Mediterranean Sea"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -16886,7 +16886,7 @@
         </attribute>
         <attribute type="at_Nom3">
           <value language="fr" value="la Manche"/>
-          <value language="en" value="English Channel"/>
+          <value language="en" value="the English Channel"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -16956,7 +16956,7 @@
         </attribute>
         <attribute type="at_Nom3">
           <value language="fr" value="la mer du Nord"/>
-          <value language="en" value="North Sea"/>
+          <value language="en" value="the North Sea"/>
         </attribute>
       </attributeList>
       <numericalAttributeList/>
@@ -17440,7 +17440,7 @@
       </relationNQuestionCategory>
       <relationNQuestionCategory relation="rNN_Riviere_Departements" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3" answerAttribute="at_Nom2"
                                  answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.1" commentMode="NONE" weight="30" minLevel="0">
-        <questionText language="fr" text="Parmi ces régions, lesquelles sont traversés par {0} ?"/>
+        <questionText language="fr" text="Parmi ces régions, lesquelles sont traversées par {0} ?"/>
         <questionText language="en" text="Among these regions, which are crossed by the {0} river?"/>
         <mapParameters framingLevel="6">
           <question drawDepth="2" categorySelectionMode="EXCLUDE" framingMode="ONLY_MAIN_ELEMENT">
@@ -17532,7 +17532,7 @@
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
                                  answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="25" minLevel="0">
         <questionText language="fr" text="Parmi ces départements, lesquels ont une frontière commune avec {0} ?"/>
-        <questionText language="en" text="Among these departments, which share a border with {0} ?"/>
+        <questionText language="en" text="Among these departments, which share a border with {0}?"/>
         <mapParameters framingLevel="7">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
@@ -17545,7 +17545,7 @@
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom2"
                                  answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
         <questionText language="fr" text="Parmi ces régions, lesquelles ont une frontière commune avec {0} ?"/>
-        <questionText language="en" text="Among these regions, which share a border with {0} ?"/>  
+        <questionText language="en" text="Among these regions, which share a border with {0}?"/>  
         <mapParameters framingLevel="6">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
@@ -17558,7 +17558,7 @@
       <relationNQuestionCategory relation="rNN_Pays_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom2"
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements ayant une frontière commune avec {0} ?"/>
-        <questionText language="en" text="Among these numbers, which are associated with departments bordering {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments bordering {0}?"/>
         <mapParameters framingLevel="7">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
@@ -17571,7 +17571,7 @@
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
                                  answerAttribute="at_Nom1" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="30" minLevel="0">
         <questionText language="fr" text="Parmi ces départements, lesquels sont bordés par {0} ?"/>
-        <questionText language="en" text="Among these departments, which are bordered by {0} ?"/>
+        <questionText language="en" text="Among these departments, which are bordered by {0}?"/>
         <mapParameters framingLevel="7">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
@@ -17584,7 +17584,7 @@
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" relation2="r1N_Region_Departements" way2="INVERSE" questionAttribute="at_Nom3"
                                  answerAttribute="at_Nom2" answerProximityCriterion="ELEMENT_LOCATION" distribParameterCorrection="0.02" commentMode="NAME" weight="20" minLevel="0">
         <questionText language="fr" text="Parmi ces régions, lesquelles sont bordées par {0} ?"/>
-        <questionText language="en" text="Among these regions, which are bordered by {0} ?"/>  
+        <questionText language="en" text="Among these regions, which are bordered by {0}?"/>  
         <mapParameters framingLevel="6">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">
@@ -17597,7 +17597,7 @@
       <relationNQuestionCategory relation="rNN_Mer_DepartementsLimitrophes" way="DIRECT" questionAttribute="at_Nom3"
                                  answerAttribute="at_Numero" answerProximityCriterion="NONE" commentMode="NAME" weight="15" minLevel="2">
         <questionText language="fr" text="Parmi ces numéros, lesquels sont associés à des départements bordés par {0} ?"/>
-        <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0} ?"/>
+        <questionText language="en" text="Among these numbers, which are associated with departments bordered by {0}?"/>
         <mapParameters framingLevel="7">
           <question drawDepth="0" categorySelectionMode="INCLUDE" framingMode="NO_ELEMENT"/>
           <answer drawDepth="2" categorySelectionMode="INCLUDE" answerSelectionMode="ALL_ANSWERS" framingMode="ONLY_MAIN_ELEMENT">

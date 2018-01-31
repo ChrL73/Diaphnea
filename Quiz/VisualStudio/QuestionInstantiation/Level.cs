@@ -30,7 +30,7 @@ namespace QuestionInstantiation
 
             _nameInLog = _xmlLevel.name[0].text;
             foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language.ToString(), xmlName.text);
-            quizData.verifyText(_name, String.Format("Level {0}", _nameInLog));
+            if (quizData.verifyText(_name, String.Format("Level {0}", _nameInLog)) != 0) return -1;
 
             _value = Int32.Parse(_xmlLevel.value);
             _choiceCount = Int32.Parse(_xmlLevel.choiceCount);

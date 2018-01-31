@@ -11,13 +11,17 @@ config.mapServerPort = '3001';
 
 //config.debugDelay = 2000;
 
-//jQueryUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
-jQueryUrl = 'jquery.min.js';
+//config.jQueryUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
+config.jQueryUrl = 'jquery.min.js';
 
-//bootstrapCssUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
-bootstrapCssUrl = 'bootstrap.min.css';
+//config.bootstrapCssUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+config.bootstrapCssUrl = 'bootstrap.min.css';
 
-//bootstrapJsUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js';
-bootstrapJsUrl = 'bootstrap.min.js';
+//config.bootstrapJsUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js';
+config.bootstrapJsUrl = 'bootstrap.min.js';
+
+config.version = 'Alpha1.0';
+config.sourceUrl = 'https://github.com/ChrL73/Diaphnea';
+config.issueUrl = 'https://github.com/ChrL73/Diaphnea/issues';
 
 module.exports = config;

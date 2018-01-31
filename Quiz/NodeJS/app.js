@@ -129,6 +129,9 @@ io.on('connection', function(socket)
          downData.siteLanguageList = languages;
          downData.siteLanguageId = context.siteLanguageId;
          downData.scoreTab = context.scoreTab;
+         downData.version = config.version;
+         downData.sourceUrl = config.sourceUrl;
+         downData.issueUrl = config.issueUrl;
 
          setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
       });
@@ -155,7 +158,10 @@ io.on('connection', function(socket)
          month: texts.month,
          year: texts.year,
          score: texts.score,
-         time: texts.time
+         time: texts.time,
+         version: texts.version,
+         sourceCode: texts.sourceCode,
+         issues: texts.issues
       };
       
       return t;

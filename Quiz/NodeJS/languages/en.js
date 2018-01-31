@@ -31,5 +31,8 @@ module.exports =
    day: 'Day',
    week: 'Week',
    month: 'Month',
-   year: 'Year'
+   year: 'Year',
+   version: 'Version',
+   sourceCode: 'Source code',
+   issues: 'Issues'
 };

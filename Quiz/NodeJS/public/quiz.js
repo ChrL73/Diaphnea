@@ -152,7 +152,13 @@ $(function()
          + '</th></tr></thead><tbody id="tbody' + i +'"></tbody></table></div>'
       });
       
-      html += '</div></div>';
+      html += '</div></div><footer><div><span id="versionSpan">'
+         + pageData.texts.version + '</span>: ' + pageData.version
+         + '</div><div><span id="sourceSpan">'
+         + pageData.texts.sourceCode + '</span>: <a target="_blank" href="' + pageData.sourceUrl + '">' + pageData.sourceUrl
+         + '</a></div><div><span id="issueSpan">'
+         + pageData.texts.issues + '</span>: <a target="_blank" href="' + pageData.issueUrl + '">' + pageData.issueUrl
+         + '</a></div></footer>';
       
       $('#container').append(html);
       
@@ -286,6 +292,9 @@ $(function()
          $('#table7-tab').text(data.week);
          $('#table30-tab').text(data.month);
          $('#table365-tab').text(data.year);
+         $('#versionSpan').text(data.version);
+         $('#sourceSpan').text(data.sourceCode);
+         $('#issueSpan').text(data.issues);
          
          d.forEach(function(i)
          {
@@ -293,6 +302,8 @@ $(function()
             $('#scoreTh' + i).text(data.score);
             $('#timeTh' + i).text(data.time);
          });
+         
+         emitLevelChoice();
       });
       
       socket.on('updateSelects', function(data)

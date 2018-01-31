@@ -31,5 +31,8 @@ module.exports =
    day: 'Jour',
    week: 'Semaine',
    month: 'Mois',
-   year: 'Année'
+   year: 'Année',
+   version: 'Version',
+   sourceCode: 'Code source',
+   issues: 'Faits techniques'
 };

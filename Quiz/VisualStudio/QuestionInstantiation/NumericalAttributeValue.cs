@@ -9,12 +9,12 @@ namespace QuestionInstantiation
     class NumericalAttributeValue
     {
         private readonly double _value;
-        private readonly XmlNumericalAttributeType _numericalAttributeType;
+        //private readonly XmlNumericalAttributeType _numericalAttributeType;
 
-        internal NumericalAttributeValue(double value, XmlNumericalAttributeType numericalAttributeType)
+        internal NumericalAttributeValue(double value/*, XmlNumericalAttributeType numericalAttributeType*/)
         {
             _value = value;
-            _numericalAttributeType = numericalAttributeType;
+            //_numericalAttributeType = numericalAttributeType;
         }
 
         internal double Value

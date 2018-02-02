@@ -53,7 +53,6 @@ namespace QuestionInstantiation
             };
 
             BsonArray choiceArray = new BsonArray();
-            BsonArray mapIdArray = new BsonArray();
             foreach (Choice choice in _choiceList) choiceArray.Add(choice.getBsonDocument(_choiceCommentMode));
             questionDocument.AddRange(new BsonDocument() { { "answers", choiceArray } });
 

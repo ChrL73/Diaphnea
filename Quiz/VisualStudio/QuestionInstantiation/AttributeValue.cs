@@ -10,13 +10,13 @@ namespace QuestionInstantiation
     {
         private readonly Text _value;
         private readonly Text _comment;
-        private readonly XmlAttributeType _attributeType;
+        //private readonly XmlAttributeType _attributeType;
 
-        internal AttributeValue(Text value, Text comment, XmlAttributeType attributeType)
+        internal AttributeValue(Text value, Text comment/*, XmlAttributeType attributeType*/)
         {
             _value = value;
             _comment = comment;
-            _attributeType = attributeType;
+            //_attributeType = attributeType;
         }
 
         internal Text Value

@@ -3,8 +3,8 @@
 
   <parameters mapId="_Gabon" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
               kmlDir="../../../EditableKml_Input" maxConnectionDistanceInKm="2.0" superposingThreshold="0.4" linePointLinkThreshold="1.5"
-              projection="ORTHOGRAPHIC" exclusionTag="~Gabon"
-              zoomMinDistance="35" zoomMaxDistance="3000" resolutionThreshold="5.0" sizeParameter1="1.25" sizeParameter2="0.5">
+              projection="ORTHOGRAPHIC" exclusionTag="~Gabon" zoomMinDistance="35" zoomMaxDistance="3000"
+              resolutionThreshold="5.0" sizeParameter1="1.25" sizeParameter2="0.5">
     <languageList>
       <language id="fr" name="Français"/>
       <language id="en" name="English"/>

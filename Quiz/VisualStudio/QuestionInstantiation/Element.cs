@@ -101,7 +101,7 @@ namespace QuestionInstantiation
 
                 if (quizData.verifyText(valueText, String.Format("element {0}, attribute type {1}", XmlElement.id, xmlAttributeType.id)) != 0) return -1;
 
-                AttributeValue attributeValue = new AttributeValue(valueText, commentText, xmlAttributeType);
+                AttributeValue attributeValue = new AttributeValue(valueText, commentText/*, xmlAttributeType*/);
                 
 		        if (_attributeDictionary.ContainsKey(xmlAttributeType))
 		        {
@@ -135,7 +135,7 @@ namespace QuestionInstantiation
             foreach (XmlNumericalAttribute xmlNumericalAttribute in _xmlElement.numericalAttributeList)
 	        {
                 XmlNumericalAttributeType xmlNumericalAttributeType = quizData.getXmlNumericalAttributeType(xmlNumericalAttribute.type);
-                NumericalAttributeValue numericalAttributeValue = new NumericalAttributeValue(xmlNumericalAttribute.value, xmlNumericalAttributeType);
+                NumericalAttributeValue numericalAttributeValue = new NumericalAttributeValue(xmlNumericalAttribute.value/*, xmlNumericalAttributeType*/);
                 
                 if (_numericalAttributeDictionary.ContainsKey(xmlNumericalAttributeType))
                 {

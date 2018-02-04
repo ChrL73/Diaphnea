@@ -2664,8 +2664,8 @@
     </element>
     <element id="el_MoulenguiBinza" type="et_Ville" minLevel="0" mapId="e_MoulenguiBinza">
       <elementName>
-        <name language="fr" text="Moulengui Binza Binza"/>
-        <name language="en" text="Mabanda"/>
+        <name language="fr" text="Moulengui Binza"/>
+        <name language="en" text="Moulengui Binza"/>
       </elementName>
       <attributeList>
         <attribute type="at_Nom1">

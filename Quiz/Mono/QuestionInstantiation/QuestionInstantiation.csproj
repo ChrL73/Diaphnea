@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5AF0FC7A-3758-46FF-853D-E28A58F30762}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>QuestionInstantiation</RootNamespace>
+    <AssemblyName>QuestionInstantiation</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_Gabon.xml</Commandlineparameters>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\AttributeOrderCategory.cs">
+      <Link>AttributeOrderCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\AttributeOrderElement.cs">
+      <Link>AttributeOrderElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\AttributeValue.cs">
+      <Link>AttributeValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Category.cs">
+      <Link>Category.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Choice.cs">
+      <Link>Choice.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\ChoiceCommentModeEnum.cs">
+      <Link>ChoiceCommentModeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Element.cs">
+      <Link>Element.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\GeoPoint.cs">
+      <Link>GeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Level.cs">
+      <Link>Level.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\MapParameters.cs">
+      <Link>MapParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\MessageLogger.cs">
+      <Link>MessageLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\MultipleAnswerCategory.cs">
+      <Link>MultipleAnswerCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\MultipleAnswerQuestion.cs">
+      <Link>MultipleAnswerQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\NumericalAttributeValue.cs">
+      <Link>NumericalAttributeValue.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\QuestionInstantiationMain.cs">
+      <Link>QuestionInstantiationMain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Questionnaire.cs">
+      <Link>Questionnaire.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\QuizData.cs">
+      <Link>QuizData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\RelationNatureEnum.cs">
+      <Link>RelationNatureEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\RelationOrderCategory.cs">
+      <Link>RelationOrderCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\RelationOrderQuestion.cs">
+      <Link>RelationOrderQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\RelationType.cs">
+      <Link>RelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\RelationWayEnum.cs">
+      <Link>RelationWayEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\SimpleAnswerCategory.cs">
+      <Link>SimpleAnswerCategory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\SimpleAnswerQuestion.cs">
+      <Link>SimpleAnswerQuestion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\Text.cs">
+      <Link>Text.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\TextComparer.cs">
+      <Link>TextComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\XmlQuizData.cs">
+      <Link>XmlQuizData.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+  </ItemGroup>
+</Project>

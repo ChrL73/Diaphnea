@@ -42,7 +42,7 @@ namespace MapDataProcessing
                 { "text_size", _look.textSize }
             };
 
-            return lookDocument; throw new NotImplementedException();
+            return lookDocument;
         }
     }
 }

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MapDataProcessing</RootNamespace>
+    <AssemblyName>MapDataProcessing</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_France.xml</Commandlineparameters>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\Category.cs">
+      <Link>Category.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\DatabaseMapItem.cs">
+      <Link>DatabaseMapItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\DistanceCalculator.cs">
+      <Link>DistanceCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\ElementLinker.cs">
+      <Link>ElementLinker.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\ElementName.cs">
+      <Link>ElementName.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\GeoPoint.cs">
+      <Link>GeoPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\IAttachment.cs">
+      <Link>IAttachment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\ItemId.cs">
+      <Link>ItemId.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\KmlFileData.cs">
+      <Link>KmlFileData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\KmlFileTypeEnum.cs">
+      <Link>KmlFileTypeEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\KmlWriter.cs">
+      <Link>KmlWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\LineLinePart.cs">
+      <Link>LineLinePart.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\LineLook.cs">
+      <Link>LineLook.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\LineMapElement.cs">
+      <Link>LineMapElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\LineSuperposer.cs">
+      <Link>LineSuperposer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\LinkerSegment.cs">
+      <Link>LinkerSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\Look.cs">
+      <Link>Look.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\MapData.cs">
+      <Link>MapData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\MapDataProcessingMain.cs">
+      <Link>MapDataProcessingMain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\MapDataProcessor.cs">
+      <Link>MapDataProcessor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\MapElement.cs">
+      <Link>MapElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\MessageLogger.cs">
+      <Link>MessageLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\OrientationEnum.cs">
+      <Link>OrientationEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\OrientedLineList.cs">
+      <Link>OrientedLineList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\OrientedPolygonLinePart.cs">
+      <Link>OrientedPolygonLinePart.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PointLook.cs">
+      <Link>PointLook.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PointMapElement.cs">
+      <Link>PointMapElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PolygonLinePart.cs">
+      <Link>PolygonLinePart.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PolygonLook.cs">
+      <Link>PolygonLook.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PolygonMapElement.cs">
+      <Link>PolygonMapElement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\PolygonPolygonPart.cs">
+      <Link>PolygonPolygonPart.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\Smoother.cs">
+      <Link>Smoother.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\SuperposerArea.cs">
+      <Link>SuperposerArea.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\SuperposerPoint.cs">
+      <Link>SuperposerPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\SuperposerSegment.cs">
+      <Link>SuperposerSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\XmlMapData.cs">
+      <Link>XmlMapData.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core">
+      <HintPath>..\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\MongoDB.Driver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\VisualStudio\MapDataProcessing\LineTemplate.kml">
+      <Link>LineTemplate.kml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\VisualStudio\MapDataProcessing\PointTemplate.kml">
+      <Link>PointTemplate.kml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\VisualStudio\MapDataProcessing\PolygonTemplate.kml">
+      <Link>PolygonTemplate.kml</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

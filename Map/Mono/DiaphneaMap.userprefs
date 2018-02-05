@@ -1,12 +1,9 @@
-﻿<Properties>
+﻿<Properties StartupItem="MapDataProcessing/MapDataProcessing.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../VisualStudio/MapDataProcessing/MapDataProcessor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../VisualStudio/MapDataProcessing/DatabaseMapItem.cs">
     <Files>
-      <File FileName="../VisualStudio/MapDataProcessing/Category.cs" Line="17" Column="3" />
-      <File FileName="../VisualStudio/MapDataProcessing/PointLook.cs" Line="30" Column="64" />
-      <File FileName="../VisualStudio/MapDataProcessing/KmlWriter.cs" Line="23" Column="38" />
-      <File FileName="../VisualStudio/MapDataProcessing/DatabaseMapItem.cs" Line="116" Column="5" />
-      <File FileName="../VisualStudio/MapDataProcessing/MapDataProcessor.cs" Line="466" Column="18" />
+      <File FileName="../VisualStudio/MapDataProcessing/Category.cs" Line="8" Column="28" />
+      <File FileName="../VisualStudio/MapDataProcessing/DatabaseMapItem.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

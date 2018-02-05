@@ -1,1 +1,0 @@
-scons --disable-warnings-as-error --c++11=on --prefix=$HOME/Diaphnea/mongo-cxx-driver install

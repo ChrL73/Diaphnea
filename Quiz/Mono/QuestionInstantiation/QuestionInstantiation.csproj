@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5AF0FC7A-3758-46FF-853D-E28A58F30762}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_Gabon.xml</Commandlineparameters>
+    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_Gabon.xml ../../../../VisualStudio/QuestionInstantiation/QuizData_France.xml</Commandlineparameters>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">

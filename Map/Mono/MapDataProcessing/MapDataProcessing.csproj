@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -20,7 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_France.xml</Commandlineparameters>
+    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_France.xml ../../../../VisualStudio/MapDataProcessing/MapData_Gabon.xml</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>full</DebugType>

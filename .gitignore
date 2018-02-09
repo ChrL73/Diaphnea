@@ -37,3 +37,5 @@ Map/NodeJS/log.txt
 Quiz/NodeJS/public/*.min.js
 Quiz/NodeJS/public/*.min.css
 MongoDB.*.dll
+/Experiments/Aurelia/basic-aurelia-project/__MACOSX
+/Experiments/Aurelia/basic-aurelia-project/scripts

@@ -38,4 +38,6 @@ Quiz/NodeJS/public/*.min.js
 Quiz/NodeJS/public/*.min.css
 MongoDB.*.dll
 /Experiments/Aurelia
-/Experiments/React
+/Experiments/React/test/*
+!/Experiments/React/test/public
+!/Experiments/React/test/src

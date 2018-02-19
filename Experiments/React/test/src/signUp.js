@@ -4,12 +4,18 @@ export class SignUp extends React.Component
 {
    render()
    {
+      let data = this.props.userInterfaceState.data;
+      
       return (
-         <div style={{display: (this.props.userInterfaceState.currentPage == 'signUp' ? 'block' : 'none')}} className="signUp">
-            <div class="container">
-               Sign up
-               <button class="btn btn-warning" onClick={() => this.props.socket.emit('cancelSignUp', {})}>Cancel</button>
+         <div style={{display: (data.page === 'signUp' ? 'block' : 'none')}} className="signUp">
+            <div className="container">
+               <button className="btn btn-warning" onClick={() => this.handleCancelBtnClick()}>{data.texts.cancel}</button>
             </div>
          </div>);
+   }
+   
+   handleCancelBtnClick()
+   {
+      this.props.socket.emit('cancelSignUp', {});
    }
 }

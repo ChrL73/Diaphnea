@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Home } from './home.js'
 import { SignUp } from './signUp.js'
+import './styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 //import { Navbar, Button } from 'react-bootstrap';
 
@@ -14,25 +15,35 @@ class UserInterface extends React.Component
       super(props);
       
       ++debugCounter;
-      if (debugCounter != 1) throw('Error: UserInterface constructor should be called only once');
+      if (debugCounter !== 1) throw(String('Error: UserInterface constructor should be called only once'));
       
       this.socket = window.io.connect('192.168.50.31:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
-      this.state = { currentPage: 'none' };
+      this.state =
+      {
+         data:
+         {
+            page: 'none',
+            texts: {}
+         }
+      };
    }
       
    handleDisplayPage(data)
    {
-      this.setState({ currentPage: data.page });
+      this.setState(
+      {
+         data: data
+      });
    }
    
    render()
    {
       return (
          <div className="userInterface">
-            <Home userInterfaceState={this.state} socket={this.socket}/>
-            <SignUp userInterfaceState={this.state} socket={this.socket}/>
+            <Home userInterfaceState={this.state} socket={this.socket} setUserInterfaceState={this.setState} changeData={(data) => this.setState({ data: data })}/>
+            <SignUp userInterfaceState={this.state} socket={this.socket} setUserInterfaceState={this.setState}/>
          </div>);
    }
 }

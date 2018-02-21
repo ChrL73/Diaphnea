@@ -1,5 +1,5 @@
 {
-   "name": "Test session id",
+   "name": "test.session.id",
    "version": "0.1.0",
    "dependencies": {
       "connect-mongo": "^2.0.1",

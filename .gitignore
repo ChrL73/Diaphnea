@@ -42,3 +42,4 @@ MongoDB.*.dll
 /Experiments/React/test/*
 !/Experiments/React/test/public
 !/Experiments/React/test/src
+!/Experiments/React/test/package.json

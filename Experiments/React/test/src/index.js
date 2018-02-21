@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Home } from './home.js'
-import { SignUp } from './signUp.js'
+import { Home } from './home.js';
+import { SignUp } from './signUp.js';
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 //import { Navbar, Button } from 'react-bootstrap';
@@ -17,7 +17,7 @@ class UserInterface extends React.Component
       ++debugCounter;
       if (debugCounter !== 1) throw(String('Error: UserInterface constructor should be called only once'));
       
-      this.socket = window.io.connect('192.168.50.31:3002');
+      this.socket = window.io.connect('albertine:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
       this.state =

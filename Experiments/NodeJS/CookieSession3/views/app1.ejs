@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Test session</title>
+   </head>
+
+   <body>  
+      Session id in HTTP request: <%=sessionId%>
+      <div id="divId">Waiting for socket.io message...</div>
+      
+      <script src="/socket.io/socket.io.js"></script>
+     
+      <script>
+         var socket = io.connect();
+         socket.on('message', function(data) { document.getElementById('divId').innerHTML = data; })
+      </script>
+   </body>
+</html> 

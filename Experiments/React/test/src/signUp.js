@@ -4,7 +4,7 @@ export class SignUp extends React.Component
 {
    render()
    {
-      let data = this.props.userInterfaceState.data;
+      const data = this.props.userInterfaceState.data;
       
       return (
          <div style={{display: (data.page === 'signUp' ? 'block' : 'none')}} className="signUp">

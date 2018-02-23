@@ -16,6 +16,7 @@ export class Home extends React.Component
       props.socket.on('updateIndex', (texts) => this.handleUpdateSiteLanguage(texts));
       props.socket.on('unknownName', () => this.handleUnknownName());
       props.socket.on('indexError', () => this.handleServerError());
+      props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
       
       this.state =
       {
@@ -137,14 +138,14 @@ export class Home extends React.Component
                         </label>
                      </div>
                   </div>
-                  <div class="row">
-                     <div class="col-sm-4 col-sm-offset-4">
-                        <select class="form-control" id="indexLevelSelect" value={data.levelId} onChange={(e) => this.handleLevelChange(data, 'levelId', e.target.value)}>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <select className="form-control" id="indexLevelSelect" value={data.levelId} onChange={(e) => this.handleLevelChange(data, 'levelId', e.target.value)}>
                            {levels}
                         </select>
                      </div>
-                     <div class="col-sm-1">
-                        <img src={waitGif} id="indexLevelWait" class="waitImg waitImg1"/>
+                     <div className="col-sm-1">
+                        <img src={waitGif} id="indexLevelWait" className="waitImg waitImg1"/>
                      </div>
                   </div>
                   
@@ -294,5 +295,10 @@ export class Home extends React.Component
    {
       document.getElementById('indexNavBarWait').style.display = 'none';
       this.handleStateChange('showModal2', true);
+   }
+   
+   handleUpdateSelects(data)
+   {
+      console.log(data);
    }
 }

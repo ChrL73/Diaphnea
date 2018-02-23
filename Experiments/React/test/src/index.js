@@ -16,7 +16,7 @@ class UserInterface extends React.Component
       ++userInterfaceDebugCounter;
       if (userInterfaceDebugCounter !== 1) throw(String('Error: UserInterface constructor should be called only once'));
       
-      this.socket = window.io.connect('192.168.50.31:3002');
+      this.socket = window.io.connect('gilberte:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
       this.state =

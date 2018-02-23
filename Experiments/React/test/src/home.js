@@ -1,6 +1,6 @@
 import React from 'react';
 import waitGif from './wait.gif'
-//import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 let homeDebugCounter = 0;
 
@@ -15,6 +15,13 @@ export class Home extends React.Component
       
       props.socket.on('updateIndex', (texts) => this.handleUpdateSiteLanguage(texts));
       props.socket.on('unknownName', () => this.handleUnknownName());
+      props.socket.on('indexError', () => this.handleServerError());
+      
+      this.state =
+      {
+         showModal1: false,
+         showModal2: false
+      };
    }
    
    render()
@@ -27,6 +34,33 @@ export class Home extends React.Component
          siteLanguages = data.siteLanguageList.map((language) =>
          {
             return (<option key={language.id} value={language.id}>{language.name}</option>);
+         });
+      }
+      
+      let questionnaires;
+      if (data.questionnaireList)
+      {
+         questionnaires = data.questionnaireList.map((questionnaire) =>
+         {
+            return (<option key={questionnaire.id} value={questionnaire.id}>{questionnaire.name}</option>);
+         });
+      }
+      
+      let questionnaireLanguages;
+      if (data.questionnaireLanguageList)
+      {
+         questionnaireLanguages = data.questionnaireLanguageList.map((language) =>
+         {
+            return (<option key={language.id} value={language.id}>{language.name}</option>);
+         });
+      }
+      
+      let levels;
+      if (data.levelList)
+      {
+         levels = data.levelList.map((level) =>
+         {
+            return (<option key={level.id} value={level.id}>{level.name}</option>);
          });
       }
       
@@ -49,23 +83,80 @@ export class Home extends React.Component
                      </div>
                   </div>
                </header>
-               <div className="modal fade" id="indexErrorMessage1">
-                  <div className="modal-dialog">
-                     <div className="modal-content">
-                        <div className="modal-body bg-danger">
-                           <span>data.texts.unknownUserOrWrongPassword</span>
-                           <button type="button" className="close" data-dismiss="modal">x</button>
-                        </div>
+               <Modal show={this.state.showModal1} onHide={() => this.handleStateChange('showModal1', false)}>               
+                  <Modal.Body className="bg-danger">
+                     <span>{data.texts.unknownUserOrWrongPassword}</span>
+                     <Button className="close" onClick={() => this.handleStateChange('showModal1', false)}>x</Button>
+                  </Modal.Body>
+               </Modal>
+               <Modal show={this.state.showModal2} onHide={() => this.handleStateChange('showModal2', false)}>               
+                  <Modal.Body className="bg-danger">
+                     <span>{data.texts.internalServerError}</span>
+                     <Button className="close" onClick={() => this.handleStateChange('showModal2', false)}>x</Button>
+                  </Modal.Body>
+               </Modal>
+               <form>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <label className="control-label" htmlFor="indexQuestionnaireSelect">{data.texts.questionnaire}:</label>
                      </div>
                   </div>
-               </div>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <select className="form-control" id="indexQuestionnaireSelect" value={data.questionnaireId}
+                                onChange={(e) => this.handleQuestionnaireChange(data, 'questionnaireId', e.target.value)}>
+                           {questionnaires}
+                        </select>
+                     </div>
+                     <div className="col-sm-1">
+                        <img src={waitGif} id="indexQuestionnaireWait" className="waitImg waitImg1"/>
+                     </div>
+                  </div>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <label className="control-label questionnaireLanguageSelection" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
+                           {data.texts.language}:
+                        </label>
+                     </div>
+                  </div>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <select className="form-control questionnaireLanguageSelection" id="indexQuestionnaireLanguageSelect" value={data.questionnaireLanguageId}
+                                onChange={(e) => this.handleQuestionnaireLanguageChange(data, 'questionnaireLanguageId', e.target.value)}>
+                           {questionnaireLanguages}
+                        </select>
+                     </div>
+                     <div className="col-sm-1">
+                        <img src={waitGif} id="indexQuestionnaireLanguageWait" className="waitImg waitImg1"/>
+                     </div>
+                  </div>
+                  <div className="row">
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <label className="control-label" htmlFor="indexLevelSelect" id="indexLevelLabel" style={{marginTop: '16px'}}>
+                           {data.texts.level}:
+                        </label>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-4 col-sm-offset-4">
+                        <select class="form-control" id="indexLevelSelect" value={data.levelId} onChange={(e) => this.handleLevelChange(data, 'levelId', e.target.value)}>
+                           {levels}
+                        </select>
+                     </div>
+                     <div class="col-sm-1">
+                        <img src={waitGif} id="indexLevelWait" class="waitImg waitImg1"/>
+                     </div>
+                  </div>
+                  
+               </form>
             </div>
          </div>);
    }
    
-   /* <div class="modal fade" id="indexErrorMessage2"><div class="modal-dialog"><div class="modal-content"><div class="modal-body bg-danger"><span id="indexErrorSpan2">'
-         + pageData.texts.internalServerError
-         + '</span><button type="button" class="close" data-dismiss="modal">x</button></div></div></div></div>*/
+   /* html += '<div class="row" style="margin-top:20px;"><div class="col-sm-4 col-sm-offset-4"><button id="indexStartBtn" class="btn btn-success">'
+         + pageData.texts.start
+         + '</button></div><div class="col-sm-1"><img src="wait.gif" id="indexStartWait" class="waitImg"/></div></div>';
+   */
    
    renderNavbarForm(data)
    {
@@ -75,7 +166,7 @@ export class Home extends React.Component
             <form className="navbar-form">
                <label>{data.userName}</label>
                <span> </span>
-               <button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{data.texts.signOut}</button>
+               <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{data.texts.signOut}</Button>
                <div className="col-sm-1 navbar-right"><img src={waitGif} id="indexNavBarWait" className="waitImg"/></div>
             </form>);
       }
@@ -93,9 +184,9 @@ export class Home extends React.Component
                   <input className="form-control input-sm" type="password" id="indexPassInput"/>
                   <span> </span>
                   <div className="visible-xs"><br/></div>
-                  <button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{data.texts.signIn}</button>
+                  <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{data.texts.signIn}</Button>
                   <span> </span>
-                  <button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</button>
+                  <Button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</Button>
                   <div className="col-sm-1 navbar-right"><img src={waitGif} id="indexNavBarWait" className="waitImg"/></div>
                </small>
             </form>);
@@ -108,6 +199,13 @@ export class Home extends React.Component
       this.props.changeData(data);
    }
    
+   handleStateChange(field, value)
+   {
+      let state = this.state
+      state[field] = value;
+      this.setState(state);
+   }
+   
    // 1- Handlers for user actions
    
    handleSiteLanguageChange(data, field, value)
@@ -116,6 +214,43 @@ export class Home extends React.Component
       if (!data.userName) document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
       this.props.socket.emit('languageChoice', { page: 'index', languageId: value });
       document.getElementById('indexNavBarWait').style.display = 'inline';
+   }
+   
+   handleQuestionnaireChange(data, field, value)
+   {
+      this.handleDataChange(data, field, value);
+      this.emitLevelChoice(data);
+      document.getElementById('indexQuestionnaireWait').style.display = 'inline';
+   }
+   
+   handleQuestionnaireLanguageChange(data, field, value)
+   {
+      this.handleDataChange(data, field, value);
+      this.emitLevelChoice(data);
+      document.getElementById('indexQuestionnaireLanguageWait').style.display = 'inline';
+   }
+   
+   handleLevelChange(data, field, value)
+   {
+      this.handleDataChange(data, field, value);
+      this.emitLevelChoice(data);
+      document.getElementById('indexLevelWait').style.display = 'inline';
+   }
+   
+   emitLevelChoice(data)
+   {
+      // Todo: Adapt this line when table will be implemented
+      //d.forEach(function(i) { $('#tbody' + i).empty();});
+         
+      if (!data.userName)
+      {
+         var expires = this.props.getCookieExpires(180);
+         document.cookie = 'questionnaireId=' + data.questionnaireId + expires;
+         document.cookie = 'questionnaireLanguageId=' + data.questionnaireLanguageId + expires;
+         document.cookie = 'levelId=' + data.levelId + expires;
+      }
+
+      this.props.socket.emit('levelChoice', { questionnaireId: data.questionnaireId, questionnaireLanguageId: data.questionnaireLanguageId, levelId: data.levelId });
    }
 
    handleSignInBtnClick(e)
@@ -152,8 +287,12 @@ export class Home extends React.Component
    handleUnknownName()
    {
       document.getElementById('indexNavBarWait').style.display = 'none';
-      
-      //document.getElementById('indexErrorMessage1').modal();
-      
+      this.handleStateChange('showModal1', true);
+   }
+   
+   handleServerError()
+   {
+      document.getElementById('indexNavBarWait').style.display = 'none';
+      this.handleStateChange('showModal2', true);
    }
 }

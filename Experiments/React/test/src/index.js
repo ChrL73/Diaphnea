@@ -31,10 +31,7 @@ class UserInterface extends React.Component
       
    handleDisplayPage(data)
    {
-      this.setState(
-      {
-         data: data
-      });
+      this.setState({ data: data });
    }
    
    getCookieExpires(days)

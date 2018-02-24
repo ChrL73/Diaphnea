@@ -93,8 +93,6 @@ app.use(function(req, res)
 
 io.on('connection', function(socket)
 {
-   console.log(socket.request.sessionID);
-   
    var cookies = extractCookies(socket.handshake.headers.cookie);
    getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
    {

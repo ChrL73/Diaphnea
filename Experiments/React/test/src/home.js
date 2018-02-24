@@ -18,11 +18,17 @@ export class Home extends React.Component
       props.socket.on('indexError', () => this.handleServerError());
       props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
       
-      this.state =
+      this.initialState =
       {
          showModal1: false,
-         showModal2: false
+         showModal2: false,
+         navBarWaitDisplay: 'none',
+         questionnaireWaitDisplay: 'none',
+         questionnaireLanguageWaitDisplay: 'none',
+         levelWaitDisplay: 'none'
       };
+      
+      this.state = this.initialState;
    }
    
    render()
@@ -110,25 +116,25 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexQuestionnaireWait" className="waitImg waitImg1"/>
+                        <img src={waitGif} id="indexQuestionnaireWait" className="waitImg"/>
                      </div>
                   </div>
-                  <div className="row">
+                  <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
                      <div className="col-sm-4 col-sm-offset-4">
-                        <label className="control-label questionnaireLanguageSelection" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
+                        <label className="control-label" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
                            {data.texts.language}:
                         </label>
                      </div>
                   </div>
-                  <div className="row">
+                  <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
                      <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control questionnaireLanguageSelection" id="indexQuestionnaireLanguageSelect" value={data.questionnaireLanguageId}
+                        <select className="form-control" id="indexQuestionnaireLanguageSelect" value={data.questionnaireLanguageId}
                                 onChange={(e) => this.handleQuestionnaireLanguageChange(data, 'questionnaireLanguageId', e.target.value)}>
                            {questionnaireLanguages}
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexQuestionnaireLanguageWait" className="waitImg waitImg1"/>
+                        <img src={waitGif} id="indexQuestionnaireLanguageWait" className="waitImg"/>
                      </div>
                   </div>
                   <div className="row">
@@ -145,7 +151,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexLevelWait" className="waitImg waitImg1"/>
+                        <img src={waitGif} id="indexLevelWait" className="waitImg"/>
                      </div>
                   </div>
                   
@@ -168,7 +174,7 @@ export class Home extends React.Component
                <label>{data.userName}</label>
                <span> </span>
                <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{data.texts.signOut}</Button>
-               <div className="col-sm-1 navbar-right"><img src={waitGif} id="indexNavBarWait" className="waitImg"/></div>
+               <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" style={{display: this.state.navBarWaitDisplay}}/></div>
             </form>);
       }
       else
@@ -176,11 +182,11 @@ export class Home extends React.Component
          return (
             <form className="navbar-form">
                <small>
-                  <label htmlFor="indexNameInput" id="indexNameLabel">{data.texts.name}:</label>
+                  <label htmlFor="indexNameInput">{data.texts.name}:</label>
                   <span> </span>
                   <input className="form-control input-sm" type="text" id="indexNameInput" value={data.tmpName ? data.tmpName : ''} onChange={(e) => this.handleDataChange(data, 'tmpName', e.target.value)}/>
                   <span> </span>
-                  <label htmlFor="indexPassInput" id="indexPassLabel">{data.texts.password}:</label>
+                  <label htmlFor="indexPassInput">{data.texts.password}:</label>
                   <span> </span>
                   <input className="form-control input-sm" type="password" id="indexPassInput"/>
                   <span> </span>
@@ -188,7 +194,7 @@ export class Home extends React.Component
                   <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{data.texts.signIn}</Button>
                   <span> </span>
                   <Button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</Button>
-                  <div className="col-sm-1 navbar-right"><img src={waitGif} id="indexNavBarWait" className="waitImg"/></div>
+                  <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg"  style={{display: this.state.navBarWaitDisplay}}/></div>
                </small>
             </form>);
       }
@@ -214,7 +220,7 @@ export class Home extends React.Component
       this.handleDataChange(data, field, value);
       if (!data.userName) document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
       this.props.socket.emit('languageChoice', { page: 'index', languageId: value });
-      document.getElementById('indexNavBarWait').style.display = 'inline';
+      this.handleStateChange('navBarWaitDisplay', 'inline');
    }
    
    handleQuestionnaireChange(data, field, value)
@@ -258,47 +264,71 @@ export class Home extends React.Component
    {
       e.preventDefault();
       this.props.socket.emit('signIn', { name: this.props.userInterfaceState.data.tmpName, pass: document.getElementById('indexPassInput').value });
-      document.getElementById('indexNavBarWait').style.display = 'inline';
+      this.handleStateChange('navBarWaitDisplay', 'inline');
    }
 
    handleSignOutBtnClick(e)
    {
       e.preventDefault();
       this.props.socket.emit('signOut', {});
-      document.getElementById('indexNavBarWait').style.display = 'inline';
+      this.handleStateChange('navBarWaitDisplay', 'inline');
    }
    
    handleSignUpBtnClick(e)
    {
       e.preventDefault();
       this.props.socket.emit('signUp', { name: this.props.userInterfaceState.data.tmpName });
-      document.getElementById('indexNavBarWait').style.display = 'inline';
+      this.handleStateChange('navBarWaitDisplay', 'inline');
    }
    
    // 2- Handlers for server messages
    
    handleUpdateSiteLanguage(texts)
    {
+      this.handleStateChange('navBarWaitDisplay', 'none');
       this.handleDataChange(this.props.userInterfaceState.data, 'texts', texts);
       
-      // Todo: remove the following line and emit 'levelChoice' instead
-      document.getElementById('indexNavBarWait').style.display = 'none';
+      // Todo: Adapt this line when table will be implemented
+      /*d.forEach(function(i)
+      {
+         $('#nameTh' + i).text(data.name);
+         $('#scoreTh' + i).text(data.score);
+         $('#timeTh' + i).text(data.time);
+      });*/
+         
+      this.emitLevelChoice(this.props.userInterfaceState.data);
    }
    
    handleUnknownName()
    {
-      document.getElementById('indexNavBarWait').style.display = 'none';
+      this.handleStateChange('navBarWaitDisplay', 'none');
       this.handleStateChange('showModal1', true);
    }
    
    handleServerError()
    {
-      document.getElementById('indexNavBarWait').style.display = 'none';
+      this.handleStateChange('navBarWaitDisplay', 'none');
       this.handleStateChange('showModal2', true);
    }
    
    handleUpdateSelects(data)
    {
-      console.log(data);
+      document.getElementById('indexQuestionnaireWait').style.display = 'none';
+      document.getElementById('indexQuestionnaireLanguageWait').style.display = 'none';
+      document.getElementById('indexLevelWait').style.display = 'none';
+      
+      const data0 = this.props.userInterfaceState.data;
+
+      data0.questionnaireList = data.questionnaireList;
+      data0.questionnaireId = data.questionnaireId;
+      data0.questionnaireLanguageList = data.questionnaireLanguageList;
+      data0.questionnaireLanguageId = data.questionnaireLanguageId;
+      data0.showQuestionnaireLanguageSelect = data.showQuestionnaireLanguageSelect;
+      data0.levelList = data.levelList;
+      data0.levelId = data.levelId;
+      this.props.changeData(data0);
+      
+      // Todo: Adapt this line when table will be implemented
+      //updateTable();
    }
 }

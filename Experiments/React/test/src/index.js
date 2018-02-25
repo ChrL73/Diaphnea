@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Home } from './home.js';
 import { SignUp } from './signUp.js';
+import { Game } from './game.js';
+import waitGif from './wait.gif'
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -16,7 +18,7 @@ class UserInterface extends React.Component
       ++userInterfaceDebugCounter;
       if (userInterfaceDebugCounter !== 1) throw(String('Error: UserInterface constructor should be called only once'));
       
-      this.socket = window.io.connect('albertine:3002');
+      this.socket = window.io.connect('gilberte:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
       this.state =
@@ -45,9 +47,11 @@ class UserInterface extends React.Component
    {
       return (
          <div className="userInterface">
-            <Home userInterfaceState={this.state} socket={this.socket} setUserInterfaceState={this.setState} changeData={(data) => this.setState({ data: data })}
+            <img src={waitGif} className="waitImg" style={{display: this.state.data.page === 'none' ? 'inline' : 'none'}}/>
+            <Home userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
                   getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <SignUp userInterfaceState={this.state} socket={this.socket} setUserInterfaceState={this.setState}/>
+            <SignUp userInterfaceState={this.state} socket={this.socket}/>
+            <Game userInterfaceState={this.state} socket={this.socket}/>
          </div>);
    }
 }

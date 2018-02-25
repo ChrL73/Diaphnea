@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 export class SignUp extends React.Component
 {
@@ -9,13 +10,14 @@ export class SignUp extends React.Component
       return (
          <div style={{display: (data.page === 'signUp' ? 'block' : 'none')}} className="signUp">
             <div className="container">
-               <button className="btn btn-warning" onClick={() => this.handleCancelBtnClick()}>{data.texts.cancel}</button>
+               <Button className="btn btn-warning" onClick={(e) => this.handleCancelBtnClick(e)}>{data.texts.cancel}</Button>
             </div>
          </div>);
    }
    
-   handleCancelBtnClick()
+   handleCancelBtnClick(e)
    {
+      e.preventDefault();
       this.props.socket.emit('cancelSignUp', {});
    }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import waitGif from './wait.gif'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Tabs, Tab } from 'react-bootstrap';
 
 let homeDebugCounter = 0;
 
@@ -17,6 +17,7 @@ export class Home extends React.Component
       props.socket.on('unknownName', () => this.handleUnknownName());
       props.socket.on('indexError', () => this.handleServerError());
       props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
+      props.socket.on('displayPage', () => this.setState(this.initialState));
       
       this.initialState =
       {
@@ -25,10 +26,20 @@ export class Home extends React.Component
          navBarWaitDisplay: 'none',
          questionnaireWaitDisplay: 'none',
          questionnaireLanguageWaitDisplay: 'none',
-         levelWaitDisplay: 'none'
+         levelWaitDisplay: 'none',
+         startWaitDisplay: 'none',
+         tableWaitDisplay: 'none'
       };
       
       this.state = this.initialState;
+      
+      this.durations =
+      [
+         { n: 1, a: 'day'},
+         { n: 7, a: 'week'},
+         { n: 30, a: 'month'},
+         { n: 365, a: 'year'},
+      ];
    }
    
    render()
@@ -70,6 +81,14 @@ export class Home extends React.Component
             return (<option key={level.id} value={level.id}>{level.name}</option>);
          });
       }
+      
+      let tabs = this.durations.map((duration) =>
+      {
+         return (
+            <Tab key={duration.n} eventKey={duration.n} title={data.texts[duration.a]}>
+               {data.texts[duration.a]}
+            </Tab>);  
+      });
       
       return (
          <div style={{display: (data.page === 'index' ? 'block' : 'none')}} className="home">
@@ -116,7 +135,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexQuestionnaireWait" className="waitImg"/>
+                        <img src={waitGif} className="waitImg" style={{display: this.state.questionnaireWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
@@ -134,7 +153,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexQuestionnaireLanguageWait" className="waitImg"/>
+                        <img src={waitGif} className="waitImg" style={{display: this.state.questionnaireLanguageWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="row">
@@ -151,19 +170,51 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} id="indexLevelWait" className="waitImg"/>
+                        <img src={waitGif} className="waitImg" style={{display: this.state.levelWaitDisplay}}/>
                      </div>
                   </div>
-                  
+                  <div className="row" style={{marginTop: '20px'}}>
+                     <div className="col-sm-4 col-sm-offset-4">
+                        <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{data.texts.start}</Button>
+                     </div>
+                     <div className="col-sm-1">
+                        <img src={waitGif} className="waitImg"  style={{display: this.state.startWaitDisplay}}/>
+                     </div>
+                  </div>
                </form>
+               <div className="col-sm-10 col-sm-offset-1" style={{marginTop: '60px'}}>
+                  <div className="row">
+                     <div className="text-center col-sm-10 col-sm-offset-1" style={{marginBottom: '6px'}}>
+                        <strong>{data.texts.highScores}</strong>
+                     </div>
+                     <div className="text-center col-sm-1">
+                        <img src={waitGif} className="waitImg" style={{display: this.state.tableWaitDisplay}}/>
+                     </div>
+                  </div>
+                  <Tabs activeKey={data.scoreTab} onSelect={(key) => this.handleSelectTab(data, key)} id="tableTabs" animation={false}>
+                     {tabs}
+                  </Tabs>
+               </div>
+               <footer>
+                  <div>
+                     {data.texts.version}:
+                     <span> </span>
+                     {data.version}
+                  </div>
+                  <div>
+                     {data.texts.sourceCode}:
+                     <span> </span>
+                     <a target="_blank" href={data.sourceUrl}>{data.sourceUrl}</a>
+                  </div>
+                  <div>
+                     {data.texts.issues}:
+                     <span> </span>
+                     <a target="_blank" href={data.issueUrl}>{data.issueUrl}</a>
+                  </div>
+               </footer>
             </div>
          </div>);
    }
-   
-   /* html += '<div class="row" style="margin-top:20px;"><div class="col-sm-4 col-sm-offset-4"><button id="indexStartBtn" class="btn btn-success">'
-         + pageData.texts.start
-         + '</button></div><div class="col-sm-1"><img src="wait.gif" id="indexStartWait" class="waitImg"/></div></div>';
-   */
    
    renderNavbarForm(data)
    {
@@ -227,21 +278,21 @@ export class Home extends React.Component
    {
       this.handleDataChange(data, field, value);
       this.emitLevelChoice(data);
-      document.getElementById('indexQuestionnaireWait').style.display = 'inline';
+      this.handleStateChange('questionnaireWaitDisplay', 'inline');
    }
    
    handleQuestionnaireLanguageChange(data, field, value)
    {
       this.handleDataChange(data, field, value);
       this.emitLevelChoice(data);
-      document.getElementById('indexQuestionnaireLanguageWait').style.display = 'inline';
+      this.handleStateChange('questionnaireLanguageWaitDisplay', 'inline');
    }
    
    handleLevelChange(data, field, value)
    {
       this.handleDataChange(data, field, value);
       this.emitLevelChoice(data);
-      document.getElementById('indexLevelWait').style.display = 'inline';
+      this.handleStateChange('levelWaitDisplay', 'inline');
    }
    
    emitLevelChoice(data)
@@ -271,7 +322,7 @@ export class Home extends React.Component
    {
       e.preventDefault();
       this.props.socket.emit('signOut', {});
-      this.handleStateChange('navBarWaitDisplay', 'inline');
+      this.handleStateChange('navBarWaitDisplay', 'inline');   
    }
    
    handleSignUpBtnClick(e)
@@ -281,21 +332,25 @@ export class Home extends React.Component
       this.handleStateChange('navBarWaitDisplay', 'inline');
    }
    
+   handleStartBtnClick(e)
+   {
+      e.preventDefault();
+      this.props.socket.emit('newGame', {});
+      this.handleStateChange('startWaitDisplay', 'inline');
+   }
+   
+   handleSelectTab(data, key)
+   {
+      this.handleDataChange(data, 'scoreTab', key);
+      this.props.socket.emit('scoreTab', { n: key });
+   }
+   
    // 2- Handlers for server messages
    
    handleUpdateSiteLanguage(texts)
    {
       this.handleStateChange('navBarWaitDisplay', 'none');
       this.handleDataChange(this.props.userInterfaceState.data, 'texts', texts);
-      
-      // Todo: Adapt this line when table will be implemented
-      /*d.forEach(function(i)
-      {
-         $('#nameTh' + i).text(data.name);
-         $('#scoreTh' + i).text(data.score);
-         $('#timeTh' + i).text(data.time);
-      });*/
-         
       this.emitLevelChoice(this.props.userInterfaceState.data);
    }
    
@@ -313,9 +368,9 @@ export class Home extends React.Component
    
    handleUpdateSelects(data)
    {
-      document.getElementById('indexQuestionnaireWait').style.display = 'none';
-      document.getElementById('indexQuestionnaireLanguageWait').style.display = 'none';
-      document.getElementById('indexLevelWait').style.display = 'none';
+      this.handleStateChange('questionnaireWaitDisplay', 'none');
+      this.handleStateChange('questionnaireLanguageWaitDisplay', 'none');
+      this.handleStateChange('levelWaitDisplay', 'none');
       
       const data0 = this.props.userInterfaceState.data;
 

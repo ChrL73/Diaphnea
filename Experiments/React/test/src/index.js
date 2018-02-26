@@ -7,18 +7,13 @@ import waitGif from './wait.gif'
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-let userInterfaceDebugCounter = 0;
-
 class UserInterface extends React.Component
 {
    constructor(props)
    {
       super(props);
       
-      ++userInterfaceDebugCounter;
-      if (userInterfaceDebugCounter !== 1) throw(String('Error: UserInterface constructor should be called only once'));
-      
-      this.socket = window.io.connect('192.168.50.31:3002');
+      this.socket = window.io.connect('gilberte:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
       this.state =

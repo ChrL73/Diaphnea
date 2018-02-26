@@ -1,6 +1,8 @@
 import React from 'react';
 import waitGif from './wait.gif'
 import { Modal, Button, Tabs, Tab } from 'react-bootstrap';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css'
 
 let homeDebugCounter = 0;
 
@@ -17,7 +19,8 @@ export class Home extends React.Component
       props.socket.on('unknownName', () => this.handleUnknownName());
       props.socket.on('indexError', () => this.handleServerError());
       props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
-      props.socket.on('displayPage', () => this.setState(this.initialState));
+      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
+      props.socket.on('tables', (tableData) => this.handleUpdateTable(tableData));
       
       this.initialState =
       {
@@ -28,7 +31,14 @@ export class Home extends React.Component
          questionnaireLanguageWaitDisplay: 'none',
          levelWaitDisplay: 'none',
          startWaitDisplay: 'none',
-         tableWaitDisplay: 'none'
+         tableWaitDisplay: 'none',
+         tables:
+         {
+            n1: [{ rank: '', name: '', score: '', time: '' }],
+            n7: [{ rank: '', name: '', score: '', time: '' }],
+            n30: [{ rank: '', name: '', score: '', time: '' }],
+            n365: [{ rank: '', name: '', score: '', time: '' }]
+         }
       };
       
       this.state = this.initialState;
@@ -82,11 +92,21 @@ export class Home extends React.Component
          });
       }
       
+      function rankFormatter(cell, row) { return '<strong>' + cell + '</strong>';}
+      function timeFormatter(cell, row) { return cell + (cell ? 's' : '');}
+      
       let tabs = this.durations.map((duration) =>
       {
          return (
             <Tab key={duration.n} eventKey={duration.n} title={data.texts[duration.a]}>
-               {data.texts[duration.a]}
+               <div style={{marginTop: '16px'}}>
+                  <BootstrapTable data={this.state.tables['n' + duration.n]} bordered={false} >
+                     <TableHeaderColumn width="10%" dataField="rank" isKey={true} dataAlign="center" dataFormat={rankFormatter}></TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="name" dataAlign="center">{data.texts.name}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="score" dataAlign="center" >{data.texts.score}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="time" dataAlign="center" dataFormat={timeFormatter}>{data.texts.time}</TableHeaderColumn>
+                 </BootstrapTable>
+               </div>
             </Tab>);  
       });
       
@@ -297,8 +317,14 @@ export class Home extends React.Component
    
    emitLevelChoice(data)
    {
-      // Todo: Adapt this line when table will be implemented
-      //d.forEach(function(i) { $('#tbody' + i).empty();});
+      const emptyTables =
+      {
+         n1: [{ rank: '', name: '', score: '', time: '' }],
+         n7: [{ rank: '', name: '', score: '', time: '' }],
+         n30: [{ rank: '', name: '', score: '', time: '' }],
+         n365: [{ rank: '', name: '', score: '', time: '' }]
+      }
+      this.handleStateChange('tables', emptyTables);
          
       if (!data.userName)
       {
@@ -347,6 +373,49 @@ export class Home extends React.Component
    
    // 2- Handlers for server messages
    
+   handleDisplayPage(data)
+   {
+      this.setState(this.initialState)
+      this.emitUpdateTables();
+   }
+   
+   emitUpdateTables()
+   {
+      const data = this.props.userInterfaceState.data;
+      this.props.socket.emit('getTables', { questionnaireId: data.questionnaireId, levelId: data.levelId });
+      this.handleStateChange('tableWaitDisplay', 'inline');
+   }
+   
+   handleUpdateTable(tableData)
+   {
+      const data = this.props.userInterfaceState.data;
+
+      let stateTables = this.state.tables;
+      
+      if (tableData.questionnaireId === data.questionnaireId && tableData.levelId === data.levelId)
+      {
+         this.handleStateChange('tableWaitDisplay', 'none');
+         tableData.tables.forEach(function(table)
+         {
+            let t = [];
+            table.rows.forEach(function(row, rank)
+            {
+               let r = { rank: rank + 1, name: row.name, score: row.score, time: (0.001 * row.time_ms).toFixed(3) };
+               t.push(r);
+            });
+            
+            if (t.length == 0) t = [{ rank: '', name: '', score: '', time: '' }];
+            stateTables['n' + table.d] = t;
+         });
+         
+         this.handleStateChange('tables', stateTables);
+      }
+      else
+      {
+         setTimeout(this.emitUpdateTables, 200);
+      }
+   }
+   
    handleUpdateSiteLanguage(texts)
    {
       this.handleStateChange('navBarWaitDisplay', 'none');
@@ -383,7 +452,6 @@ export class Home extends React.Component
       data0.levelId = data.levelId;
       this.props.changeData(data0);
       
-      // Todo: Adapt this line when table will be implemented
-      //updateTable();
+      this.emitUpdateTables();
    }
 }

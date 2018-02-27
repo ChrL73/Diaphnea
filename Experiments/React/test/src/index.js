@@ -13,7 +13,7 @@ class UserInterface extends React.Component
    {
       super(props);
       
-      this.socket = window.io.connect('gilberte:3002');
+      this.socket = window.io.connect('192.168.50.31:3002');
       this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
       this.state =
@@ -42,10 +42,11 @@ class UserInterface extends React.Component
    {
       return (
          <div className="userInterface">
-            <img src={waitGif} className="waitImg" style={{display: this.state.data.page === 'none' ? 'inline' : 'none'}}/>
+            <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.data.page === 'none' ? 'inline' : 'none'}}/>
             <Home userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
                   getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <SignUp userInterfaceState={this.state} socket={this.socket}/>
+            <SignUp userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
+                    getCookieExpires={(days) => this.getCookieExpires(days)}/>
             <Game userInterfaceState={this.state} socket={this.socket}/>
          </div>);
    }

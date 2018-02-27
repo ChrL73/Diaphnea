@@ -183,9 +183,6 @@ io.on('connection', function(socket)
          siteLanguageId: context.siteLanguageId,
          name1Message: context.signUpMessages.name1,
          name2Message: context.signUpMessages.name2,
-         pass1aMessage: context.signUpMessages.pass1a,
-         pass1bMessage: context.signUpMessages.pass1b,
-         pass2Message: context.signUpMessages.pass2,
          errorMessage: context.signUpMessages.error
       };
 
@@ -421,6 +418,8 @@ io.on('connection', function(socket)
 
          context.signUpMessages.name1 = (data.name.length < 2 || data.name.length > 16);
          if (context.signUpMessages.name1) ok = false;
+         
+         context.signUpMessages.name2 = false;
          
          context.signUpMessages.pass1a = (data.pass1.length < 8);
          if (context.signUpMessages.pass1a) ok = false;

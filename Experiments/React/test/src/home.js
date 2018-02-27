@@ -4,16 +4,11 @@ import { Modal, Button, Tabs, Tab } from 'react-bootstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css'
 
-let homeDebugCounter = 0;
-
 export class Home extends React.Component
 {
    constructor(props)
    {
       super(props);
-      
-      ++homeDebugCounter;
-      if (homeDebugCounter !== 1) throw(String('Error: Home constructor should be called only once'));
       
       props.socket.on('updateIndex', (texts) => this.handleUpdateSiteLanguage(texts));
       props.socket.on('unknownName', () => this.handleUnknownName());
@@ -24,6 +19,7 @@ export class Home extends React.Component
       
       this.initialState =
       {
+         pass: '',
          showModal1: false,
          showModal2: false,
          navBarWaitDisplay: 'none',
@@ -155,7 +151,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" style={{display: this.state.questionnaireWaitDisplay}}/>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
@@ -173,7 +169,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" style={{display: this.state.questionnaireLanguageWaitDisplay}}/>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireLanguageWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="row">
@@ -190,7 +186,7 @@ export class Home extends React.Component
                         </select>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" style={{display: this.state.levelWaitDisplay}}/>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.levelWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="row" style={{marginTop: '20px'}}>
@@ -198,7 +194,7 @@ export class Home extends React.Component
                         <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{data.texts.start}</Button>
                      </div>
                      <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg"  style={{display: this.state.startWaitDisplay}}/>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.startWaitDisplay}}/>
                      </div>
                   </div>
                </form>
@@ -208,7 +204,7 @@ export class Home extends React.Component
                         <strong>{data.texts.highScores}</strong>
                      </div>
                      <div className="text-center col-sm-1">
-                        <img src={waitGif} className="waitImg" style={{display: this.state.tableWaitDisplay}}/>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.tableWaitDisplay}}/>
                      </div>
                   </div>
                   <Tabs activeKey={data.scoreTab} onSelect={(key) => this.handleSelectTab(data, key)} id="tableTabs" animation={false}>
@@ -245,7 +241,7 @@ export class Home extends React.Component
                <label>{data.userName}</label>
                <span> </span>
                <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{data.texts.signOut}</Button>
-               <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" style={{display: this.state.navBarWaitDisplay}}/></div>
+               <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.navBarWaitDisplay}}/></div>
             </form>);
       }
       else
@@ -259,13 +255,13 @@ export class Home extends React.Component
                   <span> </span>
                   <label htmlFor="indexPassInput">{data.texts.password}:</label>
                   <span> </span>
-                  <input className="form-control input-sm" type="password" id="indexPassInput"/>
+                  <input className="form-control input-sm" type="password" id="indexPassInput" value={this.state.pass} onChange={(e) => this.handleStateChange('pass', e.target.value)}/>
                   <span> </span>
                   <div className="visible-xs"><br/></div>
                   <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{data.texts.signIn}</Button>
                   <span> </span>
                   <Button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</Button>
-                  <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg"  style={{display: this.state.navBarWaitDisplay}}/></div>
+                  <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.navBarWaitDisplay}}/></div>
                </small>
             </form>);
       }
@@ -340,7 +336,7 @@ export class Home extends React.Component
    handleSignInBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signIn', { name: this.props.userInterfaceState.data.tmpName, pass: document.getElementById('indexPassInput').value });
+      this.props.socket.emit('signIn', { name: this.props.userInterfaceState.data.tmpName, pass: this.state.pass });
       this.handleStateChange('navBarWaitDisplay', 'inline');
    }
 
@@ -404,7 +400,7 @@ export class Home extends React.Component
                t.push(r);
             });
             
-            if (t.length == 0) t = [{ rank: '', name: '', score: '', time: '' }];
+            if (t.length === 0) t = [{ rank: '', name: '', score: '', time: '' }];
             stateTables['n' + table.d] = t;
          });
          

@@ -373,29 +373,16 @@ io.on('connection', function(socket)
    socket.on('signUp', function(data)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);
-      
-      if (socket.request.session.userId) // Todo: Test this case
+      socket.request.session.userId = undefined;
+      socket.request.session.save(function(err)
       {
-         socket.request.session.userId = undefined;
-         socket.request.session.save(function(err)
-         {
-            if (err) { console.log(err); /* Todo: Handle error */ } 
-            continueSignUp();
-         });
-      }
-      else
-      {
-         continueSignUp();
-      }
-      
-      function continueSignUp()
-      {
+         if (err) { console.log(err); /* Todo: Handle error */ } 
          getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
          { 
             context.tmpName = data.name;      
             emitDisplaySignUp(context);
          });
-      }
+      });
    });
    
    socket.on('cancelSignUp', function(data)

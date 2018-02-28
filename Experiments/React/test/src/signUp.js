@@ -21,7 +21,7 @@ export class SignUp extends React.Component
          pass1bMessageDisplay: 'none',
          pass2MessageDisplay: 'none',
          languageWaitDisplay: 'none',
-         buttonWaitDisplay: 'none',
+         buttonWaitDisplay: 'none'
       };
       
       this.state = this.initialState;

@@ -47,7 +47,7 @@ class UserInterface extends React.Component
                   getCookieExpires={(days) => this.getCookieExpires(days)}/>
             <SignUp userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
                     getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <Game userInterfaceState={this.state} socket={this.socket}/>
+            <Game userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}/>
          </div>);
    }
 }

@@ -504,7 +504,8 @@ io.on('connection', function(socket)
       var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context1)
       {
-         var name = context1.user.name;
+         var name;
+         if (context1.user) name = context1.user.name;
          
          socket.request.session.userId = undefined;    
          socket.request.session.save(function(err)
@@ -512,7 +513,7 @@ io.on('connection', function(socket)
             if (err) { console.log(err); /* Todo: Handle error */ } 
             getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
             {
-               context2.tmpName = name;
+               if (name) context2.tmpName = name;
                emitDisplayIndex(context2);
             });
          });

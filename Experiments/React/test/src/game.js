@@ -8,32 +8,31 @@ export class Game extends React.Component
    {
       super(props);
       
-      props.socket.on('displayPage', () => this.setState(this.initialState));
+      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       
-      this.initialState =
+      this.stateReset =
       {
          timeWaitDisplay: 'none',
-         questionWaitVisible: {}
+         questionWaitVisible: {},
+         texts: {}
       };
       
-      this.state = this.initialState;
+      this.state = this.stateReset;
    }
    
    render()
    {
-      const data = this.props.userInterfaceState.data;
-      
       let questions;
-      if (data.questions)
+      if (this.state.questions)
       {
-         questions = data.questions.map((question, iQuestion) =>
+         questions = this.state.questions.map((question, iQuestion) =>
          {
-            let disabled = data.questionStates[iQuestion].answered;
+            let disabled = this.state.questionStates[iQuestion].answered;
             
             const choices = question.choices.map((choice, iChoice) =>
             {
-               let checked = Boolean(data.questionStates[iQuestion].choiceStates[iChoice] & 1);
-               let rightChoice = Boolean(data.questionStates[iQuestion].choiceStates[iChoice] & 2);
+               let checked = Boolean(this.state.questionStates[iQuestion].choiceStates[iChoice] & 1);
+               let rightChoice = Boolean(this.state.questionStates[iQuestion].choiceStates[iChoice] & 2);
                let classStr;
                if (disabled && rightChoice) classStr = 'boldChoice';
                
@@ -43,12 +42,12 @@ export class Game extends React.Component
                   if (question.isMultiple)
                   { 
                      return (<input id={'input' + iQuestion + '_' + iChoice} type="checkbox" checked={checked} disabled={disabled} style={{marginLeft: '12px'}}
-                                    onChange={(e) => _this.handleCheckBoxChange(data, e.target)}/>);
+                                    onChange={(e) => _this.handleCheckBoxChange(e.target)}/>);
                   }
                   else
                   {
                      return (<input id={'input' + iQuestion + '_' + iChoice} type="radio" name={'radio' + iQuestion} checked={checked} disabled={disabled} style={{marginLeft: '12px'}}
-                                    onChange={(e) => _this.handleRadioChange(data, e.target)}/>);
+                                    onChange={(e) => _this.handleRadioChange(e.target)}/>);
                   }
                }
                
@@ -81,11 +80,11 @@ export class Game extends React.Component
             });
             
             return (
-               <div className="question panel panel-info" key={'question' + iQuestion} style={{display: iQuestion === data.displayedQuestion ? 'block' : 'none'}}>
+               <div className="question panel panel-info" key={'question' + iQuestion} style={{display: iQuestion === this.state.displayedQuestion ? 'block' : 'none'}}>
                   <div className="panel-heading">
-                     {data.texts.question}
+                     {this.state.texts.question}
                      <span> </span>
-                     {iQuestion + 1}/{data.questions.length}
+                     {iQuestion + 1}/{this.state.questions.length}
                      <img src={waitGif} className="waitImg" alt="Waiting for server..."
                           style={{marginTop: '-6px', marginBottom: '-6px', display: (this.state.questionWaitVisible[iQuestion] ? 'inline' : 'none')}}/>
                   </div>
@@ -98,30 +97,30 @@ export class Game extends React.Component
       }
       
       return (
-         <div style={{display: (data.page === 'game' ? 'block' : 'none')}} className="game">
+         <div style={{display: (this.state.page === 'game' ? 'block' : 'none')}} className="game">
             <div className="container-fluid">
                <header className="row bg-success" id="gameHeader" style={{paddingLeft: '30px', borderBottom: '1px solid #bbd8a2'}}>
                   <span className="gameHeader">
-                     {data.texts.questionnaire}:&nbsp;
-                     <strong>{data.questionnaireName}</strong>
+                     {this.state.texts.questionnaire}:&nbsp;
+                     <strong>{this.state.questionnaireName}</strong>
                   </span>
                   <span className="gameHeader">
-                     {data.texts.level}:&nbsp;
-                     <strong>{data.levelName}</strong>
+                     {this.state.texts.level}:&nbsp;
+                     <strong>{this.state.levelName}</strong>
                   </span>
-                  {data.texts.score}:&nbsp;
+                  {this.state.texts.score}:&nbsp;
                   <span className="gameHeader">
-                     {data.rightAnswerCount}/{data.answerCount}
+                     {this.state.rightAnswerCount}/{this.state.answerCount}
                   </span>
-                  {data.texts.time}:&nbsp;
-                  {data.finalTime ? data.finalTime : Math.floor(0.001 * data.time)}s
+                  {this.state.texts.time}:&nbsp;
+                  {this.state.finalTime ? this.state.finalTime : Math.floor(0.001 * this.state.time)}s
                   <img src={waitGif} alt="Waiting for server..." className="waitImg" style={{display: this.state.timeWaitDisplay}}/>
                </header>
                <div className="row">
                   <div className="col-lg-3 col-md-4 col-sm-5">
                      <div id="questionDiv">
                         {questions}
-                        <Button className="btn btn-warning" onClick={(e) => this.handleStopBtnClick(e)}>{data.texts.stop}</Button>
+                        <Button className="btn btn-warning" onClick={(e) => this.handleStopBtnClick(e)}>{this.state.texts.stop}</Button>
                      </div>
                   </div>
                   <div className="col-lg-9 col-md-8 col-sm-7" id="canvasColumn">
@@ -154,19 +153,6 @@ export class Game extends React.Component
       html += '</div>
    */
    
-   handleDataChange(data, field, value)
-   {
-      data[field] = value;
-      this.props.changeData(data);
-   }
-   
-   handleStateChange(field, value)
-   {
-      let state = this.state
-      state[field] = value;
-      this.setState(state);
-   }
-   
    // 1- Handlers for user actions
    
    handleStopBtnClick(e)
@@ -175,24 +161,37 @@ export class Game extends React.Component
       this.props.socket.emit('stopGame', {});
    }
    
-   handleCheckBoxChange(data, target)
+   handleCheckBoxChange(target)
    {
       const x = target.id.match(/[0-9]+/g);
       const iQuestion = x[0];
       const iChoice = x[1];
       
-      let questionStates = data.questionStates;
+      let questionStates = this.state.questionStates;
       if (target.checked) questionStates[iQuestion].choiceStates[iChoice] |= 1;
       else questionStates[iQuestion].choiceStates[iChoice] &= 2;
-      this.handleDataChange(data, 'questionStates', questionStates);
+      this.setState({ questionStates: questionStates });
    }
    
-   handleRadioChange(data, target)
+   handleRadioChange(target)
    {
       const x = target.id.match(/[0-9]+/g);
       const iQuestion = x[0];
       const iChoice = x[1];
       
       
+   }
+   
+   // 2- Handlers for server messages
+   
+   handleDisplayPage(data)
+   {
+      let state = {};
+      Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
+      
+      if (data.page === 'game') Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+      else state.page = data.page;
+      
+      this.setState(state);
    }
 }

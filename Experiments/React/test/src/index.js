@@ -13,22 +13,10 @@ class UserInterface extends React.Component
    {
       super(props);
       
-      this.socket = window.io.connect('192.168.50.31:3002');
-      this.socket.on('displayPage', (data) => this.handleDisplayPage(data));
+      this.socket = window.io.connect('192.168.50.113:3002');
+      this.socket.on('displayPage', (data) => this.setState({ page: data.page }));
       
-      this.state =
-      {
-         data:
-         {
-            page: 'none',
-            texts: {}
-         }
-      };
-   }
-      
-   handleDisplayPage(data)
-   {
-      this.setState({ data: data });
+      this.state = { page: 'none' };
    }
    
    getCookieExpires(days)
@@ -42,12 +30,10 @@ class UserInterface extends React.Component
    {
       return (
          <div className="userInterface">
-            <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.data.page === 'none' ? 'inline' : 'none'}}/>
-            <Home userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
-                  getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <SignUp userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}
-                    getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <Game userInterfaceState={this.state} socket={this.socket} changeData={(data) => this.setState({ data: data })}/>
+            <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.page === 'none' ? 'inline' : 'none'}}/>
+            <Home socket={this.socket} getCookieExpires={(days) => this.getCookieExpires(days)}/>
+            <SignUp socket={this.socket} getCookieExpires={(days) => this.getCookieExpires(days)}/>
+            <Game socket={this.socket} />
          </div>);
    }
 }

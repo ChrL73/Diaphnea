@@ -8,11 +8,11 @@ export class SignUp extends React.Component
    {
       super(props);
       
+      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       props.socket.on('updateSignUp', (texts) => this.handleUpdateSiteLanguage(texts));
-      props.socket.on('signUpError', (errorData) => this.handleServerError(errorData));
-      props.socket.on('displayPage', () => this.setState(this.initialState));
+      props.socket.on('signUpError', (data) => this.handleServerError(data));
       
-      this.initialState =
+      this.stateReset =
       {
          pass1: '',
          pass2: '',
@@ -21,27 +21,26 @@ export class SignUp extends React.Component
          pass1bMessageDisplay: 'none',
          pass2MessageDisplay: 'none',
          languageWaitDisplay: 'none',
-         buttonWaitDisplay: 'none'
+         buttonWaitDisplay: 'none',
+         texts: {}
       };
       
-      this.state = this.initialState;
+      this.state = this.stateReset;
    }
    
    render()
    {
-      const data = this.props.userInterfaceState.data;
-      
       let siteLanguages;
-      if (data.siteLanguageList)
+      if (this.state.siteLanguageList)
       {
-         siteLanguages = data.siteLanguageList.map((language) =>
+         siteLanguages = this.state.siteLanguageList.map((language) =>
          {
             return (<option key={language.id} value={language.id}>{language.name}</option>);
          });
       }
       
       return (
-         <div style={{display: (data.page === 'signUp' ? 'block' : 'none')}} className="signUp">
+         <div style={{display: (this.state.page === 'signUp' ? 'block' : 'none')}} className="signUp">
             <div className="container">
                <div className="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">  
                   <header>
@@ -49,8 +48,8 @@ export class SignUp extends React.Component
                         <div className="col-sm-8 col-sm-offset-2">
                            <div className="navbar text-center">
                               <form className="navbar-form">
-                                 <select className="form-control input-sm"  value={data.siteLanguageId}
-                                         onChange={(e) => this.handleSiteLanguageChange(data, 'siteLanguageId', e.target.value)}>
+                                 <select className="form-control input-sm"  value={this.state.siteLanguageId}
+                                         onChange={(e) => this.handleSiteLanguageChange(e.target.value)}>
                                     {siteLanguages}
                                  </select>
                               </form>
@@ -61,36 +60,39 @@ export class SignUp extends React.Component
                         </div>
                      </div>
                   </header>
-                  <Modal show={this.state.showModal} onHide={() => this.handleStateChange('showModal', false)}>               
+                  <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>               
                      <Modal.Body className="bg-danger">
-                        <span>{data.texts.internalServerError}</span>
-                        <Button className="close" onClick={() => this.handleStateChange('showModal', false)}>x</Button>
+                        <span>{this.state.texts.internalServerError}</span>
+                        <Button className="close" onClick={() => this.setState({ showModal: false })}>x</Button>
                      </Modal.Body>
                   </Modal>
                   <Form>
-                     <FormGroup id="nameGroup" validationState={(data.name1Message || data.name2Message) ? 'error' : null}>
-                        <label htmlFor="signUpNameInput">{data.texts.name}:</label>
-                        <input className="form-control" type="text" id="signUpNameInput" value={data.name ? data.name : ''} onChange={(e) => this.handleDataChange(data, 'name', e.target.value)}/>
-                        <div className="text-danger" style={{display: (data.name1Message ? 'block' : 'none')}}>{data.texts.nameMustBeBetween2And16Chars}</div>
-                        <div className="text-danger" style={{display: (data.name2Message ? 'block' : 'none')}}>{data.texts.theNameIsAlreadyUsed}</div>
+                     <FormGroup id="nameGroup" validationState={(this.state.name1Message || this.state.name2Message) ? 'error' : null}>
+                        <label htmlFor="signUpNameInput">{this.state.texts.name}:</label>
+                        <input className="form-control" type="text" id="signUpNameInput" value={this.state.name ? this.state.name : ''}
+                               onChange={(e) => this.setState({ name: e.target.value })}/>
+                        <div className="text-danger" style={{display: (this.state.name1Message ? 'block' : 'none')}}>{this.state.texts.nameMustBeBetween2And16Chars}</div>
+                        <div className="text-danger" style={{display: (this.state.name2Message ? 'block' : 'none')}}>{this.state.texts.theNameIsAlreadyUsed}</div>
                      </FormGroup>
                      <FormGroup id="pass1Group" validationState={(this.state.pass1aMessageDisplay !== 'none' || this.state.pass1bMessageDisplay !== 'none') ? 'error' : null}>
-                        <label htmlFor="signUpPassInput1">{data.texts.password}:</label>
-                        <input className="form-control" type="password" id="signUpPassInput1" value={this.state.pass1} onChange={(e) => this.handleStateChange('pass1', e.target.value)}/>
-                        <div className="text-danger" style={{display: this.state.pass1aMessageDisplay}}>{data.texts.passwordMustContainAtLeast8Chars}</div>
-                        <div className="text-danger" style={{display: this.state.pass1bMessageDisplay}}>{data.texts.passwordMustContainOnlyLettersNumbersEtc}</div>
+                        <label htmlFor="signUpPassInput1">{this.state.texts.password}:</label>
+                        <input className="form-control" type="password" id="signUpPassInput1" value={this.state.pass1}
+                               onChange={(e) => this.setState({ pass1: e.target.value })}/>
+                        <div className="text-danger" style={{display: this.state.pass1aMessageDisplay}}>{this.state.texts.passwordMustContainAtLeast8Chars}</div>
+                        <div className="text-danger" style={{display: this.state.pass1bMessageDisplay}}>{this.state.texts.passwordMustContainOnlyLettersNumbersEtc}</div>
                      </FormGroup>
                      <FormGroup id="pass2Group" validationState={(this.state.pass2MessageDisplay !== 'none') ? 'error' : null}>
-                        <label htmlFor="signUpPassInput2">{data.texts.confirmPassword}:</label>
-                        <input className="form-control" type="password" id="signUpPassInput2" value={this.state.pass2} onChange={(e) => this.handleStateChange('pass2', e.target.value)}/>
-                        <div className="text-danger" style={{display: this.state.pass2MessageDisplay}}>{data.texts.twoPasswordsAreNotIdentical}</div>
+                        <label htmlFor="signUpPassInput2">{this.state.texts.confirmPassword}:</label>
+                        <input className="form-control" type="password" id="signUpPassInput2" value={this.state.pass2}
+                               onChange={(e) => this.setState({ pass2: e.target.value })}/>
+                        <div className="text-danger" style={{display: this.state.pass2MessageDisplay}}>{this.state.texts.twoPasswordsAreNotIdentical}</div>
                      </FormGroup>
                      <FormGroup>
                         <div className="row">
                            <div className="col-sm-10 col-xs-10">
-                              <button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</button>
+                              <button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)}>{this.state.texts.signUp}</button>
                               <span> </span>
-                              <Button className="btn btn-warning" onClick={(e) => this.handleCancelBtnClick(e)}>{data.texts.cancel}</Button>
+                              <Button className="btn btn-warning" onClick={(e) => this.handleCancelBtnClick(e)}>{this.state.texts.cancel}</Button>
                            </div>
                            <div className="col-sm-1 col-xs-1">
                               <img src={waitGif} alt="Waiting for server..." className="waitImg" style={{display: this.state.buttonWaitDisplay}}/>
@@ -103,37 +105,20 @@ export class SignUp extends React.Component
          </div>);
    }
    
-   handleDataChange(data, field, value)
-   {
-      data[field] = value;
-      this.props.changeData(data);
-   }
-   
-   handleStateChange(field, value)
-   {
-      let state = this.state
-      state[field] = value;
-      this.setState(state);
-   }
-   
    // 1- Handlers for user actions
    
-   handleSiteLanguageChange(data, field, value)
+   handleSiteLanguageChange(value)
    {
-      this.handleDataChange(data, field, value);
+      this.setState({ siteLanguageId: value, languageWaitDisplay: 'inline' });
       document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
       this.props.socket.emit('languageChoice', { page: 'signUp', languageId: value });
-      this.handleStateChange('languageWaitDisplay', 'inline');
    }
    
    handleSignUpBtnClick(e)
    {
       e.preventDefault();
-      const name = this.props.userInterfaceState.data.name;
-      const pass1 = this.state.pass1;
-      const pass2 = this.state.pass2;
-      this.props.socket.emit('submitSignUp', { name: name, pass1: pass1, pass2: pass2 });
-      this.handleStateChange('buttonWaitDisplay', 'inline');
+      this.props.socket.emit('submitSignUp', { name: this.state.name, pass1: this.state.pass1, pass2: this.state.pass2 });
+      this.setState({ buttonWaitDisplay: 'inline' });
    }
    
    handleCancelBtnClick(e)
@@ -144,24 +129,33 @@ export class SignUp extends React.Component
    
    // 2- Handlers for server messages
    
-   handleUpdateSiteLanguage(texts)
+   handleDisplayPage(data)
    {
-      this.handleStateChange('languageWaitDisplay', 'none');
-      this.handleDataChange(this.props.userInterfaceState.data, 'texts', texts);
+      let state = {};
+      Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
+      
+      if (data.page === 'signUp') Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+      else state.page = data.page;
+      
+      this.setState(state);
    }
    
-   handleServerError(errorData)
+   handleUpdateSiteLanguage(texts)
    {
-      this.handleStateChange('buttonWaitDisplay', 'none');
-      
-      const data = this.props.userInterfaceState.data;
-      this.handleDataChange(data, 'name1Message', errorData.name1Message);
-      this.handleDataChange(data, 'name2Message', errorData.name2Message);
-      
-      this.handleStateChange('pass1aMessageDisplay', errorData.pass1aMessage ? 'block' : 'none');
-      this.handleStateChange('pass1bMessageDisplay', errorData.pass1bMessage ? 'block' : 'none');
-      this.handleStateChange('pass2MessageDisplay', errorData.pass2Message ? 'block' : 'none');
-      
-      if (errorData.errorMessage) this.handleStateChange('showModal', true);
+      this.setState({ languageWaitDisplay: 'none', texts: texts });
+   }
+   
+   handleServerError(data)
+   {
+      this.setState(
+      {
+         buttonWaitDisplay: 'none',
+         name1Message: data.name1Message,
+         name2Message: data.name2Message,
+         pass1aMessageDisplay: data.pass1aMessage ? 'block' : 'none',
+         pass1bMessageDisplay: data.pass1bMessage ? 'block' : 'none',
+         pass2MessageDisplay: data.pass2Message ? 'block' : 'none',
+         showModal: Boolean(data.errorMessage)
+      });
    }
 }

@@ -10,14 +10,14 @@ export class Home extends React.Component
    {
       super(props);
       
+      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       props.socket.on('updateIndex', (texts) => this.handleUpdateSiteLanguage(texts));
       props.socket.on('unknownName', () => this.handleUnknownName());
       props.socket.on('indexError', () => this.handleServerError());
       props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
-      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       props.socket.on('tables', (tableData) => this.handleUpdateTable(tableData));
       
-      this.initialState =
+      this.stateReset =
       {
          pass: '',
          showModal1: false,
@@ -34,10 +34,12 @@ export class Home extends React.Component
             n7: [{ rank: '', name: '', score: '', time: '' }],
             n30: [{ rank: '', name: '', score: '', time: '' }],
             n365: [{ rank: '', name: '', score: '', time: '' }]
-         }
+         },
+         texts: {},
+         userName: undefined // Required to undefine 'this.state.userName' when the user signs out
       };
       
-      this.state = this.initialState;
+      this.state = this.stateReset;
       
       this.durations =
       [
@@ -50,39 +52,37 @@ export class Home extends React.Component
    
    render()
    {
-      const data = this.props.userInterfaceState.data;
-      
       let siteLanguages;
-      if (data.siteLanguageList)
+      if (this.state.siteLanguageList)
       {
-         siteLanguages = data.siteLanguageList.map((language) =>
+         siteLanguages = this.state.siteLanguageList.map((language) =>
          {
             return (<option key={language.id} value={language.id}>{language.name}</option>);
          });
       }
       
       let questionnaires;
-      if (data.questionnaireList)
+      if (this.state.questionnaireList)
       {
-         questionnaires = data.questionnaireList.map((questionnaire) =>
+         questionnaires = this.state.questionnaireList.map((questionnaire) =>
          {
             return (<option key={questionnaire.id} value={questionnaire.id}>{questionnaire.name}</option>);
          });
       }
       
       let questionnaireLanguages;
-      if (data.questionnaireLanguageList)
+      if (this.state.questionnaireLanguageList)
       {
-         questionnaireLanguages = data.questionnaireLanguageList.map((language) =>
+         questionnaireLanguages = this.state.questionnaireLanguageList.map((language) =>
          {
             return (<option key={language.id} value={language.id}>{language.name}</option>);
          });
       }
       
       let levels;
-      if (data.levelList)
+      if (this.state.levelList)
       {
-         levels = data.levelList.map((level) =>
+         levels = this.state.levelList.map((level) =>
          {
             return (<option key={level.id} value={level.id}>{level.name}</option>);
          });
@@ -94,59 +94,59 @@ export class Home extends React.Component
       let tabs = this.durations.map((duration) =>
       {
          return (
-            <Tab key={duration.n} eventKey={duration.n} title={data.texts[duration.a]}>
+            <Tab key={duration.n} eventKey={duration.n} title={this.state.texts[duration.a]}>
                <div style={{marginTop: '16px'}}>
                   <BootstrapTable data={this.state.tables['n' + duration.n]} bordered={false} >
                      <TableHeaderColumn width="10%" dataField="rank" isKey={true} dataAlign="center" dataFormat={rankFormatter}></TableHeaderColumn>
-                     <TableHeaderColumn width="30%" dataField="name" dataAlign="center">{data.texts.name}</TableHeaderColumn>
-                     <TableHeaderColumn width="30%" dataField="score" dataAlign="center" >{data.texts.score}</TableHeaderColumn>
-                     <TableHeaderColumn width="30%" dataField="time" dataAlign="center" dataFormat={timeFormatter}>{data.texts.time}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="name" dataAlign="center">{this.state.texts.name}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="score" dataAlign="center" >{this.state.texts.score}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="time" dataAlign="center" dataFormat={timeFormatter}>{this.state.texts.time}</TableHeaderColumn>
                  </BootstrapTable>
                </div>
             </Tab>);  
       });
       
       return (
-         <div style={{display: (data.page === 'index' ? 'block' : 'none')}} className="home">
+         <div style={{display: (this.state.page === 'index' ? 'block' : 'none')}} className="home">
             <div className="container">
                <header>
                   <div className="navbar">
                      <div className="col-md-10">     
-                        {this.renderNavbarForm(data)}     
+                        {this.renderNavbarForm()}     
                      </div>
                      <div className="col-md-2 text-center">
                         <div className="visible-xs visible-sm"><br/></div>
                         <form className="navbar-form">
-                           <select className="form-control input-sm" value={data.siteLanguageId}
-                                   onChange={(e) => this.handleSiteLanguageChange(data, 'siteLanguageId', e.target.value)}>
+                           <select className="form-control input-sm" value={this.state.siteLanguageId}
+                                   onChange={(e) => this.handleSiteLanguageChange(e.target.value)}>
                               {siteLanguages}
                            </select>
                         </form>
                      </div>
                   </div>
                </header>
-               <Modal show={this.state.showModal1} onHide={() => this.handleStateChange('showModal1', false)}>               
+               <Modal show={this.state.showModal1} onHide={() => this.setState({ showModal1: false })}>               
                   <Modal.Body className="bg-danger">
-                     <span>{data.texts.unknownUserOrWrongPassword}</span>
-                     <Button className="close" onClick={() => this.handleStateChange('showModal1', false)}>x</Button>
+                     <span>{this.state.texts.unknownUserOrWrongPassword}</span>
+                     <Button className="close" onClick={() => this.setState({ showModal1: false })}>x</Button>
                   </Modal.Body>
                </Modal>
-               <Modal show={this.state.showModal2} onHide={() => this.handleStateChange('showModal2', false)}>               
+               <Modal show={this.state.showModal2} onHide={() => this.setState({ showModal2: false })}>               
                   <Modal.Body className="bg-danger">
-                     <span>{data.texts.internalServerError}</span>
-                     <Button className="close" onClick={() => this.handleStateChange('showModal2', false)}>x</Button>
+                     <span>{this.state.texts.internalServerError}</span>
+                     <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
                   </Modal.Body>
                </Modal>
                <form>
                   <div className="row">
                      <div className="col-sm-4 col-sm-offset-4">
-                        <label className="control-label" htmlFor="indexQuestionnaireSelect">{data.texts.questionnaire}:</label>
+                        <label className="control-label" htmlFor="indexQuestionnaireSelect">{this.state.texts.questionnaire}:</label>
                      </div>
                   </div>
                   <div className="row">
                      <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexQuestionnaireSelect" value={data.questionnaireId}
-                                onChange={(e) => this.handleQuestionnaireChange(data, 'questionnaireId', e.target.value)}>
+                        <select className="form-control" id="indexQuestionnaireSelect" value={this.state.questionnaireId}
+                                onChange={(e) => this.handleQuestionnaireChange(e.target.value)}>
                            {questionnaires}
                         </select>
                      </div>
@@ -154,17 +154,17 @@ export class Home extends React.Component
                         <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireWaitDisplay}}/>
                      </div>
                   </div>
-                  <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
+                  <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
                      <div className="col-sm-4 col-sm-offset-4">
                         <label className="control-label" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
-                           {data.texts.language}:
+                           {this.state.texts.language}:
                         </label>
                      </div>
                   </div>
-                  <div className="row" style={{display: data.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
+                  <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
                      <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexQuestionnaireLanguageSelect" value={data.questionnaireLanguageId}
-                                onChange={(e) => this.handleQuestionnaireLanguageChange(data, 'questionnaireLanguageId', e.target.value)}>
+                        <select className="form-control" id="indexQuestionnaireLanguageSelect" value={this.state.questionnaireLanguageId}
+                                onChange={(e) => this.handleQuestionnaireLanguageChange(e.target.value)}>
                            {questionnaireLanguages}
                         </select>
                      </div>
@@ -175,13 +175,13 @@ export class Home extends React.Component
                   <div className="row">
                      <div className="col-sm-4 col-sm-offset-4">
                         <label className="control-label" htmlFor="indexLevelSelect" id="indexLevelLabel" style={{marginTop: '16px'}}>
-                           {data.texts.level}:
+                           {this.state.texts.level}:
                         </label>
                      </div>
                   </div>
                   <div className="row">
                      <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexLevelSelect" value={data.levelId} onChange={(e) => this.handleLevelChange(data, 'levelId', e.target.value)}>
+                        <select className="form-control" id="indexLevelSelect" value={this.state.levelId} onChange={(e) => this.handleLevelChange(e.target.value)}>
                            {levels}
                         </select>
                      </div>
@@ -191,7 +191,7 @@ export class Home extends React.Component
                   </div>
                   <div className="row" style={{marginTop: '20px'}}>
                      <div className="col-sm-4 col-sm-offset-4">
-                        <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{data.texts.start}</Button>
+                        <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{this.state.texts.start}</Button>
                      </div>
                      <div className="col-sm-1">
                         <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.startWaitDisplay}}/>
@@ -201,46 +201,46 @@ export class Home extends React.Component
                <div className="col-sm-10 col-sm-offset-1" style={{marginTop: '60px'}}>
                   <div className="row">
                      <div className="text-center col-sm-10 col-sm-offset-1" style={{marginBottom: '6px'}}>
-                        <strong>{data.texts.highScores}</strong>
+                        <strong>{this.state.texts.highScores}</strong>
                      </div>
                      <div className="text-center col-sm-1">
                         <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.tableWaitDisplay}}/>
                      </div>
                   </div>
-                  <Tabs activeKey={data.scoreTab} onSelect={(key) => this.handleSelectTab(data, key)} id="tableTabs" animation={false}>
+                  <Tabs activeKey={this.state.scoreTab} onSelect={(key) => this.handleSelectTab(key)} id="tableTabs" animation={false}>
                      {tabs}
                   </Tabs>
                </div>
                <footer>
                   <div>
-                     {data.texts.version}:
+                     {this.state.texts.version}:
                      <span> </span>
-                     {data.version}
+                     {this.state.version}
                   </div>
                   <div>
-                     {data.texts.sourceCode}:
+                     {this.state.texts.sourceCode}:
                      <span> </span>
-                     <a target="_blank" href={data.sourceUrl}>{data.sourceUrl}</a>
+                     <a target="_blank" href={this.state.sourceUrl}>{this.state.sourceUrl}</a>
                   </div>
                   <div>
-                     {data.texts.issues}:
+                     {this.state.texts.issues}:
                      <span> </span>
-                     <a target="_blank" href={data.issueUrl}>{data.issueUrl}</a>
+                     <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
                   </div>
                </footer>
             </div>
          </div>);
    }
    
-   renderNavbarForm(data)
+   renderNavbarForm()
    {
-      if (data.userName)
+      if (this.state.userName)
       {
          return (
             <form className="navbar-form">
-               <label>{data.userName}</label>
+               <label>{this.state.userName}</label>
                <span> </span>
-               <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{data.texts.signOut}</Button>
+               <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignOutBtnClick(e)}>{this.state.texts.signOut}</Button>
                <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.navBarWaitDisplay}}/></div>
             </form>);
       }
@@ -249,121 +249,104 @@ export class Home extends React.Component
          return (
             <form className="navbar-form">
                <small>
-                  <label htmlFor="indexNameInput">{data.texts.name}:</label>
+                  <label htmlFor="indexNameInput">{this.state.texts.name}:</label>
                   <span> </span>
-                  <input className="form-control input-sm" type="text" id="indexNameInput" value={data.tmpName ? data.tmpName : ''} onChange={(e) => this.handleDataChange(data, 'tmpName', e.target.value)}/>
+                  <input className="form-control input-sm" type="text" id="indexNameInput" value={this.state.tmpName ? this.state.tmpName : ''}
+                         onChange={(e) => this.setState({ tmpName: e.target.value })}/>
                   <span> </span>
-                  <label htmlFor="indexPassInput">{data.texts.password}:</label>
+                  <label htmlFor="indexPassInput">{this.state.texts.password}:</label>
                   <span> </span>
-                  <input className="form-control input-sm" type="password" id="indexPassInput" value={this.state.pass} onChange={(e) => this.handleStateChange('pass', e.target.value)}/>
+                  <input className="form-control input-sm" type="password" id="indexPassInput" value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })}/>
                   <span> </span>
                   <div className="visible-xs"><br/></div>
-                  <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{data.texts.signIn}</Button>
+                  <Button className="btn btn-primary btn-sm" onClick={(e) => this.handleSignInBtnClick(e)}>{this.state.texts.signIn}</Button>
                   <span> </span>
-                  <Button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{data.texts.signUp}</Button>
+                  <Button className="btn btn-info btn-sm" onClick={(e) => this.handleSignUpBtnClick(e)}>{this.state.texts.signUp}</Button>
                   <div className="col-sm-1 navbar-right"><img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.navBarWaitDisplay}}/></div>
                </small>
             </form>);
       }
    }
    
-   handleDataChange(data, field, value)
-   {
-      data[field] = value;
-      this.props.changeData(data);
-   }
-   
-   handleStateChange(field, value)
-   {
-      let state = this.state
-      state[field] = value;
-      this.setState(state);
-   }
-   
    // 1- Handlers for user actions
    
-   handleSiteLanguageChange(data, field, value)
+   handleSiteLanguageChange(value)
    {
-      this.handleDataChange(data, field, value);
-      if (!data.userName) document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
+      this.setState({ siteLanguageId: value, navBarWaitDisplay: 'inline' });
+      if (!this.state.userName) document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
       this.props.socket.emit('languageChoice', { page: 'index', languageId: value });
-      this.handleStateChange('navBarWaitDisplay', 'inline');
    }
    
-   handleQuestionnaireChange(data, field, value)
+   handleQuestionnaireChange(value)
    {
-      this.handleDataChange(data, field, value);
-      this.emitLevelChoice(data);
-      this.handleStateChange('questionnaireWaitDisplay', 'inline');
+      this.setState({ questionnaireId: value, questionnaireWaitDisplay: 'inline' }, () => this.emitLevelChoice());
    }
    
-   handleQuestionnaireLanguageChange(data, field, value)
+   handleQuestionnaireLanguageChange(value)
    {
-      this.handleDataChange(data, field, value);
-      this.emitLevelChoice(data);
-      this.handleStateChange('questionnaireLanguageWaitDisplay', 'inline');
+      this.setState({ questionnaireLanguageId: value, questionnaireLanguageWaitDisplay: 'inline' }, () => this.emitLevelChoice());
    }
    
-   handleLevelChange(data, field, value)
+   handleLevelChange(value)
    {
-      this.handleDataChange(data, field, value);
-      this.emitLevelChoice(data);
-      this.handleStateChange('levelWaitDisplay', 'inline');
+      this.setState({ levelId: value, levelWaitDisplay: 'inline' }, () => this.emitLevelChoice());
    }
    
-   emitLevelChoice(data)
+   emitLevelChoice()
    {
-      const emptyTables =
+      this.setState(
       {
-         n1: [{ rank: '', name: '', score: '', time: '' }],
-         n7: [{ rank: '', name: '', score: '', time: '' }],
-         n30: [{ rank: '', name: '', score: '', time: '' }],
-         n365: [{ rank: '', name: '', score: '', time: '' }]
-      }
-      this.handleStateChange('tables', emptyTables);
+         tables:
+         {
+            n1: [{ rank: '', name: '', score: '', time: '' }],
+            n7: [{ rank: '', name: '', score: '', time: '' }],
+            n30: [{ rank: '', name: '', score: '', time: '' }],
+            n365: [{ rank: '', name: '', score: '', time: '' }]
+         }
+      });
          
-      if (!data.userName)
+      if (!this.state.userName)
       {
          var expires = this.props.getCookieExpires(180);
-         document.cookie = 'questionnaireId=' + data.questionnaireId + expires;
-         document.cookie = 'questionnaireLanguageId=' + data.questionnaireLanguageId + expires;
-         document.cookie = 'levelId=' + data.levelId + expires;
+         document.cookie = 'questionnaireId=' + this.state.questionnaireId + expires;
+         document.cookie = 'questionnaireLanguageId=' + this.state.questionnaireLanguageId + expires;
+         document.cookie = 'levelId=' + this.state.levelId + expires;
       }
 
-      this.props.socket.emit('levelChoice', { questionnaireId: data.questionnaireId, questionnaireLanguageId: data.questionnaireLanguageId, levelId: data.levelId });
+      this.props.socket.emit('levelChoice', { questionnaireId: this.state.questionnaireId, questionnaireLanguageId: this.state.questionnaireLanguageId, levelId: this.state.levelId });
    }
 
    handleSignInBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signIn', { name: this.props.userInterfaceState.data.tmpName, pass: this.state.pass });
-      this.handleStateChange('navBarWaitDisplay', 'inline');
+      this.props.socket.emit('signIn', { name: this.state.tmpName, pass: this.state.pass });
+      this.setState({ navBarWaitDisplay: 'inline' });
    }
 
    handleSignOutBtnClick(e)
    {
       e.preventDefault();
       this.props.socket.emit('signOut', {});
-      this.handleStateChange('navBarWaitDisplay', 'inline');   
+      this.setState({ navBarWaitDisplay: 'inline' }); 
    }
    
    handleSignUpBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signUp', { name: this.props.userInterfaceState.data.tmpName });
-      this.handleStateChange('navBarWaitDisplay', 'inline');
+      this.props.socket.emit('signUp', { name: this.state.tmpName });
+      this.setState({ navBarWaitDisplay: 'inline' });
    }
    
    handleStartBtnClick(e)
    {
       e.preventDefault();
       this.props.socket.emit('newGame', {});
-      this.handleStateChange('startWaitDisplay', 'inline');
+      this.setState({ startWaitDisplay: 'inline' });
    }
    
-   handleSelectTab(data, key)
+   handleSelectTab(key)
    {
-      this.handleDataChange(data, 'scoreTab', key);
+      this.setState({ scoreTab: key });
       this.props.socket.emit('scoreTab', { n: key });
    }
    
@@ -371,26 +354,33 @@ export class Home extends React.Component
    
    handleDisplayPage(data)
    {
-      this.setState(this.initialState)
-      this.emitUpdateTables();
+      let state = {};
+      Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
+      
+      if (data.page === 'index')
+      {
+         Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+         this.setState(state, () => this.emitUpdateTables());
+      }
+      else
+      {
+         state.page = data.page;
+         this.setState(state);
+      }
    }
    
    emitUpdateTables()
    {
-      const data = this.props.userInterfaceState.data;
-      this.props.socket.emit('getTables', { questionnaireId: data.questionnaireId, levelId: data.levelId });
-      this.handleStateChange('tableWaitDisplay', 'inline');
+      this.props.socket.emit('getTables', { questionnaireId: this.state.questionnaireId, levelId: this.state.levelId });
+      this.setState({ tableWaitDisplay: 'inline' });
    }
    
    handleUpdateTable(tableData)
    {
-      const data = this.props.userInterfaceState.data;
-
       let stateTables = this.state.tables;
       
-      if (tableData.questionnaireId === data.questionnaireId && tableData.levelId === data.levelId)
+      if (tableData.questionnaireId === this.state.questionnaireId && tableData.levelId === this.state.levelId)
       {
-         this.handleStateChange('tableWaitDisplay', 'none');
          tableData.tables.forEach(function(table)
          {
             let t = [];
@@ -404,7 +394,7 @@ export class Home extends React.Component
             stateTables['n' + table.d] = t;
          });
          
-         this.handleStateChange('tables', stateTables);
+         this.setState({ tables: stateTables, tableWaitDisplay: 'none' });
       }
       else
       {
@@ -414,40 +404,35 @@ export class Home extends React.Component
    
    handleUpdateSiteLanguage(texts)
    {
-      this.handleStateChange('navBarWaitDisplay', 'none');
-      this.handleDataChange(this.props.userInterfaceState.data, 'texts', texts);
-      this.emitLevelChoice(this.props.userInterfaceState.data);
+      this.setState({ navBarWaitDisplay: 'none', texts: texts });
+      this.emitLevelChoice();
    }
    
    handleUnknownName()
    {
-      this.handleStateChange('navBarWaitDisplay', 'none');
-      this.handleStateChange('showModal1', true);
+      this.setState({ navBarWaitDisplay: 'none', showModal1: 'true' });
    }
    
    handleServerError()
    {
-      this.handleStateChange('navBarWaitDisplay', 'none');
-      this.handleStateChange('showModal2', true);
+      this.setState({ navBarWaitDisplay: 'none', showModal2: 'true' });
    }
    
    handleUpdateSelects(data)
    {
-      this.handleStateChange('questionnaireWaitDisplay', 'none');
-      this.handleStateChange('questionnaireLanguageWaitDisplay', 'none');
-      this.handleStateChange('levelWaitDisplay', 'none');
-      
-      const data0 = this.props.userInterfaceState.data;
-
-      data0.questionnaireList = data.questionnaireList;
-      data0.questionnaireId = data.questionnaireId;
-      data0.questionnaireLanguageList = data.questionnaireLanguageList;
-      data0.questionnaireLanguageId = data.questionnaireLanguageId;
-      data0.showQuestionnaireLanguageSelect = data.showQuestionnaireLanguageSelect;
-      data0.levelList = data.levelList;
-      data0.levelId = data.levelId;
-      this.props.changeData(data0);
-      
-      this.emitUpdateTables();
+      this.setState(
+      {
+         questionnaireWaitDisplay: 'none',
+         questionnaireLanguageWaitDisplay: 'none',
+         levelWaitDisplay: 'none',
+         questionnaireList: data.questionnaireList,
+         questionnaireId: data.questionnaireId,
+         questionnaireLanguageList: data.questionnaireLanguageList,
+         questionnaireLanguageId: data.questionnaireLanguageId,
+         showQuestionnaireLanguageSelect: data.showQuestionnaireLanguageSelect,
+         levelList: data.levelList,
+         levelId: data.levelId
+      },
+         () => this.emitUpdateTables());
    }
 }

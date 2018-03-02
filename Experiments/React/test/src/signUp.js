@@ -105,7 +105,7 @@ export class SignUp extends React.Component
          </div>);
    }
    
-   // 1- Handlers for user actions
+   // 1- User action handlers
    
    handleSiteLanguageChange(value)
    {
@@ -127,7 +127,7 @@ export class SignUp extends React.Component
       this.props.socket.emit('cancelSignUp', {});
    }
    
-   // 2- Handlers for server messages
+   // 2- Server message handlers
    
    handleDisplayPage(data)
    {

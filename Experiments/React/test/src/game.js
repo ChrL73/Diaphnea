@@ -9,12 +9,16 @@ export class Game extends React.Component
       super(props);
       
       props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
+      props.socket.on('updateQuestions', (data) => this.handleUpdateQuestions(data));
+      props.socket.on('time', (time) => this.initTime(time));
       
       this.stateReset =
       {
          timeWaitDisplay: 'none',
          questionWaitVisible: {},
-         texts: {}
+         stopGameWaitDisplay: 'none',
+         texts: {},
+         finalTime: undefined
       };
       
       this.state = this.stateReset;
@@ -22,49 +26,26 @@ export class Game extends React.Component
    
    render()
    {
+      const ok = Boolean(this.state.questions);
+      
       let questions;
-      if (this.state.questions)
+      if (ok)
       {
          questions = this.state.questions.map((question, iQuestion) =>
          {
-            let disabled = this.state.questionStates[iQuestion].answered;
-            
             const choices = question.choices.map((choice, iChoice) =>
             {
-               let checked = Boolean(this.state.questionStates[iQuestion].choiceStates[iChoice] & 1);
-               let rightChoice = Boolean(this.state.questionStates[iQuestion].choiceStates[iChoice] & 2);
-               let classStr;
-               if (disabled && rightChoice) classStr = 'boldChoice';
-               
-               const _this = this;
-               function renderInput()
+               const renderInput = () =>
                {
                   if (question.isMultiple)
                   { 
-                     return (<input id={'input' + iQuestion + '_' + iChoice} type="checkbox" checked={checked} disabled={disabled} style={{marginLeft: '12px'}}
-                                    onChange={(e) => _this.handleCheckBoxChange(e.target)}/>);
+                     return (<input id={'input' + iQuestion + '_' + iChoice} type="checkbox" checked={choice.checked} disabled={question.disabled} style={{marginLeft: '12px'}}
+                                    onChange={(e) => this.handleCheckBoxChange(e.target)}/>);
                   }
                   else
                   {
-                     return (<input id={'input' + iQuestion + '_' + iChoice} type="radio" name={'radio' + iQuestion} checked={checked} disabled={disabled} style={{marginLeft: '12px'}}
-                                    onChange={(e) => _this.handleRadioChange(e.target)}/>);
-                  }
-               }
-               
-               if (question.isMultiple)
-               {
-                  if (disabled)
-                  {
-                     if (checked === rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
-                  }
-               }
-               else
-               {
-                  if (disabled && checked)
-                  {
-                     if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
-                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                     return (<input id={'input' + iQuestion + '_' + iChoice} type="radio" name={'radio' + iQuestion} value={'_' + iChoice} checked={question.selection === '_' + iChoice}
+                                    disabled={question.disabled} style={{marginLeft: '12px'}} onChange={(e) => this.handleRadioChange(e.target)}/>);
                   }
                }
                
@@ -72,9 +53,9 @@ export class Game extends React.Component
                   <div key={'input' + iQuestion + '_' + iChoice} >
                      {renderInput()}
                      <span> </span>
-                     <span className={classStr}>{choice.text}</span>
+                     <span className={choice.classStr}>{choice.text}</span>
                      <span> </span>
-                     <span>{(disabled && choice.comment.length) ? (' (' + choice.comment + ')') : ''}</span><br/>
+                     <span>{(question.disabled && choice.comment) ? (' (' + choice.comment + ')') : ''}</span><br/>
                   </div>);
                
             });
@@ -118,9 +99,25 @@ export class Game extends React.Component
                </header>
                <div className="row">
                   <div className="col-lg-3 col-md-4 col-sm-5">
-                     <div id="questionDiv">
-                        {questions}
-                        <Button className="btn btn-warning" onClick={(e) => this.handleStopBtnClick(e)}>{this.state.texts.stop}</Button>
+                     {questions}
+                     <div style={{marginTop: '20px'}}>
+                        <button className="btn btn-primary input-sm" disabled={this.state.displayedQuestion === 0} onClick={(e) => this.handlePreviousBtnClick(e)}>
+                           {this.state.texts.previous}
+                        </button>
+                        <span> </span>
+                        <Button className="btn btn-success input-sm"  onClick={(e) => this.handleSubmitBtnClick(e)}
+                                disabled={ok ? this.state.questionStates[this.state.displayedQuestion].answered : true}>
+                           {this.state.texts.submit}
+                        </Button>
+                        <span> </span>
+                        <Button className="btn btn-primary input-sm" onClick={(e) => this.handleNextBtnClick(e)}
+                                disabled={ok ? this.state.displayedQuestion === this.state.questions.length - 1 || !this.state.questionStates[this.state.displayedQuestion].answered : true}>
+                           {this.state.texts.next}
+                        </Button>
+                     </div>
+                     <div style={{marginTop: '20px', marginBottom: '20px'}}>
+                        <Button className="btn btn-warning input-sm" onClick={(e) => this.handleStopBtnClick(e)}>{this.state.texts.stop}</Button>
+                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.stopGameWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="col-lg-9 col-md-8 col-sm-7" id="canvasColumn">
@@ -133,31 +130,12 @@ export class Game extends React.Component
          </div>);
    }
    
-   /*
-      
-      
-      html += '<div style="margin-top:20px;"><button class="btn btn-primary input-sm" id="previousButton"';
-      if (displayedQuestion == 0) html += ' disabled';       
-      html += '>' + pageData.texts.previous
-         + '</button> <button class="btn btn-success input-sm" id="submitButton"';
-      if (questionStates[displayedQuestion].answered) html += ' disabled';
-      html += '>' + pageData.texts.submit
-         + '</button> <button class="btn btn-primary input-sm" id="nextButton"';
-      if (displayedQuestion == questions.length - 1 || !questionStates[displayedQuestion].answered) html += ' disabled';
-      html += '>' + pageData.texts.next + '</button></div>';
-      
-      html += '<form><div style="margin-top:20px; margin-bottom:20px;"><button class="btn btn-warning input-sm" id="gameStopBtn">'
-         + pageData.texts.stop
-         + '</button><img src="wait.gif" class="waitImg" id="stopGameWaitImg"/></div></form>'
-      
-      html += '</div>
-   */
-   
-   // 1- Handlers for user actions
+   // 1- User action handlers
    
    handleStopBtnClick(e)
    {
       e.preventDefault();
+      this.setState({ stopGameWaitDisplay: 'inline' });
       this.props.socket.emit('stopGame', {});
    }
    
@@ -167,31 +145,258 @@ export class Game extends React.Component
       const iQuestion = x[0];
       const iChoice = x[1];
       
-      let questionStates = this.state.questionStates;
-      if (target.checked) questionStates[iQuestion].choiceStates[iChoice] |= 1;
-      else questionStates[iQuestion].choiceStates[iChoice] &= 2;
-      this.setState({ questionStates: questionStates });
+      let questions = this.state.questions;
+      questions[iQuestion].choices[iChoice].checked = target.checked;
+      this.setState({ questions: questions });
    }
    
    handleRadioChange(target)
    {
-      const x = target.id.match(/[0-9]+/g);
-      const iQuestion = x[0];
-      const iChoice = x[1];
-      
-      
+      if (target.checked)
+      {
+         const x = target.id.match(/[0-9]+/g);
+         const iQuestion = x[0];
+         const iChoice = x[1];
+         
+         let questions = this.state.questions;
+         questions[iQuestion].selection = '_' + iChoice;
+         this.setState({ questions: questions });
+      }
    }
    
-   // 2- Handlers for server messages
+   handlePreviousBtnClick(e)
+   {
+      e.preventDefault();
+      
+      const oldDisplayedQuestion = this.state.displayedQuestion;
+      if (oldDisplayedQuestion > 0)
+      {
+         const newDisplayedQuestion = oldDisplayedQuestion - 1;
+         this.setState({ displayedQuestion: newDisplayedQuestion });
+         this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
+         
+         // Todo:
+         //updateMap(newDisplayedQuestion, oldDisplayedQuestion);
+      }
+   }
+   
+   handleNextBtnClick(e)
+   {
+      e.preventDefault();
+      
+      const oldDisplayedQuestion = this.state.displayedQuestion;
+      if (oldDisplayedQuestion < this.state.questions.length - 1)   
+      {
+         const newDisplayedQuestion = oldDisplayedQuestion + 1;
+         this.setState({ displayedQuestion: newDisplayedQuestion });
+         this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
+         
+         // Todo:
+         //updateMap(newDisplayedQuestion, oldDisplayedQuestion);
+      }
+   }
+   
+   handleSubmitBtnClick(e)
+   {
+      e.preventDefault();
+      const displayedQuestion = this.state.displayedQuestion;
+      
+      let questionStates = this.state.questionStates;
+      questionStates[displayedQuestion].answered = true;
+      
+      let questions = this.state.questions;
+      questions[displayedQuestion].disabled = true;
+      
+      let questionWaitVisible = this.state.questionWaitVisible;
+      questionWaitVisible[displayedQuestion] = true;
+      
+      this.setState({ questionStates: questionStates, questions: questions, questionWaitVisible: questionWaitVisible });
+
+      let data = 
+      {
+         quizId: this.state.quizId,
+         question: displayedQuestion,
+         checks: []
+      };
+      
+      const question = questions[displayedQuestion];
+      question.choices.forEach((choice, iChoice) =>
+      {
+         if (question.isMultiple) data.checks.push(choice.checked);
+         else data.checks.push(question.selection === '_' + iChoice);
+      });
+
+      this.props.socket.emit('submit', data); 
+   }
+   
+   // 2- Server message handlers
    
    handleDisplayPage(data)
    {
       let state = {};
       Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
       
-      if (data.page === 'game') Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
-      else state.page = data.page;
+      if (data.page === 'game')
+      {
+         data.questions.forEach((question, iQuestion) =>
+         {
+            question.disabled = data.questionStates[iQuestion].answered;
+            if (question.isMultiple) question.selection = '_0';
+
+            question.choices.forEach((choice, iChoice) =>
+            {
+               let checked = Boolean(data.questionStates[iQuestion].choiceStates[iChoice] & 1);
+
+               if (question.isMultiple) choice.checked = checked;
+               else if (checked) question.selection = '_' + iChoice;
+
+               let rightChoice = Boolean(data.questionStates[iQuestion].choiceStates[iChoice] & 2);
+               let classStr;
+               if (question.disabled && rightChoice) classStr = 'boldChoice';
+
+               if (question.isMultiple)
+               {
+                  if (question.disabled)
+                  {
+                     if (checked === rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                  }
+               }
+               else
+               {
+                  if (question.disabled && checked)
+                  {
+                     if (rightChoice) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                     else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+                  }
+               }
+
+               choice.classStr = classStr;
+            });
+         });
+         
+         Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+      }
+      else
+      {
+         state.page = data.page;
+      }
       
       this.setState(state);
+      
+      this.initTime(data.time);
+   }
+   
+   initTime(t0)
+   {
+      this.setState({ timeWaitDisplay: 'none' });
+      
+      if (this.timeout) clearInterval(this.timeout);
+      if (this.state.finalTime)
+      {
+         this.timeout = undefined;
+         return;
+      }
+
+      let lastDisplayedTime;
+      let date0 = Date.now();
+      
+      const updateTime = () =>
+      {
+         let t = (Date.now() - date0) + t0;
+         let displayedTime = Math.floor(0.001 * t);
+         if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
+         {
+            this.propos.socket.emit('timeRequest');
+            this.timeout = undefined;
+            this.setState({ timeWaitDisplay: 'inline' });
+         }
+         else
+         {
+            this.setState({ time: t });
+            lastDisplayedTime = displayedTime;
+            this.timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
+         }
+      }
+      
+      this.timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
+   }
+   
+   handleUpdateQuestions(data)
+   {
+      if (data.quizId !== this.state.quizId)
+      {
+         window.location.replace('/');
+      }
+      else
+      {
+         let questionWaitVisible = this.state.questionWaitVisible;
+         let questionStates = this.state.questionStates;
+         let questions = this.state.questions;
+         
+         // Todo:
+         if (data.finalTime)
+         {
+            /*finished = true;
+            if (timeout) clearInterval(timeout);
+            timeout = undefined;
+            $('#timeSpan').text(data.finalTime + 's');*/
+         }
+         
+         data.questionStates.forEach((state) =>
+         {
+            var i = state.index;
+            
+            let question = questions[i];
+            questionWaitVisible[i] = false;
+            questionStates[i].answered = true;
+            question.disabled = true;
+            
+            state.choiceStates.forEach((choiceState, j) =>
+            {
+               let choice = question.choices[j];
+               
+               const checked = Boolean(choiceState.state & 1);  
+               if (question.isMultiple) choice.checked = checked;
+               else if (checked) question.selection = '_' + j;
+
+               const isRight = Boolean(choiceState.state & 2);
+               let classStr;
+               if (isRight) classStr = 'boldChoice';
+
+               if (question.isMultiple)
+               {       
+                  if (checked === isRight) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                  else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+               }
+               else if (checked)
+               {
+                  if (isRight) classStr = (classStr ? classStr + ' greenChoice' : 'greenChoice');
+                  else classStr = (classStr ? classStr + ' redChoice' : 'redChoice');
+               }
+
+               choice.classStr = classStr;
+
+               if (choiceState.comment) choice.comment = choiceState.comment;
+            });
+         });
+         
+         let state = 
+         {
+            rightAnswerCount: data.rightAnswerCount,
+            answerCount: data.answerCount,
+            questionWaitVisible: questionWaitVisible,
+            questionStates: questionStates,
+            questions: questions
+         };
+         
+         if (data.finalTime) state.finalTime = data.finalTime;
+         
+         this.setState(state);
+
+         // Todo:
+         //mapInfo = data.mapInfo;
+         //updateMap(displayedQuestion);
+      }
    }
 }

@@ -268,7 +268,7 @@ export class Home extends React.Component
       }
    }
    
-   // 1- Handlers for user actions
+   // 1- User action handlers
    
    handleSiteLanguageChange(value)
    {
@@ -350,7 +350,7 @@ export class Home extends React.Component
       this.props.socket.emit('scoreTab', { n: key });
    }
    
-   // 2- Handlers for server messages
+   // 2- Server message handlers
    
    handleDisplayPage(data)
    {

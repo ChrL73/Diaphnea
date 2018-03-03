@@ -13,7 +13,7 @@ class UserInterface extends React.Component
    {
       super(props);
       
-      this.socket = window.io.connect('192.168.50.113:3002');
+      this.socket = window.io.connect('gilberte:3002');
       this.socket.on('displayPage', (data) => this.setState({ page: data.page }));
       
       this.state = { page: 'none' };

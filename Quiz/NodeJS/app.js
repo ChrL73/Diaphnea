@@ -595,6 +595,8 @@ io.on('connection', function(socket)
    
    socket.on('submit', function(data)
    {
+      var receptionDate = Date.now();
+      
       var cookies = extractCookies(socket.handshake.headers.cookie);  
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
@@ -607,7 +609,7 @@ io.on('connection', function(socket)
                ++context.answerCount;
                if (context.answerCount == context.questions.length)
                {
-                  context.finalTime = (0.001 * (Date.now() - context.startDate)).toFixed(3);
+                  context.finalTime = (0.001 * (receptionDate - context.startDate)).toFixed(3);
                }
                
                questionState.answered = true;

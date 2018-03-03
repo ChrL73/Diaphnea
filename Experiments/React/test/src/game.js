@@ -10,7 +10,7 @@ export class Game extends React.Component
       
       props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       props.socket.on('updateQuestions', (data) => this.handleUpdateQuestions(data));
-      props.socket.on('time', (time) => this.initTime(time));
+      props.socket.on('time', (time) => this.initTime(time, Date.now()));
       
       this.stateReset =
       {
@@ -233,6 +233,8 @@ export class Game extends React.Component
    
    handleDisplayPage(data)
    {
+      const date0 = Date.now();
+      
       let state = {};
       Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
       
@@ -282,44 +284,42 @@ export class Game extends React.Component
          state.page = data.page;
       }
       
-      this.setState(state);
-      
-      this.initTime(data.time);
+      this.setState(state, () => this.initTime(data.time, date0));
    }
    
-   initTime(t0)
+   initTime(t0, date0)
    {
       this.setState({ timeWaitDisplay: 'none' });
+      clearInterval(this.timeout);
       
-      if (this.timeout) clearInterval(this.timeout);
-      if (this.state.finalTime)
+      if (!this.state.finalTime && this.state.page === 'game')
       {
-         this.timeout = undefined;
-         return;
-      }
+         let lastDisplayedTime;
 
-      let lastDisplayedTime;
-      let date0 = Date.now();
-      
-      const updateTime = () =>
-      {
-         let t = (Date.now() - date0) + t0;
-         let displayedTime = Math.floor(0.001 * t);
-         if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
+         const updateTime = () =>
          {
-            this.propos.socket.emit('timeRequest');
-            this.timeout = undefined;
-            this.setState({ timeWaitDisplay: 'inline' });
+            console.log('updateTime');
+            let t = (Date.now() - date0) + t0;
+            let displayedTime = Math.floor(0.001 * t);
+            if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
+            {
+               this.props.socket.emit('timeRequest');
+               clearInterval(this.timeout);
+               this.setState({ timeWaitDisplay: 'inline' });
+            }
+            else
+            {
+               this.setState({ time: t });
+               lastDisplayedTime = displayedTime;
+               if (!this.state.finalTime && this.state.page === 'game')
+               {
+                  this.timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
+               }
+            }
          }
-         else
-         {
-            this.setState({ time: t });
-            lastDisplayedTime = displayedTime;
-            this.timeout = setTimeout(updateTime, 1000 * (1 + displayedTime) - t);
-         }
+
+         this.timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
       }
-      
-      this.timeout = setTimeout(updateTime, 1000 * (1 + Math.floor(0.001 * t0)) - t0);
    }
    
    handleUpdateQuestions(data)
@@ -333,15 +333,6 @@ export class Game extends React.Component
          let questionWaitVisible = this.state.questionWaitVisible;
          let questionStates = this.state.questionStates;
          let questions = this.state.questions;
-         
-         // Todo:
-         if (data.finalTime)
-         {
-            /*finished = true;
-            if (timeout) clearInterval(timeout);
-            timeout = undefined;
-            $('#timeSpan').text(data.finalTime + 's');*/
-         }
          
          data.questionStates.forEach((state) =>
          {
@@ -390,7 +381,11 @@ export class Game extends React.Component
             questions: questions
          };
          
-         if (data.finalTime) state.finalTime = data.finalTime;
+         if (data.finalTime || this.state.page !== 'game')
+         {
+            clearInterval(this.timeout);
+            state.finalTime = data.finalTime;
+         }
          
          this.setState(state);
 

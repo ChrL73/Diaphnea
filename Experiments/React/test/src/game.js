@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import waitGif from './wait.gif'
+import { Map } from './map.js';
 
 export class Game extends React.Component
 {
@@ -120,9 +121,8 @@ export class Game extends React.Component
                         <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.stopGameWaitDisplay}}/>
                      </div>
                   </div>
-                  <div className="col-lg-9 col-md-8 col-sm-7" id="canvasColumn">
-                     <canvas>
-                     </canvas>
+                  <div className="col-lg-9 col-md-8 col-sm-7" id="mapColumn">
+                     <Map gameState={this.state} ref={(x) => { this.map = x; }}/>
                   </div>
                
                </div>
@@ -175,8 +175,7 @@ export class Game extends React.Component
          this.setState({ displayedQuestion: newDisplayedQuestion });
          this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
          
-         // Todo:
-         //updateMap(newDisplayedQuestion, oldDisplayedQuestion);
+         this.map.update(newDisplayedQuestion, oldDisplayedQuestion);
       }
    }
    
@@ -191,8 +190,7 @@ export class Game extends React.Component
          this.setState({ displayedQuestion: newDisplayedQuestion });
          this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
          
-         // Todo:
-         //updateMap(newDisplayedQuestion, oldDisplayedQuestion);
+         this.map.update(newDisplayedQuestion, oldDisplayedQuestion);
       }
    }
    
@@ -227,6 +225,25 @@ export class Game extends React.Component
       });
 
       this.props.socket.emit('submit', data); 
+   }
+   
+   windowResize()
+   {
+      const w = document.getElementById('mapColumn').offsetWidth;
+      if (w === 0)
+      {
+         setTimeout(() => this.windowResize(), 5);
+      }
+      else
+      {
+         document.getElementById('mapColumn').style.height = (window.innerHeight - 72).toString() + 'px';
+         this.setState(
+         {
+            mapWidth: w - 30,
+            mapHeight: window.innerHeight - 72
+         },
+            () => this.map.redraw());
+      }
    }
    
    // 2- Server message handlers
@@ -278,13 +295,21 @@ export class Game extends React.Component
          });
          
          Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+   
+         this.windowResize();
+         window.onresize = () => this.windowResize();
       }
       else
       {
          state.page = data.page;
+         window.onresize = undefined;
       }
       
-      this.setState(state, () => this.initTime(data.time, date0));
+      this.setState(state, () =>
+      {
+         this.initTime(data.time, date0);
+         if (data.page === 'game') this.map.init();
+      });
    }
    
    initTime(t0, date0)
@@ -298,7 +323,6 @@ export class Game extends React.Component
 
          const updateTime = () =>
          {
-            console.log('updateTime');
             let t = (Date.now() - date0) + t0;
             let displayedTime = Math.floor(0.001 * t);
             if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
@@ -378,7 +402,8 @@ export class Game extends React.Component
             answerCount: data.answerCount,
             questionWaitVisible: questionWaitVisible,
             questionStates: questionStates,
-            questions: questions
+            questions: questions,
+            mapInfo: data.mapInfo
          };
          
          if (data.finalTime || this.state.page !== 'game')
@@ -387,11 +412,7 @@ export class Game extends React.Component
             state.finalTime = data.finalTime;
          }
          
-         this.setState(state);
-
-         // Todo:
-         //mapInfo = data.mapInfo;
-         //updateMap(displayedQuestion);
+         this.setState(state, () => this.map.update(this.state.displayedQuestion));
       }
    }
 }

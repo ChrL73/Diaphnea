@@ -37,6 +37,55 @@ export class Map extends React.Component
                                                        (error) => this.onError(error));
       }
    }
+      
+   onError(error)
+   {
+      console.error(error);
+   }
+
+   loadMap()
+   {
+      const mapId = this.props.gameState.mapId;
+      
+      if (this.maps[mapId])
+      {
+         this.map = this.maps[mapId].map;
+         this.map.popState(-1);
+         this.map.pushState(-1);
+         this.mapElements = this.maps[mapId].mapElements;
+         this.props.gameState.questionStates.forEach((s, i) => { this.map.pushState(i); });
+         this.update(this.props.gameState.displayedQuestion);
+      }
+      else
+      {
+         let mapIds = this.state.mapIds;
+         mapIds.push(mapId);
+         
+         this.setState({ mapIds: mapIds }, () =>
+         {
+            this.mapServerConnection.loadMap(mapId, mapId, (map) =>
+            {
+               map.setFillingStyle(2);
+               map.pushState(-1);
+               const elementIds = map.getElementIds();
+               
+               map.loadElements(elementIds, (elementArray) =>
+               {
+                  this.maps[mapId] = { map: map };
+                  this.map = map;
+                  
+                  let i, n = elementArray.length;
+                  this.mapElements = {};
+                  for (i = 0; i < n; ++i) this.mapElements[elementIds[i]] = elementArray[i];
+                  this.maps[mapId].mapElements = this.mapElements;
+
+                  this.props.gameState.questionStates.forEach((s, i) => { this.map.pushState(i); });
+                  this.update(this.props.gameState.displayedQuestion);
+               });
+            });
+         });
+      }
+   }
    
    redraw()
    {
@@ -83,7 +132,7 @@ export class Map extends React.Component
          Object.getOwnPropertyNames(linkedElements).forEach((elementId) =>
          { 
             const linkedElements1 = this.mapElements[elementId].getLinkedElements1();
-            if (i < 2 || linkedElements1.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements1); }
+            if (i < 2 || linkedElements1.length < threshold) Array.prototype.push.apply(elementsToAdd, linkedElements1);
          });        
          ++i; 
 
@@ -92,7 +141,7 @@ export class Map extends React.Component
             Object.getOwnPropertyNames(linkedElements).forEach((elementId) =>
             { 
                const linkedElements2 = this.mapElements[elementId].getLinkedElements2();
-               if (i < 2 || linkedElements2.length < threshold) { Array.prototype.push.apply(elementsToAdd, linkedElements2); }
+               if (i < 2 || linkedElements2.length < threshold) Array.prototype.push.apply(elementsToAdd, linkedElements2);
             });
             ++i;
          }
@@ -121,54 +170,5 @@ export class Map extends React.Component
             else if (!elementsToShow[elementId]) elementsToShow[elementId] = false;
          }
       });
-   }
-      
-   onError(error)
-   {
-      console.error(error);
-   }
-
-   loadMap()
-   {
-      const mapId = this.props.gameState.mapId;
-      
-      if (this.maps[mapId])
-      {
-         this.map = this.maps[mapId].map;
-         this.map.popState(-1);
-         this.map.pushState(-1);
-         this.mapElements = this.maps[mapId].mapElements;
-         this.props.gameState.questionStates.forEach((state, i) => { if (state.answered) this.map.pushState(i); });
-         this.update(this.props.gameState.displayedQuestion);
-      }
-      else
-      {
-         this.maps[mapId] = {};
-         let mapIds = this.state.mapIds;
-         mapIds.push(mapId);
-         
-         this.setState({ mapIds: mapIds }, () =>
-         {
-            this.mapServerConnection.loadMap(mapId, mapId, (map) =>
-            {
-               this.maps[mapId].map = map;
-               this.map = map;
-
-               this.map.setFillingStyle(2);
-               this.map.pushState(-1);
-               const elementIds = map.getElementIds();
-               this.map.loadElements(elementIds, (elementArray) =>
-               {
-                  let i, n = elementArray.length;
-                  this.mapElements = {};
-                  for (i = 0; i < n; ++i) this.mapElements[elementIds[i]] = elementArray[i];
-                  this.maps[mapId].mapElements = this.mapElements;
-
-                  this.props.gameState.questionStates.forEach((state, i) => { if (state.answered) this.map.pushState(i); });
-                  this.update(this.props.gameState.displayedQuestion);
-               });
-            });
-         });
-      }
    }
 }

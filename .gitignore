@@ -43,3 +43,9 @@ MongoDB.*.dll
 !/Experiments/React/test/public
 !/Experiments/React/test/src
 !/Experiments/React/test/package.json
+/Quiz/React/quiz/*
+!/Quiz/React/quiz/public
+!/Quiz/React/quiz/src
+!/Quiz/React/quiz/package.json
+/Quiz/React/quiz/public/jquery.min.js
+/Quiz/React/quiz/public/map_api.js

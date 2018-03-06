@@ -36,6 +36,7 @@ Map/VisualStudio/MapServer/*.svg
 Map/NodeJS/log.txt
 Quiz/NodeJS/public/*.min.js
 Quiz/NodeJS/public/*.min.css
+Quiz/NodeJS/public/map_api.js
 MongoDB.*.dll
 /Experiments/Aurelia
 /Experiments/React

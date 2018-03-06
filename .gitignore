@@ -40,9 +40,6 @@ Quiz/NodeJS/public/map_api.js
 MongoDB.*.dll
 /Experiments/Aurelia
 /Experiments/React
-/Quiz/React/quiz/*
-!/Quiz/React/quiz/public
-!/Quiz/React/quiz/src
-!/Quiz/React/quiz/package.json
+/Quiz/React/quiz/build
 /Quiz/React/quiz/public/jquery.min.js
 /Quiz/React/quiz/public/map_api.js

@@ -83,7 +83,7 @@ quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
 app.all('/', function(req, res, next)
 {
-   res.render('quiz.ejs', config);
+   res.render(config.frontEndIndex, config);
 });
 
 app.use(function(req, res)

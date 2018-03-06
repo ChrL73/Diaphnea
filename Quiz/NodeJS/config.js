@@ -11,6 +11,9 @@ config.mapServerPort = '3001';
 
 //config.debugDelay = 2000;
 
+//config.frontEndIndex = 'quiz.ejs';
+config.frontEndIndex = 'reactIndex.ejs';
+
 //config.jQueryUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
 config.jQueryUrl = 'jquery.min.js';
 

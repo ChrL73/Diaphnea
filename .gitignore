@@ -43,3 +43,5 @@ MongoDB.*.dll
 /Quiz/React/quiz/build
 /Quiz/React/quiz/public/jquery.min.js
 /Quiz/React/quiz/public/map_api.js
+/Quiz/NodeJS/public/static
+/Quiz/NodeJS/views/reactIndex.ejs

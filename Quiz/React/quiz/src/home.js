@@ -386,7 +386,7 @@ export class Home extends React.Component
             let t = [];
             table.rows.forEach(function(row, rank)
             {
-               let r = { rank: rank + 1, name: row.name, score: row.score, time: (0.001 * row.time_ms).toFixed(3) };
+               const r = { rank: rank + 1, name: row.name, score: row.score, time: (0.001 * row.time_ms).toFixed(3) };
                t.push(r);
             });
             

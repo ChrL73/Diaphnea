@@ -54,11 +54,11 @@ td, th
 
 footer
 {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  padding: 8px;
-  background-color: white;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    background-color: white;
 }

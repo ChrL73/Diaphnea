@@ -11,17 +11,8 @@ config.mapServerPort = '3001';
 
 //config.debugDelay = 2000;
 
-//config.frontEndIndex = 'quiz.ejs';
-config.frontEndIndex = 'reactIndex.ejs';
-
-//config.jQueryUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js';
-config.jQueryUrl = 'jquery.min.js';
-
-//config.bootstrapCssUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
-config.bootstrapCssUrl = 'bootstrap.min.css';
-
-//config.bootstrapJsUrl = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js';
-config.bootstrapJsUrl = 'bootstrap.min.js';
+//config.frontEndIndex = 'quiz.ejs'; // Old front-end, removed from source control
+config.frontEndIndex = 'reactIndex.ejs'; // React front-end
 
 config.version = 'Alpha1.0';
 config.sourceUrl = 'https://github.com/ChrL73/Diaphnea';

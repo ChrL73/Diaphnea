@@ -45,3 +45,4 @@ MongoDB.*.dll
 /Quiz/React/quiz/public/map_api.js
 /Quiz/NodeJS/public/static
 /Quiz/NodeJS/views/reactIndex.ejs
+*.userprefs

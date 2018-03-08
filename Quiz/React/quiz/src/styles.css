@@ -52,13 +52,23 @@ td, th
    text-align: center;
 }
 
+.lastScore
+{
+   color: #A00000;
+   font-weight: bold;
+}
+
+.fixedFooter
+{
+   position: fixed;
+   left: 0;
+   bottom: 0;
+}
+
 footer
 {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 8px;
-    background-color: white;
+   width: 100%;
+   text-align: center;
+   margin-top: 32px;
+   padding: 8px;
 }

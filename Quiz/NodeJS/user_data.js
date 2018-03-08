@@ -23,7 +23,11 @@ var contextSchema = mongoose.Schema(
    rightAnswerCount: Number,
    answerCount: Number,
    startDate: Date,
-   finalTime: Number
+   finalTime: Number,
+   lastScore1: Number,
+   lastScore7: Number,
+   lastScore30: Number,
+   lastScore365: Number,
 }, { _id: false });
 
 var sessionSchema = mongoose.Schema(
@@ -157,11 +161,11 @@ function addScore(questionnaireId, levelId, user, score, time)
    days.forEach(function(i)
    {   
       var model = getScoreModel(questionnaireId, levelId, i);
-      addScore2(user, score, time_ms, date, model);
+      addScore2(user, score, time_ms, date, model, i);
    });
 }
 
-function addScore2(user, score, time_ms, date, model)
+function addScore2(user, score, time_ms, date, model, i)
 {
    var entry = new model();
    entry.user_id = user._id;
@@ -170,10 +174,10 @@ function addScore2(user, score, time_ms, date, model)
    entry.date = date;
    entry.retryCount = 0;
    
-   setIdAndSave(entry);
+   setIdAndSave(user, entry, i);
 }
 
-function setIdAndSave(entry)
+function setIdAndSave(user, entry, i)
 {
    entry._id = (maxScore - entry.score) * scoreShift + entry.time_ms * timeShift + randomInt(maxRandPart);
    
@@ -191,6 +195,12 @@ function setIdAndSave(entry)
             console.log(err);
          }
       }
+      else
+      {
+         user.context['lastScore' + i] = entry._id;
+         user.save(function(err) { if (err) { console.log(err); /* Todo: handle error */ } });
+      }
+      
    });
 }
 
@@ -199,7 +209,7 @@ function randomInt(max)
    return Math.floor(Math.random() * Math.floor(max + 1));
 }
 
-function getScoreTable(questionnaireId, levelId, dayCount, size, callback)
+function getScoreTable(questionnaireId, levelId, dayCount, size, callerUser, callback)
 {
    var table = [];
    var model = getScoreModel(questionnaireId, levelId, dayCount);
@@ -220,8 +230,10 @@ function getScoreTable(questionnaireId, levelId, dayCount, size, callback)
                {
                   score: entry.score,
                   time_ms: entry.time_ms,
-                  name: (!err && user ? user.name : "")
+                  name: (!err && user ? user.name : ""),
                };
+               
+               if (callerUser && String(user._id) == String(callerUser._id) && entry._id === user.context['lastScore' + dayCount]) row.highlight = true;
                table[j] = row;
                
                ++i;

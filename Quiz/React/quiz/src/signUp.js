@@ -134,8 +134,15 @@ export class SignUp extends React.Component
       let state = {};
       Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
       
-      if (data.page === 'signUp') Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
-      else state.page = data.page;
+      if (data.page === 'signUp')
+      {
+         Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+         window.onresize = undefined;
+      }
+      else
+      {
+         state.page = data.page;
+      }
       
       this.setState(state);
    }

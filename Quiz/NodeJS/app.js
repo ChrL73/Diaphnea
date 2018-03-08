@@ -355,17 +355,21 @@ io.on('connection', function(socket)
    
    socket.on('getTables', function(data)
    {
-      var tables = [];
-      var i = 0;
-      var n = dTable.length;
-      dTable.forEach(function(dayCount)
-      {
-         userData.getScoreTable(data.questionnaireId, data.levelId, dayCount, 10, function(table)
+      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+      { 
+         var tables = [];
+         var i = 0;
+         var n = dTable.length;
+         dTable.forEach(function(dayCount)
          {
-            table.d = dayCount;
-            tables.push({ rows: table, d: dayCount });
-            ++i;
-            if (i == n) setTimeout(function() { socket.emit('tables',  { questionnaireId: data.questionnaireId, levelId: data.levelId, tables: tables }); }, debugDelay);
+            userData.getScoreTable(data.questionnaireId, data.levelId, dayCount, 10, context.user, function(table)
+            {
+               table.d = dayCount;
+               tables.push({ rows: table, d: dayCount });
+               ++i;
+               if (i == n) setTimeout(function() { socket.emit('tables',  { questionnaireId: data.questionnaireId, levelId: data.levelId, tables: tables }); }, debugDelay);
+            });
          });
       });
    });

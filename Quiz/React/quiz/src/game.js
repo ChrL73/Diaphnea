@@ -302,7 +302,6 @@ export class Game extends React.Component
       else
       {
          state.page = data.page;
-         window.onresize = undefined;
       }
       
       this.setState(state, () =>

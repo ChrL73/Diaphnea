@@ -88,8 +88,33 @@ export class Home extends React.Component
          });
       }
       
-      function rankFormatter(cell, row) { return '<strong>' + cell + '</strong>';}
-      function timeFormatter(cell, row) { return cell + (cell ? 's' : '');}
+      function rankFormatter(cell, row)
+      {
+         let format = '';
+         if (row.highlight) format += '<div class="lastScore">';
+         format += '<strong>' + cell + '</strong>';
+         if (row.highlight) format += '</div>';
+         return format;
+      }
+      
+      function defaultFormatter(cell, row)
+      {
+         let format = '';
+         if (row.highlight) format += '<div class="lastScore">';
+         format += cell;
+         if (row.highlight) format += '</div>';
+         return format;
+      }
+      
+      function timeFormatter(cell, row)
+      {
+         let format = '';
+         if (row.highlight) format += '<div class="lastScore">';
+         format += cell;
+         if (cell) format += 's';
+         if (row.highlight) format += '</div>';
+         return format;
+      }
       
       let tabs = this.durations.map((duration) =>
       {
@@ -98,8 +123,8 @@ export class Home extends React.Component
                <div style={{marginTop: '16px'}}>
                   <BootstrapTable data={this.state.tables['n' + duration.n]} bordered={false} >
                      <TableHeaderColumn width="10%" dataField="rank" isKey={true} dataAlign="center" dataFormat={rankFormatter}></TableHeaderColumn>
-                     <TableHeaderColumn width="30%" dataField="name" dataAlign="center">{this.state.texts.name}</TableHeaderColumn>
-                     <TableHeaderColumn width="30%" dataField="score" dataAlign="center" >{this.state.texts.score}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="name" dataAlign="center" dataFormat={defaultFormatter}>{this.state.texts.name}</TableHeaderColumn>
+                     <TableHeaderColumn width="30%" dataField="score" dataAlign="center" dataFormat={defaultFormatter}>{this.state.texts.score}</TableHeaderColumn>
                      <TableHeaderColumn width="30%" dataField="time" dataAlign="center" dataFormat={timeFormatter}>{this.state.texts.time}</TableHeaderColumn>
                  </BootstrapTable>
                </div>
@@ -109,123 +134,129 @@ export class Home extends React.Component
       return (
          <div style={{display: (this.state.page === 'index' ? 'block' : 'none')}} className="home">
             <div className="container">
-               <header>
-                  <div className="navbar">
-                     <div className="col-md-10">     
-                        {this.renderNavbarForm()}     
+               <div id="content">
+                  <header>
+                     <div className="navbar">
+                        <div className="col-md-10">     
+                           {this.renderNavbarForm()}     
+                        </div>
+                        <div className="col-md-2 text-center">
+                           <div className="visible-xs visible-sm"><br/></div>
+                           <form className="navbar-form">
+                              <select className="form-control input-sm" value={this.state.siteLanguageId}
+                                      onChange={(e) => this.handleSiteLanguageChange(e.target.value)}>
+                                 {siteLanguages}
+                              </select>
+                           </form>
+                        </div>
                      </div>
-                     <div className="col-md-2 text-center">
-                        <div className="visible-xs visible-sm"><br/></div>
-                        <form className="navbar-form">
-                           <select className="form-control input-sm" value={this.state.siteLanguageId}
-                                   onChange={(e) => this.handleSiteLanguageChange(e.target.value)}>
-                              {siteLanguages}
+                  </header>
+                  <Modal show={this.state.showModal1} onHide={() => this.setState({ showModal1: false })}>               
+                     <Modal.Body className="bg-danger">
+                        <span>{this.state.texts.unknownUserOrWrongPassword}</span>
+                        <Button className="close" onClick={() => this.setState({ showModal1: false })}>x</Button>
+                     </Modal.Body>
+                  </Modal>
+                  <Modal show={this.state.showModal2} onHide={() => this.setState({ showModal2: false })}>               
+                     <Modal.Body className="bg-danger">
+                        <span>{this.state.texts.internalServerError}</span>
+                        <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
+                     </Modal.Body>
+                  </Modal>
+                  <form>
+                     <div className="row">
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <label className="control-label" htmlFor="indexQuestionnaireSelect">{this.state.texts.questionnaire}:</label>
+                        </div>
+                     </div>
+                     <div className="row">
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <select className="form-control" id="indexQuestionnaireSelect" value={this.state.questionnaireId}
+                                   onChange={(e) => this.handleQuestionnaireChange(e.target.value)}>
+                              {questionnaires}
                            </select>
-                        </form>
+                        </div>
+                        <div className="col-sm-1">
+                           <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireWaitDisplay}}/>
+                        </div>
                      </div>
-                  </div>
-               </header>
-               <Modal show={this.state.showModal1} onHide={() => this.setState({ showModal1: false })}>               
-                  <Modal.Body className="bg-danger">
-                     <span>{this.state.texts.unknownUserOrWrongPassword}</span>
-                     <Button className="close" onClick={() => this.setState({ showModal1: false })}>x</Button>
-                  </Modal.Body>
-               </Modal>
-               <Modal show={this.state.showModal2} onHide={() => this.setState({ showModal2: false })}>               
-                  <Modal.Body className="bg-danger">
-                     <span>{this.state.texts.internalServerError}</span>
-                     <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
-                  </Modal.Body>
-               </Modal>
-               <form>
+                     <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <label className="control-label" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
+                              {this.state.texts.language}:
+                           </label>
+                        </div>
+                     </div>
+                     <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <select className="form-control" id="indexQuestionnaireLanguageSelect" value={this.state.questionnaireLanguageId}
+                                   onChange={(e) => this.handleQuestionnaireLanguageChange(e.target.value)}>
+                              {questionnaireLanguages}
+                           </select>
+                        </div>
+                        <div className="col-sm-1">
+                           <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireLanguageWaitDisplay}}/>
+                        </div>
+                     </div>
+                     <div className="row">
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <label className="control-label" htmlFor="indexLevelSelect" id="indexLevelLabel" style={{marginTop: '16px'}}>
+                              {this.state.texts.level}:
+                           </label>
+                        </div>
+                     </div>
+                     <div className="row">
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <select className="form-control" id="indexLevelSelect" value={this.state.levelId} onChange={(e) => this.handleLevelChange(e.target.value)}>
+                              {levels}
+                           </select>
+                        </div>
+                        <div className="col-sm-1">
+                           <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.levelWaitDisplay}}/>
+                        </div>
+                     </div>
+                     <div className="row" style={{marginTop: '20px'}}>
+                        <div className="col-sm-4 col-sm-offset-4">
+                           <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{this.state.texts.start}</Button>
+                        </div>
+                        <div className="col-sm-1">
+                           <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.startWaitDisplay}}/>
+                        </div>
+                     </div>
+                  </form>
                   <div className="row">
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <label className="control-label" htmlFor="indexQuestionnaireSelect">{this.state.texts.questionnaire}:</label>
+                     <div className="col-sm-10 col-sm-offset-1" style={{marginTop: '60px'}}>
+                        <div className="row">
+                           <div className="text-center col-sm-10 col-sm-offset-1" style={{marginBottom: '6px'}}>
+                              <strong>{this.state.texts.highScores}</strong>
+                           </div>
+                           <div className="text-center col-sm-1">
+                              <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.tableWaitDisplay}}/>
+                           </div>
+                        </div>
+                        <Tabs activeKey={this.state.scoreTab} onSelect={(key) => this.handleSelectTab(key)} id="tableTabs" animation={false}>
+                           {tabs}
+                        </Tabs>
                      </div>
                   </div>
-                  <div className="row">
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexQuestionnaireSelect" value={this.state.questionnaireId}
-                                onChange={(e) => this.handleQuestionnaireChange(e.target.value)}>
-                           {questionnaires}
-                        </select>
-                     </div>
-                     <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireWaitDisplay}}/>
-                     </div>
-                  </div>
-                  <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <label className="control-label" htmlFor="indexQuestionnaireLanguageSelect" style={{marginTop: '16px'}}>
-                           {this.state.texts.language}:
-                        </label>
-                     </div>
-                  </div>
-                  <div className="row" style={{display: this.state.showQuestionnaireLanguageSelect ? 'block' : 'none'}}>
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexQuestionnaireLanguageSelect" value={this.state.questionnaireLanguageId}
-                                onChange={(e) => this.handleQuestionnaireLanguageChange(e.target.value)}>
-                           {questionnaireLanguages}
-                        </select>
-                     </div>
-                     <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.questionnaireLanguageWaitDisplay}}/>
-                     </div>
-                  </div>
-                  <div className="row">
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <label className="control-label" htmlFor="indexLevelSelect" id="indexLevelLabel" style={{marginTop: '16px'}}>
-                           {this.state.texts.level}:
-                        </label>
-                     </div>
-                  </div>
-                  <div className="row">
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <select className="form-control" id="indexLevelSelect" value={this.state.levelId} onChange={(e) => this.handleLevelChange(e.target.value)}>
-                           {levels}
-                        </select>
-                     </div>
-                     <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.levelWaitDisplay}}/>
-                     </div>
-                  </div>
-                  <div className="row" style={{marginTop: '20px'}}>
-                     <div className="col-sm-4 col-sm-offset-4">
-                        <Button id="indexStartBtn" className="btn btn-success" onClick={(e) => this.handleStartBtnClick(e)}>{this.state.texts.start}</Button>
-                     </div>
-                     <div className="col-sm-1">
-                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.startWaitDisplay}}/>
-                     </div>
-                  </div>
-               </form>
-               <div className="col-sm-10 col-sm-offset-1" style={{marginTop: '60px'}}>
-                  <div className="row">
-                     <div className="text-center col-sm-10 col-sm-offset-1" style={{marginBottom: '6px'}}>
-                        <strong>{this.state.texts.highScores}</strong>
-                     </div>
-                     <div className="text-center col-sm-1">
-                        <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.tableWaitDisplay}}/>
-                     </div>
-                  </div>
-                  <Tabs activeKey={this.state.scoreTab} onSelect={(key) => this.handleSelectTab(key)} id="tableTabs" animation={false}>
-                     {tabs}
-                  </Tabs>
                </div>
-               <footer>
-                  <div>
-                     {this.state.texts.version}:
-                     <span> </span>
-                     {this.state.version}
-                  </div>
-                  <div>
-                     {this.state.texts.sourceCode}:
-                     <span> </span>
-                     <a target="_blank" href={this.state.sourceUrl}>{this.state.sourceUrl}</a>
-                  </div>
-                  <div>
-                     {this.state.texts.issues}:
-                     <span> </span>
-                     <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
+               <footer className={this.state.footerClass}>
+                  <div className="row">
+                     <div>
+                        {this.state.texts.version}:
+                        <span> </span>
+                        {this.state.version}
+                     </div>
+                     <div>
+                        {this.state.texts.sourceCode}:
+                        <span> </span>
+                        <a target="_blank" href={this.state.sourceUrl}>{this.state.sourceUrl}</a>
+                     </div>
+                     <div>
+                        {this.state.texts.issues}:
+                        <span> </span>
+                        <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
+                     </div>
                   </div>
                </footer>
             </div>
@@ -346,7 +377,7 @@ export class Home extends React.Component
    
    handleSelectTab(key)
    {
-      this.setState({ scoreTab: key });
+      this.setState({ scoreTab: key }, () => this.resize1());
       this.props.socket.emit('scoreTab', { n: key });
    }
    
@@ -360,13 +391,28 @@ export class Home extends React.Component
       if (data.page === 'index')
       {
          Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
-         this.setState(state, () => this.emitUpdateTables());
+         this.setState(state, () => { this.emitUpdateTables(); this.resize1(); });
+         
+         window.onresize = () => this.resize1();
       }
       else
       {
          state.page = data.page;
          this.setState(state);
       }
+   }
+   
+   resize1()
+   {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => this.resize2(), 100);
+   }
+   
+   resize2()
+   {
+      const h1 = document.getElementById('content').offsetHeight;
+      const h2 = window.innerHeight;
+      this.setState({ footerClass: h1 > h2 - 150 ? '' : 'fixedFooter' });
    }
    
    emitUpdateTables()
@@ -386,7 +432,7 @@ export class Home extends React.Component
             let t = [];
             table.rows.forEach(function(row, rank)
             {
-               const r = { rank: rank + 1, name: row.name, score: row.score, time: (0.001 * row.time_ms).toFixed(3) };
+               const r = { rank: rank + 1, name: row.name, score: row.score, time: (0.001 * row.time_ms).toFixed(3), highlight: Boolean(row.highlight) };
                t.push(r);
             });
             
@@ -394,7 +440,7 @@ export class Home extends React.Component
             stateTables['n' + table.d] = t;
          });
          
-         this.setState({ tables: stateTables, tableWaitDisplay: 'none' });
+         this.setState({ tables: stateTables, tableWaitDisplay: 'none' }, () => this.resize1());
       }
       else
       {
@@ -433,6 +479,6 @@ export class Home extends React.Component
          levelList: data.levelList,
          levelId: data.levelId
       },
-         () => this.emitUpdateTables());
+         () => { this.emitUpdateTables(); this.resize1(); });
    }
 }

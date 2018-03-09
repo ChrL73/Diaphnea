@@ -185,6 +185,14 @@ io.on('connection', function(socket)
          name2Message: context.signUpMessages.name2,
          errorMessage: context.signUpMessages.error
       };
+      
+      if (context.sendScoreWithSignUp)
+      {
+         downData.questionnaireName = context.questionnaireName;
+         downData.levelName = context.levelName;
+         downData.rightAnswerCount = context.rightAnswerCount;
+         downData.finalTime = context.finalTime;
+      }
 
       setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
    }
@@ -198,12 +206,19 @@ io.on('connection', function(socket)
          confirmPassword: texts.confirmPassword,
          signUp: texts.signUp,
          cancel: texts.cancel,
+         signIn: texts.signIn,
          nameMustBeBetween2And16Chars: texts.nameMustBeBetween2And16Chars,
          passwordMustContainAtLeast8Chars: texts.passwordMustContainAtLeast8Chars,
          passwordMustContainOnlyLettersNumbersEtc: texts.passwordMustContainOnlyLettersNumbersEtc,
          twoPasswordsAreNotIdentical: texts.twoPasswordsAreNotIdentical,
          theNameIsAlreadyUsed: texts.theNameIsAlreadyUsed,
-         internalServerError: texts.internalServerError
+         internalServerError: texts.internalServerError,
+         yourScore: texts.yourScore,
+         level: texts.level,
+         questionnaire: texts.questionnaire,
+         score: texts.score,
+         time: texts.time,
+         signUpProposal: texts.signUpProposal
       };
       
       return t;
@@ -279,6 +294,10 @@ io.on('connection', function(socket)
          score: texts.score,
          time: texts.time,
          stop: texts.stop,
+         finish: texts.finish,
+         areYouSureStopGame: texts.areYouSureStopGame,
+         yes: texts.yes,
+         no: texts.no,
          previous: texts.previous,
          submit: texts.submit,
          next: texts.next,
@@ -593,7 +612,16 @@ io.on('connection', function(socket)
          context.displayedQuestion = undefined;
          context.questions = undefined;
          context.questionStates = [];
-         emitDisplayIndex(context);
+         
+         if (context.user)
+         {
+            emitDisplayIndex(context);
+         }
+         else
+         {
+            context.sendScoreWithSignUp = true;
+            context.saver.save(function(err) { emitDisplaySignUp(context); });
+         }
       });
    });
    
@@ -803,7 +831,8 @@ function getContext(session0, sessionId, cookies, callback)
                   currentPage: pages.index,
                   signUpMessages: { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false },
                   tmpName: '',
-                  scoreTab: 1
+                  scoreTab: 1,
+                  sendScoreWithSignUp: false
                };
                
                session.context.session = session;

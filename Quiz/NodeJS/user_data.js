@@ -28,6 +28,7 @@ var contextSchema = mongoose.Schema(
    lastScore7: Number,
    lastScore30: Number,
    lastScore365: Number,
+   sendScoreWithSignUp: Boolean
 }, { _id: false });
 
 var sessionSchema = mongoose.Schema(

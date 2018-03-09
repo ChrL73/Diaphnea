@@ -22,7 +22,11 @@ export class SignUp extends React.Component
          pass2MessageDisplay: 'none',
          languageWaitDisplay: 'none',
          buttonWaitDisplay: 'none',
-         texts: {}
+         texts: {},
+         questionnaireName: undefined,
+         levelName: undefined,
+         rightAnswerCount: undefined,
+         finalTime: undefined
       };
       
       this.state = this.stateReset;
@@ -42,9 +46,9 @@ export class SignUp extends React.Component
       return (
          <div style={{display: (this.state.page === 'signUp' ? 'block' : 'none')}} className="signUp">
             <div className="container">
-               <div className="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">  
+               <div  className="col-md-6 col-md-offset-3 col-sm-offset-3 col-sm-6">  
                   <header>
-                     <div className="row">
+                     <div className="row" style={{display: this.state.questionnaireName ? 'none' : 'block'}}>
                         <div className="col-sm-8 col-sm-offset-2">
                            <div className="navbar text-center">
                               <form className="navbar-form">
@@ -59,7 +63,33 @@ export class SignUp extends React.Component
                            <img src={waitGif} alt="Waiting for server..." className="waitImg" style={{display: this.state.languageWaitDisplay}}/>
                         </div>
                      </div>
+                     <div style={{display: this.state.questionnaireName ? 'block' : 'none'}}>
+                        <p className="text-center"><strong>{this.state.texts.yourScore}:</strong></p>
+                        <div className="text-center">
+                           <span>{this.state.texts.questionnaire}:</span>
+                           <span> </span>
+                           <span>{this.state.questionnaireName}</span>
+                        </div>
+                        <div className="text-center">
+                           <span>{this.state.texts.level}:</span>
+                           <span> </span>
+                           <span>{this.state.levelName}</span>
+                        </div>
+                        <div className="text-center">
+                           <span>{this.state.texts.score}:</span>
+                           <span> </span>
+                           <span>{this.state.rightAnswerCount}</span>
+                        </div>
+                        <div className="text-center">
+                           <span>{this.state.texts.time}:</span>
+                           <span> </span>
+                           <span>{this.state.finalTime}s</span>
+                        </div>
+                        <p className="text-center" style={{marginTop: '8px'}}>{this.state.texts.signUpProposal}</p>
+                     </div>
                   </header>
+               </div>
+               <div className="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">  
                   <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>               
                      <Modal.Body className="bg-danger">
                         <span>{this.state.texts.internalServerError}</span>
@@ -81,6 +111,9 @@ export class SignUp extends React.Component
                         <div className="text-danger" style={{display: this.state.pass1aMessageDisplay}}>{this.state.texts.passwordMustContainAtLeast8Chars}</div>
                         <div className="text-danger" style={{display: this.state.pass1bMessageDisplay}}>{this.state.texts.passwordMustContainOnlyLettersNumbersEtc}</div>
                      </FormGroup>
+                     <FormGroup style={{display: this.state.questionnaireName ? 'block' : 'none'}}>
+                        <Button className="btn btn-primary" onClick={(e) => this.handleSignInBtnClick(e)}>{this.state.texts.signIn}</Button>
+                     </FormGroup>
                      <FormGroup id="pass2Group" validationState={(this.state.pass2MessageDisplay !== 'none') ? 'error' : null}>
                         <label htmlFor="signUpPassInput2">{this.state.texts.confirmPassword}:</label>
                         <input className="form-control" type="password" id="signUpPassInput2" value={this.state.pass2}
@@ -90,7 +123,7 @@ export class SignUp extends React.Component
                      <FormGroup>
                         <div className="row">
                            <div className="col-sm-10 col-xs-10">
-                              <button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)}>{this.state.texts.signUp}</button>
+                              <Button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)}>{this.state.texts.signUp}</Button>
                               <span> </span>
                               <Button className="btn btn-warning" onClick={(e) => this.handleCancelBtnClick(e)}>{this.state.texts.cancel}</Button>
                            </div>
@@ -125,6 +158,11 @@ export class SignUp extends React.Component
    {
       e.preventDefault();
       this.props.socket.emit('cancelSignUp', {});
+   }
+   
+   handleSignInBtnClick(e)
+   {
+      e.preventDefault();
    }
    
    // 2- Server message handlers

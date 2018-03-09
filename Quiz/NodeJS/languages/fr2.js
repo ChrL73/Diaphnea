@@ -1,3 +1,5 @@
+// This file 'fr2.js has only a test purpose
+
 module.exports =
 {
    questionnaire: 'Questionnaire',

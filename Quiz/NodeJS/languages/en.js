@@ -12,6 +12,10 @@ module.exports =
    cancel: 'Cancel',
    start: 'Start',
    stop: 'Stop',
+   finish: 'Finish',
+   areYouSureStopGame: 'The game is not over. Are-you sure you want to stop?',
+   yes: 'Yes',
+   no: 'No',
    previous: 'Previous',
    next: 'Next',
    submit: 'Submit',
@@ -34,5 +38,7 @@ module.exports =
    year: 'Year',
    version: 'Version',
    sourceCode: 'Source code',
-   issues: 'Issues'
+   issues: 'Issues',
+   yourScore: 'Your score',
+   signUpProposal: 'If you want this score to appear in the high score table, you must sign in or sign up'
 };

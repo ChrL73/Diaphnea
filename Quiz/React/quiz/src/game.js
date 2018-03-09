@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import waitGif from './wait.gif'
 import { Map } from './map.js';
 
@@ -15,6 +15,7 @@ export class Game extends React.Component
       
       this.stateReset =
       {
+         showModal: false,
          timeWaitDisplay: 'none',
          questionWaitVisible: {},
          stopGameWaitDisplay: 'none',
@@ -98,6 +99,15 @@ export class Game extends React.Component
                   {this.state.finalTime ? this.state.finalTime : Math.floor(0.001 * this.state.time)}s
                   <img src={waitGif} alt="Waiting for server..." className="waitImg" style={{display: this.state.timeWaitDisplay}}/>
                </header>
+               <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>               
+                  <Modal.Body>{this.state.texts.areYouSureStopGame}</Modal.Body>
+                  <Modal.Footer>
+                     <div className="row text-center">
+                        <Button style={{marginRight: '4px'}} className="btn btn-primary input-sm" onClick={() => { this.setState({ showModal: false }); this.stopGame(); }}>{this.state.texts.yes}</Button>
+                        <Button style={{marginLeft: '4px'}}  className="btn btn-warning input-sm" onClick={() => this.setState({ showModal: false })}>{this.state.texts.no}</Button>
+                     </div>
+                  </Modal.Footer>
+               </Modal>
                <div className="row">
                   <div className="col-lg-3 col-md-4 col-sm-5">
                      {questions}
@@ -117,14 +127,15 @@ export class Game extends React.Component
                         </Button>
                      </div>
                      <div style={{marginTop: '20px', marginBottom: '20px'}}>
-                        <Button className="btn btn-warning input-sm" onClick={(e) => this.handleStopBtnClick(e)}>{this.state.texts.stop}</Button>
+                        <Button className="btn btn-warning input-sm" onClick={(e) => this.handleStopBtnClick(e)}>
+                           {ok && this.state.questionStates[this.state.questions.length - 1].answered ? this.state.texts.finish : this.state.texts.stop}
+                        </Button>
                         <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.stopGameWaitDisplay}}/>
                      </div>
                   </div>
                   <div className="col-lg-9 col-md-8 col-sm-7" id="mapColumn">
                      <Map gameState={this.state} ref={(x) => { this.map = x; }}/>
                   </div>
-               
                </div>
             </div>
          </div>);
@@ -135,6 +146,13 @@ export class Game extends React.Component
    handleStopBtnClick(e)
    {
       e.preventDefault();
+      
+      if (!this.state.questionStates[this.state.questions.length - 1].answered) this.setState({ showModal: true });
+      else this.stopGame();
+   }
+   
+   stopGame()
+   {
       this.setState({ stopGameWaitDisplay: 'inline' });
       this.props.socket.emit('stopGame', {});
    }

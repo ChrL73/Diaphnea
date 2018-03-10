@@ -218,7 +218,8 @@ io.on('connection', function(socket)
          questionnaire: texts.questionnaire,
          score: texts.score,
          time: texts.time,
-         signUpProposal: texts.signUpProposal
+         signUpProposal: texts.signUpProposal,
+         unknownUserOrWrongPassword: texts.unknownUserOrWrongPassword
       };
       
       return t;
@@ -364,7 +365,7 @@ io.on('connection', function(socket)
    
    socket.on('scoreTab', function(data)
    {
-      var cookies = extractCookies(socket.handshake.headers.cookie);  
+      var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
          context.scoreTab = data.n;
@@ -414,6 +415,7 @@ io.on('connection', function(socket)
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
       { 
          context.signUpMessages = { name1: false, name2: false, pass1a: false, pass1b: false, pass2: false, error: false };
+         context.sendScoreWithSignUp = false;
          emitDisplayIndex(context);
       });
    });
@@ -438,7 +440,7 @@ io.on('connection', function(socket)
          if (context.signUpMessages.pass1b) ok = false;
          
          context.signUpMessages.pass2 = (data.pass1 !== data.pass2);
-         if (context.signUpMessages.pass2) ok = false;         
+         if (context.signUpMessages.pass2) ok = false;
 
          if (ok)
          {
@@ -457,12 +459,18 @@ io.on('connection', function(socket)
                }
                else
                {
-                  socket.request.session.userId = id;    
+                  socket.request.session.userId = id;
                   socket.request.session.save(function(err)
                   {
                      if (err) { console.log(err); /* Todo: Handle error */ } 
                      getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
                      {
+                        if (context.sendScoreWithSignUp)
+                        {
+                           userData.addScore(context.questionnaireId, context.levelId, context.user, context.rightAnswerCount, context.finalTime);
+                           context.sendScoreWithSignUp = false;
+                        }
+                        
                         emitDisplayIndex(context);
                      });
                   });
@@ -494,31 +502,52 @@ io.on('connection', function(socket)
    
    socket.on('signIn', function(data)
    {     
-      userData.findUserId(data.name, data.pass, function(err, id)
+      var cookies = extractCookies(socket.handshake.headers.cookie);
+      getContext(socket.request.session, socket.request.sessionID, cookies, function(context1)
       {
-         if (err)
+         var questionnaireId, levelId, rightAnswerCount, finalTime;
+         if (context1.sendScoreWithSignUp)
          {
-            console.log(err);
-            setTimeout(function() { socket.emit('indexError', {}); }, debugDelay);
+            questionnaireId = context1.questionnaireId;
+            levelId = context1.levelId;
+            rightAnswerCount = context1.rightAnswerCount;
+            finalTime = context1.finalTime;
+            context1.sendScoreWithSignUp = false;
+            context1.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
          }
-         else if (!id)
-         {
-            setTimeout(function() { socket.emit('unknownName', {}); }, debugDelay);
-         }
-         else
-         {
-            socket.request.session.userId = id;    
-            socket.request.session.save(function(err)
-            {
-               if (err) { console.log(err); /* Todo: Handle error */ } 
 
-               var cookies = extractCookies(socket.handshake.headers.cookie);
-               getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
+         userData.findUserId(data.name, data.pass, function(err, id)
+         {
+            if (err)
+            {
+               console.log(err);
+               setTimeout(function() { socket.emit('indexError', {}); }, debugDelay);
+            }
+            else if (!id)
+            {
+               setTimeout(function() { socket.emit('unknownName', {}); }, debugDelay);
+            }
+            else
+            {
+               socket.request.session.userId = id;    
+               socket.request.session.save(function(err)
                {
-                  emitDisplayIndex(context);
+                  if (err) { console.log(err); /* Todo: Handle error */ } 
+
+                  getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
+                  {
+                     if (questionnaireId)
+                     {
+                        context2.questionnaireId = questionnaireId;
+                        context2.levelId = levelId;
+                        userData.addScore(questionnaireId, levelId, context2.user, rightAnswerCount, finalTime);
+                     }
+
+                     emitDisplayIndex(context2);
+                  });
                });
-            });
-         }
+            }
+         });
       });
    });
    
@@ -530,10 +559,10 @@ io.on('connection', function(socket)
          var name;
          if (context1.user) name = context1.user.name;
          
-         socket.request.session.userId = undefined;    
+         socket.request.session.userId = undefined;
          socket.request.session.save(function(err)
          {
-            if (err) { console.log(err); /* Todo: Handle error */ } 
+            if (err) { console.log(err); /* Todo: Handle error */ }
             getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
             {
                if (name) context2.tmpName = name;
@@ -613,7 +642,7 @@ io.on('connection', function(socket)
          context.questions = undefined;
          context.questionStates = [];
          
-         if (context.user)
+         if (context.user || !context.finalTime)
          {
             emitDisplayIndex(context);
          }

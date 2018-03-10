@@ -456,12 +456,12 @@ export class Home extends React.Component
    
    handleUnknownName()
    {
-      this.setState({ navBarWaitDisplay: 'none', showModal1: 'true' });
+      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal1: 'true' });
    }
    
    handleServerError()
    {
-      this.setState({ navBarWaitDisplay: 'none', showModal2: 'true' });
+      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal2: 'true' });
    }
    
    handleUpdateSelects(data)

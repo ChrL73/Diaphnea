@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Modal, Button } from 'react-bootstrap';
+import { Form, FormGroup, Modal, Button, Tabs, Tab } from 'react-bootstrap';
 import waitGif from './wait.gif'
 
 export class SignUp extends React.Component
@@ -11,14 +11,17 @@ export class SignUp extends React.Component
       props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
       props.socket.on('updateSignUp', (texts) => this.handleUpdateSiteLanguage(texts));
       props.socket.on('signUpError', (data) => this.handleServerError(data));
+      props.socket.on('unknownName', () => this.handleUnknownName());
+      props.socket.on('indexError', () => this.handleServerError());
       
       this.stateReset =
       {
          pass1: '',
          pass2: '',
-         showModal: false,
-         pass1aMessageDisplay: 'none',
-         pass1bMessageDisplay: 'none',
+         showModal1: false,
+         showModal2: false,
+         pass1aMessage: '',
+         pass1bMessage: '',
          pass2MessageDisplay: 'none',
          languageWaitDisplay: 'none',
          buttonWaitDisplay: 'none',
@@ -26,7 +29,8 @@ export class SignUp extends React.Component
          questionnaireName: undefined,
          levelName: undefined,
          rightAnswerCount: undefined,
-         finalTime: undefined
+         finalTime: undefined,
+         tabKey: 0
       };
       
       this.state = this.stateReset;
@@ -46,7 +50,7 @@ export class SignUp extends React.Component
       return (
          <div style={{display: (this.state.page === 'signUp' ? 'block' : 'none')}} className="signUp">
             <div className="container">
-               <div  className="col-md-6 col-md-offset-3 col-sm-offset-3 col-sm-6">  
+               <div className="col-md-6 col-md-offset-3 col-sm-offset-3 col-sm-6">  
                   <header>
                      <div className="row" style={{display: this.state.questionnaireName ? 'none' : 'block'}}>
                         <div className="col-sm-8 col-sm-offset-2">
@@ -89,32 +93,39 @@ export class SignUp extends React.Component
                      </div>
                   </header>
                </div>
-               <div className="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">  
-                  <Modal show={this.state.showModal} onHide={() => this.setState({ showModal: false })}>               
+               <div className="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">
+                  <Modal show={this.state.showModal1} onHide={() => this.setState({ showModal1: false })}>               
                      <Modal.Body className="bg-danger">
-                        <span>{this.state.texts.internalServerError}</span>
-                        <Button className="close" onClick={() => this.setState({ showModal: false })}>x</Button>
+                        <span>{this.state.texts.unknownUserOrWrongPassword}</span>
+                        <Button className="close" onClick={() => this.setState({ showModal1: false })}>x</Button>
                      </Modal.Body>
                   </Modal>
+                  <Modal show={this.state.showModal2} onHide={() => this.setState({ showModal2: false })} >               
+                     <Modal.Body className="bg-danger">
+                        <span>{this.state.texts.internalServerError}</span>
+                        <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
+                     </Modal.Body>
+                  </Modal>
+                  <Tabs activeKey={this.state.tabKey} onSelect={(key) => this.handleSelectTab(key)} style={{marginBottom: '12px', display: this.state.questionnaireName ? 'block' : 'none'}} id="tabs" >
+                     <Tab key={0} eventKey={0} title={this.state.texts.signUp}></Tab>
+                     <Tab key={1} eventKey={1} title={this.state.texts.signIn}></Tab>
+                  </Tabs>
                   <Form>
-                     <FormGroup id="nameGroup" validationState={(this.state.name1Message || this.state.name2Message) ? 'error' : null}>
+                     <FormGroup id="nameGroup" validationState={(this.state.tabKey === 0 && (this.state.name1Message || this.state.name2Message)) ? 'error' : null}>
                         <label htmlFor="signUpNameInput">{this.state.texts.name}:</label>
                         <input className="form-control" type="text" id="signUpNameInput" value={this.state.name ? this.state.name : ''}
                                onChange={(e) => this.setState({ name: e.target.value })}/>
-                        <div className="text-danger" style={{display: (this.state.name1Message ? 'block' : 'none')}}>{this.state.texts.nameMustBeBetween2And16Chars}</div>
-                        <div className="text-danger" style={{display: (this.state.name2Message ? 'block' : 'none')}}>{this.state.texts.theNameIsAlreadyUsed}</div>
+                        <div className="text-danger" style={{display: (this.state.tabKey === 0 && this.state.name1Message ? 'block' : 'none')}}>{this.state.texts.nameMustBeBetween2And16Chars}</div>
+                        <div className="text-danger" style={{display: (this.state.tabKey === 0 && this.state.name2Message ? 'block' : 'none')}}>{this.state.texts.theNameIsAlreadyUsed}</div>
                      </FormGroup>
-                     <FormGroup id="pass1Group" validationState={(this.state.pass1aMessageDisplay !== 'none' || this.state.pass1bMessageDisplay !== 'none') ? 'error' : null}>
+                     <FormGroup id="pass1Group" validationState={(this.state.tabKey === 0 && (this.state.pass1aMessage || this.state.pass1bMessage)) ? 'error' : null}>
                         <label htmlFor="signUpPassInput1">{this.state.texts.password}:</label>
                         <input className="form-control" type="password" id="signUpPassInput1" value={this.state.pass1}
                                onChange={(e) => this.setState({ pass1: e.target.value })}/>
-                        <div className="text-danger" style={{display: this.state.pass1aMessageDisplay}}>{this.state.texts.passwordMustContainAtLeast8Chars}</div>
-                        <div className="text-danger" style={{display: this.state.pass1bMessageDisplay}}>{this.state.texts.passwordMustContainOnlyLettersNumbersEtc}</div>
+                        <div className="text-danger" style={{display: (this.state.tabKey === 0 && this.state.pass1aMessage ? 'block' : 'none')}}>{this.state.texts.passwordMustContainAtLeast8Chars}</div>
+                        <div className="text-danger" style={{display: (this.state.tabKey === 0 && this.state.pass1bMessage ? 'block' : 'none')}}>{this.state.texts.passwordMustContainOnlyLettersNumbersEtc}</div>
                      </FormGroup>
-                     <FormGroup style={{display: this.state.questionnaireName ? 'block' : 'none'}}>
-                        <Button className="btn btn-primary" onClick={(e) => this.handleSignInBtnClick(e)}>{this.state.texts.signIn}</Button>
-                     </FormGroup>
-                     <FormGroup id="pass2Group" validationState={(this.state.pass2MessageDisplay !== 'none') ? 'error' : null}>
+                     <FormGroup id="pass2Group" validationState={(this.state.pass2MessageDisplay !== 'none') ? 'error' : null} style={{display: this.state.tabKey === 0 ? 'block' : 'none'}}>
                         <label htmlFor="signUpPassInput2">{this.state.texts.confirmPassword}:</label>
                         <input className="form-control" type="password" id="signUpPassInput2" value={this.state.pass2}
                                onChange={(e) => this.setState({ pass2: e.target.value })}/>
@@ -123,7 +134,12 @@ export class SignUp extends React.Component
                      <FormGroup>
                         <div className="row">
                            <div className="col-sm-10 col-xs-10">
-                              <Button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)}>{this.state.texts.signUp}</Button>
+                              <Button className="btn btn-primary" onClick={(e) => this.handleSignInBtnClick(e)} style={{display: this.state.tabKey === 1 ? 'inline' : 'none'}}>
+                                 {this.state.texts.signIn}
+                              </Button>
+                              <Button className="btn btn-info" onClick={(e) => this.handleSignUpBtnClick(e)} style={{display: this.state.tabKey === 0 ? 'inline' : 'none'}}>
+                                 {this.state.texts.signUp}
+                              </Button>
                               <span> </span>
                               <Button className="btn btn-warning" onClick={(e) => this.handleCancelBtnClick(e)}>{this.state.texts.cancel}</Button>
                            </div>
@@ -163,6 +179,13 @@ export class SignUp extends React.Component
    handleSignInBtnClick(e)
    {
       e.preventDefault();
+      this.props.socket.emit('signIn', { name: this.state.name, pass: this.state.pass1 });
+      this.setState({ buttonWaitDisplay: 'inline' });
+   }
+   
+   handleSelectTab(key)
+   {
+      this.setState({ tabKey: key });
    }
    
    // 2- Server message handlers
@@ -190,17 +213,29 @@ export class SignUp extends React.Component
       this.setState({ languageWaitDisplay: 'none', texts: texts });
    }
    
+   handleUnknownName()
+   {
+      if (this.state.page === 'signUp') this.setState({ buttonWaitDisplay: 'none', showModal1: 'true' });
+   }
+   
    handleServerError(data)
    {
-      this.setState(
+      if (data)
       {
-         buttonWaitDisplay: 'none',
-         name1Message: data.name1Message,
-         name2Message: data.name2Message,
-         pass1aMessageDisplay: data.pass1aMessage ? 'block' : 'none',
-         pass1bMessageDisplay: data.pass1bMessage ? 'block' : 'none',
-         pass2MessageDisplay: data.pass2Message ? 'block' : 'none',
-         showModal: Boolean(data.errorMessage)
-      });
+         this.setState(
+         {
+            buttonWaitDisplay: 'none',
+            name1Message: data.name1Message,
+            name2Message: data.name2Message,
+            pass1aMessage: data.pass1aMessage,
+            pass1bMessage: data.pass1bMessage,
+            pass2MessageDisplay: data.pass2Message ? 'block' : 'none',
+            showModal2: Boolean(data.errorMessage)
+         });
+      }
+      else if (this.state.page === 'signUp')
+      {
+         this.setState({ buttonWaitDisplay: 'none', showModal2: true });
+      }
    }
 }

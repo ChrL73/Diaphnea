@@ -234,7 +234,7 @@ function getScoreTable(questionnaireId, levelId, dayCount, size, callerUser, cal
                   name: (!err && user ? user.name : ""),
                };
                
-               if (callerUser && String(user._id) == String(callerUser._id) && entry._id === user.context['lastScore' + dayCount]) row.highlight = true;
+               if (!err && user && callerUser && String(user._id) == String(callerUser._id) && entry._id === user.context['lastScore' + dayCount]) row.highlight = true;
                table[j] = row;
                
                ++i;

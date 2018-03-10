@@ -60,6 +60,8 @@ export class Map extends React.Component
       {
          let mapIds = this.state.mapIds;
          mapIds.push(mapId);
+         this.map = undefined;
+         this.mapElements = undefined;
          
          this.setState({ mapIds: mapIds }, () =>
          {

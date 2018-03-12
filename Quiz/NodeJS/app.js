@@ -505,17 +505,6 @@ io.on('connection', function(socket)
       var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context1)
       {
-         var questionnaireId, levelId, rightAnswerCount, finalTime;
-         if (context1.sendScoreWithSignUp)
-         {
-            questionnaireId = context1.questionnaireId;
-            levelId = context1.levelId;
-            rightAnswerCount = context1.rightAnswerCount;
-            finalTime = context1.finalTime;
-            context1.sendScoreWithSignUp = false;
-            context1.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-         }
-
          userData.findUserId(data.name, data.pass, function(err, id)
          {
             if (err)
@@ -536,11 +525,13 @@ io.on('connection', function(socket)
 
                   getContext(socket.request.session, socket.request.sessionID, cookies, function(context2)
                   {
-                     if (questionnaireId)
+                     if (context1.sendScoreWithSignUp)
                      {
-                        context2.questionnaireId = questionnaireId;
-                        context2.levelId = levelId;
-                        userData.addScore(questionnaireId, levelId, context2.user, rightAnswerCount, finalTime);
+                        context2.questionnaireId = context1.questionnaireId;
+                        context2.levelId = context1.levelId;
+                        userData.addScore(context1.questionnaireId, context1.levelId, context2.user, context1.rightAnswerCount, context1.finalTime);
+                        context1.sendScoreWithSignUp = false;
+                        context1.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
                      }
 
                      emitDisplayIndex(context2);

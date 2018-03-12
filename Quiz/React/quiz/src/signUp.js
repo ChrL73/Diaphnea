@@ -215,7 +215,7 @@ export class SignUp extends React.Component
    
    handleUnknownName()
    {
-      if (this.state.page === 'signUp') this.setState({ buttonWaitDisplay: 'none', showModal1: 'true' });
+      if (this.state.page === 'signUp') this.setState({ buttonWaitDisplay: 'none', showModal1: true });
    }
    
    handleServerError(data)

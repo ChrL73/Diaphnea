@@ -11,12 +11,21 @@ export class Map extends React.Component
    
    render()
    {
-      const canvas = this.state.mapIds.map((mapId) =>
+      let canvas;
+      
+      if (this.state.mapIds.length)
       {
-         return (
-            <canvas style={{display: mapId === this.props.gameState.mapId ? 'block' : 'none' }} id={mapId} key={mapId}
-                    height={this.props.gameState.mapHeight} width={this.props.gameState.mapWidth}></canvas>);
-      });
+         canvas = this.state.mapIds.map((mapId) =>
+         {
+            return (
+               <canvas style={{display: mapId === this.props.gameState.mapId ? 'block' : 'none' }} id={mapId} key={mapId}
+                       height={this.props.gameState.mapHeight} width={this.props.gameState.mapWidth}></canvas>);
+         });
+      }
+      else
+      {
+         canvas = (<canvas height={this.props.gameState.mapHeight} width={this.props.gameState.mapWidth}></canvas>);
+      }
       
       return (
          <div className="map">

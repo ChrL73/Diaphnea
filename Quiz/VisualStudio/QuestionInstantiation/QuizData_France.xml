@@ -2253,7 +2253,7 @@
         <relation type="rNN_Departement_DepartementsLimitrophes" linkedElement="el_Essonne"/>
       </relationList>
     </element>
-    <element id="el_LotDepartement " sortKey="46" type="et_Departement" minLevel="0" mapId="e_46">
+    <element id="el_LotDepartement" sortKey="46" type="et_Departement" minLevel="0" mapId="e_46">
       <elementName>
         <name language="fr" text="Lot"/>
         <name language="en" text="Lot"/>

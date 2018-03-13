@@ -1,33 +1,31 @@
 March 2018
 
-`kubuntu-16.04.3-desktop-ams64.iso` (downloaded on [https://kubuntu.org/getkubuntu/](https://kubuntu.org/getkubuntu/))
+* This procedure has been tested for the following operating systems:
+
+	* `ubuntu-16.04.4-server-amd64.iso` (downloaded on [https://www.ubuntu.com/download/server/](https://www.ubuntu.com/download/server/))
+
+	* `kubuntu-16.04.3-desktop-ams64.iso` (downloaded on [https://kubuntu.org/getkubuntu/](https://kubuntu.org/getkubuntu/))
 
 * If the computer is behind a proxy:
 
-	* Edit the file `/etc/profile` and add the line:
+	* Edit the file `/etc/profile` and add the lines:
 
 			export https_proxy=http://userName:password@proxyAddress:portNumber
 			export http_proxy=http://userName:password@proxyAddress:portNumber
 
-	* Edit the file `/etc/bash.bashrc` and add the line:
+	* Apply the modifications:
 
-			export https_proxy=http://userName:password@proxyAddress:portNumber
-			export http_proxy=http://userName:password@proxyAddress:portNumber
-
-	* Edit the file `/etc/wgetrc` and add the 2 lines:
-
-			https_proxy = http_proxy=http://userName:password@proxyAddress:portNumber/
-			http_proxy = http_proxy=http://userName:password@proxyAddress:portNumber/
-			use_proxy = on
+			source /etc/profile
 
 	* Create the file `/etc/apt/apt.conf.d/proxyPerso.conf` and add the line:
 
-			Acquire::http::proxy "http:///userName:password@proxyAddress:portNumber/";
+			Acquire::http::proxy "http://userName:password@proxyAddress:portNumber/";
 
-	* Add the following environment variables:
+	* Edit the file `/etc/wgetrc` and add the lines:
 
-			export HTTP_PROXY=http://userName:password@proxyAddress:portNumber
-			export HTTPS_PROXY=http://userName:password@proxyAddress:portNumber
+			https_proxy = http://userName:password@proxyAddress:portNumber/
+			http_proxy = http://userName:password@proxyAddress:portNumber/
+			use_proxy = on
 
 * Update apt-get repositories:
 
@@ -49,39 +47,62 @@ March 2018
 
 		sudo apt-get install mongodb
 
-* Install Mono:
+* Install Mono (see [https://www.mono-project.com/download/stable/#download-lin](https://www.mono-project.com/download/stable/#download-lin) for more information):
 
+		sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+		echo "deb http://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+		sudo apt-get update
 		sudo apt-get install mono-complete
-		sudo apt-get install mono-reference-assemblies-4.0
 
-* Install the MonoDevelop IDE:
+	Verify that a correct version has been installed:
+
+		mono --version
+
+	The version must be >= 5.10 (some older versions have a bug that prevents them from working with the MongoDB C# driver)
+
+* Install MonoDevelop:
 
 		sudo apt-get install monodevelop
 
-* Download the MongoDB C# driver 2.2.4 from [https://github.com/mongodb/mongo-csharp-driver/releases](https://github.com/mongodb/mongo-csharp-driver/releases): `CSharpDriver-2.2.4.zip`
+* Download the MongoDB C# driver 2.3.0 (`CSharpDriver-2.3.0.zip` on the page [https://github.com/mongodb/mongo-csharp-driver/releases](https://github.com/mongodb/mongo-csharp-driver/releases)):
 
-* Extract the 3 following files from `CSharpDriver-2.2.4.zip`:
+		wget https://github.com/mongodb/mongo-csharp-driver/releases/download/v2.3.0/CSharpDriver-2.3.0.zip
 
-		MongoDB.Bson.dll
-		MongoDB.Driver.Core.dll
-		MongoDB.Driver.dll
+* Unzip the archive `CSharpDriver-2.3.0.zip`
 
-	 and copy these files to the 2 following folders:
+		sudo apt-get install unzip
+		unzip CSharpDriver-2.3.0.zip -d CSharpDriver-2.3.0
 
-		Diaphnea/Quiz/Mono/
-		Diaphnea/Map/Mono/
+* Copy the 3 files `MongoDB.Bson.dll` `MongoDB.Driver.Core.dll` and `MongoDB.Driver.dll` to the 2 folders `Diaphnea/Quiz/Mono/` and  `Diaphnea/Map/Mono/`:
 
-* Generate the Quiz database:
+		cp CSharpDriver-2.3.0/net45/MongoDB.Bson.dll Diaphnea/Quiz/Mono/
+		cp CSharpDriver-2.3.0/net45/MongoDB.Driver.Core.dll Diaphnea/Quiz/Mono/
+		cp CSharpDriver-2.3.0/net45/MongoDB.Driver.dll Diaphnea/Quiz/Mono/
+		cp CSharpDriver-2.3.0/net45/MongoDB.Bson.dll Diaphnea/Map/Mono/
+		cp CSharpDriver-2.3.0/net45/MongoDB.Driver.Core.dll Diaphnea/Map/Mono/
+		cp CSharpDriver-2.3.0/net45/MongoDB.Driver.dll Diaphnea/Map/Mono/
 
-	* Open `Diaphnea/Quiz/Mono/Diaphnea.sln` with MonoDevelop
+* Build the Mono project `QuestionInstantiation`:
 
-	* Build and execute the project `QuestionInstantiation`
+		cd ~/Diaphnea/Quiz/Mono/QuestionInstantiation
+		mdtool build QuestionInstantiation.csproj
 
-* Generate the Map database:
+* Build the Mono project `QuestionInstantiation` to generate the Quiz database:
 
-	* Open `Diaphnea/Map/Mono/DiaphneaMap.sln` with MonoDevelop
+		cd bin/Debug
+		chmod u+x QuestionInstantiation.exe
+		./QuestionInstantiation.exe ../../../../VisualStudio/QuestionInstantiation/QuizData_France.xml ../../../../VisualStudio/QuestionInstantiation/QuizData_Gabon.xml
 
-	* Build and execute the project `MapDataProcessing`
+* Build the Mono project `MapDataProcessing`:
+
+		cd ~/Diaphnea/Map/Mono/MapDataProcessing
+		mdtool build MapDataProcessing.csproj
+
+* Build the Mono project `QuestionInstantiation` to generate the Quiz database:
+
+		cd bin/Debug
+		chmod u+x MapDataProcessing.exe
+		./MapDataProcessing.exe ../../../../VisualStudio/MapDataProcessing/MapData_France.xml ../../../../VisualStudio/MapDataProcessing/MapData_Gabon.xml
 
 * Install the GCC compilers:
 
@@ -101,6 +122,7 @@ March 2018
 
 * Get the Legacy MongoDB C++ driver sources (required for the quiz server and for the map server):
 
+		cd
 		git clone -b releases/legacy https://github.com/mongodb/mongo-cxx-driver.git
 
 * Compile the MongoDB C++ driver (see [https://mongodb.github.io/mongo-cxx-driver/legacy-v1/installation/](https://mongodb.github.io/mongo-cxx-driver/legacy-v1/installation/) for more information):
@@ -108,14 +130,18 @@ March 2018
 		cd mongo-cxx-driver/
 		scons --disable-warnings-as-errors --c++11=on --prefix=$HOME/Diaphnea/mongo-cxx-driver install
 
-	(Adapt `--prefix` value if you cloned the Diaphnea repository in another folder than `$HOME`)
+* Download the `FreeType` library (file `freetype-2.7.tar.gz` on the page [https://download.savannah.gnu.org/releases/freetype/](https://download.savannah.gnu.org/releases/freetype/) (required for the map server):
 
-* Download `FreeType` library from [https://download.savannah.gnu.org/releases/freetype/](https://download.savannah.gnu.org/releases/freetype/) (required for the map server): `freetype-2.7.tar.gz`.
+		cd
+		wget https://download.savannah.gnu.org/releases/freetype/freetype-2.7.tar.gz
 
-	Extract the files from the tar.gz file.
+* Extract the files from the tar.gz file:
 
-	Go to the `freetype-2.7` folder (folder where the files were extracted) and run the 2 following commands to compile and install the library:
+		tar -xvzf freetype-2.7.tar.gz
 
+* Run the following commands to compile and install the library:
+
+		cd freetype-2.7
 		make
 		sudo make install
 
@@ -123,35 +149,43 @@ March 2018
 
 		sudo apt-get install libpng-dev
 
-* Download the `png++` library from [http://download.savannah.nongnu.org/releases/pngpp/](http://download.savannah.nongnu.org/releases/pngpp/) (required for the map server): `png++-0.2.9.tar.gz`
+* Download the `png++` library (file `png++-0.2.9.tar.gz` on the page [http://download.savannah.nongnu.org/releases/pngpp/](http://download.savannah.nongnu.org/releases/pngpp/) (required for the map server):
 
-	Extract the files from the tar.gz file
+		cd
+		wget http://download.savannah.nongnu.org/releases/pngpp/png++-0.2.9.tar.gz
 
-	Go to the `png++-0.2.9` folder (folder where the files were extracted) and run the 3 following commands to compile and install the library:
+* Extract the files from the tar.gz file:
 
+		tar -xvzf png++-0.2.9.tar.gz
+
+* Run the following commands to compile and install the library:
+
+		cd png++-0.2.9
 		make
 		make test
 		sudo make install
 
-	The first command can produce the following message: `pixel_generator.cpp:35:19: fatal error: png.hpp: No such file or directory`. Despite this message, it works. See [http://www.nongnu.org/pngpp/doc/0.2.9/](http://www.nongnu.org/pngpp/doc/0.2.9/) for more information
+	The `make` command can produce the following message: `pixel_generator.cpp:35:19: fatal error: png.hpp: No such file or directory`. Despite this message, it works. See [http://www.nongnu.org/pngpp/doc/0.2.9/](http://www.nongnu.org/pngpp/doc/0.2.9/) for more information
 
-* Install the Code::Blocks IDE:
+* Build the `produce_questions` project:
 
-		sudo apt-get install codeblocks
+		cd ~/Diaphnea/Quiz/NodeJS/produce_questions
+		./rebuild.sh
 
-* Open the project `Diaphnea/Quiz/NodeJS/produce_questions/produce_questions.cpb` with Code::Blocks
+* Build the `map_server` project:
 
-	Build the project in `Release` configuration. Verify that the file `Diaphnea/Quiz/NodeJS/produce_questions.exe` has been created
-
-* Open the project `Diaphnea/Map/NodeJS/map_server/map_server.cpb` with Code::Blocks
-
-	Build the project in `Release` configuration. Verify that the file `Diaphnea/Map/NodeJS/map_server.exe` has been created
+		cd ~/Diaphnea/Map/NodeJS/map_server
+		./rebuild.sh
 
 * Install Microsoft fonts:
 
 		sudo apt-get install ttf-mscorefonts-installer
 
-	Sometimes, this does not work.
+	Verify that the fonts has been installed:
+
+		ls /usr/share/fonts/truetype/msttcorefonts
+
+	This command must print a list of .ttf file names. Sometimes, this is not the case because the installation failed.
 
 	In this case: Note that the only need of the map server is the presence of the file `arial.ttf` (with a lower case initial `a`) in the folder `/usr/share/fonts/truetype/msttcorefonts/`. You can just copy this file from the Internet or from a Windows computer (folder `Windows/Fonts`). If necessary, rename `Arial.ttf` to `arial.ttf`. If `arial.ttf` is not present, the map server will work, but no text will appear on the map.
 
@@ -164,32 +198,45 @@ March 2018
 		curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 		sudo apt-get install nodejs
 
+	Verify that correct versions have been installed:
+
+		node -v
+		npm -v
+
+	node version must be >= v9.8.0 and npm version must be >= 5.6.0
+
 * If the computer is behind a proxy:
 
 		npm config set proxy http://userName:password@proxyAddress:portNumber 
 
-* Go to the folder `Diaphnea` and run  the command:
+* Go to the folder `Diaphnea` and run the command:
 
+		cd ~/Diaphnea
 		./getFiles.sh
 
-* Install the npm packages the map server depends on: Go to the folder `Diaphnea/Map/NodeJS` and run the command:
+* Install the npm packages the map server depends on:
 
+		cd ~/Diaphnea/Map/NodeJS
 		npm install
 
-* Install the npm packages the quiz server back-end depends on: Go to the folder `Diaphnea/Quiz/NodeJS` and run the command:
+* Install the npm packages the quiz server back-end depends on:
 
+		cd ~/Diaphnea/Quiz/NodeJS
 		npm install
 
-* Install the npm packages the quiz server front-end depends on and build the front-end: Go to the folder `Diaphnea/Quiz/React/quiz` and run the 3 following commands:
+* Install the npm packages the quiz server front-end depends on and build the front-end:
 
+		cd ~/Diaphnea/Quiz/React/quiz
 		npm install
 		npm run build
 		./postBuild.sh
 
-* Run the Map server: Go to the folder `Diaphnea/Map/NodeJS` and run the command:
+* Run the Map server:
 
+		cd ~/Diaphnea/Map/NodeJS
 		node app.js
 
-* Run the Quiz server: Go to the folder `Diaphnea/Quiz/NodeJS` and run the command:
+* Run the Quiz server:
 
+		cd ~/Diaphnea/Quiz/NodeJS
 		node app.js

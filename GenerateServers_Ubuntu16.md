@@ -87,7 +87,7 @@ March 2018
 		cd ~/Diaphnea/Quiz/Mono/QuestionInstantiation
 		mdtool build QuestionInstantiation.csproj
 
-* Build the Mono project `QuestionInstantiation` to generate the Quiz database:
+* Execute `QuestionInstantiation` to generate the Quiz database:
 
 		cd bin/Debug
 		chmod u+x QuestionInstantiation.exe
@@ -98,7 +98,7 @@ March 2018
 		cd ~/Diaphnea/Map/Mono/MapDataProcessing
 		mdtool build MapDataProcessing.csproj
 
-* Build the Mono project `QuestionInstantiation` to generate the Quiz database:
+* Execute `MapDataProcessing` to generate the Map database:
 
 		cd bin/Debug
 		chmod u+x MapDataProcessing.exe

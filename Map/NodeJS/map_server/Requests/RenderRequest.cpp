@@ -381,21 +381,32 @@ namespace map_server
 
     bool RenderRequest::displayText()
     {
-#ifdef _WIN32
+//#ifdef _WIN32
 		const std::string fontFile = "arial.ttf";
-#else
-		const std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/arial.ttf";
-#endif
+//#else
+		//const std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/arial.ttf";
+//#endif
 
 		FT_Library  library;
 		int error = FT_Init_FreeType(&library);
-		if (error) return false;
+		if (error)
+		{
+            _coutMutexPtr->lock();
+			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FREE_TYPE_INIT_FAILED
+				<< ",\"message\":\"FreeType library initialization failed\"}" << std::endl;
+			_coutMutexPtr->unlock();
+            return false;
+        }
 
 		FT_Face face;
 		error = FT_New_Face(library, fontFile.c_str(), 0, &face);
 		if (error)
         {
             FT_Done_FreeType(library);
+            _coutMutexPtr->lock();
+			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FONT_NOT_FOUND
+				<< ",\"message\":\"Failed to load arial.ttf font\"}" << std::endl;
+			_coutMutexPtr->unlock();
             return false;
         }
 

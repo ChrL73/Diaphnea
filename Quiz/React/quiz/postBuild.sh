@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -v
 cp build/index.html ../../NodeJS/views/reactIndex.ejs
 sed -i -E "s/http:\/\/.+(\/socket.io\/socket.io.js)/\1/" ../../NodeJS/views/reactIndex.ejs
 rm -rf ../../NodeJS/public/static

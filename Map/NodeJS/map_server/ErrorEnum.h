@@ -15,6 +15,8 @@ namespace map_server
 		BAD_REQUEST_TYPE = 8,
 		NOT_ENOUGH_TOKENS = 9,
 		BAD_PARAMETER = 10,
-		UNKNOWN_ID = 11
+		UNKNOWN_ID = 11,
+		FREE_TYPE_INIT_FAILED = 12,
+		FONT_NOT_FOUND = 13
 	};
 }

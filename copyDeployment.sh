@@ -6,7 +6,7 @@ mkdir -p ../Deployment/Quiz/NodeJS/languages
 mkdir -p ../Deployment/Quiz/NodeJS/views
 mkdir -p ../Deployment/database
 mkdir -p ../Deployment/lib
-cp Map/NodeJS/*.js Map/NodeJS/map_server.exe Map/NodeJS/package.json ../Deployment/Map/NodeJS
+cp Map/NodeJS/*.js Map/NodeJS/map_server.exe Map/NodeJS/package.json Map/NodeJS/arial.ttf ../Deployment/Map/NodeJS
 cp Quiz/NodeJS/languages/*.js ../Deployment/Quiz/NodeJS/languages/
 cp -R Quiz/NodeJS/public ../Deployment/Quiz/NodeJS/
 cp Quiz/NodeJS/views/reactIndex.ejs ../Deployment/Quiz/NodeJS/views/reactIndex.ejs

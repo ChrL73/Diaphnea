@@ -38,6 +38,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
+					<Add option="-DBUILD_WITHOUT_PNGPP" />
 					<Add directory="../../../mongo-cxx-driver/include" />
 					<Add directory="." />
 					<Add directory="Data" />
@@ -47,7 +48,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-pthread `libpng-config --ldflags`" />
+					<Add option="-pthread" />
 					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
 					<Add library="boost_system" />
 					<Add library="boost_regex" />

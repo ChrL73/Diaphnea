@@ -120,6 +120,10 @@ March 2018
 
 		sudo apt-get install scons
 
+* Install Open SSL (required to compile the MongoDB C++ driver with the --ssl option):
+
+		sudo apt-get install libssl-dev
+
 * Get the Legacy MongoDB C++ driver sources (required for the quiz server and for the map server):
 
 		cd
@@ -128,7 +132,7 @@ March 2018
 * Compile the MongoDB C++ driver (see [https://mongodb.github.io/mongo-cxx-driver/legacy-v1/installation/](https://mongodb.github.io/mongo-cxx-driver/legacy-v1/installation/) for more information):
 
 		cd mongo-cxx-driver/
-		scons --disable-warnings-as-errors --c++11=on --prefix=$HOME/Diaphnea/mongo-cxx-driver install
+		scons --disable-warnings-as-errors --c++11=on --ssl --prefix=$HOME/Diaphnea/mongo-cxx-driver install
 
 * Download the `FreeType` library (file `freetype-2.7.tar.gz` on the page [https://download.savannah.gnu.org/releases/freetype/](https://download.savannah.gnu.org/releases/freetype/) (required for the map server):
 

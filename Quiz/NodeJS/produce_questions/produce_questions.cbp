@@ -18,10 +18,13 @@
 					<Add directory="../../../mongo-cxx-driver/include" />
 				</Compiler>
 				<Linker>
+					<Add option="-pthread" />
 					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
 					<Add library="boost_thread" />
+					<Add library="ssl" />
+					<Add library="crypto" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -37,10 +40,13 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-pthread" />
 					<Add library="../../../mongo-cxx-driver/lib/libmongoclient.a" />
 					<Add library="boost_system" />
 					<Add library="boost_regex" />
 					<Add library="boost_thread" />
+					<Add library="ssl" />
+					<Add library="crypto" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="cp ./bin/Release/produce_questions ./../produce_questions.exe" />

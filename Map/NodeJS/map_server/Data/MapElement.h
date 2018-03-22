@@ -17,6 +17,7 @@ namespace map_server
     protected:
         static constexpr int _maxIntDbValue = 0xfffff;
 
+        const std::string _dbName;
         const mongo::OID _mongoId;
         const std::string _id;
         double _importance;
@@ -30,8 +31,8 @@ namespace map_server
         bool loadCommon(mongo::BSONObj dbElement);
 
     public:
-        MapElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            _category(0), _mongoId(mongoId), _id(id), _importance(0.0), _iMap(iMap), _loaded(false), _error(false) {}
+        MapElement(const std::string& dbName, const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
+            _category(0), _dbName(dbName), _mongoId(mongoId), _id(id), _importance(0.0), _iMap(iMap), _loaded(false), _error(false) {}
         virtual ~MapElement();
 
         bool isLoaded(void) const { return _loaded; }

@@ -9,7 +9,7 @@ namespace map_server
     {
         _loaded = true;
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query("diaphnea.point_elements", MONGO_QUERY("_id" << _mongoId), 1);
+		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".point_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();

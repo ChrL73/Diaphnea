@@ -22,7 +22,7 @@ namespace map_server
         TextDisplayer::setCoutMutex(&_coutMutex);
         SvgCreator::setCoutMutex(&_coutMutex);
 
-        MapData *mapData = MapData::instance();
+        MapData *mapData = MapData::instance(_dbHost, _dbName, _dbUser, _dbPassword);
         if (mapData == 0) return -1;
 
         _timeoutReference = time(0);

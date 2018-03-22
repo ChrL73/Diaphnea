@@ -22,8 +22,8 @@ namespace map_server
         bool allowMultiline(void) { return true; }
 
     public:
-        PolygonElement(const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
-            MapElement(mongoId, id, iMap) {}
+        PolygonElement(const std::string& dbName, const mongo::OID& mongoId, const std::string& id, IMap *iMap) :
+            MapElement(dbName, mongoId, id, iMap) {}
 
         const PolygonLook *getLook(int i) const;
         FilledPolygonItem *getFilledPolygonItem(void) const { return _filledPolygonItem; }

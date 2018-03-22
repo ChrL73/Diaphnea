@@ -1,13 +1,12 @@
 var config = {};
 
-config.port = 3002;
+config.port = process.env.PORT || 3002;
 
-// Replace this value with a value that is not in source control
-config.sessionSecret = 'dev';
+config.sessionSecret = process.env.SESSION_SECRET || 'dev';
 
 // If 'config.mapServerAddress' is not defined, the quiz server assumes that the map server runs on the same machine as the quiz server 
-//config.mapServerAddress = '192.168.1.5';
-config.mapServerPort = '3001';
+config.mapServerAddress = process.env.MAP_SERVER_ADDRESS;
+config.mapServerPort = process.env.MAP_SERVER_PORT || '3001';
 
 //config.debugDelay = 2000;
 

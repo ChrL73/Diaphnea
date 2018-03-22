@@ -9,11 +9,11 @@ namespace map_server
     bool MapData::_deleteOk = true;
     std::mutex MapData::_mutex;
 
-    MapData *MapData::instance(void)
+    MapData *MapData::instance(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword)
     {
         if (_instance == 0)
         {
-            _instance = new MapData();
+            _instance = new MapData(dbHost, dbName, dbUser, dbPassword);
             if (!_instance->_initOk)
             {
                 delete _instance;
@@ -31,7 +31,8 @@ namespace map_server
         return 0;
     }
 
-    MapData::MapData(void) : _initOk(true)
+    MapData::MapData(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword) :
+        _initOk(true), _dbHost(dbHost), _dbName(dbName), _dbUser(dbUser), _dbPassword(dbPassword)
     {
         mongo::Status status = mongo::client::initialize();
         if (!status.isOK())
@@ -43,18 +44,34 @@ namespace map_server
 
         try
         {
-            _connection.connect("localhost");
+            _connection.connect(_dbHost);
         }
         catch (const mongo::DBException& e)
         {
-            std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::DATABASE_SERVER_CONNECTION_FAILED << ",\"message\":\"Failed to connect to the Mongo database server\"}" << std::endl;
+            std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::DATABASE_SERVER_CONNECTION_FAILED
+                      << ",\"message\":\"Failed to connect to the Mongo database server\"}" << std::endl;
             _initOk = false;
             return;
         }
 
+        if (!dbUser.empty())
+        {
+            try
+            {
+                _connection.auth(BSON("user" << _dbUser << "pwd" << _dbPassword << "mechanism" << "SCRAM-SHA-1" << "db" << _dbName));
+            }
+            catch (const mongo::DBException& e)
+            {
+                std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::DATABASE_SERVER_AUTHENTIFICATION_FAILED
+                          << ",\"message\":\"Authentification failure to the Mongo database server\"}" << std::endl;
+                _initOk = false;
+                return;
+            }
+        }
+
         _mapIdsJson = "[\"";
         mongo::BSONObj projection = BSON("map" << 1);
-		std::unique_ptr<mongo::DBClientCursor> cursor = _connection.query("diaphnea.maps", mongo::BSONObj(), 0, 0, &projection);
+		std::unique_ptr<mongo::DBClientCursor> cursor = _connection.query(_dbName + ".maps", mongo::BSONObj(), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbMap = cursor->next();
@@ -65,7 +82,7 @@ namespace map_server
             if (!mapId.empty() && idElt.type() == mongo::jstOID)
             {
                 if (!_mapMap.empty()) _mapIdsJson += "\",\"";
-                Map *map = new Map(idElt.OID(), mapId, &_connection);
+                Map *map = new Map(_dbName, idElt.OID(), mapId, &_connection);
                 _mapMap.insert(std::pair<std::string, Map *>(map->getId(), map));
                 _mapIdsJson += map->getId();
             }

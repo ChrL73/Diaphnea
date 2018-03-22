@@ -26,7 +26,7 @@ namespace map_server
     {
     private:
         static MapData *_instance;
-        MapData(void);
+        MapData(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword);
         ~MapData();
 
         bool _initOk;
@@ -34,11 +34,16 @@ namespace map_server
         mongo::DBClientConnection _connection;
         static std::mutex _mutex;
 
+		const std::string _dbHost;
+		const std::string _dbName;
+		const std::string _dbUser;
+		const std::string _dbPassword;
+
         std::string _mapIdsJson;
         std::map<std::string, Map *> _mapMap;
 
     public:
-        static MapData *instance(void);
+        static MapData *instance(const std::string& dbHost = "", const std::string& dbName = "", const std::string& dbUser = "", const std::string& dbPassword = "");
         static int destroyInstance(void);
 
         static void lock(void) { _mutex.lock(); }

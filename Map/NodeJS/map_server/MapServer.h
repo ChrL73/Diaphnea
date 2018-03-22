@@ -34,10 +34,16 @@ namespace map_server
 		const bool _softExit;
 		bool _stopRequested;
 
+		const std::string _dbHost;
+		const std::string _dbName;
+		const std::string _dbUser;
+		const std::string _dbPassword;
+
     public:
-        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
+        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit,
+                  const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword) :
             _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs), _checkTimeoutSleepMs(checkTimeoutSleepMs),
-            _softExit(softExit), _stopRequested(false) {}
+            _softExit(softExit), _stopRequested(false), _dbHost(dbHost), _dbName(dbName), _dbUser(dbUser), _dbPassword(dbPassword) {}
 
         int run(void);
     };

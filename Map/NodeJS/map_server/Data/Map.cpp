@@ -53,7 +53,7 @@ namespace map_server
         if (itemIt == _lineItemMap.end())
         {
 			bool lineOk = false;
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongoId), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -96,7 +96,7 @@ namespace map_server
         if (itemIt == _filledPolygonItemMap.end())
         {
             bool polygonOk = false;
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("_id" << mongoId), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -146,7 +146,7 @@ namespace map_server
         int i, n = pointListIdVector.size();
         for (i = 0; i < n; ++i)
         {
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
+			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
             if (cursor->more())
             {
                 mongo::BSONObj pointList = cursor->next();
@@ -256,7 +256,7 @@ namespace map_server
         mongo::BSONObj projection = BSON("item_id" << 1 << "element0" << 1);
 
         bool found = false;
-        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.items", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             found = true;
@@ -313,7 +313,7 @@ namespace map_server
             return;
         }
 
-        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.maps", MONGO_QUERY("_id" << _mongoId), 1);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".maps", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbMap = cursor->next();
@@ -381,7 +381,7 @@ namespace map_server
     {
         mongo::BSONObj projection = BSON("id" << 1 << "item_id" << 1);
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query("diaphnea.point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -391,7 +391,7 @@ namespace map_server
 
             if (itemId >= 0 && itemId <= _maxIntDbValue && !id.empty() && mongoIdElt.type() == mongo::jstOID)
             {
-                PointElement *element = new PointElement(mongoIdElt.OID(), id, this);
+                PointElement *element = new PointElement(_dbName, mongoIdElt.OID(), id, this);
                 _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
                 if (elementIdsJson.empty()) elementIdsJson = "[\"";
@@ -407,7 +407,7 @@ namespace map_server
             }
         }
 
-        cursor = _connectionPtr->query("diaphnea.polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        cursor = _connectionPtr->query(_dbName + ".polygon_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -416,7 +416,7 @@ namespace map_server
 
             if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
             {
-                PolygonElement *element = new PolygonElement(mongoIdElt.OID(), id, this);
+                PolygonElement *element = new PolygonElement(_dbName, mongoIdElt.OID(), id, this);
                 _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
                 if (elementIdsJson.empty()) elementIdsJson = "[\"";
@@ -430,7 +430,7 @@ namespace map_server
             }
         }
 
-        cursor = _connectionPtr->query("diaphnea.line_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        cursor = _connectionPtr->query(_dbName + ".line_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -439,7 +439,7 @@ namespace map_server
 
             if (!id.empty() && mongoIdElt.type() == mongo::jstOID)
             {
-                LineElement *element = new LineElement(mongoIdElt.OID(), id, this);
+                LineElement *element = new LineElement(_dbName, mongoIdElt.OID(), id, this);
                 _elementMap.insert(std::pair<std::string, MapElement *>(element->getId(), element));
 
                 if (elementIdsJson.empty()) elementIdsJson = "[\"";

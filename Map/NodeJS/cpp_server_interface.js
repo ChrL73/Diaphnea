@@ -4,10 +4,29 @@ var readLine = require('readline');
 var cppProcess;
 var sendResponse;
 var config;
+var dbParameters;
 
 function setConfig(config_)
 {
    config = config_;
+   
+   var url = require('url');
+   var dbParsedUrl = url.parse(config.dbUrl);
+   dbParameters = [dbParsedUrl.host, dbParsedUrl.path.substr(1)];
+
+   if (dbParsedUrl.auth)
+   {
+      var i = dbParsedUrl.auth.indexOf(':');
+      if (i > -1)
+      {
+         dbParameters.push(dbParsedUrl.auth.substr(0, i));
+         dbParameters.push(dbParsedUrl.auth.substr(i + 1));
+      }
+      else
+      {
+         dbParameters.push(dbParsedUrl.auth);
+      }
+   }
 }
 
 function setResponseHandler(responseHandler)
@@ -27,7 +46,7 @@ function sendRequest(request, recursiveCall)
    {
       if (!recursiveCall)
       {
-         cppProcess = childProcess.spawn('./map_server.exe');
+         cppProcess = childProcess.spawn('./map_server.exe', dbParameters);
          
          // Don't crash on 'Connection reset' error
          cppProcess.stdin.on('error', function(err)

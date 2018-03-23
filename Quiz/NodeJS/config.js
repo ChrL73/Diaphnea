@@ -11,7 +11,7 @@ config.mapServerAddress = process.env.MAP_SERVER_ADDRESS;
 config.mapServerPort = process.env.MAP_SERVER_PORT || '3001';
 config.mapServerProtocol = process.env.PROTOCOL || 'http';
 config.forceHttpsRedirection = (process.env.PROTOCOL === 'https' && process.env.HTTPS_URL);
-config.httpsAddress = process.env.HTTPS_URL;
+config.httpsUrl = process.env.HTTPS_URL;
 
 //config.debugDelay = 2000;
 

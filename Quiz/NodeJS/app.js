@@ -59,11 +59,10 @@ io.use(function(socket, next)
 });
 app.use(sessionMiddleware);
 
-if (!config.mapServerPort) throw new Error("No 'mapServerPort' value in config.js");
 var mapServerUrl;
 if (config.mapServerAddress)
 {
-   mapServerUrl = config.mapServerProtocol + '://' + config.mapServerAddress + ':' + config.mapServerPort;
+   mapServerUrl = config.mapServerProtocol + '://' + config.mapServerAddress;
 }
 else
 {
@@ -83,8 +82,9 @@ else
          });
       }
    });
-   mapServerUrl = config.mapServerProtocol + '://' + locaIp + ':' + config.mapServerPort;
+   mapServerUrl = config.mapServerProtocol + '://' + locaIp;
 }
+if (config.mapServerPort && config.mapServerPort !== 'none') mapServerUrl += ':' + config.mapServerPort;
 
 var pages =
 {
@@ -101,13 +101,13 @@ quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
 app.all('/', function(req, res, next)
 {
-   if (config.forceHttpsRedirection && req.header['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
+   if (config.forceHttpsRedirection && req.headers['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
    else res.render(config.frontEndIndex, config);
 });
 
 app.use(function(req, res)
 {
-   if (config.forceHttpsRedirection && req.header['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
+   if (config.forceHttpsRedirection && req.headers['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
    else res.redirect('/');
 });
 

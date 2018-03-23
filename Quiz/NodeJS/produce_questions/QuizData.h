@@ -34,8 +34,13 @@ namespace produce_questions
     {
     private:
         static QuizData *_instance;
-        QuizData(void);
+        QuizData(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword);
         ~QuizData();
+
+		const std::string _dbHost;
+		const std::string _dbName;
+		const std::string _dbUser;
+		const std::string _dbPassword;
 
         int initialize(void);
         int terminate(void);
@@ -53,7 +58,7 @@ namespace produce_questions
         std::map<std::pair<std::string, int>, const RelationOrderChoice *> _relationOrderChoiceMap;
 
     public:
-        static QuizData *instance(void);
+        static QuizData *instance(const std::string& dbHost = "", const std::string& dbName = "", const std::string& dbUser = "", const std::string& dbPassword = "");
         static int destroyInstance(void);
 
         void setLanguageId(const std::string& languageId) { _languageId = languageId; }

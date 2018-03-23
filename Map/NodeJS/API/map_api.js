@@ -24,7 +24,7 @@ var mapServerInterface =
          function setContext(id, context)
          {
             contexts[id.toString()] = context;
-            setTimeout(function() { delete contexts[id.toString()]; }, 20000);
+            setTimeout(function() { delete contexts[id.toString()]; }, 50000);
          }
          
          function getContext(response, dontDelete, mapId)

@@ -15,7 +15,7 @@ namespace produce_questions
             return -1;
         }
 
-        QuizData *quizData = QuizData::instance();
+        QuizData *quizData = QuizData::instance(_dbHost, _dbName, _dbUser, _dbPassword);
         if (quizData == 0)
         {
             std::cerr << "Error in QuizData::instance()" << std::endl;

@@ -2,6 +2,8 @@ var config = {};
 
 config.port = process.env.PORT || 3002;
 
+config.dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/diaphnea';
+
 config.sessionSecret = process.env.SESSION_SECRET || 'dev';
 
 // If 'config.mapServerAddress' is not defined, the quiz server assumes that the map server runs on the same machine as the quiz server 

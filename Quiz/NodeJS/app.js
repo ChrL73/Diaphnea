@@ -1,3 +1,4 @@
+var config = require('./config');
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -10,11 +11,28 @@ var childProcess = require('child_process');
 var shortId = require('shortid');
 
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/diaphnea');
+var db = mongoose.connect(config.dbUrl);
+
+var url = require('url');
+var dbParsedUrl = url.parse(config.dbUrl);
+var dbParameters = ' ' + dbParsedUrl.host + ' ' + dbParsedUrl.path.substr(1);
+
+if (dbParsedUrl.auth)
+{
+   var i = dbParsedUrl.auth.indexOf(':');
+   if (i > -1)
+   {
+      dbParameters += ' ' + dbParsedUrl.auth.substr(0, i);
+      dbParameters += ' ' + dbParsedUrl.auth.substr(i + 1);
+   }
+   else
+   {
+      dbParameters += ' ' + dbParsedUrl.auth;
+   }
+}
+
 var quizData = require('./quiz_data');
 var userData = require('./user_data');
-
-var config = require('./config');
 var translate = require('./translate');
 var languages = translate().languages;
 var defaultLanguageId = languages[0].id;
@@ -574,7 +592,7 @@ io.on('connection', function(socket)
             {
                var levelId = levelMap[downData.questionnaireId][downData.levelId];
 
-               childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId, function(err, stdout, stderr)
+               childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId + dbParameters, function(err, stdout, stderr)
                {
                   if (err)
                   {

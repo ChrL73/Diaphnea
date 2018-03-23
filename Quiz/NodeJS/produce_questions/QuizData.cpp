@@ -19,11 +19,11 @@ namespace produce_questions
     QuizData *QuizData::_instance = 0;
     bool QuizData::_deleteOk = true;
 
-    QuizData *QuizData::instance(void)
+    QuizData *QuizData::instance(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword)
     {
         if (_instance == 0)
         {
-            _instance = new QuizData();
+            _instance = new QuizData(dbHost, dbName, dbUser, dbPassword);
             if (!_instance->_initOk)
             {
                 delete _instance;
@@ -41,7 +41,8 @@ namespace produce_questions
         return 0;
     }
 
-    QuizData::QuizData(void) : _initOk(true)
+    QuizData::QuizData(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword) :
+        _dbHost(dbHost), _dbName(dbName), _dbUser(dbUser), _dbPassword(dbPassword), _initOk(true)
     {
         mongo::Status status = mongo::client::initialize();
         if (!status.isOK())
@@ -53,12 +54,27 @@ namespace produce_questions
 
         try
         {
-            _connection.connect("localhost");
+            _connection.connect(_dbHost);
         }
         catch(const mongo::DBException& e)
         {
-            std::cerr << "Exception in _connection.connect(\"localhost\")" << std::endl;
+            std::cerr << "Exception in _connection.connect()" << std::endl;
             _initOk = false;
+            return;
+        }
+
+        if (!dbUser.empty())
+        {
+            try
+            {
+                _connection.auth(BSON("user" << _dbUser << "pwd" << _dbPassword << "mechanism" << "SCRAM-SHA-1" << "db" << _dbName));
+            }
+            catch (const mongo::DBException& e)
+            {
+                std::cerr << "Exception in _connection.auth()" << std::endl;
+                _initOk = false;
+                return;
+            }
         }
     }
 

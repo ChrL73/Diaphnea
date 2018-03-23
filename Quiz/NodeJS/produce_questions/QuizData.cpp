@@ -113,7 +113,7 @@ namespace produce_questions
         std::map<std::string, const Level *>::iterator it = _levelMap.find(id);
         if (it == _levelMap.end())
         {
-            auto cursor = _connection.query("diaphnea.levels", MONGO_QUERY( "_id" << mongo::OID(id)), 1);
+            auto cursor = _connection.query(_dbName + ".levels", MONGO_QUERY( "_id" << mongo::OID(id)), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbLevel = cursor->next();
@@ -217,7 +217,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ questions: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.question_lists", MONGO_QUERY( "_id" << mongo::OID(questionListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".question_lists", MONGO_QUERY( "_id" << mongo::OID(questionListId)), 1, 0, &projection);
 
             if (cursor->more())
             {
@@ -275,7 +275,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ questions: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.question_lists", MONGO_QUERY("_id" << mongo::OID(questionListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".question_lists", MONGO_QUERY("_id" << mongo::OID(questionListId)), 1, 0, &projection);
 
             if (cursor->more())
             {
@@ -333,7 +333,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
 
             if (cursor->more())
             {
@@ -395,7 +395,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY("_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".choice_lists", MONGO_QUERY("_id" << mongo::OID(choiceListId)), 1, 0, &projection);
 
             if (cursor->more())
             {
@@ -429,7 +429,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ questions: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.question_lists", MONGO_QUERY( "_id" << mongo::OID(questionListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".question_lists", MONGO_QUERY( "_id" << mongo::OID(questionListId)), 1, 0, &projection);
 
             if (cursor->more())
             {
@@ -463,7 +463,7 @@ namespace produce_questions
             char projectionStr[64];
             sprintf(projectionStr, "{ choices: { $slice: [%d, 1] } }", index);
             mongo::BSONObj projection = mongo::fromjson(projectionStr);
-            auto cursor = _connection.query("diaphnea.choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
+            auto cursor = _connection.query(_dbName + ".choice_lists", MONGO_QUERY( "_id" << mongo::OID(choiceListId)), 1, 0, &projection);
 
             if (cursor->more())
             {

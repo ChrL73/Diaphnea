@@ -63,7 +63,7 @@ if (!config.mapServerPort) throw new Error("No 'mapServerPort' value in config.j
 var mapServerUrl;
 if (config.mapServerAddress)
 {
-   mapServerUrl = 'http://' + config.mapServerAddress + ':' + config.mapServerPort;
+   mapServerUrl = config.mapServerProtocol + '://' + config.mapServerAddress + ':' + config.mapServerPort;
 }
 else
 {
@@ -83,7 +83,7 @@ else
          });
       }
    });
-   mapServerUrl = 'http://' + locaIp + ':' + config.mapServerPort;
+   mapServerUrl = config.mapServerProtocol + '://' + locaIp + ':' + config.mapServerPort;
 }
 
 var pages =
@@ -101,12 +101,14 @@ quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
 
 app.all('/', function(req, res, next)
 {
-   res.render(config.frontEndIndex, config);
+   if (config.forceHttpsRedirection && req.header['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
+   else res.render(config.frontEndIndex, config);
 });
 
 app.use(function(req, res)
 {
-   res.redirect('/');
+   if (config.forceHttpsRedirection && req.header['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
+   else res.redirect('/');
 });
 
 io.on('connection', function(socket)

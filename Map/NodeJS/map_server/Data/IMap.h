@@ -25,6 +25,7 @@ namespace map_server
     class PointItem;
     class ItemLook;
     class Category;
+    class Point;
 
     class IMap
     {
@@ -39,5 +40,6 @@ namespace map_server
         virtual void addItemLook(const ItemLook *look) = 0;
         virtual void addPointItem(PointItem *pointItem) = 0;
         virtual const Category *getCategory(int categoryId) const = 0;
+        virtual bool loadPointVector(std::vector<const Point *>& points, const mongo::OID& _pointListId, int itemId) = 0;
     };
 }

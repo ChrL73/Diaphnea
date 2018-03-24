@@ -26,6 +26,7 @@
 #include "ErrorEnum.h"
 #include "SvgCustomColor.h"
 #include "Category.h"
+#include "PointVector.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
@@ -454,11 +455,11 @@ namespace map_server
 					{
                         LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText(), lineItem->getImportance());
 
-						int j, m = lineItem->getPointVector(resolutionIndex).size();
+						int j, m = lineItem->getPointVector(resolutionIndex)->getPointCount();
 						for (j = 0; j < m - 1; ++j)
 						{
-							const Point *point1 = lineItem->getPointVector(resolutionIndex)[j];
-							const Point *point2 = lineItem->getPointVector(resolutionIndex)[j + 1];
+							const Point *point1 = lineItem->getPointVector(resolutionIndex)->getPoint(j);
+							const Point *point2 = lineItem->getPointVector(resolutionIndex)->getPoint(j + 1);
 							double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
 							double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 							double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
@@ -488,10 +489,10 @@ namespace map_server
                                 ItemCopyBuilder *lineBuilder = itemCopyBuilder->getLineBuilder(k);
                                 const LineItem *lineItem2 = dynamic_cast<const LineItem *>(lineBuilder->getItem());
 
-                                int j, m = lineItem2->getPointVector(resolutionIndex).size();
+                                int j, m = lineItem2->getPointVector(resolutionIndex)->getPointCount();
                                 for (j = 0; j < m; ++j)
                                 {
-                                    const Point *point = lineItem2->getPointVector(resolutionIndex)[j];
+                                    const Point *point = lineItem2->getPointVector(resolutionIndex)->getPoint(j);
                                     double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                                     double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                                     lineItemCopy->addPoint(x, y, j == 0);
@@ -508,10 +509,10 @@ namespace map_server
 						{
 							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
 
-							int j, m = filledPolygonItem->getPointVector(resolutionIndex).size();
+							int j, m = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
                             for (j = 0; j < m; ++j)
                             {
-                                const Point *point = filledPolygonItem->getPointVector(resolutionIndex)[j];
+                                const Point *point = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(j);
                                 double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                                 double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                                 filledPolygonItemCopy->addPoint(x, y);

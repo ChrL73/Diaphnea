@@ -64,7 +64,7 @@ namespace map_server
 
 				if (itemId >= 0 && itemId <= _maxIntDbValue && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1))
 				{
-					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), cap1Round != 0, cap2Round != 0);
+					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), this, cap1Round != 0, cap2Round != 0);
 					if (addPointLists(item, dbItem))
 					{
                         lineOk = true;
@@ -104,7 +104,7 @@ namespace map_server
                 int itemId = dbItem.getIntField("item_id");
                 if (itemId >= 0 && itemId <= _maxIntDbValue)
 				{
-					FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size());
+					FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size(), this);
                     if (addPointLists(item, dbItem))
                     {
                         polygonOk = true;
@@ -146,79 +146,85 @@ namespace map_server
         int i, n = pointListIdVector.size();
         for (i = 0; i < n; ++i)
         {
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_lists", MONGO_QUERY("_id" << pointListIdVector[i].OID()), 1);
-            if (cursor->more())
+            item->addPointVector(pointListIdVector[i].OID());
+        }
+
+        return true;
+    }
+
+    bool Map::loadPointVector(std::vector<const Point *>& points, const mongo::OID& _pointListId, int itemId)
+    {
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_lists", MONGO_QUERY("_id" << _pointListId), 1);
+        if (cursor->more())
+        {
+            mongo::BSONObj pointList = cursor->next();
+
+            mongo::BSONElement pointsElt = pointList.getField("points");
+            if (pointsElt.type() != mongo::Array)
             {
-                mongo::BSONObj pointList = cursor->next();
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
+            std::vector<mongo::BSONElement> pointVector = pointsElt.Array();
+            int m = pointVector.size();
+            if (m < 2)
+            {
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                return false;
+            }
 
-                mongo::BSONElement pointsElt = pointList.getField("points");
-                if (pointsElt.type() != mongo::Array)
+            int j;
+            for (j = 0; j < m; ++j)
+            {
+                mongo::BSONObj dbPoint = pointVector[j].Obj();
+
+                mongo::BSONElement xElt = dbPoint.getField("x");
+                mongo::BSONElement yElt = dbPoint.getField("y");
+                if (xElt.type() != mongo::NumberDouble || yElt.type() != mongo::NumberDouble)
                 {
                     _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
                     return false;
                 }
-                std::vector<mongo::BSONElement> pointVector = pointsElt.Array();
-                int m = pointVector.size();
-                if (m < 2)
+
+                double x = xElt.Double();
+                double y = yElt.Double();
+
+                Point *point;
+                if (j == 0)
                 {
-                    _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-                    return false;
+                    point = new Point(x, -y);
                 }
-
-                int j;
-                for (j = 0; j < m; ++j)
+                else
                 {
-                    mongo::BSONObj dbPoint = pointVector[j].Obj();
+                    mongo::BSONElement x1Elt = dbPoint.getField("x1");
+                    mongo::BSONElement y1Elt = dbPoint.getField("y1");
+                    mongo::BSONElement x2Elt = dbPoint.getField("x2");
+                    mongo::BSONElement y2Elt = dbPoint.getField("y2");
 
-                    mongo::BSONElement xElt = dbPoint.getField("x");
-                    mongo::BSONElement yElt = dbPoint.getField("y");
-                    if (xElt.type() != mongo::NumberDouble || yElt.type() != mongo::NumberDouble)
+                    if (x1Elt.type() != mongo::NumberDouble || y1Elt.type() != mongo::NumberDouble ||
+                        x2Elt.type() != mongo::NumberDouble || y2Elt.type() != mongo::NumberDouble)
                     {
                         _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
                         return false;
                     }
 
-                    double x = xElt.Double();
-                    double y = yElt.Double();
+                    double x1 = x1Elt.Double();
+                    double y1 = y1Elt.Double();
+                    double x2 = x2Elt.Double();
+                    double y2 = y2Elt.Double();
 
-                    Point *point;
-                    if (j == 0)
-                    {
-                        point = new Point(x, -y);
-                    }
-                    else
-                    {
-                        mongo::BSONElement x1Elt = dbPoint.getField("x1");
-                        mongo::BSONElement y1Elt = dbPoint.getField("y1");
-                        mongo::BSONElement x2Elt = dbPoint.getField("x2");
-                        mongo::BSONElement y2Elt = dbPoint.getField("y2");
-
-                        if (x1Elt.type() != mongo::NumberDouble || y1Elt.type() != mongo::NumberDouble ||
-                            x2Elt.type() != mongo::NumberDouble || y2Elt.type() != mongo::NumberDouble)
-                        {
-                            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-                            return false;
-                        }
-
-                        double x1 = x1Elt.Double();
-                        double y1 = y1Elt.Double();
-                        double x2 = x2Elt.Double();
-                        double y2 = y2Elt.Double();
-
-                        point = new Point(x1, -y1, x2, -y2, x, -y);
-                    }
-
-                    item->addPoint(i, _sampleLengthVector[i], point);
+                    point = new Point(x1, -y1, x2, -y2, x, -y);
                 }
-            }
-            else
-            {
-                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-                return false;
+
+                dynamic_cast<MultipointsItem *>(getItem(itemId))->addPoint(point);
+                points.push_back(point);
             }
         }
-
-        item->setInfoJsonVector();
+        else
+        {
+            _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+            return false;
+        }
 
         return true;
     }

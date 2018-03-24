@@ -2,32 +2,43 @@
 
 #include "MapItem.h"
 
+#ifdef __GNUC__
+// Avoid this warning: ‘template<class> class std::auto_ptr’ is deprecated
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+#include "mongo/client/dbclient.h"
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
+#endif
+
 #include <vector>
 #include <map>
 #include <sstream>
 
 namespace map_server
 {
+    class PointVector;
     class Point;
+    class IMap;
 
     class MultipointsItem : public MapItem
     {
     private:
-        std::map<double, std::vector<const Point *> > _pointVectorMap;
-        std::vector<std::vector<const Point *> > _pointVectorVector;
+        IMap * const _iMap;
+        std::vector<PointVector *> _pointVectorVector;
         bool hasResolution(void) const { return true; }
 
     protected:
-        MultipointsItem(int id, int resolutionCount) : MapItem(id, resolutionCount), _resolutionCount(resolutionCount) {}
+        MultipointsItem(int id, int resolutionCount, IMap *iMap) : MapItem(id, resolutionCount), _iMap(iMap), _resolutionCount(resolutionCount) {}
 
         const int _resolutionCount;
-        void addPointArray(std::stringstream& s, int resolutionIndex);
+        void addPointArray(std::stringstream& s, int resolutionIndex) const;
 
     public:
 		virtual ~MultipointsItem();
 
-		const std::vector<const Point *>& getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
-        void addPoint(unsigned int resolutionIndex, double samplingLength, Point *point);
-        virtual void setInfoJsonVector(void) = 0;
+		const PointVector *getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
+		void addPointVector(const mongo::OID& pointListId);
+        void addPoint(const Point *point);
     };
 }

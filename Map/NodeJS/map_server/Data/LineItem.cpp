@@ -2,16 +2,19 @@
 
 namespace map_server
 {
-    void LineItem::setInfoJsonVector(void)
+    const std::string& LineItem::getInfoJson(unsigned int resolutionIndex) const
     {
-        int i;
-        for (i = 0; i < _resolutionCount; ++i)
+        if (resolutionIndex >= _infoJsonVector.size()) resolutionIndex = _infoJsonVector.size() - 1;
+
+        if (_infoJsonVector[resolutionIndex].empty())
         {
             std::stringstream s;
             s << "{\"type\":\"line\",\"points\":[";
-            addPointArray(s, i);
+            addPointArray(s, resolutionIndex);
             s << "]}";
-            _infoJsonVector[i] = s.str();
+            _infoJsonVector[resolutionIndex] = s.str();
         }
+
+        return _infoJsonVector[resolutionIndex];
     }
 }

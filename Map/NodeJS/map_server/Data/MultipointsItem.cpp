@@ -1,43 +1,35 @@
 #include "MultipointsItem.h"
+#include "PointVector.h"
 #include "Point.h"
 
 namespace map_server
 {
 	MultipointsItem::~MultipointsItem()
 	{
-		std::map<double, std::vector<const Point *> >::iterator it = _pointVectorMap.begin();
-		for (; it != _pointVectorMap.end(); ++it)
-		{
-			int i, n = (*it).second.size();
-			for (i = 0; i < n; ++i) delete (*it).second[i];
-		}
+		int i, n = _pointVectorVector.size();
+		for (i = 0; i < n; ++i) delete _pointVectorVector[i];
 	}
 
-    void MultipointsItem::addPoint(unsigned int resolutionIndex, double samplingLength, Point *point)
+    void MultipointsItem::addPointVector(const mongo::OID& pointListId)
     {
-        std::map<double, std::vector<const Point *> >::iterator it = _pointVectorMap.find(samplingLength);
-        if (it == _pointVectorMap.end())
-        {
-            it = _pointVectorMap.insert(std::pair<double, std::vector<const Point *> >(samplingLength, std::vector<const Point *>())).first;
-        }
-        (*it).second.push_back(point);
+        _pointVectorVector.push_back(new PointVector(_iMap, getId(), pointListId));
+    }
 
-        while (_pointVectorVector.size() <= resolutionIndex) _pointVectorVector.push_back(std::vector<const Point *>());
-        _pointVectorVector[resolutionIndex].push_back(point);
-
+    void MultipointsItem::addPoint(const Point *point)
+    {
         if (point->getX() < _xMin) _xMin = point->getX();
         if (point->getX() > _xMax) _xMax = point->getX();
         if (point->getY() < _yMin) _yMin = point->getY();
         if (point->getY() > _yMax) _yMax = point->getY();
     }
 
-    void MultipointsItem::addPointArray(std::stringstream& s, int resolutionIndex)
+    void MultipointsItem::addPointArray(std::stringstream& s, int resolutionIndex) const
     {
-        int i, n = _pointVectorVector[resolutionIndex].size();
+        int i, n = _pointVectorVector[resolutionIndex]->getPointCount();
         for (i = 0; i < n; ++i)
         {
             if (i != 0) s << ",";
-            const Point *point =  _pointVectorVector[resolutionIndex][i];
+            const Point *point =  _pointVectorVector[resolutionIndex]->getPoint(i);
             s << "{\"x\":" << point->getX() << ",\"y\":" << point->getY() << "}";
         }
     }

@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="localhost diaphnea" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -109,6 +110,8 @@
 		<Unit filename="Data/PointItem.h" />
 		<Unit filename="Data/PointLook.cpp" />
 		<Unit filename="Data/PointLook.h" />
+		<Unit filename="Data/PointVector.cpp" />
+		<Unit filename="Data/PointVector.h" />
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
 		<Unit filename="Data/PolygonLook.cpp" />

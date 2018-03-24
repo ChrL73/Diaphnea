@@ -13,6 +13,7 @@
 #include "TextInfo.h"
 #include "MessageTypeEnum.h"
 #include "SvgCustomColor.h"
+#include "PointVector.h"
 
 #include <sstream>
 
@@ -57,10 +58,10 @@ namespace map_server
                     bool lastIn = false;
                     const double d = 2.0;
 
-                    int i, n = filledPolygonItem->getPointVector(resolutionIndex).size();
+                    int i, n = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
                     for (i = 0; i < n; ++i)
                     {
-                        const Point *point = filledPolygonItem->getPointVector(resolutionIndex)[i];
+                        const Point *point = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(i);
                         double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                         double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                         bool in = (x > -d && x < _widthInPixels + d && y > -d && y < _heightInPixels + d);
@@ -68,7 +69,7 @@ namespace map_server
                         bool nextIn = false;
                         if (i < n - 1)
                         {
-                            const Point *np = filledPolygonItem->getPointVector(resolutionIndex)[i + 1];
+                            const Point *np = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(i + 1);
                             double nx = (np->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double ny = (np->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                             nextIn = (nx > -d && nx < _widthInPixels + d && ny > -d && ny < _heightInPixels + d);
@@ -164,10 +165,10 @@ namespace map_server
 
                         bool lastIn = false;
                         std::stringstream lastMove;
-                        int i, n = lineItem->getPointVector(resolutionIndex).size();
+                        int i, n = lineItem->getPointVector(resolutionIndex)->getPointCount();
                         for (i = 0; i < n; ++i)
                         {
-                            const Point *point = lineItem->getPointVector(resolutionIndex)[i];
+                            const Point *point = lineItem->getPointVector(resolutionIndex)->getPoint(i);
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                             bool in = (x > -10.0 && x < _widthInPixels + 10.0 && y > -10.0 && y < _heightInPixels + 10.0);
@@ -194,7 +195,7 @@ namespace map_server
 
                         if (addCircle1)
                         {
-                            const Point *point = lineItem->getPointVector(resolutionIndex)[0];
+                            const Point *point = lineItem->getPointVector(resolutionIndex)->getPoint(0);
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
@@ -205,7 +206,7 @@ namespace map_server
 
                         if (addCircle2)
                         {
-                            const Point *point = lineItem->getPointVector(resolutionIndex)[n - 1];
+                            const Point *point = lineItem->getPointVector(resolutionIndex)->getPoint(n - 1);
                             double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                             double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 

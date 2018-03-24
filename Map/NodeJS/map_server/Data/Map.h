@@ -64,6 +64,7 @@ namespace map_server
         std::map<int, const Category *> _categoryMap;
 
         bool addPointLists(MultipointsItem *item, mongo::BSONObj& dbItem);
+        bool loadPointVector(std::vector<const Point *>& points, const mongo::OID& _pointListId, int itemId);
 
         std::string _infoJson;
 

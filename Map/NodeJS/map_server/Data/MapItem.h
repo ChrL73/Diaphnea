@@ -25,7 +25,7 @@
     protected:
         MapItem(int id, int resolutionCount);
 
-        std::vector<std::string> _infoJsonVector;
+        mutable std::vector<std::string> _infoJsonVector;
         double _xMin, _xMax, _yMin, _yMax;
 
     public:
@@ -47,7 +47,7 @@
         const ItemLook *getCurrentLook(int i) const;
 		const ItemLook *getCurrentTextLook(int i) const;
 		const MapElement *getElementForFraming(void) const { return _elementForFraming; }
-        const std::string& getInfoJson(unsigned int resolutionIndex) const;
+        virtual const std::string& getInfoJson(unsigned int resolutionIndex) const;
         virtual bool hasResolution(void) const = 0;
 
         double getXMin(void) const { return _xMin; }

@@ -6,10 +6,9 @@ namespace map_server
 {
     class FilledPolygonItem : public MultipointsItem
     {
-    private:
-        void setInfoJsonVector(void);
-
     public:
-        FilledPolygonItem(int id, int resolutionCount) : MultipointsItem(id, resolutionCount) {}
+        FilledPolygonItem(int id, int resolutionCount, IMap *iMap) : MultipointsItem(id, resolutionCount, iMap) {}
+
+        const std::string& getInfoJson(unsigned int resolutionIndex) const;
     };
 }

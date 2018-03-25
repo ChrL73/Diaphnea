@@ -53,6 +53,11 @@ namespace MapDataProcessing
 
             BsonArray lineArray = new BsonArray();
 
+            double xMin = Double.MaxValue;
+            double xMax = Double.MinValue;
+            double yMin = Double.MaxValue;
+            double yMax = Double.MinValue;
+
             foreach (KeyValuePair<XmlResolution, List<GeoPoint>> pair in _lineDictionary)
             {
                 List<GeoPoint> list = pair.Value;
@@ -100,7 +105,15 @@ namespace MapDataProcessing
                         }
                     }
 
-                    pointArray.Add(list[i].getBsonDocument(previous2Point, previous1Point, nextPoint, mapData.XmlMapData.parameters.projection));
+                    BsonDocument bsonPoint = list[i].getBsonDocument(previous2Point, previous1Point, nextPoint, mapData.XmlMapData.parameters.projection);
+                    pointArray.Add(bsonPoint);
+
+                    double x = bsonPoint.AsBsonDocument.GetElement("x").Value.AsDouble;
+                    double y = bsonPoint.AsBsonDocument.GetElement("y").Value.AsDouble;
+                    if (x < xMin) xMin = x;
+                    if (x > xMax) xMax = x;
+                    if (y < yMin) yMin = y;
+                    if (y > yMax) yMax = y;
                 }
 
                 BsonDocument pointListDocument = new BsonDocument()
@@ -125,6 +138,10 @@ namespace MapDataProcessing
                 { "map", mapData.XmlMapData.parameters.mapId },
                 { "element0", _element0Id },
                 { "item", itemName },
+                { "x_min", xMin },
+                { "x_max", xMax },
+                { "y_min", yMin },
+                { "y_max", yMax },
                 { "cap1_round", Cap1Round ? 1 : 0 },
                 { "cap2_round", Cap2Round ? 1 : 0 },
                 { "point_lists", lineArray }

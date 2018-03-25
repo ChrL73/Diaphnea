@@ -61,10 +61,18 @@ namespace map_server
                 int itemId = dbItem.getIntField("item_id");
                 int cap1Round = dbItem.getIntField("cap1_round");
                 int cap2Round = dbItem.getIntField("cap2_round");
+                mongo::BSONElement xMinElt = dbItem.getField("x_min");
+                mongo::BSONElement xMaxElt = dbItem.getField("x_max");
+                mongo::BSONElement yMinElt = dbItem.getField("y_min");
+                mongo::BSONElement yMaxElt = dbItem.getField("y_max");
 
-				if (itemId >= 0 && itemId <= _maxIntDbValue && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1))
+				if (itemId >= 0 && itemId <= _maxIntDbValue && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1) &&
+                    xMinElt.type() == mongo::NumberDouble && xMaxElt.type() == mongo::NumberDouble &&
+                    yMinElt.type() == mongo::NumberDouble && yMaxElt.type() == mongo::NumberDouble)
 				{
-					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), this, cap1Round != 0, cap2Round != 0);
+					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), this, xMinElt.Double(),
+                        xMaxElt.Double(), -yMaxElt.Double(), -yMinElt.Double(), cap1Round != 0, cap2Round != 0);
+
 					if (addPointLists(item, dbItem))
 					{
                         lineOk = true;
@@ -102,9 +110,18 @@ namespace map_server
                 mongo::BSONObj dbItem = cursor->next();
 
                 int itemId = dbItem.getIntField("item_id");
-                if (itemId >= 0 && itemId <= _maxIntDbValue)
+                mongo::BSONElement xMinElt = dbItem.getField("x_min");
+                mongo::BSONElement xMaxElt = dbItem.getField("x_max");
+                mongo::BSONElement yMinElt = dbItem.getField("y_min");
+                mongo::BSONElement yMaxElt = dbItem.getField("y_max");
+
+                if (itemId >= 0 && itemId <= _maxIntDbValue &&
+                    xMinElt.type() == mongo::NumberDouble && xMaxElt.type() == mongo::NumberDouble &&
+                    yMinElt.type() == mongo::NumberDouble && yMaxElt.type() == mongo::NumberDouble)
 				{
-					FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size(), this);
+					FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size(), this,
+                        xMinElt.Double(), xMaxElt.Double(), -yMaxElt.Double(), -yMinElt.Double());
+
                     if (addPointLists(item, dbItem))
                     {
                         polygonOk = true;
@@ -216,7 +233,6 @@ namespace map_server
                     point = new Point(x1, -y1, x2, -y2, x, -y);
                 }
 
-                dynamic_cast<MultipointsItem *>(getItem(itemId))->addPoint(point);
                 points.push_back(point);
             }
         }

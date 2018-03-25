@@ -29,7 +29,7 @@ namespace map_server
         bool hasResolution(void) const { return true; }
 
     protected:
-        MultipointsItem(int id, int resolutionCount, IMap *iMap) : MapItem(id, resolutionCount), _iMap(iMap), _resolutionCount(resolutionCount) {}
+        MultipointsItem(int id, int resolutionCount, IMap *iMap, double xMin, double xMax, double yMin, double yMax);
 
         const int _resolutionCount;
         void addPointArray(std::stringstream& s, int resolutionIndex) const;
@@ -39,6 +39,5 @@ namespace map_server
 
 		const PointVector *getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
 		void addPointVector(const mongo::OID& pointListId);
-        void addPoint(const Point *point);
     };
 }

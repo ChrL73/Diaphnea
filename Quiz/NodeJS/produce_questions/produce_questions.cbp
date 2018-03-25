@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="5ab1777641b47c2b258f51ec fr ds119489.mlab.com:19489 heroku_x4cbcfdh heroku_x4cbcfdh aoiatk2g6jjulfb9l1obujds7p" />
+				<Option parameters="5aa83c26580d503c85c9d0e0 fr localhost diaphnea" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />

@@ -4,6 +4,15 @@
 
 namespace map_server
 {
+    MultipointsItem::MultipointsItem(int id, int resolutionCount, IMap *iMap, double xMin, double xMax, double yMin, double yMax) :
+            MapItem(id, resolutionCount), _iMap(iMap), _resolutionCount(resolutionCount)
+    {
+        _xMin = xMin;
+        _xMax = xMax;
+        _yMin = yMin;
+        _yMax = yMax;
+    }
+
 	MultipointsItem::~MultipointsItem()
 	{
 		int i, n = _pointVectorVector.size();
@@ -13,14 +22,6 @@ namespace map_server
     void MultipointsItem::addPointVector(const mongo::OID& pointListId)
     {
         _pointVectorVector.push_back(new PointVector(_iMap, getId(), pointListId));
-    }
-
-    void MultipointsItem::addPoint(const Point *point)
-    {
-        if (point->getX() < _xMin) _xMin = point->getX();
-        if (point->getX() > _xMax) _xMax = point->getX();
-        if (point->getY() < _yMin) _yMin = point->getY();
-        if (point->getY() > _yMax) _yMax = point->getY();
     }
 
     void MultipointsItem::addPointArray(std::stringstream& s, int resolutionIndex) const

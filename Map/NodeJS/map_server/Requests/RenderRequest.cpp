@@ -137,7 +137,7 @@ namespace map_server
                 itemVector.push_back(item);
             }
 
-			bool languageOk = _map->knownLanguage(_languageId);
+            bool languageOk = _map->knownLanguage(_languageId);
             std::stringstream response;
             n = itemVector.size();
 
@@ -274,27 +274,27 @@ namespace map_server
 
                     if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
                     {
-						if (languageOk)
-						{
-							ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
-							_itemCopyBuilderVector.push_back(itemCopyBuilder);
+                        if (languageOk)
+                        {
+                            ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
+                            _itemCopyBuilderVector.push_back(itemCopyBuilder);
 
-							LineItem *lineItem = dynamic_cast<LineItem *>(item);
-							if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
-							{
-								std::string elementId = lineItem->getElementIdForText();
-								if (!elementId.empty())
-								{
-									std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
-									if (elementIt == lineItemAssociationMap.end())
-									{
-										elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
-									}
+                            LineItem *lineItem = dynamic_cast<LineItem *>(item);
+                            if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
+                            {
+                                std::string elementId = lineItem->getElementIdForText();
+                                if (!elementId.empty())
+                                {
+                                    std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
+                                    if (elementIt == lineItemAssociationMap.end())
+                                    {
+                                        elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
+                                    }
 
-									(*elementIt).second.push_back(itemCopyBuilder);
-								}
-							}
-						}
+                                    (*elementIt).second.push_back(itemCopyBuilder);
+                                }
+                            }
+                        }
                     }
                     else
                     {
@@ -367,51 +367,51 @@ namespace map_server
 
             delete _svgCreator;
 
-			flushErrors(_map);
+            flushErrors(_map);
         }
         else
         {
             MapData::unlock();
 
             _coutMutexPtr->lock();
-			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
-				<< ",\"message\":\"Unknown map id ('" << _mapId << "') in RENDER request\"}" << std::endl;
-			_coutMutexPtr->unlock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
+                << ",\"message\":\"Unknown map id ('" << _mapId << "') in RENDER request\"}" << std::endl;
+            _coutMutexPtr->unlock();
         }
     }
 
     bool RenderRequest::displayText()
     {
 //#ifdef _WIN32
-		const std::string fontFile = "arial.ttf";
+        const std::string fontFile = "arial.ttf";
 //#else
-		//const std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/arial.ttf";
+        //const std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/arial.ttf";
 //#endif
 
-		FT_Library  library;
-		int error = FT_Init_FreeType(&library);
-		if (error)
-		{
+        FT_Library  library;
+        int error = FT_Init_FreeType(&library);
+        if (error)
+        {
             _coutMutexPtr->lock();
-			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FREE_TYPE_INIT_FAILED
-				<< ",\"message\":\"FreeType library initialization failed\"}" << std::endl;
-			_coutMutexPtr->unlock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FREE_TYPE_INIT_FAILED
+                << ",\"message\":\"FreeType library initialization failed\"}" << std::endl;
+            _coutMutexPtr->unlock();
             return false;
         }
 
-		FT_Face face;
-		error = FT_New_Face(library, fontFile.c_str(), 0, &face);
-		if (error)
+        FT_Face face;
+        error = FT_New_Face(library, fontFile.c_str(), 0, &face);
+        if (error)
         {
             FT_Done_FreeType(library);
             _coutMutexPtr->lock();
-			std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FONT_NOT_FOUND
-				<< ",\"message\":\"Failed to load arial.ttf font\"}" << std::endl;
-			_coutMutexPtr->unlock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FONT_NOT_FOUND
+                << ",\"message\":\"Failed to load arial.ttf font\"}" << std::endl;
+            _coutMutexPtr->unlock();
             return false;
         }
 
-		double dx = 0.5 * _widthInPixels / _scale;
+        double dx = 0.5 * _widthInPixels / _scale;
         double xMin = _xFocus - dx;
         double xMax = _xFocus + dx;
         double dy = 0.5 * _heightInPixels / _scale;
@@ -419,8 +419,8 @@ namespace map_server
         double yMax = _yFocus + dy;
         MapData::lock();
 
-		TextDisplayerParameters parameters;
-		TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator, _testMode);
+        TextDisplayerParameters parameters;
+        TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator, _testMode);
 
         double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
 
@@ -429,8 +429,8 @@ namespace map_server
         {
             ItemCopyBuilder *itemCopyBuilder = _itemCopyBuilderVector[i];
             const MapItem *item = itemCopyBuilder->getItem();
-			double size = itemCopyBuilder->getSize();
-			int resolutionIndex = itemCopyBuilder->getResolutionIndex();
+            double size = itemCopyBuilder->getSize();
+            int resolutionIndex = itemCopyBuilder->getResolutionIndex();
 
             // Todo: make this test before creating 'ItemCopyBuilder' objects
             if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
@@ -448,35 +448,35 @@ namespace map_server
                     setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
                     textDisplayer.addItem(pointItemCopy);
                 }
-				else
-				{
-					const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
-					if (lineItem != 0)
-					{
+                else
+                {
+                    const LineItem *lineItem = dynamic_cast<const LineItem *>(item);
+                    if (lineItem != 0)
+                    {
                         LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText(), lineItem->getImportance());
 
-						int j, m = lineItem->getPointVector(resolutionIndex)->getPointCount();
-						for (j = 0; j < m - 1; ++j)
-						{
-							const Point *point1 = lineItem->getPointVector(resolutionIndex)->getPoint(j);
-							const Point *point2 = lineItem->getPointVector(resolutionIndex)->getPoint(j + 1);
-							double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-							double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-							double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-							double y2 = (point2->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                        int j, m = lineItem->getPointVector(resolutionIndex)->getPointCount();
+                        for (j = 0; j < m - 1; ++j)
+                        {
+                            const Point *point1 = lineItem->getPointVector(resolutionIndex)->getPoint(j);
+                            const Point *point2 = lineItem->getPointVector(resolutionIndex)->getPoint(j + 1);
+                            double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y2 = (point2->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
 
-							if ((x1 >= 0 && x1 <= _widthInPixels && y1 >= 0 && y1 <= _heightInPixels) || (x2 >= 0 && x2 <= _widthInPixels && y2 >= 0 && y2 <= _heightInPixels))
-							{
-								double x = 0.5 * (x1 + x2);
-								double y = 0.5 * (y1 + y2);
-								double radius1 = parameters.getSegmentRadius1Coeff() * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-								double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
-								double axisDx = x2 - x1;
-								double axisDy = y2 - y1;
-								RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false, false);
-								lineItemCopy->addRepulsiveCenter(repulsiveCenter);
-							}
-						}
+                            if ((x1 >= 0 && x1 <= _widthInPixels && y1 >= 0 && y1 <= _heightInPixels) || (x2 >= 0 && x2 <= _widthInPixels && y2 >= 0 && y2 <= _heightInPixels))
+                            {
+                                double x = 0.5 * (x1 + x2);
+                                double y = 0.5 * (y1 + y2);
+                                double radius1 = parameters.getSegmentRadius1Coeff() * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+                                double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
+                                double axisDx = x2 - x1;
+                                double axisDy = y2 - y1;
+                                RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false, false);
+                                lineItemCopy->addRepulsiveCenter(repulsiveCenter);
+                            }
+                        }
 
                         int lineBuilderCount = itemCopyBuilder->getLineBuilderCount();
                         if (lineBuilderCount != 0)
@@ -500,29 +500,29 @@ namespace map_server
                             }
                         }
 
-						textDisplayer.addItem(lineItemCopy);
-					}
-					else
-					{
-						const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
-						if (filledPolygonItem != 0)
-						{
-							FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
+                        textDisplayer.addItem(lineItemCopy);
+                    }
+                    else
+                    {
+                        const FilledPolygonItem *filledPolygonItem = dynamic_cast<const FilledPolygonItem *>(item);
+                        if (filledPolygonItem != 0)
+                        {
+                            FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
 
-							int j, m = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
+                            int j, m = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
                             for (j = 0; j < m; ++j)
                             {
                                 const Point *point = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(j);
                                 double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
                                 double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
                                 filledPolygonItemCopy->addPoint(x, y);
-							}
+                            }
 
                             setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
-							textDisplayer.addItem(filledPolygonItemCopy);
-						}
-					}
-				}
+                            textDisplayer.addItem(filledPolygonItemCopy);
+                        }
+                    }
+                }
             }
 
             delete itemCopyBuilder;
@@ -530,7 +530,7 @@ namespace map_server
 
         MapData::unlock();
 
-		FT_Done_FreeType(library);
+        FT_Done_FreeType(library);
 
         bool result = textDisplayer.start();
         if (_svgCreator != 0) _svgCreator->execute();

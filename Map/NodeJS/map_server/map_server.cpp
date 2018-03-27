@@ -4,12 +4,12 @@
 
 int main(int argc, char *argv[])
 {
-	bool softExit = false;
-	std::string dbHost, dbName, dbUser, dbPassword;
+    bool softExit = false;
+    std::string dbHost, dbName, dbUser, dbPassword;
 
-	int i, j = 0;
-	for (i = 1; i < argc; ++i)
-	{
+    int i, j = 0;
+    for (i = 1; i < argc; ++i)
+    {
         if (strcmp(argv[i], "softExit") == 0)
         {
             softExit = true;
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
             else if (j == 3) dbPassword = argv[i];
             ++j;
         }
-	}
+    }
 
     int cleanThreadSleepMs = 5;
     int checkTimeoutSleepMs = 200;

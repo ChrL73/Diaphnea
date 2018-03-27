@@ -23,6 +23,6 @@ namespace map_server
             MapElement(dbName, mongoId, id, iMap) {}
 
         const PointLook *getLook(int i) const;
-		PointItem *getItem(void) const { return _item; }
+        PointItem *getItem(void) const { return _item; }
     };
 }

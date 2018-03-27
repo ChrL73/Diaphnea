@@ -25,55 +25,55 @@
 
 namespace map_server
 {
-	std::mutex TextDisplayer::_mutex;
-	int TextDisplayer::_counter = 0;
-	std::map<std::string, int *> TextDisplayer::_clientActiveDisplayerMap;
-	std::mutex *TextDisplayer::_coutMutexPtr = 0;
+    std::mutex TextDisplayer::_mutex;
+    int TextDisplayer::_counter = 0;
+    std::map<std::string, int *> TextDisplayer::_clientActiveDisplayerMap;
+    std::mutex *TextDisplayer::_coutMutexPtr = 0;
 
-	void TextDisplayer::clearClientMap(void)
-	{
-		_mutex.lock();
+    void TextDisplayer::clearClientMap(void)
+    {
+        _mutex.lock();
 
-		std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.begin();
-		for (; it != _clientActiveDisplayerMap.end(); ++it)
-		{
-			delete (*it).second;
-			(*it).second = 0;
-		}
+        std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.begin();
+        for (; it != _clientActiveDisplayerMap.end(); ++it)
+        {
+            delete (*it).second;
+            (*it).second = 0;
+        }
 
-		_mutex.unlock();
-	}
+        _mutex.unlock();
+    }
 
     TextDisplayer::TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
                                  double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator, bool testMode) :
-		_parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height),
-		_xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage), _svgCreator(svgCreator), _testMode(testMode)
+        _parameters(parameters), _socketId(socketId), _requestId(requestId), _width(width), _height(height),
+        _xFocus(xFocus), _yFocus(yFocus), _scale(scale), _createPotentialImage(createPotentialImage), _svgCreator(svgCreator), _testMode(testMode)
     {
-		_mutex.lock();
+        _mutex.lock();
 
         _id = _counter;
         ++_counter;
 
-		std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.find(socketId);
-		if (it == _clientActiveDisplayerMap.end())
-		{
-			it = _clientActiveDisplayerMap.insert(std::pair<std::string, int *>(socketId, new int)).first;
-		}
+        std::map<std::string, int *>::iterator it = _clientActiveDisplayerMap.find(socketId);
+        if (it == _clientActiveDisplayerMap.end())
+        {
+            it = _clientActiveDisplayerMap.insert(std::pair<std::string, int *>(socketId, new int)).first;
+        }
 
-		_clientActiveDisplayerId = (*it).second;
-		*_clientActiveDisplayerId = _id;
+        _clientActiveDisplayerId = (*it).second;
+        *_clientActiveDisplayerId = _id;
 
-		_mutex.unlock();
+        _mutex.unlock();
     }
 
-	TextDisplayer::~TextDisplayer()
-	{
-		int i, n = _itemVector.size();
-		for (i = 0; i < n; ++i) delete _itemVector[i];
-	}
+    TextDisplayer::~TextDisplayer()
+    {
+        int i, n = _itemVector.size();
+        for (i = 0; i < n; ++i) delete _itemVector[i];
+    }
 
-	bool TextDisplayer::isDisplayerActive(void)
-	{
+    bool TextDisplayer::isDisplayerActive(void)
+    {
         if (_testMode || _svgCreator) return true;
 
         _mutex.lock();
@@ -81,27 +81,27 @@ namespace map_server
         _mutex.unlock();
 
         return b;
-	}
+    }
 
     bool TextDisplayer::start(void)
     {
         int visibleTextCount = 0;
 
         std::multimap<double, ItemCopy *> itemMap;
-		int i, n = _itemVector.size();
-		for (i = 0; i < n; ++i)
-		{
+        int i, n = _itemVector.size();
+        for (i = 0; i < n; ++i)
+        {
             ItemCopy *item = _itemVector[i];
             if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, ItemCopy *>(-item->getImportance(), item));
         }
 
-		std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
-		while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
-		{
-			ItemCopy *item = (*it).second;
-			int j, m = item->getTextInfoCount();
-			for (j = 0; j < m; ++j)
-			{
+        std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
+        while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
+        {
+            ItemCopy *item = (*it).second;
+            int j, m = item->getTextInfoCount();
+            for (j = 0; j < m; ++j)
+            {
                 if (displayText(item, item->getTextInfo(j)))
                 {
                     ++visibleTextCount;
@@ -110,7 +110,7 @@ namespace map_server
             }
 
             ++it;
-		}
+        }
 
         if (_createPotentialImage && isDisplayerActive())
         {
@@ -199,14 +199,14 @@ namespace map_server
     {
         item->setIntersections(_height, _width);
 
-		double optimalY = 0.0;
-		double optimalX = 0.0;
-		TextPotential pMin(true);
+        double optimalY = 0.0;
+        double optimalX = 0.0;
+        TextPotential pMin(true);
 
-		double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
-		double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
-		double xDmin = item->getXMin() + 0.5 * textInfo->getWidth() + 3.0;
-		double xDmax = item->getXMax() - 0.5 * textInfo->getWidth() - 3.0;
+        double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
+        double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+        double xDmin = item->getXMin() + 0.5 * textInfo->getWidth() + 3.0;
+        double xDmax = item->getXMax() - 0.5 * textInfo->getWidth() - 3.0;
 
         if (yDmax >= yDmin)
         {
@@ -320,9 +320,9 @@ namespace map_server
 
                 if (!isDisplayerActive()) return false;
             }
-		}
+        }
 
-		if (xDmax >= xDmin)
+        if (xDmax >= xDmin)
         {
             int xCount = _parameters->getLineXTryCount();
             double dx = (xDmax - xDmin) / static_cast<double>(xCount - 1);
@@ -435,13 +435,13 @@ namespace map_server
 
                 if (!isDisplayerActive()) return false;
             }
-		}
+        }
 
-		if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;
+        if (pMin.getMax() > _parameters->getPotentialThreshold()) return false;
 
-		textInfo->setX(optimalX);
-		textInfo->setY(optimalY);
-		sendResponse(item, textInfo);
+        textInfo->setX(optimalX);
+        textInfo->setY(optimalY);
+        sendResponse(item, textInfo);
 
         return false;
     }

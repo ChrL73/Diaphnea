@@ -8,7 +8,7 @@ namespace map_server
     {
         _loaded = true;
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".line_elements", MONGO_QUERY("_id" << _mongoId), 1);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".line_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -65,19 +65,19 @@ namespace map_server
                 mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 
-				if (lineItem == 0)
-				{
-					_error = true;
-					return;
-				}
+                if (lineItem == 0)
+                {
+                    _error = true;
+                    return;
+                }
 
-				lineItem->setCurrentLooks(lineLookVector);
-				lineItem->setCurrentTextLooks(textLookVector);
-				lineItem->setNameMap(&_nameMap);
+                lineItem->setCurrentLooks(lineLookVector);
+                lineItem->setCurrentTextLooks(textLookVector);
+                lineItem->setNameMap(&_nameMap);
                 lineItem->setElementIdForText(_id);
                 lineItem->setImportance(_importance);
                 lineItem->setElementForFraming(this);
-				_itemVector.push_back(lineItem);
+                _itemVector.push_back(lineItem);
             }
         }
         else

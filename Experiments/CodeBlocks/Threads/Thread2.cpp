@@ -43,16 +43,16 @@ void deleteFunction(void)
             if (status == std::future_status::ready) threadsToDelete.push_back(it);
         }
 
-		int i, n = threadsToDelete.size();
-		for (i = 0; i < n; ++i)
-		{
-			std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
+        int i, n = threadsToDelete.size();
+        for (i = 0; i < n; ++i)
+        {
+            std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
             (*it)->getT().join();
-			delete (*it);
-			threadSet.erase(it);
-		}
+            delete (*it);
+            threadSet.erase(it);
+        }
 
-		threadsToDelete.clear();
+        threadsToDelete.clear();
 
         if (stop && threadSet.empty())
         {

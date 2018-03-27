@@ -9,10 +9,10 @@ namespace produce_questions
     private:
         const std::string _levelId;
         const std::string _languageId;
-		const std::string _dbHost;
-		const std::string _dbName;
-		const std::string _dbUser;
-		const std::string _dbPassword;
+        const std::string _dbHost;
+        const std::string _dbName;
+        const std::string _dbUser;
+        const std::string _dbPassword;
 
     public:
         QuestionProducer(const std::string& levelId, const std::string& languageId, const std::string& dbHost,

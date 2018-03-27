@@ -13,11 +13,11 @@ namespace map_server
         _yMax = yMax;
     }
 
-	MultipointsItem::~MultipointsItem()
-	{
-		int i, n = _pointVectorVector.size();
-		for (i = 0; i < n; ++i) delete _pointVectorVector[i];
-	}
+    MultipointsItem::~MultipointsItem()
+    {
+        int i, n = _pointVectorVector.size();
+        for (i = 0; i < n; ++i) delete _pointVectorVector[i];
+    }
 
     void MultipointsItem::addPointVector(const mongo::OID& pointListId)
     {

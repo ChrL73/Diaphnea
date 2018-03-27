@@ -14,7 +14,7 @@ namespace map_server
 
     PolygonLook::~PolygonLook()
     {
-		delete _contourLook;
-		delete _fillLook;
+        delete _contourLook;
+        delete _fillLook;
     }
 }

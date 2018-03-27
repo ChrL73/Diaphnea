@@ -14,6 +14,6 @@ namespace map_server
         TEXT = 7,
         REMOVE_TEXT = 8,
         SVG = 9,
-		ERROR_ = 10
+        ERROR_ = 10
     };
 }

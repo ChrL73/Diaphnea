@@ -62,21 +62,21 @@ void deleteFunction(void)
             if (status == std::future_status::ready) threadsToDelete.push_back(it);
         }
 
-		int i, n = threadsToDelete.size();
-		for (i = 0; i < n; ++i)
-		{
-			std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
+        int i, n = threadsToDelete.size();
+        for (i = 0; i < n; ++i)
+        {
+            std::set<ThreadInfo *>::iterator it = threadsToDelete[i];
             (*it)->getT().join();
 
             coutMutex.lock();
-			std::cout << "Delete: " << (*it)->getStr() << std::endl;
-			coutMutex.unlock();
+            std::cout << "Delete: " << (*it)->getStr() << std::endl;
+            coutMutex.unlock();
 
-			delete (*it);
-			threadSet.erase(it);
-		}
+            delete (*it);
+            threadSet.erase(it);
+        }
 
-		threadsToDelete.clear();
+        threadsToDelete.clear();
 
         threadSetMutex.unlock();
     }

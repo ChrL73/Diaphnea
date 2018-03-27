@@ -15,8 +15,8 @@
     private:
         const int _id;
         std::vector<const ItemLook *> _currentLooks;
-		std::vector<const ItemLook *> _currentTextLooks;
-		const MapElement *_elementForFraming;
+        std::vector<const ItemLook *> _currentTextLooks;
+        const MapElement *_elementForFraming;
         std::map<std::string, std::vector<ElementName *> > *_nameMapPtr;
         std::string _elementIdForText;
         double _importance;
@@ -29,24 +29,24 @@
         double _xMin, _xMax, _yMin, _yMax;
 
     public:
-		virtual ~MapItem() {}
+        virtual ~MapItem() {}
 
         void setCurrentLooks(const std::vector<const ItemLook *>& looks) { _currentLooks = looks; }
-		void setCurrentTextLooks(const std::vector<const ItemLook *>& looks) { _currentTextLooks = looks; }
-		void setElementForFraming(const MapElement *elementForFraming) { _elementForFraming = elementForFraming; }
+        void setCurrentTextLooks(const std::vector<const ItemLook *>& looks) { _currentTextLooks = looks; }
+        void setElementForFraming(const MapElement *elementForFraming) { _elementForFraming = elementForFraming; }
 
-		void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
-		void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
-		void setImportance(double importance) { _importance = importance; }
-		int getTextCount(const std::string& languageId) const;
-		const ElementName *getText(const std::string& languageId, int i) const;
-		const std::string& getElementIdForText(void) const { return _elementIdForText; }
-		double getImportance(void) const { return _importance; }
+        void setNameMap(std::map<std::string, std::vector<ElementName *> > *nameMapPtr) { _nameMapPtr = nameMapPtr; }
+        void setElementIdForText(const std::string& elementId) { _elementIdForText = elementId; }
+        void setImportance(double importance) { _importance = importance; }
+        int getTextCount(const std::string& languageId) const;
+        const ElementName *getText(const std::string& languageId, int i) const;
+        const std::string& getElementIdForText(void) const { return _elementIdForText; }
+        double getImportance(void) const { return _importance; }
 
         int getId(void) const { return _id; }
         const ItemLook *getCurrentLook(int i) const;
-		const ItemLook *getCurrentTextLook(int i) const;
-		const MapElement *getElementForFraming(void) const { return _elementForFraming; }
+        const ItemLook *getCurrentTextLook(int i) const;
+        const MapElement *getElementForFraming(void) const { return _elementForFraming; }
         virtual const std::string& getInfoJson(unsigned int resolutionIndex) const;
         virtual bool hasResolution(void) const = 0;
 

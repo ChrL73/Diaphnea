@@ -36,12 +36,12 @@ namespace map_server
         if (elementIt == _elementMap.end()) return 0;
 
         MapElement *element = (*elementIt).second;
-		if (element->error()) return 0;
-		if (!element->isLoaded())
-		{
-			element->load();
-			if (element->error()) return 0;
-		}
+        if (element->error()) return 0;
+        if (!element->isLoaded())
+        {
+            element->load();
+            if (element->error()) return 0;
+        }
         return element;
     }
 
@@ -52,8 +52,8 @@ namespace map_server
 
         if (itemIt == _lineItemMap.end())
         {
-			bool lineOk = false;
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
+            bool lineOk = false;
+            std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -66,30 +66,30 @@ namespace map_server
                 mongo::BSONElement yMinElt = dbItem.getField("y_min");
                 mongo::BSONElement yMaxElt = dbItem.getField("y_max");
 
-				if (itemId >= 0 && itemId <= _maxIntDbValue && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1) &&
+                if (itemId >= 0 && itemId <= _maxIntDbValue && (cap1Round == 0 || cap1Round == 1) && (cap2Round == 0 || cap2Round == 1) &&
                     xMinElt.type() == mongo::NumberDouble && xMaxElt.type() == mongo::NumberDouble &&
                     yMinElt.type() == mongo::NumberDouble && yMaxElt.type() == mongo::NumberDouble)
-				{
-					LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), this, xMinElt.Double(),
+                {
+                    LineItem *item = new LineItem(itemId, _sampleLengthVector.size(), this, xMinElt.Double(),
                         xMaxElt.Double(), -yMaxElt.Double(), -yMinElt.Double(), cap1Round != 0, cap2Round != 0);
 
-					if (addPointLists(item, dbItem))
-					{
+                    if (addPointLists(item, dbItem))
+                    {
                         lineOk = true;
                         itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, item)).first;
                         _itemMap.insert(std::pair<int, MapItem *>(itemId, item));
-					}
-					else
-					{
+                    }
+                    else
+                    {
                         delete item;
-					}
-				}
+                    }
+                }
             }
 
             if (!lineOk)
             {
                 itemIt = _lineItemMap.insert(std::pair<std::string, LineItem *>(mongoIdStr, 0)).first;
-				_errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
+                _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
             }
         }
 
@@ -104,7 +104,7 @@ namespace map_server
         if (itemIt == _filledPolygonItemMap.end())
         {
             bool polygonOk = false;
-			std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
+            std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".items", MONGO_QUERY("_id" << mongoId), 1);
             if (cursor->more())
             {
                 mongo::BSONObj dbItem = cursor->next();
@@ -118,8 +118,8 @@ namespace map_server
                 if (itemId >= 0 && itemId <= _maxIntDbValue &&
                     xMinElt.type() == mongo::NumberDouble && xMaxElt.type() == mongo::NumberDouble &&
                     yMinElt.type() == mongo::NumberDouble && yMaxElt.type() == mongo::NumberDouble)
-				{
-					FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size(), this,
+                {
+                    FilledPolygonItem *item = new FilledPolygonItem(itemId, _sampleLengthVector.size(), this,
                         xMinElt.Double(), xMaxElt.Double(), -yMaxElt.Double(), -yMinElt.Double());
 
                     if (addPointLists(item, dbItem))
@@ -351,7 +351,7 @@ namespace map_server
             {
                 _error = true;
                 _errorVector.push_back(new DatabaseError(__FILE__, __func__, __LINE__));
-				return;
+                return;
             }
 
             _zoomMinDistance = zoomMinDistanceElt.Double();
@@ -403,7 +403,7 @@ namespace map_server
     {
         mongo::BSONObj projection = BSON("id" << 1 << "item_id" << 1);
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connectionPtr->query(_dbName + ".point_elements", MONGO_QUERY("map" << _id), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();

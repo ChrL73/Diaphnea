@@ -9,13 +9,13 @@ namespace map_server
     class MapElement;
     class MultipointsItem;
     class MapItem;
-	class DatabaseError;
-	class Category;
+    class DatabaseError;
+    class Category;
 
     class Map : public IMap
     {
     private:
-		static constexpr int _maxIntDbValue = 0xfffff;
+        static constexpr int _maxIntDbValue = 0xfffff;
 
         const std::string _dbName;
         const mongo::OID _mongoId;
@@ -29,7 +29,7 @@ namespace map_server
 
         mongo::DBClientConnection * const _connectionPtr;
         bool _loaded;
-		bool _error;
+        bool _error;
         std::string _emptyString;
 
         mongo::DBClientConnection *getConnectionPtr(void) { return _connectionPtr; }
@@ -68,12 +68,12 @@ namespace map_server
 
         std::string _infoJson;
 
-		std::vector<DatabaseError *> _errorVector;
+        std::vector<DatabaseError *> _errorVector;
 
     public:
         Map(const std::string& dbName, const mongo::OID& mongoId, const std::string& id, mongo::DBClientConnection *connectionPtr) :
             _dbName(dbName), _mongoId(mongoId), _id(id), _connectionPtr(connectionPtr), _loaded(false), _error(false), _itemToElement0MapLoaded(false) {}
-		~Map();
+        ~Map();
 
         const std::string& getId(void) const { return _id; }
         bool isLoaded(void) const { return _loaded; }
@@ -96,6 +96,6 @@ namespace map_server
         int getResolutionIndex(double scale);
         const Category *getCategory(int categoryId) const;
         bool knownLanguage(const std::string& languageId) const { return _languageIdSet.find(languageId) != _languageIdSet.end(); }
-		std::vector<DatabaseError *>& getErrorVector(void) { return _errorVector; }
+        std::vector<DatabaseError *>& getErrorVector(void) { return _errorVector; }
     };
 }

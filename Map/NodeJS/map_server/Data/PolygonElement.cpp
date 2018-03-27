@@ -8,7 +8,7 @@ namespace map_server
     {
         _loaded = true;
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".polygon_elements", MONGO_QUERY("_id" << _mongoId), 1);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".polygon_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -63,8 +63,8 @@ namespace map_server
             }
 
             _filledPolygonItem->setCurrentLooks(fillLookVector);
-			_filledPolygonItem->setCurrentTextLooks(textLookVector);
-			_filledPolygonItem->setNameMap(&_nameMap);
+            _filledPolygonItem->setCurrentTextLooks(textLookVector);
+            _filledPolygonItem->setNameMap(&_nameMap);
             _filledPolygonItem->setElementIdForText(_id);
             _filledPolygonItem->setImportance(_importance);
             _filledPolygonItem->setElementForFraming(this);
@@ -88,11 +88,11 @@ namespace map_server
                 mongo::OID itemId = dbLineItems[i].OID();
                 LineItem *lineItem = _iMap->getLineItem(itemId);
 
-				if (lineItem == 0)
-				{
-					_error = true;
-					return;
-				}
+                if (lineItem == 0)
+                {
+                    _error = true;
+                    return;
+                }
 
                 _lineItemVector.push_back(lineItem);
             }

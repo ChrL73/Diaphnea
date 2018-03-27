@@ -12,7 +12,7 @@ namespace map_server
     private:
         const MapItem * const _item;
         const double _size;
-		const ItemLook * const _textLook;
+        const ItemLook * const _textLook;
         const int _resolutionIndex;
         std::vector<ItemCopyBuilder *> _lineBuilderVector;
 
@@ -22,7 +22,7 @@ namespace map_server
 
         const MapItem *getItem(void) const { return _item; }
         double getSize(void) const { return _size; }
-		const ItemLook *getTextLook(void) const { return _textLook; }
+        const ItemLook *getTextLook(void) const { return _textLook; }
         int getResolutionIndex(void) const { return _resolutionIndex; }
 
         void setLineBuilderVector(const std::vector<ItemCopyBuilder *> lineBuilderVector) { _lineBuilderVector = lineBuilderVector; }

@@ -37,10 +37,10 @@ namespace produce_questions
         QuizData(const std::string& dbHost, const std::string& dbName, const std::string& dbUser, const std::string& dbPassword);
         ~QuizData();
 
-		const std::string _dbHost;
-		const std::string _dbName;
-		const std::string _dbUser;
-		const std::string _dbPassword;
+        const std::string _dbHost;
+        const std::string _dbName;
+        const std::string _dbUser;
+        const std::string _dbPassword;
 
         int initialize(void);
         int terminate(void);

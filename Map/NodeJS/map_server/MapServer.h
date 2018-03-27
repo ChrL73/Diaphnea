@@ -31,13 +31,13 @@ namespace map_server
         void inputLoop(void);
         void processRequest(std::string requestString);
 
-		const bool _softExit;
-		bool _stopRequested;
+        const bool _softExit;
+        bool _stopRequested;
 
-		const std::string _dbHost;
-		const std::string _dbName;
-		const std::string _dbUser;
-		const std::string _dbPassword;
+        const std::string _dbHost;
+        const std::string _dbName;
+        const std::string _dbUser;
+        const std::string _dbPassword;
 
     public:
         MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit,

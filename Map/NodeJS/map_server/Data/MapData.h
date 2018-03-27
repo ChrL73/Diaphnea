@@ -34,10 +34,10 @@ namespace map_server
         mongo::DBClientConnection _connection;
         static std::mutex _mutex;
 
-		const std::string _dbHost;
-		const std::string _dbName;
-		const std::string _dbUser;
-		const std::string _dbPassword;
+        const std::string _dbHost;
+        const std::string _dbName;
+        const std::string _dbUser;
+        const std::string _dbPassword;
 
         std::string _mapIdsJson;
         std::map<std::string, Map *> _mapMap;

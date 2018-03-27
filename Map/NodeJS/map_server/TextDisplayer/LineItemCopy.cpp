@@ -5,21 +5,21 @@
 
 namespace map_server
 {
-	LineItemCopy::~LineItemCopy()
-	{
-		int i, n = _pointVector.size();
-		for (i = 0; i < n; ++i)
-		{
-			int j, m = _pointVector[i].size();
-			for (j = 0; j < m; ++j)	delete _pointVector[i][j];
-		}
+    LineItemCopy::~LineItemCopy()
+    {
+        int i, n = _pointVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            int j, m = _pointVector[i].size();
+            for (j = 0; j < m; ++j) delete _pointVector[i][j];
+        }
 
-		for (i = 0; i < _height; ++i) delete _hIntersections[i];
-		delete[] _hIntersections;
+        for (i = 0; i < _height; ++i) delete _hIntersections[i];
+        delete[] _hIntersections;
 
-		for (i = 0; i < _width; ++i) delete _vIntersections[i];
-		delete[] _vIntersections;
-	}
+        for (i = 0; i < _width; ++i) delete _vIntersections[i];
+        delete[] _vIntersections;
+    }
 
     void LineItemCopy::addPoint(double x, double y, bool newLine)
     {

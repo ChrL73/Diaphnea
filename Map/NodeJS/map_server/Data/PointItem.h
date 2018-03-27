@@ -14,7 +14,7 @@ namespace map_server
 
     public:
         PointItem(int id, const Point *point);
-		~PointItem();
+        ~PointItem();
 
         const Point *getPoint(void) const { return _point; }
     };

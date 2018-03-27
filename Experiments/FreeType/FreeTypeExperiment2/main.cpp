@@ -6,11 +6,11 @@
 
 int wmain(int argc, wchar_t *argv[])
 {
-	if (argc < 4)
-	{
-		std::cout << "{\"message\":\"Not enough arguments\"}";
-		return -1;
-	}
+    if (argc < 4)
+    {
+        std::cout << "{\"message\":\"Not enough arguments\"}";
+        return -1;
+    }
 
     std::wstring text;
     int i, wordCount = argc - 3;
@@ -28,32 +28,32 @@ int wmain(int argc, wchar_t *argv[])
 #ifdef _WIN32
     std::string fontFile = fontFamily + ".ttf";
 #else
-	std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/" + fontFamily + ".ttf";
+    std::string fontFile = "/usr/share/fonts/truetype/msttcorefonts/" + fontFamily + ".ttf";
 #endif
 
-	double fontSize;
-	try
-	{
+    double fontSize;
+    try
+    {
         fontSize = std::stod(argv[wordCount + 1]);
-	}
-	catch (...)
-	{
-		std::cout << "{\"message\":\"Bad font size\"}";
-		return -1;
-	}
+    }
+    catch (...)
+    {
+        std::cout << "{\"message\":\"Bad font size\"}";
+        return -1;
+    }
 
-	if (fontSize < 1.0 || fontSize > 999.0)
-	{
-		std::cout << "{\"message\":\"Bad font size\"}";
-		return -1;
-	}
+    if (fontSize < 1.0 || fontSize > 999.0)
+    {
+        std::cout << "{\"message\":\"Bad font size\"}";
+        return -1;
+    }
 
     FT_Library  library;
     int error = FT_Init_FreeType(&library);
 
     if (error)
     {
-		std::cout << "{\"message\":\"FT_Init_FreeType error\"}";
+        std::cout << "{\"message\":\"FT_Init_FreeType error\"}";
         return -1;
     }
 
@@ -68,7 +68,7 @@ int wmain(int argc, wchar_t *argv[])
     }
     else if (error)
     {
-		std::cout << "{\"message\":\"FT_New_Face error: Fail to open font file " + fontFile + "\"}";
+        std::cout << "{\"message\":\"FT_New_Face error: Fail to open font file " + fontFile + "\"}";
         return -1;
     }
 
@@ -80,7 +80,7 @@ int wmain(int argc, wchar_t *argv[])
         return -1;
     }
 
-	n = text.size();
+    n = text.size();
     int width = 0, yMaxMax = 0, yMinMin = 0, left = 0;
 
     for (i = 0; i < n; ++i)
@@ -91,17 +91,17 @@ int wmain(int argc, wchar_t *argv[])
 
         error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
         if (error)
-		{
-			std::cout << "{\"message\":\"FT_Load_Glyph error\"}";
-			return -1;
-		}
+        {
+            std::cout << "{\"message\":\"FT_Load_Glyph error\"}";
+            return -1;
+        }
 
         error = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_MONO);
-		if (error)
-		{
-			std::cout << "{\"message\":\"FT_Render_Glyph error\"}";
-			return -1;
-		}
+        if (error)
+        {
+            std::cout << "{\"message\":\"FT_Render_Glyph error\"}";
+            return -1;
+        }
 
         if (i == 0)
         {

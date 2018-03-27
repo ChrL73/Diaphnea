@@ -14,24 +14,24 @@ namespace map_server
     class PointItemCopy;
     class LineItemCopy;
     class FilledPolygonItemCopy;
-	class TextDisplayerParameters;
-	class TextInfo;
-	class SvgCreator;
+    class TextDisplayerParameters;
+    class TextInfo;
+    class SvgCreator;
 
     class TextDisplayer
     {
     private:
-		static std::mutex _mutex;
-		static int _counter;
-		static std::map<std::string, int *> _clientActiveDisplayerMap;
-		int _id;
-		int *_clientActiveDisplayerId;
-		bool isDisplayerActive(void);
+        static std::mutex _mutex;
+        static int _counter;
+        static std::map<std::string, int *> _clientActiveDisplayerMap;
+        int _id;
+        int *_clientActiveDisplayerId;
+        bool isDisplayerActive(void);
 
-		static std::mutex *_coutMutexPtr;
+        static std::mutex *_coutMutexPtr;
 
         const TextDisplayerParameters * const _parameters;
-		const std::string _socketId;
+        const std::string _socketId;
         const char * const _requestId;
 
         const double _width;
@@ -60,11 +60,11 @@ namespace map_server
 
     public:
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
-		static void clearClientMap(void);
+        static void clearClientMap(void);
 
         TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
             double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator, bool testMode);
-		~TextDisplayer();
+        ~TextDisplayer();
 
         void addItem(ItemCopy *item) { _itemVector.push_back(item); }
         bool start(void);

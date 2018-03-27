@@ -35,9 +35,9 @@ namespace map_server
         void addPointArray(std::stringstream& s, int resolutionIndex) const;
 
     public:
-		virtual ~MultipointsItem();
+        virtual ~MultipointsItem();
 
-		const PointVector *getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
-		void addPointVector(const mongo::OID& pointListId);
+        const PointVector *getPointVector(int resolutionIndex) const { return _pointVectorVector[resolutionIndex]; }
+        void addPointVector(const mongo::OID& pointListId);
     };
 }

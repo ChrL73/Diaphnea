@@ -19,7 +19,7 @@ int main()
     FT_Face face;
 
     //error = FT_New_Face(library, "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf", 0, &face);
-	error = FT_New_Face(library, "Arial.ttf", 0, &face);
+    error = FT_New_Face(library, "Arial.ttf", 0, &face);
 
     if (error == FT_Err_Unknown_File_Format)
     {

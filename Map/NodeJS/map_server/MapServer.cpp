@@ -29,23 +29,23 @@ namespace map_server
 
         std::thread deleteThread(&MapServer::cleanThreads, this);
         std::thread timeoutThread(&MapServer::checkTimeout, this, _softExit);
-		if (_softExit) timeoutThread.join();
+        if (_softExit) timeoutThread.join();
 
         inputLoop();
 
-		if (!_softExit) exit(0);
+        if (!_softExit) exit(0);
 
-		_threadSetMutex.lock();
-		_stopRequested = true;
-		_threadSetMutex.unlock();
+        _threadSetMutex.lock();
+        _stopRequested = true;
+        _threadSetMutex.unlock();
 
-		deleteThread.join();
+        deleteThread.join();
 
-		int result = MapData::destroyInstance();
+        int result = MapData::destroyInstance();
 
-		TextDisplayer::clearClientMap();
+        TextDisplayer::clearClientMap();
 
-		return result;
+        return result;
     }
 
     void MapServer::inputLoop(void)
@@ -103,11 +103,11 @@ namespace map_server
 
             threadsToDelete.clear();
 
-			if (_stopRequested && _threadSet.empty())
-			{
-				_threadSetMutex.unlock();
-				break;
-			}
+            if (_stopRequested && _threadSet.empty())
+            {
+                _threadSetMutex.unlock();
+                break;
+            }
 
             _threadSetMutex.unlock();
         }
@@ -125,51 +125,51 @@ namespace map_server
             if (time(0) - _timeoutReference > _timeoutInSeconds)
             {
                 _timeMutex.unlock();
-				exit(0);
+                exit(0);
             }
             _timeMutex.unlock();
         }
     }
 
-	void MapServer::processRequest(std::string requestString)
-	{
-		try
-		{
-			std::vector<const char *> tokenVector;
-			int i, n = requestString.size() + 1;
-			char *req = new char[n];
+    void MapServer::processRequest(std::string requestString)
+    {
+        try
+        {
+            std::vector<const char *> tokenVector;
+            int i, n = requestString.size() + 1;
+            char *req = new char[n];
 
 #if _WIN32
-			strcpy_s(req, n, requestString.c_str());
+            strcpy_s(req, n, requestString.c_str());
 #else
-			strcpy(req, requestString.c_str());
+            strcpy(req, requestString.c_str());
 #endif
 
-			char *tokenStart = req;
-			for (i = 0; i < n; ++i)
-			{
-				if (req[i] == ' ' || req[i] == 0)
-				{
-					req[i] = 0;
-					if (i != 0 && req[i - 1] != 0) tokenVector.push_back(tokenStart);
-					tokenStart = req + i + 1;
-				}
-			}
+            char *tokenStart = req;
+            for (i = 0; i < n; ++i)
+            {
+                if (req[i] == ' ' || req[i] == 0)
+                {
+                    req[i] = 0;
+                    if (i != 0 && req[i - 1] != 0) tokenVector.push_back(tokenStart);
+                    tokenStart = req + i + 1;
+                }
+            }
 
-			Request *request = Request::createRequest(tokenVector);
+            Request *request = Request::createRequest(tokenVector);
 
-			if (request != 0) request->execute();
+            if (request != 0) request->execute();
 
-			delete[] req;
-			delete request;
-		}
-		catch (...)
-		{
-			_coutMutex.lock();
-			std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::UNHANDLED_EXCEPTION
-				<< ",\"message\":\"Unhandled exception while processing this request: " << requestString << "\"}" << std::endl;
-			_coutMutex.unlock();
-			exit(0);
-		}
-	}
+            delete[] req;
+            delete request;
+        }
+        catch (...)
+        {
+            _coutMutex.lock();
+            std::cout << "0 -1 " << map_server::ERROR_ << " {\"error\":" << map_server::UNHANDLED_EXCEPTION
+                << ",\"message\":\"Unhandled exception while processing this request: " << requestString << "\"}" << std::endl;
+            _coutMutex.unlock();
+            exit(0);
+        }
+    }
 }

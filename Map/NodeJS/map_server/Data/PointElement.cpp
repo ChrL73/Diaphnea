@@ -5,11 +5,11 @@
 
 namespace map_server
 {
-	void PointElement::load(void)
+    void PointElement::load(void)
     {
         _loaded = true;
 
-		std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".point_elements", MONGO_QUERY("_id" << _mongoId), 1);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _iMap->getConnectionPtr()->query(_dbName + ".point_elements", MONGO_QUERY("_id" << _mongoId), 1);
         if (cursor->more())
         {
             mongo::BSONObj dbElement = cursor->next();
@@ -75,7 +75,7 @@ namespace map_server
 
             _item = new PointItem(id, point);
             _item->setCurrentLooks(pointLookVector);
-			_item->setCurrentTextLooks(textLookVector);
+            _item->setCurrentTextLooks(textLookVector);
             _item->setNameMap(&_nameMap);
             _item->setElementIdForText(_id);
             _item->setImportance(_importance);

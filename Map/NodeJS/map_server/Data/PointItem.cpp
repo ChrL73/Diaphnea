@@ -17,8 +17,8 @@ namespace map_server
         _infoJsonVector[0] = s.str();
     }
 
-	PointItem::~PointItem()
-	{
-		delete _point;
-	}
+    PointItem::~PointItem()
+    {
+        delete _point;
+    }
 }

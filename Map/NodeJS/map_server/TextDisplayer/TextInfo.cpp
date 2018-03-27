@@ -14,12 +14,12 @@ namespace map_server
         _lineVector(lineVector), _lookId(textLook->getId()), _zIndex(textLook->getZIndex()), _alpha(textLook->getAlpha()), _red(textLook->getRed()),
         _green(textLook->getGreen()), _blue(textLook->getBlue()), _hexColor(textLook->getHexColor()), _fontSize(fontSize), _width(0.0), _ok(false)
     {
-		const double minFontSize = 5.0;
-		const double maxFontSize = 100.0;
-		if (_fontSize < minFontSize || _fontSize > maxFontSize) return;
+        const double minFontSize = 5.0;
+        const double maxFontSize = 100.0;
+        if (_fontSize < minFontSize || _fontSize > maxFontSize) return;
 
-		int error = FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(_fontSize));
-		if (error) return;
+        int error = FT_Set_Pixel_Sizes(face, 0, static_cast<FT_UInt>(_fontSize));
+        if (error) return;
 
         double firstYMaxMax = 0.0, lastYMinMin = 0.0;
         int k, lineCount = _lineVector.size();
@@ -79,19 +79,19 @@ namespace map_server
 
             if (k == 0) firstYMaxMax = yMaxMax;
             if (k == lineCount - 1) lastYMinMin = yMinMin;
-		}
+        }
 
         int lineDistance = face->size->metrics.height;
         _height = static_cast<double>(firstYMaxMax - lastYMinMin + (lineCount - 1) * lineDistance) / 64.0;
 
-		for (k = 0; k < lineCount; ++k)
+        for (k = 0; k < lineCount; ++k)
         {
             TextInfoLine *line = _lineVector[k];
             line->setXOffset(line->getXOffset() - 0.5 * (_width - line->getWidth()));
             line->setYOffset(_lineVector[lineCount - 1]->getYOffset() - static_cast<double>((lineCount - 1 - k) * lineDistance) / 64.0);
         }
 
-		_ok = true;
+        _ok = true;
     }
 
     TextInfo::~TextInfo()

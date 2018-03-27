@@ -5,7 +5,7 @@
 
 namespace map_server
 {
-	class Map;
+    class Map;
 
     class Request
     {
@@ -15,7 +15,7 @@ namespace map_server
         static std::mutex *_coutMutexPtr;
         const char * const _socketId;
         const char * const _requestId;
-		void flushErrors(Map *map);
+        void flushErrors(Map *map);
 
     public:
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }

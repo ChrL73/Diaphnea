@@ -9,8 +9,8 @@ namespace map_server
     private:
         const std::string _text;
         double _width;
-		double _xOffset;
-		double _yOffset;
+        double _xOffset;
+        double _yOffset;
 
     public:
         TextInfoLine(const std::string& text) : _text(text) {}
@@ -20,9 +20,9 @@ namespace map_server
         void setYOffset(double yOffset) { _yOffset = yOffset; }
 
         const std::string& getText(void) const { return _text; }
-		double getWidth(void) const { return _width; }
-		double getXOffset(void) const { return _xOffset; }
-		double getYOffset(void) const { return _yOffset; }
+        double getWidth(void) const { return _width; }
+        double getXOffset(void) const { return _xOffset; }
+        double getYOffset(void) const { return _yOffset; }
 
     };
 }

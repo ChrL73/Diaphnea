@@ -24,7 +24,7 @@ namespace map_server
 
         IMap * const _iMap;
         bool _loaded;
-		bool _error;
+        bool _error;
         std::map<std::string, std::vector<ElementName *> > _nameMap;
         std::string _infoJson;
 
@@ -36,7 +36,7 @@ namespace map_server
         virtual ~MapElement();
 
         bool isLoaded(void) const { return _loaded; }
-		bool error(void) const { return _error; }
+        bool error(void) const { return _error; }
         virtual void load(void) = 0;
 
         const Category *getCategory(void) const { return _category; }

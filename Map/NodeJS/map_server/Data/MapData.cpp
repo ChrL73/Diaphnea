@@ -71,7 +71,7 @@ namespace map_server
 
         _mapIdsJson = "[\"";
         mongo::BSONObj projection = BSON("map" << 1);
-		std::unique_ptr<mongo::DBClientCursor> cursor = _connection.query(_dbName + ".maps", mongo::BSONObj(), 0, 0, &projection);
+        std::unique_ptr<mongo::DBClientCursor> cursor = _connection.query(_dbName + ".maps", mongo::BSONObj(), 0, 0, &projection);
         while (cursor->more())
         {
             mongo::BSONObj dbMap = cursor->next();
@@ -125,7 +125,7 @@ namespace map_server
 
         Map *map = (*mapIt).second;
         if (map->error()) return 0;
-		if (!map->isLoaded()) map->load(); // if (map->error()), return 'map' and not '0' so that 'flushErrors(map)' can be called
+        if (!map->isLoaded()) map->load(); // if (map->error()), return 'map' and not '0' so that 'flushErrors(map)' can be called
         return map;
     }
 }

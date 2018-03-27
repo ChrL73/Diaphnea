@@ -172,6 +172,7 @@
     <ClCompile Include="..\..\NodeJS\map_server\Data\PointElement.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PointItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PointLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PointVector.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonElement.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\Data\PolygonLook.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server\MapServer.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="..\..\NodeJS\map_server\Data\PointElement.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PointItem.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PointLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PointVector.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonElement.h" />
     <ClInclude Include="..\..\NodeJS\map_server\Data\PolygonLook.h" />
     <ClInclude Include="..\..\NodeJS\map_server\ErrorEnum.h" />

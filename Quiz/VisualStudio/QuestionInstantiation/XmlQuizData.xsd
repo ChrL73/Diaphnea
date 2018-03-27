@@ -288,8 +288,7 @@
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeQuestionCategoryList">
     <xsd:sequence>
-      <xsd:element name="attributeQuestionCategory" type="XmlAttributeQuestionCategory" minOccurs="0"
-				maxOccurs="unbounded" />
+      <xsd:element name="attributeQuestionCategory" type="XmlAttributeQuestionCategory" minOccurs="0" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeQuestionCategory">
@@ -330,8 +329,7 @@
   </xsd:complexType>
   <xsd:complexType name="XmlRelationNQuestionCategoryList">
     <xsd:sequence>
-      <xsd:element name="relationNQuestionCategory" type="XmlRelationNQuestionCategory" maxOccurs="unbounded"
-				minOccurs="0" />
+      <xsd:element name="relationNQuestionCategory" type="XmlRelationNQuestionCategory" maxOccurs="unbounded" minOccurs="0" />
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="XmlRelationNQuestionCategory">

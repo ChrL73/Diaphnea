@@ -11,18 +11,18 @@ namespace CheckSourceFiles
     {
         static void Main(string[] args)
         {
-            if (args.Length < 1)
+            if (args.Length < 2)
             {
-                Console.WriteLine("usage: CheckSourceFile.exe path");
+                Console.WriteLine("usage: CheckSourceFile.exe path searchPattern");
                 return;
             }
 
             Console.WriteLine(args[0]);
-            string[] files = Directory.GetFiles(args[0], "*.cs", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(args[0], args[1], SearchOption.AllDirectories);
 
             foreach (string filePath in files)
             {
-                if (!filePath.Contains("TemporaryGeneratedFile") && !filePath.Contains("XmlQuizData.cs"))
+                if (!filePath.Contains("TemporaryGeneratedFile") && !filePath.Contains("XmlQuizData.cs") && !filePath.Contains("node_modules"))
                 {
                     Console.WriteLine(filePath);
 

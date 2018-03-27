@@ -192,6 +192,9 @@
     <ClCompile Include="..\..\NodeJS\map_server\Data\Category.cpp">
       <Filter>Fichiers sources\Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server\Data\PointVector.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server\MapServer.h">
@@ -354,6 +357,9 @@
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server\Data\Category.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server\Data\PointVector.h">
       <Filter>Fichiers d%27en-tête\Data</Filter>
     </ClInclude>
   </ItemGroup>

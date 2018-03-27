@@ -1,5 +1,9 @@
 #pragma once
 
+#if _WIN32
+#include <WinSock2.h>
+#endif
+
 #ifdef __GNUC__
 // Avoid this warning: ‘template<class> class std::auto_ptr’ is deprecated
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"

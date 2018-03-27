@@ -103,26 +103,26 @@ namespace QuestionInstantiation
 
                 AttributeValue attributeValue = new AttributeValue(valueText, commentText/*, xmlAttributeType*/);
                 
-		        if (_attributeDictionary.ContainsKey(xmlAttributeType))
-		        {
-			        MessageLogger.addMessage(XmlLogLevelEnum.ERROR,
+                if (_attributeDictionary.ContainsKey(xmlAttributeType))
+                {
+                    MessageLogger.addMessage(XmlLogLevelEnum.ERROR,
                         String.Format("Error in {0}: Attribute {1} is defined several times for element {2}",
                         quizData.DataFileName, xmlAttributeType.id, _xmlElement.id));
-			        return -1;
-		        }
+                    return -1;
+                }
 
                 _attributeDictionary.Add(xmlAttributeType, attributeValue);
 
-		        if (xmlAttributeType.canBeQuestion)
-		        {
+                if (xmlAttributeType.canBeQuestion)
+                {
                     Text attributeKey = new Text();
                     foreach (string language in attributeValue.Value.LanguageList)
                     {
                         attributeKey.setText(language, String.Format("{0}+{1}+{2}", _type.id, xmlAttributeType.id, attributeValue.Value.getText(language)));
                     }
                     _attributeKeyList.Add(attributeKey);
-		        }
-	        }
+                }
+            }
 
             return 0;
         }
@@ -133,7 +133,7 @@ namespace QuestionInstantiation
             NumericalAttributeValue latitude = null;
 
             foreach (XmlNumericalAttribute xmlNumericalAttribute in _xmlElement.numericalAttributeList)
-	        {
+            {
                 XmlNumericalAttributeType xmlNumericalAttributeType = quizData.getXmlNumericalAttributeType(xmlNumericalAttribute.type);
                 NumericalAttributeValue numericalAttributeValue = new NumericalAttributeValue(xmlNumericalAttribute.value/*, xmlNumericalAttributeType*/);
                 
@@ -159,15 +159,15 @@ namespace QuestionInstantiation
         internal int addRelations(QuizData quizData, Dictionary<string, Element> elementDictionary)
         {
             foreach (XmlRelation xmlRelation in _xmlElement.relationList)
-	        {
+            {
                 // If the linked element is in the current level...
                 if (elementDictionary.ContainsKey(xmlRelation.linkedElement))
-		        {
+                {
                     Element linkedElement = elementDictionary[xmlRelation.linkedElement];
                     RelationType relationType = quizData.getRelationType(xmlRelation.type);
 
-			        if (_type != relationType.StartType || linkedElement._type != relationType.EndType)
-			        {
+                    if (_type != relationType.StartType || linkedElement._type != relationType.EndType)
+                    {
                         if (_type != relationType.StartType)
                         {
                             MessageLogger.addMessage(XmlLogLevelEnum.ERROR, 
@@ -182,25 +182,25 @@ namespace QuestionInstantiation
                         }
 
                         return -1;
-			        }
+                    }
 
-			        if (relationType.Nature == RelationNatureEnum.RELATION_11)
-			        {
+                    if (relationType.Nature == RelationNatureEnum.RELATION_11)
+                    {
                         if (addRelation1(quizData, linkedElement, relationType) != 0) return -1;
                         if (linkedElement.addRelation1(quizData, this, relationType.ReciprocalType) != 0) return -1;
-			        }
-			        else if (relationType.Nature == RelationNatureEnum.RELATION_1N)
-			        {
+                    }
+                    else if (relationType.Nature == RelationNatureEnum.RELATION_1N)
+                    {
                         if (addRelationN(linkedElement, relationType) != 0) return -1;
-				        if (linkedElement.addRelation1 (quizData, this, relationType.ReciprocalType) != 0) return -1;
-			        }
-			        else
-			        {
-				        if (addRelationN (linkedElement, relationType) != 0) return -1;
-				        if (linkedElement.addRelationN (this, relationType.ReciprocalType) != 0) return -1;
-			        }
-		        }
-	        }
+                        if (linkedElement.addRelation1 (quizData, this, relationType.ReciprocalType) != 0) return -1;
+                    }
+                    else
+                    {
+                        if (addRelationN (linkedElement, relationType) != 0) return -1;
+                        if (linkedElement.addRelationN (this, relationType.ReciprocalType) != 0) return -1;
+                    }
+                }
+            }
 
             return 0;
         }

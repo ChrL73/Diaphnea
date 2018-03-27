@@ -55,31 +55,31 @@ namespace QuestionInstantiation
                 }
             }
 
-	        int i, n = _elementList.Count;
-	        int minIndex = n - 1;
-	        bool minIndexExists = false;
-	        for (i = n - 2; i >= 0; --i)
-	        {
-		        int j;
-		        for (j = i + 1; j <= minIndex; j++)
-		        {
+            int i, n = _elementList.Count;
+            int minIndex = n - 1;
+            bool minIndexExists = false;
+            for (i = n - 2; i >= 0; --i)
+            {
+                int j;
+                for (j = i + 1; j <= minIndex; j++)
+                {
                     double d = _elementList[i].AttributeValue - _elementList[j].AttributeValue;
-			        if (d < 0) d = -d;
+                    if (d < 0) d = -d;
                     if (d > _numericalAttributeType.ambiguityThreshold)
-			        {
-				        minIndex = j;
-				        minIndexExists = true;
-				        break;
-			        }
-		        }
-		        if (minIndexExists)
-		        {
-			        _elementList[i].MinAnswerIndex = minIndex;
-			        if (minIndex + choiceCount <= n + 1) ++_maxIndex;
-		        }
-	        }
+                    {
+                        minIndex = j;
+                        minIndexExists = true;
+                        break;
+                    }
+                }
+                if (minIndexExists)
+                {
+                    _elementList[i].MinAnswerIndex = minIndex;
+                    if (minIndex + choiceCount <= n + 1) ++_maxIndex;
+                }
+            }
 
-	        if (_maxIndex < 0) return -1;
+            if (_maxIndex < 0) return -1;
             return 0;
         }
 

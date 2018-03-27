@@ -30,23 +30,23 @@ namespace QuestionInstantiation
         {
             Text choiceText = choice.AttributeValue.Value;
             if (!_choiceDictionary.ContainsKey(choiceText))
-	        {
+            {
                 _choiceDictionary.Add(choiceText, choice);
                 _choiceList.Add(choice);
-	        }
-	        else
-	        {
+            }
+            else
+            {
                 Choice choiceToDelete = _choiceDictionary[choiceText];
                 int i, n = _choiceList.Count;
-		        for (i = 0; i < n; ++i)
-		        {
+                for (i = 0; i < n; ++i)
+                {
                     if (_choiceList[i] == choiceToDelete)
-			        {
+                    {
                         _choiceList.RemoveAt(i);
-				        break;
-			        }
-		        }
-	        }
+                        break;
+                    }
+                }
+            }
         }
 
         internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId, QuizData quizData)

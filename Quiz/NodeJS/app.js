@@ -181,7 +181,13 @@ io.on('connection', function(socket)
          time: texts.time,
          version: texts.version,
          sourceCode: texts.sourceCode,
-         issues: texts.issues
+         issues: texts.issues,
+         warning: texts.warning,
+         alphaWarningLine1: texts.alphaWarningLine1,
+         alphaWarningLine1: texts.alphaWarningLine2,
+         alphaWarningLine1: texts.alphaWarningLine3,
+         alphaWarningLine1: texts.alphaWarningLine4,
+         alphaWarningLine1: texts.alphaWarningLine5
       };
       
       return t;

@@ -248,6 +248,9 @@ export class Home extends React.Component
                         {this.state.version}
                      </div>
                      <div>
+                        <a onClick={() => this.alphaWarning()} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
+                     </div>
+                     <div>
                         {this.state.texts.sourceCode}:
                         <span> </span>
                         <a target="_blank" href={this.state.sourceUrl}>{this.state.sourceUrl}</a>
@@ -379,6 +382,11 @@ export class Home extends React.Component
    {
       this.setState({ scoreTab: key }, () => this.resize1());
       this.props.socket.emit('scoreTab', { n: key });
+   }
+   
+   alphaWarning()
+   {
+      console.log('alphaWarning');
    }
    
    // 2- Server message handlers

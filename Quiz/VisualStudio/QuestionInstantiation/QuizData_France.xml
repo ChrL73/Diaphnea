@@ -8183,7 +8183,7 @@
     </element>
     <element id="el_VilleneuveSurLot" type="et_Ville" minLevel="1" mapId="e_VilleneuveSurLot">
       <elementName>
-        <name language="fr" text="Villeneuve-sur-Lot-sur-Lot"/>
+        <name language="fr" text="Villeneuve-sur-Lot"/>
         <name language="en" text="Cahors"/>
       </elementName>
       <attributeList>

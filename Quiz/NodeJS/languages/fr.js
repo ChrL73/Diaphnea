@@ -16,6 +16,7 @@ module.exports =
    areYouSureStopGame: "La partie n'est pas terminée. Êtes-vous sûr de vouloir arrêter ?",
    yes: 'Oui',
    no: 'Non',
+   close: 'Fermer',
    previous: 'Précédent',
    next: 'Suivant',
    submit: 'Valider',
@@ -46,5 +47,6 @@ module.exports =
    alphaWarningLine2: 'Des fonctionnalités importantes ne sont pas encore présentes dans l’application.',
    alphaWarningLine3: 'L’application est susceptible de contenir un nombre important de bugs.',
    alphaWarningLine4: 'L’application peut connaitre des problèmes de performance (temps de réponse longs à certaines actions de l’utilisateur).',
-   alphaWarningLine5: 'La traduction de l’application en anglais est approximative.'
+   alphaWarningLine5: 'La traduction de l’application en anglais est approximative.',
+   alphaWarningLine6: 'Pour signaler des bugs ou des erreurs, proposer des améliorations ou de nouvelles fonctionnalités :'
 };

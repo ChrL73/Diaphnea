@@ -10,6 +10,8 @@ var favicon = require('serve-favicon');
 var childProcess = require('child_process');
 var shortId = require('shortid');
 
+console.log('Test: ' + process.env.HEROKU_RELEASE_VERSION);
+
 var mongoose = require('mongoose');
 var db = mongoose.connect(config.dbUrl);
 
@@ -184,10 +186,12 @@ io.on('connection', function(socket)
          issues: texts.issues,
          warning: texts.warning,
          alphaWarningLine1: texts.alphaWarningLine1,
-         alphaWarningLine1: texts.alphaWarningLine2,
-         alphaWarningLine1: texts.alphaWarningLine3,
-         alphaWarningLine1: texts.alphaWarningLine4,
-         alphaWarningLine1: texts.alphaWarningLine5
+         alphaWarningLine2: texts.alphaWarningLine2,
+         alphaWarningLine3: texts.alphaWarningLine3,
+         alphaWarningLine4: texts.alphaWarningLine4,
+         alphaWarningLine5: texts.alphaWarningLine5,
+         alphaWarningLine6: texts.alphaWarningLine6,
+         close: texts.close
       };
       
       return t;

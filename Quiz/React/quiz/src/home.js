@@ -22,6 +22,7 @@ export class Home extends React.Component
          pass: '',
          showModal1: false,
          showModal2: false,
+         showModal3: false,
          navBarWaitDisplay: 'none',
          questionnaireWaitDisplay: 'none',
          questionnaireLanguageWaitDisplay: 'none',
@@ -163,6 +164,28 @@ export class Home extends React.Component
                         <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
                      </Modal.Body>
                   </Modal>
+                  <Modal show={this.state.showModal3} onHide={() => this.setState({ showModal3: false })}>               
+                     <Modal.Body>
+                        <p>{this.state.texts.alphaWarningLine1}</p>
+                        <ul>
+                           <li>{this.state.texts.alphaWarningLine2}</li>
+                           <li>{this.state.texts.alphaWarningLine3}</li>
+                           <li>{this.state.texts.alphaWarningLine4}</li>
+                           <li>{this.state.texts.alphaWarningLine5}</li>
+                        </ul>
+                        <p>
+                           {this.state.texts.alphaWarningLine6}
+                           <span> </span>
+                           <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
+                        </p>
+                        
+                     </Modal.Body>
+                     <Modal.Footer>
+                        <div className="row text-center">
+                           <Button className="btn btn-primary input-sm" onClick={() => { this.setState({ showModal3: false }); }}>{this.state.texts.close}</Button>
+                        </div>
+                     </Modal.Footer>
+                  </Modal>
                   <form>
                      <div className="row">
                         <div className="col-sm-4 col-sm-offset-4">
@@ -248,7 +271,7 @@ export class Home extends React.Component
                         {this.state.version}
                      </div>
                      <div>
-                        <a onClick={() => this.alphaWarning()} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
+                        <a onClick={() => this.setState({ showModal3: 'true' })} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
                      </div>
                      <div>
                         {this.state.texts.sourceCode}:
@@ -382,11 +405,6 @@ export class Home extends React.Component
    {
       this.setState({ scoreTab: key }, () => this.resize1());
       this.props.socket.emit('scoreTab', { n: key });
-   }
-   
-   alphaWarning()
-   {
-      console.log('alphaWarning');
    }
    
    // 2- Server message handlers

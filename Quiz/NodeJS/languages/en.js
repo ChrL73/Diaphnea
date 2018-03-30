@@ -16,6 +16,7 @@ module.exports =
    areYouSureStopGame: 'The game is not over. Are-you sure you want to stop?',
    yes: 'Yes',
    no: 'No',
+   close: 'Close',
    previous: 'Previous',
    next: 'Next',
    submit: 'Submit',
@@ -46,5 +47,6 @@ module.exports =
    alphaWarningLine2: 'Important features are not yet present in the application.',
    alphaWarningLine3: 'The application is likely to contain a large number of bugs.',
    alphaWarningLine4: 'The application may experience performance problems (long response times to certain user actions).',
-   alphaWarningLine5: 'The English translation of the application is rough.'
+   alphaWarningLine5: 'The English translation of the application is rough.',
+   alphaWarningLine6: 'To report bugs or errors, to suggest improvements or new features:'
 };

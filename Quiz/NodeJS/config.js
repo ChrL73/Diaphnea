@@ -18,7 +18,11 @@ config.httpsUrl = process.env.HTTPS_URL;
 //config.frontEndIndex = 'quiz.ejs'; // Old front-end, removed from source control
 config.frontEndIndex = 'reactIndex.ejs'; // React front-end
 
-config.version = 'Alpha1.0';
+config.version = 'Alpha1';
+
+var herokuVersion = process.env.HEROKU_RELEASE_VERSION;
+if (herokuVersion) config.version += '.build' + herokuVersion.substr(1);
+
 config.sourceUrl = 'https://github.com/ChrL73/Diaphnea';
 config.issueUrl = 'https://github.com/ChrL73/Diaphnea/issues';
 

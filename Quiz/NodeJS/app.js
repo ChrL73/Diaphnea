@@ -10,8 +10,6 @@ var favicon = require('serve-favicon');
 var childProcess = require('child_process');
 var shortId = require('shortid');
 
-console.log('Test: ' + process.env.HEROKU_RELEASE_VERSION);
-
 var mongoose = require('mongoose');
 var db = mongoose.connect(config.dbUrl);
 

@@ -13,10 +13,47 @@ class UserInterface extends React.Component
    {
       super(props);
       
-      this.socket = window.io.connect('albertine:3002');
-      this.socket.on('displayPage', (data) => this.setState({ page: data.page }));
-      
       this.state = { page: 'none' };
+   }
+   
+   componentDidMount()
+   {
+      this.socket = window.io.connect('albertine:3002');
+      
+      this.socket.on('displayPage', (data) =>
+      {
+         this.setState({ page: data.page });
+         this.home.handleDisplayPage(data);
+         this.game.handleDisplayPage(data);
+         this.signUp.handleDisplayPage(data);
+      });
+      
+      this.socket.on('unknownName', () =>
+      {
+         this.home.handleUnknownName();
+         this.signUp.handleUnknownName();
+      });
+      
+      this.socket.on('indexError', () =>
+      {
+         this.home.handleServerError();
+         this.signUp.handleServerError();
+      });
+      
+      this.socket.on('updateIndex', (texts) => this.home.handleUpdateSiteLanguage(texts));
+      this.socket.on('updateSelects', (data) => this.home.handleUpdateSelects(data));
+      this.socket.on('tables', (tableData) => this.home.handleUpdateTable(tableData));  
+      
+      this.socket.on('updateQuestions', (data) => this.game.handleUpdateQuestions(data));
+      this.socket.on('time', (time) => this.game.initTime(time, Date.now())); 
+      
+      this.socket.on('updateSignUp', (texts) => this.signUp.handleUpdateSiteLanguage(texts));
+      this.socket.on('signUpError', (data) => this.signUp.handleServerError(data));
+   }
+   
+   emit(message, data)
+   {
+      if (this.socket) this.socket.emit(message, data);
    }
    
    getCookieExpires(days)
@@ -31,9 +68,9 @@ class UserInterface extends React.Component
       return (
          <div className="userInterface">
             <img src={waitGif} className="waitImg" alt="Waiting for server..." style={{display: this.state.page === 'none' ? 'inline' : 'none'}}/>
-            <Home socket={this.socket} getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <SignUp socket={this.socket} getCookieExpires={(days) => this.getCookieExpires(days)}/>
-            <Game socket={this.socket} />
+            <Home ref={(x) => { this.home = x; }} getCookieExpires={(days) => this.getCookieExpires(days)} emit={(message, data) => this.emit(message, data)}/>
+            <SignUp ref={(x) => { this.signUp = x; }} getCookieExpires={(days) => this.getCookieExpires(days)} emit={(message, data) => this.emit(message, data)}/>
+            <Game ref={(x) => { this.game = x; }} emit={(message, data) => this.emit(message, data)}/>
          </div>);
    }
 }

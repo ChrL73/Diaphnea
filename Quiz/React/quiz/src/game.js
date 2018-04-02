@@ -9,10 +9,6 @@ export class Game extends React.Component
    {
       super(props);
       
-      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
-      props.socket.on('updateQuestions', (data) => this.handleUpdateQuestions(data));
-      props.socket.on('time', (time) => this.initTime(time, Date.now()));
-      
       this.stateReset =
       {
          showModal: false,
@@ -154,7 +150,7 @@ export class Game extends React.Component
    stopGame()
    {
       this.setState({ stopGameWaitDisplay: 'inline' });
-      this.props.socket.emit('stopGame', {});
+      this.props.emit('stopGame', {});
    }
    
    handleCheckBoxChange(target)
@@ -191,7 +187,7 @@ export class Game extends React.Component
       {
          const newDisplayedQuestion = oldDisplayedQuestion - 1;
          this.setState({ displayedQuestion: newDisplayedQuestion });
-         this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
+         this.props.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
          
          this.map.update(newDisplayedQuestion, oldDisplayedQuestion);
       }
@@ -206,7 +202,7 @@ export class Game extends React.Component
       {
          const newDisplayedQuestion = oldDisplayedQuestion + 1;
          this.setState({ displayedQuestion: newDisplayedQuestion });
-         this.props.socket.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
+         this.props.emit('changeQuestion', { quizId: this.state.quizId, displayedQuestion: newDisplayedQuestion });
          
          this.map.update(newDisplayedQuestion, oldDisplayedQuestion);
       }
@@ -242,7 +238,7 @@ export class Game extends React.Component
          else data.checks.push(question.selection === '_' + iChoice);
       });
 
-      this.props.socket.emit('submit', data); 
+      this.props.emit('submit', data); 
    }
    
    windowResize()
@@ -272,6 +268,7 @@ export class Game extends React.Component
       
       let state = {};
       Object.getOwnPropertyNames(this.stateReset).forEach((property) => { state[property] = this.stateReset[property]; });
+      state.questionWaitVisible = {};
       
       if (data.page === 'game')
       {
@@ -344,7 +341,7 @@ export class Game extends React.Component
             let displayedTime = Math.floor(0.001 * t);
             if (lastDisplayedTime && (displayedTime < lastDisplayedTime || displayedTime > lastDisplayedTime + 2))
             {
-               this.props.socket.emit('timeRequest');
+               this.props.emit('timeRequest');
                clearInterval(this.timeout);
                this.setState({ timeWaitDisplay: 'inline' });
             }

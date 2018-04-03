@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ProximityCriterionTypeEnum.h"
 #include "Point.h"
 
 #include <string>

@@ -80,6 +80,8 @@
 		<Unit filename="MultipleAnswerCategory.h" />
 		<Unit filename="MultipleAnswerQuestion.cpp" />
 		<Unit filename="MultipleAnswerQuestion.h" />
+		<Unit filename="Point.cpp" />
+		<Unit filename="Point.h" />
 		<Unit filename="ProximityCriterionTypeEnum.h" />
 		<Unit filename="QuestionMultiplicityEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />

@@ -47,3 +47,4 @@ MongoDB.*.dll
 /Quiz/NodeJS/views/reactIndex.ejs
 /Quiz/NodeJS/views/quiz.ejs
 *.userprefs
+*UserPrefs.xml

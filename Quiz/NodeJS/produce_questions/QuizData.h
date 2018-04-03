@@ -57,6 +57,9 @@ namespace produce_questions
         std::map<std::pair<std::string, int>, const RelationOrderQuestion *> _relationOrderQuestionMap;
         std::map<std::pair<std::string, int>, const RelationOrderChoice *> _relationOrderChoiceMap;
 
+        const MapParameters *getMapParameters(mongo::BSONObj dbCategory);
+        const MapSubParameters *getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName);
+
     public:
         static QuizData *instance(const std::string& dbHost = "", const std::string& dbName = "", const std::string& dbUser = "", const std::string& dbPassword = "");
         static int destroyInstance(void);
@@ -70,7 +73,5 @@ namespace produce_questions
         const AttributeOrderChoice *getAttributeOrderChoice(const std::string& choiceListId, int index);
         const RelationOrderQuestion *getRelationOrderQuestion(const std::string& questionListId, int index);
         const RelationOrderChoice *getRelationOrderChoice(const std::string& choiceListId, int index);
-        const MapParameters *getMapParameters(mongo::BSONObj dbCategory);
-        const MapSubParameters *getMapSubParameters(mongo::BSONObj dbMapParameters, const char *fieldName);
     };
 }

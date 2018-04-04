@@ -48,3 +48,4 @@ MongoDB.*.dll
 /Quiz/NodeJS/views/quiz.ejs
 *.userprefs
 *UserPrefs.xml
+*generated_code

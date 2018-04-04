@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{291CBFF8-3A21-456B-90EE-4EA770E198B8}</ProjectGuid>
+    <Compiler>
+      <Compiler ctype="GppCompiler" />
+    </Compiler>
+    <Language>CPP</Language>
+    <Target>Bin</Target>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <Externalconsole>true</Externalconsole>
+    <OutputName>produce_questions2</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <Externalconsole>true</Externalconsole>
+    <OutputName>produce_questions2</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <OptimizationLevel>3</OptimizationLevel>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\NodeJS\produce_questions2\Choice.cpp">
+      <Link>Choice.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\produce_questions.cpp">
+      <Link>produce_questions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\QuestionProducer.cpp">
+      <Link>QuestionProducer.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.cpp">
+      <Link>RandomNumberGenerator.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Choices.cpp">
+      <Link>generated_code\Choices.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\DoubleArrays.cpp">
+      <Link>generated_code\DoubleArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\IntArrays.cpp">
+      <Link>generated_code\IntArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Strings.cpp">
+      <Link>generated_code\Strings.cpp</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\NodeJS\produce_questions2\Choice.h">
+      <Link>Choice.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuestionProducer.h">
+      <Link>QuestionProducer.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuizData.h">
+      <Link>QuizData.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.h">
+      <Link>RandomNumberGenerator.h</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="generated_code\" />
+  </ItemGroup>
+</Project>

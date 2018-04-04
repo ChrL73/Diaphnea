@@ -93,5 +93,6 @@ namespace QuestionInstantiation
         }
 
         abstract internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId);
+        abstract internal int generateCode(List<CodeGenerator> codeGeneratorList);
     }
 }

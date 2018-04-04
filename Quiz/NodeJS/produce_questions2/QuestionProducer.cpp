@@ -24,9 +24,12 @@ namespace produce_questions
         std::cout << choice->getMapId() << std::endl;
         std::cout << choice->getDoubleCriterionValue() << std::endl;
         std::cout << choice->getStringCriterionValue() << std::endl;
-        std::cout << choice->getPointCriterionValue()[0] << " "
-                  << choice->getPointCriterionValue()[1] << " "
-                  << choice->getPointCriterionValue()[2] << std::endl;
+
+        const double *pointCriterionValue = choice->getPointCriterionValue();
+
+        std::cout << pointCriterionValue[0] << " "
+                  << pointCriterionValue[1] << " "
+                  << pointCriterionValue[2] << std::endl;
 
         choice = Choice::get(9);
 

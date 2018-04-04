@@ -225,5 +225,10 @@ namespace QuestionInstantiation
 
             return choiceListDocument;
         }
+
+        internal override int generateCode(List<CodeGenerator> codeGeneratorList)
+        {
+            return 0;
+        }
     }
 }

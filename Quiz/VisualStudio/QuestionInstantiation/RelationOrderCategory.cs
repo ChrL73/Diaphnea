@@ -69,5 +69,10 @@ namespace QuestionInstantiation
 
             return questionListDocument;
         }
+
+        internal override int generateCode(List<CodeGenerator> codeGeneratorList)
+        {
+            return 0;
+        }
     }
 }

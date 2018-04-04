@@ -98,6 +98,8 @@ public partial class XmlParameters {
     
     private string databaseNameField;
     
+    private string generationDirField;
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("language", IsNullable=false)]
     public XmlLanguage[] languageList {
@@ -194,6 +196,17 @@ public partial class XmlParameters {
         }
         set {
             this.databaseNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string generationDir {
+        get {
+            return this.generationDirField;
+        }
+        set {
+            this.generationDirField = value;
         }
     }
 }

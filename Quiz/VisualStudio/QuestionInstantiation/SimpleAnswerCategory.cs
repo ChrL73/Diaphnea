@@ -233,5 +233,18 @@ namespace QuestionInstantiation
 
             return choiceListDocument;
         }
+
+        internal override int generateCode(List<CodeGenerator> codeGeneratorList)
+        {
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            {
+                foreach (List<Choice> list in _choiceDictionary.Values)
+                {
+                    int offset = codeGenerator.addSimpleAnswerChoice(list, _proximityCriterion, QuestionNameInLog);
+                }
+            }
+
+            return 0;
+        }
     }
 }

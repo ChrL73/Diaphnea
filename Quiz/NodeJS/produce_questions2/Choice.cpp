@@ -19,7 +19,6 @@ namespace produce_questions
     const double *Choice::getPointCriterionValue(void) const
     {
         if (_pointCriterionValueCount == 0) return doubleArrays;
-        return doubleArrays + _pointCriterionValues + RandomNumberGenerator::getRandomInt(_pointCriterionValueCount);
+        return doubleArrays + _pointCriterionValues + 3 * RandomNumberGenerator::getRandomInt(_pointCriterionValueCount);
     }
 }
-

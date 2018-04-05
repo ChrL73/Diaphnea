@@ -16,6 +16,9 @@ namespace QuestionInstantiation
         private int _currentChoiceOffset;
         private int _currentIntArrayOffset;
         private int _currentDoubleArrayOffset;
+        private int _currentSimpleAnswerQuestionOffset;
+        private int _currentMapParametersOffset;
+        private int _currentMapSubParametersOffset;
 
         private readonly Dictionary<string, int> _stringDictionary = new Dictionary<string, int>();
 
@@ -27,6 +30,9 @@ namespace QuestionInstantiation
             _currentChoiceOffset = 0;
             _currentIntArrayOffset = 1;
             _currentDoubleArrayOffset = 3;
+            _currentSimpleAnswerQuestionOffset = 0;
+            _currentMapParametersOffset = 0;
+            _currentMapSubParametersOffset = 0;
 
             _stringDictionary.Add("", 0);
 
@@ -47,6 +53,18 @@ namespace QuestionInstantiation
             path = String.Format("{0}/Strings.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("Strings.cpp", "namespace produce_questions\n{\nunsigned char strings[] =\n{\n// 0: Empty string\n0");
+
+            path = String.Format("{0}/SimpleAnswerQuestions.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("SimpleAnswerQuestions.cpp", "namespace produce_questions\n{\nint simpleAnswerQuestions[] =\n{");
+
+            path = String.Format("{0}/MapParameterss.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("MapParameterss.cpp", "namespace produce_questions\n{\nint mapParameterss[] =\n{");
+
+            path = String.Format("{0}/MapSubParameterss.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("MapSubParameterss.cpp", "namespace produce_questions\n{\nint mapSubParameterss[] =\n{");
         }
 
         internal void close()
@@ -55,6 +73,9 @@ namespace QuestionInstantiation
             append("DoubleArrays.cpp", "\n};\n}\n");
             append("IntArrays.cpp", "\n};\n}\n");
             append("Strings.cpp", "\n};\n}\n");
+            append("SimpleAnswerQuestions.cpp", "\n};\n}\n");
+            append("MapParameterss.cpp", "\n};\n}\n");
+            append("MapSubParameterss.cpp", "\n};\n}\n");
         }
 
         private int getStringOffset(string str)
@@ -174,6 +195,95 @@ namespace QuestionInstantiation
             _currentChoiceOffset += 9;
 
             return offset;
+        }
+
+        internal int addSimpleAnswerQuestion(SimpleAnswerQuestion question, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
+        {
+            string questionText = question.QuestionText.getText(_languageId);
+            string answer = question.Choice.AttributeValue.Value.getText(_languageId);
+            string comment = question.Choice.AttributeValue.Comment.getText(_languageId);
+            if (comment == null) comment = "";
+
+            string questionMapId = "";
+            if (question.QuestionElement != null && question.QuestionElement.XmlElement.mapId != null)
+            {
+                questionMapId = question.QuestionElement.XmlElement.mapId.Substring(2);
+            }
+
+            string answerMapId = "";
+            if (question.Choice.Element.XmlElement.mapId != null) answerMapId = question.Choice.Element.XmlElement.mapId.Substring(2);
+
+            string excludedChoice = "";
+            if (question.ExcludedChoice != null) excludedChoice = question.ExcludedChoice.AttributeValue.Value.getText(_languageId);
+
+            int proximityCriterionType = 0; // NONE
+            double doubleCriterionValue = 0.0;
+            string stringCriterionValue = "";
+            double pointCriterionValueX = 0.0;
+            double pointCriterionValueY = 0.0;
+            double pointCriterionValueZ = 0.0;
+
+            if (question.ProximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY)
+            {
+                proximityCriterionType = 1; // STRING
+                stringCriterionValue = question.Choice.Element.XmlElement.sortKey;
+            }
+            else if (question.ProximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER)
+            {
+                proximityCriterionType = 2; // NUMBER
+                Double? d = question.Choice.AttributeValue.Value.getAsDouble();
+                if (d != null) doubleCriterionValue = d.Value;
+            }
+            else if (question.ProximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                proximityCriterionType = 3; // POINT_3D
+                GeoPoint p = question.Choice.Element.GeoPoint;
+                pointCriterionValueX = p.X;
+                pointCriterionValueY = p.Y;
+                pointCriterionValueZ = p.Z;
+            }
+
+            int offset = _currentSimpleAnswerQuestionOffset;
+
+            int questionTextOffset = getStringOffset(questionText);
+            int answerOffset = getStringOffset(answer);
+            int commentOffset = getStringOffset(comment);
+            int questionMapIdOffset = getStringOffset(questionMapId);
+            int answerMapIdOffset = getStringOffset(answerMapId);
+            int excludedChoiceOffset = getStringOffset(excludedChoice);
+            int stringCriterionValueOffset = getStringOffset(stringCriterionValue);
+
+            int[] doubleCriterionValueInt = doubleToIntArray(doubleCriterionValue);
+            int[] pointCriterionValueXInt = doubleToIntArray(pointCriterionValueX);
+            int[] pointCriterionValueYInt = doubleToIntArray(pointCriterionValueY);
+            int[] pointCriterionValueZInt = doubleToIntArray(pointCriterionValueZ);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18}",
+                offset == 0 ? "" : ",", _currentSimpleAnswerQuestionOffset, questionText, questionTextOffset, answerOffset, commentOffset,
+                questionMapIdOffset, answerMapIdOffset, excludedChoiceOffset, proximityCriterionType, stringCriterionValueOffset,
+                doubleCriterionValueInt[0], doubleCriterionValueInt[1], pointCriterionValueXInt[0], pointCriterionValueXInt[1],
+                pointCriterionValueYInt[0], pointCriterionValueYInt[1], pointCriterionValueZInt[0], pointCriterionValueZInt[1]);
+
+            append("SimpleAnswerQuestions.cpp", code);
+            _currentSimpleAnswerQuestionOffset += 16;
+
+            return offset;
+        }
+
+        internal int addMapParameters(Category category)
+        {
+            int offset = _currentMapParametersOffset;
+
+            return offset;
+        }
+
+        private int[] doubleToIntArray(double d)
+        {
+            byte[] b = BitConverter.GetBytes(d);
+            int[] r = new int[2];
+            r[0] = (((int)b[3]) << 24) | (((int)b[2]) << 16) | (((int)b[1]) << 8) | ((int)b[0]);
+            r[1] = (((int)b[7]) << 24) | (((int)b[6]) << 16) | (((int)b[5]) << 8) | ((int)b[4]);
+            return r;
         }
 
         private void append(string fileName, string text)

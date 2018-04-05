@@ -57,6 +57,24 @@
     <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Strings.cpp">
       <Link>generated_code\Strings.cpp</Link>
     </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerQuestion.cpp">
+      <Link>SimpleAnswerQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerQuestions.cpp">
+      <Link>generated_code\SimpleAnswerQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapParameters.cpp">
+      <Link>MapParameters.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapSubParameters.cpp">
+      <Link>MapSubParameters.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapParameterss.cpp">
+      <Link>generated_code\MapParameterss.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapSubParameterss.cpp">
+      <Link>generated_code\MapSubParameterss.cpp</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NodeJS\produce_questions2\Choice.h">
@@ -70,6 +88,18 @@
     </None>
     <None Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.h">
       <Link>RandomNumberGenerator.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\SimpleAnswerQuestion.h">
+      <Link>SimpleAnswerQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\ProximityCriterionTypeEnum.h">
+      <Link>ProximityCriterionTypeEnum.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapParameters.h">
+      <Link>MapParameters.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapSubParameters.h">
+      <Link>MapSubParameters.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

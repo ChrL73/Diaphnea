@@ -36,14 +36,24 @@
 		</Compiler>
 		<Unit filename="Choice.cpp" />
 		<Unit filename="Choice.h" />
+		<Unit filename="MapParameters.cpp" />
+		<Unit filename="MapParameters.h" />
+		<Unit filename="MapSubParameters.cpp" />
+		<Unit filename="MapSubParameters.h" />
+		<Unit filename="ProximityCriterionTypeEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />
 		<Unit filename="QuestionProducer.h" />
 		<Unit filename="QuizData.h" />
 		<Unit filename="RandomNumberGenerator.cpp" />
 		<Unit filename="RandomNumberGenerator.h" />
+		<Unit filename="SimpleAnswerQuestion.cpp" />
+		<Unit filename="SimpleAnswerQuestion.h" />
 		<Unit filename="generated_code/Choices.cpp" />
 		<Unit filename="generated_code/DoubleArrays.cpp" />
 		<Unit filename="generated_code/IntArrays.cpp" />
+		<Unit filename="generated_code/MapParameterss.cpp" />
+		<Unit filename="generated_code/MapSubParameterss.cpp" />
+		<Unit filename="generated_code/SimpleAnswerQuestions.cpp" />
 		<Unit filename="generated_code/Strings.cpp" />
 		<Unit filename="produce_questions.cpp" />
 		<Extensions>

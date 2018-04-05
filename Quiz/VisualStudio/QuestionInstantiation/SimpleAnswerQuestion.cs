@@ -24,6 +24,12 @@ namespace QuestionInstantiation
             _proximityCriterion = proximityCriterion;
         }
 
+        internal Text QuestionText { get { return _questionText; } }
+        internal Choice Choice { get { return _choice; } }
+        internal Element QuestionElement { get { return _questionElement; } }
+        internal Choice ExcludedChoice { get { return _excludedChoice; } }
+        internal XmlSimpleAnswerProximityCriterionEnum ProximityCriterion { get { return _proximityCriterion; } }
+
         internal BsonDocument getBsonDocument(QuizData quizData)
         {
             BsonDocument questionDocument = new BsonDocument()

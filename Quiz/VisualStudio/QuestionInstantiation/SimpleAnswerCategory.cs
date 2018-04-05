@@ -242,6 +242,13 @@ namespace QuestionInstantiation
                 {
                     int offset = codeGenerator.addSimpleAnswerChoice(list, _proximityCriterion, QuestionNameInLog);
                 }
+
+                foreach (SimpleAnswerQuestion question in _questionList)
+                {
+                    int offset = codeGenerator.addSimpleAnswerQuestion(question, _proximityCriterion);
+                }
+
+                int mapParamOffset = codeGenerator.addMapParameters(this);
             }
 
             return 0;

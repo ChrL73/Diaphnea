@@ -3,6 +3,7 @@
 
 // tmp?
 #include "Choice.h"
+#include "SimpleAnswerQuestion.h"
 #include "QuizData.h"
 
 #include <iostream>
@@ -14,6 +15,16 @@ namespace produce_questions
         if (RandomNumberGenerator::verify() != 0)
         {
             std::cerr << "Error in RandomNumberGenerator::verify()" << std::endl;
+            return -1;
+        }
+
+        // In the generated code, some doubles (8 bytes) are encoded as 2 ints (2 * 4 bytes).
+        // The following lines verify that such a pair of ints is decoded as expected
+        int i[] = { -1128541358, 2117959400 };
+        double d = *reinterpret_cast<double *>(i);
+        if (d != 1.23456789012345678E+300)
+        {
+            std::cerr << "Unexpected double decoding" << std::endl;
             return -1;
         }
 
@@ -36,6 +47,20 @@ namespace produce_questions
         std::cout << choice->getChoiceText() << std::endl;
         std::cout << choice->getComment() << std::endl;
         std::cout << choice->getMapId() << std::endl;
+
+        SimpleAnswerQuestion *question = SimpleAnswerQuestion::get(0);
+        std::cout << question->getQuestion() << std::endl;
+        std::cout << question->getAnswer() << std::endl;
+        std::cout << question->getProximityCriterionType() << std::endl;
+        std::cout << question->getStringCriterionValue() << std::endl;
+        std::cout << question->getDoubleCriterionValue() << std::endl;
+
+        question = SimpleAnswerQuestion::get(3488);
+        std::cout << question->getQuestion() << std::endl;
+        std::cout << question->getAnswer() << std::endl;
+        std::cout << question->getPointCriterionValueX() << std::endl;
+        std::cout << question->getPointCriterionValueY() << std::endl;
+        std::cout << question->getPointCriterionValueZ() << std::endl;
 
         /*std::string json = "[";
 

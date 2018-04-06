@@ -23,6 +23,11 @@ namespace QuestionInstantiation
             _mapParameters = mapParameters;
         }
 
+        internal MapParameters MapParameters
+        {
+            get { return _mapParameters; }
+        }
+
         protected Int32 WeightIndex
         {
             get { return _weightIndex; }

@@ -4,6 +4,8 @@
 // tmp?
 #include "Choice.h"
 #include "SimpleAnswerQuestion.h"
+#include "MapParameters.h"
+#include "MapSubParameters.h"
 #include "QuizData.h"
 
 #include <iostream>
@@ -21,8 +23,8 @@ namespace produce_questions
         // In the generated code, some doubles (8 bytes) are encoded as 2 ints (2 * 4 bytes).
         // The following lines verify that such a pair of ints is decoded as expected
         int i[] = { -1128541358, 2117959400 };
-        double d = *reinterpret_cast<double *>(i);
-        if (d != 1.23456789012345678E+300)
+        double *p = reinterpret_cast<double *>(i);
+        if (*p != 1.23456789012345678E+300)
         {
             std::cerr << "Unexpected double decoding" << std::endl;
             return -1;
@@ -61,6 +63,11 @@ namespace produce_questions
         std::cout << question->getPointCriterionValueX() << std::endl;
         std::cout << question->getPointCriterionValueY() << std::endl;
         std::cout << question->getPointCriterionValueZ() << std::endl;
+
+        MapParameters *mapParameters = MapParameters::get(5);
+        std::cout << mapParameters->getFramingLevel() << std::endl;
+        std::cout << mapParameters->getAnswerParameters()->getDrawDepth() << std::endl;
+        std::cout << mapParameters->getAnswerParameters()->getCategorySelectionMode() << std::endl;
 
         /*std::string json = "[";
 

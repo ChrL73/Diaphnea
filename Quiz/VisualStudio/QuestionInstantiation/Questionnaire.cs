@@ -107,7 +107,9 @@ namespace QuestionInstantiation
 
             Text.setCompletedTranslationDictionary(_quizData);
 
-            MongoClient mongoClient = new MongoClient();
+            // Comment database filling while testing the code generation
+
+            /*MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("questionnaire", _quizData.XmlQuizData.parameters.questionnaireId);
@@ -158,7 +160,7 @@ namespace QuestionInstantiation
                 {
                     if (level.fillDataBase(database) != 0) return -1;
                 }
-            }
+            }*/
 
             return 0;
         }

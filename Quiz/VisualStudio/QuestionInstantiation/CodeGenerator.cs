@@ -100,28 +100,6 @@ namespace QuestionInstantiation
             return offset;
         }
 
-        private int getDoubleArrayOffset(IEnumerable<double> values)
-        {
-            int offset = _currentDoubleArrayOffset;
-
-            string code = String.Format(",\n{0}", String.Join(",", values.Select(v => v.ToString(CultureInfo.CreateSpecificCulture("en-US")))));
-            append("DoubleArrays.cpp", code);
-            _currentDoubleArrayOffset += values.Count();
-
-            return offset;
-        }
-
-        private int getIntArrayOffset(IEnumerable<int> values)
-        {
-            int offset = _currentIntArrayOffset;
-
-            string code = String.Format(",\n{0}", String.Join(",", values));
-            append("IntArrays.cpp", code);
-            _currentIntArrayOffset += values.Count();
-
-            return offset;
-        }
-
         internal int addSimpleAnswerChoice(List<Choice> choiceList, XmlSimpleAnswerProximityCriterionEnum proximityCriterion, string QuestionNameInLog)
         {
             string choiceText = choiceList[0].AttributeValue.Value.getText(_languageId);
@@ -270,9 +248,92 @@ namespace QuestionInstantiation
             return offset;
         }
 
-        internal int addMapParameters(Category category)
+        internal int addMapParameters(MapParameters parameters)
         {
+            int framingLevel = parameters.FramingLevel;
+            int questionParametersOffset = addMapSubParameters(parameters.QuestionParameters);
+            int answerParametersOffset = addMapSubParameters(parameters.AnswerParameters);
+            int wrongChoiceParametersOffset = addMapSubParameters(parameters.WrongChoiceParameters);
+            int allAnswersSelectionMode = 0;
+            if (parameters.AnswerSelectionMode != null && parameters.AnswerSelectionMode == XmlAnswerSelectionModeEnum.ALL_ANSWERS)
+            {
+                allAnswersSelectionMode = 1;
+            }
+
             int offset = _currentMapParametersOffset;
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6}",
+                 offset == 0 ? "" : ",", _currentMapParametersOffset, framingLevel, questionParametersOffset,
+                 answerParametersOffset, wrongChoiceParametersOffset, allAnswersSelectionMode);
+
+            append("MapParameterss.cpp", code);
+            _currentMapParametersOffset += 5;
+
+            return offset;
+        }
+
+        private int addMapSubParameters(XmlMapSubParameters subParameters)
+        {
+            int drawDepth = 0;
+            string categorySelectionMode = "";
+            List<int> categories = new List<int>();
+            int framingMode = 0;
+
+            if (subParameters != null)
+            {
+                drawDepth = Int32.Parse(subParameters.drawDepth);
+                categorySelectionMode = subParameters.categorySelectionMode.ToString();
+
+                if (subParameters.category != null)
+                {
+                    foreach (XmlMapCategory category in subParameters.category)
+                    {
+                        categories.Add(Int32.Parse(category.categoryIndexInMapConfigFile));
+                    }
+                }
+
+                if (subParameters.framingMode == XmlFramingModeEnum.ONLY_MAIN_ELEMENT) framingMode = 1;
+                else if (subParameters.framingMode == XmlFramingModeEnum.ALL_LINKED_ELEMENTS) framingMode = 2;
+            }
+
+            int offset = _currentMapSubParametersOffset;
+
+            int categorySelectionModeOffset = getStringOffset(categorySelectionMode);
+
+            int categoriesOffset = 0;
+            if (categories.Count() != 0)
+            {
+                categoriesOffset = getIntArrayOffset(categories);
+            }
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6}",
+                 offset == 0 ? "" : ",", _currentMapSubParametersOffset, drawDepth,
+                 categorySelectionModeOffset, categories.Count(), categoriesOffset, framingMode);
+
+            append("MapSubParameterss.cpp", code);
+            _currentMapSubParametersOffset += 5;
+
+            return offset;
+        }
+
+        private int getDoubleArrayOffset(IEnumerable<double> values)
+        {
+            int offset = _currentDoubleArrayOffset;
+
+            string code = String.Format(",\n{0}", String.Join(",", values.Select(v => v.ToString(CultureInfo.CreateSpecificCulture("en-US")))));
+            append("DoubleArrays.cpp", code);
+            _currentDoubleArrayOffset += values.Count();
+
+            return offset;
+        }
+
+        private int getIntArrayOffset(IEnumerable<int> values)
+        {
+            int offset = _currentIntArrayOffset;
+
+            string code = String.Format(",\n{0}", String.Join(",", values));
+            append("IntArrays.cpp", code);
+            _currentIntArrayOffset += values.Count();
 
             return offset;
         }

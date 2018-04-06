@@ -28,9 +28,9 @@ namespace produce_questions
         static MapParameters *get(int offset) { return reinterpret_cast<MapParameters *>(mapParameterss + offset); }
 
         int getFramingLevel(void) const { return _framingLevel; }
-        const MapSubParameters *getQuestionParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapParameterss + _questionParameters); }
-        const MapSubParameters *getAnswerParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapParameterss + _answerParameters); }
-        const MapSubParameters *getWrongChoiceParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapParameterss + _wrongChoiceParameters); }
+        const MapSubParameters *getQuestionParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapSubParameterss + _questionParameters); }
+        const MapSubParameters *getAnswerParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapSubParameterss + _answerParameters); }
+        const MapSubParameters *getWrongChoiceParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapSubParameterss + _wrongChoiceParameters); }
         bool getAllAnswersSelectionMode(void) const { return _allAnswersSelectionMode != 0; }
     };
 }

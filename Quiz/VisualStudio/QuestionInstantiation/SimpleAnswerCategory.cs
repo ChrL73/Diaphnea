@@ -248,7 +248,7 @@ namespace QuestionInstantiation
                     int offset = codeGenerator.addSimpleAnswerQuestion(question, _proximityCriterion);
                 }
 
-                int mapParamOffset = codeGenerator.addMapParameters(this);
+                int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
             }
 
             return 0;

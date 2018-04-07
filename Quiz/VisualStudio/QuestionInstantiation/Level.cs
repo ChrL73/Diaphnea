@@ -1229,7 +1229,7 @@ namespace QuestionInstantiation
                 if (category.generateCode(codeGeneratorList) != 0) return -1;
             }
 
-            foreach (CodeGenerator generator in codeGeneratorList) generator.close();
+            foreach (CodeGenerator generator in codeGeneratorList) generator.close(_questionCount, _weightSum, _xmlLevel.distribParameter, _choiceCount);
 
             return 0;
         }

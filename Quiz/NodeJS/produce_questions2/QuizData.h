@@ -9,4 +9,9 @@ namespace produce_questions
     extern int simpleAnswerQuestions[];
     extern int mapParameterss[];
     extern int mapSubParameterss[];
+    extern int simpleAnswerCategories[];
+    extern int multipleAnswerCategories[];
+    extern int relationOrderCategories[];
+    extern int attributeOrderCategories[];
+    extern int level[];
 }

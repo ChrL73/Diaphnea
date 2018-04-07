@@ -238,17 +238,22 @@ namespace QuestionInstantiation
         {
             foreach (CodeGenerator codeGenerator in codeGeneratorList)
             {
+                List<int> choiceList = new List<int>();
+                List<int> questionList = new List<int>();
+
                 foreach (List<Choice> list in _choiceDictionary.Values)
                 {
-                    int offset = codeGenerator.addSimpleAnswerChoice(list, _proximityCriterion, QuestionNameInLog);
+                    choiceList.Add(codeGenerator.addSimpleAnswerChoice(list, _proximityCriterion, QuestionNameInLog));
                 }
 
                 foreach (SimpleAnswerQuestion question in _questionList)
                 {
-                    int offset = codeGenerator.addSimpleAnswerQuestion(question, _proximityCriterion);
+                    questionList.Add(codeGenerator.addSimpleAnswerQuestion(question, _proximityCriterion));
                 }
 
                 int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+
+                codeGenerator.addSimpleAnswerCategory(WeightIndex, mapParamOffset, questionList, choiceList, _distribParameterCorrection, _proximityCriterion);
             }
 
             return 0;

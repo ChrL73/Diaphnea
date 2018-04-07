@@ -12,6 +12,7 @@ namespace QuestionInstantiation
     {
         private readonly string _dirName;
         private readonly string _languageId;
+
         private int _currentStringOffset;
         private int _currentChoiceOffset;
         private int _currentIntArrayOffset;
@@ -19,6 +20,12 @@ namespace QuestionInstantiation
         private int _currentSimpleAnswerQuestionOffset;
         private int _currentMapParametersOffset;
         private int _currentMapSubParametersOffset;
+        private int _currentSimpleAnswerCategoryOffset;
+
+        private readonly List<int> _simpleAnswerQuestionCategoryOffsets = new List<int>();
+        private readonly List<int> _multipleAnswerQuestionCategoryOffsets = new List<int>();
+        private readonly List<int> _relationOrderQuestionCategoryOffsets = new List<int>();
+        private readonly List<int> _attributeOrderQuestionCategoryOffsets = new List<int>();
 
         private readonly Dictionary<string, int> _stringDictionary = new Dictionary<string, int>();
 
@@ -33,6 +40,7 @@ namespace QuestionInstantiation
             _currentSimpleAnswerQuestionOffset = 0;
             _currentMapParametersOffset = 0;
             _currentMapSubParametersOffset = 0;
+            _currentSimpleAnswerCategoryOffset = 0;
 
             _stringDictionary.Add("", 0);
 
@@ -65,10 +73,53 @@ namespace QuestionInstantiation
             path = String.Format("{0}/MapSubParameterss.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("MapSubParameterss.cpp", "namespace produce_questions\n{\nint mapSubParameterss[] =\n{");
+
+            path = String.Format("{0}/SimpleAnswerCategories.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("SimpleAnswerCategories.cpp", "namespace produce_questions\n{\nint simpleAnswerCategories[] =\n{");
         }
 
-        internal void close()
+        internal void close(int questionCount, int weightSum, double distribParameter, int choiceCount)
         {
+            int simpleAnswerQuestionCategoryOffsets = 0;
+            if (_simpleAnswerQuestionCategoryOffsets.Count() != 0)
+            {
+                simpleAnswerQuestionCategoryOffsets = getIntArrayOffset(_simpleAnswerQuestionCategoryOffsets);
+            }
+
+            int multipleAnswerQuestionCategoryOffsets = 0;
+            if (_multipleAnswerQuestionCategoryOffsets.Count() != 0)
+            {
+                multipleAnswerQuestionCategoryOffsets = getIntArrayOffset(_multipleAnswerQuestionCategoryOffsets);
+            }
+
+            int relationOrderQuestionCategoryOffsets = 0;
+            if (_relationOrderQuestionCategoryOffsets.Count() != 0)
+            {
+                relationOrderQuestionCategoryOffsets = getIntArrayOffset(_relationOrderQuestionCategoryOffsets);
+            }
+
+            int attributeOrderQuestionCategoryOffsets = 0;
+            if (_attributeOrderQuestionCategoryOffsets.Count() != 0)
+            {
+                attributeOrderQuestionCategoryOffsets = getIntArrayOffset(_attributeOrderQuestionCategoryOffsets);
+            }
+
+            int[] distribParameterInt = doubleToIntArray(distribParameter);
+
+            string path = String.Format("{0}/Level_.cpp", _dirName);
+            if (File.Exists(path)) File.Delete(path);
+
+            string code = String.Format(
+                "namespace produce_questions\n{{\nint level[] =\n{{\n{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}\n}};\n}}\n",
+                _simpleAnswerQuestionCategoryOffsets.Count(), simpleAnswerQuestionCategoryOffsets,
+                _multipleAnswerQuestionCategoryOffsets.Count(), multipleAnswerQuestionCategoryOffsets,
+                _relationOrderQuestionCategoryOffsets.Count(), relationOrderQuestionCategoryOffsets,
+                _attributeOrderQuestionCategoryOffsets.Count(), attributeOrderQuestionCategoryOffsets,
+                questionCount, weightSum, distribParameterInt[0], distribParameterInt[1], choiceCount);
+
+            append("Level_.cpp", code);
+
             append("Choices.cpp", "\n};\n}\n");
             append("DoubleArrays.cpp", "\n};\n}\n");
             append("IntArrays.cpp", "\n};\n}\n");
@@ -76,6 +127,7 @@ namespace QuestionInstantiation
             append("SimpleAnswerQuestions.cpp", "\n};\n}\n");
             append("MapParameterss.cpp", "\n};\n}\n");
             append("MapSubParameterss.cpp", "\n};\n}\n");
+            append("SimpleAnswerCategories.cpp", "\n};\n}\n");
         }
 
         private int getStringOffset(string str)
@@ -316,11 +368,39 @@ namespace QuestionInstantiation
             return offset;
         }
 
+        internal void addSimpleAnswerCategory(int weightIndex, int mapParametersOffset, List<int>questionList, List<int> choiceList,
+                                             double distribParameterCorrection, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
+        {
+            int proximityCriterionType = 0; // NONE
+            if (proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY) proximityCriterionType = 1; // STRING
+            else if (proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ATTRIBUTE_VALUE_AS_NUMBER) proximityCriterionType = 2; // NUMBER
+            else if (proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.ELEMENT_LOCATION) proximityCriterionType = 3; // POINT_3D
+
+            int offset = _currentSimpleAnswerCategoryOffset;
+
+            int questionListOffset = 0;
+            if (questionList.Count() != 0) questionListOffset = getIntArrayOffset(questionList);
+
+            int choiceListOffset = 0;
+            if (choiceList.Count() != 0) choiceListOffset = getIntArrayOffset(choiceList);
+
+            int[] distribParameterCorrectionInt = doubleToIntArray(distribParameterCorrection);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10}", offset == 0 ? "" : ",", _currentSimpleAnswerCategoryOffset,
+                weightIndex, mapParametersOffset, questionList.Count, questionListOffset, choiceList.Count, choiceListOffset,
+                distribParameterCorrectionInt[0], distribParameterCorrectionInt[1], proximityCriterionType);
+
+            append("SimpleAnswerCategories.cpp", code);
+            _currentSimpleAnswerCategoryOffset += 9;
+
+            _simpleAnswerQuestionCategoryOffsets.Add(offset);
+        }
+
         private int getDoubleArrayOffset(IEnumerable<double> values)
         {
             int offset = _currentDoubleArrayOffset;
 
-            string code = String.Format(",\n{0}", String.Join(",", values.Select(v => v.ToString(CultureInfo.CreateSpecificCulture("en-US")))));
+            string code = String.Format(",\n// {0}\n{1}", offset, String.Join(",", values.Select(v => v.ToString(CultureInfo.CreateSpecificCulture("en-US")))));
             append("DoubleArrays.cpp", code);
             _currentDoubleArrayOffset += values.Count();
 
@@ -331,7 +411,7 @@ namespace QuestionInstantiation
         {
             int offset = _currentIntArrayOffset;
 
-            string code = String.Format(",\n{0}", String.Join(",", values));
+            string code = String.Format(",\n// {0}\n{1}", offset, String.Join(",", values));
             append("IntArrays.cpp", code);
             _currentIntArrayOffset += values.Count();
 

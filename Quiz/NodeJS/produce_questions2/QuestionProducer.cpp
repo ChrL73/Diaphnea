@@ -1,14 +1,19 @@
 #include "QuestionProducer.h"
 #include "RandomNumberGenerator.h"
+#include "Level.h"
+#include "Category.h"
+#include "CompleteQuestion.h"
 
-// tmp?
-#include "Choice.h"
+// tmp
+/*#include "Choice.h"
 #include "SimpleAnswerQuestion.h"
 #include "MapParameters.h"
 #include "MapSubParameters.h"
-#include "QuizData.h"
+#include "SimpleAnswerCategory.h"
+#include "QuizData.h"*/
 
 #include <iostream>
+#include <vector>
 
 namespace produce_questions
 {
@@ -22,15 +27,15 @@ namespace produce_questions
 
         // In the generated code, some doubles (8 bytes) are encoded as 2 ints (2 * 4 bytes).
         // The following lines verify that such a pair of ints is decoded as expected
-        int i[] = { -1128541358, 2117959400 };
-        double *p = reinterpret_cast<double *>(i);
-        if (*p != 1.23456789012345678E+300)
+        int x[] = { -1128541358, 2117959400 };
+        double *y = reinterpret_cast<double *>(x);
+        if (*y != 1.23456789012345678E+300)
         {
             std::cerr << "Unexpected double decoding" << std::endl;
             return -1;
         }
 
-        Choice *choice = Choice::get(0);
+        /*Choice *choice = Choice::get(0);
 
         std::cout << choice->getChoiceText() << std::endl;
         std::cout << choice->getComment() << std::endl;
@@ -69,13 +74,60 @@ namespace produce_questions
         std::cout << mapParameters->getAnswerParameters()->getDrawDepth() << std::endl;
         std::cout << mapParameters->getAnswerParameters()->getCategorySelectionMode() << std::endl;
 
-        /*std::string json = "[";
+        std::cout << "sizeof(Choice): " << sizeof(Choice) << std::endl;
+        std::cout << "sizeof(SimpleAnswerQuestion): " << sizeof(SimpleAnswerQuestion) << std::endl;
+        std::cout << "sizeof(MapParameters): " << sizeof(MapParameters) << std::endl;
+        std::cout << "sizeof(MapSubParameters): " << sizeof(MapSubParameters) << std::endl;
+        std::cout << "sizeof(SimpleAnswerCategory): " << sizeof(SimpleAnswerCategory) << std::endl;
 
-        int i, questionCount = level->getQuestionCount();
+        SimpleAnswerCategory *category = SimpleAnswerCategory::get(27);
+        std::cout << category->getWeightIndex() << std::endl;
+        std::cout << category->getMapParameters()->getFramingLevel() << std::endl;
+        std::cout << category->getQuestionCount() << std::endl;
+        std::cout << category->getQuestion(0)->getQuestion() << std::endl;
+        std::cout << category->getChoiceCount() << std::endl;
+        std::cout << category->getChoice(0)->getChoiceText() << std::endl;
+        std::cout << category->getDistribParameterCorrection() << std::endl;
+        std::cout << category->getProximityCriterionType() << std::endl;*/
+
+        const Level *level = Level::instance();
+        std::vector<Category *> categoryVector;
+
+        int i, n = level->getSimpleAnswerCategoryCount();
+        for (i = 0; i < n; ++i)
+        {
+            Category *category = new Category(level->getSimpleAnswerCategory(i));
+            categoryVector.push_back(category);
+        }
+
+        /*n = level->getMultipleAnswerCategoryCount();
+        for (i = 0; i < n; ++i)
+        {
+            Category *category = new Category(level->getMultipleAnswerCategory(i));
+            categoryVector.push_back(category);
+        }
+
+        n = level->getRelationOrderCategoryCount();
+        for (i = 0; i < n; ++i)
+        {
+            Category *category = new Category(level->getRelationOrderCategory(i));
+            categoryVector.push_back(category);
+        }
+
+        n = level->getAttributeOrderCategoryCount();
+        for (i = 0; i < n; ++i)
+        {
+            Category *category = new Category(level->getAttributeOrderCategory(i));
+            categoryVector.push_back(category);
+        }*/
+
+        std::string json = "[";
+
+        int questionCount = level->getQuestionCount();
         for (i = 0; i < questionCount; ++i)
         {
             Category *category = 0;
-            int j, categoryCount = level->getCategoryCount();
+            int j, categoryCount = categoryVector.size();
 
             while (category == 0 || !category->isSuitable())
             {
@@ -83,7 +135,7 @@ namespace produce_questions
 
                 for (j = 0; j < categoryCount; ++j)
                 {
-                    Category *jCategory = level->getCategories(j);
+                    Category *jCategory = categoryVector[j];
                     if (draw < jCategory->getWeightIndex())
                     {
                         category = jCategory;
@@ -92,25 +144,25 @@ namespace produce_questions
                 }
             }
 
-            int n = categoryCount / 10;
+            n = categoryCount / 10;
             if (n > 3) n = 3;
             category->reduceSuitability(n);
             for (j = 0; j < categoryCount; ++j)
             {
-                if (category != level->getCategories(j)) level->getCategories(j)->increaseSuitability();
+                if (category != categoryVector[j]) categoryVector[j]->increaseSuitability();
             }
 
             CompleteQuestion *question = category->getNewQuestion(level->getChoiceCount(), level->getDistribParameter());
 
-            json += question->getJson();
-            if (i != questionCount - 1) json += ",";
+            //json += question->getJson();
+            //if (i != questionCount - 1) json += ",";
 
             delete question;
         }
 
         json += "]";
 
-        std::cout << json;*/
+        std::cout << json;
 
         return 0;
     }

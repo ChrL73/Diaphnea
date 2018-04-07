@@ -75,6 +75,24 @@
     <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapSubParameterss.cpp">
       <Link>generated_code\MapSubParameterss.cpp</Link>
     </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerCategory.cpp">
+      <Link>SimpleAnswerCategory.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerCategories.cpp">
+      <Link>generated_code\SimpleAnswerCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\Category.cpp">
+      <Link>Category.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\Level.cpp">
+      <Link>Level.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Level_.cpp">
+      <Link>generated_code\Level_.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\CompleteQuestion.cpp">
+      <Link>CompleteQuestion.cpp</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NodeJS\produce_questions2\Choice.h">
@@ -100,6 +118,18 @@
     </None>
     <None Include="..\..\NodeJS\produce_questions2\MapSubParameters.h">
       <Link>MapSubParameters.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\SimpleAnswerCategory.h">
+      <Link>SimpleAnswerCategory.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\Category.h">
+      <Link>Category.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\Level.h">
+      <Link>Level.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\CompleteQuestion.h">
+      <Link>CompleteQuestion.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

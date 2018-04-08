@@ -8,6 +8,7 @@ namespace produce_questions
     class MapParameters;
     class SimpleAnswerQuestion;
     class Choice;
+    class CompleteQuestion;
 
     class SimpleAnswerCategory
     {
@@ -33,7 +34,7 @@ namespace produce_questions
         int _proximityCriterionType;
 
     public:
-        static SimpleAnswerCategory *get(int offset) { return reinterpret_cast<SimpleAnswerCategory *>(simpleAnswerCategories + offset); }
+        //static SimpleAnswerCategory *get(int offset) { return reinterpret_cast<SimpleAnswerCategory *>(simpleAnswerCategories + offset); }
 
         unsigned int getWeightIndex(void) const { return _weightIndex; }
 
@@ -48,5 +49,7 @@ namespace produce_questions
         double getDistribParameterCorrection(void) const { return _distribParameterCorrection; }
 
         ProximityCriterionTypeEnum getProximityCriterionType(void) const { return static_cast<ProximityCriterionTypeEnum>(_proximityCriterionType); }
+
+        CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
     };
 }

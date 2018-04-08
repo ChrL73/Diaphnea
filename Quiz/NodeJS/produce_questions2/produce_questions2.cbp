@@ -13,8 +13,12 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-std=c++11" />
+					<Add option="-pg" />
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/produce_questions2" prefix_auto="1" extension_auto="1" />
@@ -42,11 +46,16 @@
 		<Unit filename="CompleteQuestion.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
+		<Unit filename="MapIdInfo.cpp" />
+		<Unit filename="MapIdInfo.h" />
 		<Unit filename="MapParameters.cpp" />
 		<Unit filename="MapParameters.h" />
 		<Unit filename="MapSubParameters.cpp" />
 		<Unit filename="MapSubParameters.h" />
+		<Unit filename="MultipleAnswerQuestion.cpp" />
+		<Unit filename="MultipleAnswerQuestion.h" />
 		<Unit filename="ProximityCriterionTypeEnum.h" />
+		<Unit filename="QuestionMultiplicityEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />
 		<Unit filename="QuestionProducer.h" />
 		<Unit filename="QuizData.h" />
@@ -56,12 +65,15 @@
 		<Unit filename="SimpleAnswerCategory.h" />
 		<Unit filename="SimpleAnswerQuestion.cpp" />
 		<Unit filename="SimpleAnswerQuestion.h" />
+		<Unit filename="TextAndComment.cpp" />
+		<Unit filename="TextAndComment.h" />
 		<Unit filename="generated_code/Choices.cpp" />
 		<Unit filename="generated_code/DoubleArrays.cpp" />
 		<Unit filename="generated_code/IntArrays.cpp" />
 		<Unit filename="generated_code/Level_.cpp" />
 		<Unit filename="generated_code/MapParameterss.cpp" />
 		<Unit filename="generated_code/MapSubParameterss.cpp" />
+		<Unit filename="generated_code/MultipleAnswerQuestions.cpp" />
 		<Unit filename="generated_code/SimpleAnswerCategories.cpp" />
 		<Unit filename="generated_code/SimpleAnswerQuestions.cpp" />
 		<Unit filename="generated_code/Strings.cpp" />

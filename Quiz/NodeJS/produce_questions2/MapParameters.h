@@ -25,7 +25,7 @@ namespace produce_questions
         int _allAnswersSelectionMode;
 
     public:
-        static MapParameters *get(int offset) { return reinterpret_cast<MapParameters *>(mapParameterss + offset); }
+        //static MapParameters *get(int offset) { return reinterpret_cast<MapParameters *>(mapParameterss + offset); }
 
         int getFramingLevel(void) const { return _framingLevel; }
         const MapSubParameters *getQuestionParameters(void) const { return reinterpret_cast<MapSubParameters *>(mapSubParameterss + _questionParameters); }

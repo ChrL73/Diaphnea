@@ -27,6 +27,12 @@ namespace QuestionInstantiation
             _choiceCommentMode = choiceCommentMode;
         }
 
+        internal Text QuestionText { get { return _questionText; } }
+        internal Element QuestionElement { get { return _questionElement; } }
+        internal List<Choice> ChoiceList { get { return _choiceList; } }
+        internal ChoiceCommentModeEnum ChoiceCommentMode { get { return _choiceCommentMode; } }
+        internal Choice ExcludedChoice { get { return _excludedChoice; } }
+
         internal void addChoice(Choice choice)
         {
             _choiceDictionary[choice] = 0;

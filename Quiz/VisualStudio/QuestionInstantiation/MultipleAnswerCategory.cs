@@ -228,6 +228,24 @@ namespace QuestionInstantiation
 
         internal override int generateCode(List<CodeGenerator> codeGeneratorList)
         {
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            {
+                List<int> choiceList = new List<int>();
+                List<int> questionList = new List<int>();
+
+                foreach (List<Choice> list in _choiceDictionary.Values)
+                {
+                    choiceList.Add(codeGenerator.addMultipleAnswerChoice(list, _proximityCriterion));
+                }
+
+                foreach (MultipleAnswerQuestion question in _questionList)
+                {
+                    questionList.Add(codeGenerator.addMultipleAnswerQuestion(question, _proximityCriterion));
+                }
+
+                int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+            }
+
             return 0;
         }
     }

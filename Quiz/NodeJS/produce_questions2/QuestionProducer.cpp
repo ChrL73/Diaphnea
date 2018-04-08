@@ -5,12 +5,13 @@
 #include "CompleteQuestion.h"
 
 // tmp
-/*#include "Choice.h"
+#include "Choice.h"
 #include "SimpleAnswerQuestion.h"
 #include "MapParameters.h"
 #include "MapSubParameters.h"
 #include "SimpleAnswerCategory.h"
-#include "QuizData.h"*/
+#include "MultipleAnswerQuestion.h"
+#include "QuizData.h"
 
 #include <iostream>
 #include <vector>
@@ -35,7 +36,7 @@ namespace produce_questions
             return -1;
         }
 
-        /*Choice *choice = Choice::get(0);
+        Choice *choice = Choice::get(0);
 
         std::cout << choice->getChoiceText() << std::endl;
         std::cout << choice->getComment() << std::endl;
@@ -55,7 +56,22 @@ namespace produce_questions
         std::cout << choice->getComment() << std::endl;
         std::cout << choice->getMapId() << std::endl;
 
-        SimpleAnswerQuestion *question = SimpleAnswerQuestion::get(0);
+        MultipleAnswerQuestion *question = MultipleAnswerQuestion::get(14);
+
+        std::cout << question->getQuestion() << std::endl;
+        std::cout << question->getQuestionMapId() << std::endl;
+        std::cout << question->getAnswerCount() << std::endl;
+        std::cout << question->getAnswer(4) << std::endl;
+        std::cout << question->getComment(4) << std::endl;
+        std::cout << question->getAnswerMapId(4) << std::endl;
+        std::cout << question->getExcludedChoice() << std::endl;
+        std::cout << question->getProximityCriterionType() << std::endl;
+        std::cout << question->getPointCriterionValueX() << std::endl;
+        std::cout << question->getPointCriterionValueY() << std::endl;
+        std::cout << question->getPointCriterionValueZ() << std::endl;
+
+
+        /*SimpleAnswerQuestion *question = SimpleAnswerQuestion::get(0);
         std::cout << question->getQuestion() << std::endl;
         std::cout << question->getAnswer() << std::endl;
         std::cout << question->getProximityCriterionType() << std::endl;
@@ -121,7 +137,7 @@ namespace produce_questions
             categoryVector.push_back(category);
         }*/
 
-        std::string json = "[";
+        /*std::string json = "[";
 
         int questionCount = level->getQuestionCount();
         for (i = 0; i < questionCount; ++i)
@@ -154,15 +170,18 @@ namespace produce_questions
 
             CompleteQuestion *question = category->getNewQuestion(level->getChoiceCount(), level->getDistribParameter());
 
-            //json += question->getJson();
-            //if (i != questionCount - 1) json += ",";
+            json += question->getJson();
+            if (i != questionCount - 1) json += ",";
 
             delete question;
         }
 
         json += "]";
 
-        std::cout << json;
+        std::cout << json;*/
+
+        n = categoryVector.size();
+        for (i = 0; i < n; ++i) delete categoryVector[i];
 
         return 0;
     }

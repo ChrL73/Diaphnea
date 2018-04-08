@@ -93,6 +93,18 @@
     <Compile Include="..\..\NodeJS\produce_questions2\CompleteQuestion.cpp">
       <Link>CompleteQuestion.cpp</Link>
     </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\TextAndComment.cpp">
+      <Link>TextAndComment.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapIdInfo.cpp">
+      <Link>MapIdInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MultipleAnswerQuestion.cpp">
+      <Link>MultipleAnswerQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MultipleAnswerQuestions.cpp">
+      <Link>generated_code\MultipleAnswerQuestions.cpp</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NodeJS\produce_questions2\Choice.h">
@@ -130,6 +142,18 @@
     </None>
     <None Include="..\..\NodeJS\produce_questions2\CompleteQuestion.h">
       <Link>CompleteQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuestionMultiplicityEnum.h">
+      <Link>QuestionMultiplicityEnum.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\TextAndComment.h">
+      <Link>TextAndComment.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapIdInfo.h">
+      <Link>MapIdInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MultipleAnswerQuestion.h">
+      <Link>MultipleAnswerQuestion.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

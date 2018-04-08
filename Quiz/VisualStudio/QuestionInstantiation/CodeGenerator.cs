@@ -21,6 +21,7 @@ namespace QuestionInstantiation
         private int _currentMapParametersOffset;
         private int _currentMapSubParametersOffset;
         private int _currentSimpleAnswerCategoryOffset;
+        private int _currentMultipleAnswerQuestionOffset;
 
         private readonly List<int> _simpleAnswerQuestionCategoryOffsets = new List<int>();
         private readonly List<int> _multipleAnswerQuestionCategoryOffsets = new List<int>();
@@ -41,6 +42,7 @@ namespace QuestionInstantiation
             _currentMapParametersOffset = 0;
             _currentMapSubParametersOffset = 0;
             _currentSimpleAnswerCategoryOffset = 0;
+            _currentMultipleAnswerQuestionOffset = 0;
 
             _stringDictionary.Add("", 0);
 
@@ -77,6 +79,10 @@ namespace QuestionInstantiation
             path = String.Format("{0}/SimpleAnswerCategories.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("SimpleAnswerCategories.cpp", "namespace produce_questions\n{\nint simpleAnswerCategories[] =\n{");
+
+            path = String.Format("{0}/MultipleAnswerQuestions.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("MultipleAnswerQuestions.cpp", "namespace produce_questions\n{\nint multipleAnswerQuestions[] =\n{");
         }
 
         internal void close(int questionCount, int weightSum, double distribParameter, int choiceCount)
@@ -128,6 +134,7 @@ namespace QuestionInstantiation
             append("MapParameterss.cpp", "\n};\n}\n");
             append("MapSubParameterss.cpp", "\n};\n}\n");
             append("SimpleAnswerCategories.cpp", "\n};\n}\n");
+            append("MultipleAnswerQuestions.cpp", "\n};\n}\n");
         }
 
         private int getStringOffset(string str)
@@ -227,6 +234,42 @@ namespace QuestionInstantiation
             return offset;
         }
 
+        internal int addMultipleAnswerChoice(List<Choice> choiceList, XmlMultipleAnswerProximityCriterionEnum proximityCriterion)
+        {
+            string choiceText = choiceList[0].AttributeValue.Value.getText(_languageId);
+            string comment = choiceList[0].Comment.getText(_languageId);
+            string mapId = choiceList[0].Element.XmlElement.mapId == null ? "" : choiceList[0].Element.XmlElement.mapId.Substring(2);
+
+            List<double> pointCriterionValues = new List<double>();
+
+            if (proximityCriterion != XmlMultipleAnswerProximityCriterionEnum.NONE)
+            {
+                foreach (Choice choice in choiceList)
+                {
+                    pointCriterionValues.Add(choice.Element.GeoPoint.X);
+                    pointCriterionValues.Add(choice.Element.GeoPoint.Y);
+                    pointCriterionValues.Add(choice.Element.GeoPoint.Z);
+                }
+            }
+
+            int offset = _currentChoiceOffset;
+
+            int choiceTextOffset = getStringOffset(choiceText);
+            int commentOffset = getStringOffset(comment);
+            int mapIdOffset = getStringOffset(mapId);
+
+            int pointCriterionValuesOffset = 0;
+            if (pointCriterionValues.Count != 0) pointCriterionValuesOffset = getDoubleArrayOffset(pointCriterionValues);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},0,0,0,0,{6},{7}", offset == 0 ? "" : ",", _currentChoiceOffset, choiceText,
+                choiceTextOffset, commentOffset, mapIdOffset, pointCriterionValues.Count / 3, pointCriterionValuesOffset);
+
+            append("Choices.cpp", code);
+            _currentChoiceOffset += 9;
+
+            return offset;
+        }
+
         internal int addSimpleAnswerQuestion(SimpleAnswerQuestion question, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
         {
             string questionText = question.QuestionText.getText(_languageId);
@@ -296,6 +339,91 @@ namespace QuestionInstantiation
 
             append("SimpleAnswerQuestions.cpp", code);
             _currentSimpleAnswerQuestionOffset += 16;
+
+            return offset;
+        }
+
+        internal int addMultipleAnswerQuestion(MultipleAnswerQuestion question, XmlMultipleAnswerProximityCriterionEnum proximityCriterion)
+        {
+            string questionText = question.QuestionText.getText(_languageId);
+
+            string questionMapId = "";
+            if (question.QuestionElement != null && question.QuestionElement.XmlElement.mapId != null)
+            {
+                questionMapId = question.QuestionElement.XmlElement.mapId.Substring(2);
+            }
+
+            List<string> answers = new List<string>();
+            List<string> comments = new List<string>();
+            List<string> answerMapIds = new List<string>();
+
+            foreach (Choice choice in question.ChoiceList)
+            {
+                answers.Add(choice.AttributeValue.Value.getText(_languageId));
+
+                if ((question.ChoiceCommentMode == ChoiceCommentModeEnum.ATTRIBUTE_COMMENT)) comments.Add(choice.AttributeValue.Comment.getText(_languageId));
+                else comments.Add(choice.Comment.getText(_languageId));
+
+                if (choice.Element.XmlElement.mapId == null) answerMapIds.Add("");
+                else answerMapIds.Add(choice.Element.XmlElement.mapId.Substring(2));
+            }
+
+            string excludedChoice = "";
+            if (question.ExcludedChoice != null) excludedChoice = question.ExcludedChoice.AttributeValue.Value.getText(_languageId);
+
+            int proximityCriterionType = 0; // NONE
+            double pointCriterionValueX = 0.0;
+            double pointCriterionValueY = 0.0;
+            double pointCriterionValueZ = 0.0;
+
+            if (proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
+            {
+                proximityCriterionType = 3; // POINT_3D
+                List<GeoPoint> pointList = new List<GeoPoint>();
+                foreach (Choice choice in question.ChoiceList) pointList.Add(choice.Element.GeoPoint);
+                GeoPoint meanGeoPoint = GeoPoint.meanGeoPoint(pointList);
+                pointCriterionValueX = meanGeoPoint.X;
+                pointCriterionValueY = meanGeoPoint.Y;
+                pointCriterionValueZ = meanGeoPoint.Z;
+            }
+
+            int offset = _currentMultipleAnswerQuestionOffset;
+
+            int questionTextOffset = getStringOffset(questionText);
+            int questionMapIdOffset = getStringOffset(questionMapId);
+
+            int answersOffset = 0;
+            int commentsOffset = 0;
+            int answerMapIdsOffset = 0;
+            if (answers.Count() != 0)
+            {
+                List<int> stringOffsets = new List<int>();
+                foreach (string str in answers) stringOffsets.Add(getStringOffset(str));
+                answersOffset = getIntArrayOffset(stringOffsets);
+
+                stringOffsets.Clear();
+                foreach (string str in comments) stringOffsets.Add(getStringOffset(str == null ? "" : str));
+                commentsOffset = getIntArrayOffset(stringOffsets);
+
+                stringOffsets.Clear();
+                foreach (string str in answerMapIds) stringOffsets.Add(getStringOffset(str));
+                answerMapIdsOffset = getIntArrayOffset(stringOffsets);
+            }
+
+            int excludedChoiceOffset = getStringOffset(excludedChoice);
+
+            int[] pointCriterionValueXInt = doubleToIntArray(pointCriterionValueX);
+            int[] pointCriterionValueYInt = doubleToIntArray(pointCriterionValueY);
+            int[] pointCriterionValueZInt = doubleToIntArray(pointCriterionValueZ);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
+                offset == 0 ? "" : ",", _currentMultipleAnswerQuestionOffset, questionText, questionTextOffset, questionMapIdOffset,
+                answers.Count(), answersOffset, commentsOffset, answerMapIdsOffset, excludedChoiceOffset, proximityCriterionType,
+                pointCriterionValueXInt[0], pointCriterionValueXInt[1], pointCriterionValueYInt[0], pointCriterionValueYInt[1],
+                pointCriterionValueZInt[0], pointCriterionValueZInt[1]);
+
+            append("MultipleAnswerQuestions.cpp", code);
+            _currentMultipleAnswerQuestionOffset += 14;
 
             return offset;
         }

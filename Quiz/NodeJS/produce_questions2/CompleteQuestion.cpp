@@ -1,13 +1,13 @@
 #include "CompleteQuestion.h"
-/*#include "TextAndComment.h"
+#include "TextAndComment.h"
 #include "RandomNumberGenerator.h"
 #include "MapIdInfo.h"
 #include "MapParameters.h"
-#include "MapSubParameters.h"*/
+#include "MapSubParameters.h"
 
 namespace produce_questions
 {
-    /*CompleteQuestion::CompleteQuestion(const MapParameters *mapParameters, const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount) :
+    CompleteQuestion::CompleteQuestion(const MapParameters *mapParameters, const std::string& question, QuestionMultiplicityEnum multiplicity, int choiceCount) :
                 _mapParameters(mapParameters), _question(question), _multiplicity(multiplicity)
     {
         int i;
@@ -34,11 +34,11 @@ namespace produce_questions
     void CompleteQuestion::addMapId(const std::string& id, const MapSubParameters *subParameters)
     {
         if (!id.empty()) _mapIdVector.push_back(new MapIdInfo(id, subParameters));
-    }*/
+    }
 
     const std::string& CompleteQuestion::getJson(void)
     {
-        /*_json = "{\"question\":\"" + _question + "\",\"isMultiple\":"
+        _json = "{\"question\":\"" + _question + "\",\"isMultiple\":"
             + (_multiplicity == produce_questions::MULTIPLE ? "true" : "false")
             + ",\"choices\":[";
 
@@ -75,10 +75,7 @@ namespace produce_questions
             if (i != n - 1) _json += ",";
         }
 
-        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel()) + "}";*/
-
-        //tmp
-        _json = "{}";
+        _json += "],\"framingLevel\":" + std::to_string(_mapParameters->getFramingLevel()) + "}";
 
         return _json;
     }

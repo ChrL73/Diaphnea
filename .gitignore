@@ -49,3 +49,4 @@ MongoDB.*.dll
 *.userprefs
 *UserPrefs.xml
 *generated_code
+*gmon.out

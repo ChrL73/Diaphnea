@@ -244,6 +244,8 @@ namespace QuestionInstantiation
                 }
 
                 int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+
+                codeGenerator.addMultipleAnswerCategory(WeightIndex, mapParamOffset, questionList, choiceList, _distribParameterCorrection, _proximityCriterion);
             }
 
             return 0;

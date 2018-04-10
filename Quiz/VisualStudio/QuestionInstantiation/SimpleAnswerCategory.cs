@@ -236,7 +236,7 @@ namespace QuestionInstantiation
 
         internal override int generateCode(List<CodeGenerator> codeGeneratorList)
         {
-            /*foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
             {
                 List<int> choiceList = new List<int>();
                 List<int> questionList = new List<int>();
@@ -254,7 +254,7 @@ namespace QuestionInstantiation
                 int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
 
                 codeGenerator.addSimpleAnswerCategory(WeightIndex, mapParamOffset, questionList, choiceList, _distribParameterCorrection, _proximityCriterion);
-            }*/
+            }
 
             return 0;
         }

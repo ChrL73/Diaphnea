@@ -1,34 +1,21 @@
 #include "MultipleAnswerCategory.h"
-#include "QuizData.h"
 #include "RandomNumberGenerator.h"
-#include "MultipleAnswerQuestion.h"
 #include "CompleteQuestion.h"
-#include "TextAndComment.h"
-#include "Choice.h"
+#include "MultipleAnswerQuestion.h"
 #include "MapParameters.h"
 #include "MapSubParameters.h"
+#include "Choice.h"
+
+#include <map>
+#include <cmath>
+#include <cstring>
 
 namespace produce_questions
 {
-    MultipleAnswerCategory::MultipleAnswerCategory(unsigned int weightIndex, const MapParameters *mapParameters, int questionCount, const std::string& questionListId,
-                                                   int choiceCount, const std::string& choiceListId, double distribParameterCorrection, ProximityCriterionTypeEnum proximityCriterionType) :
-        Category(weightIndex, mapParameters), _questionCount(questionCount), _questionListId(questionListId), _choiceCount(choiceCount), _choiceListId(choiceListId),
-        _distribParameterCorrection(distribParameterCorrection), _proximityCriterionType(proximityCriterionType)
-    {
-        QuizData *quizData = QuizData::instance();
-        int i;
-        for (i = 0; i < _choiceCount; ++i)
-        {
-            const Choice *choice = quizData->getChoice(_choiceListId, i, _proximityCriterionType);
-            _choiceVector.push_back(choice);
-        }
-    }
-
     CompleteQuestion *MultipleAnswerCategory::getNewQuestion(int choiceCount, double distribParameter) const
     {
         int draw = RandomNumberGenerator::getRandomInt(_questionCount);
-        QuizData *quizData = QuizData::instance();
-        const MultipleAnswerQuestion *question = quizData->getMultipleAnswerQuestion(_questionListId, draw, _proximityCriterionType, _choiceVector);
+        const MultipleAnswerQuestion *question = getQuestion(draw);
 
         CompleteQuestion *completeQuestion = new CompleteQuestion(getMapParameters(), question->getQuestion(), produce_questions::MULTIPLE, choiceCount);
 
@@ -41,10 +28,63 @@ namespace produce_questions
         if (valueCount > static_cast<int>(question->getAnswerCount())) valueCount = question->getAnswerCount();
         int rightChoiceCount = 1 + RandomNumberGenerator::getRandomInt(valueCount);
 
-        int wrongChoiceCount = question->getWrongChoiceCount();
+        std::vector<const Choice *> sortedWrongChoiceVector;
+
+        std::set<std::string> answerSet;
+        int i, n = question->getAnswerCount();
+        for (i = 0; i < n; ++i) answerSet.insert(question->getAnswer(i));
+
+        if (_proximityCriterionType == produce_questions::POINT_3D)
+        {
+            double x0 = question->getPointCriterionValueX();
+            double y0 = question->getPointCriterionValueY();
+            double z0 = question->getPointCriterionValueZ();
+
+            std::multimap<double, const Choice *> choiceMultimap;
+
+            for (i = 0; i < _choiceCount; ++i)
+            {
+                const Choice *choice = getChoice(i);
+                if (answerSet.find(choice->getChoiceText()) == answerSet.end())
+                {
+                    double x = choice->getPointCriterionValue()[0];
+                    double y = choice->getPointCriterionValue()[1];
+                    double z = choice->getPointCriterionValue()[2];
+
+                    double dx = x - x0;
+                    double dy = y - y0;
+                    double dz = z - z0;
+
+                    double d = sqrt(dx*dx + dy*dy + dz*dz);
+                    choiceMultimap.insert(std::pair<double, const Choice *>(d, choice));
+                }
+            }
+
+            std::multimap<double, const Choice *>::iterator it = choiceMultimap.begin();
+            for (; it != choiceMultimap.end(); ++it)
+            {
+                const Choice *choice = (*it).second;
+                if (answerSet.find(choice->getChoiceText()) == answerSet.end() && strcmp(choice->getChoiceText(), question->getExcludedChoice()) != 0)
+                {
+                    sortedWrongChoiceVector.push_back(choice);
+                }
+            }
+        }
+        else
+        {
+            for (i = 0; i < _choiceCount; ++i)
+            {
+                const Choice *choice = getChoice(i);
+                if (answerSet.find(choice->getChoiceText()) == answerSet.end() && strcmp(choice->getChoiceText(), question->getExcludedChoice()) != 0)
+                {
+                    sortedWrongChoiceVector.push_back(choice);
+                }
+            }
+        }
+
+        int wrongChoiceCount = sortedWrongChoiceVector.size();
         if (rightChoiceCount + wrongChoiceCount < choiceCount) rightChoiceCount = choiceCount - wrongChoiceCount;
 
-        int i, n;
         if (getMapParameters()->getAllAnswersSelectionMode() && answerParameters->getDrawDepth() != 0)
         {
             n = question->getAnswerCount();
@@ -56,8 +96,7 @@ namespace produce_questions
         {
             draw = RandomNumberGenerator::getRandomInt(question->getAnswerCount(), excludedValues);
             excludedValues.insert(draw);
-            const TextAndComment *textAndComment = question->getAnswer(draw);
-            completeQuestion->addChoice(textAndComment->getText(), textAndComment->getComment(), true);
+            completeQuestion->addChoice(question->getAnswer(draw), question->getComment(draw), true);
             if (!getMapParameters()->getAllAnswersSelectionMode() && answerParameters->getDrawDepth() != 0) completeQuestion->addMapId(question->getAnswerMapId(draw), answerParameters);
         }
 
@@ -68,7 +107,7 @@ namespace produce_questions
             if (_proximityCriterionType != produce_questions::POINT_3D) draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount, excludedValues);
             else draw = RandomNumberGenerator::getRandomInt(wrongChoiceCount, distribParameter + _distribParameterCorrection, excludedValues);
             excludedValues.insert(draw);
-            const Choice *wrongChoice = question->getWrongChoice(draw);
+            const Choice *wrongChoice = sortedWrongChoiceVector[draw];
             completeQuestion->addChoice(wrongChoice->getChoiceText(), wrongChoice->getComment(), false);
             if (wrongChoiceParameters->getDrawDepth() != 0) completeQuestion->addMapId(wrongChoice->getMapId(), wrongChoiceParameters);
         }

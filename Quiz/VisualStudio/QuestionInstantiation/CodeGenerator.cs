@@ -22,11 +22,14 @@ namespace QuestionInstantiation
         private int _currentMapSubParametersOffset;
         private int _currentSimpleAnswerCategoryOffset;
         private int _currentMultipleAnswerQuestionOffset;
+        private int _currentMultipleAnswerCategoryOffset;
+        private int _currentRelationOrderQuestionOffset;
+        private int _currentRelationOrderCategoryOffset;
 
-        private readonly List<int> _simpleAnswerQuestionCategoryOffsets = new List<int>();
-        private readonly List<int> _multipleAnswerQuestionCategoryOffsets = new List<int>();
-        private readonly List<int> _relationOrderQuestionCategoryOffsets = new List<int>();
-        private readonly List<int> _attributeOrderQuestionCategoryOffsets = new List<int>();
+        private readonly List<int> _simpleAnswerCategoryOffsets = new List<int>();
+        private readonly List<int> _multipleAnswerCategoryOffsets = new List<int>();
+        private readonly List<int> _relationOrderCategoryOffsets = new List<int>();
+        private readonly List<int> _attributeOrderCategoryOffsets = new List<int>();
 
         private readonly Dictionary<string, int> _stringDictionary = new Dictionary<string, int>();
 
@@ -43,6 +46,8 @@ namespace QuestionInstantiation
             _currentMapSubParametersOffset = 0;
             _currentSimpleAnswerCategoryOffset = 0;
             _currentMultipleAnswerQuestionOffset = 0;
+            _currentRelationOrderQuestionOffset = 0;
+            _currentRelationOrderCategoryOffset = 0;
 
             _stringDictionary.Add("", 0);
 
@@ -83,32 +88,44 @@ namespace QuestionInstantiation
             path = String.Format("{0}/MultipleAnswerQuestions.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("MultipleAnswerQuestions.cpp", "namespace produce_questions\n{\nint multipleAnswerQuestions[] =\n{");
+
+            path = String.Format("{0}/MultipleAnswerCategories.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("MultipleAnswerCategories.cpp", "namespace produce_questions\n{\nint multipleAnswerCategories[] =\n{");
+
+            path = String.Format("{0}/RelationOrderQuestions.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("RelationOrderQuestions.cpp", "namespace produce_questions\n{\nint relationOrderQuestions[] =\n{");
+
+            path = String.Format("{0}/RelationOrderCategories.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("RelationOrderCategories.cpp", "namespace produce_questions\n{\nint relationOrderCategories[] =\n{");
         }
 
         internal void close(int questionCount, int weightSum, double distribParameter, int choiceCount)
         {
-            int simpleAnswerQuestionCategoryOffsets = 0;
-            if (_simpleAnswerQuestionCategoryOffsets.Count() != 0)
+            int simpleAnswerCategoryOffsets = 0;
+            if (_simpleAnswerCategoryOffsets.Count() != 0)
             {
-                simpleAnswerQuestionCategoryOffsets = getIntArrayOffset(_simpleAnswerQuestionCategoryOffsets);
+                simpleAnswerCategoryOffsets = getIntArrayOffset(_simpleAnswerCategoryOffsets);
             }
 
-            int multipleAnswerQuestionCategoryOffsets = 0;
-            if (_multipleAnswerQuestionCategoryOffsets.Count() != 0)
+            int multipleAnswerCategoryOffsets = 0;
+            if (_multipleAnswerCategoryOffsets.Count() != 0)
             {
-                multipleAnswerQuestionCategoryOffsets = getIntArrayOffset(_multipleAnswerQuestionCategoryOffsets);
+                multipleAnswerCategoryOffsets = getIntArrayOffset(_multipleAnswerCategoryOffsets);
             }
 
-            int relationOrderQuestionCategoryOffsets = 0;
-            if (_relationOrderQuestionCategoryOffsets.Count() != 0)
+            int relationOrderCategoryOffsets = 0;
+            if (_relationOrderCategoryOffsets.Count() != 0)
             {
-                relationOrderQuestionCategoryOffsets = getIntArrayOffset(_relationOrderQuestionCategoryOffsets);
+                relationOrderCategoryOffsets = getIntArrayOffset(_relationOrderCategoryOffsets);
             }
 
-            int attributeOrderQuestionCategoryOffsets = 0;
-            if (_attributeOrderQuestionCategoryOffsets.Count() != 0)
+            int attributeOrderCategoryOffsets = 0;
+            if (_attributeOrderCategoryOffsets.Count() != 0)
             {
-                attributeOrderQuestionCategoryOffsets = getIntArrayOffset(_attributeOrderQuestionCategoryOffsets);
+                attributeOrderCategoryOffsets = getIntArrayOffset(_attributeOrderCategoryOffsets);
             }
 
             int[] distribParameterInt = doubleToIntArray(distribParameter);
@@ -118,10 +135,10 @@ namespace QuestionInstantiation
 
             string code = String.Format(
                 "namespace produce_questions\n{{\nint level[] =\n{{\n{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}\n}};\n}}\n",
-                _simpleAnswerQuestionCategoryOffsets.Count(), simpleAnswerQuestionCategoryOffsets,
-                _multipleAnswerQuestionCategoryOffsets.Count(), multipleAnswerQuestionCategoryOffsets,
-                _relationOrderQuestionCategoryOffsets.Count(), relationOrderQuestionCategoryOffsets,
-                _attributeOrderQuestionCategoryOffsets.Count(), attributeOrderQuestionCategoryOffsets,
+                _simpleAnswerCategoryOffsets.Count(), simpleAnswerCategoryOffsets,
+                _multipleAnswerCategoryOffsets.Count(), multipleAnswerCategoryOffsets,
+                _relationOrderCategoryOffsets.Count(), relationOrderCategoryOffsets,
+                _attributeOrderCategoryOffsets.Count(), attributeOrderCategoryOffsets,
                 questionCount, weightSum, distribParameterInt[0], distribParameterInt[1], choiceCount);
 
             append("Level_.cpp", code);
@@ -135,6 +152,9 @@ namespace QuestionInstantiation
             append("MapSubParameterss.cpp", "\n};\n}\n");
             append("SimpleAnswerCategories.cpp", "\n};\n}\n");
             append("MultipleAnswerQuestions.cpp", "\n};\n}\n");
+            append("MultipleAnswerCategories.cpp", "\n};\n}\n");
+            append("RelationOrderQuestions.cpp", "\n};\n}\n");
+            append("RelationOrderCategories.cpp", "\n};\n}\n");
         }
 
         private int getStringOffset(string str)
@@ -428,6 +448,50 @@ namespace QuestionInstantiation
             return offset;
         }
 
+        internal int addRelationOrderQuestion(RelationOrderQuestion question)
+        {
+            string questionText = question.QuestionText.getText(_languageId);
+
+            string mapId = "";
+            if (question.QuestionElement.XmlElement.mapId != null) mapId = question.QuestionElement.XmlElement.mapId.Substring(2);
+
+            List<string> choiceTexts = new List<string>();
+            List<string> choiceMapIds = new List<string>();
+            foreach (Choice choice in question.ChoiceList)
+            {
+                choiceTexts.Add(choice.AttributeValue.Value.getText(_languageId));
+                if (choice.Element.XmlElement.mapId != null) choiceMapIds.Add(choice.Element.XmlElement.mapId.Substring(2));
+                else choiceMapIds.Add("");
+            }
+
+            int offset = _currentRelationOrderQuestionOffset;
+
+            int questionTextOffset = getStringOffset(questionText);
+            int mapIdOffset = getStringOffset(mapId);
+
+            int choiceTextsOffset = 0;
+            int choiceMapIdsOffset = 0;
+            if (choiceTexts.Count() != 0)
+            {
+                List<int> stringOffsets = new List<int>();
+                foreach (string str in choiceTexts) stringOffsets.Add(getStringOffset(str));
+                choiceTextsOffset = getIntArrayOffset(stringOffsets);
+
+                stringOffsets.Clear();
+                foreach (string str in choiceMapIds) stringOffsets.Add(getStringOffset(str));
+                choiceMapIdsOffset = getIntArrayOffset(stringOffsets);
+            }
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7}",
+                offset == 0 ? "" : ",", _currentRelationOrderQuestionOffset, questionText, questionTextOffset, mapIdOffset,
+                choiceTexts.Count(), choiceTextsOffset, choiceMapIdsOffset);
+
+            append("RelationOrderQuestions.cpp", code);
+            _currentRelationOrderQuestionOffset += 5;
+
+            return offset;
+        }
+
         internal int addMapParameters(MapParameters parameters)
         {
             int framingLevel = parameters.FramingLevel;
@@ -496,8 +560,8 @@ namespace QuestionInstantiation
             return offset;
         }
 
-        internal void addSimpleAnswerCategory(int weightIndex, int mapParametersOffset, List<int>questionList, List<int> choiceList,
-                                             double distribParameterCorrection, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
+        internal void addSimpleAnswerCategory(int weightIndex, int mapParametersOffset, List<int> questionList, List<int> choiceList,
+                                              double distribParameterCorrection, XmlSimpleAnswerProximityCriterionEnum proximityCriterion)
         {
             int proximityCriterionType = 0; // NONE
             if (proximityCriterion == XmlSimpleAnswerProximityCriterionEnum.SORT_KEY) proximityCriterionType = 1; // STRING
@@ -521,7 +585,52 @@ namespace QuestionInstantiation
             append("SimpleAnswerCategories.cpp", code);
             _currentSimpleAnswerCategoryOffset += 9;
 
-            _simpleAnswerQuestionCategoryOffsets.Add(offset);
+            _simpleAnswerCategoryOffsets.Add(offset);
+        }
+
+        internal void addMultipleAnswerCategory(int weightIndex, int mapParametersOffset, List<int> questionList, List<int> choiceList,
+                                                double distribParameterCorrection, XmlMultipleAnswerProximityCriterionEnum proximityCriterion)
+        {
+            int proximityCriterionType = 0; // NONE
+            if (proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION) proximityCriterionType = 3; // POINT_3D
+
+            int offset = _currentMultipleAnswerCategoryOffset;
+
+            int questionListOffset = 0;
+            if (questionList.Count() != 0) questionListOffset = getIntArrayOffset(questionList);
+
+            int choiceListOffset = 0;
+            if (choiceList.Count() != 0) choiceListOffset = getIntArrayOffset(choiceList);
+
+            int[] distribParameterCorrectionInt = doubleToIntArray(distribParameterCorrection);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10}", offset == 0 ? "" : ",", _currentMultipleAnswerCategoryOffset,
+                weightIndex, mapParametersOffset, questionList.Count, questionListOffset, choiceList.Count, choiceListOffset,
+                distribParameterCorrectionInt[0], distribParameterCorrectionInt[1], proximityCriterionType);
+
+            append("MultipleAnswerCategories.cpp", code);
+            _currentMultipleAnswerCategoryOffset += 9;
+
+            _multipleAnswerCategoryOffsets.Add(offset);
+        }
+
+        internal void addRelationOrderCategory(int weightIndex, int mapParametersOffset, List<int> questionList, double distribParameterCorrection)
+        {
+            int offset = _currentRelationOrderCategoryOffset;
+
+            int questionListOffset = 0;
+            if (questionList.Count() != 0) questionListOffset = getIntArrayOffset(questionList);
+
+            int[] distribParameterCorrectionInt = doubleToIntArray(distribParameterCorrection);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7}", offset == 0 ? "" : ",", _currentRelationOrderCategoryOffset,
+                weightIndex, mapParametersOffset, questionList.Count, questionListOffset,
+                distribParameterCorrectionInt[0], distribParameterCorrectionInt[1]);
+
+            append("RelationOrderCategories.cpp", code);
+            _currentRelationOrderCategoryOffset += 6;
+
+            _relationOrderCategoryOffsets.Add(offset);
         }
 
         private int getDoubleArrayOffset(IEnumerable<double> values)

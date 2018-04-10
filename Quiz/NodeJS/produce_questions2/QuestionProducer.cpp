@@ -5,16 +5,20 @@
 #include "CompleteQuestion.h"
 
 // tmp
-#include "Choice.h"
+/*#include "Choice.h"
 #include "SimpleAnswerQuestion.h"
 #include "MapParameters.h"
 #include "MapSubParameters.h"
 #include "SimpleAnswerCategory.h"
 #include "MultipleAnswerQuestion.h"
-#include "QuizData.h"
+#include "MultipleAnswerCategory.h"
+#include "RelationOrderQuestion.h"
+#include "RelationOrderCategory.h"
+#include "QuizData.h"*/
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 namespace produce_questions
 {
@@ -35,6 +39,21 @@ namespace produce_questions
             std::cerr << "Unexpected double decoding" << std::endl;
             return -1;
         }
+
+        /*RelationOrderCategory *category = RelationOrderCategory::get(6);
+        std::cout << category->getWeightIndex() << std::endl;
+        std::cout << category->getMapParameters()->getFramingLevel() << std::endl;
+        std::cout << category->getQuestionCount() << std::endl;
+        std::cout << category->getQuestion(0)->getQuestion() << std::endl;
+        std::cout << category->getDistribParameterCorrection() << std::endl;
+
+        RelationOrderQuestion *question = RelationOrderQuestion::get(5);
+
+        std::cout << question->getQuestion() << std::endl;
+        std::cout << question->getMapId() << std::endl;
+        std::cout << question->getChoiceCount() << std::endl;
+        std::cout << question->getChoiceText(5) << std::endl;
+        std::cout << question->getChoiceMapId(5) << std::endl;
 
         Choice *choice = Choice::get(0);
 
@@ -70,8 +89,17 @@ namespace produce_questions
         std::cout << question->getPointCriterionValueY() << std::endl;
         std::cout << question->getPointCriterionValueZ() << std::endl;
 
+        MultipleAnswerCategory *category = MultipleAnswerCategory::get(45);
+        std::cout << category->getWeightIndex() << std::endl;
+        std::cout << category->getMapParameters()->getFramingLevel() << std::endl;
+        std::cout << category->getQuestionCount() << std::endl;
+        std::cout << category->getQuestion(0)->getQuestion() << std::endl;
+        std::cout << category->getChoiceCount() << std::endl;
+        std::cout << category->getChoice(0)->getChoiceText() << std::endl;
+        std::cout << category->getDistribParameterCorrection() << std::endl;
+        std::cout << category->getProximityCriterionType() << std::endl;
 
-        /*SimpleAnswerQuestion *question = SimpleAnswerQuestion::get(0);
+        SimpleAnswerQuestion *question = SimpleAnswerQuestion::get(0);
         std::cout << question->getQuestion() << std::endl;
         std::cout << question->getAnswer() << std::endl;
         std::cout << question->getProximityCriterionType() << std::endl;
@@ -107,37 +135,46 @@ namespace produce_questions
         std::cout << category->getProximityCriterionType() << std::endl;*/
 
         const Level *level = Level::instance();
-        std::vector<Category *> categoryVector;
+        std::multimap<unsigned int, Category *> categoryMap;
 
         int i, n = level->getSimpleAnswerCategoryCount();
         for (i = 0; i < n; ++i)
         {
             Category *category = new Category(level->getSimpleAnswerCategory(i));
-            categoryVector.push_back(category);
+            categoryMap.insert(std::pair<unsigned int, Category *>(category->getWeightIndex(), category));
         }
 
-        /*n = level->getMultipleAnswerCategoryCount();
+        n = level->getMultipleAnswerCategoryCount();
         for (i = 0; i < n; ++i)
         {
             Category *category = new Category(level->getMultipleAnswerCategory(i));
-            categoryVector.push_back(category);
+            categoryMap.insert(std::pair<unsigned int, Category *>(category->getWeightIndex(), category));
         }
 
         n = level->getRelationOrderCategoryCount();
         for (i = 0; i < n; ++i)
         {
             Category *category = new Category(level->getRelationOrderCategory(i));
-            categoryVector.push_back(category);
+            categoryMap.insert(std::pair<unsigned int, Category *>(category->getWeightIndex(), category));
         }
 
-        n = level->getAttributeOrderCategoryCount();
+        /*n = level->getAttributeOrderCategoryCount();
         for (i = 0; i < n; ++i)
         {
             Category *category = new Category(level->getAttributeOrderCategory(i));
-            categoryVector.push_back(category);
+            categoryMap.insert(std::pair<unsigned int, Category *>(category->getWeightIndex(), category));
         }*/
 
-        /*std::string json = "[";
+        std::vector<Category *> categoryVector;
+        std::multimap<unsigned int, Category *>::iterator it = categoryMap.begin();
+        for (; it != categoryMap.end(); ++it) categoryVector.push_back((*it).second);
+
+        /*for (i = 0; i < static_cast<int>(categoryVector.size()); ++i)
+        {
+            std::cout << categoryVector[i]->getWeightIndex() << std::endl;
+        }*/
+
+        std::string json = "[";
 
         int questionCount = level->getQuestionCount();
         for (i = 0; i < questionCount; ++i)
@@ -178,7 +215,7 @@ namespace produce_questions
 
         json += "]";
 
-        std::cout << json;*/
+        std::cout << json;
 
         n = categoryVector.size();
         for (i = 0; i < n; ++i) delete categoryVector[i];

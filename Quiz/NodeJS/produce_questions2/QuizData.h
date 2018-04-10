@@ -8,6 +8,7 @@ namespace produce_questions
     extern double doubleArrays[];
     extern int simpleAnswerQuestions[];
     extern int multipleAnswerQuestions[];
+    extern int relationOrderQuestions[];
     extern int mapParameterss[];
     extern int mapSubParameterss[];
     extern int simpleAnswerCategories[];

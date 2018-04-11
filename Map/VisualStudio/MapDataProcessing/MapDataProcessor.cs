@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using System.IO;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Schemas;
 
 namespace MapDataProcessing
 {

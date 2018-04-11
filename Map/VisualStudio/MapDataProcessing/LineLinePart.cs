@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Schemas;
 
 namespace MapDataProcessing
 {

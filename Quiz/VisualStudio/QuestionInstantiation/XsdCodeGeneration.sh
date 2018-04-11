@@ -1,0 +1,1 @@
+xsd XmlQuizData.xsd /classes

@@ -1,0 +1,1 @@
+xsd XmlMapData.xsd /classes

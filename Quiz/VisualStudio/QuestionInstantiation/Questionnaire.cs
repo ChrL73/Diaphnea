@@ -87,10 +87,92 @@ namespace QuestionInstantiation
             foreach (XmlName xmlName in _quizData.XmlQuizData.parameters.questionnaireName) _name.setText(xmlName.language.ToString(), xmlName.text);
             if (_quizData.verifyText(_name, String.Format("name of questionnaire {0}", _quizData.XmlQuizData.parameters.questionnaireId)) != 0) return -1;
 
+            bool testMode = false;
+            foreach (XmlAttributeQuestionCategory category in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
+            {
+                if (category.test)
+                {
+                    testMode = true;
+                    break;
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlRelation1QuestionCategory category in _quizData.XmlQuizData.questionCategories.relation1QuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlRelationNQuestionCategory category in _quizData.XmlQuizData.questionCategories.relationNQuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlAttributeOrderQuestionCategory category in _quizData.XmlQuizData.questionCategories.attributeOrderQuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlRelationLimitQuestionCategory category in _quizData.XmlQuizData.questionCategories.relationLimitQuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlRelationOrderQuestionCategory category in _quizData.XmlQuizData.questionCategories.relationOrderQuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testMode)
+            {
+                foreach (XmlRelationExistenceQuestionCategory category in _quizData.XmlQuizData.questionCategories.relationExistenceQuestionCategoryList)
+                {
+                    if (category.test)
+                    {
+                        testMode = true;
+                        break;
+                    }
+                }
+            }
+
             foreach (XmlLevel xmlLevel in _quizData.XmlQuizData.parameters.levelList)
             {
                 Level level = new Level();
-                if (level.initialize(_quizData, xmlLevel) != 0) return -1;
+                if (level.initialize(_quizData, xmlLevel, testMode) != 0) return -1;
                 _levelList.Add(level);
             }
 

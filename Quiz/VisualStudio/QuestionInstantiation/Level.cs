@@ -14,6 +14,7 @@ namespace QuestionInstantiation
     {
         private XmlLevel _xmlLevel;
         private QuizData _quizData;
+        private bool _testMode;
         private Text _name = new Text();
         private string _nameInLog;
         private Int32 _value;
@@ -25,10 +26,11 @@ namespace QuestionInstantiation
         private readonly Dictionary<XmlElementType, List<Element>> _elementByTypeDictionary = new Dictionary<XmlElementType, List<Element>>();
         private readonly List<Category> _categoryList = new List<Category>();
 
-        internal int initialize(QuizData quizData, XmlLevel xmlLevel)
+        internal int initialize(QuizData quizData, XmlLevel xmlLevel, bool testMode)
         {
             _xmlLevel = xmlLevel;
             _quizData = quizData;
+            _testMode = testMode;
 
             _nameInLog = _xmlLevel.name[0].text;
             foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language.ToString(), xmlName.text);
@@ -203,7 +205,7 @@ namespace QuestionInstantiation
             foreach (XmlAttributeQuestionCategory xmlAttributeQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeQuestionCategoryList)
             {
                 Int32 minLevel = Int32.Parse(xmlAttributeQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlAttributeQuestionCategory.test))
                 {
                     XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
 
@@ -307,7 +309,7 @@ namespace QuestionInstantiation
             foreach (XmlRelation1QuestionCategory xmlRelation1QuestionCategory in _quizData.XmlQuizData.questionCategories.relation1QuestionCategoryList)
             {
                 int minLevel = Int32.Parse(xmlRelation1QuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlRelation1QuestionCategory.test))
                 {
                     RelationType relationType = _quizData.getRelationType(xmlRelation1QuestionCategory.relation);
                     if (xmlRelation1QuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
@@ -484,7 +486,7 @@ namespace QuestionInstantiation
             foreach (XmlRelationNQuestionCategory xmlRelationNQuestionCategory in _quizData.XmlQuizData.questionCategories.relationNQuestionCategoryList)
             {
                 int minLevel = Int32.Parse(xmlRelationNQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlRelationNQuestionCategory.test))
                 {
                     RelationType relationType = _quizData.getRelationType(xmlRelationNQuestionCategory.relation);
                     if (xmlRelationNQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
@@ -707,7 +709,7 @@ namespace QuestionInstantiation
             foreach (XmlAttributeOrderQuestionCategory xmlAttributeOrderQuestionCategory in _quizData.XmlQuizData.questionCategories.attributeOrderQuestionCategoryList)
             {
                 Int32 minLevel = Int32.Parse(xmlAttributeOrderQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlAttributeOrderQuestionCategory.test))
                 {
                     XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeOrderQuestionCategory.elementType);
 
@@ -793,7 +795,7 @@ namespace QuestionInstantiation
             foreach (XmlRelationLimitQuestionCategory xmlRelationLimitQuestionCategory in _quizData.XmlQuizData.questionCategories.relationLimitQuestionCategoryList)
             {
                 Int32 minLevel = Int32.Parse(xmlRelationLimitQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlRelationLimitQuestionCategory.test))
                 {
                     RelationType relationType = _quizData.getRelationType(xmlRelationLimitQuestionCategory.relation);
                     if (xmlRelationLimitQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
@@ -946,7 +948,7 @@ namespace QuestionInstantiation
             foreach (XmlRelationOrderQuestionCategory xmlRelationOrderQuestionCategory in _quizData.XmlQuizData.questionCategories.relationOrderQuestionCategoryList)
             {
                 int minLevel = Int32.Parse(xmlRelationOrderQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlRelationOrderQuestionCategory.test))
                 {
                     RelationType relationType = _quizData.getRelationType(xmlRelationOrderQuestionCategory.relation);
                     if (xmlRelationOrderQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
@@ -1074,7 +1076,7 @@ namespace QuestionInstantiation
             foreach (XmlRelationExistenceQuestionCategory xmlRelationExistenceQuestionCategory in _quizData.XmlQuizData.questionCategories.relationExistenceQuestionCategoryList)
             {
                 int minLevel = Int32.Parse(xmlRelationExistenceQuestionCategory.minLevel);
-                if (_value >= minLevel)
+                if (_value >= minLevel && (!_testMode || xmlRelationExistenceQuestionCategory.test))
                 {
                     RelationType relationType = _quizData.getRelationType(xmlRelationExistenceQuestionCategory.relation);
                     if (xmlRelationExistenceQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;

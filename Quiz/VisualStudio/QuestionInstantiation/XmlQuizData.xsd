@@ -304,6 +304,7 @@
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlRelation1QuestionCategoryList">
     <xsd:sequence>
@@ -326,6 +327,7 @@
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlRelationNQuestionCategoryList">
     <xsd:sequence>
@@ -348,6 +350,7 @@
     <xsd:attribute name="commentMode" type="XmlCommentModeEnum" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlAttributeOrderQuestionCategoryList">
     <xsd:sequence>
@@ -366,6 +369,7 @@
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlRelationLimitQuestionCategoryList">
     <xsd:sequence>
@@ -387,6 +391,7 @@
     <xsd:attribute name="answerProximityCriterion" type="XmlSimpleAnswerProximityCriterionEnum" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlRelationOrderQuestionCategoryList">
     <xsd:sequence>
@@ -406,6 +411,7 @@
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="distribParameterCorrection" type="XmlDistribParameter" use="optional" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlRelationExistenceQuestionCategoryList">
     <xsd:sequence>
@@ -425,6 +431,7 @@
     <xsd:attribute name="answerAttribute" type="XmlAttributeTypeIdRef" use="required" />
     <xsd:attribute name="weight" type="xsd:nonNegativeInteger" use="required" />
     <xsd:attribute name="minLevel" type="xsd:nonNegativeInteger" use="required" />
+    <xsd:attribute name="test" type="xsd:boolean" use="optional" />
   </xsd:complexType>
   <xsd:complexType name="XmlMapParameters1">
     <xsd:sequence>

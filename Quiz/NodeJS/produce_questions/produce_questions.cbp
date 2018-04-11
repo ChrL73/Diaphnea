@@ -32,7 +32,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="5aa83c26580d503c85c9d0e0 fr localhost diaphnea" />
+				<Option parameters="5ac7845c8bb535237f9d3ddb fr localhost diaphnea" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
@@ -80,6 +80,8 @@
 		<Unit filename="MultipleAnswerCategory.h" />
 		<Unit filename="MultipleAnswerQuestion.cpp" />
 		<Unit filename="MultipleAnswerQuestion.h" />
+		<Unit filename="Point.cpp" />
+		<Unit filename="Point.h" />
 		<Unit filename="ProximityCriterionTypeEnum.h" />
 		<Unit filename="QuestionMultiplicityEnum.h" />
 		<Unit filename="QuestionProducer.cpp" />

@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_Gabon.xml ../../../../VisualStudio/QuestionInstantiation/QuizData_France.xml</Commandlineparameters>
+    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_France.xml</Commandlineparameters>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
+    <Commandlineparameters>../../../../VisualStudio/QuestionInstantiation/QuizData_France.xml</Commandlineparameters>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -114,6 +115,9 @@
     <Compile Include="..\..\VisualStudio\QuestionInstantiation\XmlQuizData.cs">
       <Link>XmlQuizData.cs</Link>
     </Compile>
+    <Compile Include="..\..\VisualStudio\QuestionInstantiation\CodeGenerator.cs">
+      <Link>CodeGenerator.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
@@ -127,5 +131,16 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\VisualStudio\QuestionInstantiation\QuizData_France.xml">
+      <Link>QuizData_France.xml</Link>
+    </None>
+    <None Include="..\..\VisualStudio\QuestionInstantiation\QuizData_Gabon.xml">
+      <Link>QuizData_Gabon.xml</Link>
+    </None>
+    <None Include="..\..\VisualStudio\QuestionInstantiation\XmlQuizData.xsd">
+      <Link>XmlQuizData.xsd</Link>
+    </None>
   </ItemGroup>
 </Project>

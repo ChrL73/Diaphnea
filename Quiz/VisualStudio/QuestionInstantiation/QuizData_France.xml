@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <quizData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="XmlQuizData.xsd">
 
-  <parameters questionnaireId="_France" mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea">
+  <parameters questionnaireId="_France" mapId="_France" logFileName="log.txt" fileLogLevel="MESSAGE" consoleLogLevel="MESSAGE" databaseName="diaphnea"
+              generationDir="../../../../NodeJS/produce_questions2/generated_code">
     <languageList>
       <language id="fr" name="Français" status="TRANSLATION_COMPLETED"/>
       <language id="en" name="English" status="TRANSLATION_COMPLETED"/>
@@ -8183,7 +8184,7 @@
     </element>
     <element id="el_VilleneuveSurLot" type="et_Ville" minLevel="1" mapId="e_VilleneuveSurLot">
       <elementName>
-        <name language="fr" text="Villeneuve-sur-Lot-sur-Lot"/>
+        <name language="fr" text="Villeneuve-sur-Lot"/>
         <name language="en" text="Cahors"/>
       </elementName>
       <attributeList>

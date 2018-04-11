@@ -1,8 +1,8 @@
 import React from 'react';
-import waitGif from './wait.gif'
+import waitGif from './wait.gif';
 import { Modal, Button, Tabs, Tab } from 'react-bootstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css'
+import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 export class Home extends React.Component
 {
@@ -10,18 +10,12 @@ export class Home extends React.Component
    {
       super(props);
       
-      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
-      props.socket.on('updateIndex', (texts) => this.handleUpdateSiteLanguage(texts));
-      props.socket.on('unknownName', () => this.handleUnknownName());
-      props.socket.on('indexError', () => this.handleServerError());
-      props.socket.on('updateSelects', (data) => this.handleUpdateSelects(data));
-      props.socket.on('tables', (tableData) => this.handleUpdateTable(tableData));
-      
       this.stateReset =
       {
          pass: '',
          showModal1: false,
          showModal2: false,
+         showModal3: false,
          navBarWaitDisplay: 'none',
          questionnaireWaitDisplay: 'none',
          questionnaireLanguageWaitDisplay: 'none',
@@ -163,6 +157,28 @@ export class Home extends React.Component
                         <Button className="close" onClick={() => this.setState({ showModal2: false })}>x</Button>
                      </Modal.Body>
                   </Modal>
+                  <Modal show={this.state.showModal3} onHide={() => this.setState({ showModal3: false })}>               
+                     <Modal.Body>
+                        <p>{this.state.texts.alphaWarningLine1}</p>
+                        <ul>
+                           <li>{this.state.texts.alphaWarningLine2}</li>
+                           <li>{this.state.texts.alphaWarningLine3}</li>
+                           <li>{this.state.texts.alphaWarningLine4}</li>
+                           <li>{this.state.texts.alphaWarningLine5}</li>
+                        </ul>
+                        <p>
+                           {this.state.texts.alphaWarningLine6}
+                           <span> </span>
+                           <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
+                        </p>
+                        
+                     </Modal.Body>
+                     <Modal.Footer>
+                        <div className="row text-center">
+                           <Button className="btn btn-primary input-sm" onClick={() => { this.setState({ showModal3: false }); }}>{this.state.texts.close}</Button>
+                        </div>
+                     </Modal.Footer>
+                  </Modal>
                   <form>
                      <div className="row">
                         <div className="col-sm-4 col-sm-offset-4">
@@ -248,6 +264,9 @@ export class Home extends React.Component
                         {this.state.version}
                      </div>
                      <div>
+                        <a onClick={() => this.setState({ showModal3: true })} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
+                     </div>
+                     <div>
                         {this.state.texts.sourceCode}:
                         <span> </span>
                         <a target="_blank" href={this.state.sourceUrl}>{this.state.sourceUrl}</a>
@@ -305,7 +324,7 @@ export class Home extends React.Component
    {
       this.setState({ siteLanguageId: value, navBarWaitDisplay: 'inline' });
       if (!this.state.userName) document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
-      this.props.socket.emit('languageChoice', { page: 'index', languageId: value });
+      this.props.emit('languageChoice', { page: 'index', languageId: value });
    }
    
    handleQuestionnaireChange(value)
@@ -344,41 +363,41 @@ export class Home extends React.Component
          document.cookie = 'levelId=' + this.state.levelId + expires;
       }
 
-      this.props.socket.emit('levelChoice', { questionnaireId: this.state.questionnaireId, questionnaireLanguageId: this.state.questionnaireLanguageId, levelId: this.state.levelId });
+      this.props.emit('levelChoice', { questionnaireId: this.state.questionnaireId, questionnaireLanguageId: this.state.questionnaireLanguageId, levelId: this.state.levelId });
    }
 
    handleSignInBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signIn', { name: this.state.tmpName, pass: this.state.pass });
+      this.props.emit('signIn', { name: this.state.tmpName, pass: this.state.pass });
       this.setState({ navBarWaitDisplay: 'inline' });
    }
 
    handleSignOutBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signOut', {});
+      this.props.emit('signOut', {});
       this.setState({ navBarWaitDisplay: 'inline' }); 
    }
    
    handleSignUpBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signUp', { name: this.state.tmpName });
+      this.props.emit('signUp', { name: this.state.tmpName });
       this.setState({ navBarWaitDisplay: 'inline' });
    }
    
    handleStartBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('newGame', {});
+      this.props.emit('newGame', {});
       this.setState({ startWaitDisplay: 'inline' });
    }
    
    handleSelectTab(key)
    {
       this.setState({ scoreTab: key }, () => this.resize1());
-      this.props.socket.emit('scoreTab', { n: key });
+      this.props.emit('scoreTab', { n: key });
    }
    
    // 2- Server message handlers
@@ -417,7 +436,7 @@ export class Home extends React.Component
    
    emitUpdateTables()
    {
-      this.props.socket.emit('getTables', { questionnaireId: this.state.questionnaireId, levelId: this.state.levelId });
+      this.props.emit('getTables', { questionnaireId: this.state.questionnaireId, levelId: this.state.levelId });
       this.setState({ tableWaitDisplay: 'inline' });
    }
    
@@ -456,12 +475,12 @@ export class Home extends React.Component
    
    handleUnknownName()
    {
-      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal1: 'true' });
+      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal1: true });
    }
    
    handleServerError()
    {
-      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal2: 'true' });
+      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal2: true });
    }
    
    handleUpdateSelects(data)

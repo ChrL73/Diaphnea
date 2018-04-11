@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace QuestionInstantiation
 {
@@ -1207,6 +1208,28 @@ namespace QuestionInstantiation
 
             levelDocument.AddRange(categoriesDocument);
             levelCollection.InsertOne(levelDocument);
+
+            return 0;
+        }
+
+        internal int generateCode()
+        {
+            List<CodeGenerator> codeGeneratorList = new List<CodeGenerator>();
+
+            foreach (string languageId in Text.CompletedTranslationLanguages)
+            {
+                string dirName = String.Format("{0}/{1}{2}{3}", _quizData.XmlQuizData.parameters.generationDir, _quizData.XmlQuizData.parameters.questionnaireId,
+                                               _xmlLevel.levelId, languageId);
+
+                codeGeneratorList.Add(new CodeGenerator(dirName, languageId));
+            }
+
+            foreach (Category category in _categoryList)
+            {
+                if (category.generateCode(codeGeneratorList) != 0) return -1;
+            }
+
+            foreach (CodeGenerator generator in codeGeneratorList) generator.close(_questionCount, _weightSum, _xmlLevel.distribParameter, _choiceCount);
 
             return 0;
         }

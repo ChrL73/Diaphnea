@@ -23,6 +23,11 @@ namespace QuestionInstantiation
             _mapParameters = mapParameters;
         }
 
+        internal MapParameters MapParameters
+        {
+            get { return _mapParameters; }
+        }
+
         protected Int32 WeightIndex
         {
             get { return _weightIndex; }
@@ -93,5 +98,6 @@ namespace QuestionInstantiation
         }
 
         abstract internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId);
+        abstract internal int generateCode(List<CodeGenerator> codeGeneratorList);
     }
 }

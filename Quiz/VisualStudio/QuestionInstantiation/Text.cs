@@ -47,6 +47,11 @@ namespace QuestionInstantiation
             }
         }
 
+        internal static IEnumerable<string> CompletedTranslationLanguages
+        {
+            get { return _completedTranslationDictionary.Keys; }
+        }
+
         internal Double? getAsDouble()
         {
             if (_textDictionary.Count() == 0) return null;

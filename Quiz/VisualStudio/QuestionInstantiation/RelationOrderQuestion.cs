@@ -21,6 +21,10 @@ namespace QuestionInstantiation
             _questionElement = questionElement;
         }
 
+        internal Text QuestionText { get { return _questionText; } }
+        internal Element QuestionElement { get { return _questionElement; } }
+        internal List<Choice> ChoiceList { get { return _choiceList; } }
+
         internal int ChoiceCount
         {
             get { return _choiceList.Count; }

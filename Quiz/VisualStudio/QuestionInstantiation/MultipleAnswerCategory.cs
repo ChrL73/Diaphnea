@@ -225,5 +225,30 @@ namespace QuestionInstantiation
 
             return choiceListDocument;
         }
+
+        internal override int generateCode(List<CodeGenerator> codeGeneratorList)
+        {
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            {
+                List<int> choiceList = new List<int>();
+                List<int> questionList = new List<int>();
+
+                foreach (List<Choice> list in _choiceDictionary.Values)
+                {
+                    choiceList.Add(codeGenerator.addMultipleAnswerChoice(list, _proximityCriterion));
+                }
+
+                foreach (MultipleAnswerQuestion question in _questionList)
+                {
+                    questionList.Add(codeGenerator.addMultipleAnswerQuestion(question, _proximityCriterion));
+                }
+
+                int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+
+                codeGenerator.addMultipleAnswerCategory(WeightIndex, mapParamOffset, questionList, choiceList, _distribParameterCorrection, _proximityCriterion);
+            }
+
+            return 0;
+        }
     }
 }

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{291CBFF8-3A21-456B-90EE-4EA770E198B8}</ProjectGuid>
+    <Compiler>
+      <Compiler ctype="GppCompiler" />
+    </Compiler>
+    <Language>CPP</Language>
+    <Target>Bin</Target>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <Externalconsole>true</Externalconsole>
+    <OutputName>produce_questions2</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <Externalconsole>true</Externalconsole>
+    <OutputName>produce_questions2</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <OptimizationLevel>3</OptimizationLevel>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\NodeJS\produce_questions2\Choice.cpp">
+      <Link>Choice.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\produce_questions.cpp">
+      <Link>produce_questions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\QuestionProducer.cpp">
+      <Link>QuestionProducer.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.cpp">
+      <Link>RandomNumberGenerator.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Choices.cpp">
+      <Link>generated_code\Choices.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\DoubleArrays.cpp">
+      <Link>generated_code\DoubleArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\IntArrays.cpp">
+      <Link>generated_code\IntArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Strings.cpp">
+      <Link>generated_code\Strings.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerQuestion.cpp">
+      <Link>SimpleAnswerQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerQuestions.cpp">
+      <Link>generated_code\SimpleAnswerQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapParameters.cpp">
+      <Link>MapParameters.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapSubParameters.cpp">
+      <Link>MapSubParameters.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapParameterss.cpp">
+      <Link>generated_code\MapParameterss.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapSubParameterss.cpp">
+      <Link>generated_code\MapSubParameterss.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerCategory.cpp">
+      <Link>SimpleAnswerCategory.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerCategories.cpp">
+      <Link>generated_code\SimpleAnswerCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\Category.cpp">
+      <Link>Category.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\Level.cpp">
+      <Link>Level.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Level_.cpp">
+      <Link>generated_code\Level_.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\CompleteQuestion.cpp">
+      <Link>CompleteQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\TextAndComment.cpp">
+      <Link>TextAndComment.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MapIdInfo.cpp">
+      <Link>MapIdInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MultipleAnswerQuestion.cpp">
+      <Link>MultipleAnswerQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MultipleAnswerQuestions.cpp">
+      <Link>generated_code\MultipleAnswerQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\MultipleAnswerCategory.cpp">
+      <Link>MultipleAnswerCategory.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MultipleAnswerCategories.cpp">
+      <Link>generated_code\MultipleAnswerCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\RelationOrderQuestion.cpp">
+      <Link>RelationOrderQuestion.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\RelationOrderQuestions.cpp">
+      <Link>generated_code\RelationOrderQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\RelationOrderCategory.cpp">
+      <Link>RelationOrderCategory.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\RelationOrderCategories.cpp">
+      <Link>generated_code\RelationOrderCategories.cpp</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\NodeJS\produce_questions2\Choice.h">
+      <Link>Choice.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuestionProducer.h">
+      <Link>QuestionProducer.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuizData.h">
+      <Link>QuizData.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.h">
+      <Link>RandomNumberGenerator.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\SimpleAnswerQuestion.h">
+      <Link>SimpleAnswerQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\ProximityCriterionTypeEnum.h">
+      <Link>ProximityCriterionTypeEnum.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapParameters.h">
+      <Link>MapParameters.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapSubParameters.h">
+      <Link>MapSubParameters.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\SimpleAnswerCategory.h">
+      <Link>SimpleAnswerCategory.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\Category.h">
+      <Link>Category.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\Level.h">
+      <Link>Level.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\CompleteQuestion.h">
+      <Link>CompleteQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\QuestionMultiplicityEnum.h">
+      <Link>QuestionMultiplicityEnum.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\TextAndComment.h">
+      <Link>TextAndComment.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MapIdInfo.h">
+      <Link>MapIdInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MultipleAnswerQuestion.h">
+      <Link>MultipleAnswerQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\MultipleAnswerCategory.h">
+      <Link>MultipleAnswerCategory.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\RelationOrderQuestion.h">
+      <Link>RelationOrderQuestion.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\RelationOrderCategory.h">
+      <Link>RelationOrderCategory.h</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="generated_code\" />
+  </ItemGroup>
+</Project>

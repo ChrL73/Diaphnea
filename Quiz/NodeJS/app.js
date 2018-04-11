@@ -181,7 +181,15 @@ io.on('connection', function(socket)
          time: texts.time,
          version: texts.version,
          sourceCode: texts.sourceCode,
-         issues: texts.issues
+         issues: texts.issues,
+         warning: texts.warning,
+         alphaWarningLine1: texts.alphaWarningLine1,
+         alphaWarningLine2: texts.alphaWarningLine2,
+         alphaWarningLine3: texts.alphaWarningLine3,
+         alphaWarningLine4: texts.alphaWarningLine4,
+         alphaWarningLine5: texts.alphaWarningLine5,
+         alphaWarningLine6: texts.alphaWarningLine6,
+         close: texts.close
       };
       
       return t;
@@ -245,65 +253,79 @@ io.on('connection', function(socket)
       return t;
    }
    
-   function emitDisplayGame(context)
+   function emitDisplayGame(context, reqId)
    {
       context.currentPage = pages.game;
-      context.saver.save(function(err) { if (err) { console.log(err); /* Todo: Handle error */ } });
-      
-      var texts = translate(context.siteLanguageId).texts;
-      
-      var questions = [];
-      var mapInfo = [];
-      context.questions.forEach(function(question, iQuestion)
+      context.saver.save(function(err)
       {
-         var sentQuestion =
+         if (err)
          {
-            question: question.question,
-            isMultiple: question.isMultiple,
-            choices: []
-         };
-         
-         question.choices.forEach(function(choice)
-         {
-            var sentChoice = { text: choice.text };   
-            if (context.questionStates[iQuestion].answered) sentChoice.comment = choice.comment;
-            sentQuestion.choices.push(sentChoice);
-         });
-         
-         questions.push(sentQuestion);
-         
-         if (context.questionStates[iQuestion].answered)
-         {
-            mapInfo.push(
-            {
-               mapIds: context.questions[iQuestion].mapIds,
-               framingLevel: context.questions[iQuestion].framingLevel,
-               mode: context.questions[iQuestion].mode,
-               categories: context.questions[iQuestion].categories
-            });
+            // Todo: Handle error
+            // This happens when the user clicks several times on the 'start' button without waiting the beginning of the game.
+            // Todo: Understand why
+            // Example of error message 'No matching document found for id "sb8qVzAOT7X3ritwji4YS8WFxYnmmq7S"'
+            console.log(err); 
          }
-      });        
-         
-      var downData =
-      {
-         page: 'game',
-         texts: getGameTexts(texts),
-         quizId: context.quizId,
-         displayedQuestion: context.displayedQuestion,
-         questions: questions,
-         questionStates: context.questionStates,
-         questionnaireName: context.questionnaireName,
-         levelName: context.levelName,
-         rightAnswerCount: context.rightAnswerCount,
-         answerCount: context.answerCount,
-         time: Date.now() - context.startDate,
-         finalTime: context.finalTime,
-         mapServerUrl: mapServerUrl,
-         mapId: context.mapId,
-         mapInfo: mapInfo
-      };
+         else
+         {
+            var texts = translate(context.siteLanguageId).texts;
 
-      setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+            var questions = [];
+            var mapInfo = [];
+            context.questions.forEach(function(question, iQuestion)
+            {
+               var sentQuestion =
+               {
+                  question: question.question,
+                  isMultiple: question.isMultiple,
+                  choices: []
+               };
+
+               question.choices.forEach(function(choice)
+               {
+                  var sentChoice = { text: choice.text };   
+                  if (context.questionStates[iQuestion].answered) sentChoice.comment = choice.comment;
+                  sentQuestion.choices.push(sentChoice);
+               });
+
+               questions.push(sentQuestion);
+
+               if (context.questionStates[iQuestion].answered)
+               {
+                  mapInfo.push(
+                  {
+                     mapIds: context.questions[iQuestion].mapIds,
+                     framingLevel: context.questions[iQuestion].framingLevel,
+                     mode: context.questions[iQuestion].mode,
+                     categories: context.questions[iQuestion].categories
+                  });
+               }
+            });        
+
+            var downData =
+            {
+               page: 'game',
+               texts: getGameTexts(texts),
+               quizId: context.quizId,
+               displayedQuestion: context.displayedQuestion,
+               questions: questions,
+               questionStates: context.questionStates,
+               questionnaireName: context.questionnaireName,
+               levelName: context.levelName,
+               rightAnswerCount: context.rightAnswerCount,
+               answerCount: context.answerCount,
+               time: Date.now() - context.startDate,
+               finalTime: context.finalTime,
+               mapServerUrl: mapServerUrl,
+               mapId: context.mapId,
+               mapInfo: mapInfo
+            };
+
+            if (reqId || reqId === 0) downData.reqId = reqId;
+
+            setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);
+         }
+      });
    }
    
    function getGameTexts(texts)
@@ -583,7 +605,7 @@ io.on('connection', function(socket)
       });
    });
    
-   socket.on('newGame', function()
+   socket.on('newGame', function(data)
    {
       var cookies = extractCookies(socket.handshake.headers.cookie);
       getContext(socket.request.session, socket.request.sessionID, cookies, function(context)
@@ -636,7 +658,7 @@ io.on('connection', function(socket)
                      });
                   }
 
-                  emitDisplayGame(context);
+                  emitDisplayGame(context, data.reqId);
                });
             });
          });

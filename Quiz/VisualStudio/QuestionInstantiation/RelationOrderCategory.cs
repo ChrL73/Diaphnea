@@ -69,5 +69,24 @@ namespace QuestionInstantiation
 
             return questionListDocument;
         }
+
+        internal override int generateCode(List<CodeGenerator> codeGeneratorList)
+        {
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            {
+                List<int> questionList = new List<int>();
+
+                foreach (RelationOrderQuestion question in _questionList)
+                {
+                    questionList.Add(codeGenerator.addRelationOrderQuestion(question));
+                }
+
+                int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+
+                codeGenerator.addRelationOrderCategory(WeightIndex, mapParamOffset, questionList, _distribParameterCorrection);
+            }
+
+            return 0;
+        }
     }
 }

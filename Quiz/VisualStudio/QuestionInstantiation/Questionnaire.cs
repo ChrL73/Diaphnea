@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace QuestionInstantiation
 {
@@ -24,6 +25,7 @@ namespace QuestionInstantiation
             if (result == 0) result = loadData(path);
             if (result == 0) result = instantiateQuestions();
             if (result == 0) result = fillDatabase();
+            if (result == 0) result = generateCode();
 
             if (result == 0) Console.WriteLine("Question instantitation terminated successfully for file {0}", path);
             else Console.WriteLine("Question instantitation terminated with errors for file {0}", path);
@@ -79,7 +81,7 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int instantiateQuestions()
+        private int instantiateQuestions()
         {
             foreach (XmlName xmlName in _quizData.XmlQuizData.parameters.questionnaireName) _name.setText(xmlName.language.ToString(), xmlName.text);
             if (_quizData.verifyText(_name, String.Format("name of questionnaire {0}", _quizData.XmlQuizData.parameters.questionnaireId)) != 0) return -1;
@@ -94,7 +96,7 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        int fillDatabase()
+        private int fillDatabase()
         {
             if (_quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED).Count() == 0)
             {
@@ -105,7 +107,9 @@ namespace QuestionInstantiation
 
             Text.setCompletedTranslationDictionary(_quizData);
 
-            MongoClient mongoClient = new MongoClient();
+            // Comment database filling while testing the code generation
+
+            /*MongoClient mongoClient = new MongoClient();
             IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
 
             FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("questionnaire", _quizData.XmlQuizData.parameters.questionnaireId);
@@ -155,6 +159,25 @@ namespace QuestionInstantiation
                 if (level.QuestionCount > 0)
                 {
                     if (level.fillDataBase(database) != 0) return -1;
+                }
+            }*/
+
+            return 0;
+        }
+
+        private int generateCode()
+        {
+            if (!Directory.Exists(_quizData.XmlQuizData.parameters.generationDir))
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _quizData.XmlQuizData.parameters.generationDir));
+                return -1;
+            }
+
+            foreach (Level level in _levelList)
+            {
+                if (level.QuestionCount > 0)
+                {
+                    if (level.generateCode() != 0) return -1;
                 }
             }
 

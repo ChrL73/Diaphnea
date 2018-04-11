@@ -16,6 +16,7 @@ module.exports =
    areYouSureStopGame: 'The game is not over. Are-you sure you want to stop?',
    yes: 'Yes',
    no: 'No',
+   close: 'Close',
    previous: 'Previous',
    next: 'Next',
    submit: 'Submit',
@@ -40,5 +41,12 @@ module.exports =
    sourceCode: 'Source code',
    issues: 'Issues',
    yourScore: 'Your score',
-   signUpProposal: 'If you want this score to appear in the high score table, you must sign in or sign up'
+   signUpProposal: 'If you want this score to appear in the high score table, you must sign in or sign up',
+   warning: 'Warning',
+   alphaWarningLine1: 'This application is under development. Consequently:',
+   alphaWarningLine2: 'Important features are not yet present in the application.',
+   alphaWarningLine3: 'The application is likely to contain a large number of bugs.',
+   alphaWarningLine4: 'The application may experience performance problems (long response times to certain user actions).',
+   alphaWarningLine5: 'The English translation of the application is rough.',
+   alphaWarningLine6: 'To report bugs or errors, to suggest improvements or new features:'
 };

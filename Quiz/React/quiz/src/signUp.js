@@ -8,12 +8,6 @@ export class SignUp extends React.Component
    {
       super(props);
       
-      props.socket.on('displayPage', (data) => this.handleDisplayPage(data));
-      props.socket.on('updateSignUp', (texts) => this.handleUpdateSiteLanguage(texts));
-      props.socket.on('signUpError', (data) => this.handleServerError(data));
-      props.socket.on('unknownName', () => this.handleUnknownName());
-      props.socket.on('indexError', () => this.handleServerError());
-      
       this.stateReset =
       {
          pass1: '',
@@ -160,26 +154,26 @@ export class SignUp extends React.Component
    {
       this.setState({ siteLanguageId: value, languageWaitDisplay: 'inline' });
       document.cookie = 'siteLanguageId=' + value + this.props.getCookieExpires(180);
-      this.props.socket.emit('languageChoice', { page: 'signUp', languageId: value });
+      this.props.emit('languageChoice', { page: 'signUp', languageId: value });
    }
    
    handleSignUpBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('submitSignUp', { name: this.state.name, pass1: this.state.pass1, pass2: this.state.pass2 });
+      this.props.emit('submitSignUp', { name: this.state.name, pass1: this.state.pass1, pass2: this.state.pass2 });
       this.setState({ buttonWaitDisplay: 'inline' });
    }
    
    handleCancelBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('cancelSignUp', {});
+      this.props.emit('cancelSignUp', {});
    }
    
    handleSignInBtnClick(e)
    {
       e.preventDefault();
-      this.props.socket.emit('signIn', { name: this.state.name, pass: this.state.pass1 });
+      this.props.emit('signIn', { name: this.state.name, pass: this.state.pass1 });
       this.setState({ buttonWaitDisplay: 'inline' });
    }
    

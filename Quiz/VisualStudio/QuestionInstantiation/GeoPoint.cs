@@ -62,5 +62,9 @@ namespace QuestionInstantiation
 
             return pointDocument;
         }
+
+        internal double X { get { return _x; } }
+        internal double Y { get { return _y; } }
+        internal double Z { get { return _z; } }
     }
 }

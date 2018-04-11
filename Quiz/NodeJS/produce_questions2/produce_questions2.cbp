@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="produce_questions2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/produce_questions2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-pg" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/produce_questions2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Category.cpp" />
+		<Unit filename="Category.h" />
+		<Unit filename="Choice.cpp" />
+		<Unit filename="Choice.h" />
+		<Unit filename="CompleteQuestion.cpp" />
+		<Unit filename="CompleteQuestion.h" />
+		<Unit filename="Level.cpp" />
+		<Unit filename="Level.h" />
+		<Unit filename="MapIdInfo.cpp" />
+		<Unit filename="MapIdInfo.h" />
+		<Unit filename="MapParameters.cpp" />
+		<Unit filename="MapParameters.h" />
+		<Unit filename="MapSubParameters.cpp" />
+		<Unit filename="MapSubParameters.h" />
+		<Unit filename="MultipleAnswerCategory.cpp" />
+		<Unit filename="MultipleAnswerCategory.h" />
+		<Unit filename="MultipleAnswerQuestion.cpp" />
+		<Unit filename="MultipleAnswerQuestion.h" />
+		<Unit filename="ProximityCriterionTypeEnum.h" />
+		<Unit filename="QuestionMultiplicityEnum.h" />
+		<Unit filename="QuestionProducer.cpp" />
+		<Unit filename="QuestionProducer.h" />
+		<Unit filename="QuizData.h" />
+		<Unit filename="RandomNumberGenerator.cpp" />
+		<Unit filename="RandomNumberGenerator.h" />
+		<Unit filename="RelationOrderCategory.cpp" />
+		<Unit filename="RelationOrderCategory.h" />
+		<Unit filename="RelationOrderQuestion.cpp" />
+		<Unit filename="RelationOrderQuestion.h" />
+		<Unit filename="SimpleAnswerCategory.cpp" />
+		<Unit filename="SimpleAnswerCategory.h" />
+		<Unit filename="SimpleAnswerQuestion.cpp" />
+		<Unit filename="SimpleAnswerQuestion.h" />
+		<Unit filename="TextAndComment.cpp" />
+		<Unit filename="TextAndComment.h" />
+		<Unit filename="generated_code/Choices.cpp" />
+		<Unit filename="generated_code/DoubleArrays.cpp" />
+		<Unit filename="generated_code/IntArrays.cpp" />
+		<Unit filename="generated_code/Level_.cpp" />
+		<Unit filename="generated_code/MapParameterss.cpp" />
+		<Unit filename="generated_code/MapSubParameterss.cpp" />
+		<Unit filename="generated_code/MultipleAnswerCategories.cpp" />
+		<Unit filename="generated_code/MultipleAnswerQuestions.cpp" />
+		<Unit filename="generated_code/RelationOrderCategories.cpp" />
+		<Unit filename="generated_code/RelationOrderQuestions.cpp" />
+		<Unit filename="generated_code/SimpleAnswerCategories.cpp" />
+		<Unit filename="generated_code/SimpleAnswerQuestions.cpp" />
+		<Unit filename="generated_code/Strings.cpp" />
+		<Unit filename="produce_questions.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -3,18 +3,55 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionInstantiation", "QuestionInstantiation\QuestionInstantiation.csproj", "{5AF0FC7A-3758-46FF-853D-E28A58F30762}"
 EndProject
+Project("{2857B73E-F847-4B02-9238-064979017E93}") = "produce_questions2", "produce_questions2\produce_questions2.cproj", "{291CBFF8-3A21-456B-90EE-4EA770E198B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Debug|x86.Build.0 = Debug|Any CPU
+		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Release|x86.ActiveCfg = Release|Any CPU
+		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Release|x86.Build.0 = Release|Any CPU
 		{5AF0FC7A-3758-46FF-853D-E28A58F30762}.Debug|x86.ActiveCfg = Debug|x86
 		{5AF0FC7A-3758-46FF-853D-E28A58F30762}.Debug|x86.Build.0 = Debug|x86
 		{5AF0FC7A-3758-46FF-853D-E28A58F30762}.Release|x86.ActiveCfg = Release|x86
 		{5AF0FC7A-3758-46FF-853D-E28A58F30762}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.scope = text/x-csharp
+		$1.FileWidth = 80
+		$1.TabsToSpaces = True
+		$0.CSharpFormattingPolicy = $2
+		$2.IndentSwitchBody = True
+		$2.IndentBlocksInsideExpressions = True
+		$2.AnonymousMethodBraceStyle = NextLine
+		$2.PropertyBraceStyle = NextLine
+		$2.PropertyGetBraceStyle = NextLine
+		$2.PropertySetBraceStyle = NextLine
+		$2.EventBraceStyle = NextLine
+		$2.EventAddBraceStyle = NextLine
+		$2.EventRemoveBraceStyle = NextLine
+		$2.StatementBraceStyle = NextLine
+		$2.ElseNewLinePlacement = NewLine
+		$2.CatchNewLinePlacement = NewLine
+		$2.FinallyNewLinePlacement = NewLine
+		$2.WhileNewLinePlacement = DoNotCare
+		$2.ArrayInitializerWrapping = DoNotChange
+		$2.ArrayInitializerBraceStyle = NextLine
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.BeforeConstructorDeclarationParentheses = False
+		$2.NewLineBeforeConstructorInitializerColon = NewLine
+		$2.NewLineAfterConstructorInitializerColon = SameLine
+		$2.BeforeDelegateDeclarationParentheses = False
+		$2.NewParentheses = False
+		$2.SpacesBeforeBrackets = False
+		$2.scope = text/x-csharp
 		StartupItem = QuestionInstantiation\QuestionInstantiation.csproj
 	EndGlobalSection
 EndGlobal

@@ -17611,7 +17611,7 @@
     </relationNQuestionCategoryList>
     <attributeOrderQuestionCategoryList>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
-                                      distribParameterCorrection="0.1">
+                                      distribParameterCorrection="0.1" test="true">
         <questionText language="fr" text="Laquelle de ces villes est la plus au nord ?"/>
         <questionText language="en" text="Which of thes cities is the northernmost?"/> 
         <mapParameters framingLevel="3">
@@ -17622,7 +17622,7 @@
         </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Latitude" mode="LOWEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
-                                      distribParameterCorrection="0.1">
+                                      distribParameterCorrection="0.1" test="true">
         <questionText language="fr" text="Laquelle de ces villes est la plus au sud ?"/>
         <questionText language="en" text="Which of thes cities is the southernmost?"/> 
         <mapParameters framingLevel="3">
@@ -17633,7 +17633,7 @@
         </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="GREATEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
-                                      distribParameterCorrection="0.1">
+                                      distribParameterCorrection="0.1" test="true">
         <questionText language="fr" text="Laquelle de ces villes est la plus à l'est ?"/>
         <questionText language="en" text="Which of thes cities is the easternmost?"/> 
         <mapParameters framingLevel="3">
@@ -17644,7 +17644,7 @@
         </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Longitude" mode="LOWEST" answerAttribute="at_Nom1" weight="30" minLevel="0"
-                                      distribParameterCorrection="0.1">
+                                      distribParameterCorrection="0.1" test="true">
         <questionText language="fr" text="Laquelle de ces villes est la plus à l'ouest ?"/>
         <questionText language="en" text="Which of thes cities is the westernmost?"/> 
         <mapParameters framingLevel="3">
@@ -17655,7 +17655,7 @@
         </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_Ville" attribute="nt_Population" mode="GREATEST" answerAttribute="at_Nom1" weight="40" minLevel="2"
-                                      distribParameterCorrection="0.2">
+                                      distribParameterCorrection="0.2" test="true">
         <questionText language="fr" text="Laquelle de ces villes est la plus peuplée (en 2008) ?"/>
         <questionText language="en" text="Which of thes cities is the most populous (in 2008)?"/>
         <mapParameters framingLevel="3">
@@ -17666,7 +17666,7 @@
         </mapParameters>
       </attributeOrderQuestionCategory>
       <attributeOrderQuestionCategory elementType="et_FleuveRiviere" attribute="nt_Longueur" mode="GREATEST" answerAttribute="at_Nom1" weight="50" minLevel="1"
-                                      distribParameterCorrection="0.2">
+                                      distribParameterCorrection="0.2" test="true">
         <questionText language="fr" text="Lequel de ces cours d'eau est le plus long ?"/>
         <questionText language="en" text="Which of thes rivers is the longest?"/>
         <mapParameters framingLevel="3">

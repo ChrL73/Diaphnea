@@ -139,6 +139,13 @@ namespace QuestionInstantiation
 
         internal override int generateCode(List<CodeGenerator> codeGeneratorList)
         {
+            foreach (CodeGenerator codeGenerator in codeGeneratorList)
+            {
+                int mapParamOffset = codeGenerator.addMapParameters(MapParameters);
+                codeGenerator.addAttributeOrderCategory(_questionText, WeightIndex, mapParamOffset, _elementList, _maxIndex,
+                                                        _distribParameterCorrection, _mode, _numericalAttributeType, _valueFormat);
+            }
+
             return 0;
         }
     }

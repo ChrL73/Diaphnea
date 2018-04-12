@@ -26,6 +26,7 @@ namespace QuestionInstantiation
         private int _currentMultipleAnswerCategoryOffset;
         private int _currentRelationOrderQuestionOffset;
         private int _currentRelationOrderCategoryOffset;
+        private int _currentAttributeOrderCategoryOffset;
 
         private readonly List<int> _simpleAnswerCategoryOffsets = new List<int>();
         private readonly List<int> _multipleAnswerCategoryOffsets = new List<int>();
@@ -49,6 +50,7 @@ namespace QuestionInstantiation
             _currentMultipleAnswerQuestionOffset = 0;
             _currentRelationOrderQuestionOffset = 0;
             _currentRelationOrderCategoryOffset = 0;
+            _currentAttributeOrderCategoryOffset = 0;
 
             _stringDictionary.Add("", 0);
 
@@ -101,6 +103,10 @@ namespace QuestionInstantiation
             path = String.Format("{0}/RelationOrderCategories.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("RelationOrderCategories.cpp", "namespace produce_questions\n{\nint relationOrderCategories[] =\n{");
+
+            path = String.Format("{0}/AttributeOrderCategories.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("AttributeOrderCategories.cpp", "namespace produce_questions\n{\nint attributeOrderCategories[] =\n{");
         }
 
         internal void close(int questionCount, int weightSum, double distribParameter, int choiceCount)
@@ -156,6 +162,7 @@ namespace QuestionInstantiation
             append("MultipleAnswerCategories.cpp", "\n};\n}\n");
             append("RelationOrderQuestions.cpp", "\n};\n}\n");
             append("RelationOrderCategories.cpp", "\n};\n}\n");
+            append("AttributeOrderCategories.cpp", "\n};\n}\n");
         }
 
         private int getStringOffset(string str)
@@ -632,6 +639,67 @@ namespace QuestionInstantiation
             _currentRelationOrderCategoryOffset += 6;
 
             _relationOrderCategoryOffsets.Add(offset);
+        }
+
+        internal void addAttributeOrderCategory(Text questionText, int weightIndex, int mapParametersOffset, List<AttributeOrderElement> elementList,
+            int maxIndex, double distribParameterCorrection, XmlAttributeOrderModeEnum mode, XmlNumericalAttributeType numericalAttributeType, string valueFormat)
+        {
+            string questionStr = questionText.getText(_languageId);
+
+            List<string> choiceTexts = new List<string>();
+            List<string> choiceComments = new List<string>();
+            List<int> choiceMinIndexes = new List<int>();
+            List<string> choiceMapIds = new List<string>();
+
+            foreach (AttributeOrderElement element in elementList)
+            {
+                choiceTexts.Add(element.Element.Name.getText(_languageId));
+
+                double value = mode == XmlAttributeOrderModeEnum.LOWEST ? element.AttributeValue : -element.AttributeValue;
+                string comment = String.Format("{0}{1}", value.ToString(valueFormat, CultureInfo.CreateSpecificCulture("en-US")), numericalAttributeType.unit);
+                choiceComments.Add(comment);
+
+                choiceMinIndexes.Add(element.MinAnswerIndex);
+
+                choiceMapIds.Add(element.Element.XmlElement.mapId == null ? "" : element.Element.XmlElement.mapId.Substring(2));
+            }
+
+            int offset = _currentAttributeOrderCategoryOffset;
+
+            int questionOffset = getStringOffset(questionStr);
+
+            int choiceTextsOffset = 0;
+            int choiceCommentsOffset = 0;
+            int choiceMinIndexesOffset = 0;
+            int choiceMapIdsOffset = 0;
+            if (choiceTexts.Count() != 0)
+            {
+                List<int> stringOffsets = new List<int>();
+                foreach (string str in choiceTexts) stringOffsets.Add(getStringOffset(str));
+                choiceTextsOffset = getIntArrayOffset(stringOffsets);
+
+                stringOffsets.Clear();
+                foreach (string str in choiceComments) stringOffsets.Add(getStringOffset(str));
+                choiceCommentsOffset = getIntArrayOffset(stringOffsets);
+
+                choiceMinIndexesOffset = getIntArrayOffset(choiceMinIndexes);
+
+                stringOffsets.Clear();
+                foreach (string str in choiceMapIds) stringOffsets.Add(getStringOffset(str));
+                choiceMapIdsOffset = getIntArrayOffset(stringOffsets);
+            }
+
+            int[] distribParameterCorrectionInt = doubleToIntArray(distribParameterCorrection);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
+                offset == 0 ? "" : ",", _currentAttributeOrderCategoryOffset, questionStr,
+                weightIndex, mapParametersOffset, questionOffset, choiceTexts.Count(), choiceTextsOffset, choiceCommentsOffset,
+                choiceMinIndexesOffset, choiceMapIdsOffset, distribParameterCorrectionInt[0], distribParameterCorrectionInt[1], maxIndex);
+
+            append("AttributeOrderCategories.cpp", code);
+            _currentAttributeOrderCategoryOffset += 11;
+
+            _attributeOrderCategoryOffsets.Add(offset);
         }
 
         private int getDoubleArrayOffset(IEnumerable<double> values)

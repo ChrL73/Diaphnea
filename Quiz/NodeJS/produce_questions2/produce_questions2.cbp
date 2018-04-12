@@ -13,12 +13,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-std=c++11" />
-					<Add option="-pg" />
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add option="-pg" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/produce_questions2" prefix_auto="1" extension_auto="1" />
@@ -38,6 +34,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AttributOrderCategory.cpp" />
+		<Unit filename="AttributOrderCategory.h" />
 		<Unit filename="Category.cpp" />
 		<Unit filename="Category.h" />
 		<Unit filename="Choice.cpp" />
@@ -73,6 +71,7 @@
 		<Unit filename="SimpleAnswerQuestion.h" />
 		<Unit filename="TextAndComment.cpp" />
 		<Unit filename="TextAndComment.h" />
+		<Unit filename="generated_code/AttributeOrderCategories.cpp" />
 		<Unit filename="generated_code/Choices.cpp" />
 		<Unit filename="generated_code/DoubleArrays.cpp" />
 		<Unit filename="generated_code/IntArrays.cpp" />

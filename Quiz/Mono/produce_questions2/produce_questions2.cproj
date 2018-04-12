@@ -123,6 +123,12 @@
     <Compile Include="..\..\NodeJS\produce_questions2\generated_code\RelationOrderCategories.cpp">
       <Link>generated_code\RelationOrderCategories.cpp</Link>
     </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\AttributOrderCategory.cpp">
+      <Link>AttributOrderCategory.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\AttributeOrderCategories.cpp">
+      <Link>generated_code\AttributeOrderCategories.cpp</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NodeJS\produce_questions2\Choice.h">
@@ -181,6 +187,9 @@
     </None>
     <None Include="..\..\NodeJS\produce_questions2\RelationOrderCategory.h">
       <Link>RelationOrderCategory.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\produce_questions2\AttributOrderCategory.h">
+      <Link>AttributOrderCategory.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>

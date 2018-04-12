@@ -32,8 +32,6 @@ namespace produce_questions
         double _pointCriterionValueZ;
 
     public:
-        static MultipleAnswerQuestion *get(int offset) { return reinterpret_cast<MultipleAnswerQuestion *>(multipleAnswerQuestions + offset); }
-
         const char *getQuestion(void) const { return strings + _question; }
         const char *getQuestionMapId(void) const { return strings + _questionMapId; }
         int getAnswerCount(void) const { return _answerCount; }

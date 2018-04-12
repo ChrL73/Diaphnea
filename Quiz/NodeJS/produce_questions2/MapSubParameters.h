@@ -21,8 +21,6 @@ namespace produce_questions
         int _framingMode;
 
     public:
-        //static MapSubParameters *get(int offset) { return reinterpret_cast<MapSubParameters *>(mapSubParameterss + offset); }
-
         int getDrawDepth(void) const { return _drawDepth; }
         const char *getCategorySelectionMode(void) const { return strings + _categorySelectionMode; }
         int getCategoryCount(void) const { return _categoryCount; }

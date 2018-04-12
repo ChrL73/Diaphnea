@@ -5,6 +5,7 @@
 namespace produce_questions
 {
     class MapParameters;
+    class CompleteQuestion;
 
     class AttributeOrderCategory
     {
@@ -32,13 +33,11 @@ namespace produce_questions
         int _maxIndex;
 
     public:
-        static AttributeOrderCategory *get(int offset) { return reinterpret_cast<AttributeOrderCategory *>(attributeOrderCategories + offset); }
-
         unsigned int getWeightIndex(void) const { return _weightIndex; }
 
-        const char *getQuestionText(void) const { return strings + _questionText; }
-
         const MapParameters *getMapParameters(void) const { return reinterpret_cast<MapParameters *>(mapParameterss + _mapParameters); }
+
+        const char *getQuestionText(void) const { return strings + _questionText; }
 
         int getChoiceCount(void) const { return _choiceCount; }
         const char *getChoiceText(int i) const { return strings + *(intArrays + _choiceTexts + i); }
@@ -50,5 +49,6 @@ namespace produce_questions
 
         int getMaxIndex(void) const { return _maxIndex; }
 
+        CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
     };
 }

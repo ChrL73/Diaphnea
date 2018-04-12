@@ -34,8 +34,6 @@ namespace produce_questions
         int _proximityCriterionType;
 
     public:
-        //static SimpleAnswerCategory *get(int offset) { return reinterpret_cast<SimpleAnswerCategory *>(simpleAnswerCategories + offset); }
-
         unsigned int getWeightIndex(void) const { return _weightIndex; }
 
         const MapParameters *getMapParameters(void) const { return reinterpret_cast<MapParameters *>(mapParameterss + _mapParameters); }

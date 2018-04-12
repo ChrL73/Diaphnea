@@ -29,8 +29,6 @@ namespace produce_questions
         int _pointCriterionValues;
 
     public:
-        static Choice *get(int offset) { return reinterpret_cast<Choice *>(choices + offset); }
-
         const char *getChoiceText(void) const { return strings + _choiceText; }
         const char *getComment(void) const { return strings + _comment; }
         const char *getMapId(void) const { return strings + _mapId; }

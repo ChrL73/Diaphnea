@@ -41,8 +41,6 @@ namespace produce_questions
         double _pointCriterionValueZ;
 
     public:
-        //static SimpleAnswerQuestion *get(int offset) { return reinterpret_cast<SimpleAnswerQuestion *>(simpleAnswerQuestions + offset); }
-
         const char *getQuestion(void) const { return strings + _question; }
         const char *getAnswer(void) const { return strings + _answer; }
         const char *getComment(void) const { return strings + _comment; }

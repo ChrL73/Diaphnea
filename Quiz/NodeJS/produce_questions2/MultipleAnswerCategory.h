@@ -34,8 +34,6 @@ namespace produce_questions
         int _proximityCriterionType;
 
     public:
-        static MultipleAnswerCategory *get(int offset) { return reinterpret_cast<MultipleAnswerCategory *>(multipleAnswerCategories + offset); }
-
         unsigned int getWeightIndex(void) const { return _weightIndex; }
 
         const MapParameters *getMapParameters(void) const { return reinterpret_cast<MapParameters *>(mapParameterss + _mapParameters); }
@@ -53,4 +51,4 @@ namespace produce_questions
         CompleteQuestion *getNewQuestion(int choiceCount, double distribParameter) const;
     };
 }
- 
+

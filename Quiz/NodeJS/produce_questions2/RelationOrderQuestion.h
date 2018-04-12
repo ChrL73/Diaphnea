@@ -22,8 +22,6 @@ namespace produce_questions
         int _choiceMapIds;
 
     public:
-        static RelationOrderQuestion *get(int offset) { return reinterpret_cast<RelationOrderQuestion *>(relationOrderQuestions + offset); }
-
         const char *getQuestion(void) const { return strings + _question; }
         const char *getMapId(void) const { return strings + _mapId; }
 

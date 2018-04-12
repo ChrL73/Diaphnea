@@ -25,8 +25,6 @@ namespace produce_questions
         double _distribParameterCorrection;
 
     public:
-        static RelationOrderCategory *get(int offset) { return reinterpret_cast<RelationOrderCategory *>(relationOrderCategories + offset); }
-
         unsigned int getWeightIndex(void) const { return _weightIndex; }
 
         const MapParameters *getMapParameters(void) const { return reinterpret_cast<MapParameters *>(mapParameterss + _mapParameters); }

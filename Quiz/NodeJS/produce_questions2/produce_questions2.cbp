@@ -34,8 +34,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="AttributOrderCategory.cpp" />
-		<Unit filename="AttributOrderCategory.h" />
+		<Unit filename="AttributeOrderCategory.cpp" />
+		<Unit filename="AttributeOrderCategory.h" />
 		<Unit filename="Category.cpp" />
 		<Unit filename="Category.h" />
 		<Unit filename="Choice.cpp" />
@@ -71,20 +71,20 @@
 		<Unit filename="SimpleAnswerQuestion.h" />
 		<Unit filename="TextAndComment.cpp" />
 		<Unit filename="TextAndComment.h" />
-		<Unit filename="generated_code/AttributeOrderCategories.cpp" />
-		<Unit filename="generated_code/Choices.cpp" />
-		<Unit filename="generated_code/DoubleArrays.cpp" />
-		<Unit filename="generated_code/IntArrays.cpp" />
-		<Unit filename="generated_code/Level_.cpp" />
-		<Unit filename="generated_code/MapParameterss.cpp" />
-		<Unit filename="generated_code/MapSubParameterss.cpp" />
-		<Unit filename="generated_code/MultipleAnswerCategories.cpp" />
-		<Unit filename="generated_code/MultipleAnswerQuestions.cpp" />
-		<Unit filename="generated_code/RelationOrderCategories.cpp" />
-		<Unit filename="generated_code/RelationOrderQuestions.cpp" />
-		<Unit filename="generated_code/SimpleAnswerCategories.cpp" />
-		<Unit filename="generated_code/SimpleAnswerQuestions.cpp" />
-		<Unit filename="generated_code/Strings.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/AttributeOrderCategories.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/Choices.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/DoubleArrays.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/IntArrays.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/Level_.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/MapParameterss.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/MapSubParameterss.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/MultipleAnswerCategories.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/MultipleAnswerQuestions.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/RelationOrderCategories.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/RelationOrderQuestions.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/SimpleAnswerCategories.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/SimpleAnswerQuestions.cpp" />
+		<Unit filename="generated_code/_Francelv_TresDifficilefr/Strings.cpp" />
 		<Unit filename="produce_questions.cpp" />
 		<Extensions>
 			<code_completion />

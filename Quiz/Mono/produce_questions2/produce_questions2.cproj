@@ -45,23 +45,8 @@
     <Compile Include="..\..\NodeJS\produce_questions2\RandomNumberGenerator.cpp">
       <Link>RandomNumberGenerator.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Choices.cpp">
-      <Link>generated_code\Choices.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\DoubleArrays.cpp">
-      <Link>generated_code\DoubleArrays.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\IntArrays.cpp">
-      <Link>generated_code\IntArrays.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Strings.cpp">
-      <Link>generated_code\Strings.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerQuestion.cpp">
       <Link>SimpleAnswerQuestion.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerQuestions.cpp">
-      <Link>generated_code\SimpleAnswerQuestions.cpp</Link>
     </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\MapParameters.cpp">
       <Link>MapParameters.cpp</Link>
@@ -69,26 +54,14 @@
     <Compile Include="..\..\NodeJS\produce_questions2\MapSubParameters.cpp">
       <Link>MapSubParameters.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapParameterss.cpp">
-      <Link>generated_code\MapParameterss.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MapSubParameterss.cpp">
-      <Link>generated_code\MapSubParameterss.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\SimpleAnswerCategory.cpp">
       <Link>SimpleAnswerCategory.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\SimpleAnswerCategories.cpp">
-      <Link>generated_code\SimpleAnswerCategories.cpp</Link>
     </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\Category.cpp">
       <Link>Category.cpp</Link>
     </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\Level.cpp">
       <Link>Level.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\Level_.cpp">
-      <Link>generated_code\Level_.cpp</Link>
     </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\CompleteQuestion.cpp">
       <Link>CompleteQuestion.cpp</Link>
@@ -102,32 +75,59 @@
     <Compile Include="..\..\NodeJS\produce_questions2\MultipleAnswerQuestion.cpp">
       <Link>MultipleAnswerQuestion.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MultipleAnswerQuestions.cpp">
-      <Link>generated_code\MultipleAnswerQuestions.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\MultipleAnswerCategory.cpp">
       <Link>MultipleAnswerCategory.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\MultipleAnswerCategories.cpp">
-      <Link>generated_code\MultipleAnswerCategories.cpp</Link>
     </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\RelationOrderQuestion.cpp">
       <Link>RelationOrderQuestion.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\RelationOrderQuestions.cpp">
-      <Link>generated_code\RelationOrderQuestions.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\produce_questions2\RelationOrderCategory.cpp">
       <Link>RelationOrderCategory.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\RelationOrderCategories.cpp">
-      <Link>generated_code\RelationOrderCategories.cpp</Link>
+    <Compile Include="..\..\NodeJS\produce_questions2\AttributeOrderCategory.cpp">
+      <Link>AttributeOrderCategory.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\AttributOrderCategory.cpp">
-      <Link>AttributOrderCategory.cpp</Link>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\AttributeOrderCategories.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\AttributeOrderCategories.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\AttributeOrderCategories.cpp">
-      <Link>generated_code\AttributeOrderCategories.cpp</Link>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\Choices.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\Choices.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\DoubleArrays.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\DoubleArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\IntArrays.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\IntArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\Level_.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\Level_.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\MapParameterss.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\MapParameterss.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\MapSubParameterss.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\MapSubParameterss.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\MultipleAnswerCategories.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\MultipleAnswerCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\MultipleAnswerQuestions.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\MultipleAnswerQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\RelationOrderCategories.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\RelationOrderCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\RelationOrderQuestions.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\RelationOrderQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\SimpleAnswerCategories.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\SimpleAnswerCategories.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\SimpleAnswerQuestions.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\SimpleAnswerQuestions.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\produce_questions2\generated_code\_Francelv_TresDifficilefr\Strings.cpp">
+      <Link>generated_code\_Francelv_TresDifficilefr\Strings.cpp</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -188,11 +188,12 @@
     <None Include="..\..\NodeJS\produce_questions2\RelationOrderCategory.h">
       <Link>RelationOrderCategory.h</Link>
     </None>
-    <None Include="..\..\NodeJS\produce_questions2\AttributOrderCategory.h">
-      <Link>AttributOrderCategory.h</Link>
+    <None Include="..\..\NodeJS\produce_questions2\AttributeOrderCategory.h">
+      <Link>AttributeOrderCategory.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="generated_code\" />
+    <Folder Include="generated_code\_Francelv_TresDifficilefr\" />
   </ItemGroup>
 </Project>

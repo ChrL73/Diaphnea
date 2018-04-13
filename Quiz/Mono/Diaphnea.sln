@@ -5,12 +5,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionInstantiation", "Qu
 EndProject
 Project("{2857B73E-F847-4B02-9238-064979017E93}") = "produce_questions2", "produce_questions2\produce_questions2.cproj", "{291CBFF8-3A21-456B-90EE-4EA770E198B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateMakefile", "GenerateMakefile\GenerateMakefile.csproj", "{0684F18A-8D1A-4B99-B366-08C5D811ADBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0684F18A-8D1A-4B99-B366-08C5D811ADBE}.Debug|x86.ActiveCfg = Debug|x86
+		{0684F18A-8D1A-4B99-B366-08C5D811ADBE}.Debug|x86.Build.0 = Debug|x86
+		{0684F18A-8D1A-4B99-B366-08C5D811ADBE}.Release|x86.ActiveCfg = Release|x86
+		{0684F18A-8D1A-4B99-B366-08C5D811ADBE}.Release|x86.Build.0 = Release|x86
 		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Debug|x86.Build.0 = Debug|Any CPU
 		{291CBFF8-3A21-456B-90EE-4EA770E198B8}.Release|x86.ActiveCfg = Release|Any CPU
@@ -23,9 +29,9 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.TextStylePolicy = $1
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
 		$1.scope = text/x-csharp
-		$1.FileWidth = 80
-		$1.TabsToSpaces = True
 		$0.CSharpFormattingPolicy = $2
 		$2.IndentSwitchBody = True
 		$2.IndentBlocksInsideExpressions = True
@@ -49,8 +55,11 @@ Global
 		$2.NewLineBeforeConstructorInitializerColon = NewLine
 		$2.NewLineAfterConstructorInitializerColon = SameLine
 		$2.BeforeDelegateDeclarationParentheses = False
+		$2.AfterDelegateDeclarationParameterComma = True
 		$2.NewParentheses = False
 		$2.SpacesBeforeBrackets = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
 		StartupItem = QuestionInstantiation\QuestionInstantiation.csproj
 	EndGlobalSection

@@ -27,6 +27,7 @@ Global
 		{5AF0FC7A-3758-46FF-853D-E28A58F30762}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = GenerateMakefile\GenerateMakefile.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = VisualStudio
@@ -34,7 +35,6 @@ Global
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
 		$2.IndentSwitchBody = True
-		$2.IndentBlocksInsideExpressions = True
 		$2.AnonymousMethodBraceStyle = NextLine
 		$2.PropertyBraceStyle = NextLine
 		$2.PropertyGetBraceStyle = NextLine
@@ -52,8 +52,6 @@ Global
 		$2.BeforeMethodDeclarationParentheses = False
 		$2.BeforeMethodCallParentheses = False
 		$2.BeforeConstructorDeclarationParentheses = False
-		$2.NewLineBeforeConstructorInitializerColon = NewLine
-		$2.NewLineAfterConstructorInitializerColon = SameLine
 		$2.BeforeDelegateDeclarationParentheses = False
 		$2.AfterDelegateDeclarationParameterComma = True
 		$2.NewParentheses = False
@@ -61,6 +59,5 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		StartupItem = QuestionInstantiation\QuestionInstantiation.csproj
 	EndGlobalSection
 EndGlobal

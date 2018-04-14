@@ -145,7 +145,7 @@
     <xsd:sequence></xsd:sequence>
     <xsd:attribute name="id" type="XmlLanguageId" use="required" />
     <xsd:attribute name="name" type="xsd:string" use="required" />
-    <xsd:attribute name="status" type="XmlLanguageStatusEnum" />
+    <xsd:attribute name="status" type="XmlLanguageStatusEnum" use="required" />
   </xsd:complexType>
   <xsd:simpleType name="XmlLanguageId">
     <xsd:restriction base="xsd:ID">

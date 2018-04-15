@@ -52,3 +52,4 @@ MongoDB.*.dll
 *gmon.out
 *XmlQuizData.cs
 *XmlMapData.cs
+/Quiz/Makefile

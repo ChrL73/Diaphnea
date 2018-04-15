@@ -17,6 +17,7 @@ namespace QuestionInstantiation
         private bool _testMode;
         private Text _name = new Text();
         private string _nameInLog;
+        private int _logLanguageIndex = 0;
         private Int32 _value;
         private Int32 _weightSum = 0;
         private Int32 _choiceCount;
@@ -32,7 +33,19 @@ namespace QuestionInstantiation
             _quizData = quizData;
             _testMode = testMode;
 
-            _nameInLog = _xmlLevel.name[0].text;
+            int i = 0;
+            foreach (XmlLanguage language in quizData.XmlQuizData.parameters.languageList)
+            {
+                if (language.id == XmlLanguageId.en)
+                {
+                    _logLanguageIndex = i;
+                    break;
+                }
+
+                ++i;
+            }
+
+            _nameInLog = _xmlLevel.name[_logLanguageIndex].text;
             foreach (XmlName xmlName in _xmlLevel.name) _name.setText(xmlName.language.ToString(), xmlName.text);
             if (quizData.verifyText(_name, String.Format("Level {0}", _nameInLog)) != 0) return -1;
 
@@ -209,7 +222,7 @@ namespace QuestionInstantiation
                 {
                     XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeQuestionCategory.elementType);
 
-                    string questionNameInLog =  xmlAttributeQuestionCategory.questionText[0].text;
+                    string questionNameInLog =  xmlAttributeQuestionCategory.questionText[_logLanguageIndex].text;
 
                     if (_elementByTypeDictionary.ContainsKey(elementType))
                     {
@@ -314,7 +327,7 @@ namespace QuestionInstantiation
                     RelationType relationType = _quizData.getRelationType(xmlRelation1QuestionCategory.relation);
                     if (xmlRelation1QuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
 
-                    string questionNameInLog = xmlRelation1QuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlRelation1QuestionCategory.questionText[_logLanguageIndex].text;
 
                     if (relationType.Nature == RelationNatureEnum.RELATION_NN || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.INVERSE))
                     {
@@ -491,7 +504,7 @@ namespace QuestionInstantiation
                     RelationType relationType = _quizData.getRelationType(xmlRelationNQuestionCategory.relation);
                     if (xmlRelationNQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
 
-                    string questionNameInLog = xmlRelationNQuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlRelationNQuestionCategory.questionText[_logLanguageIndex].text;
 
                     if (xmlRelationNQuestionCategory.relation2 != null && !xmlRelationNQuestionCategory.way2Specified)
                     {
@@ -713,7 +726,7 @@ namespace QuestionInstantiation
                 {
                     XmlElementType elementType = _quizData.getXmlElementType(xmlAttributeOrderQuestionCategory.elementType);
 
-                    string questionNameInLog = xmlAttributeOrderQuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlAttributeOrderQuestionCategory.questionText[_logLanguageIndex].text;
 
                     if (_elementByTypeDictionary.ContainsKey(elementType))
                     {
@@ -800,7 +813,7 @@ namespace QuestionInstantiation
                     RelationType relationType = _quizData.getRelationType(xmlRelationLimitQuestionCategory.relation);
                     if (xmlRelationLimitQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
 
-                    string questionNameInLog = xmlRelationLimitQuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlRelationLimitQuestionCategory.questionText[_logLanguageIndex].text;
                      
                     if (relationType.Nature == RelationNatureEnum.RELATION_11 || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.DIRECT))
                     {
@@ -953,7 +966,7 @@ namespace QuestionInstantiation
                     RelationType relationType = _quizData.getRelationType(xmlRelationOrderQuestionCategory.relation);
                     if (xmlRelationOrderQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
 
-                    string questionNameInLog = xmlRelationOrderQuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlRelationOrderQuestionCategory.questionText[_logLanguageIndex].text;
 
                     if (relationType.Nature == RelationNatureEnum.RELATION_11 || (relationType.Nature == RelationNatureEnum.RELATION_1N && relationType.Way != RelationWayEnum.DIRECT))
                     {
@@ -1081,7 +1094,7 @@ namespace QuestionInstantiation
                     RelationType relationType = _quizData.getRelationType(xmlRelationExistenceQuestionCategory.relation);
                     if (xmlRelationExistenceQuestionCategory.way == XmlWayEnum.INVERSE) relationType = relationType.ReciprocalType;
                     XmlElementType elementType = relationType.StartType;
-                    string questionNameInLog = xmlRelationExistenceQuestionCategory.questionText[0].text;
+                    string questionNameInLog = xmlRelationExistenceQuestionCategory.questionText[_logLanguageIndex].text;
 
                     Dictionary<Element, int> elementExceptionDictionary = new Dictionary<Element, int>();
                     if (xmlRelationExistenceQuestionCategory.exception != null)
@@ -1217,6 +1230,8 @@ namespace QuestionInstantiation
 
         internal int generateCode()
         {
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("level \"{0}\": C++ code generation...", _nameInLog));
+
             List<CodeGenerator> codeGeneratorList = new List<CodeGenerator>();
 
             foreach (string languageId in Text.CompletedTranslationLanguages)

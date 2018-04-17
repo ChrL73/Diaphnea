@@ -205,6 +205,7 @@ namespace GenerateMakefile
 
                 foreach (string dep in dependencies[file].Keys) rule.Dependencies.Add(String.Format("NodeJS/produce_questions2/{0}", dep));
 
+                rule.Commands.Add("mkdir -p NodeJS/produce_questions2/obj/Release");
                 rule.Commands.Add(String.Format("cd NodeJS/produce_questions2 && g++ -Wall -fexceptions -O2 -std=c++11 -c {0} -o obj/Release/{1}o",
                     file, file.Substring(0, file.Length - 3)));
 
@@ -272,6 +273,7 @@ namespace GenerateMakefile
                     rule.Target = String.Format("NodeJS/produce_questions2/generated_code/{0}/{1}.cpp", pair.Key, fileName);
                     rule.Dependencies.Add("Mono/QuestionInstantiation/bin/Debug/QuestionInstantiation.exe");
                     rule.Dependencies.Add(String.Format("VisualStudio/QuestionInstantiation/{0}", pair.Value));
+                    rule.Commands.Add("mkdir -p NodeJS/produce_questions2/generated_code");
                     rule.Commands.Add(String.Format(
                         "cd Mono/QuestionInstantiation/bin/Debug && mono QuestionInstantiation.exe ../../../../VisualStudio/QuestionInstantiation/{0}",
                         pair.Value));

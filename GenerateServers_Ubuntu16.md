@@ -1,4 +1,4 @@
-March 2018
+[This procedure is out of date]
 
 * This procedure has been tested for the following operating systems:
 

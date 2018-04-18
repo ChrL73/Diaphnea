@@ -34,6 +34,8 @@ namespace GenerateMakefile
 
         private static void Main(string[] args)
         {
+            Console.WriteLine("Quiz Makefile generation...");
+
             int result = setGenerationDirectories();
 
             if (result == 0)
@@ -48,8 +50,10 @@ namespace GenerateMakefile
                 generateMakefile();
             }
 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to continue...");
+            //Console.ReadKey();
+
+            System.Environment.Exit(result);
         }
 
         private static int setGenerationDirectories()
@@ -74,8 +78,6 @@ namespace GenerateMakefile
                     Console.WriteLine(e.Message);
                     return -1;
                 }
-
-                Console.WriteLine("Reading configuration file " + file + " ...");
 
                 XmlSerializer serializer = new XmlSerializer(typeof(XmlQuizData));
 

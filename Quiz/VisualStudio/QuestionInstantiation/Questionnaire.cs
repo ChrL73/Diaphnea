@@ -19,7 +19,7 @@ namespace QuestionInstantiation
         private Text _name = new Text();
         private List<Level> _levelList = new List<Level>();
 
-        internal void instantiate(string path)
+        internal int instantiate(string path)
         {
             int result = 0;
 
@@ -32,6 +32,8 @@ namespace QuestionInstantiation
             else Console.WriteLine("Question instantitation terminated with errors for file {0}", path);
 
             Console.WriteLine();
+
+            return result;
         }
 
         private int loadData(string path)

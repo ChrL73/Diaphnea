@@ -117,7 +117,7 @@ namespace GenerateMakefile
         private static void AddObjectFilesLink()
         {
             Rule mainRule = new Rule();
-            mainRule.Target = "all";
+            mainRule.Target = "quiz";
             _ruleList.Add(mainRule);
 
             string[] files = Directory.GetFiles("../../../../NodeJS/produce_questions2", "*.cpp");

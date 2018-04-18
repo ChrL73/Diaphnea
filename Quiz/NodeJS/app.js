@@ -97,8 +97,6 @@ var dTable = [1, 7, 30, 365];
 
 var debugDelay = config.debugDelay ? config.debugDelay : 0;
 
-quizData.getLevelMap(function(levelMap) { /*console.log(levelMap);*/ } );
-
 app.all('/', function(req, res, next)
 {
    if (config.forceHttpsRedirection && req.headers['x-forwarded-proto'] !== 'https') res.redirect(config.httpsUrl);
@@ -612,54 +610,49 @@ io.on('connection', function(socket)
       {
          quizData.getLevelChoiceDownData(context, function(downData)
          {
-            quizData.getLevelMap(function(levelMap)
+            childProcess.exec('./produce_questions' + downData.questionnaireId + downData.levelId + downData.questionnaireLanguageId + '.exe' , function(err, stdout, stderr)
             {
-               var levelId = levelMap[downData.questionnaireId][downData.levelId];
-
-               childProcess.exec('./produce_questions.exe ' + levelId + ' ' + downData.questionnaireLanguageId + dbParameters, function(err, stdout, stderr)
+               if (err)
                {
-                  if (err)
-                  {
-                     console.log(stderr);
-                     context.quizId = undefined;
-                     context.displayedQuestion = undefined;
-                     context.questions = undefined;
-                     context.questionStates = [];
-                     context.answerCount = undefined;
-                     context.rightAnswerCount = undefined;
-                     context.startDate = undefined;
-                     context.finalTime = undefined;
-                  }
-                  else
-                  {
-                     context.quizId = shortId.generate();
-                     context.displayedQuestion = 0;
-                     context.questions = JSON.parse(stdout);
-                     context.questionStates = [];
-                     context.questionnaireName = downData.questionnaireName;
-                     context.mapId = downData.mapId;
-                     context.levelName = downData.levelName;
-                     context.answerCount = 0;
-                     context.rightAnswerCount = 0;
-                     context.startDate = Date.now();
-                     context.finalTime = undefined;
+                  console.log(stderr);
+                  context.quizId = undefined;
+                  context.displayedQuestion = undefined;
+                  context.questions = undefined;
+                  context.questionStates = [];
+                  context.answerCount = undefined;
+                  context.rightAnswerCount = undefined;
+                  context.startDate = undefined;
+                  context.finalTime = undefined;
+               }
+               else
+               {
+                  context.quizId = shortId.generate();
+                  context.displayedQuestion = 0;
+                  context.questions = JSON.parse(stdout);
+                  context.questionStates = [];
+                  context.questionnaireName = downData.questionnaireName;
+                  context.mapId = downData.mapId;
+                  context.levelName = downData.levelName;
+                  context.answerCount = 0;
+                  context.rightAnswerCount = 0;
+                  context.startDate = Date.now();
+                  context.finalTime = undefined;
 
-                     context.questions.forEach(function(question, iQuestion)
+                  context.questions.forEach(function(question, iQuestion)
+                  {
+                     context.questionStates.push({ answered: false, choiceStates: [] });
+                     question.choices.forEach(function(choice, iChoice)
                      {
-                        context.questionStates.push({ answered: false, choiceStates: [] });
-                        question.choices.forEach(function(choice, iChoice)
-                        {
-                           // 0 <= choiceStates[iChoice] <= 3 :
-                           // bit 0 = 1 if choice is checked.
-                           // bit 1 = 1 if answer has been submitted and if the choice is right
-                           if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
-                           else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
-                        });
+                        // 0 <= choiceStates[iChoice] <= 3 :
+                        // bit 0 = 1 if choice is checked.
+                        // bit 1 = 1 if answer has been submitted and if the choice is right
+                        if (question.isMultiple) context.questionStates[iQuestion].choiceStates.push(0);
+                        else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
-                  }
+                  });
+               }
 
-                  emitDisplayGame(context, data.reqId);
-               });
+               emitDisplayGame(context, data.reqId);
             });
          });
       });

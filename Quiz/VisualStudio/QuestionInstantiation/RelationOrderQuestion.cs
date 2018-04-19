@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,50 +49,6 @@ namespace QuestionInstantiation
                     }
                 }
             }
-        }
-
-        internal BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId, QuizData quizData)
-        {
-            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
-            BsonDocument choiceListDocument = getChoiceListDocument(questionnaireId);
-            choiceListsCollection.InsertOne(choiceListDocument);
-
-            BsonDocument questionDocument = new BsonDocument()
-            {
-                { "question", _questionText.getBsonDocument() },
-                { "choice_count", _choiceList.Count },
-                { "choice_list", choiceListDocument.GetValue("_id") },
-                { "map_id", (_questionElement.XmlElement.mapId == null) ? "" : _questionElement.XmlElement.mapId.Substring(2) }
-            };
-
-            return questionDocument;
-        }
-
-        private BsonDocument getChoiceListDocument(string questionnaireId)
-        {
-            BsonArray choicesArray = new BsonArray();
-            foreach (Choice choice in _choiceList)
-            {
-                BsonDocument choiceDocument = new BsonDocument()
-                {
-                    { "choice", choice.AttributeValue.Value.getBsonDocument() },
-                    { "map_id", choice.Element.XmlElement.mapId == null ? "" : choice.Element.XmlElement.mapId.Substring(2) }
-                };
-
-                choicesArray.Add(choiceDocument);
-            }
-
-            BsonDocument choicesDocument = new BsonDocument()
-            {
-                { "questionnaire", questionnaireId },
-                { "count", _choiceDictionary.Count },
-                { "choices", choicesArray }
-            };
-
-            BsonDocument choiceListDocument = new BsonDocument();
-            choiceListDocument.AddRange(choicesDocument);
-
-            return choiceListDocument;
         }
     }
 }

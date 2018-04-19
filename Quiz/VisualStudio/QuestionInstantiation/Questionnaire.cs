@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +23,6 @@ namespace QuestionInstantiation
 
             if (result == 0) result = loadData(path);
             if (result == 0) result = instantiateQuestions();
-            if (result == 0) result = fillDatabase();
             if (result == 0) result = generateCode();
 
             if (result == 0) Console.WriteLine("Question instantitation terminated successfully for file {0}", path);
@@ -181,77 +178,17 @@ namespace QuestionInstantiation
             return 0;
         }
 
-        private int fillDatabase()
+        private int generateCode()
         {
             if (_quizData.XmlQuizData.parameters.languageList.Where(x => x.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED).Count() == 0)
             {
-                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Qestionnaire \"{0}\": No language with completed translation: Database not filled",
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Qestionnaire \"{0}\": No language with completed translation: No code generated",
                     _quizData.XmlQuizData.parameters.questionnaireId));
                 return -1;
             }
 
             Text.setCompletedTranslationDictionary(_quizData);
 
-            // Comment database filling while testing the code generation
-
-            /*MongoClient mongoClient = new MongoClient();
-            IMongoDatabase database = mongoClient.GetDatabase(_quizData.XmlQuizData.parameters.databaseName);
-
-            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("questionnaire", _quizData.XmlQuizData.parameters.questionnaireId);
-            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
-            levelCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
-            questionListsCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
-            choiceListsCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> questionnaireCollection = database.GetCollection<BsonDocument>("questionnaires");
-            questionnaireCollection.DeleteMany(filter);
-
-            Int32 totalQuestionCount = 0;
-            foreach (Level level in _levelList) totalQuestionCount += level.QuestionCount;
-            if (totalQuestionCount == 0) return 0;
-            
-            BsonDocument questionnaireDocument = new BsonDocument()
-            {
-                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
-                { "map_id", _quizData.XmlQuizData.parameters.mapId },
-                { "name", _name.getBsonDocument() }
-            };
-
-            BsonArray languagesArray = new BsonArray();
-            foreach (XmlLanguage language in _quizData.XmlQuizData.parameters.languageList)
-            {
-                if (language.status == XmlLanguageStatusEnum.TRANSLATION_COMPLETED)
-                {
-                    BsonDocument languageDocument = new BsonDocument()
-                    {
-                        { "id", language.id.ToString() },
-                        { "name", language.name }
-                    };
-                    languagesArray.Add(languageDocument);
-                }
-            }
-            BsonDocument languagesDocument = new BsonDocument()
-            {
-                { "languages", languagesArray }
-            };
-            questionnaireDocument.AddRange(languagesDocument);
-
-            questionnaireCollection.InsertOne(questionnaireDocument);
-
-            foreach (Level level in _levelList)
-            {
-                if (level.QuestionCount > 0)
-                {
-                    if (level.fillDataBase(database) != 0) return -1;
-                }
-            }*/
-
-            return 0;
-        }
-
-        private int generateCode()
-        {
             if (!Directory.Exists(_quizData.XmlQuizData.parameters.cppGenerationDir))
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _quizData.XmlQuizData.parameters.cppGenerationDir));

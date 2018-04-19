@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -644,7 +642,8 @@ namespace QuestionInstantiation
                                     Choice ExcludedChoice = null;
                                     if (startElementType == endElementType && choiceDictionary.ContainsKey(startElement)) ExcludedChoice = choiceDictionary[startElement];
 
-                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice, startElement, xmlRelationNQuestionCategory.answerProximityCriterion, ChoiceCommentModeEnum.ATTRIBUTE_COMMENT);
+                                    question = new MultipleAnswerQuestion(questionText, ExcludedChoice, startElement,
+                                        /*xmlRelationNQuestionCategory.answerProximityCriterion, */ChoiceCommentModeEnum.ATTRIBUTE_COMMENT);
 
                                     foreach(Element endElement in endElementDictionary.Keys)
                                     {
@@ -1126,7 +1125,8 @@ namespace QuestionInstantiation
 
                         MapParameters mapParameters = new MapParameters(xmlRelationExistenceQuestionCategory.mapParameters);
                         MultipleAnswerCategory category = new MultipleAnswerCategory(_weightSum, questionNameInLog, _quizData, XmlMultipleAnswerProximityCriterionEnum.NONE, 0.0, mapParameters);
-                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, null, XmlMultipleAnswerProximityCriterionEnum.NONE, ChoiceCommentModeEnum.MAIN_COMMENT);
+                        MultipleAnswerQuestion question = new MultipleAnswerQuestion(questionText, null, null,
+                            /*XmlMultipleAnswerProximityCriterionEnum.NONE,*/ ChoiceCommentModeEnum.MAIN_COMMENT);
 
                         foreach (Element element in _elementByTypeDictionary[elementType])
                         {
@@ -1190,40 +1190,6 @@ namespace QuestionInstantiation
                     }
                 }
             }
-
-            return 0;
-        }
-
-        internal int fillDataBase(IMongoDatabase database)
-        {
-            IMongoCollection<BsonDocument> levelCollection = database.GetCollection<BsonDocument>("levels");
-
-            BsonDocument levelDocument = new BsonDocument()
-            {
-                { "questionnaire", _quizData.XmlQuizData.parameters.questionnaireId },
-                { "level_id", _xmlLevel.levelId },
-                { "index", _value },
-                { "name", _name.getBsonDocument() },
-                { "question_count", _questionCount },
-                { "choice_count", _choiceCount },
-                { "weight_sum", _weightSum },
-                { "distrib_parameter", _xmlLevel.distribParameter },
-                { "category_count", _categoryList.Count }
-            };
-
-            BsonArray categoriesArray = new BsonArray();
-            foreach (Category category in _categoryList)
-            {
-                categoriesArray.Add(category.getBsonDocument(database, _quizData.XmlQuizData.parameters.questionnaireId));
-            }
-
-            BsonDocument categoriesDocument = new BsonDocument()
-            {
-                { "categories", categoriesArray }
-            };
-
-            levelDocument.AddRange(categoriesDocument);
-            levelCollection.InsertOne(levelDocument);
 
             return 0;
         }

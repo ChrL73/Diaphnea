@@ -120,15 +120,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core">
-      <HintPath>..\MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\MongoDB.Driver.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System" />
   </ItemGroup>

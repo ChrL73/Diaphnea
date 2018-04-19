@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,18 +48,6 @@ namespace QuestionInstantiation
             z *= invN;
 
             return new GeoPoint(x, y, z);
-        }
-
-        internal BsonDocument getBsonDocument()
-        {
-            BsonDocument pointDocument = new BsonDocument()
-            {
-                { "x", _x },
-                { "y", _y },
-                { "z", _z }
-            };
-
-            return pointDocument;
         }
 
         internal double X { get { return _x; } }

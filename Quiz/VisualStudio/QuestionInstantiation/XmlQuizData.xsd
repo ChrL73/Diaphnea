@@ -581,7 +581,6 @@
     <xsd:attribute name="logFileName" type="xsd:string" use="required" />
     <xsd:attribute name="fileLogLevel" type="XmlLogLevelEnum" use="required" />
     <xsd:attribute name="consoleLogLevel" type="XmlLogLevelEnum" use="required" />
-    <xsd:attribute name="databaseName" type="xsd:string" use="required" />
     <xsd:attribute name="cppGenerationDir" type="xsd:string" use="required" />
     <xsd:attribute name="jsGenerationDir" type="xsd:string" use="required" />
   </xsd:complexType>

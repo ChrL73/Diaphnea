@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -132,99 +130,6 @@ namespace QuestionInstantiation
                     choice.Comment = Text.fromTextList(textList, QuizData);
                 }
             }
-        }
-
-        internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
-        {
-            IMongoCollection<BsonDocument> questionListsCollection = database.GetCollection<BsonDocument>("question_lists");
-            BsonDocument questionListDocument = getQuestionListDocument(questionnaireId);
-            questionListsCollection.InsertOne(questionListDocument);
-
-            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
-            BsonDocument choiceListDocument = getChoiceListDocument(questionnaireId);
-            choiceListsCollection.InsertOne(choiceListDocument);
-
-            string proximityCriterionType = "none";
-            if (_proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
-            {
-                proximityCriterionType = "3d_point";
-            }
-
-            BsonDocument categoryDocument = new BsonDocument()
-            {
-                { "type", "MultipleAnswer" },
-                { "question_count", _questionList.Count },
-                { "question_list", questionListDocument.GetValue("_id") },
-                { "choice_count", _choiceDictionary.Count },
-                { "choice_list", choiceListDocument.GetValue("_id") },
-                { "weight_index", WeightIndex },
-                { "distrib_parameter_correction", _distribParameterCorrection },
-                { "proximity_criterion_type", proximityCriterionType },
-                { "map_parameters", getMapParameterBsonDocument() }
-            };
-
-            return categoryDocument;
-        }
-
-        internal BsonDocument getQuestionListDocument(string questionnaireId)
-        {
-            BsonDocument questionListDocument = new BsonDocument();
-
-            BsonArray questionsArray = new BsonArray();
-            foreach (MultipleAnswerQuestion question in _questionList)
-            {
-                questionsArray.Add(question.getBsonDocument(QuizData));
-            }
-
-            BsonDocument questionsDocument = new BsonDocument()
-            {
-                { "questionnaire", questionnaireId },
-                { "count", _questionList.Count },
-                { "questions", questionsArray }
-            };
-
-            questionListDocument.AddRange(questionsDocument);
-
-            return questionListDocument;
-        }
-
-        internal BsonDocument getChoiceListDocument(string questionnaireId)
-        {
-            BsonArray choicesArray = new BsonArray();
-            foreach (List<Choice> list in _choiceDictionary.Values)
-            {
-                BsonDocument choiceDocument = new BsonDocument()
-                {
-                    { "choice", list[0].AttributeValue.Value.getBsonDocument() },
-                    { "comment", list[0].Comment.getBsonDocument() },
-                    { "map_id", list[0].Element.XmlElement.mapId == null ? "" : list[0].Element.XmlElement.mapId.Substring(2) }
-                };
-
-                if (_proximityCriterion != XmlMultipleAnswerProximityCriterionEnum.NONE)
-                {
-                    BsonArray proximityCriterionArray = new BsonArray();
-                    if (_proximityCriterion == XmlMultipleAnswerProximityCriterionEnum.ELEMENT_LOCATION)
-                    {
-                        foreach (Choice choice in list) proximityCriterionArray.Add(choice.Element.GeoPoint.getBsonDocument());
-                    }
-
-                    choiceDocument.AddRange(new BsonDocument() { { "proximity_criterion_values", proximityCriterionArray } });
-                }
-
-                choicesArray.Add(choiceDocument);
-            }
-
-            BsonDocument choicesDocument = new BsonDocument()
-            {
-                { "questionnaire", questionnaireId },
-                { "count", _choiceDictionary.Count },
-                { "choices", choicesArray }
-            };
-
-            BsonDocument choiceListDocument = new BsonDocument();
-            choiceListDocument.AddRange(choicesDocument);
-
-            return choiceListDocument;
         }
 
         internal override int generateCode(List<CodeGenerator> codeGeneratorList)

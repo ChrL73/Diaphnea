@@ -24,17 +24,17 @@ module.exports =
    {
       id: '_Gabon',
       mapId: '_Gabon',
-      name: { en: 'Gabon', fr: 'Gabon' },
+      name: { fr: 'Gabon', en: 'Gabon' },
       languages:
       [
-        { id: 'fr', name: 'Français' },
-        { id: 'en', name: 'English' }
+         { id: 'fr', name: 'Français' },
+         { id: 'en', name: 'English' },
       ],
       levels:
       [
-         { id: 'lv_Facile', name: { en: 'Easy', fr: 'Facile' } },
-         { id: 'lv_Moyen', name: { en: 'Medium', fr: 'Moyen' } },
-         { id: 'lv_Difficile', name: { en: 'Hard', fr: 'Difficile' } }
-      ]
-   }
+         { id: 'lv_Facile', name: { fr: 'Facile', en: 'Easy' } },
+         { id: 'lv_Moyen', name: { fr: 'Moyen', en: 'Medium' } },
+         { id: 'lv_Difficile', name: { fr: 'Difficile', en: 'Hard' } },
+      ],
+   },
 ];

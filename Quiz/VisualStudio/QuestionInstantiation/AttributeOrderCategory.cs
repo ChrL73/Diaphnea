@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -82,59 +80,6 @@ namespace QuestionInstantiation
 
             if (_maxIndex < 0) return -1;
             return 0;
-        }
-
-        internal override BsonDocument getBsonDocument(IMongoDatabase database, string questionnaireId)
-        {
-            IMongoCollection<BsonDocument> choiceListsCollection = database.GetCollection<BsonDocument>("choice_lists");
-            BsonDocument choiceListDocument = getChoiceListDocument(questionnaireId);
-            choiceListsCollection.InsertOne(choiceListDocument);
-
-            BsonDocument categoryDocument = new BsonDocument()
-            {
-                { "type", "AttributeOrder" },
-                { "question", _questionText.getBsonDocument() },
-                { "choice_count", _elementList.Count },
-                { "choice_list", choiceListDocument.GetValue("_id") },
-                { "weight_index", WeightIndex },
-                { "distrib_parameter_correction", _distribParameterCorrection },
-                { "max_index", _maxIndex },
-                { "map_parameters", getMapParameterBsonDocument() }
-            };
-
-            return categoryDocument;
-        }
-
-        private BsonDocument getChoiceListDocument(string questionnaireId)
-        {
-            BsonArray choicesArray = new BsonArray();
-            foreach (AttributeOrderElement element in _elementList)
-            {
-                double value = _mode == XmlAttributeOrderModeEnum.LOWEST ? element.AttributeValue : -element.AttributeValue;
-                string comment = String.Format("{0}{1}", value.ToString(_valueFormat, CultureInfo.CreateSpecificCulture("en-US")), _numericalAttributeType.unit);
-
-                BsonDocument choiceDocument = new BsonDocument()
-                {
-                    { "choice", element.Element.Name.getBsonDocument() },
-                    { "comment", comment },
-                    { "min_index", element.MinAnswerIndex },
-                    { "map_id", element.Element.XmlElement.mapId == null ? "" : element.Element.XmlElement.mapId.Substring(2) }
-                };
-
-                choicesArray.Add(choiceDocument);
-            }
-
-            BsonDocument choicesDocument = new BsonDocument()
-            {
-                { "questionnaire", questionnaireId },
-                { "count", _choiceDictionary.Count },
-                { "choices", choicesArray }
-            };
-
-            BsonDocument choiceListDocument = new BsonDocument();
-            choiceListDocument.AddRange(choicesDocument);
-
-            return choiceListDocument;
         }
 
         internal override int generateCode(List<CodeGenerator> codeGeneratorList)

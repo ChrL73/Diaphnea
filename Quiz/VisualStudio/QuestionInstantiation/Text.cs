@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -102,18 +101,6 @@ namespace QuestionInstantiation
                 result.setText(xmlLanguage.id.ToString(), str);
             }
             return result;
-        }
-
-        internal BsonDocument getBsonDocument()
-        {
-            BsonDocument textDocument = new BsonDocument();
-
-            foreach (KeyValuePair<string, string> pair in _textDictionary)
-            {
-                if (_completedTranslationDictionary.ContainsKey(pair.Key)) textDocument.AddRange(new BsonDocument() { { pair.Key, pair.Value == null ? "" : pair.Value } });
-            }
-
-            return textDocument;
         }
     }
 }

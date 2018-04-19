@@ -1236,7 +1236,7 @@ namespace QuestionInstantiation
 
             foreach (string languageId in Text.CompletedTranslationLanguages)
             {
-                string dirName = String.Format("{0}/{1}{2}{3}", _quizData.XmlQuizData.parameters.generationDir, _quizData.XmlQuizData.parameters.questionnaireId,
+                string dirName = String.Format("{0}/{1}{2}{3}", _quizData.XmlQuizData.parameters.cppGenerationDir, _quizData.XmlQuizData.parameters.questionnaireId,
                                                _xmlLevel.levelId, languageId);
 
                 codeGeneratorList.Add(new CodeGenerator(dirName, languageId));

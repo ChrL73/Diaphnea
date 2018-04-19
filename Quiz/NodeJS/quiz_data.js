@@ -1,44 +1,7 @@
 var translate = require('./translate');
 var languages = translate().languages;
 
-// tmp
-var questionnaires = 
-[
-   {
-      id: '_France',
-      mapId: '_France',
-      name: { en: 'France', fr: 'France' },
-      languages:
-      [
-        { id: 'fr', name: 'Français' },
-        { id: 'en', name: 'English' }
-      ],
-      levels:
-      [
-         { id: 'lv_TresFacile', name: { en: 'Very easy', fr: 'Très facile' } },
-         { id: 'lv_Facile', name: { en: 'Easy', fr: 'Facile' } },
-         { id: 'lv_Moyen', name: { en: 'Medium', fr: 'Moyen' } },
-         { id: 'lv_Difficile', name: { en: 'Hard', fr: 'Difficile' } },
-         { id: 'lv_TresDifficile', name: { en: 'Very hard', fr: 'Très difficile' } }
-      ]
-   },
-   {
-      id: '_Gabon',
-      mapId: '_Gabon',
-      name: { en: 'Gabon', fr: 'Gabon' },
-      languages:
-      [
-        { id: 'fr', name: 'Français' },
-        { id: 'en', name: 'English' }
-      ],
-      levels:
-      [
-         { id: 'lv_Facile', name: { en: 'Easy', fr: 'Facile' } },
-         { id: 'lv_Moyen', name: { en: 'Medium', fr: 'Moyen' } },
-         { id: 'lv_Difficile', name: { en: 'Hard', fr: 'Difficile' } }
-      ]
-   }
-]
+var questionnaires = require('./generated_data');
 
 function getLevelChoiceDownData(upData, callback)
 {

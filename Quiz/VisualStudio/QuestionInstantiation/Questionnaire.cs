@@ -252,9 +252,9 @@ namespace QuestionInstantiation
 
         private int generateCode()
         {
-            if (!Directory.Exists(_quizData.XmlQuizData.parameters.generationDir))
+            if (!Directory.Exists(_quizData.XmlQuizData.parameters.cppGenerationDir))
             {
-                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _quizData.XmlQuizData.parameters.generationDir));
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _quizData.XmlQuizData.parameters.cppGenerationDir));
                 return -1;
             }
 
@@ -264,6 +264,131 @@ namespace QuestionInstantiation
                 {
                     if (level.generateCode() != 0) return -1;
                 }
+            }
+
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, String.Format("JavaScript code generation..."));
+
+            List<string> generatedSection = new List<string>();
+
+            generatedSection.Add("   {");
+            generatedSection.Add(String.Format("      id: '{0}',", _quizData.XmlQuizData.parameters.questionnaireId));
+            generatedSection.Add(String.Format("      mapId: '{0}',", _quizData.XmlQuizData.parameters.mapId));
+
+            List<string> names = new List<string>();
+            foreach (XmlName name in _quizData.XmlQuizData.parameters.questionnaireName)
+            {
+                names.Add(String.Format(" {0}: '{1}'", name.language, name.text));
+            }
+            generatedSection.Add(String.Format("      name: {{{0} }},", String.Join(",", names)));
+
+            generatedSection.Add("      languages:");
+            generatedSection.Add("      [");
+            foreach (XmlLanguage language in _quizData.XmlQuizData.parameters.languageList)
+            {
+                generatedSection.Add(String.Format("         {{ id: '{0}', name: '{1}' }},", language.id, language.name));
+            }
+            generatedSection.Add("      ],");
+
+            generatedSection.Add("      levels:");
+            generatedSection.Add("      [");
+            foreach (XmlLevel level in _quizData.XmlQuizData.parameters.levelList)
+            {
+                names.Clear();
+                foreach (XmlName name in level.name)
+                {
+                    names.Add(String.Format(" {0}: '{1}'", name.language, name.text));
+                }
+                generatedSection.Add(String.Format("         {{ id: '{0}', name: {{{1} }} }},",
+                                     level.levelId, String.Join(",", names)));
+            }
+            generatedSection.Add("      ],");
+            generatedSection.Add("   },");
+
+            string jsPath = String.Format("{0}/generated_data.js", _quizData.XmlQuizData.parameters.jsGenerationDir);
+            string[] lines = null;
+
+            try
+            {
+                lines = File.ReadAllLines(jsPath);
+            }
+            catch (Exception)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Failed to read file ({0})", jsPath));
+                return -1;
+            }
+            List<List<string>> jsFileContent = new List<List<string>>();
+
+            List<string> currentSection = null;
+            string currentQuestionnaireId = null;
+            bool sectionToReplaceReached = false;
+            bool generatedSectionAdded = false;
+
+            foreach (string line in lines)
+            {
+                if (currentSection == null && line.Contains("{"))
+                {
+                    currentSection = new List<string>();
+                }
+
+                if (currentSection != null)
+                {
+                    if (currentQuestionnaireId == null)
+                    {
+                        int index = line.IndexOf("'");
+                        if (index != -1)
+                        {
+                            string s = line.Substring(index + 1);
+                            index = s.IndexOf("'");
+                            if (index != -1)
+                            {
+                                currentQuestionnaireId = s.Substring(0, index);
+                                if (currentQuestionnaireId == _quizData.XmlQuizData.parameters.questionnaireId)
+                                {
+                                    sectionToReplaceReached = true;
+                                }
+                            }
+                        }
+                    }
+
+                    currentSection.Add(line);
+                }
+
+                if (currentSection != null && line.Contains("}") && !line.Contains("{"))
+                {
+                    if (sectionToReplaceReached && !generatedSectionAdded)
+                    {
+                        jsFileContent.Add(generatedSection);
+                        generatedSectionAdded = true;
+                    }
+                    else
+                    {
+                        jsFileContent.Add(currentSection);
+                    }
+
+                    currentSection = null;
+                    currentQuestionnaireId = null;
+                }
+            }
+
+            if (!generatedSectionAdded)
+            {
+                jsFileContent.Add(generatedSection);
+            }
+
+            using (TextWriter tw = new StreamWriter(jsPath))
+            {
+                tw.WriteLine("// This file is automatically updated by 'QuestionInstantiation.exe'");
+                tw.WriteLine("// Manually editing this file may cause this automatic update to fail");
+                tw.WriteLine("// (In particular, do not add or remove 'newline' characters)");
+                tw.WriteLine("module.exports =");
+                tw.WriteLine("[");
+
+                foreach (List<string> section in jsFileContent)
+                {
+                    foreach (string line in section) tw.WriteLine(line);
+                }
+
+                tw.WriteLine("];");
             }
 
             return 0;

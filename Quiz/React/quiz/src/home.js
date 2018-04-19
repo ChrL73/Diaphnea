@@ -480,7 +480,7 @@ export class Home extends React.Component
    
    handleServerError()
    {
-      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', showModal2: true });
+      if (this.state.page === 'index') this.setState({ navBarWaitDisplay: 'none', startWaitDisplay: 'none', showModal2: true });
    }
    
    handleUpdateSelects(data)

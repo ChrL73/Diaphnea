@@ -13,24 +13,6 @@ var shortId = require('shortid');
 var mongoose = require('mongoose');
 var db = mongoose.connect(config.dbUrl);
 
-var url = require('url');
-var dbParsedUrl = url.parse(config.dbUrl);
-var dbParameters = ' ' + dbParsedUrl.host + ' ' + dbParsedUrl.path.substr(1);
-
-if (dbParsedUrl.auth)
-{
-   var i = dbParsedUrl.auth.indexOf(':');
-   if (i > -1)
-   {
-      dbParameters += ' ' + dbParsedUrl.auth.substr(0, i);
-      dbParameters += ' ' + dbParsedUrl.auth.substr(i + 1);
-   }
-   else
-   {
-      dbParameters += ' ' + dbParsedUrl.auth;
-   }
-}
-
 var quizData = require('./quiz_data');
 var userData = require('./user_data');
 var translate = require('./translate');
@@ -623,6 +605,8 @@ io.on('connection', function(socket)
                   context.rightAnswerCount = undefined;
                   context.startDate = undefined;
                   context.finalTime = undefined;
+                  
+                  setTimeout(function() { socket.emit('indexError', {}); }, debugDelay);
                }
                else
                {
@@ -650,9 +634,9 @@ io.on('connection', function(socket)
                         else context.questionStates[iQuestion].choiceStates.push(iChoice == 0 ? 1 : 0);
                      });
                   });
+                  
+                  emitDisplayGame(context, data.reqId);
                }
-
-               emitDisplayGame(context, data.reqId);
             });
          });
       });

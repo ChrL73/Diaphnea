@@ -104,6 +104,22 @@ namespace map_server
         _infoJson = "{\"names\":" + namesJson + ",\"linkedElements1\":" + linkedElements1Json + ",\"linkedElements2\":" + linkedElements2Json
                     + ",\"category\":" + std::to_string(categoryId) + "}";
 
+        // tmp debug
+        /*std::map<std::string, std::vector<ElementName *> >::iterator it1 = _nameMap.begin();
+        for (; it1 != _nameMap.end(); ++it1)
+        {
+            std::cout << (*it1).first << ":" << std::endl;
+
+            int i, n = (*it1).second.size() ;
+            for (i = 0; i < n; ++i)
+            {
+                int j, m = (*it1).second[i]->getLineCount();
+                for (j = 0; j < m; ++j) std::cout << "|" << (*it1).second[i]->getLine(j);
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
+        }*/
+
         return true;
     }
 

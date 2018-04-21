@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="map_server2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/map_server2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="Requests" />
+					<Add directory="." />
+				</Compiler>
+				<Linker>
+					<Add option="-pthread" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/map_server2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add directory="Requests" />
+					<Add directory="." />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-pthread" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Data/LineElement.cpp" />
+		<Unit filename="Data/LineElement.h" />
+		<Unit filename="Data/MapElement.cpp" />
+		<Unit filename="Data/MapElement.h" />
+		<Unit filename="Data/PointElement.cpp" />
+		<Unit filename="Data/PointElement.h" />
+		<Unit filename="Data/PolygonElement.cpp" />
+		<Unit filename="Data/PolygonElement.h" />
+		<Unit filename="ErrorEnum.h" />
+		<Unit filename="MapServer.cpp" />
+		<Unit filename="MapServer.h" />
+		<Unit filename="MessageTypeEnum.h" />
+		<Unit filename="Requests/RenderRequest.cpp" />
+		<Unit filename="Requests/RenderRequest.h" />
+		<Unit filename="Requests/Request.cpp" />
+		<Unit filename="Requests/Request.h" />
+		<Unit filename="Requests/SvgCustomColor.cpp" />
+		<Unit filename="Requests/SvgCustomColor.h" />
+		<Unit filename="ThreadInfo.cpp" />
+		<Unit filename="ThreadInfo.h" />
+		<Unit filename="map_server.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

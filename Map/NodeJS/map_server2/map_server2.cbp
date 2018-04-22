@@ -44,12 +44,15 @@
 		</Compiler>
 		<Unit filename="Data/LineElement.cpp" />
 		<Unit filename="Data/LineElement.h" />
+		<Unit filename="Data/MapData.h" />
 		<Unit filename="Data/MapElement.cpp" />
 		<Unit filename="Data/MapElement.h" />
 		<Unit filename="Data/PointElement.cpp" />
 		<Unit filename="Data/PointElement.h" />
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
+		<Unit filename="Data/generated_code/_France/LineElements.cpp" />
+		<Unit filename="Data/generated_code/_France/Strings.cpp" />
 		<Unit filename="ErrorEnum.h" />
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />

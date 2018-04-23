@@ -42,6 +42,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Data/CommonData.cpp" />
+		<Unit filename="Data/CommonData.h" />
+		<Unit filename="Data/ElementInfo.cpp" />
+		<Unit filename="Data/ElementInfo.h" />
+		<Unit filename="Data/ElementTypeEnum.h" />
 		<Unit filename="Data/LineElement.cpp" />
 		<Unit filename="Data/LineElement.h" />
 		<Unit filename="Data/MapData.h" />
@@ -52,6 +57,9 @@
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
 		<Unit filename="Data/generated_code/_France/LineElements.cpp" />
+		<Unit filename="Data/generated_code/_France/MapData.cpp" />
+		<Unit filename="Data/generated_code/_France/PointElements.cpp" />
+		<Unit filename="Data/generated_code/_France/PolygonElements.cpp" />
 		<Unit filename="Data/generated_code/_France/Strings.cpp" />
 		<Unit filename="ErrorEnum.h" />
 		<Unit filename="MapServer.cpp" />

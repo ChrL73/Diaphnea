@@ -1,6 +1,6 @@
 namespace map_server
 {
-int lineElements[] =
+int pointElements[] =
 {
 0
 };

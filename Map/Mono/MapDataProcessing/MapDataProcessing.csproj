@@ -20,7 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_France.xml ../../../../VisualStudio/MapDataProcessing/MapData_Gabon.xml</Commandlineparameters>
+    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_Gabon.xml</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>full</DebugType>
@@ -141,6 +141,9 @@
     <Compile Include="..\..\VisualStudio\MapDataProcessing\XmlMapData.cs">
       <Link>XmlMapData.cs</Link>
     </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\CodeGenerator.cs">
+      <Link>CodeGenerator.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -165,5 +168,16 @@
     <EmbeddedResource Include="..\..\VisualStudio\MapDataProcessing\PolygonTemplate.kml">
       <Link>PolygonTemplate.kml</Link>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\VisualStudio\MapDataProcessing\MapData_France.xml">
+      <Link>MapData_France.xml</Link>
+    </None>
+    <None Include="..\..\VisualStudio\MapDataProcessing\MapData_Gabon.xml">
+      <Link>MapData_Gabon.xml</Link>
+    </None>
+    <None Include="..\..\VisualStudio\MapDataProcessing\XmlMapData.xsd">
+      <Link>XmlMapData.xsd</Link>
+    </None>
   </ItemGroup>
 </Project>

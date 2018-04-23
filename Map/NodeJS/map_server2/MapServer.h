@@ -9,10 +9,13 @@
 namespace map_server
 {
     class ThreadInfo;
+    class CommonData;
 
     class MapServer
     {
     private:
+        CommonData * const _commonData;
+
         std::set<ThreadInfo *> _threadSet;
         std::mutex _threadSetMutex;
 
@@ -35,8 +38,8 @@ namespace map_server
         bool _stopRequested;
 
     public:
-        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
-            _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs), _checkTimeoutSleepMs(checkTimeoutSleepMs), _softExit(softExit) {}
+        MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit);
+        ~MapServer();
 
         int run(void);
     };

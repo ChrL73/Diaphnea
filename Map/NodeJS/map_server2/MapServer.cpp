@@ -3,6 +3,7 @@
 #include "Request.h"
 #include "MessageTypeEnum.h"
 #include "ErrorEnum.h"
+#include "CommonData.h"
 
 #include <iostream>
 #include <vector>
@@ -13,6 +14,17 @@
 
 namespace map_server
 {
+    MapServer::MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
+            _commonData(new CommonData()), _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs),
+            _checkTimeoutSleepMs(checkTimeoutSleepMs), _softExit(softExit)
+    {
+    }
+
+    MapServer::~MapServer()
+    {
+        delete _commonData;
+    }
+
     int MapServer::run(void)
     {
         Request::setCoutMutex(&_coutMutex);

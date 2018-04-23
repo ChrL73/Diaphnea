@@ -71,5 +71,7 @@ namespace MapDataProcessing
 
             return elementDocument;
         }
+
+        abstract internal int generateCode(CodeGenerator codeGenerator);
     }
 }

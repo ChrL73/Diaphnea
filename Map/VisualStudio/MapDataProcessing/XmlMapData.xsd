@@ -31,6 +31,7 @@
     <xsd:attribute name="resolutionThreshold" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="sizeParameter1" type="XmlPositiveDouble" use="required" />
     <xsd:attribute name="sizeParameter2" type="XmlPositiveDouble" use="required" />
+    <xsd:attribute name="cppGenerationDir" type="xsd:string" use="required" />
   </xsd:complexType>
   <xsd:simpleType name="XmlExclusionTag">
     <xsd:restriction base="xsd:string">

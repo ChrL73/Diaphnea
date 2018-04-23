@@ -113,7 +113,13 @@ namespace MapDataProcessing
             if (result == 0)
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
-                result = fillDatabase();
+                //result = fillDatabase();
+            }
+
+            if (result == 0)
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
+                result = generateCode();
             }
 
             return result;
@@ -579,6 +585,26 @@ namespace MapDataProcessing
             foreach (MapElement element in _elementDictionary.Values)
             {
                 if (element.fillDatabase(database) != 0) return -1;
+            }
+
+            return 0;
+        }
+
+        private int generateCode()
+        {
+            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "C++ code generation...");
+
+            if (!Directory.Exists(_mapData.XmlMapData.parameters.cppGenerationDir))
+            {
+                MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _mapData.XmlMapData.parameters.cppGenerationDir));
+                return -1;
+            }
+
+            CodeGenerator codeGenerator = new CodeGenerator(String.Format("{0}/{1}", _mapData.XmlMapData.parameters.cppGenerationDir, _mapData.XmlMapData.parameters.mapId));
+
+            foreach (MapElement element in _elementDictionary.Values)
+            {
+                if (element.generateCode(codeGenerator) != 0) return -1;
             }
 
             return 0;

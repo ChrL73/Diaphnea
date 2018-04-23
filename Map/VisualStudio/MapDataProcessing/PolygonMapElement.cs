@@ -319,5 +319,10 @@ namespace MapDataProcessing
 
             return 0;
         }
+
+        internal override int generateCode(CodeGenerator codeGenerator)
+        {
+            return 0;
+        }
     }
 }

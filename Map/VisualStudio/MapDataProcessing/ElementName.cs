@@ -19,7 +19,7 @@ namespace MapDataProcessing
 
         private readonly SortedDictionary<string, string> _dictionary = new SortedDictionary<string, string>();
 
-        public ElementName(XmlName[] name)
+        internal ElementName(XmlName[] name)
         {
             if (name != null)
             {
@@ -32,7 +32,7 @@ namespace MapDataProcessing
             }
         }
 
-        public ElementName(XmlName[] name, XmlName[] suffix)
+        internal ElementName(XmlName[] name, XmlName[] suffix)
         {
             if (name != null)
             {

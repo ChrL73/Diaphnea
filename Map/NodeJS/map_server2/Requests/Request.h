@@ -5,7 +5,8 @@
 
 namespace map_server
 {
-    class Map;
+    //class Map;
+    class CommonData;
 
     class Request
     {
@@ -15,11 +16,11 @@ namespace map_server
         static std::mutex *_coutMutexPtr;
         const char * const _socketId;
         const char * const _requestId;
-        void flushErrors(Map *map);
+        //void flushErrors(Map *map);
 
     public:
         static void setCoutMutex(std::mutex *coutMutexPtr) { _coutMutexPtr = coutMutexPtr; }
-        static Request *createRequest(std::vector<const char *> tokenVector);
+        static Request *createRequest(CommonData *commonData, std::vector<const char *> tokenVector);
         virtual ~Request() {}
         virtual void execute(void) = 0;
     };

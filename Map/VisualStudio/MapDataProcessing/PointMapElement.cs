@@ -90,6 +90,8 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
+            codeGenerator.addPointElement(this);
+
             return 0;
         }
     }

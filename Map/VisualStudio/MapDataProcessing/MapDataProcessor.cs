@@ -607,6 +607,8 @@ namespace MapDataProcessing
                 if (element.generateCode(codeGenerator) != 0) return -1;
             }
 
+            codeGenerator.close();
+
             return 0;
         }
     }

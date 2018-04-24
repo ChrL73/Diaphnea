@@ -2,9 +2,10 @@
 //#include "MapData.h"
 //#include "Map.h"
 #include "MessageTypeEnum.h"
-//#include "PolygonElement.h"
-//#include "PointElement.h"
-//#include "LineElement.h"
+#include "PointElement.h"
+#include "LineElement.h"
+#include "PolygonElement.h"
+#include "CommonData.h"
 //#include "PointItem.h"
 //#include "FilledPolygonItem.h"
 //#include "LineItem.h"
@@ -53,26 +54,56 @@ namespace map_server
     {
         bool createSvg = (strcmp(_socketId, "svg") == 0);
 
-        /*std::vector<MapElement *> elementVector;
+        std::vector<const PointElement *> pointElementVector;
+        std::vector<const LineElement *> lineElementVector;
+        std::vector<const PolygonElement *> polygonElementVector;
+
+        _commonData->lock();
+
         unsigned int i, n = _elementIds.size();
         for (i = 0; i < n; ++i)
         {
             std::string elementId = _elementIds[i];
-            MapElement *element = _map->getElement(elementId);
-            if (element != 0) elementVector.push_back(element);
+            ElementTypeEnum elementType = _commonData->getElementType(elementId);
 
+            if (elementType == map_server::POINT)
+            {
+                pointElementVector.push_back(_commonData->getLastElementAsPoint());
+            }
+            else if (elementType == map_server::LINE)
+            {
+                lineElementVector.push_back(_commonData->getLastElementAsLine());
+            }
+            else if (elementType == map_server::POLYGON)
+            {
+                polygonElementVector.push_back(_commonData->getLastElementAsPolygon());
+            }
+            else if (elementId == "#test")
+            {
+                //_testMode = true;
+            }
             // Disable potential image creation, because it's only a developement/debug/test feature.
             // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.
-            //else if (elementId == "#img") _createPotentialImage = true;
-
-            else if (elementId == "#test") _testMode = true;
+            /*else if (elementId == "#img")
+            {
+                _createPotentialImage = true;
+            }*/
         }
 
-        std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
-        std::vector<MapItem *> itemVector;
-        std::set<std::string> coveredElementSet;
+        _commonData->unlock();
 
-        n = elementVector.size();
+        /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
+        std::vector<MapItem *> itemVector;
+        std::set<std::string> coveredElementSet;*/
+
+        n = pointElementVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            const PointElement *pointElement = pointElementVector[i];
+            //itemVector.push_back(pointElement->getItem());
+        }
+
+        /*n = elementVector.size();
         bool noElement = (n == 0);
         for (i = 0; i < n; ++i)
         {

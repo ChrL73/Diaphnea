@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add directory="Requests" />
 					<Add directory="." />
+					<Add directory="Data" />
 				</Compiler>
 				<Linker>
 					<Add option="-pthread" />
@@ -31,6 +32,7 @@
 					<Add option="-std=c++11" />
 					<Add directory="Requests" />
 					<Add directory="." />
+					<Add directory="Data" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

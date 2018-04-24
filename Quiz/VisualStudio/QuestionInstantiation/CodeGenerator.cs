@@ -14,6 +14,8 @@ namespace QuestionInstantiation
         private readonly string _dirName;
         private readonly string _languageId;
 
+        private readonly Dictionary<string, StreamWriter> _streamWriterDictionary = new Dictionary<string, StreamWriter>();
+
         private int _currentStringOffset;
         private int _currentChoiceOffset;
         private int _currentIntArrayOffset;
@@ -163,6 +165,8 @@ namespace QuestionInstantiation
             append("RelationOrderQuestions.cpp", "\n};\n}\n");
             append("RelationOrderCategories.cpp", "\n};\n}\n");
             append("AttributeOrderCategories.cpp", "\n};\n}\n");
+
+            foreach (StreamWriter file in _streamWriterDictionary.Values) file.Close();
         }
 
         private int getStringOffset(string str)
@@ -737,10 +741,14 @@ namespace QuestionInstantiation
         {
             string path = String.Format("{0}/{1}", _dirName, fileName);
 
-            using (StreamWriter file = new StreamWriter(path, true))
+            StreamWriter file;
+            if (!_streamWriterDictionary.TryGetValue(path, out file))
             {
-                file.Write(text);
+                file = new StreamWriter(path, true);
+                _streamWriterDictionary.Add(path, file);
             }
+
+            file.Write(text);
         }
     }
 }

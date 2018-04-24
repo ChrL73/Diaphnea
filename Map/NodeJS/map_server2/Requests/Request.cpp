@@ -20,7 +20,7 @@ namespace map_server
 {
     std::mutex *Request::_coutMutexPtr = 0;
 
-    Request *Request::createRequest(std::vector<const char *> tokenVector)
+    Request *Request::createRequest(CommonData *commonData, std::vector<const char *> tokenVector)
     {
         int tokenCount = tokenVector.size();
 
@@ -199,13 +199,13 @@ namespace map_server
                         framingLevel = 0;
                     }
 
-                    return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels,
+                    return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels,
                                              lookIndex, elementIds, customColorMap, framingLevel, framingExceptions);
                 }
 
 
-                return new RenderRequest(tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds, customColorMap,
-                                         scale, xFocus, yFocus);
+                return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds,
+                                         customColorMap, scale, xFocus, yFocus);
             }
         }
 

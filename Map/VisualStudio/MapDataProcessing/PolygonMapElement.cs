@@ -322,6 +322,8 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
+            codeGenerator.addPolygonElement(this);
+
             return 0;
         }
     }

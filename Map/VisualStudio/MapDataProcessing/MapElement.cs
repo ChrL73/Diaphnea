@@ -41,7 +41,7 @@ namespace MapDataProcessing
         abstract internal int formParts2();
         abstract internal int fillDatabase(IMongoDatabase database);
 
-        protected string Id { get { return _id; } }
+        internal string Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }
         internal int CategoryId { get { return _categoryId; } }
 

@@ -56,7 +56,7 @@ namespace map_server
 
     const PointElement *CommonData::getLastElementAsPoint(void) const
     {
-        return 0;
+        return new PointElement(_lastElementOffset);
     }
 
     const LineElement *CommonData::getLastElementAsLine(void) const
@@ -66,7 +66,7 @@ namespace map_server
 
     const PolygonElement *CommonData::getLastElementAsPolygon(void) const
     {
-        return 0;
+        return new PolygonElement(_lastElementOffset);
     }
 
 }

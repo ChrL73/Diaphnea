@@ -10,7 +10,7 @@ namespace produce_questions
 
     class RelationOrderCategory
     {
-        private:
+    private:
         // Int
         int _weightIndex;
 

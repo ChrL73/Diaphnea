@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using Schemas;
 
 namespace MapDataProcessing
 {
@@ -98,14 +99,20 @@ namespace MapDataProcessing
             }
 
             return offset;
-        }
+        } 
 
-        internal void addPointElement(PointMapElement element)
+        internal void addPointElement(PointMapElement element, XmlProjectionEnum projection)
         {
             int idOffset = getStringOffset(element.Id);
+            int itemId = element.ItemId.Value;
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3}", _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
-                idOffset);
+            double x = 0.0, y = 0.0;
+            element.Point.getProjection(projection, out x, out y);
+            int[] xInt = doubleToIntArray(x);
+            int[] yInt = doubleToIntArray(y);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}", _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
+                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1]);
 
             append("PointElements.cpp", code);
             _currentPointElementOffset += 1;
@@ -134,6 +141,15 @@ namespace MapDataProcessing
             append("PolygonElements.cpp", code);
             _currentPolygonElementOffset += 1;
             ++_polygonElementCount;
+        }
+
+        private int[] doubleToIntArray(double d)
+        {
+            byte[] b = BitConverter.GetBytes(d);
+            int[] r = new int[2];
+            r[0] = (((int)b[3]) << 24) | (((int)b[2]) << 16) | (((int)b[1]) << 8) | ((int)b[0]);
+            r[1] = (((int)b[7]) << 24) | (((int)b[6]) << 16) | (((int)b[5]) << 8) | ((int)b[4]);
+            return r;
         }
 
         private void append(string fileName, string text)

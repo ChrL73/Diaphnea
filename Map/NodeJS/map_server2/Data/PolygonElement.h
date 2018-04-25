@@ -1,14 +1,19 @@
- #pragma once
+#pragma once
+
+#include "MapData.h"
 
 namespace map_server
 {
     class PolygonElement
     {
     private:
-        char *_id;
+        // String
+        int _elementId;
 
     public:
-        PolygonElement(int offset);
+        static const PolygonElement *get(int offset) { return reinterpret_cast<const PolygonElement *>(polygonElements + offset); }
+
+        const char *getElementId(void) const { return strings + _elementId; }
 
     };
 }

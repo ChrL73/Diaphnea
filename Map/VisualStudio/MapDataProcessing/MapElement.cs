@@ -12,7 +12,7 @@ namespace MapDataProcessing
     abstract class MapElement
     {
         private readonly String _id;
-        private readonly MapData _mapData;
+        protected readonly MapData _mapData;
         private readonly ElementName _name;
         private readonly ElementName _shortName;
         private readonly double _importance;

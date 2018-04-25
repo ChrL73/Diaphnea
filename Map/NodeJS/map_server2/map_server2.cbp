@@ -52,10 +52,10 @@
 		<Unit filename="Data/LineElement.cpp" />
 		<Unit filename="Data/LineElement.h" />
 		<Unit filename="Data/MapData.h" />
-		<Unit filename="Data/MapElement.cpp" />
-		<Unit filename="Data/MapElement.h" />
 		<Unit filename="Data/PointElement.cpp" />
 		<Unit filename="Data/PointElement.h" />
+		<Unit filename="Data/PointItem.cpp" />
+		<Unit filename="Data/PointItem.h" />
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
 		<Unit filename="Data/generated_code/_France/LineElements.cpp" />

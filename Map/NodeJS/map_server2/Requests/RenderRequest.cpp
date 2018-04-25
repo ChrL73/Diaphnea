@@ -3,10 +3,10 @@
 //#include "Map.h"
 #include "MessageTypeEnum.h"
 #include "PointElement.h"
-#include "LineElement.h"
-#include "PolygonElement.h"
+//#include "LineElement.h"
+//#include "PolygonElement.h"
 #include "CommonData.h"
-//#include "PointItem.h"
+#include "PointItem.h"
 //#include "FilledPolygonItem.h"
 //#include "LineItem.h"
 //#include "PolygonLook.h"
@@ -54,9 +54,7 @@ namespace map_server
     {
         bool createSvg = (strcmp(_socketId, "svg") == 0);
 
-        std::vector<const PointElement *> pointElementVector;
-        std::vector<const LineElement *> lineElementVector;
-        std::vector<const PolygonElement *> polygonElementVector;
+        std::vector<const PointItem *> pointItemVector;
 
         _commonData->lock();
 
@@ -68,15 +66,16 @@ namespace map_server
 
             if (elementType == map_server::POINT)
             {
-                pointElementVector.push_back(_commonData->getLastElementAsPoint());
+                const PointElement *pointElement = _commonData->getLastElementAsPoint();
+                PointItem *item = new PointItem(pointElement->getItemId(), pointElement->getElementId());
             }
             else if (elementType == map_server::LINE)
             {
-                lineElementVector.push_back(_commonData->getLastElementAsLine());
+
             }
             else if (elementType == map_server::POLYGON)
             {
-                polygonElementVector.push_back(_commonData->getLastElementAsPolygon());
+
             }
             else if (elementId == "#test")
             {
@@ -94,16 +93,9 @@ namespace map_server
 
         /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
         std::vector<MapItem *> itemVector;
-        std::set<std::string> coveredElementSet;*/
+        std::set<std::string> coveredElementSet;
 
-        n = pointElementVector.size();
-        for (i = 0; i < n; ++i)
-        {
-            const PointElement *pointElement = pointElementVector[i];
-            //itemVector.push_back(pointElement->getItem());
-        }
-
-        /*n = elementVector.size();
+        n = elementVector.size();
         bool noElement = (n == 0);
         for (i = 0; i < n; ++i)
         {

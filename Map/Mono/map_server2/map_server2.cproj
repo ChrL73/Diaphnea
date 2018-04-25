@@ -76,20 +76,8 @@
     <None Include="..\..\NodeJS\map_server2\Data\ElementTypeEnum.h">
       <Link>Data\ElementTypeEnum.h</Link>
     </None>
-    <None Include="..\..\NodeJS\map_server2\Data\LineElement.h">
-      <Link>Data\LineElement.h</Link>
-    </None>
     <None Include="..\..\NodeJS\map_server2\Data\MapData.h">
       <Link>Data\MapData.h</Link>
-    </None>
-    <None Include="..\..\NodeJS\map_server2\Data\MapElement.h">
-      <Link>Data\MapElement.h</Link>
-    </None>
-    <None Include="..\..\NodeJS\map_server2\Data\PointElement.h">
-      <Link>Data\PointElement.h</Link>
-    </None>
-    <None Include="..\..\NodeJS\map_server2\Data\PolygonElement.h">
-      <Link>Data\PolygonElement.h</Link>
     </None>
     <None Include="..\..\NodeJS\map_server2\Requests\RenderRequest.h">
       <Link>Requests\RenderRequest.h</Link>
@@ -99,6 +87,18 @@
     </None>
     <None Include="..\..\NodeJS\map_server2\Requests\SvgCustomColor.h">
       <Link>Requests\SvgCustomColor.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PointItem.h">
+      <Link>Data\PointItem.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\LineElement.h">
+      <Link>Data\LineElement.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PointElement.h">
+      <Link>Data\PointElement.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PolygonElement.h">
+      <Link>Data\PolygonElement.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -123,18 +123,6 @@
     <Compile Include="..\..\NodeJS\map_server2\Data\ElementInfo.cpp">
       <Link>Data\ElementInfo.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\map_server2\Data\LineElement.cpp">
-      <Link>Data\LineElement.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\map_server2\Data\MapElement.cpp">
-      <Link>Data\MapElement.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\map_server2\Data\PointElement.cpp">
-      <Link>Data\PointElement.cpp</Link>
-    </Compile>
-    <Compile Include="..\..\NodeJS\map_server2\Data\PolygonElement.cpp">
-      <Link>Data\PolygonElement.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Requests\RenderRequest.cpp">
       <Link>Requests\RenderRequest.cpp</Link>
     </Compile>
@@ -152,6 +140,18 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\ThreadInfo.cpp">
       <Link>ThreadInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PointItem.cpp">
+      <Link>Data\PointItem.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\LineElement.cpp">
+      <Link>Data\LineElement.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PointElement.cpp">
+      <Link>Data\PointElement.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PolygonElement.cpp">
+      <Link>Data\PolygonElement.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

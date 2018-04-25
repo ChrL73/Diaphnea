@@ -1,4 +1,4 @@
-#include "MapElement.h"
+#include "PointItem.h"
 
 namespace map_server
 {

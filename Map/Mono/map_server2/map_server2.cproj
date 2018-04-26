@@ -100,6 +100,15 @@
     <None Include="..\..\NodeJS\map_server2\Data\PolygonElement.h">
       <Link>Data\PolygonElement.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\MultipointItem.h">
+      <Link>Data\MultipointItem.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.h">
+      <Link>Data\FilledPolygonItem.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\LineItem.h">
+      <Link>Data\LineItem.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -152,6 +161,21 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\PolygonElement.cpp">
       <Link>Data\PolygonElement.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\MultipointItem.cpp">
+      <Link>Data\MultipointItem.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\IntArrays.cpp">
+      <Link>Data\generated_code\_France\IntArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MultipointItems.cpp">
+      <Link>Data\generated_code\_France\MultipointItems.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.cpp">
+      <Link>Data\FilledPolygonItem.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\LineItem.cpp">
+      <Link>Data\LineItem.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

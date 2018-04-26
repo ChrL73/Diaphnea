@@ -120,6 +120,16 @@ namespace MapDataProcessing
             return 0;
         }
 
+        internal static int generateCode(CodeGenerator codeGenerator, MapData mapData)
+        {
+            foreach (PolygonLinePart part in _partDictionary.Values)
+            {
+                if (part._smoothedLineMapItem.generateCode(codeGenerator, mapData, Path.GetFileNameWithoutExtension(part.Line.Path)) != 0) return -1;
+            }
+
+            return 0;
+        }
+
         public List<GeoPoint> AttachmentLine
         {
             get

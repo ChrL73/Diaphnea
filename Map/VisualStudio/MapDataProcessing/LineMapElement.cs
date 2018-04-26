@@ -18,6 +18,8 @@ namespace MapDataProcessing
 
         private readonly List<LineLinePart> _partList = new List<LineLinePart>();
 
+        internal List<LineLinePart> PartList { get { return _partList; } }
+
         internal LineMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId) :
             base(id, mapData, name, shortName, importance, lookIds, categoryId) { }
 

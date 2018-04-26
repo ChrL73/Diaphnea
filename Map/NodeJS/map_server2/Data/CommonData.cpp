@@ -2,6 +2,7 @@
 #include "ElementInfo.h"
 #include "MapData.h"
 #include "PointElement.h"
+#include "LineElement.h"
 
 namespace map_server
 {
@@ -18,7 +19,7 @@ namespace map_server
 
         for (i = 0; i < lineElementCount; ++i)
         {
-            int offset = 1 * i;
+            int offset = 3 * i;
             const char *id = strings + lineElements[offset];
             ElementInfo *info = new ElementInfo(map_server::LINE, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -59,7 +60,7 @@ namespace map_server
 
     const LineElement *CommonData::getLastElementAsLine(void) const
     {
-        return 0;
+        return LineElement::get(_lastElementOffset);
     }
 
     const PolygonElement *CommonData::getLastElementAsPolygon(void) const

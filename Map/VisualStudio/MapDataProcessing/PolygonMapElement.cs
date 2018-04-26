@@ -322,6 +322,7 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
+            _contourMapItem.generateCode(codeGenerator, MapData, Id);
             codeGenerator.addPolygonElement(this);
 
             return 0;

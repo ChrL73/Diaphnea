@@ -69,12 +69,13 @@ namespace map_server
             // 0 0 6 {"items":[[14,17,1],[624,16,1],[541,16,1],[626,16,1],[540,16,1],[627,16,1],[485,16,1],[625,16,1]],"xFocus":212.02,"yFocus":91.2119,"scale":5.2446}
             // 0 0 7 {"t":[["Ain (01)",192.887,92.3181]],"e":"01","x1":192.696,"x2":207.187,"y1":89.458,"y2":93.0808,"s":21,"look":15}
 
-            request = "0 0 6 _France fr 800 600 0 n n n Paris";
+            //request = "0 0 6 _France fr 800 600 0 n n n Paris";
 
             // 2 expected responses:
             //0 0 6 {"items":[[401,64]],"xFocus":-24.8653,"yFocus":-215.634,"scale":28.5714}
             //0 0 7 {"t":[["Paris",-24.4359,-215.354]],"e":"Paris","x1":-24.4009,"x2":-22.6859,"y1":-215.914,"y2":-215.354,"s":22,"look":63}
 
+            request = "0 0 6 _France fr 800 600 0 n n n Seine";
 
             _timeMutex.lock();
             _timeoutReference = time(0);

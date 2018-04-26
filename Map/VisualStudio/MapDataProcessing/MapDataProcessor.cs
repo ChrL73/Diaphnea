@@ -602,6 +602,10 @@ namespace MapDataProcessing
 
             CodeGenerator codeGenerator = new CodeGenerator(String.Format("{0}/{1}", _mapData.XmlMapData.parameters.cppGenerationDir, _mapData.XmlMapData.parameters.mapId));
 
+            if (PolygonLinePart.generateCode(codeGenerator, _mapData) != 0) return -1;
+            if (PolygonPolygonPart.generateCode(codeGenerator, _mapData) != 0) return -1;
+            if (LineLinePart.generateCode(codeGenerator, _mapData) != 0) return -1;
+
             foreach (MapElement element in _elementDictionary.Values)
             {
                 if (element.generateCode(codeGenerator) != 0) return -1;

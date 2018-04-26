@@ -47,6 +47,7 @@ namespace MapDataProcessing
         private readonly DatabaseMapItem _smoothedLineMapItem;
         private bool _smoothed = false;
         internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
+        internal int MapItemCppOffset { get { return _smoothedLineMapItem.CppOffset; } }
 
         private LineLinePart(KmlFileData lineData, string element0Id)
         {
@@ -116,6 +117,16 @@ namespace MapDataProcessing
             foreach (LineLinePart part in _partDictionary.Values)
             {
                 if (part._smoothedLineMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part._lineData.Path)) != 0) return -1;
+            }
+
+            return 0;
+        }
+
+        internal static int generateCode(CodeGenerator codeGenerator, MapData mapData)
+        {
+            foreach (LineLinePart part in _partDictionary.Values)
+            {
+                if (part._smoothedLineMapItem.generateCode(codeGenerator, mapData, Path.GetFileNameWithoutExtension(part._lineData.Path)) != 0) return -1;
             }
 
             return 0;

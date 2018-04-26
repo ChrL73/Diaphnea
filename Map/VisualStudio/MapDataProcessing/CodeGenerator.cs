@@ -16,9 +16,11 @@ namespace MapDataProcessing
         private readonly Dictionary<string, StreamWriter> _streamWriterDictionary = new Dictionary<string, StreamWriter>();
 
         private int _currentStringOffset;
+        private int _currentIntArrayOffset;
         private int _currentPointElementOffset;
         private int _currentLineElementOffset;
         private int _currentPolygonElementOffset;
+        private int _currentMultipointItemOffset;
 
         private int _pointElementCount;
         private int _lineElementCount;
@@ -31,9 +33,11 @@ namespace MapDataProcessing
             _dirName = dirName;
 
             _currentStringOffset = 1;
+            _currentIntArrayOffset = 1;
             _currentPointElementOffset = 0;
             _currentLineElementOffset = 0;
             _currentPolygonElementOffset = 0;
+            _currentMultipointItemOffset = 0;
 
             _pointElementCount = 0;
             _lineElementCount = 0;
@@ -47,6 +51,10 @@ namespace MapDataProcessing
             if (File.Exists(path)) File.Delete(path);
             append("Strings.cpp", "namespace map_server\n{\nunsigned char strings[] =\n{\n// 0: Empty string\n0");
 
+            path = String.Format("{0}/IntArrays.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("IntArrays.cpp", "namespace map_server\n{\nint intArrays[] =\n{\n0");
+
             path = String.Format("{0}/PointElements.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("PointElements.cpp", "namespace map_server\n{\nint pointElements[] =\n{");
@@ -58,6 +66,10 @@ namespace MapDataProcessing
             path = String.Format("{0}/PolygonElements.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("PolygonElements.cpp", "namespace map_server\n{\nint polygonElements[] =\n{");
+
+            path = String.Format("{0}/MultipointItems.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("MultipointItems.cpp", "namespace map_server\n{\nint multipointItems[] =\n{");
         }
 
         internal void close()
@@ -72,9 +84,11 @@ namespace MapDataProcessing
             append("MapData.cpp", code);
 
             append("Strings.cpp", "\n};\n}\n");
+            append("IntArrays.cpp", "\n};\n}\n");
             append("PointElements.cpp", "\n};\n}\n");
             append("LineElements.cpp", "\n};\n}\n");
             append("PolygonElements.cpp", "\n};\n}\n");
+            append("MultipointItems.cpp", "\n};\n}\n");
 
             foreach (StreamWriter file in _streamWriterDictionary.Values) file.Close();
         }
@@ -121,13 +135,22 @@ namespace MapDataProcessing
 
         internal void addLineElement(LineMapElement element)
         {
+            List<int> itemOffsetList = new List<int>();
+            foreach (LineLinePart part in element.PartList) itemOffsetList.Add(part.MapItemCppOffset);
+
             int idOffset = getStringOffset(element.Id);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3}", _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
-                idOffset);
+            int itemsOffset = 0;
+            if (itemOffsetList.Count() != 0)
+            {
+                itemsOffset = getIntArrayOffset(itemOffsetList);
+            }
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5}", _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
+                idOffset, itemOffsetList.Count(), itemsOffset);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 1;
+            _currentLineElementOffset += 3;
             ++_lineElementCount;
         }
 
@@ -141,6 +164,35 @@ namespace MapDataProcessing
             append("PolygonElements.cpp", code);
             _currentPolygonElementOffset += 1;
             ++_polygonElementCount;
+        }
+
+        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId)
+        {
+            int offset = _currentMultipointItemOffset;
+
+            int[] xMinInt = doubleToIntArray(xMin);
+            int[] xMaxInt = doubleToIntArray(xMax);
+            int[] yMinInt = doubleToIntArray(yMin);
+            int[] yMaxInt = doubleToIntArray(yMax);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10}", offset == 0 ? "" : ",", offset,
+                xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId);
+
+            append("MultipointItems.cpp", code);
+            _currentMultipointItemOffset += 9;
+
+            return offset;
+        }
+
+        private int getIntArrayOffset(IEnumerable<int> values)
+        {
+            int offset = _currentIntArrayOffset;
+
+            string code = String.Format(",\n// {0}\n{1}", offset, String.Join(",", values));
+            append("IntArrays.cpp", code);
+            _currentIntArrayOffset += values.Count();
+
+            return offset;
         }
 
         private int[] doubleToIntArray(double d)

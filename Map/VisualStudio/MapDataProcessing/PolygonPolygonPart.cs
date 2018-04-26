@@ -76,6 +76,16 @@ namespace MapDataProcessing
             return 0;
         }
 
+        internal static int generateCode(CodeGenerator codeGenerator, MapData mapData)
+        {
+            foreach (PolygonPolygonPart part in _partDictionary.Values)
+            {
+                if (part._smoothedPolygonMapItem.generateCode(codeGenerator, mapData, Path.GetFileNameWithoutExtension(part.Polygon.Path)) != 0) return -1;
+            }
+
+            return 0;
+        }
+
         public List<GeoPoint> AttachmentLine { get { return _polygonData.PointList; } }
         public DatabaseMapItem SmoothedAttachmentLine { get { return _smoothedPolygonMapItem; } }
     }

@@ -3,12 +3,13 @@
 //#include "Map.h"
 #include "MessageTypeEnum.h"
 #include "PointElement.h"
-//#include "LineElement.h"
+#include "LineElement.h"
 //#include "PolygonElement.h"
+#include "MultipointItem.h"
 #include "CommonData.h"
 #include "PointItem.h"
-//#include "FilledPolygonItem.h"
-//#include "LineItem.h"
+#include "FilledPolygonItem.h"
+#include "LineItem.h"
 //#include "PolygonLook.h"
 //#include "ItemLook.h"
 //#include "ItemCopyBuilder.h"
@@ -52,9 +53,14 @@ namespace map_server
 
     void RenderRequest::execute()
     {
-        bool createSvg = (strcmp(_socketId, "svg") == 0);
+        //bool createSvg = (strcmp(_socketId, "svg") == 0);
 
-        std::vector<const PointItem *> pointItemVector;
+        std::vector<PointItem *> pointItemVector;
+        std::vector<LineItem *> lineItemVector;
+
+        /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
+        std::vector<MapItem *> itemVector;
+        std::set<std::string> coveredElementSet;*/
 
         _commonData->lock();
 
@@ -67,15 +73,45 @@ namespace map_server
             if (elementType == map_server::POINT)
             {
                 const PointElement *pointElement = _commonData->getLastElementAsPoint();
-                PointItem *item = new PointItem(pointElement->getItemId(), pointElement->getElementId());
+                PointItem *item = new PointItem(pointElement);
+                pointItemVector.push_back(item);
             }
             else if (elementType == map_server::LINE)
             {
+                const LineElement *lineElement = _commonData->getLastElementAsLine();
 
+                int j, m = lineElement->getItemCount();
+                for (j = 0; j < m; ++j)
+                {
+                    const MultipointItem *multipointItem = lineElement->getItem(j);
+                    LineItem *lineItem = new LineItem(multipointItem);
+                    lineItemVector.push_back(lineItem);
+                }
             }
             else if (elementType == map_server::POLYGON)
             {
+                /*PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);
+                if (polygonElement != 0)
+                {
+                    itemVector.push_back(polygonElement->getFilledPolygonItem());
+                    int j, m = polygonElement->getLineItemVector().size();
+                    for (j = 0; j < m; ++j)
+                    {
+                        LineItem *lineItem = polygonElement->getLineItemVector()[j];
+                        std::map<LineItem *, std::map<int, PolygonElement *> >::iterator lineItemIt = lineItemMap.find(lineItem);
+                        if (lineItemIt == lineItemMap.end())
+                        {
+                            lineItemIt = lineItemMap.insert(std::pair<LineItem *, std::map<int, PolygonElement *> >(lineItem, std::map<int, PolygonElement *>())).first;
+                        }
 
+                        int zIndex = polygonElement->getLook(0)->getContourLook()->getZIndex();
+                        (*lineItemIt).second.insert(std::pair<int, PolygonElement *>(zIndex, polygonElement));
+                    }
+
+                    m = polygonElement->getCoveredElementVector().size();
+                    for (j = 0; j < m; ++j) coveredElementSet.insert(polygonElement->getCoveredElementVector()[j]);
+                }
+                */
             }
             else if (elementId == "#test")
             {
@@ -91,58 +127,7 @@ namespace map_server
 
         _commonData->unlock();
 
-        /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
-        std::vector<MapItem *> itemVector;
-        std::set<std::string> coveredElementSet;
-
-        n = elementVector.size();
-        bool noElement = (n == 0);
-        for (i = 0; i < n; ++i)
-        {
-            MapElement *element = elementVector[i];
-
-            PointElement *pointElement = dynamic_cast<PointElement *>(element);
-            if (pointElement != 0)
-            {
-                itemVector.push_back(pointElement->getItem());
-                continue;
-            }
-
-            LineElement *lineElement = dynamic_cast<LineElement *>(element);
-            if (lineElement != 0)
-            {
-                int j, m = lineElement->getItemVector().size();
-                for (j = 0; j < m; ++j)
-                {
-                    LineItem *lineItem = lineElement->getItemVector()[j];
-                    itemVector.push_back(lineItem);
-                }
-
-                continue;
-            }
-
-            PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);
-            if (polygonElement != 0)
-            {
-                itemVector.push_back(polygonElement->getFilledPolygonItem());
-                int j, m = polygonElement->getLineItemVector().size();
-                for (j = 0; j < m; ++j)
-                {
-                    LineItem *lineItem = polygonElement->getLineItemVector()[j];
-                    std::map<LineItem *, std::map<int, PolygonElement *> >::iterator lineItemIt = lineItemMap.find(lineItem);
-                    if (lineItemIt == lineItemMap.end())
-                    {
-                        lineItemIt = lineItemMap.insert(std::pair<LineItem *, std::map<int, PolygonElement *> >(lineItem, std::map<int, PolygonElement *>())).first;
-                    }
-
-                    int zIndex = polygonElement->getLook(0)->getContourLook()->getZIndex();
-                    (*lineItemIt).second.insert(std::pair<int, PolygonElement *>(zIndex, polygonElement));
-                }
-
-                m = polygonElement->getCoveredElementVector().size();
-                for (j = 0; j < m; ++j) coveredElementSet.insert(polygonElement->getCoveredElementVector()[j]);
-            }
-        }
+        /*bool noElement = (n == 0);
 
         std::map<LineItem *, std::map<int, PolygonElement *> >::iterator lineItemIt = lineItemMap.begin();
         for (; lineItemIt != lineItemMap.end(); ++lineItemIt)

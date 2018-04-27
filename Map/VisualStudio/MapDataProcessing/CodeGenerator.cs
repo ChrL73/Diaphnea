@@ -166,7 +166,7 @@ namespace MapDataProcessing
             ++_polygonElementCount;
         }
 
-        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId)
+        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment)
         {
             int offset = _currentMultipointItemOffset;
 
@@ -175,7 +175,8 @@ namespace MapDataProcessing
             int[] yMinInt = doubleToIntArray(yMin);
             int[] yMaxInt = doubleToIntArray(yMax);
 
-            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10}", offset == 0 ? "" : ",", offset,
+            string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+                offset == 0 ? "" : ",", offset, comment,
                 xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId);
 
             append("MultipointItems.cpp", code);

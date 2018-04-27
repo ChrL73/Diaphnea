@@ -264,7 +264,7 @@ namespace MapDataProcessing
 
             Id = itemDocument.GetValue("_id");*/
 
-            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value);
+            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName);
 
             return 0;
         }

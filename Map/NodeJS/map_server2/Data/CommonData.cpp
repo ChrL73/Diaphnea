@@ -3,6 +3,7 @@
 #include "MapData.h"
 #include "PointElement.h"
 #include "LineElement.h"
+#include "PolygonElement.h"
 
 namespace map_server
 {
@@ -27,7 +28,7 @@ namespace map_server
 
         for (i = 0; i < polygonElementCount; ++i)
         {
-            int offset = 1 * i;
+            int offset = 6 * i;
             const char *id = strings + polygonElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POLYGON, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -65,7 +66,7 @@ namespace map_server
 
     const PolygonElement *CommonData::getLastElementAsPolygon(void) const
     {
-        return 0;
+        return PolygonElement::get(_lastElementOffset);
     }
 
 }

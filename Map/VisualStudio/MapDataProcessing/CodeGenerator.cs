@@ -156,13 +156,40 @@ namespace MapDataProcessing
 
         internal void addPolygonElement(PolygonMapElement element)
         {
+            List<int> itemOffsetList = new List<int>();
+            foreach (OrientedLineList list in element.CompoundPolygonList)
+            {
+                foreach (OrientedPolygonLinePart linePart in list.LineList)
+                {
+                    itemOffsetList.Add(linePart.MapItemCppOffset);
+                }
+            }
+            foreach (PolygonPolygonPart part in element.PolygonPartList)
+            {
+                itemOffsetList.Add(part.MapItemCppOffset);
+            }
+
             int idOffset = getStringOffset(element.Id);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3}", _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
-                idOffset);
+            int itemsOffset = 0;
+            if (itemOffsetList.Count() != 0)
+            {
+                itemsOffset = getIntArrayOffset(itemOffsetList);
+            }
+
+            int coveredElementsOffset = 0;
+            if (element.CoveredElementList.Count() != 0)
+            {
+                List<int> stringOffsets = new List<int>();
+                foreach (string str in element.CoveredElementList) stringOffsets.Add(getStringOffset(str));
+                coveredElementsOffset = getIntArrayOffset(stringOffsets);
+            }
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}", _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
+                                        idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset, element.CoveredElementList.Count(), coveredElementsOffset);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 1;
+            _currentPolygonElementOffset += 6;
             ++_polygonElementCount;
         }
 

@@ -83,6 +83,7 @@ namespace MapDataProcessing
         internal KmlFileData Point1 { get { return _pointData1; } }
         internal KmlFileData Point2 { get { return _pointData2; } }
         internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
+        internal int MapItemCppOffset { get { return _smoothedLineMapItem.CppOffset; } }
 
         internal List<GeoPoint> getPointList(XmlResolution resolution)
         {

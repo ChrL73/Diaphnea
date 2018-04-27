@@ -4,7 +4,7 @@
 #include "MessageTypeEnum.h"
 #include "PointElement.h"
 #include "LineElement.h"
-//#include "PolygonElement.h"
+#include "PolygonElement.h"
 #include "MultipointItem.h"
 #include "CommonData.h"
 #include "PointItem.h"
@@ -90,6 +90,8 @@ namespace map_server
             }
             else if (elementType == map_server::POLYGON)
             {
+                const PolygonElement *polygonElement = _commonData->getLastElementAsPolygon();
+
                 /*PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);
                 if (polygonElement != 0)
                 {

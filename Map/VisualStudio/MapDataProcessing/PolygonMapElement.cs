@@ -35,6 +35,9 @@ namespace MapDataProcessing
         }
 
         internal List<string> CoveredElementList { get { return _coveredElementList; } }
+        internal List<OrientedLineList> CompoundPolygonList { get { return _compoundPolygonList; } }
+        internal List<PolygonPolygonPart> PolygonPartList { get { return _polygonPartList; } }
+        internal DatabaseMapItem ContourMapItem { get { return _contourMapItem; } }
 
         internal override int addKmlFile(String path)
         {

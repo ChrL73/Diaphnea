@@ -34,6 +34,7 @@ namespace MapDataProcessing
         private readonly KmlFileData _polygonData;
         private readonly DatabaseMapItem _smoothedPolygonMapItem;
         internal BsonValue MapItemId { get { return _smoothedPolygonMapItem.Id; } }
+        internal int MapItemCppOffset { get { return _smoothedPolygonMapItem.CppOffset; } }
 
         private PolygonPolygonPart(KmlFileData polygonData, string element0Id)
         {

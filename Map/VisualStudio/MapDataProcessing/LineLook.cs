@@ -45,5 +45,12 @@ namespace MapDataProcessing
 
             return lookDocument;
         }
+
+        internal override int generateCode(CodeGenerator codeGenerator)
+        {
+            CppOffset = codeGenerator.addLineLook(this);
+
+            return 0;
+        }
     }
 }

@@ -55,6 +55,8 @@
 		<Unit filename="Data/LineElement.h" />
 		<Unit filename="Data/LineItem.cpp" />
 		<Unit filename="Data/LineItem.h" />
+		<Unit filename="Data/LineLook.cpp" />
+		<Unit filename="Data/LineLook.h" />
 		<Unit filename="Data/MapData.h" />
 		<Unit filename="Data/MultipointItem.cpp" />
 		<Unit filename="Data/MultipointItem.h" />
@@ -62,8 +64,12 @@
 		<Unit filename="Data/PointElement.h" />
 		<Unit filename="Data/PointItem.cpp" />
 		<Unit filename="Data/PointItem.h" />
+		<Unit filename="Data/PointLook.cpp" />
+		<Unit filename="Data/PointLook.h" />
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
+		<Unit filename="Data/PolygonLook.cpp" />
+		<Unit filename="Data/PolygonLook.h" />
 		<Unit filename="Data/generated_code/_France/IntArrays.cpp" />
 		<Unit filename="Data/generated_code/_France/LineElements.cpp" />
 		<Unit filename="Data/generated_code/_France/MapData.cpp" />

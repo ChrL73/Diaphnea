@@ -14,6 +14,8 @@ namespace map_server
         const double _yMin;
         const double _yMax;
 
+        int _minZIndex;
+
     public:
         LineItem(const MultipointItem *multipointItem);
 

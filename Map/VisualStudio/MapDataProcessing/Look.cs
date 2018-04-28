@@ -17,6 +17,9 @@ namespace MapDataProcessing
 
         protected Look() { _id = ++_counter; }
 
+        internal int CppOffset { get; set; }
+
+        abstract internal int generateCode(CodeGenerator codeGenerator);
         abstract internal BsonDocument getBsonDocument();
     }
 }

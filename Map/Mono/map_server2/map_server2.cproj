@@ -109,6 +109,15 @@
     <None Include="..\..\NodeJS\map_server2\Data\LineItem.h">
       <Link>Data\LineItem.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\LineLook.h">
+      <Link>Data\LineLook.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PointLook.h">
+      <Link>Data\PointLook.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PolygonLook.h">
+      <Link>Data\PolygonLook.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -176,6 +185,15 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\LineItem.cpp">
       <Link>Data\LineItem.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\LineLook.cpp">
+      <Link>Data\LineLook.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PointLook.cpp">
+      <Link>Data\PointLook.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp">
+      <Link>Data\PolygonLook.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

@@ -16,6 +16,9 @@ namespace MapDataProcessing
         private readonly ElementName _fillName;
         private readonly ElementName _textName;
 
+        internal XmlPolygonLook1 Look1 { get { return _look1; } }
+        internal XmlPolygonLook2 Look2 { get { return _look2; } }
+
         internal PolygonLook(XmlPolygonLook1 look1, XmlNameSuffixes suffixes)
         {
             _look1 = look1;
@@ -63,6 +66,13 @@ namespace MapDataProcessing
             };
 
             return lookDocument;
+        }
+
+        internal override int generateCode(CodeGenerator codeGenerator)
+        {
+            CppOffset = codeGenerator.addPolygonLook(this);
+
+            return 0;
         }
     }
 }

@@ -21,6 +21,9 @@ namespace MapDataProcessing
         private int _currentLineElementOffset;
         private int _currentPolygonElementOffset;
         private int _currentMultipointItemOffset;
+        private int _currentPointLookOffset;
+        private int _currentLineLookOffset;
+        private int _currentPolygonLookOffset;
 
         private int _pointElementCount;
         private int _lineElementCount;
@@ -38,6 +41,9 @@ namespace MapDataProcessing
             _currentLineElementOffset = 0;
             _currentPolygonElementOffset = 0;
             _currentMultipointItemOffset = 0;
+            _currentPointLookOffset = 0;
+            _currentLineLookOffset = 0;
+            _currentPolygonLookOffset = 0;
 
             _pointElementCount = 0;
             _lineElementCount = 0;
@@ -70,6 +76,18 @@ namespace MapDataProcessing
             path = String.Format("{0}/MultipointItems.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("MultipointItems.cpp", "namespace map_server\n{\nint multipointItems[] =\n{");
+
+            path = String.Format("{0}/PointLooks.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("PointLooks.cpp", "namespace map_server\n{\nint pointLooks[] =\n{");
+
+            path = String.Format("{0}/LineLooks.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("LineLooks.cpp", "namespace map_server\n{\nint lineLooks[] =\n{");
+
+            path = String.Format("{0}/PolygonLooks.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("PolygonLooks.cpp", "namespace map_server\n{\nint polygonLooks[] =\n{");
         }
 
         internal void close()
@@ -89,6 +107,9 @@ namespace MapDataProcessing
             append("LineElements.cpp", "\n};\n}\n");
             append("PolygonElements.cpp", "\n};\n}\n");
             append("MultipointItems.cpp", "\n};\n}\n");
+            append("PointLooks.cpp", "\n};\n}\n");
+            append("LineLooks.cpp", "\n};\n}\n");
+            append("PolygonLooks.cpp", "\n};\n}\n");
 
             foreach (StreamWriter file in _streamWriterDictionary.Values) file.Close();
         }
@@ -210,6 +231,25 @@ namespace MapDataProcessing
             _currentMultipointItemOffset += 9;
 
             return offset;
+        }
+
+        internal int addPointLook(PointLook look)
+        {
+            int offset = _currentPointLookOffset;
+
+            _currentMultipointItemOffset += 15;
+
+            return 0;
+        }
+
+        internal int addLineLook(LineLook look)
+        {
+            return 0;
+        }
+
+        internal int addPolygonLook(PolygonLook look)
+        {
+            return 0;
         }
 
         private int getIntArrayOffset(IEnumerable<int> values)

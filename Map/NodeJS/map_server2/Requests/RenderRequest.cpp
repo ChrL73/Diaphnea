@@ -55,11 +55,11 @@ namespace map_server
     {
         //bool createSvg = (strcmp(_socketId, "svg") == 0);
 
-        std::vector<PointItem *> pointItemVector;
-        std::vector<LineItem *> lineItemVector;
+        std::vector<PointItem *> pointItems;
+        std::map<int, LineItem *> lineItems;
+        std::map<int, FilledPolygonItem *> filledPolygonItems;
 
         /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
-        std::vector<MapItem *> itemVector;
         std::set<std::string> coveredElementSet;*/
 
         _commonData->lock();
@@ -74,7 +74,7 @@ namespace map_server
             {
                 const PointElement *pointElement = _commonData->getLastElementAsPoint();
                 PointItem *item = new PointItem(pointElement);
-                pointItemVector.push_back(item);
+                pointItems.push_back(item);
             }
             else if (elementType == map_server::LINE)
             {
@@ -84,13 +84,35 @@ namespace map_server
                 for (j = 0; j < m; ++j)
                 {
                     const MultipointItem *multipointItem = lineElement->getItem(j);
-                    LineItem *lineItem = new LineItem(multipointItem);
-                    lineItemVector.push_back(lineItem);
+
+                    std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(multipointItem->getItemId());
+                    if (lineItemIt == lineItems.end())
+                    {
+                        LineItem *lineItem = new LineItem(multipointItem);
+                        lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
+                    }
                 }
             }
             else if (elementType == map_server::POLYGON)
             {
                 const PolygonElement *polygonElement = _commonData->getLastElementAsPolygon();
+
+                const MultipointItem *contourItem = polygonElement->getContour();
+
+                std::map<int, FilledPolygonItem *>::iterator filledPolygonIt = filledPolygonItems.find(contourItem->getItemId());
+                if (filledPolygonIt == filledPolygonItems.end())
+                {
+                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(contourItem);
+                    filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
+                }
+
+                int j, m = polygonElement->getItemCount();
+                for (j = 0; j < m; ++j)
+                {
+                    const MultipointItem *item = polygonElement->getItem(j);
+
+
+                }
 
                 /*PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);
                 if (polygonElement != 0)

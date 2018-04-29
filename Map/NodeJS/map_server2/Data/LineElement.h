@@ -5,6 +5,7 @@
 namespace map_server
 {
     class MultipointItem;
+    class LineLook;
 
     class LineElement
     {
@@ -16,6 +17,10 @@ namespace map_server
         int _itemCount;
         int _items;
 
+        // Array of LineLooks
+        int _lookCount;
+        int _looks;
+
     public:
         static const LineElement *get(int offset) { return reinterpret_cast<const LineElement *>(lineElements + offset); }
 
@@ -23,5 +28,8 @@ namespace map_server
 
         int getItemCount(void) const { return _itemCount; }
         const MultipointItem *getItem(int i) const { return reinterpret_cast<const MultipointItem *>(multipointItems + *(intArrays + _items + i)); }
+
+        int getLookCount(void) const { return _lookCount; }
+        const LineLook *getLook(int i) const { return reinterpret_cast<const LineLook *>(lineLooks + *(intArrays + _looks + i)); }
     };
 }

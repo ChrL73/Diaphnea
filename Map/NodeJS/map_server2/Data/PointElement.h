@@ -4,6 +4,8 @@
 
 namespace map_server
 {
+    class PointLook;
+
     class PointElement
     {
     private:
@@ -19,6 +21,10 @@ namespace map_server
         // Double
         double _y;
 
+        // Array of PointLooks
+        int _lookCount;
+        int _looks;
+
     public:
         static const PointElement *get(int offset) { return reinterpret_cast<const PointElement *>(pointElements + offset); }
 
@@ -26,6 +32,10 @@ namespace map_server
         int getItemId(void) const { return _itemId; }
         double getX(void) const { return _x; }
         double getY(void) const { return _y; }
+
+        int getLookCount(void) const { return _lookCount; }
+        const PointLook *getLook(int i) const { return reinterpret_cast<const PointLook *>(pointLooks + *(intArrays + _looks + i)); }
+
     };
 }
 

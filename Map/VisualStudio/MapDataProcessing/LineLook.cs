@@ -48,7 +48,7 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
-            CppOffset = codeGenerator.addLineLook(this);
+            CppOffset = codeGenerator.addLineLook(Id, _look);
 
             return 0;
         }

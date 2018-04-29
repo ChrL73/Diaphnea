@@ -16,13 +16,15 @@ namespace MapDataProcessing
         private readonly ElementName _name;
         private readonly ElementName _shortName;
         private readonly double _importance;
-        private readonly List<int> _lookIds = new List<int>();
+        private readonly List<Look> _looks = new List<Look>();
         private readonly int _categoryId;
 
         private readonly Dictionary<MapElement, int> _linkedElements1 = new Dictionary<MapElement, int>();
         private readonly Dictionary<MapElement, int> _linkedElements2 = new Dictionary<MapElement, int>();
         internal Dictionary<MapElement, int> LinkedElements1 { get { return _linkedElements1; } }
         internal Dictionary<MapElement, int> LinkedElements2 { get { return _linkedElements2; } }
+
+        internal List<Look> Looks { get { return _looks; } }
 
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)
         {
@@ -33,7 +35,7 @@ namespace MapDataProcessing
             _importance = importance;
             _categoryId = mapData.getCategory(categoryId).Id;
 
-            foreach (string lookId in lookIds) _lookIds.Add(mapData.getLook(lookId).Id);
+            foreach (string lookId in lookIds) _looks.Add(mapData.getLook(lookId));
         }
 
         abstract internal int addKmlFile(String path);
@@ -48,7 +50,7 @@ namespace MapDataProcessing
         protected BsonDocument getBsonDocument()
         {
             BsonArray lookIdArray = new BsonArray();
-            foreach (int lookId in _lookIds) lookIdArray.Add(lookId);
+            foreach (Look look in _looks) lookIdArray.Add(look.Id);
 
             BsonArray _linkedElements1Array = new BsonArray();
             foreach (MapElement linkedElement in _linkedElements1.Keys) _linkedElements1Array.Add(linkedElement.Id);

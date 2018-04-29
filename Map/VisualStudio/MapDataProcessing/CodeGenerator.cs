@@ -146,32 +146,40 @@ namespace MapDataProcessing
             int[] xInt = doubleToIntArray(x);
             int[] yInt = doubleToIntArray(y);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}", _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
-                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1]);
+            List<int> lookOffsetList = new List<int>();
+            foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
+            int looksOffset = 0;
+            if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
+                _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
+                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], lookOffsetList.Count(), looksOffset);
 
             append("PointElements.cpp", code);
-            _currentPointElementOffset += 1;
+            _currentPointElementOffset += 8;
             ++_pointElementCount;
         }
 
         internal void addLineElement(LineMapElement element)
         {
-            List<int> itemOffsetList = new List<int>();
-            foreach (LineLinePart part in element.PartList) itemOffsetList.Add(part.MapItemCppOffset);
-
             int idOffset = getStringOffset(element.Id);
 
+            List<int> itemOffsetList = new List<int>();
+            foreach (LineLinePart part in element.PartList) itemOffsetList.Add(part.MapItemCppOffset);
             int itemsOffset = 0;
-            if (itemOffsetList.Count() != 0)
-            {
-                itemsOffset = getIntArrayOffset(itemOffsetList);
-            }
+            if (itemOffsetList.Count() != 0) itemsOffset = getIntArrayOffset(itemOffsetList);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5}", _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
-                idOffset, itemOffsetList.Count(), itemsOffset);
+            List<int> lookOffsetList = new List<int>();
+            foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
+            int looksOffset = 0;
+            if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7}",
+                _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
+                idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 3;
+            _currentLineElementOffset += 5;
             ++_lineElementCount;
         }
 
@@ -206,11 +214,18 @@ namespace MapDataProcessing
                 coveredElementsOffset = getIntArrayOffset(stringOffsets);
             }
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}", _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
-                                        idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset, element.CoveredElementList.Count(), coveredElementsOffset);
+            List<int> lookOffsetList = new List<int>();
+            foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
+            int looksOffset = 0;
+            if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
+                _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
+                idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
+                element.CoveredElementList.Count(), coveredElementsOffset, lookOffsetList.Count(), looksOffset);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 6;
+            _currentPolygonElementOffset += 8;
             ++_polygonElementCount;
         }
 
@@ -233,23 +248,103 @@ namespace MapDataProcessing
             return offset;
         }
 
-        internal int addPointLook(PointLook look)
+        internal int addPointLook(int lookId, XmlPointLook look)
         {
             int offset = _currentPointLookOffset;
 
-            _currentMultipointItemOffset += 15;
+            int[] pointSize = doubleToIntArray(look.pointSize);
+            int[] textSize = doubleToIntArray(look.textSize);
 
-            return 0;
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                offset == 0 ? "" : ",", offset,
+                lookId, (int)look.pointZIndex, (int)look.pointAlpha, (int)look.pointRed, (int)look.pointGreen, (int)look.pointBlue, pointSize[0], pointSize[1],
+                (int)look.textAlpha, (int)look.textRed, (int)look.textGreen, (int)look.textBlue, textSize[0], textSize[1]);
+
+            append("PointLooks.cpp", code);
+            _currentPointLookOffset += 14;
+
+            return offset;
         }
 
-        internal int addLineLook(LineLook look)
+        internal int addLineLook(int lookId, XmlLineLook look)
         {
-            return 0;
+            int offset = _currentLineLookOffset;
+
+            int[] lineSize = doubleToIntArray(look.lineSize);
+            int[] textSize = doubleToIntArray(look.textSize);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                offset == 0 ? "" : ",", offset,
+                lookId, (int)look.lineZIndex, (int)look.lineAlpha, (int)look.lineRed, (int)look.lineGreen, (int)look.lineBlue, lineSize[0], lineSize[1],
+                (int)look.textAlpha, (int)look.textRed, (int)look.textGreen, (int)look.textBlue, textSize[0], textSize[1]);
+
+            append("LineLooks.cpp", code);
+            _currentLineLookOffset += 14;
+
+            return offset;
         }
 
-        internal int addPolygonLook(PolygonLook look)
+        internal int addPolygonLook(int lookId, XmlPolygonLook1 look1, XmlPolygonLook2 look2)
         {
-            return 0;
+            int contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue;
+            int fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue;
+            int textAlpha, textRed, textGreen, textBlue;
+            double contourSize, textSize;
+
+            if (look2 == null)
+            {
+                contourZIndex = look1.contourZIndex;
+                contourAlpha = (int)look1.contourAlpha;
+                contourRed = (int)look1.contourRed;
+                contourGreen = (int)look1.contourGreen;
+                contourBlue = (int)look1.contourBlue;
+                contourSize = look1.contourSize;
+                fillZIndex = look1.fillZIndex;
+                fillAlpha = (int)look1.contourAlpha;
+                fillRed = 255 - (int)((double)(255 - look1.contourRed) * look1.fillLightRatio);
+                fillGreen = 255 - (int)((double)(255 - look1.contourGreen) * look1.fillLightRatio);
+                fillBlue = 255 - (int)((double)(255 - look1.contourBlue) * look1.fillLightRatio);
+                textAlpha = (int)look1.textAlpha;
+                textRed = (int)look1.textRed;
+                textGreen = (int)look1.textGreen;
+                textBlue = (int)look1.textBlue;
+                textSize = look1.textSize;
+            }
+            else
+            {
+                contourZIndex = look2.contourZIndex;
+                contourAlpha = (int)look2.contourAlpha;
+                contourRed = (int)look2.contourRed;
+                contourGreen = (int)look2.contourGreen;
+                contourBlue = (int)look2.contourBlue;
+                contourSize = look2.contourSize;
+                fillZIndex = look2.fillZIndex;
+                fillAlpha = (int)look2.contourAlpha;
+                fillRed = (int)look2.fillRed;
+                fillGreen = (int)look2.fillGreen;
+                fillBlue = (int)look2.fillBlue;
+                textAlpha = (int)look2.textAlpha;
+                textRed = (int)look2.textRed;
+                textGreen = (int)look2.textGreen;
+                textBlue = (int)look2.textBlue;
+                textSize = look2.textSize;
+            }
+
+            int offset = _currentPolygonLookOffset;
+
+            int[] contourSizeInt = doubleToIntArray(contourSize);
+            int[] textSizeInt = doubleToIntArray(textSize);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}",
+                offset == 0 ? "" : ",", offset,
+                lookId, contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeInt[0], contourSizeInt[1],
+                textAlpha, textRed, textGreen, textBlue, textSizeInt[0], textSizeInt[1],
+                fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue);
+
+            append("PolygonLooks.cpp", code);
+            _currentPolygonLookOffset += 19;
+
+            return offset;
         }
 
         private int getIntArrayOffset(IEnumerable<int> values)

@@ -8,6 +8,9 @@ namespace map_server
     extern int lineElements[];
     extern int polygonElements[];
     extern int multipointItems[];
+    extern int pointLooks[];
+    extern int lineLooks[];
+    extern int polygonLooks[];
     extern int pointElementCount;
     extern int lineElementCount;
     extern int polygonElementCount;

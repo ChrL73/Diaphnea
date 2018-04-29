@@ -5,6 +5,7 @@
 namespace map_server
 {
     class MultipointItem;
+    class PolygonLook;
 
     class PolygonElement
     {
@@ -23,6 +24,10 @@ namespace map_server
         int _coveredElementCount;
         int _coveredElements;
 
+        // Array of PolygonLooks
+        int _lookCount;
+        int _looks;
+
     public:
         static const PolygonElement *get(int offset) { return reinterpret_cast<const PolygonElement *>(polygonElements + offset); }
 
@@ -36,5 +41,7 @@ namespace map_server
         int getCoveredElementCount(void) const { return _coveredElementCount; }
         const char *getCoveredElement(int i) const { return strings + *(intArrays + _coveredElements + i); }
 
+        int getLookCount(void) const { return _lookCount; }
+        const PolygonLook *getLook(int i) const { return reinterpret_cast<const PolygonLook *>(polygonLooks + *(intArrays + _looks + i)); }
     };
 }

@@ -195,5 +195,14 @@
     <Compile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp">
       <Link>Data\PolygonLook.cpp</Link>
     </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineLooks.cpp">
+      <Link>Data\generated_code\_France\LineLooks.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLooks.cpp">
+      <Link>Data\generated_code\_France\PointLooks.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonLooks.cpp">
+      <Link>Data\generated_code\_France\PolygonLooks.cpp</Link>
+    </Compile>
   </ItemGroup>
 </Project>

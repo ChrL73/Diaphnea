@@ -30,6 +30,6 @@ namespace map_server
         const MultipointItem *getItem(int i) const { return reinterpret_cast<const MultipointItem *>(multipointItems + *(intArrays + _items + i)); }
 
         int getLookCount(void) const { return _lookCount; }
-        const LineLook *getLook(int i) const { return reinterpret_cast<const LineLook *>(lineLooks + *(intArrays + _looks + i)); }
+        const LineLook *getLook(int i) const;
     };
 }

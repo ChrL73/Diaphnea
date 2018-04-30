@@ -42,6 +42,6 @@ namespace map_server
         const char *getCoveredElement(int i) const { return strings + *(intArrays + _coveredElements + i); }
 
         int getLookCount(void) const { return _lookCount; }
-        const PolygonLook *getLook(int i) const { return reinterpret_cast<const PolygonLook *>(polygonLooks + *(intArrays + _looks + i)); }
+        const PolygonLook *getLook(int i) const;
     };
 }

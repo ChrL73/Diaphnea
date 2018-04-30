@@ -57,7 +57,7 @@ namespace map_server
 
         std::vector<PointItem *> pointItems;
         std::map<int, LineItem *> lineItems;
-        std::map<int, FilledPolygonItem *> filledPolygonItems;
+        std::vector<FilledPolygonItem *> filledPolygonItems;
 
         /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
         std::set<std::string> coveredElementSet;*/
@@ -73,7 +73,7 @@ namespace map_server
             if (elementType == map_server::POINT)
             {
                 const PointElement *pointElement = _commonData->getLastElementAsPoint();
-                PointItem *item = new PointItem(pointElement);
+                PointItem *item = new PointItem(pointElement, _lookIndex);
                 pointItems.push_back(item);
             }
             else if (elementType == map_server::LINE)
@@ -88,7 +88,7 @@ namespace map_server
                     std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(multipointItem->getItemId());
                     if (lineItemIt == lineItems.end())
                     {
-                        LineItem *lineItem = new LineItem(multipointItem);
+                        LineItem *lineItem = new LineItem(multipointItem, lineElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
                     }
                 }
@@ -98,20 +98,24 @@ namespace map_server
                 const PolygonElement *polygonElement = _commonData->getLastElementAsPolygon();
 
                 const MultipointItem *contourItem = polygonElement->getContour();
-
-                std::map<int, FilledPolygonItem *>::iterator filledPolygonIt = filledPolygonItems.find(contourItem->getItemId());
-                if (filledPolygonIt == filledPolygonItems.end())
-                {
-                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(contourItem);
-                    filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
-                }
+                FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(contourItem);
+                filledPolygonItems.push_back(filledPolygonItem);
 
                 int j, m = polygonElement->getItemCount();
                 for (j = 0; j < m; ++j)
                 {
                     const MultipointItem *item = polygonElement->getItem(j);
 
+                    std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(item->getItemId());
+                    if (lineItemIt == lineItems.end())
+                    {
+                        LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex));
+                        lineItems.insert(std::pair<int, LineItem *>(item->getItemId(), lineItem));
+                    }
+                    else
+                    {
 
+                    }
                 }
 
                 /*PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);

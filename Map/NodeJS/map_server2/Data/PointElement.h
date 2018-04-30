@@ -34,8 +34,7 @@ namespace map_server
         double getY(void) const { return _y; }
 
         int getLookCount(void) const { return _lookCount; }
-        const PointLook *getLook(int i) const { return reinterpret_cast<const PointLook *>(pointLooks + *(intArrays + _looks + i)); }
-
+        const PointLook *getLook(int i) const;
     };
 }
 

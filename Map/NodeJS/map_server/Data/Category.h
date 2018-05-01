@@ -11,7 +11,7 @@ namespace map_server
     public:
         Category(int id, int framingLevel) : _id(id), _framingLevel(framingLevel) {}
 
-        int getId(void) const { return _id; }
+        //int getId(void) const { return _id; }
         int getFramingLevel(void) const { return _framingLevel; }
     };
 }

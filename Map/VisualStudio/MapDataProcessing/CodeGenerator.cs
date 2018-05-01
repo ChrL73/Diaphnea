@@ -90,14 +90,15 @@ namespace MapDataProcessing
             append("PolygonLooks.cpp", "namespace map_server\n{\nint polygonLooks[] =\n{");
         }
 
-        internal void close()
+        internal void close(MapData mapData)
         {
             string path = String.Format("{0}/MapData.cpp", _dirName);
             if (File.Exists(path)) File.Delete(path);
 
             string code = String.Format(
-                "namespace map_server\n{{\n    int pointElementCount = {0};\n    int lineElementCount = {1};\n    int polygonElementCount = {2};\n}}\n",
-                _pointElementCount, _lineElementCount, _polygonElementCount);
+                "namespace map_server\n{{\n    int pointElementCount = {0};\n    int lineElementCount = {1};\n    int polygonElementCount = {2};\n    double zoomMinDistance = {3};\n    double zoomMaxDistance = {4};\n}}\n",
+                _pointElementCount, _lineElementCount, _polygonElementCount, mapData.XmlMapData.parameters.zoomMinDistance,
+                mapData.XmlMapData.parameters.zoomMaxDistance);
 
             append("MapData.cpp", code);
 
@@ -151,12 +152,15 @@ namespace MapDataProcessing
             int looksOffset = 0;
             if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
+            int framingLevel = element.Category.XmlCategory.framingLevel;
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
                 _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
-                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], lookOffsetList.Count(), looksOffset);
+                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], lookOffsetList.Count(), looksOffset,
+                framingLevel);
 
             append("PointElements.cpp", code);
-            _currentPointElementOffset += 8;
+            _currentPointElementOffset += 9;
             ++_pointElementCount;
         }
 
@@ -174,12 +178,15 @@ namespace MapDataProcessing
             int looksOffset = 0;
             if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7}",
+            int framingLevel = element.Category.XmlCategory.framingLevel;
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}",
                 _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
-                idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset);
+                idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset,
+                framingLevel);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 5;
+            _currentLineElementOffset += 6;
             ++_lineElementCount;
         }
 
@@ -219,13 +226,16 @@ namespace MapDataProcessing
             int looksOffset = 0;
             if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
+            int framingLevel = element.Category.XmlCategory.framingLevel;
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
                 _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
                 idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
-                element.CoveredElementList.Count(), coveredElementsOffset, lookOffsetList.Count(), looksOffset);
+                element.CoveredElementList.Count(), coveredElementsOffset, lookOffsetList.Count(), looksOffset,
+                framingLevel);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 8;
+            _currentPolygonElementOffset += 9;
             ++_polygonElementCount;
         }
 

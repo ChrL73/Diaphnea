@@ -2,15 +2,14 @@
 #include "MultipointItem.h"
 #include "LineLook.h"
 #include "PolygonLook.h"
+#include "LineElement.h"
 
 namespace map_server
 {
-    LineItem::LineItem(const MultipointItem *multipointItem, const LineLook *lineLook) :
-        _itemId(multipointItem->getItemId()), _xMin(multipointItem->getXMin()), _xMax(multipointItem->getXMax()),
-        _yMin(multipointItem->getYMin()), _yMax(multipointItem->getYMax()),
-        _textLookId(3 * lineLook->getLookId()), _textAlpha(lineLook->getTextAlpha()),
-        _textRed(lineLook->getTextRed()), _textGreen(lineLook->getTextGreen()),
-        _textBlue(lineLook->getTextBlue()), _textSize(lineLook->getTextSize()),
+    LineItem::LineItem(const LineElement *lineElement, const MultipointItem *multipointItem, const LineLook *lineLook) :
+        MapItem(multipointItem->getItemId(), lineElement->getElementId(), multipointItem->getXMin(), multipointItem->getXMax(),
+        multipointItem->getYMin(), multipointItem->getYMax(), 3 * lineLook->getLookId(), lineLook->getTextAlpha(),
+        lineLook->getTextRed(), lineLook->getTextGreen(), lineLook->getTextBlue(), lineLook->getTextSize(), lineElement->getFramingLevel()),
         _lineLookId(3 * lineLook->getLookId() + 1), _lineZIndex(lineLook->getLineZIndex()),
         _lineAlpha(lineLook->getLineAlpha()), _lineRed(lineLook->getLineRed()),
         _lineGreen(lineLook->getLineGreen()), _lineBlue(lineLook->getLineBlue()),
@@ -19,9 +18,8 @@ namespace map_server
     }
 
     LineItem::LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook) :
-        _itemId(multipointItem->getItemId()), _xMin(multipointItem->getXMin()), _xMax(multipointItem->getXMax()),
-        _yMin(multipointItem->getYMin()), _yMax(multipointItem->getYMax()),
-        _textLookId(-1), _textAlpha(0), _textRed(0), _textGreen(0), _textBlue(0), _textSize(0),
+        MapItem(multipointItem->getItemId(), "", multipointItem->getXMin(), multipointItem->getXMax(),
+        multipointItem->getYMin(), multipointItem->getYMax(),-1, 0, 0, 0, 0, 0.0, -1),
         _lineLookId(3 * polygonLook->getLookId() + 1), _lineZIndex(polygonLook->getContourZIndex()),
         _lineAlpha(polygonLook->getContourAlpha()), _lineRed(polygonLook->getContourRed()),
         _lineGreen(polygonLook->getContourGreen()), _lineBlue(polygonLook->getContourBlue()),

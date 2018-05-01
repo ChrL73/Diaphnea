@@ -1,28 +1,17 @@
 #pragma once
 
+#include "MapItem.h"
+
 namespace map_server
 {
     class MultipointItem;
     class LineLook;
     class PolygonLook;
+    class LineElement;
 
-    class LineItem
+    class LineItem : public MapItem
     {
     private:
-        const int _itemId;
-
-        const double _xMin;
-        const double _xMax;
-        const double _yMin;
-        const double _yMax;
-
-        const int _textLookId;
-        const int _textAlpha;
-        const int _textRed;
-        const int _textGreen;
-        const int _textBlue;
-        const double _textSize;
-
         int _lineLookId;
         int _lineZIndex;
         int _lineAlpha;
@@ -32,16 +21,17 @@ namespace map_server
         double _lineSize;
 
     public:
-        LineItem(const MultipointItem *multipointItem, const LineLook *lineLook);
+        LineItem(const LineElement *lineElement, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 
-        int getItemId(void) const { return _itemId; }
-
-        double getXMin(void) const { return _xMin; }
-        double getXMax(void) const { return _xMax; }
-        double getYMin(void) const { return _yMin; }
-        double getYMax(void) const { return _yMax; }
-
         void updateLook(const PolygonLook *polygonLook);
+
+        int getLineLookId(void) const { return _lineLookId; }
+        int getLineZIndex(void) const { return _lineZIndex; }
+        int getLineAlpha(void) const { return _lineAlpha; }
+        int getLineRed(void) const { return _lineRed; }
+        int getLineGreen(void) const { return _lineGreen; }
+        int getLineBlue(void) const { return _lineBlue; }
+        double getLineSize(void) const { return _lineSize; }
     };
 }

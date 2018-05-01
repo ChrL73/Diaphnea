@@ -14,4 +14,6 @@ namespace map_server
     extern int pointElementCount;
     extern int lineElementCount;
     extern int polygonElementCount;
+    extern double zoomMinDistance;
+    extern double zoomMaxDistance;
 }

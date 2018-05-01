@@ -19,6 +19,8 @@ namespace MapDataProcessing
         private readonly XmlCategory _xmlCategory;
         private readonly ElementName _name;
 
+        internal XmlCategory XmlCategory { get { return _xmlCategory; } }
+
         internal Category(XmlCategory xmlCategory)
         {
             _id = ++_counter;

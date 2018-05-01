@@ -28,6 +28,9 @@ namespace map_server
         int _lookCount;
         int _looks;
 
+        // Int
+        int _framingLevel;
+
     public:
         static const PolygonElement *get(int offset) { return reinterpret_cast<const PolygonElement *>(polygonElements + offset); }
 
@@ -43,5 +46,7 @@ namespace map_server
 
         int getLookCount(void) const { return _lookCount; }
         const PolygonLook *getLook(int i) const;
+
+        int getFramingLevel(void) const { return _framingLevel; }
     };
 }

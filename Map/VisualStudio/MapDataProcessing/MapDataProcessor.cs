@@ -358,7 +358,7 @@ namespace MapDataProcessing
                                     if (_elementDictionary.TryGetValue(id2, out element2))
                                     {
                                         PolygonMapElement polygon2 = element2 as PolygonMapElement;
-                                        if (polygon2 != null && element.CategoryId == polygon2.CategoryId)
+                                        if (polygon2 != null && element.Category.Id == polygon2.Category.Id)
                                         {
                                             _elementLinker.addNeighbor((PolygonMapElement)element, polygon2);
                                         }
@@ -616,7 +616,7 @@ namespace MapDataProcessing
                 if (element.generateCode(codeGenerator) != 0) return -1;
             }
 
-            codeGenerator.close();
+            codeGenerator.close(_mapData);
 
             return 0;
         }

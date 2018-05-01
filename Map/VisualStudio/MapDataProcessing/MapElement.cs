@@ -17,7 +17,7 @@ namespace MapDataProcessing
         private readonly ElementName _shortName;
         private readonly double _importance;
         private readonly List<Look> _looks = new List<Look>();
-        private readonly int _categoryId;
+        private readonly Category _category;
 
         private readonly Dictionary<MapElement, int> _linkedElements1 = new Dictionary<MapElement, int>();
         private readonly Dictionary<MapElement, int> _linkedElements2 = new Dictionary<MapElement, int>();
@@ -33,7 +33,7 @@ namespace MapDataProcessing
             _name = new ElementName(name);
             _shortName = new ElementName(shortName);
             _importance = importance;
-            _categoryId = mapData.getCategory(categoryId).Id;
+            _category = mapData.getCategory(categoryId);
 
             foreach (string lookId in lookIds) _looks.Add(mapData.getLook(lookId));
         }
@@ -45,7 +45,7 @@ namespace MapDataProcessing
 
         internal string Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }
-        internal int CategoryId { get { return _categoryId; } }
+        internal Category Category { get { return _category; } }
 
         protected BsonDocument getBsonDocument()
         {
@@ -68,7 +68,7 @@ namespace MapDataProcessing
                 { "linked_elements1", _linkedElements1Array },
                 { "linked_elements2", _linkedElements2Array },
                 { "look_ids", lookIdArray },
-                { "category_id", _categoryId }
+                { "category_id", _category.Id }
             };
 
             return elementDocument;

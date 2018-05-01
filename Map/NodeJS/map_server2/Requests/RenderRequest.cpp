@@ -34,10 +34,9 @@
 //#include FT_FREETYPE_H
 
 #include <cstring>
-//#include <map>
-//#include <sstream>
-//#include <limits>
-//#include <cmath>
+#include <sstream>
+#include <limits>
+#include <cmath>
 
 #if _WIN32
 #undef max
@@ -55,12 +54,11 @@ namespace map_server
     {
         //bool createSvg = (strcmp(_socketId, "svg") == 0);
 
-        std::vector<PointItem *> pointItems;
+        std::map<int, PointItem *> pointItems;
         std::map<int, LineItem *> lineItems;
-        std::vector<FilledPolygonItem *> filledPolygonItems;
-
-        /*std::map<LineItem *, std::map<int, PolygonElement *> > lineItemMap;
-        std::set<std::string> coveredElementSet;*/
+        std::map<int, FilledPolygonItem *> filledPolygonItems;
+        std::vector<MapItem *> itemVector;
+        std::set<std::string> coveredElementSet;
 
         _commonData->lock();
 
@@ -73,8 +71,14 @@ namespace map_server
             if (elementType == map_server::POINT)
             {
                 const PointElement *pointElement = _commonData->getLastElementAsPoint();
-                PointItem *item = new PointItem(pointElement, _lookIndex);
-                pointItems.push_back(item);
+
+                std::map<int, PointItem *>::iterator pointItemIt = pointItems.find(pointElement->getItemId());
+                if (pointItemIt == pointItems.end())
+                {
+                    PointItem *item = new PointItem(pointElement, pointElement->getLook(_lookIndex));
+                    pointItems.insert(std::pair<int, PointItem *>(pointElement->getItemId(), item));
+                    itemVector.push_back(item);
+                }
             }
             else if (elementType == map_server::LINE)
             {
@@ -88,8 +92,9 @@ namespace map_server
                     std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(multipointItem->getItemId());
                     if (lineItemIt == lineItems.end())
                     {
-                        LineItem *lineItem = new LineItem(multipointItem, lineElement->getLook(_lookIndex));
+                        LineItem *lineItem = new LineItem(lineElement, multipointItem, lineElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
+                        itemVector.push_back(lineItem);
                     }
                 }
             }
@@ -98,8 +103,14 @@ namespace map_server
                 const PolygonElement *polygonElement = _commonData->getLastElementAsPolygon();
 
                 const MultipointItem *contourItem = polygonElement->getContour();
-                FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(contourItem);
-                filledPolygonItems.push_back(filledPolygonItem);
+
+                std::map<int, FilledPolygonItem *>::iterator filledPolygonItemIt = filledPolygonItems.find(contourItem->getItemId());
+                if (filledPolygonItemIt == filledPolygonItems.end())
+                {
+                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, contourItem, polygonElement->getLook(_lookIndex));
+                    filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
+                    itemVector.push_back(filledPolygonItem);
+                }
 
                 int j, m = polygonElement->getItemCount();
                 for (j = 0; j < m; ++j)
@@ -111,35 +122,16 @@ namespace map_server
                     {
                         LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(item->getItemId(), lineItem));
+                        itemVector.push_back(lineItem);
                     }
                     else
                     {
-
+                        (*lineItemIt).second->updateLook(polygonElement->getLook(_lookIndex));
                     }
                 }
 
-                /*PolygonElement *polygonElement = dynamic_cast<PolygonElement *>(element);
-                if (polygonElement != 0)
-                {
-                    itemVector.push_back(polygonElement->getFilledPolygonItem());
-                    int j, m = polygonElement->getLineItemVector().size();
-                    for (j = 0; j < m; ++j)
-                    {
-                        LineItem *lineItem = polygonElement->getLineItemVector()[j];
-                        std::map<LineItem *, std::map<int, PolygonElement *> >::iterator lineItemIt = lineItemMap.find(lineItem);
-                        if (lineItemIt == lineItemMap.end())
-                        {
-                            lineItemIt = lineItemMap.insert(std::pair<LineItem *, std::map<int, PolygonElement *> >(lineItem, std::map<int, PolygonElement *>())).first;
-                        }
-
-                        int zIndex = polygonElement->getLook(0)->getContourLook()->getZIndex();
-                        (*lineItemIt).second.insert(std::pair<int, PolygonElement *>(zIndex, polygonElement));
-                    }
-
-                    m = polygonElement->getCoveredElementVector().size();
-                    for (j = 0; j < m; ++j) coveredElementSet.insert(polygonElement->getCoveredElementVector()[j]);
-                }
-                */
+                m = polygonElement->getCoveredElementCount();
+                for (j = 0; j < m; ++j) coveredElementSet.insert(polygonElement->getCoveredElement(j));
             }
             else if (elementId == "#test")
             {
@@ -155,53 +147,34 @@ namespace map_server
 
         _commonData->unlock();
 
-        /*bool noElement = (n == 0);
+        //bool noElement = (n == 0);
+        //bool languageOk = _map->knownLanguage(_languageId);
 
-        std::map<LineItem *, std::map<int, PolygonElement *> >::iterator lineItemIt = lineItemMap.begin();
-        for (; lineItemIt != lineItemMap.end(); ++lineItemIt)
-        {
-            PolygonElement *element = (*(*lineItemIt).second.begin()).second;
-            LineItem *item = (*lineItemIt).first;
-            std::vector<const ItemLook *> contourLook;
-            contourLook.push_back(element->getLook(_lookIndex)->getContourLook());
-            item->setCurrentLooks(contourLook);
-            itemVector.push_back(item);
-        }
-
-        bool languageOk = _map->knownLanguage(_languageId);
         std::stringstream response;
         n = itemVector.size();
 
-        if (n > 0)
+        if (n != 0)
         {
             std::vector<MapItem *> itemVector2;
+
+            double xMin, xMax, yMin, yMax;
 
             if (_focusSetByClient)
             {
                 const double r = 0.6;
                 double dx = r * _widthInPixels / _scale;
-                double xMin = _xFocus - dx;
-                double xMax = _xFocus + dx;
+                xMin = _xFocus - dx;
+                xMax = _xFocus + dx;
                 double dy = r * _heightInPixels / _scale;
-                double yMin = _yFocus - dy;
-                double yMax = _yFocus + dy;
-
-                for (i = 0; i < n; ++i)
-                {
-                    MapItem *item = itemVector[i];
-
-                    if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
-                    {
-                        itemVector2.push_back(item);
-                    }
-                }
+                yMin = _yFocus - dy;
+                yMax = _yFocus + dy;
             }
             else
             {
-                double xMin = std::numeric_limits<double>::max();
-                double xMax = std::numeric_limits<double>::lowest();
-                double yMin = xMin;
-                double yMax = xMax;
+                xMin = std::numeric_limits<double>::max();
+                xMax = std::numeric_limits<double>::lowest();
+                yMin = xMin;
+                yMax = xMax;
                 double xMin0 = xMin;
                 double xMax0 = xMax;
                 double yMin0 = xMin;
@@ -211,12 +184,11 @@ namespace map_server
                 for (i = 0; i < n; ++i)
                 {
                     MapItem *item = itemVector[i];
-                    itemVector2.push_back(item);
 
                     int framingLevel = 0;
-                    if (item->getElementForFraming() != 0 && _framingExceptions.find(item->getElementForFraming()->getId()) == _framingExceptions.end())
+                    if (item->getFramingLevel() != -1 && _framingExceptions.find(item->getElementId()) == _framingExceptions.end())
                     {
-                        framingLevel = item->getElementForFraming()->getCategory()->getFramingLevel();
+                        framingLevel = item->getFramingLevel();
                     }
 
                     if (framingLevel >= _framingLevel)
@@ -264,13 +236,22 @@ namespace map_server
                     geoSize = geoHeight * sqrt(1.0 + a * a);
                 }
 
-                if (geoSize < _map->getZoomMinDistance()) geoSize = _map->getZoomMinDistance();
-                if (geoSize > _map->getZoomMaxDistance()) geoSize = _map->getZoomMaxDistance();
+                if (geoSize < zoomMinDistance) geoSize = zoomMinDistance;
+                if (geoSize > zoomMaxDistance) geoSize = zoomMaxDistance;
 
                 _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
             }
 
-            int resolutionIndex = _map->getResolutionIndex(_scale);
+            for (i = 0; i < n; ++i)
+            {
+                MapItem *item = itemVector[i];
+                if (item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
+                {
+                    itemVector2.push_back(item);
+                }
+            }
+
+            /*int resolutionIndex = _map->getResolutionIndex(_scale);
 
             std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
             double dx = 0.5 * _widthInPixels / _scale;
@@ -353,12 +334,11 @@ namespace map_server
             for (; elementIt != lineItemAssociationMap.end(); ++elementIt)
             {
                 (*elementIt).second[0]->setLineBuilderVector((*elementIt).second);
-            }
+            }*/
         }
 
-        MapData::unlock();
 
-        if (n > 0)
+        /*if (n > 0)
         {
             if (_svgCreator == 0)
             {

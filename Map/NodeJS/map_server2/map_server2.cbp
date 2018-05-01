@@ -58,6 +58,8 @@
 		<Unit filename="Data/LineLook.cpp" />
 		<Unit filename="Data/LineLook.h" />
 		<Unit filename="Data/MapData.h" />
+		<Unit filename="Data/MapItem.cpp" />
+		<Unit filename="Data/MapItem.h" />
 		<Unit filename="Data/MultipointItem.cpp" />
 		<Unit filename="Data/MultipointItem.h" />
 		<Unit filename="Data/PointElement.cpp" />

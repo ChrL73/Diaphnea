@@ -96,9 +96,28 @@ namespace MapDataProcessing
             if (File.Exists(path)) File.Delete(path);
 
             string code = String.Format(
-                "namespace map_server\n{{\n    int pointElementCount = {0};\n    int lineElementCount = {1};\n    int polygonElementCount = {2};\n    double zoomMinDistance = {3};\n    double zoomMaxDistance = {4};\n}}\n",
-                _pointElementCount, _lineElementCount, _polygonElementCount, mapData.XmlMapData.parameters.zoomMinDistance,
-                mapData.XmlMapData.parameters.zoomMaxDistance);
+                "namespace map_server\n{{\n    int pointElementCount = {0};\n    int lineElementCount = {1};\n    int polygonElementCount = {2};\n",
+                _pointElementCount, _lineElementCount, _polygonElementCount);
+            append("MapData.cpp", code);
+
+            XmlParameters parameters = mapData.XmlMapData.parameters;
+            code = String.Format(
+                "    double zoomMinDistance = {0};\n    double zoomMaxDistance = {1};\n    double resolutionThreshold = {2};\n    double sizeParameter1 = {3};\n    double sizeParameter2 = {4};\n",
+                parameters.zoomMinDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.zoomMaxDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")),
+                parameters.resolutionThreshold.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.sizeParameter1.ToString(CultureInfo.CreateSpecificCulture("en-US")),
+                parameters.sizeParameter2.ToString(CultureInfo.CreateSpecificCulture("en-US")));
+            append("MapData.cpp", code);
+
+            List<string> sampleLengthList = new List<string>();
+            int i, n = mapData.XmlMapData.resolutionList.Length;
+            for (i = 0; i < n; ++i)
+            {
+                XmlResolution resolution = mapData.XmlMapData.resolutionList[i];
+                double sampleLength = resolution.sampleLength1 * Double.Parse(resolution.sampleRatio);
+                sampleLengthList.Add(sampleLength.ToString(CultureInfo.CreateSpecificCulture("en-US")));
+            }
+
+            code = String.Format("    int sampleLengthCount = {0};\n    double sampleLengths[] = {{{1}}};\n}}\n", n, String.Join(", ", sampleLengthList));
 
             append("MapData.cpp", code);
 

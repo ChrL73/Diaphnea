@@ -118,6 +118,9 @@
     <None Include="..\..\NodeJS\map_server2\Data\PolygonLook.h">
       <Link>Data\PolygonLook.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\MapItem.h">
+      <Link>Data\MapItem.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -203,6 +206,9 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonLooks.cpp">
       <Link>Data\generated_code\_France\PolygonLooks.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\MapItem.cpp">
+      <Link>Data\MapItem.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

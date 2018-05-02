@@ -16,4 +16,9 @@ namespace map_server
     extern int polygonElementCount;
     extern double zoomMinDistance;
     extern double zoomMaxDistance;
+    extern double resolutionThreshold;
+    extern double sizeParameter1;
+    extern double sizeParameter2;
+    extern int sampleLengthCount;
+    extern double sampleLengths[];
 }

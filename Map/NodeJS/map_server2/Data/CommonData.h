@@ -4,7 +4,7 @@
 
 #include <map>
 #include <string>
-#include <mutex>
+//#include <mutex>
 
 namespace map_server
 {
@@ -16,7 +16,8 @@ namespace map_server
     class CommonData
     {
     private:
-        std::mutex _mutex;
+        // The mutex does not seem to be necessary, because the memory locations shared between the threads are read, but never modified
+        //std::mutex _mutex;
         std::map<std::string, ElementInfo *> _elementInfoMap;
 
         int _lastElementOffset;
@@ -25,8 +26,8 @@ namespace map_server
         CommonData(void);
         ~CommonData();
 
-        void lock(void) { _mutex.lock(); }
-        void unlock(void) { _mutex.unlock(); }
+        //void lock(void) { _mutex.lock(); }
+        //void unlock(void) { _mutex.unlock(); }
 
         ElementTypeEnum getElementType(const std::string& elementId);
         const PointElement *getLastElementAsPoint(void) const;

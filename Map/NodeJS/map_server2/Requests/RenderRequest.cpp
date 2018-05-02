@@ -60,7 +60,7 @@ namespace map_server
         std::vector<MapItem *> itemVector;
         std::set<std::string> coveredElementSet;
 
-        _commonData->lock();
+        //_commonData->lock();
 
         unsigned int i, n = _elementIds.size();
         for (i = 0; i < n; ++i)
@@ -145,7 +145,7 @@ namespace map_server
             }*/
         }
 
-        _commonData->unlock();
+        //_commonData->unlock();
 
         //bool noElement = (n == 0);
         //bool languageOk = _map->knownLanguage(_languageId);
@@ -251,19 +251,24 @@ namespace map_server
                 }
             }
 
-            /*int resolutionIndex = _map->getResolutionIndex(_scale);
+            double wantedLength = resolutionThreshold / _scale;
+            int resolutionIndex;
+            for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
+            {
+                if (wantedLength > sampleLengths[resolutionIndex]) break;
+            }
 
-            std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
+            //std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
             double dx = 0.5 * _widthInPixels / _scale;
-            double xMin = _xFocus - dx;
-            double xMax = _xFocus + dx;
+            xMin = _xFocus - dx;
+            xMax = _xFocus + dx;
             double dy = 0.5 * _heightInPixels / _scale;
-            double yMin = _yFocus - dy;
-            double yMax = _yFocus + dy;
+            yMin = _yFocus - dy;
+            yMax = _yFocus + dy;
 
-            double sizeFactor = _map->getSizeParameter1() / (_map->getSizeParameter2() + _scale);
+            double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
 
-            if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
+            /*if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
             else response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
 
             n = itemVector2.size();

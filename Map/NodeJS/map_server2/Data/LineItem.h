@@ -20,6 +20,9 @@ namespace map_server
         int _lineBlue;
         double _lineSize;
 
+        int getElementLookId(void) const { return _lineLookId; }
+        bool hasResolution(void) const { return true; }
+
     public:
         LineItem(const LineElement *lineElement, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);

@@ -49,5 +49,8 @@ namespace map_server
         double getTextSize(void) const { return _textSize; }
 
         int getFramingLevel(void) const { return _framingLevel; }
+
+        virtual int getElementLookId(void) const = 0;
+        virtual bool hasResolution(void) const = 0;
     };
 }

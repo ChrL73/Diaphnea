@@ -19,6 +19,9 @@ namespace map_server
         int _fillBlue;
         double _fillSize;
 
+        int getElementLookId(void) const { return _fillLookId; }
+        bool hasResolution(void) const { return true; }
+
     public:
         FilledPolygonItem(const PolygonElement *polygonElement, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 

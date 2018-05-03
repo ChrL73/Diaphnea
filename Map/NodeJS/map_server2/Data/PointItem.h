@@ -18,6 +18,9 @@ namespace map_server
         const int _pointBlue;
         const double _pointSize;
 
+        int getElementLookId(void) const { return _pointLookId; }
+        bool hasResolution(void) const { return false; }
+
     public:
         PointItem(const PointElement *pointElement, const PointLook *pointLook);
 

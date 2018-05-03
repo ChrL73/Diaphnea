@@ -37,6 +37,7 @@ namespace map_server
             _lineGreen = polygonLook->getContourGreen();
             _lineBlue = polygonLook->getContourBlue();
             _lineSize = polygonLook->getContourSize();
+            _lineLookId = 3 * polygonLook->getLookId() + 1;
         }
     }
 }

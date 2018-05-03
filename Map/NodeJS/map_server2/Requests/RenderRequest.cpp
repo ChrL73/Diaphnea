@@ -25,7 +25,7 @@
 //#include "ElementName.h"
 //#include "SvgCreator.h"
 //#include "SvgItemInfo.h"
-//include "ErrorEnum.h"
+#include "ErrorEnum.h"
 #include "SvgCustomColor.h"
 //#include "Category.h"
 //#include "PointVector.h"
@@ -37,6 +37,7 @@
 #include <sstream>
 #include <limits>
 #include <cmath>
+#include <iostream>
 
 #if _WIN32
 #undef max
@@ -147,7 +148,6 @@ namespace map_server
 
         //_commonData->unlock();
 
-        //bool noElement = (n == 0);
         //bool languageOk = _map->knownLanguage(_languageId);
 
         std::stringstream response;
@@ -159,17 +159,7 @@ namespace map_server
 
             double xMin, xMax, yMin, yMax;
 
-            if (_focusSetByClient)
-            {
-                const double r = 0.6;
-                double dx = r * _widthInPixels / _scale;
-                xMin = _xFocus - dx;
-                xMax = _xFocus + dx;
-                double dy = r * _heightInPixels / _scale;
-                yMin = _yFocus - dy;
-                yMax = _yFocus + dy;
-            }
-            else
+            if (!_focusSetByClient)
             {
                 xMin = std::numeric_limits<double>::max();
                 xMax = std::numeric_limits<double>::lowest();
@@ -242,6 +232,14 @@ namespace map_server
                 _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
             }
 
+            const double r = 0.6;
+            double dx = r * _widthInPixels / _scale;
+            xMin = _xFocus - dx;
+            xMax = _xFocus + dx;
+            double dy = r * _heightInPixels / _scale;
+            yMin = _yFocus - dy;
+            yMax = _yFocus + dy;
+
             for (i = 0; i < n; ++i)
             {
                 MapItem *item = itemVector[i];
@@ -259,17 +257,17 @@ namespace map_server
             }
 
             //std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
-            double dx = 0.5 * _widthInPixels / _scale;
+            dx = 0.5 * _widthInPixels / _scale;
             xMin = _xFocus - dx;
             xMax = _xFocus + dx;
-            double dy = 0.5 * _heightInPixels / _scale;
+            dy = 0.5 * _heightInPixels / _scale;
             yMin = _yFocus - dy;
             yMax = _yFocus + dy;
 
-            double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
+            //double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
 
             /*if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
-            else response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
+            else*/ response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
 
             n = itemVector2.size();
             for (i = 0; i < n; ++i)
@@ -279,17 +277,17 @@ namespace map_server
                 if (_svgCreator == 0)
                 {
                     if (i != 0) response << ",";
-                    response << "[" << item->getId() << "," << item->getCurrentLook(_lookIndex)->getId();
+                    response << "[" << item->getItemId() << "," << item->getElementLookId();
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
                 }
-                else
+                /*else
                 {
                     SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(_lookIndex), resolutionIndex);
                     _svgCreator->addInfo(item->getCurrentLook(_lookIndex)->getZIndex(), svgItemInfo);
-                }
+                }*/
 
-                if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
+                /*if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
                 {
                     if (languageOk)
                     {
@@ -326,7 +324,7 @@ namespace map_server
                         _coutMutexPtr->unlock();
                         MapData::lock();
                     }
-                }
+                }*/
             }
 
             if (_svgCreator == 0)
@@ -335,7 +333,7 @@ namespace map_server
                          << ",\"scale\":" << _scale << "}";
             }
 
-            std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.begin();
+            /*std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.begin();
             for (; elementIt != lineItemAssociationMap.end(); ++elementIt)
             {
                 (*elementIt).second[0]->setLineBuilderVector((*elementIt).second);
@@ -343,7 +341,7 @@ namespace map_server
         }
 
 
-        /*if (n > 0)
+        if (n > 0)
         {
             if (_svgCreator == 0)
             {
@@ -352,19 +350,19 @@ namespace map_server
                 _coutMutexPtr->unlock();
             }
 
-            if (languageOk)
+            /*if (languageOk)
             {
                 displayText();
             }
-            else
+            elses
             {
                 _coutMutexPtr->lock();
                 std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
                     << ",\"message\":\"Unknown language id ('" << _languageId << "') in RENDER request\"}" << std::endl;
                 _coutMutexPtr->unlock();
-            }
+            }*/
         }
-        else if (noElement)
+        else if (itemVector.empty())
         {
             _coutMutexPtr->lock();
             std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
@@ -381,8 +379,6 @@ namespace map_server
             _coutMutexPtr->unlock();
         }
 
-        delete _svgCreator;
-
-        flushErrors(_map);*/
+        //delete _svgCreator;
     }
 }

@@ -2,6 +2,7 @@ var childProcess = require('child_process');
 var readLine = require('readline');
 
 var cppProcess;
+var cppProcess2; // tmp
 var sendResponse;
 var config;
 var dbParameters;
@@ -77,6 +78,51 @@ function sendRequest(request, recursiveCall)
    }
 }
 
+// tmp
+function sendRequest2(request, recursiveCall)
+{
+   if (!recursiveCall && config.displayRequests) console.log('Request: ' + request);
+   
+   try
+   {
+      cppProcess2.stdin.write(request + '\n');
+   }
+   catch (err)
+   {
+      if (!recursiveCall)
+      {
+         cppProcess2 = childProcess.spawn('./map_server2.exe', dbParameters);
+         
+         // Don't crash on 'Connection reset' error
+         cppProcess2.stdin.on('error', function(err)
+         {
+            if (err.code != 'ECONNRESET') throw err; 
+            else console.log("Warning: 'cppProcess2.stdin' sent 'Connection reset' error");
+         });
+
+         readLine.createInterface(cppProcess2.stdout, cppProcess2.stdin).on('line', function(response)
+         {
+            var i = response.indexOf(' ');
+            var socketId = response.substring(0, i);
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestId = Number(response.substring(0, i));
+            response = response.substring(i + 1);
+            i = response.indexOf(' ');
+            var requestType = response.substring(0, i);
+            var responseContent = JSON.parse(response.substring(i + 1));
+            
+            if (config.displayReponses || requestType == config.errorMessageIndex) console.log('Response: ' + response);
+
+            sendResponse(socketId, requestId, requestType, responseContent);
+         });
+
+         sendRequest(request, true);
+      }
+   }
+}
+
 module.exports.setConfig = setConfig;
 module.exports.setResponseHandler = setResponseHandler;
 module.exports.sendRequest = sendRequest;
+module.exports.sendRequest2 = sendRequest2; // tmp

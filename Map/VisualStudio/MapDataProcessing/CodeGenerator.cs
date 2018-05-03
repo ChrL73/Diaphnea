@@ -164,7 +164,7 @@ namespace MapDataProcessing
             double x = 0.0, y = 0.0;
             element.Point.getProjection(projection, out x, out y);
             int[] xInt = doubleToIntArray(x);
-            int[] yInt = doubleToIntArray(y);
+            int[] yInt = doubleToIntArray(-y);
 
             List<int> lookOffsetList = new List<int>();
             foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
@@ -264,8 +264,8 @@ namespace MapDataProcessing
 
             int[] xMinInt = doubleToIntArray(xMin);
             int[] xMaxInt = doubleToIntArray(xMax);
-            int[] yMinInt = doubleToIntArray(yMin);
-            int[] yMaxInt = doubleToIntArray(yMax);
+            int[] yMinInt = doubleToIntArray(-yMax);
+            int[] yMaxInt = doubleToIntArray(-yMin);
 
             string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
                 offset == 0 ? "" : ",", offset, comment,

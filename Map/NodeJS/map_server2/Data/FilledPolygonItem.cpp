@@ -10,7 +10,7 @@ namespace map_server
         multipointItem->getYMin(), multipointItem->getYMax(), 3 * polygonLook->getLookId(),
         polygonLook->getTextAlpha(), polygonLook->getTextRed(), polygonLook->getTextGreen(),
         polygonLook->getTextBlue(), polygonLook->getTextSize(), polygonElement->getFramingLevel()),
-        _fillLookId(3 * polygonLook->getLookId() + 1), _fillZIndex(polygonLook->getFillZIndex()),
+        _fillLookId(3 * polygonLook->getLookId() + 2), _fillZIndex(polygonLook->getFillZIndex()),
         _fillAlpha(polygonLook->getFillAlpha()), _fillRed(polygonLook->getFillRed()),
         _fillGreen(polygonLook->getFillGreen()), _fillBlue(polygonLook->getFillBlue())
     {

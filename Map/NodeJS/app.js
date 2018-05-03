@@ -249,7 +249,7 @@ function onRenderReq(socketId, request)
       });
    }
    
-   cppServer.sendRequest(req);
+   cppServer.sendRequest2(req);
 }
 
 cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)

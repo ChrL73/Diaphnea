@@ -81,7 +81,7 @@ namespace map_server
             // 0 0 6 {"items":[[795,55,3],[796,55,3],[797,55,3]],"xFocus":-8.7913,"yFocus":-178.268,"scale":2.16204}
             // 0 0 7 {"t":[["Seine",-2.10266,-179.549]],"e":"Seine","x1":-2.10266,"x2":17.3234,"y1":-185.1,"y2":-179.549,"s":17,"look":54}
 
-            //request = "0 0 6 _France fr 800 600 0 n n n Bretagne 22";
+            request = "0 0 6 _France fr 800 600 0 n n n Bretagne 22";
 
             _timeMutex.lock();
             _timeoutReference = time(0);

@@ -17,9 +17,12 @@
 					<Add directory="Requests" />
 					<Add directory="." />
 					<Add directory="Data" />
+					<Add directory="../../../../freetype-2.7/include" />
+					<Add directory="TextDisplayer" />
 				</Compiler>
 				<Linker>
 					<Add option="-pthread" />
+					<Add library="freetype" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -33,10 +36,13 @@
 					<Add directory="Requests" />
 					<Add directory="." />
 					<Add directory="Data" />
+					<Add directory="../../../../freetype-2.7/include" />
+					<Add directory="TextDisplayer" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 					<Add option="-pthread" />
+					<Add library="freetype" />
 				</Linker>
 			</Target>
 		</Build>
@@ -92,6 +98,14 @@
 		<Unit filename="Requests/Request.h" />
 		<Unit filename="Requests/SvgCustomColor.cpp" />
 		<Unit filename="Requests/SvgCustomColor.h" />
+		<Unit filename="TextDisplayer/Potential.cpp" />
+		<Unit filename="TextDisplayer/Potential.h" />
+		<Unit filename="TextDisplayer/TextDisplayer.cpp" />
+		<Unit filename="TextDisplayer/TextDisplayer.h" />
+		<Unit filename="TextDisplayer/TextDisplayerParameters.cpp" />
+		<Unit filename="TextDisplayer/TextDisplayerParameters.h" />
+		<Unit filename="TextDisplayer/TextPotential.cpp" />
+		<Unit filename="TextDisplayer/TextPotential.h" />
 		<Unit filename="ThreadInfo.cpp" />
 		<Unit filename="ThreadInfo.h" />
 		<Unit filename="map_server.cpp" />

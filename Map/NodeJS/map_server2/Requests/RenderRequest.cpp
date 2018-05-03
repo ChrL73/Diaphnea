@@ -1,6 +1,4 @@
 #include "RenderRequest.h"
-//#include "MapData.h"
-//#include "Map.h"
 #include "MessageTypeEnum.h"
 #include "PointElement.h"
 #include "LineElement.h"
@@ -13,7 +11,7 @@
 //#include "PolygonLook.h"
 //#include "ItemLook.h"
 //#include "ItemCopyBuilder.h"
-//#include "TextDisplayer.h"
+#include "TextDisplayer.h"
 //#include "PointItemCopy.h"
 //#include "LineItemCopy.h"
 //#include "FilledPolygonItemCopy.h"
@@ -21,7 +19,7 @@
 //#include "Point.h"
 //#include "TextInfo.h"
 //#include "TextInfoLine.h"
-//#include "TextDisplayerParameters.h"
+#include "TextDisplayerParameters.h"
 //#include "ElementName.h"
 //#include "SvgCreator.h"
 //#include "SvgItemInfo.h"
@@ -30,8 +28,8 @@
 //#include "Category.h"
 //#include "PointVector.h"
 
-//#include "ft2build.h"
-//#include FT_FREETYPE_H
+#include "ft2build.h"
+#include FT_FREETYPE_H
 
 #include <cstring>
 #include <sstream>
@@ -136,7 +134,7 @@ namespace map_server
             }
             else if (elementId == "#test")
             {
-                //_testMode = true;
+                _testMode = true;
             }
             // Disable potential image creation, because it's only a developement/debug/test feature.
             // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.
@@ -148,15 +146,12 @@ namespace map_server
 
         //_commonData->unlock();
 
-        //bool languageOk = _map->knownLanguage(_languageId);
+        int languageIndex = _commonData->getLanguageIndex(_languageId);
 
-        std::stringstream response;
         n = itemVector.size();
 
         if (n != 0)
         {
-            std::vector<MapItem *> itemVector2;
-
             double xMin, xMax, yMin, yMax;
 
             if (!_focusSetByClient)
@@ -240,6 +235,8 @@ namespace map_server
             yMin = _yFocus - dy;
             yMax = _yFocus + dy;
 
+            std::vector<MapItem *> itemVector2;
+
             for (i = 0; i < n; ++i)
             {
                 MapItem *item = itemVector[i];
@@ -256,7 +253,6 @@ namespace map_server
                 if (wantedLength > sampleLengths[resolutionIndex]) break;
             }
 
-            //std::map<std::string, std::vector<ItemCopyBuilder *> > lineItemAssociationMap;
             dx = 0.5 * _widthInPixels / _scale;
             xMin = _xFocus - dx;
             xMax = _xFocus + dx;
@@ -266,8 +262,12 @@ namespace map_server
 
             //double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
 
+            std::stringstream response;
+
             /*if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
             else*/ response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
+
+            std::map<std::string, std::vector<LineItem *> > lineItemAssociationMap;
 
             n = itemVector2.size();
             for (i = 0; i < n; ++i)
@@ -287,27 +287,24 @@ namespace map_server
                     _svgCreator->addInfo(item->getCurrentLook(_lookIndex)->getZIndex(), svgItemInfo);
                 }*/
 
-                /*if (coveredElementSet.find(item->getElementIdForText()) == coveredElementSet.end())
+                if (languageIndex != -1 && coveredElementSet.find(item->getElementId()) == coveredElementSet.end() &&
+                    item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
                 {
-                    if (languageOk)
+                    _itemVector3.push_back(item);
+
+                    LineItem *lineItem = dynamic_cast<LineItem *>(item);
+                    if (lineItem != 0)
                     {
-                        ItemCopyBuilder *itemCopyBuilder = new ItemCopyBuilder(item, item->getCurrentLook(_lookIndex)->getSize(), item->getCurrentTextLook(_lookIndex), resolutionIndex);
-                        _itemCopyBuilderVector.push_back(itemCopyBuilder);
-
-                        LineItem *lineItem = dynamic_cast<LineItem *>(item);
-                        if (lineItem != 0 && lineItem->getXMax() >= xMin && lineItem->getXMin() <= xMax && lineItem->getYMax() >= yMin && lineItem->getYMin() <= yMax)
+                        std::string elementId = lineItem->getElementId();
+                        if (!elementId.empty())
                         {
-                            std::string elementId = lineItem->getElementIdForText();
-                            if (!elementId.empty())
+                            std::map<std::string, std::vector<LineItem *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
+                            if (elementIt == lineItemAssociationMap.end())
                             {
-                                std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.find(elementId);
-                                if (elementIt == lineItemAssociationMap.end())
-                                {
-                                    elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<ItemCopyBuilder *> >(elementId, std::vector<ItemCopyBuilder *>())).first;
-                                }
-
-                                (*elementIt).second.push_back(itemCopyBuilder);
+                                elementIt = lineItemAssociationMap.insert(std::pair<std::string, std::vector<LineItem *> >(elementId, std::vector<LineItem *>())).first;
                             }
+
+                            (*elementIt).second.push_back(lineItem);
                         }
                     }
                 }
@@ -317,14 +314,13 @@ namespace map_server
                     {
                         std::stringstream delResponse;
                         delResponse << _socketId << " " << _requestId << " " << map_server::REMOVE_TEXT
-                            << " {\"e\":\"" << item->getElementIdForText() << "\"}";
-                        MapData::unlock();
+                            << " {\"e\":\"" << item->getElementId() << "\"}";
+
                         _coutMutexPtr->lock();
                         std::cout << delResponse.str() << std::endl;
                         _coutMutexPtr->unlock();
-                        MapData::lock();
                     }
-                }*/
+                }
             }
 
             if (_svgCreator == 0)
@@ -333,16 +329,12 @@ namespace map_server
                          << ",\"scale\":" << _scale << "}";
             }
 
-            /*std::map<std::string, std::vector<ItemCopyBuilder *> >::iterator elementIt = lineItemAssociationMap.begin();
+            std::map<std::string, std::vector<LineItem *> >::iterator elementIt = lineItemAssociationMap.begin();
             for (; elementIt != lineItemAssociationMap.end(); ++elementIt)
             {
-                (*elementIt).second[0]->setLineBuilderVector((*elementIt).second);
-            }*/
-        }
+                (*elementIt).second[0]->setAssociatedLineVector((*elementIt).second);
+            }
 
-
-        if (n > 0)
-        {
             if (_svgCreator == 0)
             {
                 _coutMutexPtr->lock();
@@ -350,17 +342,17 @@ namespace map_server
                 _coutMutexPtr->unlock();
             }
 
-            /*if (languageOk)
+            if (languageIndex != -1)
             {
-                displayText();
+                displayText(resolutionIndex);
             }
-            elses
+            else
             {
                 _coutMutexPtr->lock();
                 std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
                     << ",\"message\":\"Unknown language id ('" << _languageId << "') in RENDER request\"}" << std::endl;
                 _coutMutexPtr->unlock();
-            }*/
+            }
         }
         else if (itemVector.empty())
         {
@@ -380,5 +372,138 @@ namespace map_server
         }
 
         //delete _svgCreator;
+    }
+
+    void RenderRequest::displayText(int resolutionIndex)
+    {
+        const std::string fontFile = "arial.ttf";
+
+        FT_Library  library;
+        int error = FT_Init_FreeType(&library);
+        if (error)
+        {
+            _coutMutexPtr->lock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FREE_TYPE_INIT_FAILED
+                << ",\"message\":\"FreeType library initialization failed\"}" << std::endl;
+            _coutMutexPtr->unlock();
+            return;
+        }
+
+        FT_Face face;
+        error = FT_New_Face(library, fontFile.c_str(), 0, &face);
+        if (error)
+        {
+            FT_Done_FreeType(library);
+            _coutMutexPtr->lock();
+            std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::FONT_NOT_FOUND
+                << ",\"message\":\"Failed to load arial.ttf font\"}" << std::endl;
+            _coutMutexPtr->unlock();
+            return;
+        }
+
+        TextDisplayerParameters parameters;
+        TextDisplayer textDisplayer(&parameters, _socketId, _requestId, _widthInPixels, _heightInPixels, _xFocus, _yFocus, _scale, _createPotentialImage, _svgCreator, _testMode);
+
+        double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
+
+        int i, n = _itemVector3.size();
+        for (i = 0; i < n; ++i)
+        {
+            MapItem *item = _itemVector3[i];
+
+            PointItem *pointItem = dynamic_cast<PointItem *>(item);
+            if (pointItem != 0)
+            {
+                double diameter = pointItem->getPointSize() * sizeFactor * _scale;
+                double x = (pointItem->getXMin() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                double y = (pointItem->getYMin() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                /*PointItemCopy *pointItemCopy = new PointItemCopy(pointItem->getElementIdForText(), pointItem->getImportance(), x, y, diameter);
+                double radius = parameters.getPointRadiusCoeff() * diameter;
+                RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
+                pointItemCopy->addRepulsiveCenter(repulsiveCenter);
+                setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
+                textDisplayer.addItem(pointItemCopy);*/
+            }
+            else
+            {
+                LineItem *lineItem = dynamic_cast<LineItem *>(item);
+                if (lineItem != 0)
+                {
+                    /*LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText(), lineItem->getImportance());
+
+                    int j, m = lineItem->getPointVector(resolutionIndex)->getPointCount();
+                    for (j = 0; j < m - 1; ++j)
+                    {
+                        const Point *point1 = lineItem->getPointVector(resolutionIndex)->getPoint(j);
+                        const Point *point2 = lineItem->getPointVector(resolutionIndex)->getPoint(j + 1);
+                        double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                        double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                        double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                        double y2 = (point2->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+
+                        if ((x1 >= 0 && x1 <= _widthInPixels && y1 >= 0 && y1 <= _heightInPixels) || (x2 >= 0 && x2 <= _widthInPixels && y2 >= 0 && y2 <= _heightInPixels))
+                        {
+                            double x = 0.5 * (x1 + x2);
+                            double y = 0.5 * (y1 + y2);
+                            double radius1 = parameters.getSegmentRadius1Coeff() * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+                            double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
+                            double axisDx = x2 - x1;
+                            double axisDy = y2 - y1;
+                            RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false, false);
+                            lineItemCopy->addRepulsiveCenter(repulsiveCenter);
+                        }
+                    }
+
+                    int lineBuilderCount = itemCopyBuilder->getLineBuilderCount();
+                    if (lineBuilderCount != 0)
+                    {
+                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
+
+                        int k;
+                        for (k = 0; k < lineBuilderCount; ++k)
+                        {
+                            ItemCopyBuilder *lineBuilder = itemCopyBuilder->getLineBuilder(k);
+                            const LineItem *lineItem2 = dynamic_cast<const LineItem *>(lineBuilder->getItem());
+
+                            int j, m = lineItem2->getPointVector(resolutionIndex)->getPointCount();
+                            for (j = 0; j < m; ++j)
+                            {
+                                const Point *point = lineItem2->getPointVector(resolutionIndex)->getPoint(j);
+                                double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                                lineItemCopy->addPoint(x, y, j == 0);
+                            }
+                        }
+                    }
+
+                    textDisplayer.addItem(lineItemCopy);*/
+                }
+                else
+                {
+                    FilledPolygonItem *filledPolygonItem = dynamic_cast<FilledPolygonItem *>(item);
+                    if (filledPolygonItem != 0)
+                    {
+                        /*FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
+
+                        int j, m = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
+                        for (j = 0; j < m; ++j)
+                        {
+                            const Point *point = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(j);
+                            double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            filledPolygonItemCopy->addPoint(x, y);
+                        }
+
+                        setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
+                        textDisplayer.addItem(filledPolygonItemCopy);*/
+                    }
+                }
+            }
+        }
+
+        FT_Done_FreeType(library);
+
+        textDisplayer.start();
+        //if (_svgCreator != 0) _svgCreator->execute();
     }
 }

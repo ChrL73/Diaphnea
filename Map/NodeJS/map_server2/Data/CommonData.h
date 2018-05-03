@@ -18,7 +18,9 @@ namespace map_server
     private:
         // The mutex does not seem to be necessary, because the memory locations shared between the threads are read, but never modified
         //std::mutex _mutex;
+
         std::map<std::string, ElementInfo *> _elementInfoMap;
+        std::map<std::string, int> _languageIdMap;
 
         int _lastElementOffset;
 
@@ -33,5 +35,7 @@ namespace map_server
         const PointElement *getLastElementAsPoint(void) const;
         const LineElement *getLastElementAsLine(void) const;
         const PolygonElement *getLastElementAsPolygon(void) const;
+
+        int getLanguageIndex(const std::string& languageId) const;
     };
 }

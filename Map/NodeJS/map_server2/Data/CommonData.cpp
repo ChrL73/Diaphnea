@@ -33,6 +33,12 @@ namespace map_server
             ElementInfo *info = new ElementInfo(map_server::POLYGON, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
         }
+
+        for (i = 0; i < languageCount; ++i)
+        {
+            const char *id = strings + languageIds[i];
+            _languageIdMap.insert(std::pair<std::string, int>(id, i));
+        }
     }
 
     CommonData::~CommonData()
@@ -69,4 +75,10 @@ namespace map_server
         return PolygonElement::get(_lastElementOffset);
     }
 
+    int CommonData::getLanguageIndex(const std::string& languageId) const
+    {
+        std::map<std::string, int>::const_iterator it = _languageIdMap.find(languageId);
+        if (it != _languageIdMap.end()) return (*it).second;
+        return -1;
+    }
 }

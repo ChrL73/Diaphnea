@@ -27,8 +27,15 @@
         <Include>$(ProjectDir)/../../NodeJS/map_server2/Requests</Include>
         <Include>$(ProjectDir)/../../NodeJS/map_server2/Data</Include>
         <Include>$(ProjectDir)/../../NodeJS/map_server2</Include>
+        <Include>$(ProjectDir)/../../NodeJS/map_server2/TextDisplayer</Include>
+        <Include>$(ProjectDir)/../../../../freetype-2.7/include</Include>
       </Includes>
     </Includes>
+    <Libs>
+      <Libs>
+        <Lib>freetype</Lib>
+      </Libs>
+    </Libs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
@@ -44,15 +51,23 @@
         <Include>$(ProjectDir)/../../NodeJS/map_server2/Requests</Include>
         <Include>$(ProjectDir)/../../NodeJS/map_server2</Include>
         <Include>$(ProjectDir)/../../NodeJS/map_server2/Data</Include>
+        <Include>$(ProjectDir)/../../NodeJS/map_server2/TextDisplayer</Include>
+        <Include>$(ProjectDir)/../../../../freetype-2.7/include</Include>
       </Includes>
     </Includes>
     <ExtraLinkerArguments>-pthread</ExtraLinkerArguments>
+    <Libs>
+      <Libs>
+        <Lib>freetype</Lib>
+      </Libs>
+    </Libs>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Requests\" />
     <Folder Include="Data\generated_code\" />
     <Folder Include="Data\generated_code\_France\" />
+    <Folder Include="TextDisplayer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\NodeJS\map_server2\ErrorEnum.h">
@@ -120,6 +135,18 @@
     </None>
     <None Include="..\..\NodeJS\map_server2\Data\MapItem.h">
       <Link>Data\MapItem.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.h">
+      <Link>TextDisplayer\Potential.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.h">
+      <Link>TextDisplayer\TextDisplayer.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.h">
+      <Link>TextDisplayer\TextDisplayerParameters.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.h">
+      <Link>TextDisplayer\TextPotential.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +236,18 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\MapItem.cpp">
       <Link>Data\MapItem.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.cpp">
+      <Link>TextDisplayer\Potential.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.cpp">
+      <Link>TextDisplayer\TextDisplayer.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.cpp">
+      <Link>TextDisplayer\TextDisplayerParameters.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.cpp">
+      <Link>TextDisplayer\TextPotential.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

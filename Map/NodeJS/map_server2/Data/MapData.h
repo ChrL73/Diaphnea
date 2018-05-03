@@ -21,4 +21,6 @@ namespace map_server
     extern double sizeParameter2;
     extern int sampleLengthCount;
     extern double sampleLengths[];
+    extern int languageCount;
+    extern int languageIds[];
 }

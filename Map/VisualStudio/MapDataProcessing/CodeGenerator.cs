@@ -116,9 +116,16 @@ namespace MapDataProcessing
                 double sampleLength = resolution.sampleLength1 * Double.Parse(resolution.sampleRatio);
                 sampleLengthList.Add(sampleLength.ToString(CultureInfo.CreateSpecificCulture("en-US")));
             }
+            code = String.Format("    int sampleLengthCount = {0};\n    double sampleLengths[] = {{{1}}};\n", n, String.Join(", ", sampleLengthList));
+            append("MapData.cpp", code);
 
-            code = String.Format("    int sampleLengthCount = {0};\n    double sampleLengths[] = {{{1}}};\n}}\n", n, String.Join(", ", sampleLengthList));
-
+            List<int> languageIdOffsetList = new List<int>();
+            foreach (XmlLanguage language in mapData.XmlMapData.parameters.languageList)
+            {
+                languageIdOffsetList.Add(getStringOffset(language.id.ToString()));
+            }
+            code = String.Format("    int languageCount = {0};\n    int languageIds[] = {{{1}}};\n}}\n", mapData.XmlMapData.parameters.languageList.Count(),
+                                 String.Join(", ", languageIdOffsetList));
             append("MapData.cpp", code);
 
             append("Strings.cpp", "\n};\n}\n");

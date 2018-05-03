@@ -2,6 +2,8 @@
 
 #include "MapItem.h"
 
+#include <vector>
+
 namespace map_server
 {
     class MultipointItem;
@@ -23,6 +25,8 @@ namespace map_server
         int getElementLookId(void) const { return _lineLookId; }
         bool hasResolution(void) const { return true; }
 
+        std::vector<LineItem *> _associatedLineVector;
+
     public:
         LineItem(const LineElement *lineElement, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
@@ -36,5 +40,7 @@ namespace map_server
         int getLineGreen(void) const { return _lineGreen; }
         int getLineBlue(void) const { return _lineBlue; }
         double getLineSize(void) const { return _lineSize; }
+
+        void setAssociatedLineVector(const std::vector<LineItem *>& associatedLineVector) { _associatedLineVector = associatedLineVector; }
     };
 }

@@ -17,7 +17,6 @@ namespace map_server
         int _fillRed;
         int _fillGreen;
         int _fillBlue;
-        double _fillSize;
 
         int getElementLookId(void) const { return _fillLookId; }
         bool hasResolution(void) const { return true; }

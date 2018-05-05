@@ -100,6 +100,8 @@
 		<Unit filename="Requests/SvgCustomColor.h" />
 		<Unit filename="TextDisplayer/Potential.cpp" />
 		<Unit filename="TextDisplayer/Potential.h" />
+		<Unit filename="TextDisplayer/RepulsiveCenter.cpp" />
+		<Unit filename="TextDisplayer/RepulsiveCenter.h" />
 		<Unit filename="TextDisplayer/TextDisplayer.cpp" />
 		<Unit filename="TextDisplayer/TextDisplayer.h" />
 		<Unit filename="TextDisplayer/TextDisplayerParameters.cpp" />

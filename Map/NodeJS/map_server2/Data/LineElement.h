@@ -24,6 +24,9 @@ namespace map_server
         // Int
         int _framingLevel;
 
+        // Double
+        double _importance;
+
     public:
         static const LineElement *get(int offset) { return reinterpret_cast<const LineElement *>(lineElements + offset); }
 
@@ -36,5 +39,7 @@ namespace map_server
         const LineLook *getLook(int i) const;
 
         int getFramingLevel(void) const { return _framingLevel; }
+
+        double getImportance(void) const { return _importance; }
     };
 }

@@ -18,6 +18,10 @@ namespace map_server
         const int _pointBlue;
         const double _pointSize;
 
+        double _x;
+        double _y;
+        double _diameter;
+
         int getElementLookId(void) const { return _pointLookId; }
         bool hasResolution(void) const { return false; }
 
@@ -31,6 +35,14 @@ namespace map_server
         int getPointGreen(void) const { return _pointGreen; }
         int getPointBlue(void) const { return _pointBlue; }
         double getPointSize(void) const { return _pointSize; }
+
+        void setX(double x) { _x = x; }
+        void setY(double y) { _y = y; }
+        void setDiameter(double diameter) { _diameter = diameter; }
+
+        double getX(void) const { return _x; }
+        double getY(void) const { return _y; }
+        double getDiameter(void) const { return _diameter; }
     };
 }
 

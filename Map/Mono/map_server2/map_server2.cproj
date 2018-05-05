@@ -148,6 +148,9 @@
     <None Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.h">
       <Link>TextDisplayer\TextPotential.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.h">
+      <Link>TextDisplayer\RepulsiveCenter.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -248,6 +251,9 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.cpp">
       <Link>TextDisplayer\TextPotential.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.cpp">
+      <Link>TextDisplayer\RepulsiveCenter.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

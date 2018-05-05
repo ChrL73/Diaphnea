@@ -5,7 +5,7 @@
 namespace map_server
 {
     PointItem::PointItem(const PointElement *pointElement, const PointLook *pointLook) :
-        MapItem(pointElement->getItemId(), pointElement->getElementId(), pointElement->getX(), pointElement->getX(),
+        MapItem(pointElement->getItemId(), pointElement->getElementId(), pointElement->getImportance(), pointElement->getX(), pointElement->getX(),
         pointElement->getY(), pointElement->getY(), 3 * pointLook->getLookId(), pointLook->getTextAlpha(),
         pointLook->getTextRed(), pointLook->getTextGreen(), pointLook->getTextBlue(), pointLook->getTextSize(), pointElement->getFramingLevel()),
         _pointLookId(3 * pointLook->getLookId() + 1), _pointZIndex(pointLook->getPointZIndex()),

@@ -15,7 +15,7 @@
 //#include "PointItemCopy.h"
 //#include "LineItemCopy.h"
 //#include "FilledPolygonItemCopy.h"
-//#include "RepulsiveCenter.h"
+#include "RepulsiveCenter.h"
 //#include "Point.h"
 //#include "TextInfo.h"
 //#include "TextInfoLine.h"
@@ -417,12 +417,16 @@ namespace map_server
                 double diameter = pointItem->getPointSize() * sizeFactor * _scale;
                 double x = (pointItem->getXMin() - _xFocus) * _scale + 0.5 * _widthInPixels;
                 double y = (pointItem->getYMin() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                /*PointItemCopy *pointItemCopy = new PointItemCopy(pointItem->getElementIdForText(), pointItem->getImportance(), x, y, diameter);
+
+                pointItem->setDiameter(diameter);
+                pointItem->setX(x);
+                pointItem->setY(y);
+
                 double radius = parameters.getPointRadiusCoeff() * diameter;
                 RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
-                pointItemCopy->addRepulsiveCenter(repulsiveCenter);
-                setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
-                textDisplayer.addItem(pointItemCopy);*/
+                pointItem->addRepulsiveCenter(repulsiveCenter);
+                //setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
+                textDisplayer.addItem(pointItem);
             }
             else
             {

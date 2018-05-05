@@ -12,7 +12,7 @@ namespace map_server
         int i;
         for (i = 0; i < pointElementCount; ++i)
         {
-            int offset = 9 * i;
+            int offset = 11 * i;
             const char *id = strings + pointElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POINT, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -20,7 +20,7 @@ namespace map_server
 
         for (i = 0; i < lineElementCount; ++i)
         {
-            int offset = 6 * i;
+            int offset = 8 * i;
             const char *id = strings + lineElements[offset];
             ElementInfo *info = new ElementInfo(map_server::LINE, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -28,7 +28,7 @@ namespace map_server
 
         for (i = 0; i < polygonElementCount; ++i)
         {
-            int offset = 9 * i;
+            int offset = 11 * i;
             const char *id = strings + polygonElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POLYGON, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));

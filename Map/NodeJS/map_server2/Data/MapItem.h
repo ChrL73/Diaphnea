@@ -1,14 +1,18 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace map_server
 {
+    class RepulsiveCenter;
+
     class MapItem
     {
     private:
         const int _itemId;
         const std::string _elementId;
+        const double _importance;
 
         const double _xMin;
         const double _xMax;
@@ -24,10 +28,12 @@ namespace map_server
 
         const int _framingLevel;
 
+        std::vector<const RepulsiveCenter *> _repulsiveCenterVector;
+
     public:
-        MapItem(int itemId, const std::string& elementId, double xMin, double xMax, double yMin, double yMax,
+        MapItem(int itemId, const std::string& elementId, double importance, double xMin, double xMax, double yMin, double yMax,
                 int textLookId, int textAlpha, int textRed, int textGreen, int textBlue, double textSize, int framingLevel) :
-            _itemId(itemId), _elementId(elementId), _xMin(xMin), _xMax(xMax), _yMin(yMin), _yMax(yMax),
+            _itemId(itemId), _elementId(elementId), _importance(importance), _xMin(xMin), _xMax(xMax), _yMin(yMin), _yMax(yMax),
             _textLookId(textLookId), _textAlpha(textAlpha), _textRed(textRed), _textGreen(textGreen),
             _textBlue(textBlue), _textSize(textSize), _framingLevel(framingLevel) {}
 
@@ -35,6 +41,7 @@ namespace map_server
 
         int getItemId(void) const { return _itemId; }
         const std::string& getElementId(void) const { return _elementId; }
+        double getImportance(void) const { return _importance; }
 
         double getXMin(void) const { return _xMin; }
         double getXMax(void) const { return _xMax; }
@@ -52,5 +59,7 @@ namespace map_server
 
         virtual int getElementLookId(void) const = 0;
         virtual bool hasResolution(void) const = 0;
+
+        void addRepulsiveCenter(RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
     };
 }

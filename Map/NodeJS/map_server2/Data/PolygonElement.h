@@ -24,6 +24,9 @@ namespace map_server
         int _coveredElementCount;
         int _coveredElements;
 
+        // Double
+        double _importance;
+
         // Array of PolygonLooks
         int _lookCount;
         int _looks;
@@ -43,6 +46,8 @@ namespace map_server
 
         int getCoveredElementCount(void) const { return _coveredElementCount; }
         const char *getCoveredElement(int i) const { return strings + *(intArrays + _coveredElements + i); }
+
+        double getImportance(void) const { return _importance; }
 
         int getLookCount(void) const { return _lookCount; }
         const PolygonLook *getLook(int i) const;

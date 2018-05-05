@@ -6,7 +6,7 @@
 namespace map_server
 {
     FilledPolygonItem::FilledPolygonItem(const PolygonElement *polygonElement, const MultipointItem *multipointItem, const PolygonLook *polygonLook) :
-        MapItem(multipointItem->getItemId(), polygonElement->getElementId(), multipointItem->getXMin(), multipointItem->getXMax(),
+        MapItem(multipointItem->getItemId(), polygonElement->getElementId(), polygonElement->getImportance(), multipointItem->getXMin(), multipointItem->getXMax(),
         multipointItem->getYMin(), multipointItem->getYMax(), 3 * polygonLook->getLookId(),
         polygonLook->getTextAlpha(), polygonLook->getTextRed(), polygonLook->getTextGreen(),
         polygonLook->getTextBlue(), polygonLook->getTextSize(), polygonElement->getFramingLevel()),

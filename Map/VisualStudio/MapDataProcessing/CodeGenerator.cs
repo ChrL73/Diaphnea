@@ -173,6 +173,8 @@ namespace MapDataProcessing
             int[] xInt = doubleToIntArray(x);
             int[] yInt = doubleToIntArray(-y);
 
+            int[] importance = doubleToIntArray(element.Importance);
+
             List<int> lookOffsetList = new List<int>();
             foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
             int looksOffset = 0;
@@ -180,13 +182,13 @@ namespace MapDataProcessing
 
             int framingLevel = element.Category.XmlCategory.framingLevel;
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
                 _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
-                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], lookOffsetList.Count(), looksOffset,
+                idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], importance[0], importance[1], lookOffsetList.Count(), looksOffset,
                 framingLevel);
 
             append("PointElements.cpp", code);
-            _currentPointElementOffset += 9;
+            _currentPointElementOffset += 11;
             ++_pointElementCount;
         }
 
@@ -206,13 +208,15 @@ namespace MapDataProcessing
 
             int framingLevel = element.Category.XmlCategory.framingLevel;
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8}",
+            int[] importance = doubleToIntArray(element.Importance);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
                 _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
                 idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset,
-                framingLevel);
+                framingLevel, importance[0], importance[1]);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 6;
+            _currentLineElementOffset += 8;
             ++_lineElementCount;
         }
 
@@ -247,6 +251,8 @@ namespace MapDataProcessing
                 coveredElementsOffset = getIntArrayOffset(stringOffsets);
             }
 
+            int[] importance = doubleToIntArray(element.Importance);
+
             List<int> lookOffsetList = new List<int>();
             foreach (Look look in element.Looks) lookOffsetList.Add(look.CppOffset);
             int looksOffset = 0;
@@ -254,14 +260,14 @@ namespace MapDataProcessing
 
             int framingLevel = element.Category.XmlCategory.framingLevel;
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
                 _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
                 idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
-                element.CoveredElementList.Count(), coveredElementsOffset, lookOffsetList.Count(), looksOffset,
-                framingLevel);
+                element.CoveredElementList.Count(), coveredElementsOffset, importance[0], importance[1],
+                lookOffsetList.Count(), looksOffset, >framingLevel);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 9;
+            _currentPolygonElementOffset += 11;
             ++_polygonElementCount;
         }
 

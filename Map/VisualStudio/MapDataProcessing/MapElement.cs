@@ -24,6 +24,7 @@ namespace MapDataProcessing
         internal Dictionary<MapElement, int> LinkedElements1 { get { return _linkedElements1; } }
         internal Dictionary<MapElement, int> LinkedElements2 { get { return _linkedElements2; } }
 
+        internal double Importance { get { return _importance; } }
         internal List<Look> Looks { get { return _looks; } }
 
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)

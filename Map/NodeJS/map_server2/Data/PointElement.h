@@ -21,6 +21,9 @@ namespace map_server
         // Double
         double _y;
 
+        // Double
+        double _importance;
+
         // Array of PointLooks
         int _lookCount;
         int _looks;
@@ -35,6 +38,7 @@ namespace map_server
         int getItemId(void) const { return _itemId; }
         double getX(void) const { return _x; }
         double getY(void) const { return _y; }
+        double getImportance(void) const { return _importance; }
 
         int getLookCount(void) const { return _lookCount; }
         const PointLook *getLook(int i) const;

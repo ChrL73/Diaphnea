@@ -34,6 +34,10 @@ namespace map_server
         // Int
         int _framingLevel;
 
+        // Array NameTranslations
+        int _translationCounts;
+        int _translations;
+
     public:
         static const PolygonElement *get(int offset) { return reinterpret_cast<const PolygonElement *>(polygonElements + offset); }
 
@@ -53,5 +57,10 @@ namespace map_server
         const PolygonLook *getLook(int i) const;
 
         int getFramingLevel(void) const { return _framingLevel; }
+
+        int getTranslationCount(void) const { return _translationCounts; }
+        int getNameCount(int languageIndex) const;
+        int getLineCount(int languageIndex, int nameIndex) const;
+        const char *getNameLine(int languageIndex, int nameIndex, int lineIndex) const;
     };
 }

@@ -23,4 +23,6 @@ namespace map_server
     extern double sampleLengths[];
     extern int languageCount;
     extern int languageIds[];
+    extern int nameTranslations[];
+    extern int elementNames[];
 }

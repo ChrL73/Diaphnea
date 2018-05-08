@@ -151,6 +151,12 @@
     <None Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.h">
       <Link>TextDisplayer\RepulsiveCenter.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\ElementName.h">
+      <Link>Data\ElementName.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\NameTranslation.h">
+      <Link>Data\NameTranslation.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -254,6 +260,18 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.cpp">
       <Link>TextDisplayer\RepulsiveCenter.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ElementNames.cpp">
+      <Link>Data\generated_code\_France\ElementNames.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\NameTranslations.cpp">
+      <Link>Data\generated_code\_France\NameTranslations.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\ElementName.cpp">
+      <Link>Data\ElementName.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\NameTranslation.cpp">
+      <Link>Data\NameTranslation.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

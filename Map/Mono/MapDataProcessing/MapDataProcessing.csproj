@@ -144,6 +144,9 @@
     <Compile Include="..\..\VisualStudio\MapDataProcessing\CodeGenerator.cs">
       <Link>CodeGenerator.cs</Link>
     </Compile>
+    <Compile Include="..\..\VisualStudio\MapDataProcessing\Combinations.cs">
+      <Link>Combinations.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

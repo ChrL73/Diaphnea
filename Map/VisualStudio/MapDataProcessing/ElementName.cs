@@ -54,6 +54,8 @@ namespace MapDataProcessing
             }
         }
 
+        internal SortedDictionary<string, string> Dictionary { get { return _dictionary;} }
+
         internal BsonDocument getBsonDocument()
         {
             BsonDocument textDocument = new BsonDocument();

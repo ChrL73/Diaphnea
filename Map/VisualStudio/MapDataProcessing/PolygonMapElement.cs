@@ -29,6 +29,8 @@ namespace MapDataProcessing
             _contourMapItem = new DatabaseMapItem(true, Id);
         }
 
+        protected override bool allowMultiline() { return true; }
+
         internal List<GeoPoint> getContourLine(XmlResolution resolution)
         {
             return _contourMapItem.getLine(resolution);

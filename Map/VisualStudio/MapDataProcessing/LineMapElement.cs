@@ -23,6 +23,8 @@ namespace MapDataProcessing
         internal LineMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId) :
             base(id, mapData, name, shortName, importance, lookIds, categoryId) { }
 
+        protected override bool allowMultiline() { return false; }
+
         internal List<GeoPoint> getPoints(XmlResolution resolution)
         {
             List<GeoPoint> points = new List<GeoPoint>();

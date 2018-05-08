@@ -264,7 +264,7 @@ namespace MapDataProcessing
                 _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
                 idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
                 element.CoveredElementList.Count(), coveredElementsOffset, importance[0], importance[1],
-                lookOffsetList.Count(), looksOffset, >framingLevel);
+                lookOffsetList.Count(), looksOffset, framingLevel);
 
             append("PolygonElements.cpp", code);
             _currentPolygonElementOffset += 11;

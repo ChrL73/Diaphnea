@@ -17,6 +17,7 @@ namespace MapDataProcessing
         internal PointMapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId) :
             base(id, mapData, name, shortName, importance, lookIds, categoryId) { }
 
+        protected override bool allowMultiline() { return false; }
         internal ItemId ItemId { get { return _itemId; } }
 
         internal override int addKmlFile(String path)

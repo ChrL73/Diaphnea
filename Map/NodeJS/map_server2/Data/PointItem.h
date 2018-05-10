@@ -26,7 +26,7 @@ namespace map_server
         bool hasResolution(void) const { return false; }
 
     public:
-        PointItem(const PointElement *pointElement, const PointLook *pointLook);
+        PointItem(const PointElement *pointElement, const NameTranslation *name, const PointLook *pointLook);
 
         int getPointLookId(void) const { return _pointLookId; }
         int getPointZIndex(void) const { return _pointZIndex; }

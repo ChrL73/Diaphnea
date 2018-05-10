@@ -28,7 +28,7 @@ namespace map_server
         std::vector<LineItem *> _associatedLineVector;
 
     public:
-        LineItem(const LineElement *lineElement, const MultipointItem *multipointItem, const LineLook *lineLook);
+        LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 
         void updateLook(const PolygonLook *polygonLook);

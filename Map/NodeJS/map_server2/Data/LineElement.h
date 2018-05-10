@@ -6,6 +6,7 @@ namespace map_server
 {
     class MultipointItem;
     class LineLook;
+    class NameTranslation;
 
     class LineElement
     {
@@ -27,6 +28,9 @@ namespace map_server
         // Double
         double _importance;
 
+        // Array of NameTranslations (array size is 'languageCount' defined in 'MapData.cpp')
+        int _translations;
+
     public:
         static const LineElement *get(int offset) { return reinterpret_cast<const LineElement *>(lineElements + offset); }
 
@@ -41,5 +45,7 @@ namespace map_server
         int getFramingLevel(void) const { return _framingLevel; }
 
         double getImportance(void) const { return _importance; }
+
+        const NameTranslation *getTranslation(int languageIndex) const { return reinterpret_cast<const NameTranslation *>(nameTranslations + *(intArrays + _translations + languageIndex)); }
     };
 }

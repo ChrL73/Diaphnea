@@ -28,6 +28,8 @@ namespace MapDataProcessing
         internal double Importance { get { return _importance; } }
         internal List<Look> Looks { get { return _looks; } }
 
+        internal Dictionary<string, List<List<string>>> NameDictionary { get { return _nameDictionary; } }
+
         internal MapElement(String id, MapData mapData, XmlName[] name, XmlName[] shortName, double importance, List<string> lookIds, string categoryId)
         {
             _id = id;

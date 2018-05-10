@@ -40,7 +40,7 @@ namespace map_server
 
         void execute(void);
         void displayText(int resolutionIndex);
-        //void setTextInfo(ItemCopy *itemCopy, ItemCopyBuilder *itemCopyBuilder, double sizeFactor, FT_Face face);
+        void setTextInfo(MapItem *item, FT_Face face);
 
     public:
         RenderRequest(CommonData *commonData, const char *socketId, const char *requestId, const char *mapId, const char *languageId, double widthInPixels,

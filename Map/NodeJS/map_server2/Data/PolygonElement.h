@@ -6,6 +6,7 @@ namespace map_server
 {
     class MultipointItem;
     class PolygonLook;
+    class NameTranslation;
 
     class PolygonElement
     {
@@ -34,8 +35,7 @@ namespace map_server
         // Int
         int _framingLevel;
 
-        // Array NameTranslations
-        int _translationCounts;
+        // Array of NameTranslations (array size is 'languageCount' defined in 'MapData.cpp')
         int _translations;
 
     public:
@@ -58,9 +58,6 @@ namespace map_server
 
         int getFramingLevel(void) const { return _framingLevel; }
 
-        int getTranslationCount(void) const { return _translationCounts; }
-        int getNameCount(int languageIndex) const;
-        int getLineCount(int languageIndex, int nameIndex) const;
-        const char *getNameLine(int languageIndex, int nameIndex, int lineIndex) const;
+        const NameTranslation *getTranslation(int languageIndex) const { return reinterpret_cast<const NameTranslation *>(nameTranslations + *(intArrays + _translations + languageIndex)); }
     };
 }

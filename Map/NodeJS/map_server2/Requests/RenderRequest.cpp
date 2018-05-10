@@ -17,10 +17,11 @@
 //#include "FilledPolygonItemCopy.h"
 #include "RepulsiveCenter.h"
 //#include "Point.h"
-//#include "TextInfo.h"
-//#include "TextInfoLine.h"
+#include "NameTranslation.h"
+#include "TextInfo.h"
+#include "TextInfoLine.h"
 #include "TextDisplayerParameters.h"
-//#include "ElementName.h"
+#include "ElementName.h"
 //#include "SvgCreator.h"
 //#include "SvgItemInfo.h"
 #include "ErrorEnum.h"
@@ -59,6 +60,8 @@ namespace map_server
         std::vector<MapItem *> itemVector;
         std::set<std::string> coveredElementSet;
 
+        int languageIndex = _commonData->getLanguageIndex(_languageId);
+
         //_commonData->lock();
 
         unsigned int i, n = _elementIds.size();
@@ -74,7 +77,10 @@ namespace map_server
                 std::map<int, PointItem *>::iterator pointItemIt = pointItems.find(pointElement->getItemId());
                 if (pointItemIt == pointItems.end())
                 {
-                    PointItem *item = new PointItem(pointElement, pointElement->getLook(_lookIndex));
+                    const NameTranslation *name = 0;
+                    if (languageIndex != -1) name = pointElement->getTranslation(languageIndex);
+
+                    PointItem *item = new PointItem(pointElement, name, pointElement->getLook(_lookIndex));
                     pointItems.insert(std::pair<int, PointItem *>(pointElement->getItemId(), item));
                     itemVector.push_back(item);
                 }
@@ -91,7 +97,10 @@ namespace map_server
                     std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(multipointItem->getItemId());
                     if (lineItemIt == lineItems.end())
                     {
-                        LineItem *lineItem = new LineItem(lineElement, multipointItem, lineElement->getLook(_lookIndex));
+                        const NameTranslation *name = 0;
+                        if (languageIndex != -1) name = lineElement->getTranslation(languageIndex);
+
+                        LineItem *lineItem = new LineItem(lineElement, name, multipointItem, lineElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
                         itemVector.push_back(lineItem);
                     }
@@ -106,7 +115,10 @@ namespace map_server
                 std::map<int, FilledPolygonItem *>::iterator filledPolygonItemIt = filledPolygonItems.find(contourItem->getItemId());
                 if (filledPolygonItemIt == filledPolygonItems.end())
                 {
-                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, contourItem, polygonElement->getLook(_lookIndex));
+                    const NameTranslation *name = 0;
+                    if (languageIndex != -1) name = polygonElement->getTranslation(languageIndex);
+
+                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, name, contourItem, polygonElement->getLook(_lookIndex));
                     filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
                     itemVector.push_back(filledPolygonItem);
                 }
@@ -145,8 +157,6 @@ namespace map_server
         }
 
         //_commonData->unlock();
-
-        int languageIndex = _commonData->getLanguageIndex(_languageId);
 
         n = itemVector.size();
 
@@ -425,7 +435,10 @@ namespace map_server
                 double radius = parameters.getPointRadiusCoeff() * diameter;
                 RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, 1.0, 0.0, radius, radius, parameters.getPointRefPotential(), true, false);
                 pointItem->addRepulsiveCenter(repulsiveCenter);
-                //setTextInfo(pointItemCopy, itemCopyBuilder, sizeFactor, face);
+
+                pointItem->setFontSize(floor(pointItem->getTextSize() * sizeFactor * _scale));
+                setTextInfo(pointItem, face);
+
                 textDisplayer.addItem(pointItem);
             }
             else
@@ -509,5 +522,35 @@ namespace map_server
 
         textDisplayer.start();
         //if (_svgCreator != 0) _svgCreator->execute();
+    }
+
+    void RenderRequest::setTextInfo(MapItem *item, FT_Face face)
+    {
+        const NameTranslation *name = item->getName();
+        if (name == 0) return;
+
+        int i, n = name->getNameCount();
+        for (i = 0; i < n; ++i)
+        {
+            const ElementName *text = name->getElementName(i);
+
+            if (text != 0)
+            {
+                std::vector<TextInfoLine *> lineVector;
+                int j, m = text->getLineCount();
+                for (j = 0; j < m; ++j)
+                {
+                    std::string line = text->getLine(j);
+                    if (!line.empty()) lineVector.push_back(new TextInfoLine(line));
+                }
+
+                if (!lineVector.empty())
+                {
+                    TextInfo *textInfo = new TextInfo(lineVector, face, item->getFontSize());
+                    if (textInfo->ok()) item->addTextInfo(textInfo);
+                    else delete textInfo;
+                }
+            }
+        }
     }
 }

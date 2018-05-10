@@ -22,7 +22,7 @@ namespace map_server
         bool hasResolution(void) const { return true; }
 
     public:
-        FilledPolygonItem(const PolygonElement *polygonElement, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
+        FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 
         int getFillLookId(void) const { return _fillLookId; }
         int getFillZIndex(void) const { return _fillZIndex; }

@@ -1,7 +1,11 @@
 #pragma once
 
+#include "MapData.h"
+
 namespace map_server
 {
+    class ElementName;
+
     class NameTranslation
     {
     private:
@@ -11,7 +15,6 @@ namespace map_server
 
     public:
         int getNameCount(void) const { return _nameCount; }
-        int getLineCount(int nameIndex) const;
-        const char *getLine(int nameIndex, int lineIndex) const;
+        const ElementName *getElementName(int i) const { return reinterpret_cast<const ElementName *>(elementNames + *(intArrays + _names + i)); }
     };
 }

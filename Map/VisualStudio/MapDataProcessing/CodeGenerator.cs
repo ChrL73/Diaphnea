@@ -24,6 +24,8 @@ namespace MapDataProcessing
         private int _currentPointLookOffset;
         private int _currentLineLookOffset;
         private int _currentPolygonLookOffset;
+        private int _currentNameTranslationOffset;
+        private int _currentElementNameOffset;
 
         private int _pointElementCount;
         private int _lineElementCount;
@@ -44,6 +46,8 @@ namespace MapDataProcessing
             _currentPointLookOffset = 0;
             _currentLineLookOffset = 0;
             _currentPolygonLookOffset = 0;
+            _currentNameTranslationOffset = 0;
+            _currentElementNameOffset = 0;
 
             _pointElementCount = 0;
             _lineElementCount = 0;
@@ -88,6 +92,14 @@ namespace MapDataProcessing
             path = String.Format("{0}/PolygonLooks.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("PolygonLooks.cpp", "namespace map_server\n{\nint polygonLooks[] =\n{");
+
+            path = String.Format("{0}/NameTranslations.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("NameTranslations.cpp", "namespace map_server\n{\nint nameTranslations[] =\n{");
+
+            path = String.Format("{0}/ElementNames.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("ElementNames.cpp", "namespace map_server\n{\nint elementNames[] =\n{");
         }
 
         internal void close(MapData mapData)
@@ -137,6 +149,8 @@ namespace MapDataProcessing
             append("PointLooks.cpp", "\n};\n}\n");
             append("LineLooks.cpp", "\n};\n}\n");
             append("PolygonLooks.cpp", "\n};\n}\n");
+            append("NameTranslations.cpp", "\n};\n}\n");
+            append("ElementNames.cpp", "\n};\n}\n");
 
             foreach (StreamWriter file in _streamWriterDictionary.Values) file.Close();
         }
@@ -163,7 +177,7 @@ namespace MapDataProcessing
             return offset;
         } 
 
-        internal void addPointElement(PointMapElement element, XmlProjectionEnum projection)
+        internal void addPointElement(PointMapElement element, XmlProjectionEnum projection, MapData mapData)
         {
             int idOffset = getStringOffset(element.Id);
             int itemId = element.ItemId.Value;
@@ -181,18 +195,20 @@ namespace MapDataProcessing
             if (lookOffsetList.Count() != 0) looksOffset = getIntArrayOffset(lookOffsetList);
 
             int framingLevel = element.Category.XmlCategory.framingLevel;
+                
+            int translationsOffset = addElementName(element.NameDictionary, mapData);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
                 _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
                 idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], importance[0], importance[1], lookOffsetList.Count(), looksOffset,
-                framingLevel);
+                framingLevel, translationsOffset);
 
             append("PointElements.cpp", code);
-            _currentPointElementOffset += 11;
+            _currentPointElementOffset += 12;
             ++_pointElementCount;
         }
 
-        internal void addLineElement(LineMapElement element)
+        internal void addLineElement(LineMapElement element, MapData mapData)
         {
             int idOffset = getStringOffset(element.Id);
 
@@ -210,17 +226,19 @@ namespace MapDataProcessing
 
             int[] importance = doubleToIntArray(element.Importance);
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10}",
+            int translationsOffset = addElementName(element.NameDictionary, mapData);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
                 _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
                 idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset,
-                framingLevel, importance[0], importance[1]);
+                framingLevel, importance[0], importance[1], translationsOffset);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 8;
+            _currentLineElementOffset += 9;
             ++_lineElementCount;
         }
 
-        internal void addPolygonElement(PolygonMapElement element)
+        internal void addPolygonElement(PolygonMapElement element, MapData mapData)
         {
             List<int> itemOffsetList = new List<int>();
             foreach (OrientedLineList list in element.CompoundPolygonList)
@@ -260,15 +278,66 @@ namespace MapDataProcessing
 
             int framingLevel = element.Category.XmlCategory.framingLevel;
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
+            int translationsOffset = addElementName(element.NameDictionary, mapData);
+
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
                 _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
                 idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
                 element.CoveredElementList.Count(), coveredElementsOffset, importance[0], importance[1],
-                lookOffsetList.Count(), looksOffset, framingLevel);
+                lookOffsetList.Count(), looksOffset, framingLevel, translationsOffset);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 11;
+            _currentPolygonElementOffset += 12;
             ++_polygonElementCount;
+        }
+
+        private int addElementName(Dictionary<string, List<List<string>>> nameDictionary, MapData mapData)
+        {
+            List<int> translationOffset = new List<int>();
+
+            int i, n = mapData.XmlMapData.parameters.languageList.Count();
+            for (i = 0; i < n; ++i)
+            {
+                string languageId = mapData.XmlMapData.parameters.languageList[i].id.ToString();
+
+                if (nameDictionary.ContainsKey(languageId))
+                {
+                    List<List<string>> translation = nameDictionary[languageId];
+                    List<int> nameOffset = new List<int>();
+
+                    foreach (List<string> name in translation)
+                    {
+                        List<int> lineOffset = new List<int>();
+                        foreach (string line in name)
+                        {
+                            lineOffset.Add(getStringOffset(line));
+                        }
+
+                        int linesOffset = 0;
+                        if (lineOffset.Count() != 0) linesOffset = getIntArrayOffset(lineOffset);
+
+                        string code1 = String.Format("{0}\n// {1}\n{2},{3}", _currentElementNameOffset == 0 ? "" : ",", _currentElementNameOffset, lineOffset.Count(), linesOffset);
+                        append("ElementNames.cpp", code1);
+                        nameOffset.Add(_currentElementNameOffset);
+                        _currentElementNameOffset += 2;
+                    }
+
+                    int namesOffset = 0;
+                    if (nameOffset.Count() != 0) namesOffset = getIntArrayOffset(nameOffset);
+
+                    string code2 = String.Format("{0}\n// {1}\n{2},{3}", _currentNameTranslationOffset == 0 ? "" : ",", _currentNameTranslationOffset, nameOffset.Count(), namesOffset);
+                    append("NameTranslations.cpp", code2);
+                    translationOffset.Add(_currentNameTranslationOffset);
+                    _currentNameTranslationOffset += 2;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            if (translationOffset.Count() != 0) return getIntArrayOffset(translationOffset);
+            return 0;
         }
 
         internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment)

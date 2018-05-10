@@ -112,6 +112,9 @@
 		<Unit filename="TextDisplayer/TextDisplayer.h" />
 		<Unit filename="TextDisplayer/TextDisplayerParameters.cpp" />
 		<Unit filename="TextDisplayer/TextDisplayerParameters.h" />
+		<Unit filename="TextDisplayer/TextInfo.cpp" />
+		<Unit filename="TextDisplayer/TextInfo.h" />
+		<Unit filename="TextDisplayer/TextInfoLine.cpp" />
 		<Unit filename="TextDisplayer/TextPotential.cpp" />
 		<Unit filename="TextDisplayer/TextPotential.h" />
 		<Unit filename="ThreadInfo.cpp" />

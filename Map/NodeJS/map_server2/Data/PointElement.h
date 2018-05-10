@@ -5,6 +5,7 @@
 namespace map_server
 {
     class PointLook;
+    class NameTranslation;
 
     class PointElement
     {
@@ -31,6 +32,9 @@ namespace map_server
         // Int
         int _framingLevel;
 
+        // Array of NameTranslations (array size is 'languageCount' defined in 'MapData.cpp')
+        int _translations;
+
     public:
         static const PointElement *get(int offset) { return reinterpret_cast<const PointElement *>(pointElements + offset); }
 
@@ -44,6 +48,8 @@ namespace map_server
         const PointLook *getLook(int i) const;
 
         int getFramingLevel(void) const { return _framingLevel; }
+
+        const NameTranslation *getTranslation(int languageIndex) const { return reinterpret_cast<const NameTranslation *>(nameTranslations + *(intArrays + _translations + languageIndex)); }
     };
 }
 

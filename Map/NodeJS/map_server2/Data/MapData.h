@@ -4,6 +4,7 @@ namespace map_server
 {
     extern char strings[];
     extern int intArrays[];
+    extern double doubleArrays[];
     extern int pointElements[];
     extern int lineElements[];
     extern int polygonElements[];
@@ -25,4 +26,5 @@ namespace map_server
     extern int languageIds[];
     extern int nameTranslations[];
     extern int elementNames[];
+    extern int pointLists[];
 }

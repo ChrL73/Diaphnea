@@ -17,7 +17,7 @@ namespace map_server
         // MultipointItem
         int _contour;
 
-        // Array of MultipointItems
+        // Array of MultipointItem
         int _itemCount;
         int _items;
 
@@ -28,14 +28,14 @@ namespace map_server
         // Double
         double _importance;
 
-        // Array of PolygonLooks
+        // Array of PolygonLook
         int _lookCount;
         int _looks;
 
         // Int
         int _framingLevel;
 
-        // Array of NameTranslations (array size is 'languageCount' defined in 'MapData.cpp')
+        // Array of NameTranslation (array size is 'languageCount' defined in 'MapData.cpp')
         int _translations;
 
     public:

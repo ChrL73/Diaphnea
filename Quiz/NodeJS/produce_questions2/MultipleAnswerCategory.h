@@ -23,7 +23,7 @@ namespace produce_questions
         int _questionCount;
         int _questions;
 
-        // Array of Chocie
+        // Array of Choice
         int _choiceCount;
         int _choices;
 

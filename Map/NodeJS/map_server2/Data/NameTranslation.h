@@ -9,7 +9,7 @@ namespace map_server
     class NameTranslation
     {
     private:
-        // Array of ElementNames
+        // Array of ElementName
         int _nameCount;
         int _names;
 

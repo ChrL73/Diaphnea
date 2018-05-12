@@ -158,9 +158,7 @@ namespace MapDataProcessing
 
         internal int generateCode(CodeGenerator codeGenerator, MapData mapData, string itemName)
         {
-            //IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
-
-            //BsonArray lineArray = new BsonArray();
+            List<List<double>> lineList = new List<List<double>>();
 
             double xMin = Double.MaxValue;
             double xMax = Double.MinValue;
@@ -170,14 +168,13 @@ namespace MapDataProcessing
             foreach (KeyValuePair<XmlResolution, List<GeoPoint>> pair in _lineDictionary)
             {
                 List<GeoPoint> list = pair.Value;
-                //double resolution = pair.Key.sampleLength1 * Double.Parse(pair.Key.sampleRatio);
 
                 int i, n = list.Count;
-                //bool closedLine = (DistanceCalculator.getDistance(list[0], list[n - 1]) < 0.0001);
-                //BsonArray pointArray = new BsonArray();
+                bool closedLine = (DistanceCalculator.getDistance(list[0], list[n - 1]) < 0.0001);
+                List<double> pointList = new List<double>();
                 for (i = 0; i < n; ++i)
                 {
-                    /*GeoPoint previous2Point = null;
+                    GeoPoint previous2Point = null;
                     GeoPoint previous1Point = null;
                     GeoPoint nextPoint = null;
 
@@ -214,14 +211,11 @@ namespace MapDataProcessing
                         }
                     }
 
-                    BsonDocument bsonPoint = list[i].getBsonDocument(previous2Point, previous1Point, nextPoint, mapData.XmlMapData.parameters.projection);
-                    pointArray.Add(bsonPoint);
+                    List<double> info = list[i].getInfo(previous2Point, previous1Point, nextPoint, mapData.XmlMapData.parameters.projection);
+                    pointList.AddRange(info);
 
-                    double x = bsonPoint.AsBsonDocument.GetElement("x").Value.AsDouble;
-                    double y = bsonPoint.AsBsonDocument.GetElement("y").Value.AsDouble;*/
-
-                    double x = 0.0, y = 0.0;
-                    list[i].getProjection(mapData.XmlMapData.parameters.projection, out x, out y);
+                    double x = info[4];
+                    double y = info[5];
 
                     if (x < xMin) xMin = x;
                     if (x > xMax) xMax = x;
@@ -241,6 +235,7 @@ namespace MapDataProcessing
                 //pointListCollection.InsertOne(pointListDocument);
 
                 //lineArray.Add(pointListDocument.GetValue("_id"));
+                lineList.Add(pointList);
             }
 
             /*IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
@@ -264,7 +259,7 @@ namespace MapDataProcessing
 
             Id = itemDocument.GetValue("_id");*/
 
-            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName);
+            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName, lineList);
 
             return 0;
         }

@@ -17,6 +17,7 @@ namespace MapDataProcessing
 
         private int _currentStringOffset;
         private int _currentIntArrayOffset;
+        private int _currentDoubleArrayOffset;
         private int _currentPointElementOffset;
         private int _currentLineElementOffset;
         private int _currentPolygonElementOffset;
@@ -26,6 +27,7 @@ namespace MapDataProcessing
         private int _currentPolygonLookOffset;
         private int _currentNameTranslationOffset;
         private int _currentElementNameOffset;
+        private int _currentPointListOffset;
 
         private int _pointElementCount;
         private int _lineElementCount;
@@ -39,6 +41,7 @@ namespace MapDataProcessing
 
             _currentStringOffset = 1;
             _currentIntArrayOffset = 1;
+            _currentDoubleArrayOffset = 0;
             _currentPointElementOffset = 0;
             _currentLineElementOffset = 0;
             _currentPolygonElementOffset = 0;
@@ -48,6 +51,7 @@ namespace MapDataProcessing
             _currentPolygonLookOffset = 0;
             _currentNameTranslationOffset = 0;
             _currentElementNameOffset = 0;
+            _currentPointListOffset = 0;
 
             _pointElementCount = 0;
             _lineElementCount = 0;
@@ -64,6 +68,10 @@ namespace MapDataProcessing
             path = String.Format("{0}/IntArrays.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("IntArrays.cpp", "namespace map_server\n{\nint intArrays[] =\n{\n0");
+
+            path = String.Format("{0}/DoubleArrays.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("DoubleArrays.cpp", "namespace produce_questions\n{\ndouble doubleArrays[] =\n{\n");
 
             path = String.Format("{0}/PointElements.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
@@ -100,6 +108,10 @@ namespace MapDataProcessing
             path = String.Format("{0}/ElementNames.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
             append("ElementNames.cpp", "namespace map_server\n{\nint elementNames[] =\n{");
+
+            path = String.Format("{0}/PointLists.cpp", dirName);
+            if (File.Exists(path)) File.Delete(path);
+            append("PointLists.cpp", "namespace map_server\n{\nint pointLists[] =\n{");
         }
 
         internal void close(MapData mapData)
@@ -142,6 +154,7 @@ namespace MapDataProcessing
 
             append("Strings.cpp", "\n};\n}\n");
             append("IntArrays.cpp", "\n};\n}\n");
+            append("DoubleArrays.cpp", "\n};\n}\n");
             append("PointElements.cpp", "\n};\n}\n");
             append("LineElements.cpp", "\n};\n}\n");
             append("PolygonElements.cpp", "\n};\n}\n");
@@ -151,6 +164,7 @@ namespace MapDataProcessing
             append("PolygonLooks.cpp", "\n};\n}\n");
             append("NameTranslations.cpp", "\n};\n}\n");
             append("ElementNames.cpp", "\n};\n}\n");
+            append("PointLists.cpp", "\n};\n}\n");
 
             foreach (StreamWriter file in _streamWriterDictionary.Values) file.Close();
         }
@@ -340,7 +354,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment)
+        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment, List<List<double>> lineList)
         {
             int offset = _currentMultipointItemOffset;
 
@@ -349,12 +363,34 @@ namespace MapDataProcessing
             int[] yMinInt = doubleToIntArray(-yMax);
             int[] yMaxInt = doubleToIntArray(-yMin);
 
-            string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+            List<int> pointListOffsets = new List<int>();
+            foreach (List<double> pointList in lineList)
+            {
+                pointListOffsets.Add(addPointList(pointList));
+            }
+            int pointArrayOffset = getIntArrayOffset(pointListOffsets);
+
+            string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
                 offset == 0 ? "" : ",", offset, comment,
-                xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId);
+                xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId, pointArrayOffset);
 
             append("MultipointItems.cpp", code);
-            _currentMultipointItemOffset += 9;
+            _currentMultipointItemOffset += 10;
+
+            return offset;
+        }
+
+        private int addPointList(List<double> pointList)
+        {
+            int offset = _currentPointListOffset;
+
+            int arrayOffset = getDoubleArrayOffset(pointList);
+
+            string code = String.Format("{0}\n// {1}\n{2},{3}",
+                offset == 0 ? "" : ",", offset, pointList.Count(), arrayOffset);
+
+            append("PointLists.cpp", code);
+            _currentPointListOffset += 2;
 
             return offset;
         }
@@ -465,6 +501,18 @@ namespace MapDataProcessing
             string code = String.Format(",\n// {0}\n{1}", offset, String.Join(",", values));
             append("IntArrays.cpp", code);
             _currentIntArrayOffset += values.Count();
+
+            return offset;
+        }
+
+        private int getDoubleArrayOffset(IEnumerable<double> values)
+        {
+            int offset = _currentDoubleArrayOffset;
+
+            string code = String.Format("{0}\n// {1}\n{2}",
+                offset == 0 ? "" : ",", offset, String.Join(",", values.Select(v => v.ToString("F5", CultureInfo.CreateSpecificCulture("en-US")))));
+            append("DoubleArrays.cpp", code);
+            _currentDoubleArrayOffset += values.Count();
 
             return offset;
         }

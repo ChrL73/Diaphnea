@@ -14,11 +14,11 @@ namespace map_server
         // String
         int _elementId;
 
-        // Array of MultipointItems
+        // Array of MultipointItem
         int _itemCount;
         int _items;
 
-        // Array of LineLooks
+        // Array of LineLook
         int _lookCount;
         int _looks;
 
@@ -28,7 +28,7 @@ namespace map_server
         // Double
         double _importance;
 
-        // Array of NameTranslations (array size is 'languageCount' defined in 'MapData.cpp')
+        // Array of NameTranslation (array size is 'languageCount' defined in 'MapData.cpp')
         int _translations;
 
     public:

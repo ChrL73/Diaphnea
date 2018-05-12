@@ -76,12 +76,15 @@
 		<Unit filename="Data/PointElement.h" />
 		<Unit filename="Data/PointItem.cpp" />
 		<Unit filename="Data/PointItem.h" />
+		<Unit filename="Data/PointList.cpp" />
+		<Unit filename="Data/PointList.h" />
 		<Unit filename="Data/PointLook.cpp" />
 		<Unit filename="Data/PointLook.h" />
 		<Unit filename="Data/PolygonElement.cpp" />
 		<Unit filename="Data/PolygonElement.h" />
 		<Unit filename="Data/PolygonLook.cpp" />
 		<Unit filename="Data/PolygonLook.h" />
+		<Unit filename="Data/generated_code/_France/DoubleArrays.cpp" />
 		<Unit filename="Data/generated_code/_France/ElementNames.cpp" />
 		<Unit filename="Data/generated_code/_France/IntArrays.cpp" />
 		<Unit filename="Data/generated_code/_France/LineElements.cpp" />
@@ -90,6 +93,7 @@
 		<Unit filename="Data/generated_code/_France/MultipointItems.cpp" />
 		<Unit filename="Data/generated_code/_France/NameTranslations.cpp" />
 		<Unit filename="Data/generated_code/_France/PointElements.cpp" />
+		<Unit filename="Data/generated_code/_France/PointLists.cpp" />
 		<Unit filename="Data/generated_code/_France/PointLooks.cpp" />
 		<Unit filename="Data/generated_code/_France/PolygonElements.cpp" />
 		<Unit filename="Data/generated_code/_France/PolygonLooks.cpp" />

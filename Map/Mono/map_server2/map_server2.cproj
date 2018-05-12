@@ -163,6 +163,9 @@
     <None Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.h">
       <Link>TextDisplayer\TextInfoLine.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\PointList.h">
+      <Link>Data\PointList.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -284,6 +287,15 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.cpp">
       <Link>TextDisplayer\TextInfoLine.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\PointList.cpp">
+      <Link>Data\PointList.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\DoubleArrays.cpp">
+      <Link>Data\generated_code\_France\DoubleArrays.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLists.cpp">
+      <Link>Data\generated_code\_France\PointLists.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

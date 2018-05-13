@@ -71,7 +71,7 @@ namespace MapDataProcessing
 
             path = String.Format("{0}/DoubleArrays.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
-            append("DoubleArrays.cpp", "namespace produce_questions\n{\ndouble doubleArrays[] =\n{\n");
+            append("DoubleArrays.cpp", "namespace map_server\n{\ndouble doubleArrays[] =\n{");
 
             path = String.Format("{0}/PointElements.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);
@@ -387,7 +387,7 @@ namespace MapDataProcessing
             int arrayOffset = getDoubleArrayOffset(pointList);
 
             string code = String.Format("{0}\n// {1}\n{2},{3}",
-                offset == 0 ? "" : ",", offset, pointList.Count(), arrayOffset);
+                offset == 0 ? "" : ",", offset, pointList.Count() / 6, arrayOffset);
 
             append("PointLists.cpp", code);
             _currentPointListOffset += 2;

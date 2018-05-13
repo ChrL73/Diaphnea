@@ -166,6 +166,12 @@
     <None Include="..\..\NodeJS\map_server2\Data\PointList.h">
       <Link>Data\PointList.h</Link>
     </None>
+    <None Include="..\..\NodeJS\map_server2\Data\BezierInfo.h">
+      <Link>Data\BezierInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Data\Point.h">
+      <Link>Data\Point.h</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
@@ -296,6 +302,12 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLists.cpp">
       <Link>Data\generated_code\_France\PointLists.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\BezierInfo.cpp">
+      <Link>Data\BezierInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Data\Point.cpp">
+      <Link>Data\Point.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

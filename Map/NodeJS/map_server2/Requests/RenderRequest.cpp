@@ -17,6 +17,7 @@
 //#include "FilledPolygonItemCopy.h"
 #include "RepulsiveCenter.h"
 //#include "Point.h"
+#include "PointList.h"
 #include "NameTranslation.h"
 #include "TextInfo.h"
 #include "TextInfoLine.h"
@@ -62,6 +63,13 @@ namespace map_server
 
         int languageIndex = _commonData->getLanguageIndex(_languageId);
 
+        double wantedLength = resolutionThreshold / _scale;
+        int resolutionIndex;
+        for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
+        {
+            if (wantedLength > sampleLengths[resolutionIndex]) break;
+        }
+
         //_commonData->lock();
 
         unsigned int i, n = _elementIds.size();
@@ -100,7 +108,7 @@ namespace map_server
                         const NameTranslation *name = 0;
                         if (languageIndex != -1) name = lineElement->getTranslation(languageIndex);
 
-                        LineItem *lineItem = new LineItem(lineElement, name, multipointItem, lineElement->getLook(_lookIndex));
+                        LineItem *lineItem = new LineItem(lineElement, name, multipointItem, lineElement->getLook(_lookIndex), resolutionIndex);
                         lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
                         itemVector.push_back(lineItem);
                     }
@@ -118,7 +126,7 @@ namespace map_server
                     const NameTranslation *name = 0;
                     if (languageIndex != -1) name = polygonElement->getTranslation(languageIndex);
 
-                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, name, contourItem, polygonElement->getLook(_lookIndex));
+                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, name, contourItem, polygonElement->getLook(_lookIndex), resolutionIndex);
                     filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
                     itemVector.push_back(filledPolygonItem);
                 }
@@ -254,13 +262,6 @@ namespace map_server
                 {
                     itemVector2.push_back(item);
                 }
-            }
-
-            double wantedLength = resolutionThreshold / _scale;
-            int resolutionIndex;
-            for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
-            {
-                if (wantedLength > sampleLengths[resolutionIndex]) break;
             }
 
             dx = 0.5 * _widthInPixels / _scale;
@@ -446,73 +447,71 @@ namespace map_server
                 LineItem *lineItem = dynamic_cast<LineItem *>(item);
                 if (lineItem != 0)
                 {
-                    /*LineItemCopy *lineItemCopy = new LineItemCopy(lineItem->getElementIdForText(), lineItem->getImportance());
-
-                    int j, m = lineItem->getPointVector(resolutionIndex)->getPointCount();
+                    const PointList *pointList = lineItem->getPointList();
+                    int j, m = pointList->getPointCount();
                     for (j = 0; j < m - 1; ++j)
                     {
-                        const Point *point1 = lineItem->getPointVector(resolutionIndex)->getPoint(j);
-                        const Point *point2 = lineItem->getPointVector(resolutionIndex)->getPoint(j + 1);
-                        double x1 = (point1->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                        double y1 = (point1->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                        double x2 = (point2->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                        double y2 = (point2->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
+                        const double *point1 = pointList->getPoint(j);
+                        const double *point2 = pointList->getPoint(j + 1);
+                        double x1 = (point1[4] - _xFocus) * _scale + 0.5 * _widthInPixels;
+                        double y1 = (point1[5] - _yFocus) * _scale + 0.5 * _heightInPixels;
+                        double x2 = (point2[4] - _xFocus) * _scale + 0.5 * _widthInPixels;
+                        double y2 = (point2[5] - _yFocus) * _scale + 0.5 * _heightInPixels;
 
                         if ((x1 >= 0 && x1 <= _widthInPixels && y1 >= 0 && y1 <= _heightInPixels) || (x2 >= 0 && x2 <= _widthInPixels && y2 >= 0 && y2 <= _heightInPixels))
                         {
                             double x = 0.5 * (x1 + x2);
                             double y = 0.5 * (y1 + y2);
                             double radius1 = parameters.getSegmentRadius1Coeff() * sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-                            double radius2 = parameters.getSegmentRadius2Coeff() * size * sizeFactor * _scale;
+                            double radius2 = parameters.getSegmentRadius2Coeff() * lineItem->getLineSize() * sizeFactor * _scale;
                             double axisDx = x2 - x1;
                             double axisDy = y2 - y1;
                             RepulsiveCenter *repulsiveCenter = new RepulsiveCenter(&parameters, x, y, axisDx, axisDy, radius1, radius2, parameters.getSegmentRefPotential(), false, false);
-                            lineItemCopy->addRepulsiveCenter(repulsiveCenter);
+                            lineItem->addRepulsiveCenter(repulsiveCenter);
                         }
                     }
 
-                    int lineBuilderCount = itemCopyBuilder->getLineBuilderCount();
-                    if (lineBuilderCount != 0)
+                    int associatedLineCount = lineItem->getAssociatedLineCount();
+                    if (associatedLineCount != 0)
                     {
-                        setTextInfo(lineItemCopy, itemCopyBuilder, sizeFactor, face);
+                        setTextInfo(lineItem, face);
 
                         int k;
-                        for (k = 0; k < lineBuilderCount; ++k)
+                        for (k = 0; k < associatedLineCount; ++k)
                         {
-                            ItemCopyBuilder *lineBuilder = itemCopyBuilder->getLineBuilder(k);
-                            const LineItem *lineItem2 = dynamic_cast<const LineItem *>(lineBuilder->getItem());
+                            LineItem *associatedLine = lineItem->getAssociatedLine(k);
+                            const PointList *pointList2 = associatedLine->getPointList();
 
-                            int j, m = lineItem2->getPointVector(resolutionIndex)->getPointCount();
+                            int j, m = pointList2->getPointCount();
                             for (j = 0; j < m; ++j)
                             {
-                                const Point *point = lineItem2->getPointVector(resolutionIndex)->getPoint(j);
-                                double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                                double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                                lineItemCopy->addPoint(x, y, j == 0);
+                                const double *point = pointList2->getPoint(j);
+                                double x = (point[4] - _xFocus) * _scale + 0.5 * _widthInPixels;
+                                double y = (point[5] - _yFocus) * _scale + 0.5 * _heightInPixels;
+                                lineItem->addPoint(x, y, j == 0);
                             }
                         }
                     }
 
-                    textDisplayer.addItem(lineItemCopy);*/
+                    textDisplayer.addItem(lineItem);
                 }
                 else
                 {
                     FilledPolygonItem *filledPolygonItem = dynamic_cast<FilledPolygonItem *>(item);
                     if (filledPolygonItem != 0)
                     {
-                        /*FilledPolygonItemCopy *filledPolygonItemCopy = new FilledPolygonItemCopy(filledPolygonItem->getElementIdForText(), filledPolygonItem->getImportance());
-
-                        int j, m = filledPolygonItem->getPointVector(resolutionIndex)->getPointCount();
+                        const PointList *pointList = filledPolygonItem->getPointList();
+                        int j, m = pointList->getPointCount();
                         for (j = 0; j < m; ++j)
                         {
-                            const Point *point = filledPolygonItem->getPointVector(resolutionIndex)->getPoint(j);
-                            double x = (point->getX() - _xFocus) * _scale + 0.5 * _widthInPixels;
-                            double y = (point->getY() - _yFocus) * _scale + 0.5 * _heightInPixels;
-                            filledPolygonItemCopy->addPoint(x, y);
+                            const double *point = pointList->getPoint(j);
+                            double x = (point[4] - _xFocus) * _scale + 0.5 * _widthInPixels;
+                            double y = (point[5] - _yFocus) * _scale + 0.5 * _heightInPixels;
+                            filledPolygonItem->addPoint(x, y);
                         }
 
-                        setTextInfo(filledPolygonItemCopy, itemCopyBuilder, sizeFactor, face);
-                        textDisplayer.addItem(filledPolygonItemCopy);*/
+                        setTextInfo(filledPolygonItem, face);
+                        textDisplayer.addItem(filledPolygonItem);
                     }
                 }
             }

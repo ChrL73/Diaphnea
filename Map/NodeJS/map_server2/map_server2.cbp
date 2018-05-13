@@ -50,6 +50,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Data/BezierInfo.cpp" />
+		<Unit filename="Data/BezierInfo.h" />
 		<Unit filename="Data/CommonData.cpp" />
 		<Unit filename="Data/CommonData.h" />
 		<Unit filename="Data/ElementInfo.cpp" />
@@ -72,6 +74,8 @@
 		<Unit filename="Data/MultipointItem.h" />
 		<Unit filename="Data/NameTranslation.cpp" />
 		<Unit filename="Data/NameTranslation.h" />
+		<Unit filename="Data/Point.cpp" />
+		<Unit filename="Data/Point.h" />
 		<Unit filename="Data/PointElement.cpp" />
 		<Unit filename="Data/PointElement.h" />
 		<Unit filename="Data/PointItem.cpp" />

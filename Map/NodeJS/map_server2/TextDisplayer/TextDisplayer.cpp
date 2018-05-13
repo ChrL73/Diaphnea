@@ -84,17 +84,17 @@ namespace map_server
 
     bool TextDisplayer::start(void)
     {
-        /*int visibleTextCount = 0;
+        int visibleTextCount = 0;
 
-        std::multimap<double, ItemCopy *> itemMap;
+        std::multimap<double, MapItem *> itemMap;
         int i, n = _itemVector.size();
         for (i = 0; i < n; ++i)
         {
-            ItemCopy *item = _itemVector[i];
-            if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, ItemCopy *>(-item->getImportance(), item));
+            MapItem *item = _itemVector[i];
+            //if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, MapItem *>(-item->getImportance(), item));
         }
 
-        std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
+        /*std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
         while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
         {
             ItemCopy *item = (*it).second;

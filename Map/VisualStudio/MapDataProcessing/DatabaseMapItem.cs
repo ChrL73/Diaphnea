@@ -215,7 +215,7 @@ namespace MapDataProcessing
                     pointList.AddRange(info);
 
                     double x = info[4];
-                    double y = info[5];
+                    double y = -info[5];
 
                     if (x < xMin) xMin = x;
                     if (x > xMax) xMax = x;

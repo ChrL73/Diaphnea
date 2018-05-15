@@ -71,6 +71,10 @@ namespace map_server
         virtual bool hasResolution(void) const = 0;
 
         void addRepulsiveCenter(const RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
+        const std::vector<const RepulsiveCenter *>& getRepulsiveCenterVector(void) const { return _repulsiveCenterVector; }
+
         void addTextInfo(TextInfo *textInfo) { _textInfoVector.push_back(textInfo); }
+        int getTextInfoCount(void) const { return _textInfoVector.size(); }
+        TextInfo *getTextInfo(int i) const { return _textInfoVector[i]; }
     };
 }

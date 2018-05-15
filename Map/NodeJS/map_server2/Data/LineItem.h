@@ -3,6 +3,7 @@
 #include "MapItem.h"
 
 #include <vector>
+#include <map>
 
 namespace map_server
 {
@@ -31,9 +32,19 @@ namespace map_server
         std::vector<LineItem *> _associatedLineVector;
         std::vector<std::vector<const Point *> > _pointVector;
 
+        std::map<double, double> **_hIntersections;
+        int _height;
+        double _yMinP;
+        double _yMaxP;
+
+        std::map<double, double> **_vIntersections;
+        int _width;
+        double _xMinP;
+        double _xMaxP;
+
     public:
         LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook, int resolutionIndex);
-        LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
+        LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook, int resolutionIndex);
 
         void updateLook(const PolygonLook *polygonLook);
 
@@ -52,5 +63,14 @@ namespace map_server
         LineItem *getAssociatedLine(int i) const { return _associatedLineVector[i];}
 
         void addPoint(double x, double y, bool newLine);
+        void setIntersections(double height, double width);
+
+        double getYMinP(void) const { return _yMinP; }
+        double getYMaxP(void) const { return _yMaxP; }
+        std::map<double, double> *getHIntersections(int y);
+
+        double getXMinP(void) const { return _xMinP; }
+        double getXMaxP(void) const { return _xMaxP; }
+        std::map<double, double> *getVIntersections(int x);
     };
 }

@@ -1,26 +1,26 @@
 #define _USE_MATH_DEFINES
 
 #include "TextDisplayer.h"
-/*#include "Potential.h"
+//#include "Potential.h"
 #include "RepulsiveCenter.h"
 #include "TextDisplayerParameters.h"
-#include "PngImage.h"*/
+#include "PngImage.h"
 #include "PointItem.h"
 #include "LineItem.h"
 #include "FilledPolygonItem.h"
-/*#include "TextInfo.h"
+#include "TextInfo.h"
 #include "TextInfoLine.h"
 #include "MessageTypeEnum.h"
 #include "Interval.h"
-#include "SvgCreator.h"
+/*#include "SvgCreator.h"
 #include "SvgTextInfo.h"
-#include "SvgLineInfo.h"
+#include "SvgLineInfo.h"*/
 
 #include <cmath>
-#include <chrono>
+/*#include <chrono>
 #include <thread>
-#include <limits>
-#include <iostream>*/
+#include <limits>*/
+#include <iostream>
 
 namespace map_server
 {
@@ -91,13 +91,13 @@ namespace map_server
         for (i = 0; i < n; ++i)
         {
             MapItem *item = _itemVector[i];
-            //if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, MapItem *>(-item->getImportance(), item));
+            if (item->getTextInfoCount() > 0) itemMap.insert(std::pair<double, MapItem *>(-item->getImportance(), item));
         }
 
-        /*std::multimap<double, ItemCopy *>::iterator it = itemMap.begin();
+        std::multimap<double, MapItem *>::iterator it = itemMap.begin();
         while (it != itemMap.end() && visibleTextCount < _parameters->getMaxVisibleTextCount())
         {
-            ItemCopy *item = (*it).second;
+            MapItem *item = (*it).second;
             int j, m = item->getTextInfoCount();
             for (j = 0; j < m; ++j)
             {
@@ -140,29 +140,28 @@ namespace map_server
             if (isDisplayerActive()) image.save(fileName);
         }
 
-        return isDisplayerActive();*/
-        return true;
+        return isDisplayerActive();
     }
 
     bool TextDisplayer::displayText(MapItem *item, TextInfo *textInfo)
     {
-        /*if (textInfo == 0 || !isDisplayerActive()) return false;
+        if (textInfo == 0 || !isDisplayerActive()) return false;
 
-        PointItemCopy *pointItem = dynamic_cast<PointItemCopy *>(item);
+        PointItem *pointItem = dynamic_cast<PointItem *>(item);
         if (pointItem != 0) return displayPointText(pointItem, textInfo);
 
-        LineItemCopy *lineItem = dynamic_cast<LineItemCopy *>(item);
+        LineItem *lineItem = dynamic_cast<LineItem *>(item);
         if (lineItem != 0) return displayLineText(lineItem, textInfo);
 
-        FilledPolygonItemCopy *filledPolygonItem = dynamic_cast<FilledPolygonItemCopy *>(item);
-        if (filledPolygonItem != 0) return displayFilledPolygonText(filledPolygonItem, textInfo);*/
+        FilledPolygonItem *filledPolygonItem = dynamic_cast<FilledPolygonItem *>(item);
+        if (filledPolygonItem != 0) return displayFilledPolygonText(filledPolygonItem, textInfo);
 
         return false;
     }
 
     bool TextDisplayer::displayPointText(PointItem *item, TextInfo *textInfo)
     {
-        /*TextPotential pMin(true);
+        TextPotential pMin(true);
         double optimalX = 0.0;
         double optimalY = 0.0;
 
@@ -190,23 +189,23 @@ namespace map_server
 
         textInfo->setX(optimalX);
         textInfo->setY(optimalY);
-        sendResponse(item, textInfo);*/
+        sendResponse(item, textInfo);
 
         return true;
     }
 
     bool TextDisplayer::displayLineText(LineItem *item, TextInfo *textInfo)
     {
-        /*item->setIntersections(_height, _width);
+        item->setIntersections(_height, _width);
 
         double optimalY = 0.0;
         double optimalX = 0.0;
         TextPotential pMin(true);
 
-        double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
-        double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
-        double xDmin = item->getXMin() + 0.5 * textInfo->getWidth() + 3.0;
-        double xDmax = item->getXMax() - 0.5 * textInfo->getWidth() - 3.0;
+        double yDmin = item->getYMinP() + 0.5 * textInfo->getHeight() + 3.0;
+        double yDmax = item->getYMaxP() - 0.5 * textInfo->getHeight() - 3.0;
+        double xDmin = item->getXMinP() + 0.5 * textInfo->getWidth() + 3.0;
+        double xDmax = item->getXMaxP() - 0.5 * textInfo->getWidth() - 3.0;
 
         if (yDmax >= yDmin)
         {
@@ -441,21 +440,21 @@ namespace map_server
 
         textInfo->setX(optimalX);
         textInfo->setY(optimalY);
-        sendResponse(item, textInfo);*/
+        sendResponse(item, textInfo);
 
         return false;
     }
 
     bool TextDisplayer::displayFilledPolygonText(FilledPolygonItem *item, TextInfo *textInfo)
     {
-        /*item->setIntersections(_height, _width);
+        item->setIntersections(_height, _width);
 
         double optimalYD = 0.0;
         double optimalX = 0.0;
         TextPotential pMin(true);
 
-        double yDmin = item->getYMin() + 0.5 * textInfo->getHeight() + 3.0;
-        double yDmax = item->getYMax() - 0.5 * textInfo->getHeight() - 3.0;
+        double yDmin = item->getYMinP() + 0.5 * textInfo->getHeight() + 3.0;
+        double yDmax = item->getYMaxP() - 0.5 * textInfo->getHeight() - 3.0;
         if (yDmax < yDmin) return false;
 
         int yCount = _parameters->getPolygonYTryCount();;
@@ -582,7 +581,7 @@ namespace map_server
 
         textInfo->setX(optimalX);
         textInfo->setY(optimalYD);
-        sendResponse(item, textInfo);*/
+        sendResponse(item, textInfo);
 
         return true;
     }
@@ -591,7 +590,7 @@ namespace map_server
     {
         TextPotential textPotential;
 
-        /*double centereCountXD = ceil(_parameters->getComputationDensityFactor() * textInfo->getWidth());
+        double centereCountXD = ceil(_parameters->getComputationDensityFactor() * textInfo->getWidth());
         if (centereCountXD < 1.0) centereCountXD = 1.0;
         centereCountXD = centereCountXD * 2 + 1;
         double dx = textInfo->getWidth() / (centereCountXD - 1.0);
@@ -617,14 +616,14 @@ namespace map_server
                     if (textPotential.getMax() > _parameters->getPotentialThreshold()) return std::move(textPotential);
                 }
             }
-        }*/
+        }
 
         return std::move(textPotential);
     }
 
     void TextDisplayer::sendResponse(MapItem *item, TextInfo *textInfo)
     {
-        /*double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
+        double xMin = textInfo->getX()  - 0.5 * textInfo->getWidth();
         double xMax = textInfo->getX()  + 0.5 * textInfo->getWidth();
         double yMin = textInfo->getY()  - 0.5 * textInfo->getHeight();
         double yMax = textInfo->getY()  + 0.5 * textInfo->getHeight();
@@ -634,18 +633,18 @@ namespace map_server
         yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
         yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
 
-        SvgTextInfo *svgTextInfo = 0;
+        //SvgTextInfo *svgTextInfo = 0;
 
-        if (_svgCreator == 0)
+        //if (_svgCreator == 0)
         {
             _coutMutexPtr->lock();
             std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
                 << " {\"t\":[";
         }
-        else
+        /*else
         {
             svgTextInfo = new SvgTextInfo(textInfo);
-        }
+        }*/
 
         int i, n = textInfo->getLineVector().size();
         for (i = 0; i < n; ++i)
@@ -656,45 +655,45 @@ namespace map_server
             x = _xFocus + (x - 0.5 * _width) / _scale;
             y = _yFocus + (y - 0.5 * _height) / _scale;
 
-            if (_svgCreator == 0)
+            //if (_svgCreator == 0)
             {
                 std::cout << "[\"" << line->getText() << "\","
                     << x << "," << y << "]";
                 if (i != n - 1) std::cout << ",";
             }
-            else
+            /*else
             {
                 svgTextInfo->addLine(new SvgLineInfo(line->getText(), x, y));
-            }
+            }*/
         }
 
-        if (_svgCreator == 0)
+        //if (_svgCreator == 0)
         {
             std::cout  << "],\"e\":\"" << item->getElementId()
                 << "\",\"x1\":" << xMin
                 << ",\"x2\":" << xMax
                 << ",\"y1\":" << yMin
                 << ",\"y2\":" << yMax
-                << ",\"s\":" << textInfo->getFontSize()
-                << ",\"look\":" << textInfo->getLookId()
+                << ",\"s\":" << item->getFontSize()
+                << ",\"look\":" << item->getTextLookId()
                 << "}" << std::endl;
             _coutMutexPtr->unlock();
         }
-        else
+        /*else
         {
             _svgCreator->addInfo(textInfo->getZIndex(), svgTextInfo);
-        }
+        }*/
 
         RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
             _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);
-        item->addRepulsiveCenter(center);*/
+        item->addRepulsiveCenter(center);
     }
 
     Potential TextDisplayer::getPotential(double x, double y, MapItem *selfItem)
     {
         Potential potential;
 
-        /*const double u0 = _parameters->getEdgeRefPotential();
+        const double u0 = _parameters->getEdgeRefPotential();
         const double epsilon = _parameters->getEdgeRangeRatio();
         double a;
 
@@ -713,14 +712,14 @@ namespace map_server
         int i, n = _itemVector.size();
         for (i = 0; i < n; ++i)
         {
-            ItemCopy *item = _itemVector[i];
+            MapItem *item = _itemVector[i];
             if (selfItem == 0 || item != selfItem)
             {
                 Potential elementaryPotential = std::move(getElementaryPotential(item, x, y));
                 potential += elementaryPotential;
                 if (potential.getValue() > _parameters->getPotentialThreshold()) return std::move(potential);
             }
-        }*/
+        }
 
         return std::move(potential);
     }
@@ -729,7 +728,7 @@ namespace map_server
     {
         Potential potential;
 
-        /*int i, n = item->getRepulsiveCenterVector().size();
+        int i, n = item->getRepulsiveCenterVector().size();
         for (i = 0; i < n; ++i)
         {
             const RepulsiveCenter *center = item->getRepulsiveCenterVector()[i];
@@ -784,14 +783,14 @@ namespace map_server
 
                 if (potential.getValue() > _parameters->getPotentialThreshold()) break;
             }
-        }*/
+        }
 
         return std::move(potential);
     }
 
     void TextDisplayer::hsvToRgb(double h, double s, double v, double& r, double& g, double& b)
     {
-        /*double hh, p, q, t, ff;
+        double hh, p, q, t, ff;
         long i;
 
         if (s <= 0.0)
@@ -848,6 +847,6 @@ namespace map_server
             g = p;
             b = q;
             break;
-        }*/
+        }
     }
 }

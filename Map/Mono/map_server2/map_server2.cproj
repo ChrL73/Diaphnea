@@ -21,7 +21,7 @@
     <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
     <SourceDirectory>.</SourceDirectory>
     <ExtraCompilerArguments>-std=c++11</ExtraCompilerArguments>
-    <ExtraLinkerArguments>-pthread</ExtraLinkerArguments>
+    <ExtraLinkerArguments>-pthread `libpng-config --ldflags`</ExtraLinkerArguments>
     <Includes>
       <Includes>
         <Include>$(ProjectDir)/../../NodeJS/map_server2/Requests</Include>
@@ -55,7 +55,7 @@
         <Include>$(ProjectDir)/../../../../freetype-2.7/include</Include>
       </Includes>
     </Includes>
-    <ExtraLinkerArguments>-pthread</ExtraLinkerArguments>
+    <ExtraLinkerArguments>-pthread `libpng-config --ldflags`</ExtraLinkerArguments>
     <Libs>
       <Libs>
         <Lib>freetype</Lib>
@@ -171,6 +171,12 @@
     </None>
     <None Include="..\..\NodeJS\map_server2\Data\Point.h">
       <Link>Data\Point.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.h">
+      <Link>TextDisplayer\PngImage.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.h">
+      <Link>TextDisplayer\Interval.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +314,12 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\Point.cpp">
       <Link>Data\Point.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.cpp">
+      <Link>TextDisplayer\PngImage.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.cpp">
+      <Link>TextDisplayer\Interval.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

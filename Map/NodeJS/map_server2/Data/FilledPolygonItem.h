@@ -2,6 +2,8 @@
 
 #include "MapItem.h"
 
+#include <set>
+
 namespace map_server
 {
     class MultipointItem;
@@ -22,6 +24,10 @@ namespace map_server
 
         const PointList * const _pointList;
         std::vector<const Point *> _pointVector;
+        std::set<double> **_intersections;
+        int _height;
+        double _yMinP;
+        double _yMaxP;
 
         int getElementLookId(void) const { return _fillLookId; }
         bool hasResolution(void) const { return true; }
@@ -38,5 +44,10 @@ namespace map_server
 
         const PointList *getPointList(void) const { return _pointList; }
         void addPoint(double x, double y);
+        void setIntersections(double height, double width);
+
+        double getYMinP(void) const { return _yMinP; }
+        double getYMaxP(void) const { return _yMaxP; }
+        std::set<double> *getIntersections(int y);
     };
 }

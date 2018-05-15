@@ -4,6 +4,7 @@
 #include "MessageTypeEnum.h"
 #include "ErrorEnum.h"
 #include "CommonData.h"
+#include "TextDisplayer.h"
 
 #include <iostream>
 #include <vector>
@@ -28,7 +29,7 @@ namespace map_server
     int MapServer::run(void)
     {
         Request::setCoutMutex(&_coutMutex);
-        //TextDisplayer::setCoutMutex(&_coutMutex);
+        TextDisplayer::setCoutMutex(&_coutMutex);
         //SvgCreator::setCoutMutex(&_coutMutex);
 
         _timeoutReference = time(0);
@@ -47,7 +48,7 @@ namespace map_server
 
         deleteThread.join();
 
-        //TextDisplayer::clearClientMap();
+        TextDisplayer::clearClientMap();
 
         return 0;
     }
@@ -69,7 +70,7 @@ namespace map_server
             // 0 0 6 {"items":[[14,17,1],[624,16,1],[541,16,1],[626,16,1],[540,16,1],[627,16,1],[485,16,1],[625,16,1]],"xFocus":212.02,"yFocus":91.2119,"scale":5.2446}
             // 0 0 7 {"t":[["Ain (01)",192.887,92.3181]],"e":"01","x1":192.696,"x2":207.187,"y1":89.458,"y2":93.0808,"s":21,"look":15}
 
-            request = "0 0 6 _France fr 800 600 0 n n n Paris";
+            //request = "0 0 6 _France fr 800 600 0 n n n Paris";
 
             // 2 expected responses:
             //0 0 6 {"items":[[401,64]],"xFocus":-24.8653,"yFocus":-215.634,"scale":28.5714}
@@ -82,6 +83,8 @@ namespace map_server
             // 0 0 7 {"t":[["Seine",-2.10266,-179.549]],"e":"Seine","x1":-2.10266,"x2":17.3234,"y1":-185.1,"y2":-179.549,"s":17,"look":54}
 
             //request = "0 0 6 _France fr 800 600 0 n n n Bretagne 22";
+
+            //request = "0 0 6 _France fr 800 600 0 n n n Aulne";
 
             _timeMutex.lock();
             _timeoutReference = time(0);

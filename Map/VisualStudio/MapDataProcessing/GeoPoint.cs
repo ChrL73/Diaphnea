@@ -182,7 +182,7 @@ namespace MapDataProcessing
                 info.Add(0.0);
                 info.Add(0.0);
                 info.Add(x);
-                info.Add(y);
+                info.Add(-y);
             }
             else
             {
@@ -245,11 +245,11 @@ namespace MapDataProcessing
                 }
 
                 info.Add(x1);
-                info.Add(y1);
+                info.Add(-y1);
                 info.Add(x2);
-                info.Add(y2);
+                info.Add(-y2);
                 info.Add(x);
-                info.Add(y);
+                info.Add(-y);
             }
 
             return info;

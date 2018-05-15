@@ -21,7 +21,7 @@
 					<Add directory="TextDisplayer" />
 				</Compiler>
 				<Linker>
-					<Add option="-pthread" />
+					<Add option="-pthread `libpng-config --ldflags`" />
 					<Add library="freetype" />
 				</Linker>
 			</Target>
@@ -41,7 +41,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-pthread" />
+					<Add option="-pthread `libpng-config --ldflags`" />
 					<Add library="freetype" />
 				</Linker>
 			</Target>
@@ -112,6 +112,10 @@
 		<Unit filename="Requests/Request.h" />
 		<Unit filename="Requests/SvgCustomColor.cpp" />
 		<Unit filename="Requests/SvgCustomColor.h" />
+		<Unit filename="TextDisplayer/Interval.cpp" />
+		<Unit filename="TextDisplayer/Interval.h" />
+		<Unit filename="TextDisplayer/PngImage.cpp" />
+		<Unit filename="TextDisplayer/PngImage.h" />
 		<Unit filename="TextDisplayer/Potential.cpp" />
 		<Unit filename="TextDisplayer/Potential.h" />
 		<Unit filename="TextDisplayer/RepulsiveCenter.cpp" />

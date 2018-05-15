@@ -10,11 +10,7 @@
 #include "LineItem.h"
 //#include "PolygonLook.h"
 //#include "ItemLook.h"
-//#include "ItemCopyBuilder.h"
 #include "TextDisplayer.h"
-//#include "PointItemCopy.h"
-//#include "LineItemCopy.h"
-//#include "FilledPolygonItemCopy.h"
 #include "RepulsiveCenter.h"
 //#include "Point.h"
 #include "PointList.h"
@@ -139,7 +135,7 @@ namespace map_server
                     std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(item->getItemId());
                     if (lineItemIt == lineItems.end())
                     {
-                        LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex));
+                        LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex), resolutionIndex);
                         lineItems.insert(std::pair<int, LineItem *>(item->getItemId(), lineItem));
                         itemVector.push_back(lineItem);
                     }
@@ -474,6 +470,7 @@ namespace map_server
                     int associatedLineCount = lineItem->getAssociatedLineCount();
                     if (associatedLineCount != 0)
                     {
+                        lineItem->setFontSize(floor(lineItem->getTextSize() * sizeFactor * _scale));
                         setTextInfo(lineItem, face);
 
                         int k;
@@ -510,6 +507,7 @@ namespace map_server
                             filledPolygonItem->addPoint(x, y);
                         }
 
+                        filledPolygonItem->setFontSize(floor(filledPolygonItem->getTextSize() * sizeFactor * _scale));
                         setTextInfo(filledPolygonItem, face);
                         textDisplayer.addItem(filledPolygonItem);
                     }

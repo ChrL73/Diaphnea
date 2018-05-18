@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9481DE9F-D11A-4355-9DD3-231E0A9B8F79}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MapServer2</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);..\..\NodeJS\map_server2;..\..\NodeJS\map_server2\TextDisplayer;..\..\NodeJS\map_server2\Data;..\..\NodeJS\map_server2\Requests;..\..\..\..\freetype-2.7\include;..\..\..\..\png++-0.2.9;..\..\..\..\lpng1626\lpng1626</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories);..\..\..\..\freetype-2.7\objs\vc2015\Win32\;..\..\..\..\lpng1626\lpng1626\projects\vstudio\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype27MT.lib;libpng16.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\Visual Leak Detector\include;%(AdditionalIncludeDirectories);..\..\NodeJS\map_server2;..\..\NodeJS\map_server2\TextDisplayer;..\..\NodeJS\map_server2\Data;..\..\NodeJS\map_server2\Requests;..\..\..\..\freetype-2.7\include;..\..\..\..\png++-0.2.9;..\..\..\..\lpng1626\lpng1626</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories);..\..\..\..\freetype-2.7\objs\vc2015\Win32\;..\..\..\..\lpng1626\lpng1626\projects\vstudio\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype27MT.lib;libpng16.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\BezierInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\CommonData.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\ElementInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\ElementName.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\DoubleArrays.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ElementNames.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\IntArrays.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineLooks.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MapData.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MultipointItems.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\NameTranslations.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointElements.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLists.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLooks.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonElements.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonLooks.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\Strings.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\MapItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\MultipointItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\NameTranslation.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\Point.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointItem.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointList.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonElement.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\MapServer.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\map_server.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\RenderRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\Request.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\SvgCustomColor.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfo.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\ThreadInfo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\BezierInfo.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\CommonData.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementInfo.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementName.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementTypeEnum.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MapData.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MapItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MultipointItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\NameTranslation.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\Point.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointItem.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointList.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PolygonElement.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PolygonLook.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\MapServer.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\MessageTypeEnum.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\RenderRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\Request.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\SvgCustomColor.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfo.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\ThreadInfo.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

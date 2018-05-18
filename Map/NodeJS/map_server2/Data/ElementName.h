@@ -13,6 +13,6 @@ namespace map_server
 
     public:
         int getLineCount(void) const { return _lineCount; }
-        const char *getLine(int i) const { return strings + *(intArrays + _lines + i); }
+        const char *getLine(int i) const { return reinterpret_cast<const char *>(strings) + *(intArrays + _lines + i); }
     };
 }

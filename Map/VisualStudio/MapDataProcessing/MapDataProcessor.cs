@@ -113,7 +113,7 @@ namespace MapDataProcessing
             if (result == 0)
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
-                //result = fillDatabase();
+                result = fillDatabase();
             }
 
             if (result == 0)

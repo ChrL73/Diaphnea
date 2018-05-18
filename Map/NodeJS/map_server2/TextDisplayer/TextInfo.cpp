@@ -28,7 +28,7 @@ namespace map_server
             std::wstring wtext = converter.from_bytes(line->getText());
 
             int i, n = wtext.size();
-            int width = 0.0, yMaxMax = 0.0, yMinMin = 0.0, xOffset = 0.0;
+            int width = 0, yMaxMax = 0, yMinMin = 0, xOffset = 0;
 
             for (i = 0; i < n; ++i)
             {

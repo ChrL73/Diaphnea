@@ -41,7 +41,7 @@ namespace map_server
     public:
         static const PolygonElement *get(int offset) { return reinterpret_cast<const PolygonElement *>(polygonElements + offset); }
 
-        const char *getElementId(void) const { return strings + _elementId; }
+        const char *getElementId(void) const { return reinterpret_cast<const char *>(strings) + _elementId; }
 
         const MultipointItem *getContour(void) const { return reinterpret_cast<const MultipointItem *>(multipointItems + _contour); }
 
@@ -49,7 +49,7 @@ namespace map_server
         const MultipointItem *getItem(int i) const { return reinterpret_cast<const MultipointItem *>(multipointItems + *(intArrays + _items + i)); }
 
         int getCoveredElementCount(void) const { return _coveredElementCount; }
-        const char *getCoveredElement(int i) const { return strings + *(intArrays + _coveredElements + i); }
+        const char *getCoveredElement(int i) const { return reinterpret_cast<const char *>(strings) + *(intArrays + _coveredElements + i); }
 
         double getImportance(void) const { return _importance; }
 

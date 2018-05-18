@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="CodeGenerator.cs" />
+    <Compile Include="Combinations.cs" />
     <Compile Include="DatabaseMapItem.cs" />
     <Compile Include="DistanceCalculator.cs" />
     <Compile Include="ElementLinker.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="PolygonLinePart.cs" />
     <Compile Include="PolygonPolygonPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schemas.cs" />
     <Compile Include="Smoother.cs" />
     <Compile Include="SuperposerArea.cs" />
     <Compile Include="SuperposerPoint.cs" />

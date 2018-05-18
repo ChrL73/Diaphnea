@@ -13,7 +13,7 @@ namespace map_server
         for (i = 0; i < pointElementCount; ++i)
         {
             int offset = 12 * i;
-            const char *id = strings + pointElements[offset];
+            const char *id = reinterpret_cast<const char *>(strings) + pointElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POINT, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
         }
@@ -21,7 +21,7 @@ namespace map_server
         for (i = 0; i < lineElementCount; ++i)
         {
             int offset = 9 * i;
-            const char *id = strings + lineElements[offset];
+            const char *id = reinterpret_cast<const char *>(strings) + lineElements[offset];
             ElementInfo *info = new ElementInfo(map_server::LINE, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
         }
@@ -29,14 +29,14 @@ namespace map_server
         for (i = 0; i < polygonElementCount; ++i)
         {
             int offset = 12 * i;
-            const char *id = strings + polygonElements[offset];
+            const char *id = reinterpret_cast<const char *>(strings) + polygonElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POLYGON, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
         }
 
         for (i = 0; i < languageCount; ++i)
         {
-            const char *id = strings + languageIds[i];
+            const char *id = reinterpret_cast<const char *>(strings) + languageIds[i];
             _languageIdMap.insert(std::pair<std::string, int>(id, i));
         }
     }

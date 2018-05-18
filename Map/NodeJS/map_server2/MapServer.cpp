@@ -84,7 +84,11 @@ namespace map_server
 
             //request = "0 0 6 _France fr 800 600 0 n n n Bretagne 22";
 
-            //request = "0 0 6 _France fr 800 600 0 n n n Aulne";
+            request = "0 0 6 _France fr 800 600 0 n n n Aulne";
+
+			// 2 expected responses:
+			// 0 0 6 {"items":[[859,55,0]],"xFocus":-484.984,"yFocus":-174.604,"scale":11.626}
+			// 0 0 7 {"t":[["Aulne",-484.169,-161.366]],"e":"Aulne","x1":-484.255,"x2":-479.869,"y1":-162.656,"y2":-161.366,"s":20,"look":54}
 
             _timeMutex.lock();
             _timeoutReference = time(0);

@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Data">
+      <UniqueIdentifier>{5c172387-b096-4059-8523-1e4e03b304f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Requests">
+      <UniqueIdentifier>{384391bd-e26d-4828-bbc6-a75cc8316cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\TextDisplayer">
+      <UniqueIdentifier>{f602f8b3-bf4e-4422-a05e-6a8beeafc9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Data">
+      <UniqueIdentifier>{bd8a51f1-ed4d-4dfe-b2aa-fb83e07fb6a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Requests">
+      <UniqueIdentifier>{5bd477c1-b595-4679-bc63-4ce7b6fdedf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\TextDisplayer">
+      <UniqueIdentifier>{cef79e89-5579-40c4-a14f-5eff7c96928a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Data\generated_code">
+      <UniqueIdentifier>{f9f86201-e9cd-4931-85d0-3069405170b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Data\generated_code\_France">
+      <UniqueIdentifier>{7ae66bfe-fdcc-4d5d-a941-376d7d624a81}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\BezierInfo.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\CommonData.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\ElementInfo.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\ElementName.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineElement.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineItem.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\LineLook.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\MapItem.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\MultipointItem.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\NameTranslation.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\Point.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointElement.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointItem.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointList.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PointLook.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonElement.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp">
+      <Filter>Fichiers sources\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\DoubleArrays.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ElementNames.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\IntArrays.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineLooks.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MapData.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MultipointItems.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\NameTranslations.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointElements.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLists.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLooks.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonElements.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PolygonLooks.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\Strings.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfo.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.cpp">
+      <Filter>Fichiers sources\TextDisplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\RenderRequest.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\Request.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\SvgCustomColor.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\map_server.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\MapServer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\ThreadInfo.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\MapServer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\MessageTypeEnum.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\ThreadInfo.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\BezierInfo.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\CommonData.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementInfo.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementName.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\ElementTypeEnum.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineElement.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineItem.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\LineLook.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MapData.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MapItem.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\MultipointItem.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\NameTranslation.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\Point.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointElement.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointItem.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointList.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PointLook.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PolygonElement.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Data\PolygonLook.h">
+      <Filter>Fichiers d%27en-tête\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\PngImage.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\Potential.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\RepulsiveCenter.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayer.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextDisplayerParameters.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfo.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.h">
+      <Filter>Fichiers d%27en-tête\TextDisplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\RenderRequest.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\Request.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\SvgCustomColor.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

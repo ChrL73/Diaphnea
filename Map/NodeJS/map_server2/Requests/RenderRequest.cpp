@@ -59,13 +59,6 @@ namespace map_server
 
         int languageIndex = _commonData->getLanguageIndex(_languageId);
 
-        double wantedLength = resolutionThreshold / _scale;
-        int resolutionIndex;
-        for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
-        {
-            if (wantedLength > sampleLengths[resolutionIndex]) break;
-        }
-
         //_commonData->lock();
 
         unsigned int i, n = _elementIds.size();
@@ -240,6 +233,13 @@ namespace map_server
 
                 _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
             }
+
+			double wantedLength = resolutionThreshold / _scale;
+			int resolutionIndex;
+			for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
+			{
+				if (wantedLength > sampleLengths[resolutionIndex]) break;
+			}
 
             const double r = 0.6;
             double dx = r * _widthInPixels / _scale;

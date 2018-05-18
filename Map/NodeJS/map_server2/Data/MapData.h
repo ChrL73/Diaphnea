@@ -2,7 +2,7 @@
 
 namespace map_server
 {
-    extern char strings[];
+    extern unsigned char strings[];
     extern int intArrays[];
     extern double doubleArrays[];
     extern int pointElements[];

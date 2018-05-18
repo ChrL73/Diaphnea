@@ -34,7 +34,7 @@ namespace map_server
     public:
         static const LineElement *get(int offset) { return reinterpret_cast<const LineElement *>(lineElements + offset); }
 
-        const char *getElementId(void) const { return strings + _elementId; }
+        const char *getElementId(void) const { return reinterpret_cast<const char *>(strings) + _elementId; }
 
         int getItemCount(void) const { return _itemCount; }
         const MultipointItem *getItem(int i) const { return reinterpret_cast<const MultipointItem *>(multipointItems + *(intArrays + _items + i)); }

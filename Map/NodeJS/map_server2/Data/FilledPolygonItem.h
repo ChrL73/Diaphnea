@@ -22,7 +22,7 @@ namespace map_server
         int _fillGreen;
         int _fillBlue;
 
-        const PointList * const _pointList;
+        const MultipointItem * const _multipointItem;
         std::vector<const Point *> _pointVector;
         std::set<double> **_intersections;
         int _height;
@@ -33,7 +33,7 @@ namespace map_server
         bool hasResolution(void) const { return true; }
 
     public:
-        FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook, int resolutionIndex);
+        FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 
         int getFillLookId(void) const { return _fillLookId; }
         int getFillZIndex(void) const { return _fillZIndex; }
@@ -42,7 +42,7 @@ namespace map_server
         int getFillGreen(void) const { return _fillGreen; }
         int getFillBlue(void) const { return _fillBlue; }
 
-        const PointList *getPointList(void) const { return _pointList; }
+        const PointList *getPointList(int resolutionIndex) const;
         void addPoint(double x, double y);
         void setIntersections(double height, double width);
 

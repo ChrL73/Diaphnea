@@ -8,15 +8,20 @@
 
 namespace map_server
 {
-    FilledPolygonItem::FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook, int resolutionIndex) :
+    FilledPolygonItem::FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook) :
         MapItem(multipointItem->getItemId(), polygonElement->getElementId(), polygonElement->getImportance(), multipointItem->getXMin(), multipointItem->getXMax(),
         multipointItem->getYMin(), multipointItem->getYMax(), 3 * polygonLook->getLookId(),
         polygonLook->getTextAlpha(), polygonLook->getTextRed(), polygonLook->getTextGreen(),
         polygonLook->getTextBlue(), polygonLook->getTextSize(), polygonElement->getFramingLevel(), name),
         _fillLookId(3 * polygonLook->getLookId() + 2), _fillZIndex(polygonLook->getFillZIndex()),
         _fillAlpha(polygonLook->getFillAlpha()), _fillRed(polygonLook->getFillRed()),
-        _fillGreen(polygonLook->getFillGreen()), _fillBlue(polygonLook->getFillBlue()), _pointList(multipointItem->getPointList(resolutionIndex))
+        _fillGreen(polygonLook->getFillGreen()), _fillBlue(polygonLook->getFillBlue()), _multipointItem(multipointItem)
     {
+    }
+
+    const PointList *FilledPolygonItem::getPointList(int resolutionIndex) const
+    {
+        return _multipointItem->getPointList(resolutionIndex);
     }
 
     void FilledPolygonItem::addPoint(double x, double y)

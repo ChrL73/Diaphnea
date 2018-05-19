@@ -97,7 +97,7 @@ namespace map_server
                         const NameTranslation *name = 0;
                         if (languageIndex != -1) name = lineElement->getTranslation(languageIndex);
 
-                        LineItem *lineItem = new LineItem(lineElement, name, multipointItem, lineElement->getLook(_lookIndex), resolutionIndex);
+                        LineItem *lineItem = new LineItem(lineElement, name, multipointItem, lineElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(multipointItem->getItemId(), lineItem));
                         itemVector.push_back(lineItem);
                     }
@@ -115,7 +115,7 @@ namespace map_server
                     const NameTranslation *name = 0;
                     if (languageIndex != -1) name = polygonElement->getTranslation(languageIndex);
 
-                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, name, contourItem, polygonElement->getLook(_lookIndex), resolutionIndex);
+                    FilledPolygonItem *filledPolygonItem = new FilledPolygonItem(polygonElement, name, contourItem, polygonElement->getLook(_lookIndex));
                     filledPolygonItems.insert(std::pair<int, FilledPolygonItem *>(contourItem->getItemId(), filledPolygonItem));
                     itemVector.push_back(filledPolygonItem);
                 }
@@ -128,7 +128,7 @@ namespace map_server
                     std::map<int, LineItem *>::iterator lineItemIt = lineItems.find(item->getItemId());
                     if (lineItemIt == lineItems.end())
                     {
-                        LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex), resolutionIndex);
+                        LineItem *lineItem = new LineItem(item, polygonElement->getLook(_lookIndex));
                         lineItems.insert(std::pair<int, LineItem *>(item->getItemId(), lineItem));
                         itemVector.push_back(lineItem);
                     }
@@ -443,7 +443,7 @@ namespace map_server
                 LineItem *lineItem = dynamic_cast<LineItem *>(item);
                 if (lineItem != 0)
                 {
-                    const PointList *pointList = lineItem->getPointList();
+                    const PointList *pointList = lineItem->getPointList(resolutionIndex);
                     int j, m = pointList->getPointCount();
                     for (j = 0; j < m - 1; ++j)
                     {
@@ -477,7 +477,7 @@ namespace map_server
                         for (k = 0; k < associatedLineCount; ++k)
                         {
                             LineItem *associatedLine = lineItem->getAssociatedLine(k);
-                            const PointList *pointList2 = associatedLine->getPointList();
+                            const PointList *pointList2 = associatedLine->getPointList(resolutionIndex);
 
                             int j, m = pointList2->getPointCount();
                             for (j = 0; j < m; ++j)
@@ -497,7 +497,7 @@ namespace map_server
                     FilledPolygonItem *filledPolygonItem = dynamic_cast<FilledPolygonItem *>(item);
                     if (filledPolygonItem != 0)
                     {
-                        const PointList *pointList = filledPolygonItem->getPointList();
+                        const PointList *pointList = filledPolygonItem->getPointList(resolutionIndex);
                         int j, m = pointList->getPointCount();
                         for (j = 0; j < m; ++j)
                         {

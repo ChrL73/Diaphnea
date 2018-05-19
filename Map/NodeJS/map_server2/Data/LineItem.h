@@ -24,7 +24,7 @@ namespace map_server
         int _lineGreen;
         int _lineBlue;
         double _lineSize;
-        const PointList * const _pointList;
+        const MultipointItem * const _multipointItem;
 
         int getElementLookId(void) const { return _lineLookId; }
         bool hasResolution(void) const { return true; }
@@ -43,8 +43,8 @@ namespace map_server
         double _xMaxP;
 
     public:
-        LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook, int resolutionIndex);
-        LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook, int resolutionIndex);
+        LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook);
+        LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
 
         void updateLook(const PolygonLook *polygonLook);
 
@@ -56,7 +56,7 @@ namespace map_server
         int getLineBlue(void) const { return _lineBlue; }
         double getLineSize(void) const { return _lineSize; }
 
-        const PointList *getPointList(void) const { return _pointList; }
+        const PointList *getPointList(int resolutionIndex) const;
 
         void setAssociatedLineVector(const std::vector<LineItem *>& associatedLineVector) { _associatedLineVector = associatedLineVector; }
         int getAssociatedLineCount(void) const { return _associatedLineVector.size(); }

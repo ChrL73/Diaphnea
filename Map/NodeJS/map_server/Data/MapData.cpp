@@ -3,6 +3,8 @@
 #include "MessageTypeEnum.h"
 #include "ErrorEnum.h"
 
+#include <iostream>
+
 namespace map_server
 {
     MapData *MapData::_instance = 0;

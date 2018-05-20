@@ -7,6 +7,8 @@
 #include "PointItem.h"
 #include "ErrorEnum.h"
 
+#include <iostream>
+
 namespace map_server
 {
     void ItemDataRequest::execute()

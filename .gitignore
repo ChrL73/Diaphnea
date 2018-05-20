@@ -13,6 +13,7 @@
 *tmp
 *packages
 /Quiz/VisualStudio/.vs
+/Map/VisualStudio/.vs
 /Experiments/VisualStudio/.vs
 /Shared/*
 !/Shared/readme.txt

@@ -4,6 +4,8 @@
 #include "MessageTypeEnum.h"
 #include "ErrorEnum.h"
 
+#include <iostream>
+
 namespace map_server
 {
     void MapInfoRequest::execute(void)

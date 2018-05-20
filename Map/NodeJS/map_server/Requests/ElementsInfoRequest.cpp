@@ -5,6 +5,8 @@
 #include "MapElement.h"
 #include "ErrorEnum.h"
 
+#include <iostream>
+
 namespace map_server
 {
     void ElementsInfoRequest::execute()

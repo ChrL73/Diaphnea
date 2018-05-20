@@ -35,6 +35,7 @@
 #include <sstream>
 #include <limits>
 #include <cmath>
+#include <iostream>
 
 #if _WIN32
 #undef max

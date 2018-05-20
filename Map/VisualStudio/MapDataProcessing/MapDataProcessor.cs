@@ -118,7 +118,7 @@ namespace MapDataProcessing
 
             if (result == 0)
             {
-                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
+                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "C++ code generation...");
                 result = generateCode();
             }
 
@@ -592,8 +592,6 @@ namespace MapDataProcessing
 
         private int generateCode()
         {
-            MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "C++ code generation...");
-
             if (!Directory.Exists(_mapData.XmlMapData.parameters.cppGenerationDir))
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.ERROR, String.Format("Generation folder does not exist ({0})", _mapData.XmlMapData.parameters.cppGenerationDir));

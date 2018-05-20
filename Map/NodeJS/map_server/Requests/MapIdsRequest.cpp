@@ -2,6 +2,8 @@
 #include "MapData.h"
 #include "MessageTypeEnum.h"
 
+#include <iostream>
+
 namespace map_server
 {
     void MapIdsRequest::execute(void)

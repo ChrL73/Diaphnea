@@ -91,7 +91,7 @@ function sendRequest2(request, recursiveCall)
    {
       if (!recursiveCall)
       {
-         cppProcess2 = childProcess.spawn('./map_server2.exe', dbParameters);
+         cppProcess2 = childProcess.spawn('./map_server2.exe');
          
          // Don't crash on 'Connection reset' error
          cppProcess2.stdin.on('error', function(err)
@@ -117,7 +117,7 @@ function sendRequest2(request, recursiveCall)
             sendResponse(socketId, requestId, requestType, responseContent);
          });
 
-         sendRequest(request, true);
+         sendRequest2(request, true);
       }
    }
 }

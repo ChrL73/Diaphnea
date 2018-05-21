@@ -90,8 +90,8 @@ namespace MapDataProcessing
             {
                 pointDocument = new BsonDocument()
                 {
-                    { "x", Math.Round(x, 5) },
-                    { "y", Math.Round(y, 5) }
+                    { "x", x },
+                    { "y", y }
                 };
             }
             else
@@ -156,12 +156,12 @@ namespace MapDataProcessing
 
                 pointDocument = new BsonDocument()
                 {
-                    { "x1", Math.Round(x1, 5) },
-                    { "y1",  Math.Round(y1, 5) },
-                    { "x2",  Math.Round(x2, 5) },
-                    { "y2",  Math.Round(y2, 5) },
-                    { "x",  Math.Round(x, 5) },
-                    { "y",  Math.Round(y, 5) }
+                    { "x1", x1 },
+                    { "y1",  y1 },
+                    { "x2",  x2 },
+                    { "y2",  y2 },
+                    { "x", x },
+                    { "y", y }
                 };
             }
 

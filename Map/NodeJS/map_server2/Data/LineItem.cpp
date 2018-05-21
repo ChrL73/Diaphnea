@@ -16,7 +16,8 @@ namespace map_server
         _lineLookId(3 * lineLook->getLookId() + 1), _lineZIndex(lineLook->getLineZIndex()),
         _lineAlpha(lineLook->getLineAlpha()), _lineRed(lineLook->getLineRed()),
         _lineGreen(lineLook->getLineGreen()), _lineBlue(lineLook->getLineBlue()),
-        _lineSize(lineLook->getLineSize()), _multipointItem(multipointItem)
+        _lineSize(lineLook->getLineSize()), _multipointItem(multipointItem),
+        _hIntersections(0), _vIntersections(0)
     {
     }
 
@@ -26,7 +27,8 @@ namespace map_server
         _lineLookId(3 * polygonLook->getLookId() + 1), _lineZIndex(polygonLook->getContourZIndex()),
         _lineAlpha(polygonLook->getContourAlpha()), _lineRed(polygonLook->getContourRed()),
         _lineGreen(polygonLook->getContourGreen()), _lineBlue(polygonLook->getContourBlue()),
-        _lineSize(polygonLook->getContourSize()), _multipointItem(multipointItem)
+        _lineSize(polygonLook->getContourSize()), _multipointItem(multipointItem),
+        _hIntersections(0), _vIntersections(0)
     {
     }
 

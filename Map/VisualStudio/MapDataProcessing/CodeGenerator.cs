@@ -358,10 +358,10 @@ namespace MapDataProcessing
         {
             int offset = _currentMultipointItemOffset;
 
-            int[] xMinInt = doubleToIntArray(Math.Round(xMin, 5));
-            int[] xMaxInt = doubleToIntArray(Math.Round(xMax, 5));
-            int[] yMinInt = doubleToIntArray(Math.Round(-yMax, 5));
-            int[] yMaxInt = doubleToIntArray(Math.Round(-yMin, 5));
+            int[] xMinInt = doubleToIntArray(xMin);
+            int[] xMaxInt = doubleToIntArray(xMax);
+            int[] yMinInt = doubleToIntArray(-yMax);
+            int[] yMaxInt = doubleToIntArray(-yMin);
 
             List<int> pointListOffsets = new List<int>();
             foreach (List<double> pointList in lineList)
@@ -510,7 +510,7 @@ namespace MapDataProcessing
             int offset = _currentDoubleArrayOffset;
 
             string code = String.Format("{0}\n// {1}\n{2}",
-                offset == 0 ? "" : ",", offset, String.Join(",", values.Select(v => Math.Round(v, 5).ToString("G", CultureInfo.CreateSpecificCulture("en-US")))));
+                offset == 0 ? "" : ",", offset, String.Join(",", values.Select(v => v.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))));
             append("DoubleArrays.cpp", code);
             _currentDoubleArrayOffset += values.Count();
 

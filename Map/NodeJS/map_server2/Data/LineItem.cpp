@@ -32,6 +32,22 @@ namespace map_server
     {
     }
 
+	LineItem::~LineItem()
+	{
+		int i, n = _pointVector.size();
+		for (i = 0; i < n; ++i)
+		{
+			int j, m = _pointVector[i].size();
+			for (j = 0; j < m; ++j) delete _pointVector[i][j];
+		}
+
+		for (i = 0; i < _height; ++i) delete _hIntersections[i];
+		delete[] _hIntersections;
+
+		for (i = 0; i < _width; ++i) delete _vIntersections[i];
+		delete[] _vIntersections;
+	}
+
     const PointList *LineItem::getPointList(int resolutionIndex) const
     {
         return _multipointItem->getPointList(resolutionIndex);

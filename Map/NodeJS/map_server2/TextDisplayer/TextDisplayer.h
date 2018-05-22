@@ -64,7 +64,6 @@ namespace map_server
 
         TextDisplayer(const TextDisplayerParameters *parameters, const std::string& socketId, const char *requestId,
             double width, double height, double xFocus, double yFocus, double scale, bool createPotentialImage, SvgCreator *svgCreator, bool testMode);
-        ~TextDisplayer();
 
         void addItem(MapItem *item) { _itemVector.push_back(item); }
         bool start(void);

@@ -34,6 +34,7 @@ namespace map_server
 
     public:
         FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
+		~FilledPolygonItem();
 
         int getFillLookId(void) const { return _fillLookId; }
         int getFillZIndex(void) const { return _fillZIndex; }

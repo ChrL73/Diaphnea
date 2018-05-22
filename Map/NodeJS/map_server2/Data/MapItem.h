@@ -43,7 +43,7 @@ namespace map_server
             _textLookId(textLookId), _textAlpha(textAlpha), _textRed(textRed), _textGreen(textGreen),
             _textBlue(textBlue), _textSize(textSize), _framingLevel(framingLevel), _name(name) {}
 
-        virtual ~MapItem() {}
+		virtual ~MapItem();
 
         int getItemId(void) const { return _itemId; }
         const std::string& getElementId(void) const { return _elementId; }

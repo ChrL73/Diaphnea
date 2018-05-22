@@ -379,6 +379,9 @@ namespace map_server
         }
 
         //delete _svgCreator;
+
+		n = itemVector.size();
+		for (i = 0; i < n; ++i) delete itemVector[i];
     }
 
     void RenderRequest::displayText(int resolutionIndex)

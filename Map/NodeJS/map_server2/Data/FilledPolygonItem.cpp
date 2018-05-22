@@ -20,6 +20,15 @@ namespace map_server
     {
     }
 
+	FilledPolygonItem::~FilledPolygonItem()
+	{
+		int i, n = _pointVector.size();
+		for (i = 0; i < n; ++i) delete _pointVector[i];
+
+		for (i = 0; i < _height; ++i) delete _intersections[i];
+		delete[] _intersections;
+	}
+
     const PointList *FilledPolygonItem::getPointList(int resolutionIndex) const
     {
         return _multipointItem->getPointList(resolutionIndex);

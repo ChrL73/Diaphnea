@@ -45,6 +45,7 @@ namespace map_server
     public:
         LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
+		~LineItem();
 
         void updateLook(const PolygonLook *polygonLook);
 

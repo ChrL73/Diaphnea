@@ -180,6 +180,9 @@
     <ClCompile Include="..\..\NodeJS\map_server2\ThreadInfo.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="vld.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h">

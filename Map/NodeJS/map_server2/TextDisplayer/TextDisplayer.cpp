@@ -65,12 +65,6 @@ namespace map_server
         _mutex.unlock();
     }
 
-    TextDisplayer::~TextDisplayer()
-    {
-        int i, n = _itemVector.size();
-        for (i = 0; i < n; ++i) delete _itemVector[i];
-    }
-
     bool TextDisplayer::isDisplayerActive(void)
     {
         if (_testMode || _svgCreator) return true;

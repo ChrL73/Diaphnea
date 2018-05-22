@@ -199,6 +199,7 @@
     <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextInfoLine.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\TextDisplayer\TextPotential.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\ThreadInfo.cpp" />
+    <ClCompile Include="vld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server2\Data\BezierInfo.h" />

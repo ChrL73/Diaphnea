@@ -50,8 +50,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Data/BezierInfo.cpp" />
-		<Unit filename="Data/BezierInfo.h" />
 		<Unit filename="Data/CommonData.cpp" />
 		<Unit filename="Data/CommonData.h" />
 		<Unit filename="Data/ElementInfo.cpp" />
@@ -110,8 +108,20 @@
 		<Unit filename="Requests/RenderRequest.h" />
 		<Unit filename="Requests/Request.cpp" />
 		<Unit filename="Requests/Request.h" />
+		<Unit filename="Requests/SvgCreator.cpp" />
+		<Unit filename="Requests/SvgCreator.h" />
+		<Unit filename="Requests/SvgCurveInfo.cpp" />
+		<Unit filename="Requests/SvgCurveInfo.h" />
 		<Unit filename="Requests/SvgCustomColor.cpp" />
 		<Unit filename="Requests/SvgCustomColor.h" />
+		<Unit filename="Requests/SvgInfo.cpp" />
+		<Unit filename="Requests/SvgInfo.h" />
+		<Unit filename="Requests/SvgItemInfo.cpp" />
+		<Unit filename="Requests/SvgItemInfo.h" />
+		<Unit filename="Requests/SvgLineInfo.cpp" />
+		<Unit filename="Requests/SvgLineInfo.h" />
+		<Unit filename="Requests/SvgTextInfo.cpp" />
+		<Unit filename="Requests/SvgTextInfo.h" />
 		<Unit filename="TextDisplayer/Interval.cpp" />
 		<Unit filename="TextDisplayer/Interval.h" />
 		<Unit filename="TextDisplayer/PngImage.cpp" />

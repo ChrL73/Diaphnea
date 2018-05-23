@@ -5,6 +5,7 @@
 #include "ErrorEnum.h"
 #include "CommonData.h"
 #include "TextDisplayer.h"
+#include "SvgCreator.h"
 
 #include <iostream>
 #include <vector>
@@ -30,7 +31,7 @@ namespace map_server
     {
         Request::setCoutMutex(&_coutMutex);
         TextDisplayer::setCoutMutex(&_coutMutex);
-        //SvgCreator::setCoutMutex(&_coutMutex);
+        SvgCreator::setCoutMutex(&_coutMutex);
 
         _timeoutReference = time(0);
 
@@ -86,9 +87,11 @@ namespace map_server
 
             //request = "0 0 6 _France fr 800 600 0 n n n Aulne";
 
-			// 2 expected responses:
-			// 0 0 6 {"items":[[859,55,0]],"xFocus":-484.984,"yFocus":-174.604,"scale":11.626}
-			// 0 0 7 {"t":[["Aulne",-484.169,-161.366]],"e":"Aulne","x1":-484.255,"x2":-479.869,"y1":-162.656,"y2":-161.366,"s":20,"look":54}
+            // 2 expected responses:
+            // 0 0 6 {"items":[[859,55,0]],"xFocus":-484.984,"yFocus":-174.604,"scale":11.626}
+            // 0 0 7 {"t":[["Aulne",-484.169,-161.366]],"e":"Aulne","x1":-484.255,"x2":-479.869,"y1":-162.656,"y2":-161.366,"s":20,"look":54}
+
+            //request = "svg 0 6 _France fr 1410 907 0_ 4.08367 -423.4392223073853 -143.48961115369266 Bretagne # 9 #ff0000 0.784 10 #00ff00 0.996 11 #7878ff 0.784";
 
             _timeMutex.lock();
             _timeoutReference = time(0);

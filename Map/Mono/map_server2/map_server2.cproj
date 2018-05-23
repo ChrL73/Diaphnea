@@ -166,9 +166,6 @@
     <None Include="..\..\NodeJS\map_server2\Data\PointList.h">
       <Link>Data\PointList.h</Link>
     </None>
-    <None Include="..\..\NodeJS\map_server2\Data\BezierInfo.h">
-      <Link>Data\BezierInfo.h</Link>
-    </None>
     <None Include="..\..\NodeJS\map_server2\Data\Point.h">
       <Link>Data\Point.h</Link>
     </None>
@@ -177,6 +174,24 @@
     </None>
     <None Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.h">
       <Link>TextDisplayer\Interval.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgCreator.h">
+      <Link>Requests\SvgCreator.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgCurveInfo.h">
+      <Link>Requests\SvgCurveInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgInfo.h">
+      <Link>Requests\SvgInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgItemInfo.h">
+      <Link>Requests\SvgItemInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgLineInfo.h">
+      <Link>Requests\SvgLineInfo.h</Link>
+    </None>
+    <None Include="..\..\NodeJS\map_server2\Requests\SvgTextInfo.h">
+      <Link>Requests\SvgTextInfo.h</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -309,9 +324,6 @@
     <Compile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\PointLists.cpp">
       <Link>Data\generated_code\_France\PointLists.cpp</Link>
     </Compile>
-    <Compile Include="..\..\NodeJS\map_server2\Data\BezierInfo.cpp">
-      <Link>Data\BezierInfo.cpp</Link>
-    </Compile>
     <Compile Include="..\..\NodeJS\map_server2\Data\Point.cpp">
       <Link>Data\Point.cpp</Link>
     </Compile>
@@ -320,6 +332,24 @@
     </Compile>
     <Compile Include="..\..\NodeJS\map_server2\TextDisplayer\Interval.cpp">
       <Link>TextDisplayer\Interval.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgCreator.cpp">
+      <Link>Requests\SvgCreator.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgCurveInfo.cpp">
+      <Link>Requests\SvgCurveInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgInfo.cpp">
+      <Link>Requests\SvgInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgItemInfo.cpp">
+      <Link>Requests\SvgItemInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgLineInfo.cpp">
+      <Link>Requests\SvgLineInfo.cpp</Link>
+    </Compile>
+    <Compile Include="..\..\NodeJS\map_server2\Requests\SvgTextInfo.cpp">
+      <Link>Requests\SvgTextInfo.cpp</Link>
     </Compile>
   </ItemGroup>
 </Project>

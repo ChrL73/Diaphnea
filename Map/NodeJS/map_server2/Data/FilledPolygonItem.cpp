@@ -11,23 +11,21 @@ namespace map_server
     FilledPolygonItem::FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook) :
         MapItem(multipointItem->getItemId(), polygonElement->getElementId(), polygonElement->getImportance(), multipointItem->getXMin(), multipointItem->getXMax(),
         multipointItem->getYMin(), multipointItem->getYMax(), 3 * polygonLook->getLookId(),
-        polygonLook->getTextAlpha(), polygonLook->getTextRed(), polygonLook->getTextGreen(),
-        polygonLook->getTextBlue(), polygonLook->getTextSize(), polygonElement->getFramingLevel(), name),
+        polygonLook->getTextColor(), polygonLook->getTextOpacity(), polygonLook->getTextSize(), polygonElement->getFramingLevel(), name),
         _fillLookId(3 * polygonLook->getLookId() + 2), _fillZIndex(polygonLook->getFillZIndex()),
-        _fillAlpha(polygonLook->getFillAlpha()), _fillRed(polygonLook->getFillRed()),
-        _fillGreen(polygonLook->getFillGreen()), _fillBlue(polygonLook->getFillBlue()), _multipointItem(multipointItem),
+        _fillColor(polygonLook->getFillColor()), _fillOpacity(polygonLook->getFillOpacity()), _multipointItem(multipointItem),
         _intersections(0)
     {
     }
 
-	FilledPolygonItem::~FilledPolygonItem()
-	{
-		int i, n = _pointVector.size();
-		for (i = 0; i < n; ++i) delete _pointVector[i];
+    FilledPolygonItem::~FilledPolygonItem()
+    {
+        int i, n = _pointVector.size();
+        for (i = 0; i < n; ++i) delete _pointVector[i];
 
-		for (i = 0; i < _height; ++i) delete _intersections[i];
-		delete[] _intersections;
-	}
+        for (i = 0; i < _height; ++i) delete _intersections[i];
+        delete[] _intersections;
+    }
 
     const PointList *FilledPolygonItem::getPointList(int resolutionIndex) const
     {

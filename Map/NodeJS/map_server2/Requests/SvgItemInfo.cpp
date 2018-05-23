@@ -1,4 +1,4 @@
-#include "BezierInfo.h"
+#include "SvgItemInfo.h"
 
 namespace map_server
 {

@@ -22,10 +22,8 @@ namespace map_server
         const double _yMax;
 
         const int _textLookId;
-        const int _textAlpha;
-        const int _textRed;
-        const int _textGreen;
-        const int _textBlue;
+        const char * const _textColor;
+        const double _textOpacity;
         const double _textSize;
 
         const int _framingLevel;
@@ -38,12 +36,11 @@ namespace map_server
 
     public:
         MapItem(int itemId, const std::string& elementId, double importance, double xMin, double xMax, double yMin, double yMax,
-                int textLookId, int textAlpha, int textRed, int textGreen, int textBlue, double textSize, int framingLevel, const NameTranslation *name) :
+                int textLookId, const char *textColor, double textOpacity, double textSize, int framingLevel, const NameTranslation *name) :
             _itemId(itemId), _elementId(elementId), _importance(importance), _xMin(xMin), _xMax(xMax), _yMin(yMin), _yMax(yMax),
-            _textLookId(textLookId), _textAlpha(textAlpha), _textRed(textRed), _textGreen(textGreen),
-            _textBlue(textBlue), _textSize(textSize), _framingLevel(framingLevel), _name(name) {}
+            _textLookId(textLookId), _textColor(textColor), _textOpacity(textOpacity), _textSize(textSize), _framingLevel(framingLevel), _name(name) {}
 
-		virtual ~MapItem();
+        virtual ~MapItem();
 
         int getItemId(void) const { return _itemId; }
         const std::string& getElementId(void) const { return _elementId; }
@@ -55,10 +52,8 @@ namespace map_server
         double getYMax(void) const { return _yMax; }
 
         int getTextLookId(void) const { return _textLookId; }
-        int getTextAlpha(void) const { return _textAlpha; }
-        int getTextRed(void) const { return _textRed; }
-        int getTextGreen(void) const { return _textGreen; }
-        int getTextBlue(void) const { return _textBlue; }
+        const char *getTextColor(void) const { return _textColor; }
+        double getTextOpacity(void) const { return _textOpacity; }
         double getTextSize(void) const { return _textSize; }
 
         int getFramingLevel(void) const { return _framingLevel; }
@@ -69,6 +64,7 @@ namespace map_server
 
         virtual int getElementLookId(void) const = 0;
         virtual bool hasResolution(void) const = 0;
+        virtual int getZIndex(void) const = 0;
 
         void addRepulsiveCenter(const RepulsiveCenter *repulsiveCenter) { _repulsiveCenterVector.push_back(repulsiveCenter); }
         const std::vector<const RepulsiveCenter *>& getRepulsiveCenterVector(void) const { return _repulsiveCenterVector; }

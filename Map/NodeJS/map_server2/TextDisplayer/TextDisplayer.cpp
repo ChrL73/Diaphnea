@@ -1,7 +1,6 @@
 #define _USE_MATH_DEFINES
 
 #include "TextDisplayer.h"
-//#include "Potential.h"
 #include "RepulsiveCenter.h"
 #include "TextDisplayerParameters.h"
 #include "PngImage.h"
@@ -12,9 +11,9 @@
 #include "TextInfoLine.h"
 #include "MessageTypeEnum.h"
 #include "Interval.h"
-/*#include "SvgCreator.h"
+#include "SvgCreator.h"
 #include "SvgTextInfo.h"
-#include "SvgLineInfo.h"*/
+#include "SvgLineInfo.h"
 
 #include <cmath>
 /*#include <chrono>
@@ -627,18 +626,17 @@ namespace map_server
         yMin = _yFocus + (yMin - 0.5 * _height) / _scale;
         yMax = _yFocus + (yMax - 0.5 * _height) / _scale;
 
-        //SvgTextInfo *svgTextInfo = 0;
+        SvgTextInfo *svgTextInfo = 0;
 
-        //if (_svgCreator == 0)
+        if (_svgCreator == 0)
         {
             _coutMutexPtr->lock();
-            std::cout << _socketId << " " << _requestId << " " << map_server::TEXT
-                << " {\"t\":[";
+            std::cout << _socketId << " " << _requestId << " " << map_server::TEXT << " {\"t\":[";
         }
-        /*else
+        else
         {
-            svgTextInfo = new SvgTextInfo(textInfo);
-        }*/
+            svgTextInfo = new SvgTextInfo(textInfo, item->getTextLookId(), item->getTextColor(), item->getTextOpacity(), item->getFontSize());
+        }
 
         int i, n = textInfo->getLineVector().size();
         for (i = 0; i < n; ++i)
@@ -649,19 +647,18 @@ namespace map_server
             x = _xFocus + (x - 0.5 * _width) / _scale;
             y = _yFocus + (y - 0.5 * _height) / _scale;
 
-            //if (_svgCreator == 0)
+            if (_svgCreator == 0)
             {
-                std::cout << "[\"" << line->getText() << "\","
-                    << x << "," << y << "]";
+                std::cout << "[\"" << line->getText() << "\"," << x << "," << y << "]";
                 if (i != n - 1) std::cout << ",";
             }
-            /*else
+            else
             {
                 svgTextInfo->addLine(new SvgLineInfo(line->getText(), x, y));
-            }*/
+            }
         }
 
-        //if (_svgCreator == 0)
+        if (_svgCreator == 0)
         {
             std::cout  << "],\"e\":\"" << item->getElementId()
                 << "\",\"x1\":" << xMin
@@ -673,10 +670,10 @@ namespace map_server
                 << "}" << std::endl;
             _coutMutexPtr->unlock();
         }
-        /*else
+        else
         {
-            _svgCreator->addInfo(textInfo->getZIndex(), svgTextInfo);
-        }*/
+            _svgCreator->addInfo(item->getZIndex(), svgTextInfo);
+        }
 
         RepulsiveCenter *center = new RepulsiveCenter(_parameters, textInfo->getX(), textInfo->getY(), 1.0, 0.0,
             _parameters->getTextRadiusCoeff() * textInfo->getWidth(), _parameters->getTextRadiusCoeff() * textInfo->getHeight(), _parameters->getTextRefPotential(), true, true);

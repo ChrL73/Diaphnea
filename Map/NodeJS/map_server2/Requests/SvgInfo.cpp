@@ -1,4 +1,4 @@
-#include "Point.h"
+#include "SvgInfo.h"
 
 namespace map_server
 {

@@ -19,6 +19,9 @@ namespace map_server
         // Array of PointList (array size is 'sampleLengthCount' defined in 'MapData.cpp')
         int _pointLists;
 
+        int _cap1Round;
+        int _cap2Round;
+
     public:
         double getXMin(void) const { return _xMin; }
         double getXMax(void) const { return _xMax; }
@@ -29,5 +32,7 @@ namespace map_server
 
         const PointList *getPointList(int i) const { return reinterpret_cast<const PointList *>(pointLists + *(intArrays + _pointLists + i)); }
 
+        bool cap1Round(void) const { return static_cast<bool>(_cap1Round); }
+        bool cap2Round(void) const { return static_cast<bool>(_cap2Round); }
     };
 }

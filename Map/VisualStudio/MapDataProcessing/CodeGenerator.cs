@@ -354,7 +354,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment, List<List<double>> lineList)
+        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string comment, List<List<double>> lineList, bool cap1Round, bool cap2Round)
         {
             int offset = _currentMultipointItemOffset;
 
@@ -370,12 +370,13 @@ namespace MapDataProcessing
             }
             int pointArrayOffset = getIntArrayOffset(pointListOffsets);
 
-            string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
+            string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
                 offset == 0 ? "" : ",", offset, comment,
-                xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId, pointArrayOffset);
+                xMinInt[0], xMinInt[1], xMaxInt[0], xMaxInt[1], yMinInt[0], yMinInt[1], yMaxInt[0], yMaxInt[1], itemId, pointArrayOffset,
+                cap1Round ? 1 : 0, cap2Round ? 1 : 0);
 
             append("MultipointItems.cpp", code);
-            _currentMultipointItemOffset += 10;
+            _currentMultipointItemOffset += 12;
 
             return offset;
         }
@@ -401,14 +402,18 @@ namespace MapDataProcessing
 
             int[] pointSize = doubleToIntArray(look.pointSize);
             int[] textSize = doubleToIntArray(look.textSize);
+            int[] pointOpacity = doubleToIntArray((double)look.pointAlpha / 255.0);
+            int[] textOpacity = doubleToIntArray((double)look.textAlpha / 255.0);
+            int pointColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", look.pointRed, look.pointGreen, look.pointBlue));
+            int textColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", look.textRed, look.textGreen, look.textBlue));
 
-            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
                 offset == 0 ? "" : ",", offset,
-                lookId, (int)look.pointZIndex, (int)look.pointAlpha, (int)look.pointRed, (int)look.pointGreen, (int)look.pointBlue, pointSize[0], pointSize[1],
-                (int)look.textAlpha, (int)look.textRed, (int)look.textGreen, (int)look.textBlue, textSize[0], textSize[1]);
+                lookId, (int)look.pointZIndex, pointSize[0], pointSize[1], pointOpacity[0], pointOpacity[1], pointColorOffset,
+                textColorOffset, textSize[0], textSize[1], textOpacity[0], textOpacity[1]);
 
             append("PointLooks.cpp", code);
-            _currentPointLookOffset += 14;
+            _currentPointLookOffset += 12;
 
             return offset;
         }
@@ -419,14 +424,18 @@ namespace MapDataProcessing
 
             int[] lineSize = doubleToIntArray(look.lineSize);
             int[] textSize = doubleToIntArray(look.textSize);
+            int[] lineOpacity = doubleToIntArray((double)look.lineAlpha / 255.0);
+            int[] textOpacity = doubleToIntArray((double)look.textAlpha / 255.0);
+            int lineColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", look.lineRed, look.lineGreen, look.lineBlue));
+            int textColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", look.textRed, look.textGreen, look.textBlue));
 
-            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}",
                 offset == 0 ? "" : ",", offset,
-                lookId, (int)look.lineZIndex, (int)look.lineAlpha, (int)look.lineRed, (int)look.lineGreen, (int)look.lineBlue, lineSize[0], lineSize[1],
-                (int)look.textAlpha, (int)look.textRed, (int)look.textGreen, (int)look.textBlue, textSize[0], textSize[1]);
+                lookId, (int)look.lineZIndex, lineSize[0], lineSize[1], lineOpacity[0], lineOpacity[1], lineColorOffset,
+                textColorOffset, textSize[0], textSize[1], textOpacity[0], textOpacity[1]);
 
             append("LineLooks.cpp", code);
-            _currentLineLookOffset += 14;
+            _currentLineLookOffset += 12;
 
             return offset;
         }
@@ -481,15 +490,21 @@ namespace MapDataProcessing
 
             int[] contourSizeInt = doubleToIntArray(contourSize);
             int[] textSizeInt = doubleToIntArray(textSize);
+            int[] contourOpacity = doubleToIntArray((double)contourAlpha / 255.0);
+            int[] textOpacity = doubleToIntArray((double)textAlpha / 255.0);
+            int[] fillOpacity = doubleToIntArray((double)fillAlpha / 255.0);
+            int contourColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", contourRed, contourGreen, contourBlue));
+            int textColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", textRed, textGreen, textBlue));
+            int fillColorOffset = getStringOffset(String.Format("#{0:x2}{1:x2}{2:x2}", fillRed, fillGreen, fillBlue));
 
-            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},{20}",
+            string code = String.Format("{0}\n// {1}\n{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17}",
                 offset == 0 ? "" : ",", offset,
-                lookId, contourZIndex, contourAlpha, contourRed, contourGreen, contourBlue, contourSizeInt[0], contourSizeInt[1],
-                textAlpha, textRed, textGreen, textBlue, textSizeInt[0], textSizeInt[1],
-                fillZIndex, fillAlpha, fillRed, fillGreen, fillBlue);
+                lookId, contourZIndex, contourSizeInt[0], contourSizeInt[1], contourOpacity[0], contourOpacity[1], contourColorOffset,
+                textColorOffset, textSizeInt[0], textSizeInt[1], textOpacity[0], textOpacity[1],
+                fillZIndex, fillColorOffset, fillOpacity[0], fillOpacity[1]);
 
             append("PolygonLooks.cpp", code);
-            _currentPolygonLookOffset += 19;
+            _currentPolygonLookOffset += 16;
 
             return offset;
         }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MapData.h"
+
 namespace map_server
 {
     class PolygonLook
@@ -8,44 +10,32 @@ namespace map_server
         int _lookId;
 
         int _contourZIndex;
-        int _contourAlpha;
-        int _contourRed;
-        int _contourGreen;
-        int _contourBlue;
         double _contourSize;
+        double _contourOpacity;
+        int _contourColor; // String
 
-        int _textAlpha;
-        int _textRed;
-        int _textGreen;
-        int _textBlue;
+        int _textColor; // String
         double _textSize;
+        double _textOpacity;
 
         int _fillZIndex;
-        int _fillAlpha;
-        int _fillRed;
-        int _fillGreen;
-        int _fillBlue;
+        int _fillColor; // String
+        double _fillOpacity;
 
     public:
         int getLookId(void) const { return _lookId; }
 
         int getContourZIndex(void) const { return _contourZIndex; }
-        int getContourAlpha(void) const { return _contourAlpha; }
-        int getContourRed(void) const { return _contourRed; }
-        int getContourGreen(void) const { return _contourGreen; }
-        int getContourBlue(void) const { return _contourBlue; }
         double getContourSize(void) const { return _contourSize; }
+        double getContourOpacity(void) const { return _contourOpacity; }
+        const char *getContourColor(void) const { return reinterpret_cast<const char *>(strings) + _contourColor; }
 
-        int getTextAlpha(void) const { return _textAlpha; }
-        int getTextRed(void) const { return _textRed; }
-        int getTextGreen(void) const { return _textGreen; }
-        int getTextBlue(void) const { return _textBlue; }
+        const char *getTextColor(void) const { return reinterpret_cast<const char *>(strings) + _textColor; }
         double getTextSize(void) const { return _textSize; }
+        double getTextOpacity(void) const { return _textOpacity; }
 
         int getFillZIndex(void) const { return _fillZIndex; }
-        int getFillAlpha(void) const { return _fillAlpha; }
-        int getFillRed(void) const { return _fillRed; }
-        int getFillGreen(void) const { return _fillGreen; }
-        int getFillBlue(void) const { return _fillBlue; }
+        const char *getFillColor(void) const { return reinterpret_cast<const char *>(strings) + _fillColor; }
+        double getFillOpacity(void) const { return _fillOpacity; }
     };
 }

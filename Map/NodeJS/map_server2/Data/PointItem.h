@@ -12,10 +12,8 @@ namespace map_server
     private:
         const int _pointLookId;
         const int _pointZIndex;
-        const int _pointAlpha;
-        const int _pointRed;
-        const int _pointGreen;
-        const int _pointBlue;
+        const char * const _pointColor;
+        const double _pointOpacity;
         const double _pointSize;
 
         double _x;
@@ -24,16 +22,15 @@ namespace map_server
 
         int getElementLookId(void) const { return _pointLookId; }
         bool hasResolution(void) const { return false; }
+        int getZIndex(void) const { return _pointZIndex; }
 
     public:
         PointItem(const PointElement *pointElement, const NameTranslation *name, const PointLook *pointLook);
 
         int getPointLookId(void) const { return _pointLookId; }
         int getPointZIndex(void) const { return _pointZIndex; }
-        int getPointAlpha(void) const { return _pointAlpha; }
-        int getPointRed(void) const { return _pointRed; }
-        int getPointGreen(void) const { return _pointGreen; }
-        int getPointBlue(void) const { return _pointBlue; }
+        const char *getPointColor(void) const { return _pointColor; }
+        double getPointOpacity(void) const { return _pointOpacity; }
         double getPointSize(void) const { return _pointSize; }
 
         void setX(double x) { _x = x; }

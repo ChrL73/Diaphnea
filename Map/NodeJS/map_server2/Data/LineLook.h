@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MapData.h"
+
 namespace map_server
 {
     class LineLook
@@ -8,32 +10,24 @@ namespace map_server
         int _lookId;
 
         int _lineZIndex;
-        int _lineAlpha;
-        int _lineRed;
-        int _lineGreen;
-        int _lineBlue;
         double _lineSize;
+        double _lineOpacity;
+        int _lineColor; // String
 
-        int _textAlpha;
-        int _textRed;
-        int _textGreen;
-        int _textBlue;
+        int _textColor; // String
         double _textSize;
+        double _textOpacity;
 
     public:
         int getLookId(void) const { return _lookId; }
 
         int getLineZIndex(void) const { return _lineZIndex; }
-        int getLineAlpha(void) const { return _lineAlpha; }
-        int getLineRed(void) const { return _lineRed; }
-        int getLineGreen(void) const { return _lineGreen; }
-        int getLineBlue(void) const { return _lineBlue; }
         double getLineSize(void) const { return _lineSize; }
+        double getLineOpacity(void) const { return _lineOpacity; }
+        const char *getLineColor(void) const { return reinterpret_cast<const char *>(strings) + _lineColor; }
 
-        int getTextAlpha(void) const { return _textAlpha; }
-        int getTextRed(void) const { return _textRed; }
-        int getTextGreen(void) const { return _textGreen; }
-        int getTextBlue(void) const { return _textBlue; }
+        const char *getTextColor(void) const { return reinterpret_cast<const char *>(strings) + _textColor; }
         double getTextSize(void) const { return _textSize; }
+        double getTextOpacity(void) const { return _textOpacity; }
     };
 }

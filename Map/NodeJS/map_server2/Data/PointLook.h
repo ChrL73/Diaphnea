@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MapData.h"
+
 namespace map_server
 {
     class PointLook
@@ -8,32 +10,24 @@ namespace map_server
         int _lookId;
 
         int _pointZIndex;
-        int _pointAlpha;
-        int _pointRed;
-        int _pointGreen;
-        int _pointBlue;
         double _pointSize;
+        double _pointOpacity;
+        int _pointColor; // String
 
-        int _textAlpha;
-        int _textRed;
-        int _textGreen;
-        int _textBlue;
+        int _textColor; // String
         double _textSize;
+        double _textOpacity;
 
     public:
         int getLookId(void) const { return _lookId; }
 
         int getPointZIndex(void) const { return _pointZIndex; }
-        int getPointAlpha(void) const { return _pointAlpha; }
-        int getPointRed(void) const { return _pointRed; }
-        int getPointGreen(void) const { return _pointGreen; }
-        int getPointBlue(void) const { return _pointBlue; }
         double getPointSize(void) const { return _pointSize; }
+        double getPointOpacity(void) const { return _pointOpacity; }
+        const char *getPointColor(void) const { return reinterpret_cast<const char *>(strings) + _pointColor; }
 
-        int getTextAlpha(void) const { return _textAlpha; }
-        int getTextRed(void) const { return _textRed; }
-        int getTextGreen(void) const { return _textGreen; }
-        int getTextBlue(void) const { return _textBlue; }
+        const char *getTextColor(void) const { return reinterpret_cast<const char *>(strings) + _textColor; }
         double getTextSize(void) const { return _textSize; }
+        double getTextOpacity(void) const { return _textOpacity; }
     };
 }

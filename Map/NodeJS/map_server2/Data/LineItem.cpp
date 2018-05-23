@@ -11,11 +11,10 @@ namespace map_server
 {
     LineItem::LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook) :
         MapItem(multipointItem->getItemId(), lineElement->getElementId(), lineElement->getImportance(), multipointItem->getXMin(), multipointItem->getXMax(),
-        multipointItem->getYMin(), multipointItem->getYMax(), 3 * lineLook->getLookId(), lineLook->getTextAlpha(),
-        lineLook->getTextRed(), lineLook->getTextGreen(), lineLook->getTextBlue(), lineLook->getTextSize(), lineElement->getFramingLevel(), name),
+        multipointItem->getYMin(), multipointItem->getYMax(), 3 * lineLook->getLookId(),
+        lineLook->getTextColor(), lineLook->getLineOpacity(), lineLook->getTextSize(), lineElement->getFramingLevel(), name),
         _lineLookId(3 * lineLook->getLookId() + 1), _lineZIndex(lineLook->getLineZIndex()),
-        _lineAlpha(lineLook->getLineAlpha()), _lineRed(lineLook->getLineRed()),
-        _lineGreen(lineLook->getLineGreen()), _lineBlue(lineLook->getLineBlue()),
+        _lineColor(lineLook->getLineColor()), _lineOpacity(lineLook->getLineOpacity()),
         _lineSize(lineLook->getLineSize()), _multipointItem(multipointItem),
         _hIntersections(0), _vIntersections(0)
     {
@@ -23,34 +22,43 @@ namespace map_server
 
     LineItem::LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook) :
         MapItem(multipointItem->getItemId(), "", -1.0, multipointItem->getXMin(), multipointItem->getXMax(),
-        multipointItem->getYMin(), multipointItem->getYMax(),-1, 0, 0, 0, 0, 0.0, -1, 0),
+        multipointItem->getYMin(), multipointItem->getYMax(),-1, 0, 0.0, 0.0, -1, 0),
         _lineLookId(3 * polygonLook->getLookId() + 1), _lineZIndex(polygonLook->getContourZIndex()),
-        _lineAlpha(polygonLook->getContourAlpha()), _lineRed(polygonLook->getContourRed()),
-        _lineGreen(polygonLook->getContourGreen()), _lineBlue(polygonLook->getContourBlue()),
+        _lineColor(polygonLook->getContourColor()), _lineOpacity(polygonLook->getContourOpacity()),
         _lineSize(polygonLook->getContourSize()), _multipointItem(multipointItem),
         _hIntersections(0), _vIntersections(0)
     {
     }
 
-	LineItem::~LineItem()
-	{
-		int i, n = _pointVector.size();
-		for (i = 0; i < n; ++i)
-		{
-			int j, m = _pointVector[i].size();
-			for (j = 0; j < m; ++j) delete _pointVector[i][j];
-		}
+    LineItem::~LineItem()
+    {
+        int i, n = _pointVector.size();
+        for (i = 0; i < n; ++i)
+        {
+            int j, m = _pointVector[i].size();
+            for (j = 0; j < m; ++j) delete _pointVector[i][j];
+        }
 
-		for (i = 0; i < _height; ++i) delete _hIntersections[i];
-		delete[] _hIntersections;
+        for (i = 0; i < _height; ++i) delete _hIntersections[i];
+        delete[] _hIntersections;
 
-		for (i = 0; i < _width; ++i) delete _vIntersections[i];
-		delete[] _vIntersections;
-	}
+        for (i = 0; i < _width; ++i) delete _vIntersections[i];
+        delete[] _vIntersections;
+    }
 
     const PointList *LineItem::getPointList(int resolutionIndex) const
     {
         return _multipointItem->getPointList(resolutionIndex);
+    }
+
+    bool LineItem::cap1Round(void) const
+    {
+        return _multipointItem->cap1Round();
+    }
+
+    bool LineItem::cap2Round(void) const
+    {
+        return _multipointItem->cap2Round();
     }
 
     void LineItem::updateLook(const PolygonLook *polygonLook)
@@ -58,10 +66,8 @@ namespace map_server
         if (polygonLook->getContourZIndex() < _lineZIndex)
         {
             _lineZIndex = polygonLook->getContourZIndex();
-            _lineAlpha = polygonLook->getContourAlpha();
-            _lineRed = polygonLook->getContourRed();
-            _lineGreen = polygonLook->getContourGreen();
-            _lineBlue = polygonLook->getContourBlue();
+            _lineColor = polygonLook->getContourColor();
+            _lineOpacity = polygonLook->getContourOpacity();
             _lineSize = polygonLook->getContourSize();
             _lineLookId = 3 * polygonLook->getLookId() + 1;
         }

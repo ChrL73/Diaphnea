@@ -19,8 +19,8 @@
 #include "TextInfoLine.h"
 #include "TextDisplayerParameters.h"
 #include "ElementName.h"
-//#include "SvgCreator.h"
-//#include "SvgItemInfo.h"
+#include "SvgCreator.h"
+#include "SvgItemInfo.h"
 #include "ErrorEnum.h"
 #include "SvgCustomColor.h"
 //#include "Category.h"
@@ -49,7 +49,7 @@ namespace map_server
 
     void RenderRequest::execute()
     {
-        //bool createSvg = (strcmp(_socketId, "svg") == 0);
+        bool createSvg = (strcmp(_socketId, "svg") == 0);
 
         std::map<int, PointItem *> pointItems;
         std::map<int, LineItem *> lineItems;
@@ -58,8 +58,6 @@ namespace map_server
         std::set<std::string> coveredElementSet;
 
         int languageIndex = _commonData->getLanguageIndex(_languageId);
-
-        //_commonData->lock();
 
         unsigned int i, n = _elementIds.size();
         for (i = 0; i < n; ++i)
@@ -153,8 +151,6 @@ namespace map_server
             }*/
         }
 
-        //_commonData->unlock();
-
         n = itemVector.size();
 
         if (n != 0)
@@ -234,12 +230,12 @@ namespace map_server
                 _scale = sqrt(_widthInPixels * _widthInPixels + _heightInPixels * _heightInPixels) / geoSize;
             }
 
-			double wantedLength = resolutionThreshold / _scale;
-			int resolutionIndex;
-			for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
-			{
-				if (wantedLength > sampleLengths[resolutionIndex]) break;
-			}
+            double wantedLength = resolutionThreshold / _scale;
+            int resolutionIndex;
+            for (resolutionIndex = sampleLengthCount - 1; resolutionIndex > 0; --resolutionIndex)
+            {
+                if (wantedLength > sampleLengths[resolutionIndex]) break;
+            }
 
             const double r = 0.6;
             double dx = r * _widthInPixels / _scale;
@@ -267,12 +263,12 @@ namespace map_server
             yMin = _yFocus - dy;
             yMax = _yFocus + dy;
 
-            //double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
+            double sizeFactor = sizeParameter1 / (sizeParameter2 + _scale);
 
             std::stringstream response;
 
-            /*if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
-            else*/ response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
+            if (createSvg) _svgCreator = new SvgCreator(_widthInPixels, _heightInPixels, _scale, sizeFactor, _xFocus, _yFocus, _socketId, _requestId, &_customColorMap);
+            else response << _socketId << " " << _requestId << " " << map_server::RENDER << " {\"items\":[";
 
             std::map<std::string, std::vector<LineItem *> > lineItemAssociationMap;
 
@@ -288,11 +284,11 @@ namespace map_server
                     if (item->hasResolution()) response << "," << resolutionIndex;
                     response << "]";
                 }
-                /*else
+                else
                 {
-                    SvgItemInfo *svgItemInfo = new SvgItemInfo(item, item->getCurrentLook(_lookIndex), resolutionIndex);
-                    _svgCreator->addInfo(item->getCurrentLook(_lookIndex)->getZIndex(), svgItemInfo);
-                }*/
+                    SvgItemInfo *svgItemInfo = new SvgItemInfo(item, resolutionIndex);
+                    _svgCreator->addInfo(item->getZIndex(), svgItemInfo);
+                }
 
                 if (languageIndex != -1 && coveredElementSet.find(item->getElementId()) == coveredElementSet.end() &&
                     item->getXMax() >= xMin && item->getXMin() <= xMax && item->getYMax() >= yMin && item->getYMin() <= yMax)
@@ -378,10 +374,10 @@ namespace map_server
             _coutMutexPtr->unlock();
         }
 
-        //delete _svgCreator;
+        delete _svgCreator;
 
-		n = itemVector.size();
-		for (i = 0; i < n; ++i) delete itemVector[i];
+        n = itemVector.size();
+        for (i = 0; i < n; ++i) delete itemVector[i];
     }
 
     void RenderRequest::displayText(int resolutionIndex)
@@ -521,7 +517,7 @@ namespace map_server
         FT_Done_FreeType(library);
 
         textDisplayer.start();
-        //if (_svgCreator != 0) _svgCreator->execute();
+        if (_svgCreator != 0) _svgCreator->execute();
     }
 
     void RenderRequest::setTextInfo(MapItem *item, FT_Face face)

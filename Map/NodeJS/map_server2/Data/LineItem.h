@@ -19,15 +19,14 @@ namespace map_server
     private:
         int _lineLookId;
         int _lineZIndex;
-        int _lineAlpha;
-        int _lineRed;
-        int _lineGreen;
-        int _lineBlue;
+        const char *_lineColor;
+        double _lineOpacity;
         double _lineSize;
         const MultipointItem * const _multipointItem;
 
         int getElementLookId(void) const { return _lineLookId; }
         bool hasResolution(void) const { return true; }
+        int getZIndex(void) const { return _lineZIndex; }
 
         std::vector<LineItem *> _associatedLineVector;
         std::vector<std::vector<const Point *> > _pointVector;
@@ -45,19 +44,19 @@ namespace map_server
     public:
         LineItem(const LineElement *lineElement, const NameTranslation *name, const MultipointItem *multipointItem, const LineLook *lineLook);
         LineItem(const MultipointItem *multipointItem, const PolygonLook *polygonLook);
-		~LineItem();
+        ~LineItem();
 
         void updateLook(const PolygonLook *polygonLook);
 
         int getLineLookId(void) const { return _lineLookId; }
         int getLineZIndex(void) const { return _lineZIndex; }
-        int getLineAlpha(void) const { return _lineAlpha; }
-        int getLineRed(void) const { return _lineRed; }
-        int getLineGreen(void) const { return _lineGreen; }
-        int getLineBlue(void) const { return _lineBlue; }
+        const char *getLineColor(void) const { return _lineColor; }
+        double getLineOpacity(void) const { return _lineOpacity; }
         double getLineSize(void) const { return _lineSize; }
 
         const PointList *getPointList(int resolutionIndex) const;
+        bool cap1Round(void) const;
+        bool cap2Round(void) const;
 
         void setAssociatedLineVector(const std::vector<LineItem *>& associatedLineVector) { _associatedLineVector = associatedLineVector; }
         int getAssociatedLineCount(void) const { return _associatedLineVector.size(); }

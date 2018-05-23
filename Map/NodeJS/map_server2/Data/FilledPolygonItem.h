@@ -15,12 +15,10 @@ namespace map_server
     class FilledPolygonItem : public MapItem
     {
     private:
-        int _fillLookId;
-        int _fillZIndex;
-        int _fillAlpha;
-        int _fillRed;
-        int _fillGreen;
-        int _fillBlue;
+        const int _fillLookId;
+        const int _fillZIndex;
+        const char * const _fillColor;
+        const double _fillOpacity;
 
         const MultipointItem * const _multipointItem;
         std::vector<const Point *> _pointVector;
@@ -31,17 +29,16 @@ namespace map_server
 
         int getElementLookId(void) const { return _fillLookId; }
         bool hasResolution(void) const { return true; }
+        int getZIndex(void) const { return _fillZIndex; }
 
     public:
         FilledPolygonItem(const PolygonElement *polygonElement, const NameTranslation *name, const MultipointItem *multipointItem, const PolygonLook *polygonLook);
-		~FilledPolygonItem();
+        ~FilledPolygonItem();
 
         int getFillLookId(void) const { return _fillLookId; }
         int getFillZIndex(void) const { return _fillZIndex; }
-        int getFillAlpha(void) const { return _fillAlpha; }
-        int getFillRed(void) const { return _fillRed; }
-        int getFillGreen(void) const { return _fillGreen; }
-        int getFillBlue(void) const { return _fillBlue; }
+        const char *getFillColor(void) const { return _fillColor; }
+        double getFillOpacity(void) const { return _fillOpacity; }
 
         const PointList *getPointList(int resolutionIndex) const;
         void addPoint(double x, double y);

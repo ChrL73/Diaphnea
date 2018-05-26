@@ -2,9 +2,10 @@
 
 namespace map_server
 {
+    typedef struct { int a; int b; double *c; } pList;
+
     extern unsigned char strings[];
     extern int intArrays[];
-    extern double doubleArrays[];
     extern int pointElements[];
     extern int lineElements[];
     extern int polygonElements[];
@@ -26,5 +27,5 @@ namespace map_server
     extern int languageIds[];
     extern int nameTranslations[];
     extern int elementNames[];
-    extern int pointLists[];
+    extern pList pointLists[];
 }

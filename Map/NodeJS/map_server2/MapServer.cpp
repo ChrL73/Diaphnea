@@ -18,7 +18,7 @@ namespace map_server
 {
     MapServer::MapServer(time_t timeoutInSeconds, int cleanThreadSleepMs, int checkTimeoutSleepMs, bool softExit) :
             _commonData(new CommonData()), _timeoutInSeconds(timeoutInSeconds), _cleanThreadSleepMs(cleanThreadSleepMs),
-            _checkTimeoutSleepMs(checkTimeoutSleepMs), _softExit(softExit)
+            _checkTimeoutSleepMs(checkTimeoutSleepMs), _softExit(softExit), _stopRequested(false)
     {
     }
 
@@ -65,7 +65,7 @@ namespace map_server
             if (request.size() == 0) break;
 
             // tmp
-            request = "0 0 6 _France fr 800 600 0 n n n 01";
+            //request = "0 0 6 _France fr 800 600 0 n n n 01";
 
             // 2 expected responses:
             // 0 0 6 {"items":[[14,17,1],[624,16,1],[541,16,1],[626,16,1],[540,16,1],[627,16,1],[485,16,1],[625,16,1]],"xFocus":212.02,"yFocus":91.2119,"scale":5.2446}

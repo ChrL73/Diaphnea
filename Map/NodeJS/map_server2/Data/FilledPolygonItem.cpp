@@ -14,7 +14,7 @@ namespace map_server
         polygonLook->getTextColor(), polygonLook->getTextOpacity(), polygonLook->getTextSize(), polygonElement->getFramingLevel(), name),
         _fillLookId(3 * polygonLook->getLookId() + 2), _fillZIndex(polygonLook->getFillZIndex()),
         _fillColor(polygonLook->getFillColor()), _fillOpacity(polygonLook->getFillOpacity()), _multipointItem(multipointItem),
-        _intersections(0)
+        _intersections(0), _height(0)
     {
     }
 

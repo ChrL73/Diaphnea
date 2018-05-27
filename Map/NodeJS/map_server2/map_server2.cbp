@@ -44,7 +44,7 @@
 					<Add option="-s" />
 					<Add option="-pthread `libpng-config --ldflags`" />
 					<Add library="freetype" />
-					<Add library="obj/Release/Data/generated_code/_France/test.a" />
+					<Add library="obj/Release/Data/generated_code/_France/_France.a" />
 				</Linker>
 			</Target>
 		</Build>

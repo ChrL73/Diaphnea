@@ -370,11 +370,15 @@ namespace MapDataProcessing
 
             int i = 0;
             List<int> pointListOffsets = new List<int>();
+            string fileContent = "namespace map_server\n{\n";
             foreach (List<double> pointList in lineList)
             {
-                pointListOffsets.Add(addPointList(pointList, itemName, i));
+                pointListOffsets.Add(addPointList(pointList, itemName, ref fileContent, i));
                 ++i;
             }
+            fileContent += "\n}\n";
+            writeAndClose(String.Format("_{0}.cpp", itemName.Replace("#", "_").Replace("!", "_")), fileContent);
+
             int pointArrayOffset = getIntArrayOffset(pointListOffsets);
 
             string code = String.Format("{0}\n// {1} ({2})\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
@@ -388,7 +392,7 @@ namespace MapDataProcessing
             return offset;
         }
 
-        private int addPointList(List<double> pointList, string itemName, int i)
+        private int addPointList(List<double> pointList, string itemName, ref string fileContent, int i)
         {
             // Todo: Return error if several 'itemCppId' are identical
             // Todo: Handle other incorrect chars than '_' and '!' or return error if 'itemName' contains such chars
@@ -399,11 +403,10 @@ namespace MapDataProcessing
             int offset = _currentPointListOffset;
 
             //int arrayOffset = getDoubleArrayOffset(pointList);
-            string code = String.Format("namespace map_server\n{{\ndouble {0}[] =\n{{{1}}};\n}}",
+            fileContent += String.Format("double {0}[] =\n{{{1}}};\n",
                 itemCppId, String.Join(",", pointList.Select(v => v.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))));
-            writeAndClose(String.Format("{0}.cpp", itemCppId), code);
 
-            code = String.Format("{0}\n// {1}\n{2},0,{3}",
+            string code = String.Format("{0}\n// {1}\n{2},0,{3}",
                 offset == 0 ? "" : ",", offset, pointList.Count() / 6, itemCppId.Replace("#", "_"));
 
             append("PointLists.cpp", code);

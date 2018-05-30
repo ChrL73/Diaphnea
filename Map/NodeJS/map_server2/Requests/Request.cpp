@@ -199,12 +199,12 @@ namespace map_server
                         framingLevel = 0;
                     }
 
-                    return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels,
+                    return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[4], widthInPixels, heightInPixels,
                                              lookIndex, elementIds, customColorMap, framingLevel, framingExceptions);
                 }
 
 
-                return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[3], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds,
+                return new RenderRequest(commonData, tokenVector[0], tokenVector[1], tokenVector[4], widthInPixels, heightInPixels, lookIndex, elementIds,
                                          customColorMap, scale, xFocus, yFocus);
             }
         }

@@ -69,7 +69,7 @@ namespace map_server
                 {
                     _coutMutexPtr->lock();
                     std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::NOT_ENOUGH_TOKENS
-                        << ",\"message\":\"Not enough tokens in MAP_ID request (3 tokens, 4 expected)\"}" << std::endl;
+                        << ",\"message\":\"Not enough tokens in MAP_INFO request (3 tokens, 4 expected)\"}" << std::endl;
                     _coutMutexPtr->unlock();
                     return 0;
                 }

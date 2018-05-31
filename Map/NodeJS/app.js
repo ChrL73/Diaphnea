@@ -173,7 +173,7 @@ function onMapIdsReq(socketId, request)
 function onMapInfoReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.mapInfo, request);
-   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId);
+   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId);
 }
 
 function onElementInfoReq(socketId, request)

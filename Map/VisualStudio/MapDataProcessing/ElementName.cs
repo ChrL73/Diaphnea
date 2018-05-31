@@ -69,5 +69,18 @@ namespace MapDataProcessing
 
             return textDocument;
         }
+
+        internal string getJson()
+        {
+            List<string> jsonList = new List<string>();
+            foreach (string languageId in _languageDictionary.Keys)
+            {
+                string name;
+                if (!_dictionary.TryGetValue(languageId, out name)) name = "";
+                jsonList.Add(String.Format("\"{0}\":\"{1}\"", languageId, name));
+            }
+
+            return String.Format("{{{0}}}", String.Join(",", jsonList));
+        }
     }
 }

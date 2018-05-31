@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
@@ -614,9 +615,78 @@ namespace MapDataProcessing
                 if (element.generateCode(codeGenerator) != 0) return -1;
             }
 
-            codeGenerator.close(_mapData);
+            string mapInfo = getMapInfoJson();
+
+            codeGenerator.close(_mapData, mapInfo);
 
             return 0;
+        }
+
+        private string getMapInfoJson()
+        {
+            StringBuilder mapInfo = new StringBuilder();
+
+            mapInfo.Append("{\"elementIds\":[\"");
+
+            List<string> elementIdList = new List<string>();
+            foreach (XmlPointElement xmlPointElement in _mapData.XmlMapData.elementList.pointElementList) elementIdList.Add(xmlPointElement.id.Substring(2));
+            foreach (XmlLineElement xmlLineElement in _mapData.XmlMapData.elementList.lineElementList) elementIdList.Add(xmlLineElement.id.Substring(2));
+            foreach (XmlPolygonElement xmlPolygonElement in _mapData.XmlMapData.elementList.polygonElementList) elementIdList.Add(xmlPolygonElement.id.Substring(2));
+            mapInfo.Append(String.Join("\",\"", elementIdList));
+
+            mapInfo.Append("\"],\"languages\":[");
+
+            List<string> languageList = new List<string>();
+            foreach (XmlLanguage xmlLanguage in _mapData.XmlMapData.parameters.languageList)
+            {
+                languageList.Add(String.Format("{{\"id\":\"{0}\",\"name\":\"{1}\"}}", xmlLanguage.id, xmlLanguage.name));
+            }
+            mapInfo.Append(String.Join(",", languageList));
+
+            mapInfo.Append("],\"names\":{");
+            List<string> nameList = new List<string>();
+            foreach (XmlName xmlName in _mapData.XmlMapData.parameters.mapName)
+            {
+                nameList.Add(String.Format("\"{0}\":\"{1}\"", xmlName.language, xmlName.text));
+            }
+            mapInfo.Append(String.Join(",", nameList));
+
+            mapInfo.Append("},\"categories\":[");
+
+            List<string> categoryList = new List<string>();
+            foreach(XmlCategory xmlCategory in _mapData.XmlMapData.categoryList)
+            {
+                StringBuilder categoryInfo = new StringBuilder();
+                categoryInfo.Append("{");
+                List<string> categoryNameList = new List<string>();
+                foreach(XmlName xmlName in xmlCategory.name)
+                {
+                    categoryNameList.Add(String.Format("\"{0}\":\"{1}\"", xmlName.language, xmlName.text));
+                }
+                categoryInfo.Append(String.Join(",", categoryNameList));
+                categoryInfo.Append("}");
+                categoryList.Add(categoryInfo.ToString());
+            }
+            mapInfo.Append(String.Join(",", categoryList));
+
+            mapInfo.Append("],\"looks\":[");
+
+            List<string> lookList = new List<string>();
+            foreach(Look look in _mapData.LookList) lookList.Add(look.getJson());
+            mapInfo.Append(String.Join(",", lookList));
+
+            mapInfo.Append("],\"zoomMinDistance\":");
+            mapInfo.Append(_mapData.XmlMapData.parameters.zoomMinDistance.ToString("G5", CultureInfo.CreateSpecificCulture("en-US")));
+            mapInfo.Append(",\"zoomMaxDistance\":");
+            mapInfo.Append(_mapData.XmlMapData.parameters.zoomMaxDistance.ToString("G5", CultureInfo.CreateSpecificCulture("en-US")));
+            mapInfo.Append(",\"sizeParameter1\":");
+            mapInfo.Append(_mapData.XmlMapData.parameters.sizeParameter1.ToString("G5", CultureInfo.CreateSpecificCulture("en-US")));
+            mapInfo.Append(",\"sizeParameter2\":");
+            mapInfo.Append(_mapData.XmlMapData.parameters.sizeParameter2.ToString("G5", CultureInfo.CreateSpecificCulture("en-US")));
+
+            mapInfo.Append("}");
+
+            return mapInfo.ToString();
         }
     }
 }

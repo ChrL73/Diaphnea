@@ -700,6 +700,7 @@
     <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\MapServer.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\map_server.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\Request.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\SvgCreator.cpp" />
@@ -745,6 +746,7 @@
     <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\MapServer.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\MessageTypeEnum.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\Request.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\SvgCreator.h" />

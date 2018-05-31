@@ -8,11 +8,8 @@
 #include "PointItem.h"
 #include "FilledPolygonItem.h"
 #include "LineItem.h"
-//#include "PolygonLook.h"
-//#include "ItemLook.h"
 #include "TextDisplayer.h"
 #include "RepulsiveCenter.h"
-//#include "Point.h"
 #include "PointList.h"
 #include "NameTranslation.h"
 #include "TextInfo.h"
@@ -23,8 +20,6 @@
 #include "SvgItemInfo.h"
 #include "ErrorEnum.h"
 #include "SvgCustomColor.h"
-//#include "Category.h"
-//#include "PointVector.h"
 
 #include "ft2build.h"
 #include FT_FREETYPE_H

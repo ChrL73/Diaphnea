@@ -21,5 +21,6 @@ namespace MapDataProcessing
 
         abstract internal int generateCode(CodeGenerator codeGenerator);
         abstract internal BsonDocument getBsonDocument();
+        abstract internal string getJson();
     }
 }

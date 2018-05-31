@@ -1749,6 +1749,9 @@
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\Strings.cpp">
       <Filter>Fichiers sources\Data\generated_code\_France</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h">
@@ -1875,6 +1878,9 @@
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\SvgTextInfo.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.h">
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
   </ItemGroup>

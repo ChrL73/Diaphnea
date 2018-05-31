@@ -118,7 +118,7 @@ namespace MapDataProcessing
             append("PointLists.h", "#pragma once\n\nnamespace map_server\n{\n");
         }
 
-        internal void close(MapData mapData)
+        internal void close(MapData mapData, string mapInfo)
         {
             string path = String.Format("{0}/MapData.cpp", _dirName);
             if (File.Exists(path)) File.Delete(path);
@@ -128,12 +128,13 @@ namespace MapDataProcessing
                 _pointElementCount, _lineElementCount, _polygonElementCount);
             append("MapData.cpp", code);
 
+            int mapInfoOffset = getStringOffset(mapInfo);
             XmlParameters parameters = mapData.XmlMapData.parameters;
             code = String.Format(
-                "    double zoomMinDistance = {0};\n    double zoomMaxDistance = {1};\n    double resolutionThreshold = {2};\n    double sizeParameter1 = {3};\n    double sizeParameter2 = {4};\n",
+                "    double zoomMinDistance = {0};\n    double zoomMaxDistance = {1};\n    double resolutionThreshold = {2};\n    double sizeParameter1 = {3};\n    double sizeParameter2 = {4};\n    int mapInfo = {5};\n",
                 parameters.zoomMinDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.zoomMaxDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")),
                 parameters.resolutionThreshold.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.sizeParameter1.ToString(CultureInfo.CreateSpecificCulture("en-US")),
-                parameters.sizeParameter2.ToString(CultureInfo.CreateSpecificCulture("en-US")));
+                parameters.sizeParameter2.ToString(CultureInfo.CreateSpecificCulture("en-US")), mapInfoOffset);
             append("MapData.cpp", code);
 
             List<string> sampleLengthList = new List<string>();

@@ -1,7 +1,7 @@
 #include "Request.h"
 #include "MessageTypeEnum.h"
 //#include "MapIdsRequest.h"
-//#include "MapInfoRequest.h"
+#include "MapInfoRequest.h"
 //#include "ElementInfoRequest.h"
 //#include "ElementsInfoRequest.h"
 //#include "ItemDataRequest.h"
@@ -58,7 +58,19 @@ namespace map_server
 
         if (requestTypeOk)
         {
-            if (requestType == map_server::RENDER)
+			if (requestType == map_server::MAP_INFO)
+			{
+				if (tokenCount < 4)
+				{
+					_coutMutexPtr->lock();
+					std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::NOT_ENOUGH_TOKENS
+						<< ",\"message\":\"Not enough tokens in MAP_INFO request (3 tokens, 4 expected)\"}" << std::endl;
+					_coutMutexPtr->unlock();
+					return 0;
+				}
+				return new MapInfoRequest(tokenVector[0], tokenVector[1]);
+			}
+            else if (requestType == map_server::RENDER)
             {
                 int i;
                 if (tokenCount < 12)

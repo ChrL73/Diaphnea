@@ -217,14 +217,15 @@ namespace MapDataProcessing
             int framingLevel = element.Category.XmlCategory.framingLevel;
                 
             int translationsOffset = addElementName(element.NameDictionary, mapData);
+            int infoJsonOffset = getStringOffset(element.getInfoJson());
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
                 _currentPointElementOffset == 0 ? "" : ",", _currentPointElementOffset, element.Id,
                 idOffset, itemId, xInt[0], xInt[1], yInt[0], yInt[1], importance[0], importance[1], lookOffsetList.Count(), looksOffset,
-                framingLevel, translationsOffset);
+                framingLevel, translationsOffset, infoJsonOffset);
 
             append("PointElements.cpp", code);
-            _currentPointElementOffset += 12;
+            _currentPointElementOffset += 13;
             ++_pointElementCount;
         }
 
@@ -247,14 +248,15 @@ namespace MapDataProcessing
             int[] importance = doubleToIntArray(element.Importance);
 
             int translationsOffset = addElementName(element.NameDictionary, mapData);
+            int infoJsonOffset = getStringOffset(element.getInfoJson());
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
                 _currentLineElementOffset == 0 ? "" : ",", _currentLineElementOffset, element.Id,
                 idOffset, itemOffsetList.Count(), itemsOffset, lookOffsetList.Count(), looksOffset,
-                framingLevel, importance[0], importance[1], translationsOffset);
+                framingLevel, importance[0], importance[1], translationsOffset, infoJsonOffset);
 
             append("LineElements.cpp", code);
-            _currentLineElementOffset += 9;
+            _currentLineElementOffset += 10;
             ++_lineElementCount;
         }
 
@@ -299,15 +301,16 @@ namespace MapDataProcessing
             int framingLevel = element.Category.XmlCategory.framingLevel;
 
             int translationsOffset = addElementName(element.NameDictionary, mapData);
+            int infoJsonOffset = getStringOffset(element.getInfoJson());
 
-            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
+            string code = String.Format("{0}\n// {1} \"{2}\", ...\n{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
                 _currentPolygonElementOffset == 0 ? "" : ",", _currentPolygonElementOffset, element.Id,
                 idOffset, element.ContourMapItem.CppOffset, itemOffsetList.Count(), itemsOffset,
                 element.CoveredElementList.Count(), coveredElementsOffset, importance[0], importance[1],
-                lookOffsetList.Count(), looksOffset, framingLevel, translationsOffset);
+                lookOffsetList.Count(), looksOffset, framingLevel, translationsOffset, infoJsonOffset);
 
             append("PolygonElements.cpp", code);
-            _currentPolygonElementOffset += 12;
+            _currentPolygonElementOffset += 13;
             ++_polygonElementCount;
         }
 

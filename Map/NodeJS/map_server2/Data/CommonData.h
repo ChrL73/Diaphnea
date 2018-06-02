@@ -4,6 +4,7 @@
 
 #include <map>
 #include <string>
+#include <mutex>
 
 namespace map_server
 {
@@ -15,6 +16,8 @@ namespace map_server
     class CommonData
     {
     private:
+        std::mutex _mutex;
+
         std::map<std::string, ElementInfo *> _elementInfoMap;
         std::map<std::string, int> _languageIdMap;
 
@@ -24,10 +27,15 @@ namespace map_server
         CommonData(void);
         ~CommonData();
 
+        void lock(void) { _mutex.lock(); }
+        void unlock(void) { _mutex.unlock(); }
+
         ElementTypeEnum getElementType(const std::string& elementId);
         const PointElement *getLastElementAsPoint(void) const;
         const LineElement *getLastElementAsLine(void) const;
         const PolygonElement *getLastElementAsPolygon(void) const;
+
+        const char *getElementInfoJson(const std::string& elementId);
 
         int getLanguageIndex(const std::string& languageId) const;
     };

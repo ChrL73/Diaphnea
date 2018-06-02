@@ -31,6 +31,9 @@ namespace map_server
         // Array of NameTranslation (array size is 'languageCount' defined in 'MapData.cpp')
         int _translations;
 
+        // String
+        int _infoJson;
+
     public:
         static const LineElement *get(int offset) { return reinterpret_cast<const LineElement *>(lineElements + offset); }
 
@@ -47,5 +50,6 @@ namespace map_server
         double getImportance(void) const { return _importance; }
 
         const NameTranslation *getTranslation(int languageIndex) const { return reinterpret_cast<const NameTranslation *>(nameTranslations + *(intArrays + _translations + languageIndex)); }
+        const char *getInfoJson(void) const { return reinterpret_cast<const char *>(strings) + _infoJson; }
     };
 }

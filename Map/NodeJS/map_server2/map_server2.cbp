@@ -92,6 +92,10 @@
 		<Unit filename="MapServer.cpp" />
 		<Unit filename="MapServer.h" />
 		<Unit filename="MessageTypeEnum.h" />
+		<Unit filename="Requests/ElementInfoRequest.cpp" />
+		<Unit filename="Requests/ElementInfoRequest.h" />
+		<Unit filename="Requests/ElementsInfoRequest.cpp" />
+		<Unit filename="Requests/ElementsInfoRequest.h" />
 		<Unit filename="Requests/MapInfoRequest.cpp" />
 		<Unit filename="Requests/MapInfoRequest.h" />
 		<Unit filename="Requests/RenderRequest.cpp" />

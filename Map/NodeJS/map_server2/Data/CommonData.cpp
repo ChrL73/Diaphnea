@@ -12,7 +12,7 @@ namespace map_server
         int i;
         for (i = 0; i < pointElementCount; ++i)
         {
-            int offset = 12 * i;
+            int offset = 13 * i;
             const char *id = reinterpret_cast<const char *>(strings) + pointElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POINT, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -20,7 +20,7 @@ namespace map_server
 
         for (i = 0; i < lineElementCount; ++i)
         {
-            int offset = 9 * i;
+            int offset = 10 * i;
             const char *id = reinterpret_cast<const char *>(strings) + lineElements[offset];
             ElementInfo *info = new ElementInfo(map_server::LINE, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -28,7 +28,7 @@ namespace map_server
 
         for (i = 0; i < polygonElementCount; ++i)
         {
-            int offset = 12 * i;
+            int offset = 13 * i;
             const char *id = reinterpret_cast<const char *>(strings) + polygonElements[offset];
             ElementInfo *info = new ElementInfo(map_server::POLYGON, offset);
             _elementInfoMap.insert(std::pair<std::string, ElementInfo *>(id, info));
@@ -49,7 +49,7 @@ namespace map_server
 
     ElementTypeEnum CommonData::getElementType(const std::string& elementId)
     {
-        std::map<std::string, ElementInfo *>::iterator it = _elementInfoMap.find(elementId);
+        std::map<std::string, ElementInfo *>::const_iterator it = _elementInfoMap.find(elementId);
 
         if (it != _elementInfoMap.end())
         {
@@ -73,6 +73,23 @@ namespace map_server
     const PolygonElement *CommonData::getLastElementAsPolygon(void) const
     {
         return PolygonElement::get(_lastElementOffset);
+    }
+
+    const char *CommonData::getElementInfoJson(const std::string& elementId)
+    {
+        std::map<std::string, ElementInfo *>::const_iterator it = _elementInfoMap.find(elementId);
+
+        if (it != _elementInfoMap.end())
+        {
+            int elementOffset = (*it).second->getOffset();
+            ElementTypeEnum elementType = (*it).second->getType();
+
+            if (elementType == map_server::POINT) return PointElement::get(elementOffset)->getInfoJson();
+            else if (elementType == map_server::LINE) return LineElement::get(elementOffset)->getInfoJson();
+            else if (elementType == map_server::POLYGON) return PolygonElement::get(elementOffset)->getInfoJson();
+        }
+
+        return 0;
     }
 
     int CommonData::getLanguageIndex(const std::string& languageId) const

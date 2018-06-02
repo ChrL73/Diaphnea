@@ -58,11 +58,14 @@ namespace map_server
         for (i = 0; i < n; ++i)
         {
             std::string elementId = _elementIds[i];
+
+            _commonData->lock();
             ElementTypeEnum elementType = _commonData->getElementType(elementId);
 
             if (elementType == map_server::POINT)
             {
                 const PointElement *pointElement = _commonData->getLastElementAsPoint();
+                _commonData->unlock();
 
                 std::map<int, PointItem *>::iterator pointItemIt = pointItems.find(pointElement->getItemId());
                 if (pointItemIt == pointItems.end())
@@ -78,6 +81,7 @@ namespace map_server
             else if (elementType == map_server::LINE)
             {
                 const LineElement *lineElement = _commonData->getLastElementAsLine();
+                _commonData->unlock();
 
                 int j, m = lineElement->getItemCount();
                 for (j = 0; j < m; ++j)
@@ -99,6 +103,7 @@ namespace map_server
             else if (elementType == map_server::POLYGON)
             {
                 const PolygonElement *polygonElement = _commonData->getLastElementAsPolygon();
+                _commonData->unlock();
 
                 const MultipointItem *contourItem = polygonElement->getContour();
 
@@ -136,14 +141,20 @@ namespace map_server
             }
             else if (elementId == "#test")
             {
+                _commonData->unlock();
                 _testMode = true;
             }
             // Disable potential image creation, because it's only a developement/debug/test feature.
             // Moreover, this  feature requires a significant calculation time that could overload the server if used in production.
             /*else if (elementId == "#img")
             {
+                _commonData->unlock();
                 _createPotentialImage = true;
             }*/
+            else
+            {
+                _commonData->unlock();
+            }
         }
 
         n = itemVector.size();

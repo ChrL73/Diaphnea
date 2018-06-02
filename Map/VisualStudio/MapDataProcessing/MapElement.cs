@@ -159,11 +159,11 @@ namespace MapDataProcessing
             BsonArray lookIdArray = new BsonArray();
             foreach (Look look in _looks) lookIdArray.Add(look.Id);
 
-            BsonArray _linkedElements1Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements1.Keys) _linkedElements1Array.Add(linkedElement.Id);
+            BsonArray linkedElements1Array = new BsonArray();
+            foreach (MapElement linkedElement in _linkedElements1.Keys) linkedElements1Array.Add(linkedElement.Id);
 
-            BsonArray _linkedElements2Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements2.Keys) _linkedElements2Array.Add(linkedElement.Id);
+            BsonArray linkedElements2Array = new BsonArray();
+            foreach (MapElement linkedElement in _linkedElements2.Keys) linkedElements2Array.Add(linkedElement.Id);
 
             BsonDocument elementDocument = new BsonDocument()
             {
@@ -172,13 +172,29 @@ namespace MapDataProcessing
                 { "name", _name.getBsonDocument() },
                 { "short_name", _shortName.getBsonDocument() },
                 { "importance", _importance },
-                { "linked_elements1", _linkedElements1Array },
-                { "linked_elements2", _linkedElements2Array },
+                { "linked_elements1", linkedElements1Array },
+                { "linked_elements2", linkedElements2Array },
                 { "look_ids", lookIdArray },
                 { "category_id", _category.Id }
             };
 
             return elementDocument;
+        }
+
+        internal string getInfoJson()
+        {
+            List<string> linkedElements1Array = new List<string>();
+            foreach (MapElement linkedElement in _linkedElements1.Keys) linkedElements1Array.Add(String.Format("\"{0}\"", linkedElement.Id));
+            string linkedElements1 = String.Join(",", linkedElements1Array);
+
+            List<string> linkedElements2Array = new List<string>();
+            foreach (MapElement linkedElement in _linkedElements2.Keys) linkedElements2Array.Add(String.Format("\"{0}\"", linkedElement.Id));
+            string linkedElements2 = String.Join(",", linkedElements2Array);
+
+            string tmp = String.Format("{{\"names\":{0},\"linkedElements1\":[{1}],\"linkedElements2\":[{2}],\"category\":{3}}}",
+                _name.getJson(), linkedElements1, linkedElements2, _category.Id);
+
+            return tmp;
         }
 
         abstract internal int generateCode(CodeGenerator codeGenerator);

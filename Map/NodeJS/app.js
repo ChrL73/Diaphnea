@@ -150,11 +150,11 @@ if (!replay)
          if (config.displayStat) received += JSON.stringify(request).length;
       });
       
-      socket.on('lookReq', function(request)
+      /*socket.on('lookReq', function(request)
       {
          onLookReq(socket.id, request);
          if (config.displayStat) received += JSON.stringify(request).length;
-      });
+      });*/
       
       socket.on('renderReq', function(request)
       {
@@ -179,7 +179,7 @@ function onMapInfoReq(socketId, request)
 function onElementInfoReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.elementInfo, request);
-   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId);
+   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId);
 }
 
 function onElementsInfoReq(socketId, request)
@@ -199,11 +199,11 @@ function onItemDataReq(socketId, request)
    cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
 }
 
-function onLookReq(socketId, request)
+/*function onLookReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.look, request);
    cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.look + ' ' + request.mapId + ' ' + request.lookId);
-}
+}*/
 
 function onRenderReq(socketId, request)
 {

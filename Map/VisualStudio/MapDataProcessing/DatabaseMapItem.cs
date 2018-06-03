@@ -16,13 +16,18 @@ namespace MapDataProcessing
         private readonly Dictionary<XmlResolution, List<GeoPoint>> _lineDictionary = new Dictionary<XmlResolution, List<GeoPoint>>();
         private readonly bool _useBezierSucessors;
         private readonly string _element0Id;
+        private readonly string _type;
 
         internal DatabaseMapItem(bool useBezierSucessors, string element0Id)
         {
             _useBezierSucessors = useBezierSucessors;
             _element0Id = element0Id;
+
             Cap1Round = true;
             Cap2Round = true;
+
+            if (useBezierSucessors) _type = "polygon";
+            else _type = "line";
         }
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
@@ -259,7 +264,7 @@ namespace MapDataProcessing
 
             Id = itemDocument.GetValue("_id");*/
 
-            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName, lineList, Cap1Round, Cap2Round);
+            CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName, lineList, Cap1Round, Cap2Round, _type);
 
             return 0;
         }

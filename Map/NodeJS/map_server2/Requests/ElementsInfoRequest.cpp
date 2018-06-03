@@ -1,7 +1,7 @@
 #include "ElementsInfoRequest.h"
-//#include "MapData.h"
-//#include "MessageTypeEnum.h"
-//#include "ErrorEnum.h"
+#include "CommonData.h"
+#include "MessageTypeEnum.h"
+#include "ErrorEnum.h"
 
 #include <iostream>
 
@@ -9,12 +9,12 @@ namespace map_server
 {
     void ElementsInfoRequest::execute()
     {
-        /*std::vector<std::string> infoVector;
+        std::vector<const char *> infoVector;
         unsigned int i, n = _elementIds.size();
         for (i = 0; i < n; ++i)
         {
-            const MapElement *element = map->getElement(_elementIds[i]);
-            if (element != 0) infoVector.push_back(element->getInfoJson());
+            const char *info = _commonData->getElementInfoJson(_elementIds[i]);
+            if (info != 0) infoVector.push_back(info);
             else break;
         }
 
@@ -38,6 +38,6 @@ namespace map_server
             std::cout << _socketId << " " << _requestId << " " << map_server::ERROR_ << " {\"error\":" << map_server::UNKNOWN_ID
                 << ",\"message\":\"Unknown element id ('" << _elementIds[i] << "') in ELEMENTS_INFO request\"}" << std::endl;
             _coutMutexPtr->unlock();
-        }*/
+        }
     }
 }

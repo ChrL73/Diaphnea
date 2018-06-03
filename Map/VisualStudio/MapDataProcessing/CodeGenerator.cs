@@ -35,6 +35,8 @@ namespace MapDataProcessing
 
         private readonly Dictionary<string, int> _stringDictionary = new Dictionary<string, int>();
 
+        private readonly CultureInfo _cultureInfo = CultureInfo.CreateSpecificCulture("en-US");
+
         internal CodeGenerator(string dirName)
         {
             _dirName = dirName;
@@ -132,9 +134,9 @@ namespace MapDataProcessing
             XmlParameters parameters = mapData.XmlMapData.parameters;
             code = String.Format(
                 "    double zoomMinDistance = {0};\n    double zoomMaxDistance = {1};\n    double resolutionThreshold = {2};\n    double sizeParameter1 = {3};\n    double sizeParameter2 = {4};\n    int mapInfo = {5};\n",
-                parameters.zoomMinDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.zoomMaxDistance.ToString(CultureInfo.CreateSpecificCulture("en-US")),
-                parameters.resolutionThreshold.ToString(CultureInfo.CreateSpecificCulture("en-US")), parameters.sizeParameter1.ToString(CultureInfo.CreateSpecificCulture("en-US")),
-                parameters.sizeParameter2.ToString(CultureInfo.CreateSpecificCulture("en-US")), mapInfoOffset);
+                parameters.zoomMinDistance.ToString(_cultureInfo), parameters.zoomMaxDistance.ToString(_cultureInfo),
+                parameters.resolutionThreshold.ToString(_cultureInfo), parameters.sizeParameter1.ToString(_cultureInfo),
+                parameters.sizeParameter2.ToString(_cultureInfo), mapInfoOffset);
             append("MapData.cpp", code);
 
             List<string> sampleLengthList = new List<string>();
@@ -143,7 +145,7 @@ namespace MapDataProcessing
             {
                 XmlResolution resolution = mapData.XmlMapData.resolutionList[i];
                 double sampleLength = resolution.sampleLength1 * Double.Parse(resolution.sampleRatio);
-                sampleLengthList.Add(sampleLength.ToString(CultureInfo.CreateSpecificCulture("en-US")));
+                sampleLengthList.Add(sampleLength.ToString(_cultureInfo));
             }
             code = String.Format("    int sampleLengthCount = {0};\n    double sampleLengths[] = {{{1}}};\n", n, String.Join(", ", sampleLengthList));
             append("MapData.cpp", code);
@@ -153,8 +155,8 @@ namespace MapDataProcessing
             {
                 languageIdOffsetList.Add(getStringOffset(language.id.ToString()));
             }
-            code = String.Format("    int languageCount = {0};\n    int languageIds[] = {{{1}}};\n}}\n", mapData.XmlMapData.parameters.languageList.Count(),
-                                 String.Join(", ", languageIdOffsetList));
+            code = String.Format("    int languageCount = {0};\n    int languageIds[] = {{{1}}};\n    int itemCount = {2};\n}}\n",
+                                 mapData.XmlMapData.parameters.languageList.Count(), String.Join(", ", languageIdOffsetList), ItemId.MaxValue + 1);
             append("MapData.cpp", code);
 
             append("Strings.cpp", "\n};\n}\n");
@@ -363,7 +365,7 @@ namespace MapDataProcessing
             return 0;
         }
 
-        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string itemName, List<List<double>> lineList, bool cap1Round, bool cap2Round)
+        internal int addMultipointItem(double xMin, double xMax, double yMin, double yMax, int itemId, string itemName, List<List<double>> lineList, bool cap1Round, bool cap2Round, string type)
         {
             int offset = _currentMultipointItemOffset;
 
@@ -374,14 +376,15 @@ namespace MapDataProcessing
 
             int i = 0;
             List<int> pointListOffsets = new List<int>();
-            string fileContent = "namespace map_server\n{\n";
+            StringBuilder fileContent = new StringBuilder();
+            fileContent.Append("namespace map_server\n{\n");
             foreach (List<double> pointList in lineList)
             {
-                pointListOffsets.Add(addPointList(pointList, itemName, ref fileContent, i));
+                pointListOffsets.Add(addPointList(pointList, itemName, fileContent, i, type));
                 ++i;
             }
-            fileContent += "\n}\n";
-            writeAndClose(String.Format("_{0}.cpp", itemName.Replace("#", "_").Replace("!", "_")), fileContent);
+            fileContent.Append("\n}\n");
+            writeAndClose(String.Format("_{0}.cpp", itemName.Replace("#", "_").Replace("!", "_")), fileContent.ToString());
 
             int pointArrayOffset = getIntArrayOffset(pointListOffsets);
 
@@ -396,7 +399,7 @@ namespace MapDataProcessing
             return offset;
         }
 
-        private int addPointList(List<double> pointList, string itemName, ref string fileContent, int i)
+        private int addPointList(List<double> pointList, string itemName, StringBuilder fileContent, int i, string type)
         {
             // Todo: Return error if several 'itemCppId' are identical
             // Todo: Handle other incorrect chars than '_' and '!' or return error if 'itemName' contains such chars
@@ -407,8 +410,22 @@ namespace MapDataProcessing
             int offset = _currentPointListOffset;
 
             //int arrayOffset = getDoubleArrayOffset(pointList);
-            fileContent += String.Format("double {0}[] =\n{{{1}}};\n",
-                itemCppId, String.Join(",", pointList.Select(v => v.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))));
+            fileContent.Append(String.Format("double {0}[] =\n{{{1}}};\n",
+                itemCppId, String.Join(",", pointList.Select(v => v.ToString("G", _cultureInfo)))));
+
+            List<string> pointJsonList = new List<string>();
+            int j, n = pointList.Count() / 6;
+            for (j = 0; j < n; ++j)
+            {
+                double x = pointList[j * 6 + 4];
+                double y = pointList[j * 6 + 5];
+                string pointJson = String.Format("{{\"x\":{0},\"y\":{1}}}", x.ToString("G6", _cultureInfo), y.ToString("G6", _cultureInfo));
+                pointJsonList.Add(pointJson);
+            }
+            string infoJson = String.Format("{{\"type\":\"{0}\",\"points\":[{1}]}}", type, String.Join(",", pointJsonList));
+
+            byte[] bytes = Encoding.UTF8.GetBytes(infoJson);
+            fileContent.Append(String.Format("unsigned char {0}__j[] = {{{1},0}};\n", itemCppId, String.Join(",", bytes)));
 
             string code = String.Format("{0}\n// {1}\n{2},0,{3}",
                 offset == 0 ? "" : ",", offset, pointList.Count() / 6, itemCppId.Replace("#", "_"));
@@ -548,7 +565,7 @@ namespace MapDataProcessing
             int offset = _currentDoubleArrayOffset;
 
             string code = String.Format("{0}\n// {1}\n{2}",
-                offset == 0 ? "" : ",", offset, String.Join(",", values.Select(v => v.ToString("G", CultureInfo.CreateSpecificCulture("en-US")))));
+                offset == 0 ? "" : ",", offset, String.Join(",", values.Select(v => v.ToString("G", _cultureInfo))));
             append("DoubleArrays.cpp", code);
             _currentDoubleArrayOffset += values.Count();
 

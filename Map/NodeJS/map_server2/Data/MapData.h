@@ -28,5 +28,6 @@ namespace map_server
     extern int nameTranslations[];
     extern int elementNames[];
     extern pList pointLists[];
-	extern int mapInfo;
+    extern int mapInfo;
+    extern int itemCount;
 }

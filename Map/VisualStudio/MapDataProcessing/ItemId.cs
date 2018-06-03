@@ -10,6 +10,7 @@ namespace MapDataProcessing
     {
         private static int _counter = -1;
         internal static void reset() { _counter = -1; }
+        internal static int MaxValue { get { return _counter; } }
 
         private readonly int _value;
         internal ItemId() { _value = ++_counter; }

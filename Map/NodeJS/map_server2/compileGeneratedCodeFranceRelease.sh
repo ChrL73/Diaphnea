@@ -1,6 +1,6 @@
 #!/bin/bash -v
 set -e
-rm obj/Release/Data/generated_code/_France/*
+rm -f obj/Release/Data/generated_code/_France/*
 cd Data/generated_code/_France
 for filename in *.cpp; do
     echo $filename

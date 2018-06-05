@@ -1,11 +1,9 @@
 #include "Request.h"
 #include "MessageTypeEnum.h"
-//#include "MapIdsRequest.h"
 #include "MapInfoRequest.h"
 #include "ElementInfoRequest.h"
 #include "ElementsInfoRequest.h"
-//#include "ItemDataRequest.h"
-//#include "LookRequest.h"
+#include "ItemDataRequest.h"
 #include "RenderRequest.h"
 #include "ErrorEnum.h"
 #include "SvgCustomColor.h"
@@ -97,6 +95,47 @@ namespace map_server
                 int i;
                 for (i = 4; i < tokenCount; ++i) elementIds.push_back(tokenVector[i]);
                 return new ElementsInfoRequest(commonData, tokenVector[0], tokenVector[1], elementIds);
+            }
+            else if (requestType == map_server::ITEM_DATA)
+            {
+                if (tokenCount < 6)
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::NOT_ENOUGH_TOKENS
+                        << ",\"message\":\"Not enough tokens in ITEM_DATA request (" << tokenCount << " tokens, 6 expected)\"}" << std::endl;
+                    _coutMutexPtr->unlock();
+                    return 0;
+                }
+
+                int itemId;
+                try
+                {
+                    itemId = std::stoi(tokenVector[4]);
+                }
+                catch (...)
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
+                        << ",\"message\":\"Incorrect 'itemId' parameter ('" << tokenVector[4] << "') in ITEM_DATA request (int expected)\"}" << std::endl;
+                    _coutMutexPtr->unlock();
+                    return 0;
+                }
+
+                int resolutionIndex;
+                try
+                {
+                    resolutionIndex = std::stoi(tokenVector[5]);
+                }
+                catch (...)
+                {
+                    _coutMutexPtr->lock();
+                    std::cout << tokenVector[0] << " " << tokenVector[1] << " " << map_server::ERROR_ << " {\"error\":" << map_server::BAD_PARAMETER
+                        << ",\"message\":\"Incorrect 'resolutionIndex' parameter ('" << tokenVector[5] << "') in ITEM_DATA request (int expected)\"}" << std::endl;
+                    _coutMutexPtr->unlock();
+                    return 0;
+                }
+
+                return new ItemDataRequest(tokenVector[0], tokenVector[1], itemId, resolutionIndex);
             }
             else if (requestType == map_server::RENDER)
             {

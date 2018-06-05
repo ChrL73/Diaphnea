@@ -211,7 +211,7 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
-            codeGenerator.addLineElement(this, _mapData);
+            codeGenerator.addLineElement(this);
 
             return 0;
         }

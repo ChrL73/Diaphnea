@@ -190,13 +190,13 @@ function onElementsInfoReq(socketId, request)
    {
       req += ' ' + elementId;
    });
-   cppServer.sendRequest(req);
+   cppServer.sendRequest2(req);
 }
 
 function onItemDataReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.itemData, request);
-   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
 }
 
 /*function onLookReq(socketId, request)

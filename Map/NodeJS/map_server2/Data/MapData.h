@@ -30,4 +30,5 @@ namespace map_server
     extern pList pointLists[];
     extern int mapInfo;
     extern int itemCount;
+    extern unsigned char *itemData[];
 }

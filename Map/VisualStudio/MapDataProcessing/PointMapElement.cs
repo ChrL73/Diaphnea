@@ -93,7 +93,7 @@ namespace MapDataProcessing
 
         internal override int generateCode(CodeGenerator codeGenerator)
         {
-            codeGenerator.addPointElement(this, _mapData.XmlMapData.parameters.projection, _mapData);
+            codeGenerator.addPointElement(this, _mapData.XmlMapData.parameters.projection);
 
             return 0;
         }

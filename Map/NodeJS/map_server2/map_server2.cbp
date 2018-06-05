@@ -96,6 +96,8 @@
 		<Unit filename="Requests/ElementInfoRequest.h" />
 		<Unit filename="Requests/ElementsInfoRequest.cpp" />
 		<Unit filename="Requests/ElementsInfoRequest.h" />
+		<Unit filename="Requests/ItemDataRequest.cpp" />
+		<Unit filename="Requests/ItemDataRequest.h" />
 		<Unit filename="Requests/MapInfoRequest.cpp" />
 		<Unit filename="Requests/MapInfoRequest.h" />
 		<Unit filename="Requests/RenderRequest.cpp" />

@@ -599,7 +599,7 @@ namespace MapDataProcessing
                 return -1;
             }
 
-            CodeGenerator codeGenerator = new CodeGenerator(String.Format("{0}/{1}", _mapData.XmlMapData.parameters.cppGenerationDir, _mapData.XmlMapData.parameters.mapId));
+            CodeGenerator codeGenerator = new CodeGenerator(String.Format("{0}/{1}", _mapData.XmlMapData.parameters.cppGenerationDir, _mapData.XmlMapData.parameters.mapId), _mapData);
 
             foreach (Look look in _mapData.LookList)
             {
@@ -617,7 +617,7 @@ namespace MapDataProcessing
 
             string mapInfo = getMapInfoJson();
 
-            codeGenerator.close(_mapData, mapInfo);
+            codeGenerator.close(mapInfo);
 
             return 0;
         }

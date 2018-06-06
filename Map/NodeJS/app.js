@@ -72,7 +72,7 @@ var messageNames =
    'elementInfo', // 2
    'elementsInfo', // 3
    'itemData', // 4
-   'look', // 5
+   'look', // 5 (no loger used)
    'render', // 6
    'text', // 7
    'removeText', //8
@@ -97,6 +97,7 @@ var io;
 if (!replay)
 {
    io = require('socket.io').listen(server);
+   var mapIds = require('./map_ids');
 
    io.on('connection', function(socket)
    {
@@ -150,12 +151,6 @@ if (!replay)
          if (config.displayStat) received += JSON.stringify(request).length;
       });
       
-      /*socket.on('lookReq', function(request)
-      {
-         onLookReq(socket.id, request);
-         if (config.displayStat) received += JSON.stringify(request).length;
-      });*/
-      
       socket.on('renderReq', function(request)
       {
          onRenderReq(socket.id, request);
@@ -167,19 +162,20 @@ if (!replay)
 function onMapIdsReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.mapIds, request);
-   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.mapIds);
+   //cppServer.sendRequest(socketId + ' ' + request.id + ' ' + request.id);
+   sendResponse(socketId, request.id, request.id, mapIds.idArray);
 }
 
 function onMapInfoReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.mapInfo, request);
-   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId);
+   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.mapInfo + ' ' + request.mapId, request.mapId);
 }
 
 function onElementInfoReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.elementInfo, request);
-   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId);
+   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.elementInfo + ' ' + request.mapId + ' ' + request.elementId, request.mapId);
 }
 
 function onElementsInfoReq(socketId, request)
@@ -190,20 +186,14 @@ function onElementsInfoReq(socketId, request)
    {
       req += ' ' + elementId;
    });
-   cppServer.sendRequest2(req);
+   cppServer.sendRequest(req, request.mapId);
 }
 
 function onItemDataReq(socketId, request)
 {
    if (record) tester.logRequest(socketId, messageTypes.itemData, request);
-   cppServer.sendRequest2(socketId + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution);
+   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.itemData + ' ' + request.mapId + ' ' + request.itemId + ' ' + request.resolution, request.mapId);
 }
-
-/*function onLookReq(socketId, request)
-{
-   if (record) tester.logRequest(socketId, messageTypes.look, request);
-   cppServer.sendRequest(socketId + ' ' + request.id + ' ' + messageTypes.look + ' ' + request.mapId + ' ' + request.lookId);
-}*/
 
 function onRenderReq(socketId, request)
 {
@@ -249,10 +239,12 @@ function onRenderReq(socketId, request)
       });
    }
    
-   cppServer.sendRequest2(req);
+   cppServer.sendRequest(req, request.mapId);
 }
 
-cppServer.setResponseHandler(function(socketId, requestId, requestType, responseContent)
+cppServer.setResponseHandler(sendResponse);
+
+function sendResponse(socketId, requestId, requestType, responseContent)
 {
    if (record) tester.logResponse(socketId, requestId, requestType, responseContent);
    
@@ -298,7 +290,7 @@ cppServer.setResponseHandler(function(socketId, requestId, requestType, response
    {
       tester.processReplayResponse(socketId, requestId, requestType, responseContent);
    }
-});
+}
 
 if (record) tester.initRecordMode();
 else if (replay) tester.initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsInfoReq, onItemDataReq, onLookReq, onRenderReq);

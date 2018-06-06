@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +22,7 @@ namespace MapDataProcessing
             PolygonPolygonPart part;
             if (!_partDictionary.TryGetValue(polygonData, out part))
             {
-                part = new PolygonPolygonPart(polygonData, elementId);
+                part = new PolygonPolygonPart(polygonData/*, elementId*/);
                 _partDictionary.Add(polygonData, part);
             }
 
@@ -33,13 +31,12 @@ namespace MapDataProcessing
 
         private readonly KmlFileData _polygonData;
         private readonly DatabaseMapItem _smoothedPolygonMapItem;
-        internal BsonValue MapItemId { get { return _smoothedPolygonMapItem.Id; } }
         internal int MapItemCppOffset { get { return _smoothedPolygonMapItem.CppOffset; } }
 
-        private PolygonPolygonPart(KmlFileData polygonData, string element0Id)
+        private PolygonPolygonPart(KmlFileData polygonData/*, string element0Id*/)
         {
             _polygonData = polygonData;
-            _smoothedPolygonMapItem = new DatabaseMapItem(false, element0Id);
+            _smoothedPolygonMapItem = new DatabaseMapItem(false/*, element0Id*/);
         }
 
         internal KmlFileData Polygon { get { return _polygonData; } }
@@ -62,16 +59,6 @@ namespace MapDataProcessing
                     part._smoothedPolygonMapItem.addLine(resolution, smoothedPolygon);
                     KmlWriter.write(smoothedPolygon, KmlFileTypeEnum.POLYGON, "Polygons_Polygons", Path.GetFileName(part.Polygon.Path), resolution);
                 }
-            }
-
-            return 0;
-        }
-
-        internal static int fillDatabase(IMongoDatabase database, MapData mapData)
-        {
-            foreach (PolygonPolygonPart part in _partDictionary.Values)
-            {
-                if (part._smoothedPolygonMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part.Polygon.Path)) != 0) return -1;
             }
 
             return 0;

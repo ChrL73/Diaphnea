@@ -20,7 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_Gabon.xml</Commandlineparameters>
+    <Commandlineparameters>../../../../VisualStudio/MapDataProcessing/MapData_France.xml</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>full</DebugType>
@@ -151,15 +151,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core">
-      <HintPath>..\MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\MongoDB.Driver.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\VisualStudio\MapDataProcessing\LineTemplate.kml">

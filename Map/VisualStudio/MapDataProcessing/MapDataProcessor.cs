@@ -8,8 +8,6 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.IO;
-using MongoDB.Driver;
-using MongoDB.Bson;
 using Schemas;
 
 namespace MapDataProcessing
@@ -109,12 +107,6 @@ namespace MapDataProcessing
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Linking elements...");
                 result = linkElements();
-            }
-
-            if (result == 0)
-            {
-                MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "Filling database...");
-                //result = fillDatabase();
             }
 
             if (result == 0)
@@ -499,93 +491,6 @@ namespace MapDataProcessing
 
                 if (element.LinkedElements1.ContainsKey(element)) element.LinkedElements1.Remove(element);
                 if (element.LinkedElements2.ContainsKey(element)) element.LinkedElements2.Remove(element); 
-            }
-
-            return 0;
-        }
-
-        private int fillDatabase()
-        {
-            MongoClient mongoClient = new MongoClient();
-            IMongoDatabase database = mongoClient.GetDatabase(_mapData.XmlMapData.parameters.databaseName);
-
-            FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("map", _mapData.XmlMapData.parameters.mapId);
-            IMongoCollection<BsonDocument> pointListCollection = database.GetCollection<BsonDocument>("point_lists");
-            pointListCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> mapCollection = database.GetCollection<BsonDocument>("maps");
-            mapCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
-            polygonElementCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> pointElementCollection = database.GetCollection<BsonDocument>("point_elements");
-            pointElementCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> lineElementCollection = database.GetCollection<BsonDocument>("line_elements");
-            lineElementCollection.DeleteMany(filter);
-            IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
-            itemCollection.DeleteMany(filter);
-
-            BsonArray languagesArray = new BsonArray();
-            foreach (XmlLanguage language in _mapData.XmlMapData.parameters.languageList)
-            {
-                BsonDocument languageDocument = new BsonDocument()
-                {
-                    { "id", language.id.ToString() },
-                    { "name", language.name }
-                };
-                languagesArray.Add(languageDocument);
-            }
-
-            BsonArray resolutionArray = new BsonArray();
-            int i, n = _mapData.XmlMapData.resolutionList.Length;
-            for (i = 0; i < n; ++i)
-            {
-                XmlResolution resolution = _mapData.XmlMapData.resolutionList[i];
-                double sample_length = resolution.sampleLength1 * Double.Parse(resolution.sampleRatio);
-
-                BsonDocument resolutionDocument = new BsonDocument()
-                {
-                    { "index", i},
-                    { "sample_length", sample_length}
-                };
-
-                resolutionArray.Add(resolutionDocument);
-            }
-
-            BsonArray lookArray = new BsonArray();
-            foreach (Look look in _mapData.LookList)
-            {
-                lookArray.Add(look.getBsonDocument());
-            }
-
-            BsonArray categoryArray = new BsonArray();
-            foreach (Category category in _mapData.CategoryList)
-            {
-                categoryArray.Add(category.getBsonDocument());
-            }
-
-            BsonDocument mapDocument = new BsonDocument()
-            {
-                { "map", _mapData.XmlMapData.parameters.mapId },
-                { "name", new ElementName(_mapData.XmlMapData.parameters.mapName).getBsonDocument() },
-                { "languages", languagesArray },
-                { "resolutions", resolutionArray },
-                { "looks", lookArray },
-                { "categories", categoryArray },
-                { "zoom_min_distance", _mapData.XmlMapData.parameters.zoomMinDistance },
-                { "zoom_max_distance", _mapData.XmlMapData.parameters.zoomMaxDistance },
-                { "resolution_threshold", _mapData.XmlMapData.parameters.resolutionThreshold },
-                { "size_parameter1", _mapData.XmlMapData.parameters.sizeParameter1 },
-                { "size_parameter2", _mapData.XmlMapData.parameters.sizeParameter2 }
-            };
-
-            mapCollection.InsertOne(mapDocument);
-
-            if (PolygonLinePart.fillDatabase(database, _mapData) != 0) return -1;
-            if (PolygonPolygonPart.fillDatabase(database, _mapData) != 0) return -1;
-            if (LineLinePart.fillDatabase(database, _mapData) != 0) return -1;
-
-            foreach (MapElement element in _elementDictionary.Values)
-            {
-                if (element.fillDatabase(database) != 0) return -1;
             }
 
             return 0;

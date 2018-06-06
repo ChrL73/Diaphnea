@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,7 +33,7 @@ namespace MapDataProcessing
             PolygonLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
-                part = new PolygonLinePart(lineData, pointData1, pointData2, elementId);
+                part = new PolygonLinePart(lineData, pointData1, pointData2/*, elementId*/);
                 _partDictionary.Add(lineData, part);
             }
             else
@@ -71,18 +69,17 @@ namespace MapDataProcessing
         private readonly KmlFileData _pointData2;
         private readonly DatabaseMapItem _smoothedLineMapItem;
 
-        private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2, string element0Id)
+        private PolygonLinePart(KmlFileData lineData, KmlFileData pointData1, KmlFileData pointData2/*, string element0Id*/)
         {
             _lineData = lineData;
             _pointData1 = pointData1;
             _pointData2 = pointData2;
-            _smoothedLineMapItem = new DatabaseMapItem(false, element0Id);
+            _smoothedLineMapItem = new DatabaseMapItem(false/*, element0Id*/);
         }
 
         internal KmlFileData Line { get { return _lineData; } }
         internal KmlFileData Point1 { get { return _pointData1; } }
         internal KmlFileData Point2 { get { return _pointData2; } }
-        internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
         internal int MapItemCppOffset { get { return _smoothedLineMapItem.CppOffset; } }
 
         internal List<GeoPoint> getPointList(XmlResolution resolution)
@@ -106,16 +103,6 @@ namespace MapDataProcessing
                     part._smoothedLineMapItem.addLine(resolution, smoothedLine);
                     if (KmlWriter.write(smoothedLine, KmlFileTypeEnum.LINE, "Polygons_Lines", Path.GetFileName(part.Line.Path), resolution) != 0) return -1;
                 }
-            }
-
-            return 0;
-        }
-
-        internal static int fillDatabase(IMongoDatabase database, MapData mapData)
-        {
-            foreach (PolygonLinePart part in _partDictionary.Values)
-            {
-                if (part._smoothedLineMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part.Line.Path)) != 0) return -1;
             }
 
             return 0;

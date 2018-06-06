@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,20 +54,6 @@ namespace MapDataProcessing
         }
 
         internal SortedDictionary<string, string> Dictionary { get { return _dictionary;} }
-
-        internal BsonDocument getBsonDocument()
-        {
-            BsonDocument textDocument = new BsonDocument();
-
-            foreach (string languageId in _languageDictionary.Keys)
-            {
-                string name;
-                if (!_dictionary.TryGetValue(languageId, out name)) name = "";
-                textDocument.AddRange(new BsonDocument() { { languageId, name } });
-            }
-
-            return textDocument;
-        }
 
         internal string getJson()
         {

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +16,7 @@ namespace MapDataProcessing
         internal int Id { get { return _id; } }
 
         private readonly XmlCategory _xmlCategory;
-        private readonly ElementName _name;
+        //private readonly ElementName _name;
 
         internal XmlCategory XmlCategory { get { return _xmlCategory; } }
 
@@ -25,22 +24,9 @@ namespace MapDataProcessing
         {
             _id = ++_counter;
             _xmlCategory = xmlCategory;
-            _name = new ElementName(xmlCategory.name);
+            //_name = new ElementName(xmlCategory.name);
         }
 
         internal double Importance { get { return _xmlCategory.importance; } }
-
-        internal BsonDocument getBsonDocument()
-        {
-            BsonDocument categoryDocument = new BsonDocument()
-            {
-                { "id", _id },
-                { "xml_id", _xmlCategory.id },
-                { "framing_level", _xmlCategory.framingLevel },
-                { "name", _name.getBsonDocument() }
-            };
-
-            return categoryDocument;
-        }
     }
 }

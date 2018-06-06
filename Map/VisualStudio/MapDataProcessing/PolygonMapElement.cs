@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +24,7 @@ namespace MapDataProcessing
             base(id, mapData, name, shortName, importance, lookIds, categoryId)
         {
             _coveredElementList = coveredElementList;
-            _contourMapItem = new DatabaseMapItem(true, Id);
+            _contourMapItem = new DatabaseMapItem(true/*, Id*/);
         }
 
         protected override bool allowMultiline() { return true; }
@@ -283,44 +281,6 @@ namespace MapDataProcessing
                     ++index;
                 }
             }
-
-            return 0;
-        }
-
-        internal override int fillDatabase(IMongoDatabase database)
-        {
-            _contourMapItem.fillDataBase(database, MapData, Id);
-
-            IMongoCollection<BsonDocument> polygonElementCollection = database.GetCollection<BsonDocument>("polygon_elements");
-
-            BsonArray itemArray = new BsonArray();
-
-            foreach (OrientedLineList list in _compoundPolygonList)
-            {
-                foreach (OrientedPolygonLinePart linePart in list.LineList)
-                {
-                    itemArray.Add(linePart.MapItemId);
-                }
-            }
-
-            foreach (PolygonPolygonPart part in _polygonPartList)
-            {
-                itemArray.Add(part.MapItemId);
-            }
-
-            BsonArray coveredElementArray = new BsonArray();
-            foreach (string coveredElement in _coveredElementList) coveredElementArray.Add(coveredElement);
-
-            BsonDocument elementDocument = new BsonDocument();
-            elementDocument.AddRange(getBsonDocument());
-            elementDocument.AddRange(new BsonDocument()
-            {
-                { "contour", _contourMapItem.Id },
-                { "items", itemArray},
-                { "covered_elements", coveredElementArray }
-            });
-
-            polygonElementCollection.InsertOne(elementDocument);
 
             return 0;
         }

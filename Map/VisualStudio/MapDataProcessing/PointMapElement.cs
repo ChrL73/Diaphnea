@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,23 +69,6 @@ namespace MapDataProcessing
 
         internal override int formParts2()
         {
-            return 0;
-        }
-
-        internal override int fillDatabase(IMongoDatabase database)
-        {
-            IMongoCollection<BsonDocument> pointElementCollection = database.GetCollection<BsonDocument>("point_elements");
-
-            BsonDocument elementDocument = new BsonDocument();
-            elementDocument.AddRange(getBsonDocument());
-            elementDocument.AddRange(new BsonDocument()
-            {
-                { "item_id", _itemId.Value },
-                { "point", _kmlFile.PointList[0].getBsonDocument(null, null, null, MapData.XmlMapData.parameters.projection) }
-            });
-
-            pointElementCollection.InsertOne(elementDocument);
-
             return 0;
         }
 

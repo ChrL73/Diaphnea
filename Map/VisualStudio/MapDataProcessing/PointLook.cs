@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,31 +19,6 @@ namespace MapDataProcessing
             _look = look;
             _pointName = new ElementName(look.name, suffixes.fill);
             _textName = new ElementName(look.name, suffixes.text);
-        }
-
-        internal override BsonDocument getBsonDocument()
-        {
-            BsonDocument lookDocument = new BsonDocument()
-            {
-                { "id", Id },
-                { "xml_id", _look.id },
-                { "type", "point" },
-                { "point_name", _pointName.getBsonDocument() },
-                { "point_z_index", _look.pointZIndex },
-                { "point_alpha", _look.pointAlpha },
-                { "point_red", _look.pointRed },
-                { "point_green", _look.pointGreen },
-                { "point_blue", _look.pointBlue },
-                { "point_size", _look.pointSize },
-                { "text_name", _textName.getBsonDocument() },
-                { "text_alpha", _look.textAlpha },
-                { "text_red", _look.textRed },
-                { "text_green", _look.textGreen },
-                { "text_blue", _look.textBlue },
-                { "text_size", _look.textSize }
-            };
-
-            return lookDocument;
         }
 
         internal override string getJson()

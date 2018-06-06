@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using Schemas;
 
 namespace MapDataProcessing
@@ -35,7 +33,7 @@ namespace MapDataProcessing
             LineLinePart part;
             if (!_partDictionary.TryGetValue(lineData, out part))
             {
-                part = new LineLinePart(lineData, elementId);
+                part = new LineLinePart(lineData/*, elementId*/);
                 _partDictionary.Add(lineData, part);
             }
 
@@ -46,14 +44,13 @@ namespace MapDataProcessing
         private readonly bool _superposable;
         private readonly DatabaseMapItem _smoothedLineMapItem;
         private bool _smoothed = false;
-        internal BsonValue MapItemId { get { return _smoothedLineMapItem.Id; } }
         internal int MapItemCppOffset { get { return _smoothedLineMapItem.CppOffset; } }
 
-        private LineLinePart(KmlFileData lineData, string element0Id)
+        private LineLinePart(KmlFileData lineData/*, string element0Id*/)
         {
             _lineData = lineData;
             _superposable = (!Path.GetFileName(_lineData.Path).Contains("!"));
-            _smoothedLineMapItem = new DatabaseMapItem(false, element0Id);
+            _smoothedLineMapItem = new DatabaseMapItem(false/*, element0Id*/);
         }
 
         internal List<GeoPoint> getLine(XmlResolution resolution)
@@ -109,16 +106,6 @@ namespace MapDataProcessing
             }
 
             _smoothed = true;
-            return 0;
-        }
-
-        internal static int fillDatabase(IMongoDatabase database, MapData mapData)
-        {
-            foreach (LineLinePart part in _partDictionary.Values)
-            {
-                if (part._smoothedLineMapItem.fillDataBase(database, mapData, Path.GetFileNameWithoutExtension(part._lineData.Path)) != 0) return -1;
-            }
-
             return 0;
         }
 

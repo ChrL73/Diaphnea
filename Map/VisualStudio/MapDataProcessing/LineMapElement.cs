@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -182,29 +180,6 @@ namespace MapDataProcessing
                 part.Attachment2 = attachment2;
                 _partList.Add(part);
             }
-
-            return 0;
-        }
-
-        internal override int fillDatabase(IMongoDatabase database)
-        {
-            IMongoCollection<BsonDocument> lineElementCollection = database.GetCollection<BsonDocument>("line_elements");
-
-            BsonArray itemArray = new BsonArray();
-
-            foreach (LineLinePart part in _partList)
-            {
-                itemArray.Add(part.MapItemId);
-            }
-
-            BsonDocument elementDocument = new BsonDocument();
-            elementDocument.AddRange(getBsonDocument());
-            elementDocument.AddRange(new BsonDocument()
-            {
-                { "items", itemArray}
-            });
-
-            lineElementCollection.InsertOne(elementDocument);
 
             return 0;
         }

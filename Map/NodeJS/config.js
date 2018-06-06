@@ -2,8 +2,6 @@ var config = {};
 
 config.port = process.env.PORT || 3001;
 
-config.dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/diaphnea';
-
 //config.debugDelay = 1000;
 config.displayRequests = 1;
 //config.displayReponses = 1;

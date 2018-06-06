@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,7 +47,6 @@ namespace MapDataProcessing
         abstract internal int addKmlFile(String path);
         abstract internal int formParts1();
         abstract internal int formParts2();
-        abstract internal int fillDatabase(IMongoDatabase database);
 
         internal string Id { get { return _id; } }
         protected MapData MapData { get { return _mapData; } }
@@ -152,33 +149,6 @@ namespace MapDataProcessing
                     _nameDictionary[languageId].Add(bestLineList);
                 }
             }
-        }
-
-        protected BsonDocument getBsonDocument()
-        {
-            BsonArray lookIdArray = new BsonArray();
-            foreach (Look look in _looks) lookIdArray.Add(look.Id);
-
-            BsonArray linkedElements1Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements1.Keys) linkedElements1Array.Add(linkedElement.Id);
-
-            BsonArray linkedElements2Array = new BsonArray();
-            foreach (MapElement linkedElement in _linkedElements2.Keys) linkedElements2Array.Add(linkedElement.Id);
-
-            BsonDocument elementDocument = new BsonDocument()
-            {
-                { "map", _mapData.XmlMapData.parameters.mapId },
-                { "id", _id},
-                { "name", _name.getBsonDocument() },
-                { "short_name", _shortName.getBsonDocument() },
-                { "importance", _importance },
-                { "linked_elements1", linkedElements1Array },
-                { "linked_elements2", linkedElements2Array },
-                { "look_ids", lookIdArray },
-                { "category_id", _category.Id }
-            };
-
-            return elementDocument;
         }
 
         internal string getInfoJson()

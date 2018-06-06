@@ -1,33 +1,14 @@
 var childProcess = require('child_process');
 var readLine = require('readline');
+var mapIds = require('./map_ids');
 
-var cppProcess;
-var cppProcess2; // tmp
+var cppProcesses = {};
 var sendResponse;
 var config;
-var dbParameters;
 
 function setConfig(config_)
 {
    config = config_;
-   
-   var url = require('url');
-   var dbParsedUrl = url.parse(config.dbUrl);
-   dbParameters = [dbParsedUrl.host, dbParsedUrl.path.substr(1)];
-
-   if (dbParsedUrl.auth)
-   {
-      var i = dbParsedUrl.auth.indexOf(':');
-      if (i > -1)
-      {
-         dbParameters.push(dbParsedUrl.auth.substr(0, i));
-         dbParameters.push(dbParsedUrl.auth.substr(i + 1));
-      }
-      else
-      {
-         dbParameters.push(dbParsedUrl.auth);
-      }
-   }
 }
 
 function setResponseHandler(responseHandler)
@@ -35,28 +16,30 @@ function setResponseHandler(responseHandler)
    sendResponse = responseHandler;
 }
 
-function sendRequest(request, recursiveCall)
+function sendRequest(request, mapId, recursiveCall)
 {
+   if (!mapIds.idObject[mapId]) return;
+   
    if (!recursiveCall && config.displayRequests) console.log('Request: ' + request);
    
    try
    {
-      cppProcess.stdin.write(request + '\n');
+      cppProcesses[mapId].stdin.write(request + '\n');
    }
    catch (err)
    {
       if (!recursiveCall)
       {
-         cppProcess = childProcess.spawn('./map_server.exe', dbParameters);
+         cppProcesses[mapId] = childProcess.spawn('./map_server' + mapId + '.exe');
          
          // Don't crash on 'Connection reset' error
-         cppProcess.stdin.on('error', function(err)
+         cppProcesses[mapId].stdin.on('error', function(err)
          {
             if (err.code != 'ECONNRESET') throw err; 
-            else console.log("Warning: 'cppProcess.stdin' sent 'Connection reset' error");
+            else console.log("Warning: 'cppProcesses[mapId].stdin' sent 'Connection reset' error");
          });
 
-         readLine.createInterface(cppProcess.stdout, cppProcess.stdin).on('line', function(response)
+         readLine.createInterface(cppProcesses[mapId].stdout, cppProcesses[mapId].stdin).on('line', function(response)
          {
             var i = response.indexOf(' ');
             var socketId = response.substring(0, i);
@@ -73,51 +56,7 @@ function sendRequest(request, recursiveCall)
             sendResponse(socketId, requestId, requestType, responseContent);
          });
 
-         sendRequest(request, true);
-      }
-   }
-}
-
-// tmp
-function sendRequest2(request, recursiveCall)
-{
-   if (!recursiveCall && config.displayRequests) console.log('Request: ' + request);
-   
-   try
-   {
-      cppProcess2.stdin.write(request + '\n');
-   }
-   catch (err)
-   {
-      if (!recursiveCall)
-      {
-         cppProcess2 = childProcess.spawn('./map_server2.exe');
-         
-         // Don't crash on 'Connection reset' error
-         cppProcess2.stdin.on('error', function(err)
-         {
-            if (err.code != 'ECONNRESET') throw err; 
-            else console.log("Warning: 'cppProcess2.stdin' sent 'Connection reset' error");
-         });
-
-         readLine.createInterface(cppProcess2.stdout, cppProcess2.stdin).on('line', function(response)
-         {
-            var i = response.indexOf(' ');
-            var socketId = response.substring(0, i);
-            response = response.substring(i + 1);
-            i = response.indexOf(' ');
-            var requestId = Number(response.substring(0, i));
-            response = response.substring(i + 1);
-            i = response.indexOf(' ');
-            var requestType = response.substring(0, i);
-            var responseContent = JSON.parse(response.substring(i + 1));
-            
-            if (config.displayReponses || requestType == config.errorMessageIndex) console.log('Response: ' + response);
-
-            sendResponse(socketId, requestId, requestType, responseContent);
-         });
-
-         sendRequest2(request, true);
+         sendRequest(request, mapId ,true);
       }
    }
 }
@@ -125,4 +64,3 @@ function sendRequest2(request, recursiveCall)
 module.exports.setConfig = setConfig;
 module.exports.setResponseHandler = setResponseHandler;
 module.exports.sendRequest = sendRequest;
-module.exports.sendRequest2 = sendRequest2; // tmp

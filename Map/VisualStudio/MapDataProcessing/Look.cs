@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +19,6 @@ namespace MapDataProcessing
         internal int CppOffset { get; set; }
 
         abstract internal int generateCode(CodeGenerator codeGenerator);
-        abstract internal BsonDocument getBsonDocument();
         abstract internal string getJson();
     }
 }

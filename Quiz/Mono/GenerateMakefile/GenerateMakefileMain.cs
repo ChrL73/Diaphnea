@@ -90,8 +90,7 @@ namespace GenerateMakefile
                 {
                     Console.WriteLine("Fail to deserialize content of file {0}", file);
                     Console.WriteLine(e.Message);
-                    if (e.InnerException != null)
-                        Console.WriteLine(e.InnerException.Message);
+                    if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
                     return -1;
                 }
 

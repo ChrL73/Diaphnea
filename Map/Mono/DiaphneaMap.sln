@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapDataProcessing", "MapDataProcessing\MapDataProcessing.csproj", "{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateMakefile", "GenerateMakefile\GenerateMakefile.csproj", "{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}.Debug|x86.Build.0 = Debug|x86
 		{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}.Release|x86.ActiveCfg = Release|x86
 		{C29D0E51-88CF-4F66-8B8A-7077B1CD8BE3}.Release|x86.Build.0 = Release|x86
+		{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}.Debug|x86.ActiveCfg = Debug|x86
+		{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}.Debug|x86.Build.0 = Debug|x86
+		{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}.Release|x86.ActiveCfg = Release|x86
+		{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

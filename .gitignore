@@ -54,3 +54,4 @@ MongoDB.*.dll
 *XmlQuizData.cs
 *XmlMapData.cs
 /Quiz/Makefile
+/Map/Makefile

@@ -43,6 +43,9 @@ namespace MapDataProcessing
             _dirName = dirName;
             _mapData = mapData;
 
+            DirectoryInfo dirInfo = new DirectoryInfo(dirName);
+            foreach(FileInfo file in dirInfo.GetFiles()) file.Delete();
+
             _currentStringOffset = 1;
             _currentIntArrayOffset = 1;
             //_currentDoubleArrayOffset = 0;
@@ -221,7 +224,7 @@ namespace MapDataProcessing
             }
 
             return offset;
-        } 
+        }
 
         internal void addPointElement(PointMapElement element, XmlProjectionEnum projection)
         {

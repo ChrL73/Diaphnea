@@ -16,6 +16,8 @@ namespace GenerateMakefile
 
         private static Dictionary<string, List<string>> _cppGeneratedFileNames = new Dictionary<string, List<string>>();
 
+        private static List<string> _subdirList = new List<string>() { "", "/Data", "/TextDisplayer", "/Requests" };
+
         private static void Main(string[] args)
         {
             Console.WriteLine("Map Makefile generation...");
@@ -25,8 +27,8 @@ namespace GenerateMakefile
             if (result == 0)
             {
                 /*AddObjectFilesLink();
-                addCppGeneratedFilesCompilation();
-                addCppFilesCompilation();*/
+                addCppGeneratedFilesCompilation();*/
+                addCppFilesCompilation();
                 addCppFileGeneration();
                 addMapDataProcessingBuild();
                 addXsdGeneration();
@@ -38,6 +40,108 @@ namespace GenerateMakefile
             //Console.ReadKey();
 
             System.Environment.Exit(result);
+        }
+
+        private static void addCppFilesCompilation()
+        {
+            Dictionary<string, Dictionary<string, int>> dependencies = new Dictionary<string, Dictionary<string, int>>();
+
+            List<string> cppFileList = new List<string>();
+            List<string> fileList = new List<string>();
+
+            string[] cppFiles;
+            string[] hFiles;
+
+            foreach (string subdir in _subdirList)
+            {
+                cppFiles = Directory.GetFiles(String.Format("../../../../NodeJS/map_server2{0}", subdir), "*.cpp");
+                hFiles = Directory.GetFiles(String.Format("../../../../NodeJS/map_server2{0}", subdir), "*.h");
+
+                foreach (string file in cppFiles)
+                {
+                    string name = String.Format("{0}/{1}", subdir, Path.GetFileName(file));
+                    cppFileList.Add(name);
+                    fileList.Add(name);
+                }
+
+                foreach (string file in hFiles)
+                {
+                    string name = String.Format("{0}/{1}", subdir, Path.GetFileName(file));
+                    fileList.Add(name);
+                }
+            }
+
+            foreach (string file in fileList) dependencies.Add(file, new Dictionary<string, int>());
+            foreach (string file in fileList) addIncludeDependencies(file, dependencies, new Dictionary<string, int>(), new List<string>());
+
+            foreach (string file in cppFileList)
+            {
+                Rule rule = new Rule();
+                rule.Target = String.Format("NodeJS/map_server2/obj/Release{0}o", file.Substring(0, file.Length - 3));
+                rule.Dependencies.Add(String.Format("NodeJS/map_server2{0}", file));
+
+                foreach (string dep in dependencies[file].Keys) rule.Dependencies.Add(String.Format("NodeJS/map_server2{0}", dep));
+
+                rule.Commands.Add("mkdir -p NodeJS/map_server2/obj/Release");
+                rule.Commands.Add(String.Format("cd NodeJS/map_server2 && g++ -I. -IRequests -IData -ITextDisplayer -Wall -fexceptions -O2 -std=c++11 -c {0} -o obj/Release{1}o",
+                                                file.Substring(1), file.Substring(0, file.Length - 3)));
+
+                _ruleList.Add(rule);
+            }
+        }
+
+        private static void addIncludeDependencies(string file, Dictionary<string, Dictionary<string, int>> dependencies, Dictionary<string, int> doneFiles, List<string> fileStack)
+        {
+            fileStack.Add(file);
+            doneFiles.Add(file, 1);
+
+            List<string> includes = getIncludeFiles(file);
+            foreach (string include in includes)
+            {
+                foreach (string subdir in _subdirList)
+                {
+                    string includeWithSubdir = String.Format("{0}/{1}", subdir, include);
+                    if (dependencies.ContainsKey(includeWithSubdir))
+                    {
+                        foreach (string f in fileStack) dependencies[f][includeWithSubdir] = 1;
+                        if (!doneFiles.ContainsKey(includeWithSubdir)) addIncludeDependencies(includeWithSubdir, dependencies, doneFiles, fileStack);
+                    }
+                }
+            }
+
+            fileStack.RemoveAt(fileStack.Count - 1);
+        }
+
+        private static List<string> getIncludeFiles(string file)
+        {
+            List<string> includeFiles = new List<string>();
+            StreamReader reader = new System.IO.StreamReader(String.Format("../../../../NodeJS/map_server2/{0}", file));
+
+            while(true)
+            {
+                string line = reader.ReadLine();
+                if (line == null) break;
+
+                // Note: We do not handle the case where the 'include' directive is inside a comment
+                if (line.Contains("#") && line.Contains("include"))
+                {
+                    int index = line.IndexOf('"');
+                    if (index >= 0)
+                    {
+                        line = line.Substring(index + 1);
+                        index = line.IndexOf('"');
+                        if (index >= 0)
+                        {
+                            line = line.Substring(0, index);
+                            includeFiles.Add(line);
+                        }
+                    }
+                }
+            }
+
+            reader.Close();
+
+            return includeFiles;
         }
 
         private static void addCppFileGeneration()
@@ -56,6 +160,16 @@ namespace GenerateMakefile
                         pair.Value));
                     _ruleList.Add(rule);
                 }
+
+                Rule rule2 = new Rule();
+                rule2.Target = String.Format("NodeJS/map_server2/Data/generated_code/{0}/PointLists.h", pair.Key);
+                rule2.Dependencies.Add("Mono/MapDataProcessing/bin/Debug/MapDataProcessing.exe");
+                rule2.Dependencies.Add(String.Format("VisualStudio/MapDataProcessing/{0}", pair.Value));
+                rule2.Commands.Add("mkdir -p NodeJS/map_server2/Data/generated_code");
+                rule2.Commands.Add(String.Format(
+                    "cd Mono/MapDataProcessing/bin/Debug && mono MapDataProcessing.exe ../../../../VisualStudio/MapDataProcessing/{0}",
+                    pair.Value));
+                _ruleList.Add(rule2);
             }
         }
 

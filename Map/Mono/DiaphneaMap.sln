@@ -21,6 +21,7 @@ Global
 		{FF60D6D0-2BB4-4787-8A9C-A0B4C5D012AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = GenerateMakefile\GenerateMakefile.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
 		$1.inheritsSet = VisualStudio
@@ -51,6 +52,5 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		StartupItem = MapDataProcessing\MapDataProcessing.csproj
 	EndGlobalSection
 EndGlobal

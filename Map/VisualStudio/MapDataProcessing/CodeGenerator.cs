@@ -40,6 +40,8 @@ namespace MapDataProcessing
 
         internal CodeGenerator(string dirName, MapData mapData)
         {
+            if (!Directory.Exists(dirName)) Directory.CreateDirectory(dirName);
+
             _dirName = dirName;
             _mapData = mapData;
 
@@ -67,8 +69,6 @@ namespace MapDataProcessing
             _stringDictionary.Add("", 0);
 
             _itemDataArray = new string[(ItemId.MaxValue + 1) * mapData.XmlMapData.resolutionList.Length];
-
-            if (!Directory.Exists(dirName)) Directory.CreateDirectory(dirName);
 
             string path = String.Format("{0}/Strings.cpp", dirName);
             if (File.Exists(path)) File.Delete(path);

@@ -16,6 +16,9 @@ namespace MapDataProcessing
         //private readonly string _element0Id;
         private readonly string _type;
 
+        private static int _generationCounter = 0;
+        private static int _instanceCounter = 0;
+
         internal DatabaseMapItem(bool useBezierSucessors/*, string element0Id*/)
         {
             _useBezierSucessors = useBezierSucessors;
@@ -26,6 +29,8 @@ namespace MapDataProcessing
 
             if (useBezierSucessors) _type = "polygon";
             else _type = "line";
+
+            ++_instanceCounter;
         }
 
         internal void addLine(XmlResolution resolution, List<GeoPoint> line)
@@ -118,43 +123,15 @@ namespace MapDataProcessing
                     if (y > yMax) yMax = y;
                 }
 
-                /*BsonDocument pointListDocument = new BsonDocument()
-                {
-                    { "map", mapData.XmlMapData.parameters.mapId },
-                    { "item", itemName },
-                    { "resolution", resolution },
-                    { "count", list.Count },
-                    { "points", pointArray }
-                };*/
-
-                //pointListCollection.InsertOne(pointListDocument);
-
-                //lineArray.Add(pointListDocument.GetValue("_id"));
                 lineList.Add(pointList);
             }
 
-            /*IMongoCollection<BsonDocument> itemCollection = database.GetCollection<BsonDocument>("items");
-
-            BsonDocument itemDocument = new BsonDocument()
-            {
-                { "item_id", _itemId.Value },
-                { "map", mapData.XmlMapData.parameters.mapId },
-                { "element0", _element0Id },
-                { "item", itemName },
-                { "x_min", xMin },
-                { "x_max", xMax },
-                { "y_min", yMin },
-                { "y_max", yMax },
-                { "cap1_round", Cap1Round ? 1 : 0 },
-                { "cap2_round", Cap2Round ? 1 : 0 },
-                { "point_lists", lineArray }
-            };
-
-            itemCollection.InsertOne(itemDocument);
-
-            Id = itemDocument.GetValue("_id");*/
+            if (_generationCounter == 0) Console.Write("0%");
+            ++_generationCounter;
 
             CppOffset = codeGenerator.addMultipointItem(xMin, xMax, yMin, yMax, _itemId.Value, itemName, lineList, Cap1Round, Cap2Round, _type);
+
+            Console.Write(String.Format("\r{0}%", 100 * _generationCounter / _instanceCounter));
 
             return 0;
         }

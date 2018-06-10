@@ -26,8 +26,8 @@ namespace GenerateMakefile
 
             if (result == 0)
             {
-                /*AddObjectFilesLink();
-                addCppGeneratedFilesCompilation();*/
+                AddObjectFilesLink();
+                addCppGeneratedFilesCompilation();
                 addCppFilesCompilation();
                 addCppFileGeneration();
                 addMapDataProcessingBuild();
@@ -40,6 +40,69 @@ namespace GenerateMakefile
             //Console.ReadKey();
 
             System.Environment.Exit(result);
+        }
+
+        private static void AddObjectFilesLink()
+        {
+            Rule mainRule = new Rule();
+            mainRule.Target = "map";
+            _ruleList.Add(mainRule);
+
+            List<string> fileList = new List<string>();
+
+            foreach (string subdir in _subdirList)
+            {
+                string[] files = Directory.GetFiles(String.Format("../../../../NodeJS/map_server2{0}", subdir), "*.cpp");
+                foreach (string file in files) fileList.Add(String.Format("{0}/{1}", subdir, Path.GetFileName(file)));
+            }
+
+            foreach (string directory in _generationDirectories.Keys)
+            {
+                Rule rule = new Rule();
+                rule.Target = String.Format("NodeJS/map_server{0}.exe", directory);
+                mainRule.Dependencies.Add(rule.Target);
+
+                string command = String.Format("cd NodeJS/map_server2 && g++ -o ../map_server{0}.exe", directory);
+
+                foreach (string file in fileList)
+                {
+                    rule.Dependencies.Add(String.Format("NodeJS/map_server2/obj/Release{0}o", file.Substring(0, file.Length - 3)));
+                    command += String.Format(" obj/Release{0}o", file.Substring(0, file.Length - 3));
+                }
+
+                foreach (string file in _cppGeneratedFileNames[directory])
+                {
+                    rule.Dependencies.Add(String.Format("NodeJS/map_server2/obj/Release/Data/generated_code/{0}/{1}.o", directory, file));
+                    command += String.Format(" obj/Release/Data/generated_code/{0}/{1}.o", directory, file);
+                }
+
+                command += " -s -pthread -lfreetype";
+                rule.Commands.Add(command);
+
+                _ruleList.Add(rule);
+            }
+        }
+
+        private static void addCppGeneratedFilesCompilation()
+        {
+            foreach (string directory in _generationDirectories.Keys)
+            {
+                foreach (string file in _cppGeneratedFileNames[directory])
+                {
+                    string file2 = String.Format("{0}/{1}.", directory, file);
+
+                    Rule rule = new Rule();
+                    rule.Target = String.Format("NodeJS/map_server2/obj/Release/Data/generated_code/{0}o", file2);
+                    rule.Dependencies.Add(String.Format("NodeJS/map_server2/Data/generated_code/{0}cpp", file2));
+
+                    rule.Commands.Add(String.Format("mkdir -p NodeJS/map_server2/obj/Release/Data/generated_code/{0}", directory));
+                    rule.Commands.Add(String.Format(
+                        "cd NodeJS/map_server2 && g++ -Wall -fexceptions -O2 -std=c++11 -c Data/generated_code/{0}cpp -o obj/Release/Data/generated_code/{0}o",
+                        file2));
+
+                    _ruleList.Add(rule);
+                }
+            }
         }
 
         private static void addCppFilesCompilation()
@@ -82,9 +145,10 @@ namespace GenerateMakefile
 
                 foreach (string dep in dependencies[file].Keys) rule.Dependencies.Add(String.Format("NodeJS/map_server2{0}", dep));
 
-                rule.Commands.Add("mkdir -p NodeJS/map_server2/obj/Release");
-                rule.Commands.Add(String.Format("cd NodeJS/map_server2 && g++ -I. -IRequests -IData -ITextDisplayer -Wall -fexceptions -O2 -std=c++11 -c {0} -o obj/Release{1}o",
-                                                file.Substring(1), file.Substring(0, file.Length - 3)));
+                rule.Commands.Add(String.Format("mkdir -p NodeJS/map_server2/obj/Release{0}", Path.GetDirectoryName(file)));
+                rule.Commands.Add(String.Format(
+                    "cd NodeJS/map_server2 && g++ -I. -IRequests -IData -ITextDisplayer -I../../../../freetype-2.7/include -DBUILD_WITHOUT_PNGPP -Wall -fexceptions -O2 -std=c++11 -c {0} -o obj/Release{1}o",
+                    file.Substring(1), file.Substring(0, file.Length - 3)));
 
                 _ruleList.Add(rule);
             }

@@ -113,6 +113,7 @@ namespace MapDataProcessing
             {
                 MessageLogger.addMessage(XmlLogLevelEnum.MESSAGE, "C++ code generation...");
                 result = generateCode();
+                Console.WriteLine();
             }
 
             return result;

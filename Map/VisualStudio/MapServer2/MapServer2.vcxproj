@@ -158,6 +158,7 @@
     <ClCompile Include="..\..\NodeJS\map_server2\Data\FilledPolygonItem.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ElementNames.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\IntArrays.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ItemData.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineElements.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\LineLooks.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\MapData.cpp" />
@@ -700,6 +701,9 @@
     <ClCompile Include="..\..\NodeJS\map_server2\Data\PolygonLook.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\MapServer.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\map_server.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ElementInfoRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ElementsInfoRequest.cpp" />
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ItemDataRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\RenderRequest.cpp" />
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\Request.cpp" />
@@ -746,6 +750,9 @@
     <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\MapServer.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\MessageTypeEnum.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ElementInfoRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ElementsInfoRequest.h" />
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ItemDataRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\RenderRequest.h" />
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\Request.h" />

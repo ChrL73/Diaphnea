@@ -1752,6 +1752,18 @@
     <ClCompile Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.cpp">
       <Filter>Fichiers sources\Requests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ElementInfoRequest.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ElementsInfoRequest.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Requests\ItemDataRequest.cpp">
+      <Filter>Fichiers sources\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\NodeJS\map_server2\Data\generated_code\_France\ItemData.cpp">
+      <Filter>Fichiers sources\Data\generated_code\_France</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\NodeJS\map_server2\ErrorEnum.h">
@@ -1881,6 +1893,15 @@
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\NodeJS\map_server2\Requests\MapInfoRequest.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ElementInfoRequest.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ElementsInfoRequest.h">
+      <Filter>Fichiers d%27en-tête\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\NodeJS\map_server2\Requests\ItemDataRequest.h">
       <Filter>Fichiers d%27en-tête\Requests</Filter>
     </ClInclude>
   </ItemGroup>

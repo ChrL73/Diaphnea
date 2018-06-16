@@ -18,7 +18,7 @@ config.httpsUrl = process.env.HTTPS_URL;
 //config.frontEndIndex = 'quiz.ejs'; // Old front-end, removed from source control
 config.frontEndIndex = 'reactIndex.ejs'; // React front-end
 
-config.version = 'Alpha1';
+config.version = 'Alpha2';
 
 var herokuVersion = process.env.HEROKU_RELEASE_VERSION;
 if (herokuVersion) config.version += '.build' + herokuVersion.substr(1);

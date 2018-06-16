@@ -46,7 +46,7 @@ function initRecordMode()
    }
 }
 
-function initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsInfoReq, onItemDataReq, onLookReq, onRenderReq)
+function initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsInfoReq, onItemDataReq, onRenderReq)
 {
    console.log('Replay mode...');
    
@@ -93,7 +93,7 @@ function initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsI
             if (request.type == '2') onElementInfoReq(request.socketId, request.request);
             if (request.type == '3') onElementsInfoReq(request.socketId, request.request);
             if (request.type == '4') onItemDataReq(request.socketId, request.request);
-            if (request.type == '5') onLookReq(request.socketId, request.request);
+            //if (request.type == '5') onLookReq(request.socketId, request.request);
             if (request.type == '6') onRenderReq(request.socketId, request.request);
          }
       }

@@ -161,7 +161,7 @@ if (!replay)
 
 function onMapIdsReq(socketId, request)
 {
-   if (record) tester.logRequest(socketId, messageTypes.mapIds, request);
+   //if (record) tester.logRequest(socketId, messageTypes.mapIds, request);
    //cppServer.sendRequest(socketId + ' ' + request.id + ' ' + request.id);
    sendResponse(socketId, request.id, request.id, mapIds.idArray);
 }
@@ -246,7 +246,7 @@ cppServer.setResponseHandler(sendResponse);
 
 function sendResponse(socketId, requestId, requestType, responseContent)
 {
-   if (record) tester.logResponse(socketId, requestId, requestType, responseContent);
+   if (record && requestType !== 0) tester.logResponse(socketId, requestId, requestType, responseContent);
    
    if (!replay)
    {
@@ -293,7 +293,7 @@ function sendResponse(socketId, requestId, requestType, responseContent)
 }
 
 if (record) tester.initRecordMode();
-else if (replay) tester.initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsInfoReq, onItemDataReq, onLookReq, onRenderReq);
+else if (replay) tester.initReplayMode(onMapIdsReq, onMapInfoReq, onElementInfoReq, onElementsInfoReq, onItemDataReq, onRenderReq);
 
 if (!replay)
 {

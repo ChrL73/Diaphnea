@@ -1,2 +1,2 @@
-# diaphnea
+# Diaphnea
 Geography Quiz

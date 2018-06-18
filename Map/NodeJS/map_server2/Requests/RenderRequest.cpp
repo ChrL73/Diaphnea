@@ -319,7 +319,7 @@ namespace map_server
                 }
                 else
                 {
-                    if (_svgCreator == 0)
+                    if (_svgCreator == 0 && !item->getElementId().empty())
                     {
                         std::stringstream delResponse;
                         delResponse << _socketId << " " << _requestId << " " << map_server::REMOVE_TEXT

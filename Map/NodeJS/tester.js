@@ -139,6 +139,7 @@ function processReplayResponse(socketId, requestId, requestType, responseContent
       if (receivedReplayRes == expectedReplayRes)
       {
          console.log('All expected responses have been received...');
+         // require('./cpp_server_interface').sendRequest('', '_France'); // This line stops the 'C++ France map server' (used for profiling)
       }
       else if (receivedReplayRes > expectedReplayRes)
       {

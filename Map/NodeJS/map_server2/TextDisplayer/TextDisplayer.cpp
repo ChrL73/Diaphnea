@@ -16,9 +16,6 @@
 #include "SvgLineInfo.h"
 
 #include <cmath>
-/*#include <chrono>
-#include <thread>
-#include <limits>*/
 #include <iostream>
 
 namespace map_server

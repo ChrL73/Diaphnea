@@ -1,10 +1,12 @@
-[June 2018]
+## Procedure to build and run the servers (quiz server and map server) in a development configuration on Ubuntu 16
 
-* This procedure has been tested for the following operating systems:
+* This procedure is specific to Ubuntu 16 and will not work on other operationg systems. This procedure has been tested (in june and july 2018) on the folowing operating systems:
 
-	* `ubuntu-16.04.4-server-amd64.iso` (downloaded on [https://www.ubuntu.com/download/server/](https://www.ubuntu.com/download/server/)) [Todo]
+	* `kubuntu-16.04.4-desktop-amd64.iso` (downloaded on [https://kubuntu.org/getkubuntu/](https://kubuntu.org/getkubuntu/))
 
-	* `kubuntu-16.04.4-desktop-ams64.iso` (downloaded on [https://kubuntu.org/getkubuntu/](https://kubuntu.org/getkubuntu/))
+	* `ubuntu-16.04.4-desktop-amd64.iso` (downloaded on [http://releases.ubuntu.com/16.04/](http://releases.ubuntu.com/16.04/))
+
+	* `ubuntu-16.04.4-server-amd64.iso` (downloaded on [http://releases.ubuntu.com/16.04/](http://releases.ubuntu.com/16.04/))
 
 * If the computer is behind a proxy:
 
@@ -47,11 +49,8 @@
 
 		sudo apt-get install mongodb
 
-* Install Mono (see [https://www.mono-project.com/download/stable/#download-lin](https://www.mono-project.com/download/stable/#download-lin) for more information):
+* Install Mono:
 
-		sudo -E apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-		echo "deb http://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-		sudo apt-get update
 		sudo apt-get install mono-complete
 
 * Install MonoDevelop:
@@ -103,16 +102,25 @@
 		curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 		sudo apt-get install nodejs
 
-	Verify that correct versions have been installed:
+	Verify that a correct version of NodeJS has been installed:
 
 		node -v
-		npm -v
 
-	node version must be >= v9.8.0 and npm version must be >= 5.6.0
+	The version must be >= v9.11.2
 
 * If the computer is behind a proxy:
 
-		npm config set proxy http://userName:password@proxyAddress:portNumber 
+		npm config set proxy http://userName:password@proxyAddress:portNumber
+
+* Get the latest version of npm:
+
+		sudo npm install -g npm@latest
+
+	Verify the version:
+
+		npm -v
+
+	The version must be >= 6.1.0
 
 * Install the npm packages the map server depends on:
 
@@ -140,3 +148,12 @@
 
 		cd ~/Diaphnea/Quiz/NodeJS
 		node app.js
+
+* Test the application by typing the URL of the Quiz server in a Web browser (by default, the Quiz server runs on port 3002):
+
+		http://<serverAddressOrName>:3002
+
+	Examples of URLs:
+
+		http://localhost:3002
+		http://192.168.1.1:3002

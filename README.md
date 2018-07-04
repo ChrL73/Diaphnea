@@ -13,7 +13,6 @@ The backends of these servers use [NodeJS](https://nodejs.org). They are written
 
 The frontend of the application uses the [React](https://reactjs.org/) framework.
 
-The source of the application contains a significant amount of C# code. This C# code is not executed at the application runtime, but before the compilation of the servers. The C# code performs various treatments and as a result of these treatments, it generates C++ code.
+The source of the application contains C# code. This C# code is not executed at the application runtime, but before the compilation of the servers. The C# code performs a significant amount of processing and as a result of this processing, it generates C++ code.
 
 The application uses a [MondoDB](https://www.mongodb.com/) database.
-

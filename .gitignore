@@ -51,6 +51,7 @@ MongoDB.*.dll
 *UserPrefs.xml
 *generated_code
 *gmon.out
+*analysis.txt
 *XmlQuizData.cs
 *XmlMapData.cs
 /Quiz/Makefile

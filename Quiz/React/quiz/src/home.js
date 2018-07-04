@@ -164,10 +164,9 @@ export class Home extends React.Component
                            <li>{this.state.texts.alphaWarningLine2}</li>
                            <li>{this.state.texts.alphaWarningLine3}</li>
                            <li>{this.state.texts.alphaWarningLine4}</li>
-                           <li>{this.state.texts.alphaWarningLine5}</li>
                         </ul>
                         <p>
-                           {this.state.texts.alphaWarningLine6}
+                           {this.state.texts.alphaWarningLine5}
                            <span> </span>
                            <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
                         </p>

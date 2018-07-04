@@ -46,7 +46,6 @@ module.exports =
    alphaWarningLine1: 'This application is under development. Consequently:',
    alphaWarningLine2: 'Important features are not yet present in the application.',
    alphaWarningLine3: 'The application is likely to contain a large number of bugs.',
-   alphaWarningLine4: 'The application may experience performance problems (long response times to certain user actions).',
-   alphaWarningLine5: 'The English translation of the application is rough.',
-   alphaWarningLine6: 'To report bugs or errors, to suggest improvements or new features:'
+   alphaWarningLine4: 'The English translation of the application is rough.',
+   alphaWarningLine5: 'To report bugs or errors, to suggest improvements or new features:'
 };

@@ -168,7 +168,6 @@ io.on('connection', function(socket)
          alphaWarningLine3: texts.alphaWarningLine3,
          alphaWarningLine4: texts.alphaWarningLine4,
          alphaWarningLine5: texts.alphaWarningLine5,
-         alphaWarningLine6: texts.alphaWarningLine6,
          close: texts.close
       };
       

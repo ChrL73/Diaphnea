@@ -31,6 +31,7 @@ function sendRequest(request, mapId, recursiveCall)
       if (!recursiveCall)
       {
          cppProcesses[mapId] = childProcess.spawn('./map_server' + mapId + '.exe');
+         //cppProcesses[mapId] = childProcess.spawn('./map_server2/bin/Debug/map_server2'); // Used for profiling
          
          // Don't crash on 'Connection reset' error
          cppProcesses[mapId].stdin.on('error', function(err)

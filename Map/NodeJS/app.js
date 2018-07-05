@@ -92,7 +92,7 @@ var messageNames =
    'elementInfo', // 2
    'elementsInfo', // 3
    'itemData', // 4
-   'look', // 5 (no loger used)
+   'look', // 5 (no longer used)
    'render', // 6
    'text', // 7
    'removeText', //8

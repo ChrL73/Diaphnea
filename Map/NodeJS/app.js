@@ -121,6 +121,8 @@ if (!replay)
 
    io.on('connection', function(socket)
    {
+      socket.emit('version', config.version);
+      
       var received = 0, lastSent = 0, lastReceived = 0;
       socket.sent = 0;
       if (config.displayStat)

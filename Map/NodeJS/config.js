@@ -29,4 +29,9 @@ config.port = process.env.PORT || 3001;
 //config.mode = 'record';
 //config.mode = 'replay';
 
+config.version = 'Alpha2';
+
+var herokuVersion = process.env.HEROKU_RELEASE_VERSION;
+if (herokuVersion) config.version += '.build' + herokuVersion.substr(1);
+
 module.exports = config;

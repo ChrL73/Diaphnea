@@ -33,6 +33,9 @@ var mapServerInterface =
          var mapIds;
          this.getMapIds = function() { return mapIds; }
          
+         var serverVersion = 'unknown';
+         this.getServerVersion = function() { return serverVersion; }
+         
          var usedMapIds = {};
          var usedCanvas = {};
          
@@ -66,6 +69,11 @@ var mapServerInterface =
          {         
             _url = url;
             socket = io(url);
+            
+            socket.on('version', function(version)
+            {
+               serverVersion = version;
+            });
             
             var id = ++requestCounter;
             var request = { id: id };

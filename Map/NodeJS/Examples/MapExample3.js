@@ -55,6 +55,8 @@ $(function()
    {
       $('#mapForm').css('display', 'block');
       $('#connectionForm').css('display', 'none');
+      
+      $('#versionDiv').text('Server version: ' + mapServerConnection.getServerVersion());
 
       var mapIds = mapServerConnection.getMapIds();
       mapIds.forEach(function(mapId)

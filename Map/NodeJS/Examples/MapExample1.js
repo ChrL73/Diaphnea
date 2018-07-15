@@ -26,6 +26,7 @@ $(function()
    function onConnected(mapServerConnection)
    {
       console.log(mapServerConnection.getMapIds());
+      console.log(mapServerConnection.getServerVersion());
       
       var canvasId = 'canvas';
       var mapId = '_Gabon';   

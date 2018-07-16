@@ -77,6 +77,12 @@ if (!replay)
             }
          });
       }
+      else if (req.method == 'GET' && route == '/version')
+      {
+         res.setHeader('Access-Control-Allow-Origin', '*');
+         res.setHeader('content-type', 'text/plain');
+         res.end(config.version);
+      }
       else
       {
          res.statusCode = 404;

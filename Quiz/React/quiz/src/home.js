@@ -278,9 +278,14 @@ export class Home extends React.Component
                <footer className={this.state.footerClass}>
                   <div className="row">
                      <div>
-                        {this.state.texts.version}:
+                        {this.state.texts.quizVersion}:
                         <span> </span>
                         {this.state.version}
+                     </div>
+                     <div>
+                        {this.state.texts.mapVersion}:
+                        <span> </span>
+                        {this.state.mapVersion}
                      </div>
                      <div>
                         <a onClick={() => this.setState({ showModal3: true })} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
@@ -429,7 +434,12 @@ export class Home extends React.Component
       if (data.page === 'index')
       {
          Object.getOwnPropertyNames(data).forEach((property) => { state[property] = data[property]; });
+         
          this.setState(state, () => { this.emitUpdateTables(); this.resize1(); });
+         
+         fetch(data.mapServerUrl + '/version')
+            .then(response => response.text())
+            .then(version => this.setState({ mapVersion: version }));
          
          window.onresize = () => this.resize1();
       }

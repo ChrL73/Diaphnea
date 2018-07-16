@@ -152,6 +152,7 @@ io.on('connection', function(socket)
          downData.version = config.version;
          downData.sourceUrl = config.sourceUrl;
          downData.issueUrl = config.issueUrl;
+         downData.mapServerUrl = mapServerUrl;
 
          setTimeout(function() { socket.emit('displayPage', downData); }, debugDelay);   
       });
@@ -179,7 +180,8 @@ io.on('connection', function(socket)
          year: texts.year,
          score: texts.score,
          time: texts.time,
-         version: texts.version,
+         quizVersion: texts.quizVersion,
+         mapVersion: texts.mapVersion,
          sourceCode: texts.sourceCode,
          issues: texts.issues,
          warning: texts.warning,

@@ -278,6 +278,9 @@ export class Home extends React.Component
                <footer className={this.state.footerClass}>
                   <div className="row">
                      <div>
+                        <a onClick={() => this.setState({ showModal3: true })} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
+                     </div>
+                     <div>
                         {this.state.texts.quizVersion}:
                         <span> </span>
                         {this.state.version}
@@ -287,9 +290,7 @@ export class Home extends React.Component
                         <span> </span>
                         {this.state.mapVersion}
                      </div>
-                     <div>
-                        <a onClick={() => this.setState({ showModal3: true })} style={{cursor: 'pointer'}}>{this.state.texts.warning}</a>
-                     </div>
+                  </div>
                      <div>
                         {this.state.texts.sourceCode}:
                         <span> </span>
@@ -300,7 +301,6 @@ export class Home extends React.Component
                         <span> </span>
                         <a target="_blank" href={this.state.issueUrl}>{this.state.issueUrl}</a>
                      </div>
-                  </div>
                </footer>
             </div>
          </div>);

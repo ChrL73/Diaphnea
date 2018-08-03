@@ -24,4 +24,4 @@ The front-end of the application uses the [React](https://reactjs.org/) framewor
 
 The source of the application contains C# code. This C# code is not executed at the application runtime, but before the compilation of the servers. The C# code performs a significant amount of processing and as a result of this processing, it generates C++ code.
 
-The application uses a [MondoDB](https://www.mongodb.com/) database to store session and user data.
+The application uses a [MondoDB](https://www.mongodb.com/) database to store session data, user data and best score tables.

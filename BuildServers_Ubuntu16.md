@@ -1,6 +1,6 @@
 ## Procedure to build and run the servers (quiz server and map server) in a development configuration on Ubuntu 16
 
-* This procedure is specific to Ubuntu 16 and will not work on other operationg systems. This procedure has been tested (in june and july 2018) on the folowing operating systems:
+* This procedure is specific to Ubuntu 16 and will not work on other operating systems. This procedure has been tested (in june and july 2018) on the folowing operating systems:
 
 	* `kubuntu-16.04.4-desktop-amd64.iso` (downloaded on [https://kubuntu.org/getkubuntu/](https://kubuntu.org/getkubuntu/))
 
